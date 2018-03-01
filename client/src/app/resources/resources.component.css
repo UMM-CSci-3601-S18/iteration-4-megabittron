@@ -1,0 +1,61 @@
+.phone-numbers {
+    max-width: 25%;
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+#phone-icon {
+    color: forestgreen;
+    vertical-align: bottom;
+    font-size: 28px
+}
+
+.phone-numbers-title {
+    font-size: 24px;
+    font-align: right;
+}
+
+.phone-numbers {
+    background-image: url("https://www.toptal.com/designers/subtlepatterns/patterns/fresh_snow.png");
+}
+
+#phone-numbers-subtitle {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: white;
+    color: black;
+}
+
+.phone-numbers-list {
+    font-size: 22px;
+}
+
+.bullet-icon {
+    color: #202050;
+    vertical-align: bottom;
+}
+
+.phone-numbers-to-call {
+    margin: 10%;
+}
+
+.actual-phone-number {
+    color: rgba(0, 0, 79, 0.9);
+    font-size: 24px;
+}
+
+.little-phone-icon {
+    color: forestgreen;
+}
+
+.hotline-company-name {
+    margin: 10%;
+}
