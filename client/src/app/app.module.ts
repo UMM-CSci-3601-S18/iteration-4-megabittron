@@ -15,6 +15,8 @@ import {APP_BASE_HREF} from '@angular/common';
 import {CustomModule} from './custom.module';
 import {AddUserComponent} from './users/add-user.component';
 
+import {ResourcesComponent} from "./resources/resources.component";
+
 
 @NgModule({
     imports: [
@@ -27,7 +29,8 @@ import {AddUserComponent} from './users/add-user.component';
         AppComponent,
         HomeComponent,
         UserListComponent,
-        AddUserComponent
+        AddUserComponent,
+        ResourcesComponent,
     ],
     providers: [
         UserListService,
