@@ -1,5 +1,6 @@
 .phone-numbers {
     max-width: 25%;
+    min-height: 20px;
 }
 
 .example-header-image {
@@ -45,10 +46,11 @@
 
 .phone-numbers-to-call {
     margin: 10%;
+    font-style: oblique;
 }
 
 .actual-phone-number {
-    color: rgba(0, 0, 79, 0.9);
+    color: rgba(0, 0, 179, 0.9);
     font-size: 24px;
 }
 
