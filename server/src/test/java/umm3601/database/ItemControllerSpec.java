@@ -36,23 +36,24 @@ public class ItemControllerSpec {
         testItems.add(Document.parse("{\n" +
             "                    name: \"Aurora\",\n" +
             "                    goal: \"To get an A in software design!\",\n" +
-            "                    category: \"UMM\",\n" +
+            "                    category: \"School\",\n" +
             "                }"));
         testItems.add(Document.parse("{\n" +
             "                    name: \"Kai\",\n" +
             "                    goal: \"To take more than 12 credits.\",\n" +
-            "                    category: \"UMM\",\n" +
+            "                    category: \"Courses\",\n" +
             "                }"));
         testItems.add(Document.parse("{\n" +
             "                    name: \"John\",\n" +
             "                    goal: \"To get some pizza.\",\n" +
-            "                    category: \"UMM\",\n" +
+            "                    category: \"Food\",\n" +
             "                }"));
 
         huntersID = new ObjectId();
         BasicDBObject hunter = new BasicDBObject("_id", huntersID);
         hunter = hunter.append("name", "Hunter")
-            .append("goal", "To finish his math homework.");
+            .append("goal", "To finish his math homework.")
+            .append("category", "Homework");
 
 
 
@@ -92,7 +93,7 @@ public class ItemControllerSpec {
             .map(ItemControllerSpec::getGoal)
             .sorted()
             .collect(Collectors.toList());
-        List<String> expectedNames = Arrays.asList("To get an A in software design!", "To take more than 12 credits.", "To get some pizza.", "To finish his math homework.");
+        List<String> expectedNames = Arrays.asList("To finish his math homework.", "To get an A in software design!", "To get some pizza.", "To take more than 12 credits.");
         assertEquals("Goals should match", expectedNames, goals);
     }
 
