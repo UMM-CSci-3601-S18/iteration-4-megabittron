@@ -65,6 +65,14 @@ public class ItemController {
             filterDoc = filterDoc.append("goal", contentRegQuery);
         }
 
+        if (queryParams.containsKey("category")) {
+            String targetContent = (queryParams.get("category")[0]);
+            Document contentRegQuery = new Document();
+            contentRegQuery.append("$regex", targetContent);
+            contentRegQuery.append("$options", "i");
+            filterDoc = filterDoc.append("category", contentRegQuery);
+        }
+
         // FindIterable comes from mongo, Document comes from Gson
         FindIterable<Document> matchingUsers = itemCollection.find(filterDoc);
 
@@ -73,16 +81,17 @@ public class ItemController {
 
     // As of now this only adds the goal, but you can separate multiple arguments
     // by commas as we add them.
-    public String addNewItem(String goal) {
+    public String addNewItem(String name, String goal) {
 
         Document newItem = new Document();
         newItem.append("goal", goal);
+        newItem.append("name", name);
         // Append new items here
 
         try {
             itemCollection.insertOne(newItem);
             ObjectId id = newItem.getObjectId("_id");
-            System.err.println("Successfully added new item [_id=" + id + ", goal=" + goal);
+            System.err.println("Successfully added new item [_id=" + id + ", goal=" + goal + ", name=" + name);
             // return JSON.serialize(newItem);
             return JSON.serialize(id);
         } catch(MongoException me) {

@@ -20,6 +20,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class ItemControllerSpec {
     private ItemController itemController;
@@ -81,6 +83,11 @@ public class ItemControllerSpec {
         return ((BsonString) doc.get("goal")).getValue();
     }
 
+    private static String getName(BsonValue val) {
+        BsonDocument doc = val.asDocument();
+        return ((BsonString) doc.get("name")).getValue();
+    }
+
     @Test
     public void getAllItems() {
         Map<String, String[]> emptyMap = new HashMap<>();
@@ -96,5 +103,50 @@ public class ItemControllerSpec {
         List<String> expectedNames = Arrays.asList("To finish his math homework.", "To get an A in software design!", "To get some pizza.", "To take more than 12 credits.");
         assertEquals("Goals should match", expectedNames, goals);
     }
+
+    @Test
+    public void getItemByCategory(){
+        Map<String, String[]> argMap = new HashMap<>();
+        // Mongo in ItemController is doing a regex search so can just take a Java Reg. Expression
+        // This will search the category for letters 'f' and 'c'.
+        argMap.put("category", new String[] { "[f, c]" });
+        String jsonResult = itemController.getItems(argMap);
+        BsonArray docs = parseJsonArray(jsonResult);
+        assertEquals("Should be 3 items", 3, docs.size());
+        List<String> name = docs
+            .stream()
+            .map(ItemControllerSpec::getName)
+            .sorted()
+            .collect(Collectors.toList());
+        List<String> expectedName = Arrays.asList("Aurora","John","Kai");
+        assertEquals("Names should match", expectedName, name);
+    }
+
+    @Test
+    public void getHuntersByID() {
+        String jsonResult = itemController.getItem(huntersID.toHexString());
+        Document sam = Document.parse(jsonResult);
+        assertEquals("Name should match", "Hunter", sam.get("name"));
+        String noJsonResult = itemController.getItem(new ObjectId().toString());
+        assertNull("No name should match",noJsonResult);
+    }
+
+    // There is a problem with the "argMap" variable.
+/*    @Test
+    public void addItemTest(){
+        String newId = itemController.addNewItem("Spencer", "Avoid stabbing knee on old keyboard holder.");
+
+        assertNotNull("Add new item should return true when item is added,", newId);
+        Map<String, String[]> argMap = new HashMap<>();
+        String jsonResult = itemController.getItem(argMap);
+        BsonArray docs = parseJsonArray(jsonResult);
+
+        List<String> name = docs
+            .stream()
+            .map(ItemControllerSpec::getName)
+            .sorted()
+            .collect(Collectors.toList());
+        assertEquals("Should return name of new user", "Spencer", name.get(0));
+    }*/
 
 }
