@@ -133,7 +133,7 @@ public class ItemControllerSpec {
 
     @Test
     public void addItemTest(){
-        String newId = itemController.addNewItem("Aaron", "Avoid stabbing knee on old keyboard holder.");
+        String newId = itemController.addNewItem("Aaron", "Injury", "Do not stab knee on keyboard holder.");
 
         assertNotNull("Add new item should return true when item is added,", newId);
         Map<String, String[]> argMap = new HashMap<>();
@@ -147,7 +147,7 @@ public class ItemControllerSpec {
             .collect(Collectors.toList());
         // name.get(0) says to get the name of the first person in the database,
         // so "Aaron" will probably always be first because it is sorted alphabetically.
-        assertEquals("Should return name of new user", "Aaron", name.get(0));
+        assertEquals("Should return name of new item", "Aaron", name.get(0));
     }
 
 }
