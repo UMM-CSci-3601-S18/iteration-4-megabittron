@@ -96,17 +96,18 @@ public class ItemController {
      */
     // As of now this only adds the goal, but you can separate multiple arguments
     // by commas as we add them.
-    public String addNewItem(String name, String goal) {
+    public String addNewItem(String name, String category, String goal) {
 
         Document newItem = new Document();
         newItem.append("name", name);
+        newItem.append("category", name);
         newItem.append("goal", goal);
         // Append new items here
 
         try {
             itemCollection.insertOne(newItem);
             ObjectId id = newItem.getObjectId("_id");
-            System.err.println("Successfully added new item [_id=" + id + ", goal=" + goal + ", name=" + name);
+            System.err.println("Successfully added new item [name=" + name + ", category=" + category + " goal=" + goal + ']');
             // return JSON.serialize(newItem);
             return JSON.serialize(id);
         } catch(MongoException me) {
