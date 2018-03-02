@@ -131,14 +131,13 @@ public class ItemControllerSpec {
         assertNull("No name should match",noJsonResult);
     }
 
-    // There is a problem with the "argMap" variable.
-/*    @Test
+    @Test
     public void addItemTest(){
-        String newId = itemController.addNewItem("Spencer", "Avoid stabbing knee on old keyboard holder.");
+        String newId = itemController.addNewItem("Aaron", "Avoid stabbing knee on old keyboard holder.");
 
         assertNotNull("Add new item should return true when item is added,", newId);
         Map<String, String[]> argMap = new HashMap<>();
-        String jsonResult = itemController.getItem(argMap);
+        String jsonResult = itemController.getItems(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
         List<String> name = docs
@@ -146,7 +145,9 @@ public class ItemControllerSpec {
             .map(ItemControllerSpec::getName)
             .sorted()
             .collect(Collectors.toList());
-        assertEquals("Should return name of new user", "Spencer", name.get(0));
-    }*/
+        // name.get(0) says to get the name of the first person in the database,
+        // so "Aaron" will probably always be first because it is sorted alphabetically.
+        assertEquals("Should return name of new user", "Aaron", name.get(0));
+    }
 
 }

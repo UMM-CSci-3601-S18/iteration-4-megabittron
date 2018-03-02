@@ -73,19 +73,34 @@ public class ItemController {
             filterDoc = filterDoc.append("category", contentRegQuery);
         }
 
-        // FindIterable comes from mongo, Document comes from Gson
-        FindIterable<Document> matchingUsers = itemCollection.find(filterDoc);
+        if (queryParams.containsKey("name")) {
+            String targetContent = (queryParams.get("name")[0]);
+            Document contentRegQuery = new Document();
+            contentRegQuery.append("$regex", targetContent);
+            contentRegQuery.append("$options", "i");
+            filterDoc = filterDoc.append("name", contentRegQuery);
+        }
 
-        return JSON.serialize(matchingUsers);
+        // FindIterable comes from mongo, Document comes from Gson
+        FindIterable<Document> matchingItems = itemCollection.find(filterDoc);
+
+        return JSON.serialize(matchingItems);
     }
 
+    /**
+     * Helper method which appends received user information to the to-be added document
+     *
+     * @param name
+     * @param goal
+     * @return boolean after successfully or unsuccessfully adding a user
+     */
     // As of now this only adds the goal, but you can separate multiple arguments
     // by commas as we add them.
     public String addNewItem(String name, String goal) {
 
         Document newItem = new Document();
-        newItem.append("goal", goal);
         newItem.append("name", name);
+        newItem.append("goal", goal);
         // Append new items here
 
         try {
