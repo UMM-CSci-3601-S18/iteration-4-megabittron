@@ -19,19 +19,33 @@ import static com.mongodb.client.model.Filters.eq;
 public class ItemController {
 
     private final Gson gson;
+    private final ItemControllerUtility itemControllerUtility = new ItemControllerUtility(this);
     private MongoDatabase database;
     private final MongoCollection<Document> itemCollection;
+    private final MongoCollection<Document> emojiCollection;
+    // Goals data has not been setup yet
+    // private final MongoCollection<Document> goalCollection;
 
     // Construct controller for items.
     public ItemController(MongoDatabase database) {
         gson = new Gson();
         this.database = database;
         itemCollection = database.getCollection("items");
+        // goalCollection = database.getCollection("goals");
+        emojiCollection = database.getCollection("emoji");
     }
 
-    public String getItem(String id) {
+    private MongoCollection<Document> getCollectionByName(String nameOfCollection) {
+        return itemControllerUtility.getCollectionByName(nameOfCollection);
+    }
+
+    private String[] getKeysByCollectionName(String name) {
+        return ItemControllerUtility.getKeysByCollectionName(name);
+    }
+
+    public String getItem(String id, String collection) {
         FindIterable<Document> jsonItems
-            = itemCollection
+            = itemControllerUtility.getCollectionByName(collection)
             .find(eq("_id", new ObjectId(id)));
 
         Iterator<Document> iterator = jsonItems.iterator();
@@ -48,14 +62,28 @@ public class ItemController {
     // documents if no query parameter is specified. If the goal parameter is
     // specified, then the collection is filtered so only documents of that
     // specified goal are found.
-    public String getItems(Map<String, String[]> queryParams) {
+    public String getItems(Map<String, String[]> queryParams, String collection) {
 
         Document filterDoc = new Document();
 
         // We will need more statements here for different objects,
         // such as emoji, category, etc.
 
-        // "goal" will be a key to a string object, where the object is
+        // This bit of code parametrizes the queryParams.containsKey code that we
+        // will no longer need, but will be commented out for posterity.
+        MongoCollection<Document> thisCollection = getCollectionByName(collection);
+        String[] keys = getKeysByCollectionName(collection);
+        for(int i = 0; i < keys.length; i++) {
+            if(queryParams.containsKey(keys[i])) {
+                String targetContent = queryParams.get(keys[i])[0];
+                Document contentRegQuery = new Document();
+                contentRegQuery.append("$regex", targetContent);
+                contentRegQuery.append("$options", "i");
+                filterDoc = filterDoc.append(keys[i], contentRegQuery);
+            }
+        }
+
+        /*// "goal" will be a key to a string object, where the object is
         // what we get when people enter their goals as a text body.
         if (queryParams.containsKey("goal")) {
             String targetContent = (queryParams.get("goal")[0]);
@@ -79,10 +107,10 @@ public class ItemController {
             contentRegQuery.append("$regex", targetContent);
             contentRegQuery.append("$options", "i");
             filterDoc = filterDoc.append("name", contentRegQuery);
-        }
+        }*/
 
         // FindIterable comes from mongo, Document comes from Gson
-        FindIterable<Document> matchingItems = itemCollection.find(filterDoc);
+        FindIterable<Document> matchingItems = itemControllerUtility.getCollectionByName(collection).find(filterDoc);
 
         return JSON.serialize(matchingItems);
     }
@@ -116,4 +144,11 @@ public class ItemController {
         }
     }
 
+    public MongoCollection<Document> getItemCollection() {
+        return itemCollection;
+    }
+
+    public MongoCollection<Document> getEmojiCollection() {
+        return emojiCollection;
+    }
 }
