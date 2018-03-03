@@ -13,6 +13,11 @@ task seedToDoData(type: Exec) {
     args = ["-d", "dev", "-c", "todos", "--file", "todos.seed.json", "--jsonArray"]
 }
 
+task seedEmojiData(type: Exec) {
+    executable = "mongoimport"
+    args = ["-d", "dev", "-c", "emoji", "--file", "emoji.seed.json", "--jsonArray"]
+}
+
 task seedUserData(type: Exec) {
     executable = "mongoimport"
     args = ["-d", "dev", "-c", "users", "--file", "users.seed.json", "--jsonArray"]
