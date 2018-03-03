@@ -23,10 +23,10 @@ public class ItemControllerUtility {
     public static String[] getKeysByCollectionName(String name) {
         if (name.equals("emoji")) {
             return new String[]{"user_id", "emoji", "datetime"};
-        } else if (name.equals("items")) {
-            return null;
         } else if (name.equals("goals")) {
-            return new String[]{"category", "name", "goal"};
+            return null;
+        } else if (name.equals("items")) {
+            return new String[]{"name", "goal", "category"};
         } else {
             return null;
         }

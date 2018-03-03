@@ -70,7 +70,7 @@ public class Server {
         get("api/users", userRequestHandler::getUsers);
         get("api/users/:id", userRequestHandler::getUserJSON);
         post("api/users/new", userRequestHandler::addNewUser);
-        
+
         get("api/emoji/:id", itemRequestHandler::getEmojiJSON);
         get("api/emoji", itemRequestHandler::getEmojis);
 

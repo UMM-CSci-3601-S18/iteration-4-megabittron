@@ -70,12 +70,11 @@ public class ItemController {
         // such as emoji, category, etc.
 
         // This bit of code parametrizes the queryParams.containsKey code that we
-        // will no longer need, but will be commented out for posterity.
-        MongoCollection<Document> thisCollection = getCollectionByName(collection);
+        // will no longer need
         String[] keys = getKeysByCollectionName(collection);
         for(int i = 0; i < keys.length; i++) {
             if(queryParams.containsKey(keys[i])) {
-                String targetContent = queryParams.get(keys[i])[0];
+                String targetContent = (queryParams.get(keys[i])[0]);
                 Document contentRegQuery = new Document();
                 contentRegQuery.append("$regex", targetContent);
                 contentRegQuery.append("$options", "i");

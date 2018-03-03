@@ -91,7 +91,7 @@ public class ItemControllerSpec {
     @Test
     public void getAllItems() {
         Map<String, String[]> emptyMap = new HashMap<>();
-        String jsonResult = itemController.getItems(emptyMap);
+        String jsonResult = itemController.getItems(emptyMap, "items");
         BsonArray docs = parseJsonArray(jsonResult);
 
         assertEquals("Should be 4 goals", 4, docs.size());
@@ -110,7 +110,7 @@ public class ItemControllerSpec {
         // Mongo in ItemController is doing a regex search so can just take a Java Reg. Expression
         // This will search the category for letters 'f' and 'c'.
         argMap.put("category", new String[] { "[f, c]" });
-        String jsonResult = itemController.getItems(argMap);
+        String jsonResult = itemController.getItems(argMap, "items");
         BsonArray docs = parseJsonArray(jsonResult);
         assertEquals("Should be 3 items", 3, docs.size());
         List<String> name = docs
@@ -124,10 +124,10 @@ public class ItemControllerSpec {
 
     @Test
     public void getHuntersByID() {
-        String jsonResult = itemController.getItem(huntersID.toHexString());
+        String jsonResult = itemController.getItem(huntersID.toHexString(), "items");
         Document sam = Document.parse(jsonResult);
         assertEquals("Name should match", "Hunter", sam.get("name"));
-        String noJsonResult = itemController.getItem(new ObjectId().toString());
+        String noJsonResult = itemController.getItem(new ObjectId().toString(), "items");
         assertNull("No name should match",noJsonResult);
     }
 
@@ -137,7 +137,7 @@ public class ItemControllerSpec {
 
         assertNotNull("Add new item should return true when item is added,", newId);
         Map<String, String[]> argMap = new HashMap<>();
-        String jsonResult = itemController.getItems(argMap);
+        String jsonResult = itemController.getItems(argMap, "items");
         BsonArray docs = parseJsonArray(jsonResult);
 
         List<String> name = docs
