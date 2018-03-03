@@ -29,3 +29,4 @@ task seedMongoDB {
 seedMongoDB.dependsOn(clearMongoDB)
 seedMongoDB.dependsOn(seedToDoData)
 seedMongoDB.dependsOn(seedUserData)
+seedMongoDB.dependsOn(seedEmojiData)
