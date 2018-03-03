@@ -4,6 +4,8 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import spark.Request;
 import spark.Response;
+import umm3601.database.ItemController;
+import umm3601.database.ItemRequestHandler;
 import umm3601.user.UserController;
 import umm3601.user.UserRequestHandler;
 
@@ -14,17 +16,19 @@ import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Server {
-    private static final String userDatabaseName = "dev";
+    private static final String databaseName = "dev";
     private static final int serverPort = 4567;
 
     public static void main(String[] args) throws IOException {
 
         MongoClient mongoClient = new MongoClient();
-        MongoDatabase userDatabase = mongoClient.getDatabase(userDatabaseName);
+        MongoDatabase database = mongoClient.getDatabase(databaseName);
 
-        UserController userController = new UserController(userDatabase);
+        UserController userController = new UserController(database);
         UserRequestHandler userRequestHandler = new UserRequestHandler(userController);
 
+        ItemController itemController = new ItemController(database);
+        ItemRequestHandler itemRequestHandler = new ItemRequestHandler(itemController);
         //Configure Spark
         port(serverPort);
         enableDebugScreen();
@@ -66,6 +70,9 @@ public class Server {
         get("api/users", userRequestHandler::getUsers);
         get("api/users/:id", userRequestHandler::getUserJSON);
         post("api/users/new", userRequestHandler::addNewUser);
+        
+        get("api/emoji/:id", itemRequestHandler::getEmojiJSON);
+        get("api/emoji", itemRequestHandler::getEmojis);
 
         // An example of throwing an unhandled exception so you can see how the
         // Java Spark debugger displays errors like this.
