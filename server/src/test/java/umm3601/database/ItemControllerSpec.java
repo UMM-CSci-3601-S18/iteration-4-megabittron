@@ -12,8 +12,6 @@ import org.bson.json.JsonReader;
 import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
-import umm3601.user.UserController;
-import umm3601.user.UserControllerSpec;
 
 import java.io.IOException;
 import java.util.*;
@@ -25,7 +23,9 @@ import static org.junit.Assert.assertNull;
 
 public class ItemControllerSpec {
     private ItemController itemController;
+    private ItemController utilItemController;
     private ObjectId huntersID;
+    private ObjectId kaisID;
     @Before
     public void clearAndPopulateDB() throws IOException {
         MongoClient mongoClient = new MongoClient();
@@ -33,6 +33,61 @@ public class ItemControllerSpec {
         MongoDatabase db = mongoClient.getDatabase("test");
         // End rename "test" to something useful.
         MongoCollection<Document> itemDocuments = db.getCollection("items");
+        MongoCollection<Document> goalDocuments = db.getCollection("goals");
+        MongoCollection<Document> emojiDocuments = db.getCollection("emoji");
+        MongoCollection<Document> userIdDocuments = db.getCollection("userId");
+
+        utilItemController = new ItemController(db);
+
+        userIdDocuments.drop();
+
+        List<Document> testUserId = new ArrayList<>();
+        testUserId.add(Document.parse("{\n" +
+            "                       user_id: 0,\n" +
+            "                       userName: \"John\",\n" +
+            "                       timeCreated: 90000,\n"+
+            "                       }"));
+        testUserId.add(Document.parse("{\n" +
+            "                       user_id: 1,\n" +
+            "                       userName: \"Aurora\",\n" +
+            "                       timeCreated: 90100,\n"+
+            "                       }"));
+
+        userIdDocuments.insertMany(testUserId);
+
+        kaisID = new ObjectId();
+        BasicDBObject kai = new BasicDBObject("_id", kaisID);
+        kai = kai.append("user_id", utilItemController.getNewUserId())
+            .append("userName", "Kai")
+            .append("timeCreated", 300000);
+
+        userIdDocuments.insertOne(Document.parse(kai.toJson()));
+
+
+        emojiDocuments.drop();
+        List<Document> testEmoji = new ArrayList<>();
+        testEmoji.add(Document.parse("{\n" +
+        "                       user_id: 0,\n" +
+        "                       emoji: 0,\n" +
+        "                       datetime: 100000,\n"+
+        "                       }"));
+        testEmoji.add(Document.parse("{\n" +
+            "                       user_id: 0,\n" +
+            "                       emoji: 1,\n" +
+            "                       datetime: 200000,\n"+
+            "                       }"));
+        testEmoji.add(Document.parse("{\n" +
+            "                       user_id: 0,\n" +
+            "                       emoji: 0,\n" +
+            "                       datetime: 300000,\n"+
+            "                       }"));
+        testEmoji.add(Document.parse("{\n" +
+            "                       user_id: 1,\n" +
+            "                       emoji: 0,\n" +
+            "                       datetime: 100000,\n"+
+            "                       }"));
+        emojiDocuments.insertMany(testEmoji);
+
         itemDocuments.drop();
         List<Document> testItems = new ArrayList<>();
         testItems.add(Document.parse("{\n" +
@@ -125,8 +180,8 @@ public class ItemControllerSpec {
     @Test
     public void getHuntersByID() {
         String jsonResult = itemController.getItem(huntersID.toHexString(), "items");
-        Document sam = Document.parse(jsonResult);
-        assertEquals("Name should match", "Hunter", sam.get("name"));
+        Document hunterDoc = Document.parse(jsonResult);
+        assertEquals("Name should match", "Hunter", hunterDoc.get("name"));
         String noJsonResult = itemController.getItem(new ObjectId().toString(), "items");
         assertNull("No name should match",noJsonResult);
     }
@@ -147,8 +202,15 @@ public class ItemControllerSpec {
             .collect(Collectors.toList());
         // name.get(0) says to get the name of the first person in the database,
         // so "Aaron" will probably always be first because it is sorted alphabetically.
-        // TODO: 3/4/18 Not necessarily: it is likely that that is how they're stored but we don't know. Find a different way of doing this. 
+        // TODO: 3/4/18 Not necessarily: it is likely that that is how they're stored but we don't know. Find a different way of doing this.
         assertEquals("Should return name of new item", "Aaron", name.get(0));
+    }
+
+    @Test
+    public void centralUserIdTest() {
+        String jsonResult = itemController.getItem(kaisID.toHexString(), "userId");
+        Document kaiDoc = Document.parse(jsonResult);
+        assertEquals("user_id should be 2", 2, kaiDoc.get("user_id"));
     }
 
 }
