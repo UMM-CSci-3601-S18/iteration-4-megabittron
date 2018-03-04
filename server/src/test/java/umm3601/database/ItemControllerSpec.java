@@ -147,6 +147,7 @@ public class ItemControllerSpec {
             .collect(Collectors.toList());
         // name.get(0) says to get the name of the first person in the database,
         // so "Aaron" will probably always be first because it is sorted alphabetically.
+        // TODO: 3/4/18 Not necessarily: it is likely that that is how they're stored but we don't know. Find a different way of doing this. 
         assertEquals("Should return name of new item", "Aaron", name.get(0));
     }
 
