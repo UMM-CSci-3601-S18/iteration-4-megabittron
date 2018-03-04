@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
-
-
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
@@ -11,12 +8,10 @@ import {UserListComponent} from './users/user-list.component';
 import {UserListService} from './users/user-list.service';
 import {Routing} from './app.routes';
 import {APP_BASE_HREF} from '@angular/common';
-
 import {CustomModule} from './custom.module';
 import {AddUserComponent} from './users/add-user.component';
-
 import {ResourcesComponent} from "./resources/resources.component";
-
+import {GoalsComponent} from "./goals/goals.component";
 
 @NgModule({
     imports: [
@@ -31,6 +26,7 @@ import {ResourcesComponent} from "./resources/resources.component";
         UserListComponent,
         AddUserComponent,
         ResourcesComponent,
+        GoalsComponent,
     ],
     providers: [
         UserListService,
