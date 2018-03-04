@@ -15,6 +15,10 @@ public class ItemControllerUtility {
             return itemController.getItemCollection();
         } else if (nameOfCollection.equals("emoji")) {
             return itemController.getEmojiCollection();
+        } else if (nameOfCollection.equals("userId")) {
+            return itemController.getUserIdCollection();
+        } else if(nameOfCollection.equals("goals")) {
+            return itemController.getGoalCollection();
         } else {
             return null;
         }
@@ -27,8 +31,14 @@ public class ItemControllerUtility {
             return null;
         } else if (name.equals("items")) {
             return new String[]{"name", "goal", "category"};
+        } else if(name.equals("userId")) {
+            return new String[]{"userId", "userName", "timeCreated"};
         } else {
             return null;
         }
+    }
+
+    public int getNewUserId() {
+        return itemController.getNewUserId();
     }
 }

@@ -1,15 +1,20 @@
 package umm3601.database;
 
 import com.google.gson.Gson;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.IndexModel;
 import com.mongodb.util.JSON;
-import org.bson.Document;
+import org.bson.*;
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -23,16 +28,37 @@ public class ItemController {
     private MongoDatabase database;
     private final MongoCollection<Document> itemCollection;
     private final MongoCollection<Document> emojiCollection;
-    // Goals data has not been setup yet
-    // private final MongoCollection<Document> goalCollection;
+    private final MongoCollection<Document> userIdCollection;
+    // Goals data has not been setup yet, but the collection can still be here
+    private final MongoCollection<Document> goalCollection;
 
     // Construct controller for items.
     public ItemController(MongoDatabase database) {
         gson = new Gson();
         this.database = database;
         itemCollection = database.getCollection("items");
-        // goalCollection = database.getCollection("goals");
+        goalCollection = database.getCollection("goals");
         emojiCollection = database.getCollection("emoji");
+        userIdCollection = database.getCollection("userId");
+        // if the userId is new, setup the id index
+        if(userIdCollection.count() == 0) {
+            setupUserId();
+        }
+    }
+
+    // This sets up an index so that we can get the largest userId when assigning new ones
+    private void setupUserId() {
+        BsonDocument bsonDocument = new BsonDocument();
+        bsonDocument.append("userId", new BsonInt32(-1)); // -1 means descending order
+        userIdCollection.createIndex(bsonDocument);
+    }
+
+    // This uses the aforementioned index to get the most recent userId
+    public int getNewUserId() {
+        int returnInt = 0;
+        FindIterable<Document> doc = userIdCollection.find().sort(new BsonDocument("userId", new BsonInt32(-1)));
+        returnInt = doc.first().getInteger("userId");
+        return ++returnInt; // Do not change order of ++, this makes it so that it is updated before being returned
     }
 
     private MongoCollection<Document> getCollectionByName(String nameOfCollection) {
@@ -115,7 +141,7 @@ public class ItemController {
     }
 
     /**
-     * Helper method which appends received user information to the to-be added document
+     * Helper method which appends received item information to the to-be added document
      *
      * @param name
      * @param goal
@@ -149,5 +175,13 @@ public class ItemController {
 
     public MongoCollection<Document> getEmojiCollection() {
         return emojiCollection;
+    }
+
+    public MongoCollection<Document> getUserIdCollection() {
+        return userIdCollection;
+    }
+
+    public MongoCollection<Document> getGoalCollection() {
+        return goalCollection;
     }
 }
