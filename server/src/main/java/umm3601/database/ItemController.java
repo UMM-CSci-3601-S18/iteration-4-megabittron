@@ -49,16 +49,22 @@ public class ItemController {
     // This sets up an index so that we can get the largest userId when assigning new ones
     private void setupUserId() {
         BsonDocument bsonDocument = new BsonDocument();
-        bsonDocument.append("userId", new BsonInt32(-1)); // -1 means descending order
+        bsonDocument.append("user_id", new BsonInt32(-1)); // -1 means descending order
         userIdCollection.createIndex(bsonDocument);
     }
 
     // This uses the aforementioned index to get the most recent userId
     public int getNewUserId() {
         int returnInt = 0;
-        FindIterable<Document> doc = userIdCollection.find().sort(new BsonDocument("userId", new BsonInt32(-1)));
-        returnInt = doc.first().getInteger("userId");
-        return ++returnInt; // Do not change order of ++, this makes it so that it is updated before being returned
+        FindIterable<Document> doc = userIdCollection.find().sort(new BsonDocument("user_id", new BsonInt32(-1)));
+        if(doc.first() != null) {
+            Document document = doc.first();
+            returnInt = document.getInteger("user_id");
+            return ++returnInt; // Do not change order of ++, this makes it so that it is updated before being returned
+        }
+        else {
+            return returnInt;
+        }
     }
 
     private MongoCollection<Document> getCollectionByName(String nameOfCollection) {
@@ -96,7 +102,7 @@ public class ItemController {
         // such as emoji, category, etc.
 
         // This bit of code parametrizes the queryParams.containsKey code that we
-        // will no longer need
+        // will no longer need because it's all in this loop
         String[] keys = getKeysByCollectionName(collection);
         for(int i = 0; i < keys.length; i++) {
             if(queryParams.containsKey(keys[i])) {
