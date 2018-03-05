@@ -94,7 +94,7 @@ public class ItemController {
     // documents if no query parameter is specified. If the goal parameter is
     // specified, then the collection is filtered so only documents of that
     // specified goal are found.
-    public String getItems(Map<String, String[]> queryParams, String collection) {
+    public String getItems(Map<String, String[]> queryParams, String collectionName) {
 
         Document filterDoc = new Document();
 
@@ -103,7 +103,7 @@ public class ItemController {
 
         // This bit of code parametrizes the queryParams.containsKey code that we
         // will no longer need because it's all in this loop
-        String[] keys = getKeysByCollectionName(collection);
+        String[] keys = getKeysByCollectionName(collectionName);
         for(int i = 0; i < keys.length; i++) {
             if(queryParams.containsKey(keys[i])) {
                 String targetContent = (queryParams.get(keys[i])[0]);
@@ -141,7 +141,7 @@ public class ItemController {
         }*/
 
         // FindIterable comes from mongo, Document comes from Gson
-        FindIterable<Document> matchingItems = itemControllerUtility.getCollectionByName(collection).find(filterDoc);
+        FindIterable<Document> matchingItems = itemControllerUtility.getCollectionByName(collectionName).find(filterDoc);
 
         return JSON.serialize(matchingItems);
     }
