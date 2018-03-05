@@ -13,6 +13,10 @@
     border-style: solid;
 }
 
+.whole-body {
+    background-color: #e6e5ee;
+}
+
 .resources-div {
     width: 25%;
 }
@@ -42,15 +46,15 @@
 }
 
 .phone-numbers {
-    background-color: #d0e0e6;
+    background-color: white;
 }
 
 .main-card {
-    background-color: #d0e0e6;
+    background-color: white;
 }
 
 .resources-card {
-    background-color: #d0e0e6;
+    background-color: white;
 }
 
 .best-div {
@@ -97,11 +101,3 @@
 .hotline-company-name {
     margin: 10%;
 }
-
-/*.testThing {
-    background-color: blue;
-}*/
-
-/*[_ngcontent-c5] {
-    background-color: pink;
-}*/
