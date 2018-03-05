@@ -24,14 +24,14 @@ public class ItemControllerUtility {
         }
     }
 
-    public static String[] getKeysByCollectionName(String name) {
-        if (name.equals("emoji")) {
+    public static String[] getKeysByCollectionName(String collectionName) {
+        if (collectionName.equals("emoji")) {
             return new String[]{"user_id", "emoji", "datetime"};
-        } else if (name.equals("goals")) {
+        } else if (collectionName.equals("goals")) {
             return null;
-        } else if (name.equals("items")) {
+        } else if (collectionName.equals("items")) {
             return new String[]{"name", "goal", "category"};
-        } else if(name.equals("userId")) {
+        } else if(collectionName.equals("userId")) {
             return new String[]{"userId", "userName", "timeCreated"};
         } else {
             return null;
