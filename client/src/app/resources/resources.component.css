@@ -32,19 +32,7 @@
     font-size: 24px;
     text-align: center;
 }
-/*
-.phone-numbers {
-    background-color: white;
-}
 
-.main-card {
-    background-color: white;
-}
-
-.resources-card {
-    background-color: white;
-}
-*/
 .best-div {
     padding: 25px;
     background-color: transparent;
@@ -88,11 +76,6 @@
 
 .hotline-company-name {
     margin: 10%;
-}
-
-#your-loved{
-    max-width: 100%;
-    height: auto;
 }
 
 #breathing{
