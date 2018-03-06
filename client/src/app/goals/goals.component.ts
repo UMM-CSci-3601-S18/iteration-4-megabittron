@@ -1,77 +1,66 @@
 import {Component, OnInit} from '@angular/core';
-import {GoalsService} from "./goals.service";
+import {GoalsService} from './goals.service';
+import {Goal} from './goal';
 import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
-import {Goal} from './goal'
-import {AddGoalComponent} from "./add-goal.component";
+import {AddGoalComponent} from './add-goal.component';
 
 @Component({
-    selector: 'goals-component',
+    selector: 'app-goals-component',
     templateUrl: 'goals.component.html',
     styleUrls: ['./goals.component.css'],
 })
 
 export class GoalsComponent implements OnInit {
-    public title: string;
-
-    constructor(public goalService: GoalsService,
-                public dialog: MatDialog) {
-        this.title = 'Goals';
-        this.user_id = 2;
-    }
-
+    // These are public so that tests can reference them (.spec.ts)
     public goals: Goal[];
     public filteredGoals: Goal[];
 
+    // These are the target values used in searching.
+    // We should rename them to make that clearer.
     public goalGoal: string;
-    public goalTimeCreated: number;
-    public goalComplete: boolean;
-    public user_id: number;
+    public goalCategory: string;
+    public goalName: string;
 
+    // The ID of the
     private highlightedID: {'$oid': string} = { '$oid': '' };
 
-    openDialog(): void {
-        const newGoal: Goal = {_id: '', user_id:this.user_id, goal:'', timeCreated:-1, complete:false};
-        const dialogRef = this.dialog.open(AddGoalComponent, {
-            width: '500px',
-            data: { goal : newGoal }
-        });
+    // Inject the UserListService into this component.
+    constructor(public goalService: GoalsService, public dialog: MatDialog) {
 
-        dialogRef.afterClosed().subscribe(result => {
-            this.goalService.addNewGoal(result).subscribe(
-                addUserResult => {
-                    this.highlightedID = addUserResult;
-                    this.refreshGoals();
-                },
-                err => {
-                    // This should probably be turned into some sort of meaningful response.
-                    console.log('There was an error adding the goal.');
-                    console.log('The error was ' + JSON.stringify(err));
-                });
-        });
     }
 
     isHighlighted(goal: Goal): boolean {
         return goal._id['$oid'] === this.highlightedID['$oid'];
     }
 
-    refreshGoals(): Observable<Goal[]> {
-        const goalObservable: Observable<Goal[]> = this.goalService.getGoals();
-        goalObservable.subscribe(
-            goals => {
-                this.goals = goals;
-                this.filterGoals(this.goalGoal, this.goalTimeCreated, this.goalComplete);
-            },
-            err => {
-                console.log(err);
-            });
-        return goalObservable;
-    }
+/*    openDialog(): void {
+        const newUser: Goal = {_id: '', name: '', age: -1, company: '', email: ''};
+        const dialogRef = this.dialog.open(AddUserComponent, {
+            width: '500px',
+            data: { user: newUser }
+        });
 
-    public filterGoals(searchGoal: string, searchTime: number, searchComplete: boolean) {
+        dialogRef.afterClosed().subscribe(result => {
+            this.userListService.addNewUser(result).subscribe(
+                addUserResult => {
+                    this.highlightedID = addUserResult;
+                    this.refreshUsers();
+                },
+                err => {
+                    // This should probably be turned into some sort of meaningful response.
+                    console.log('There was an error adding the user.');
+                    console.log('The error was ' + JSON.stringify(err));
+                });
+        });
+    }*/
+
+    public filterGoals(searchGoal: string, searchCategory: string, searchName: string): Goal[] {
+
         this.filteredGoals = this.goals;
 
-        if(searchGoal != null) {
+        // Filter by goal
+        if (searchGoal != null) {
             searchGoal = searchGoal.toLocaleLowerCase();
 
             this.filteredGoals = this.filteredGoals.filter(goal => {
@@ -79,24 +68,53 @@ export class GoalsComponent implements OnInit {
             });
         }
 
-        if(searchTime != null) {
+        // Filter by category
+        if (searchCategory != null) {
+            searchCategory = searchCategory.toLocaleLowerCase();
+
             this.filteredGoals = this.filteredGoals.filter(goal => {
-                return !searchTime || goal.timeCreated == searchTime;
+                return !searchCategory || goal.category.toLowerCase().indexOf(searchCategory) !== -1;
             });
         }
 
-        if(searchComplete != null) {
+        // Filter by name
+        if (searchName != null) {
+            searchName = searchName.toLocaleLowerCase();
+
             this.filteredGoals = this.filteredGoals.filter(goal => {
-                return null || goal.complete == searchComplete;
+                return !searchName || goal.name.toLowerCase().indexOf(searchName) !== -1;
             });
         }
 
         return this.filteredGoals;
-
     }
 
+    /**
+     * Starts an asynchronous operation to update the users list
+     *
+     */
+    refreshUsers(): Observable<Goal[]> {
+        // Get Users returns an Observable, basically a "promise" that
+        // we will get the data from the server.
+        //
+        // Subscribe waits until the data is fully downloaded, then
+        // performs an action on it (the first lambda)
+
+        const goalObservable: Observable<Goal[]> = this.goalService.getGoals();
+        goalObservable.subscribe(
+            goals => {
+                this.goals = goals;
+                this.filterGoals(this.goalGoal, this.goalCategory, this.goalName);
+            },
+            err => {
+                console.log(err);
+            });
+        return goalObservable;
+    }
+
+
     loadService(): void {
-        this.goalService.getGoals(this.user_id).subscribe(
+        this.goalService.getGoals(this.goalCategory).subscribe(
             goals => {
                 this.goals = goals;
                 this.filteredGoals = this.goals;
@@ -107,8 +125,9 @@ export class GoalsComponent implements OnInit {
         );
     }
 
+
     ngOnInit(): void {
-        this.refreshGoals();
+        this.refreshUsers();
         this.loadService();
     }
 }

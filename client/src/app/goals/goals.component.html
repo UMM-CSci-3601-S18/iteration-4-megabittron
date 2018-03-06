@@ -24,15 +24,24 @@
         <div class="second-sec">
         <mat-card> <mat-card-title class="your-goals-title">Your Goals</mat-card-title>
             <mat-card-subtitle class="your-goals-subtitle">All of your goals are displayed here.</mat-card-subtitle>
-            <mat-accordion class="your-goals-content">
-                <mat-expansion-panel>
+            <mat-accordion *ngIf="goals; else goalsError" >
+                <mat-expansion-panel #elem class="goals" [id]="goal.goal" [expanded]="this.isHighlighted(goal)" *ngFor="let goal of this.filterGoals(goalGoal, goalCategory, goalName)">
                     <mat-expansion-panel-header>
-                        <mat-panel-title matTooltip="email: " ></mat-panel-title>
+
                     </mat-expansion-panel-header>
-                    <mat-panel-description >Works for </mat-panel-description>
-                    <mat-panel-description>Age: years old</mat-panel-description>
+                    <mat-panel-description >Works for {{goal.category}}</mat-panel-description>
+                    <mat-panel-description>Age: {{goal.name}} years old</mat-panel-description>
                 </mat-expansion-panel>
             </mat-accordion>
+            <ng-template #goalsError>
+                <mat-error>
+                    There was a problem loading the goals. Possibly the server is down or perhaps there are network
+                    issues.
+                </mat-error>
+                <mat-error>
+                    Please wait a bit and try again or start the server.
+                </mat-error>
+            </ng-template>
         </mat-card>
     </div>
     </div>
