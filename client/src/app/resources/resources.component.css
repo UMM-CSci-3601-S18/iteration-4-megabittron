@@ -13,6 +13,22 @@
     border-style: solid;
 }
 
+.whole-body {
+    background-color: #e6e5ee;
+}
+
+.resources-div {
+    width: 25%;
+}
+
+.main-div {
+    width: 50%;
+}
+
+.phone-div {
+    width: 25%;
+}
+
 .example-header-image {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
@@ -27,6 +43,18 @@
 .phone-numbers-title {
     font-size: 24px;
     text-align: center;
+}
+
+.phone-numbers {
+    background-color: white;
+}
+
+.main-card {
+    background-color: white;
+}
+
+.resources-card {
+    background-color: white;
 }
 
 .best-div {
@@ -74,8 +102,10 @@
     margin: 10%;
 }
 
-#breathing{
+#your-loved{
     max-width: 100%;
 }
 
-
+#breathing{
+    max-width: 100%;
+}
