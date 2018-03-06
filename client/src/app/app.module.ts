@@ -12,6 +12,8 @@ import {CustomModule} from './custom.module';
 import {AddUserComponent} from './users/add-user.component';
 import {ResourcesComponent} from "./resources/resources.component";
 import {GoalsComponent} from "./goals/goals.component";
+import {AddGoalComponent} from "./goals/add-goal.component";
+import {GoalsService} from "./goals/goals.service";
 
 @NgModule({
     imports: [
@@ -27,14 +29,15 @@ import {GoalsComponent} from "./goals/goals.component";
         AddUserComponent,
         ResourcesComponent,
         GoalsComponent,
+        AddGoalComponent,
     ],
     providers: [
-        UserListService,
+        UserListService, GoalsService,
         {provide: APP_BASE_HREF, useValue: '/'},
         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}
     ],
     entryComponents: [
-      AddUserComponent,
+      AddUserComponent, AddGoalComponent,
     ],
     bootstrap: [AppComponent]
 })
