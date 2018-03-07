@@ -76,7 +76,7 @@ export class GoalsService {
         this.goalUrl = this.goalUrl.substring(0, start) + this.goalUrl.substring(end);
     }
 
-    addNewUser(newGoal: Goal): Observable<{'$oid': string}> {
+    addNewGoal(newGoal: Goal): Observable<{'$oid': string}> {
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'

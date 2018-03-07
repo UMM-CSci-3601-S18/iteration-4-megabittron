@@ -26,7 +26,7 @@ public class ItemController {
     public ItemController(MongoDatabase database) {
         gson = new Gson();
         this.database = database;
-        itemCollection = database.getCollection("items");
+        itemCollection = database.getCollection("goals");
     }
 
     public String getItem(String id) {
@@ -96,18 +96,18 @@ public class ItemController {
      */
     // As of now this only adds the goal, but you can separate multiple arguments
     // by commas as we add them.
-    public String addNewItem(String name, String category, String goal) {
+    public String addNewItem(String goal, String category, String name) {
 
         Document newItem = new Document();
-        newItem.append("name", name);
+        newItem.append("goal", name);
         newItem.append("category", name);
-        newItem.append("goal", goal);
+        newItem.append("name", goal);
         // Append new items here
 
         try {
             itemCollection.insertOne(newItem);
             ObjectId id = newItem.getObjectId("_id");
-            System.err.println("Successfully added new item [name=" + name + ", category=" + category + " goal=" + goal + ']');
+            System.err.println("Successfully added new item [goal=" + goal + ", category=" + category + " name=" + name + ']');
             // return JSON.serialize(newItem);
             return JSON.serialize(id);
         } catch(MongoException me) {

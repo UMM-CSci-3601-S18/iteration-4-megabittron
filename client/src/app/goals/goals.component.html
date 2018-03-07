@@ -27,10 +27,10 @@
             <mat-accordion *ngIf="goals; else goalsError" >
                 <mat-expansion-panel #elem class="goals" [id]="goal.goal" [expanded]="this.isHighlighted(goal)" *ngFor="let goal of this.filterGoals(goalGoal, goalCategory, goalName)">
                     <mat-expansion-panel-header>
-
+                        <mat-panel-title>{{goal.name}}</mat-panel-title>
                     </mat-expansion-panel-header>
-                    <mat-panel-description >Works for {{goal.category}}</mat-panel-description>
-                    <mat-panel-description>Age: {{goal.name}} years old</mat-panel-description>
+                    <mat-panel-description>I need to: {{goal.goal}}</mat-panel-description>
+                    <mat-panel-description>Category: {{goal.category}}</mat-panel-description>
                 </mat-expansion-panel>
             </mat-accordion>
             <ng-template #goalsError>

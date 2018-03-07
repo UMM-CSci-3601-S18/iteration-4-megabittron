@@ -76,12 +76,12 @@ public class ItemRequestHandler {
                 try {
                     BasicDBObject dbO = (BasicDBObject) o;
 
-                    String name = dbO.getString("name");
+                    String name = dbO.getString("goal");
                     String category = dbO.getString("category");
-                    String goal = dbO.getString("goal");
+                    String goal = dbO.getString("name");
 
-                    System.err.println("Adding new item [name=" + name + ", category=" + category + " goal=" + goal + ']');
-                    return itemController.addNewItem(name, category, goal).toString();
+                    System.err.println("Adding new item [goal=" + goal + ", category=" + category + " name=" + name + ']');
+                    return itemController.addNewItem(goal, category, name).toString();
                 }
                 catch(NullPointerException e)
                 {

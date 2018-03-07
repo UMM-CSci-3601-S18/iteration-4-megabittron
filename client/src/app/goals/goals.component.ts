@@ -34,26 +34,26 @@ export class GoalsComponent implements OnInit {
         return goal._id['$oid'] === this.highlightedID['$oid'];
     }
 
-/*    openDialog(): void {
-        const newUser: Goal = {_id: '', name: '', age: -1, company: '', email: ''};
-        const dialogRef = this.dialog.open(AddUserComponent, {
+    openDialog(): void {
+        const newGoal: Goal = {_id: '', goal:'', category:'', name:''};
+        const dialogRef = this.dialog.open(AddGoalComponent, {
             width: '500px',
-            data: { user: newUser }
+            data: { goal : newGoal }
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            this.userListService.addNewUser(result).subscribe(
-                addUserResult => {
-                    this.highlightedID = addUserResult;
-                    this.refreshUsers();
+            this.goalService.addNewGoal(result).subscribe(
+                addGoalResult => {
+                    this.highlightedID = addGoalResult;
+                    this.refreshGoals();
                 },
                 err => {
                     // This should probably be turned into some sort of meaningful response.
-                    console.log('There was an error adding the user.');
+                    console.log('There was an error adding the goal.');
                     console.log('The error was ' + JSON.stringify(err));
                 });
         });
-    }*/
+    }
 
     public filterGoals(searchGoal: string, searchCategory: string, searchName: string): Goal[] {
 
@@ -93,7 +93,7 @@ export class GoalsComponent implements OnInit {
      * Starts an asynchronous operation to update the users list
      *
      */
-    refreshUsers(): Observable<Goal[]> {
+    refreshGoals(): Observable<Goal[]> {
         // Get Users returns an Observable, basically a "promise" that
         // we will get the data from the server.
         //
@@ -127,7 +127,7 @@ export class GoalsComponent implements OnInit {
 
 
     ngOnInit(): void {
-        this.refreshUsers();
+        this.refreshGoals();
         this.loadService();
     }
 }
