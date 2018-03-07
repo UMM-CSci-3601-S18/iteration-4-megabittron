@@ -78,6 +78,11 @@
     margin: 10%;
 }
 
+#your-loved{
+    max-width: 100%;
+    height: auto;
+}
+
 #breathing{
     max-width: 100%;
 }
