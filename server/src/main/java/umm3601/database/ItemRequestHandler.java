@@ -18,20 +18,12 @@ public class ItemRequestHandler {
      * @param res the HTTP response
      * @return one user in JSON formatted string and if it fails it will return text with a different HTTP status code
      */
-    public String getEmojiJSON(Request req, Response res) {
-        return getItemJSON(req, res, "emoji");
-    }
-
-    public String getEmojis(Request req, Response res) {
-        return  getItems(req, res, "emoji");
-    }
-
-    public String getItemJSON(Request req, Response res, String collection){
+    public String getItemJSON(Request req, Response res){
         res.type("application/json");
         String id = req.params("id");
         String item;
         try {
-            item = itemController.getItem(id, collection);
+            item = itemController.getItem(id);
         } catch (IllegalArgumentException e) {
             // This is thrown if the ID doesn't have the appropriate
             // form for a Mongo Object ID.
@@ -59,10 +51,10 @@ public class ItemRequestHandler {
      * @param res the HTTP response
      * @return an array of users in JSON formatted String
      */
-    public String getItems(Request req, Response res, String collection)
+    public String getItems(Request req, Response res)
     {
         res.type("application/json");
-        return itemController.getItems(req.queryMap().toMap(), collection);
+        return itemController.getItems(req.queryMap().toMap());
     }
 
     /**Method called from Server when the 'api/users/new'endpoint is recieved.
@@ -84,12 +76,12 @@ public class ItemRequestHandler {
                 try {
                     BasicDBObject dbO = (BasicDBObject) o;
 
-                    String name = dbO.getString("name");
+                    String name = dbO.getString("goal");
                     String category = dbO.getString("category");
-                    String goal = dbO.getString("goal");
+                    String goal = dbO.getString("name");
 
-                    System.err.println("Adding new item [name=" + name + ", category=" + category + " goal=" + goal + ']');
-                    return itemController.addNewItem(name, category, goal);
+                    System.err.println("Adding new item [goal=" + goal + ", category=" + category + " name=" + name + ']');
+                    return itemController.addNewItem(goal, category, name).toString();
                 }
                 catch(NullPointerException e)
                 {
