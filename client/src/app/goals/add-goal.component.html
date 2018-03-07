@@ -7,8 +7,16 @@
                 <mat-form-field>
                     <input matInput #input id="goalField" placeholder="Goal" [(ngModel)]="data.goal.goal">
                 </mat-form-field>
-                <!-- [mat-dialog-close]="data.user" causes the data.user object to be returned when the dialog is closed. -->
-                <button mat-button id="confirmAddGoalButton" [mat-dialog-close]="data.goal" type="button">Add goal</button>
+                <mat-form-field>
+                    <input matInput #input id="categoryField" placeholder="Category" [(ngModel)]="data.goal.category">
+
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput #input id="nameField" placeholder="Name" [(ngModel)]="data.goal.name">
+
+                </mat-form-field>
+
+                <button mat-raised-button="" id="confirmAddGoalButton" [mat-dialog-close]="data.goal" type="button">Add goal</button>
             </mat-card-content>
         </mat-card>
         <button mat-raised-button id="exitWithoutAddingButton" (click)="onNoClick()" type="button">Exit</button>

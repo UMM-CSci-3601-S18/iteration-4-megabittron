@@ -1,0 +1,51 @@
+[{
+    "_id": "1",
+    "goal": "Wash the dishes.",
+    "category": "Chores",
+    "name": "John"
+}, {
+    "_id": "2",
+    "goal": "Call my mom.",
+    "category": "Family",
+    "name": "Kemp"
+}, {
+    "_id": "3",
+    "goal": "Write letter to brother.",
+    "category": "Family",
+    "name": "Hunter"
+}, {
+    "_id": "4",
+    "goal": "Go to bed early.",
+    "category": "Personal health.",
+    "name": "Jerry"
+}, {
+    "_id": "5",
+    "goal": "Shovel the snow.",
+    "category": "Chores",
+    "name": "Mason"
+}, {
+    "_id": "6",
+    "goal": "Not eat fast food for a week.",
+    "category": "Personal health",
+    "name": "Chuck"
+}, {
+    "_id": "7",
+    "goal": "Finish homework on time.",
+    "category": "Academics",
+    "name": "Ahnaf"
+}, {
+    "_id": "8",
+    "goal": "Set up meeting with counselor.",
+    "category": "Personal health",
+    "name": "Travis"
+}, {
+    "_id": "9",
+    "goal": "Grade my students homework.",
+    "category": "Academics",
+    "name": "Nic Mcphee"
+}, {
+    "_id": "10",
+    "goal": "Tell dad I love him.",
+    "category": "Family",
+    "name": "Jubair"
+}]
