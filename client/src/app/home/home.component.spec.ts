@@ -1,4 +1,3 @@
-/*
 import {TestBed, ComponentFixture} from '@angular/core/testing';
 import {HomeComponent} from './home.component';
 import {DebugElement} from '@angular/core';
@@ -31,7 +30,7 @@ describe('Home', () => {
 
     it('displays a greeting', () => {
         fixture.detectChanges();
-        expect(el.textContent).toContain(component.text);
+        expect(el.textContent).toContain(component.title);
     });
 });
-*/
+
