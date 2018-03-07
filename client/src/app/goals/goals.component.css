@@ -18,11 +18,12 @@
 }
 
 .first-sec {
-    width: 25%
+    width: 325px;
+    margin: 0 auto;
 }
 
 .goal-title {
-    text-align: center;
+    text-align: justify;
     font-size: 32px;
 }
 
@@ -33,7 +34,7 @@
 }
 
 .second-sec {
-    width: 75%
+    width: 100%
 }
 
 .your-goals-title {
