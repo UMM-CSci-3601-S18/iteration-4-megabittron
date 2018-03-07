@@ -100,7 +100,7 @@ public class ItemController {
 
         Document newItem = new Document();
         newItem.append("goal", name);
-        newItem.append("category", name);
+        newItem.append("category", category);
         newItem.append("name", goal);
         // Append new items here
 
