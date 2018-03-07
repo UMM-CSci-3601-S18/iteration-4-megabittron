@@ -5,12 +5,12 @@
 <br>
 <div layout-gt-sm="row" class="main-bg">
     <div flex-gt-sm="80" flex-offset-gt-sm="10">
-            <mat-card-title id="hello-world">Friendly Panda</mat-card-title>
+            <mat-card-title id="hello-world">{{this.title}}</mat-card-title>
         <br>
         <mat-card class="page-buttons">
             <mat-card-content>
-            <button mat-button [routerLink]="['/goals']" id="goals-button">Goals</button>
-            <button mat-button [routerLink]="['/resources']" id="resources-button">Resources</button>
+            <a mat-button routerLink="['/goals']" id="goals-button">Goals</a>
+            <a mat-button routerLink="['/resources']" id="resources-button">Resources</a>
             </mat-card-content>
         </mat-card>
     </div>

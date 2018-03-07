@@ -6,9 +6,9 @@ import {Component} from '@angular/core';
     styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-    public text: string;
+    public title: string;
 
     constructor() {
-        this.text = 'Mongo lab';
+        this.title = 'Friendly Panda';
     }
 }
