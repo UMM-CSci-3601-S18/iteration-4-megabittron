@@ -2,6 +2,31 @@
 
 <header>
     <div class ="main-top">Resources</div>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+        .phone-div{
+            float: left;
+            width: 25%;
+        }
+
+        .resources-div{
+            float: left;
+            width: 50%;
+        }
+
+        .resources-div{
+            float: left;
+            width: 25%;
+        }
+
+        @media screen and (max-width: 600px) {
+            .phone-div, .main-div, .resources-div{
+                width: 100%;
+            }
+        }
+
+    </style>
 </header>
 
 <main>
@@ -51,7 +76,16 @@
             <br>
             <mat-panel-description class="actual-phone-number"><mat-icon class="little-phone-icon">message</mat-icon> 741741</mat-panel-description>
         </mat-expansion-panel>
+
+        <mat-expansion-panel #elem class="phone-numbers-to-call">
+            <mat-expansion-panel-header>
+                <mat-panel-title class="Kate-phone-number">Kates-phone-number</mat-panel-title>
+            </mat-expansion-panel-header>
+            <br>
+            <mat-panel-description class="actual-phone-number"><mat-icon class="little-phone-icon">phone</mat-icon> 555-555-1234</mat-panel-description>
+        </mat-expansion-panel>
         <br>
+
     </mat-card>
     </div>
 
@@ -60,14 +94,14 @@
     <mat-card class="main-card">
         <mat-card-title id="main-thing-title">{{ this.title }}</mat-card-title>
         <mat-divider></mat-divider>
-        <mat-card-header>This is a breathing exercise for when you are feeling stressed out. Breathe in as the image is building and out as the image is falling.</mat-card-header>
+        <mat-card-header>This is a breathing exercise for when you are feeling stressed out. Breathe in as the image is building and out as the image shrinks.</mat-card-header>
         <mat-card-content>
             <img id="breathing" width= "100%" src="../../assets/images/ezgif.com-resize.gif">
         </mat-card-content>
         <br>
-        <iframe id="your-loved" width="100%" height="400"
-                src="https://www.youtube.com/embed/bh9N1A5gnR0">
-        </iframe>
+        <mat-card-content>
+            <img id="do-it" width= "100%" src="../../assets/images/do-it.gif">
+        </mat-card-content>
     </mat-card>
     </div>
 
@@ -77,9 +111,15 @@
         <mat-card-title id="resources-title">Links</mat-card-title>
         <mat-card-subtitle>These links take you to helpful pages.</mat-card-subtitle>
         <mat-card-content>
-            <a href="https://depression.org.nz/get-better/self-help/" target="_blank">Depression help</a>
+
+            <a href="https://depression.org.nz/get-better/self-help/" target="_blank">Depression Help</a>
             <br>
-            <a href="https://www.everydayhealth.com/news/cheap-natural-quick-anxiety-remedies/" target="_blank">Anxiety help</a>
+            <a href="https://www.everydayhealth.com/news/cheap-natural-quick-anxiety-remedies/" target="_blank">Anxiety Help</a>
+            <br>
+            <a href="http://www.apa.org/helpcenter/controlling-anger.aspx" target="_blank">Anger Management Help</a>
+            <br>
+            <a href="http://enlightenmentportal.com/development/self-esteem-building-activities/" target="_blank">Self Esteem Building Activities</a>
+
             <mat-divider></mat-divider>
         </mat-card-content>
     </mat-card>
