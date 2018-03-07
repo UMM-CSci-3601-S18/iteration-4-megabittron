@@ -24,11 +24,9 @@ public class ItemControllerBasicSpec {
     private ItemController itemController;
     private ItemController utilItemController;
     private ObjectId huntersID;
-    // !!! RENAME "test" TO SOMETHING USEFUL !!!
     @Before
     public void clearAndPopulateDB() throws IOException {
         MongoClient mongoClient = new MongoClient();
-        // !!! RENAME "test" TO SOMETHING USEFUL !!!
         MongoDatabase db = mongoClient.getDatabase("test");
         MongoCollection<Document> goalDocuments = db.getCollection("goals");
 
