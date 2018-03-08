@@ -2,16 +2,15 @@
 <header>
     <div class ="main-top">Home</div>
 </header>
+<br>
 <div layout-gt-sm="row" class="main-bg">
     <div flex-gt-sm="80" flex-offset-gt-sm="10">
-        <mat-card class="bg" class="bg2">
-            <mat-card-title id="hello-world">Friendly Panda</mat-card-title>
-            <mat-divider></mat-divider>
-            <mat-card-content class="content-home">
-                Select a page: <br> <br>
-            <button mat-button [routerLink]="['/goals']" id="goals-button">Goals</button>
-            <button mat-button [routerLink]="['/resources']" id="resources-button">Resources</button>
-            <button mat-button id="emojis-button">Emojis</button>
+            <mat-card-title id="hello-world">{{this.title}}</mat-card-title>
+        <br>
+        <mat-card class="page-buttons">
+            <mat-card-content>
+            <a mat-button routerLink="['/goals']" id="goals-button">Goals</a>
+            <a mat-button routerLink="['/resources']" id="resources-button">Resources</a>
             </mat-card-content>
         </mat-card>
     </div>

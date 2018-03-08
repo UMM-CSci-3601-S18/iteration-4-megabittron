@@ -4,10 +4,10 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import spark.Request;
 import spark.Response;
-import umm3601.database.ItemController;
-import umm3601.database.ItemRequestHandler;
 import umm3601.user.UserController;
 import umm3601.user.UserRequestHandler;
+import umm3601.database.ItemController;
+import umm3601.database.ItemRequestHandler;
 
 import java.io.IOException;
 
@@ -16,19 +16,23 @@ import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Server {
-    private static final String databaseName = "dev";
+    private static final String userDatabaseName = "dev";
+    private static final String itemDatabaseName = "dev";
+
     private static final int serverPort = 4567;
 
     public static void main(String[] args) throws IOException {
 
         MongoClient mongoClient = new MongoClient();
-        MongoDatabase database = mongoClient.getDatabase(databaseName);
+        MongoDatabase userDatabase = mongoClient.getDatabase(userDatabaseName);
+        MongoDatabase itemDatabase = mongoClient.getDatabase(itemDatabaseName);
 
-        UserController userController = new UserController(database);
+        UserController userController = new UserController(userDatabase);
         UserRequestHandler userRequestHandler = new UserRequestHandler(userController);
 
-        ItemController itemController = new ItemController(database);
+        ItemController itemController = new ItemController(itemDatabase);
         ItemRequestHandler itemRequestHandler = new ItemRequestHandler(itemController);
+
         //Configure Spark
         port(serverPort);
         enableDebugScreen();
@@ -60,6 +64,8 @@ public class Server {
         // Redirects for the "home" page
         redirect.get("", "/");
 
+        redirect.get("/", "http://localhost:9000");
+
         /// User Endpoints ///////////////////////////
         /////////////////////////////////////////////
 
@@ -69,8 +75,10 @@ public class Server {
         get("api/users/:id", userRequestHandler::getUserJSON);
         post("api/users/new", userRequestHandler::addNewUser);
 
-        get("api/emoji/:id", itemRequestHandler::getEmojiJSON);
-        get("api/emoji", itemRequestHandler::getEmojis);
+        get("api/goals", itemRequestHandler::getItems);
+        get("api/goals/:id", itemRequestHandler::getItemJSON);
+        post("api/goals/new", itemRequestHandler::addNewItem);
+
 
         // An example of throwing an unhandled exception so you can see how the
         // Java Spark debugger displays errors like this.

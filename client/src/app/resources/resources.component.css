@@ -14,7 +14,7 @@
 }
 
 .whole-body {
-    background-color: #e6e5ee;
+    background-color: white;
 }
 
 .example-header-image {
@@ -76,6 +76,11 @@
 
 .hotline-company-name {
     margin: 10%;
+}
+
+#your-loved{
+    max-width: 100%;
+    height: auto;
 }
 
 #breathing{
