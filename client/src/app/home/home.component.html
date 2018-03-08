@@ -9,8 +9,8 @@
         <br>
         <mat-card class="page-buttons">
             <mat-card-content>
-            <a mat-button routerLink="['/goals']" id="goals-button">Goals</a>
-            <a mat-button routerLink="['/resources']" id="resources-button">Resources</a>
+            <button mat-button id="goals-button" [routerLink]="['/goals']" >Goals</button>
+            <button mat-button id="resources-button" [routerLink]="['/resources']">Resources</button>
             </mat-card-content>
         </mat-card>
     </div>
