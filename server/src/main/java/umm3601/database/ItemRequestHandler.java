@@ -18,6 +18,8 @@ public class ItemRequestHandler {
      * @param res the HTTP response
      * @return one user in JSON formatted string and if it fails it will return text with a different HTTP status code
      */
+
+    // gets one item using its ObjectId--didn't use, just for potential future functionality
     public String getItemJSON(Request req, Response res){
         res.type("application/json");
         String id = req.params("id");
@@ -51,6 +53,8 @@ public class ItemRequestHandler {
      * @param res the HTTP response
      * @return an array of users in JSON formatted String
      */
+
+    // Gets the goals from the DB given the query parameters
     public String getItems(Request req, Response res)
     {
         res.type("application/json");
@@ -71,6 +75,8 @@ public class ItemRequestHandler {
         res.type("application/json");
         Object o = JSON.parse(req.body());
         try {
+            // if the object that is the JSON representation of the request body's class is the class BasicDBObject
+            // then try to add the item with itemController's addNewItem method
             if(o.getClass().equals(BasicDBObject.class))
             {
                 try {

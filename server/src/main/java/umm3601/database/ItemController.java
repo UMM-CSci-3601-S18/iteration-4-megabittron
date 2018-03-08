@@ -20,6 +20,7 @@ public class ItemController {
 
     private final Gson gson;
     private MongoDatabase database;
+    // itemCollection is the collection that the goals data is in.
     private final MongoCollection<Document> itemCollection;
 
     // Construct controller for items.
@@ -29,6 +30,7 @@ public class ItemController {
         itemCollection = database.getCollection("goals");
     }
 
+    // get an item by its ObjectId, not used by client, for potential future use
     public String getItem(String id) {
         FindIterable<Document> jsonItems
             = itemCollection
@@ -57,6 +59,7 @@ public class ItemController {
 
         // "goal" will be a key to a string object, where the object is
         // what we get when people enter their goals as a text body.
+        // "goal" is the purpose of the goal
         if (queryParams.containsKey("goal")) {
             String targetContent = (queryParams.get("goal")[0]);
             Document contentRegQuery = new Document();
@@ -65,6 +68,7 @@ public class ItemController {
             filterDoc = filterDoc.append("goal", contentRegQuery);
         }
 
+        // category is the category of the goal, also a String
         if (queryParams.containsKey("category")) {
             String targetContent = (queryParams.get("category")[0]);
             Document contentRegQuery = new Document();
@@ -73,6 +77,7 @@ public class ItemController {
             filterDoc = filterDoc.append("category", contentRegQuery);
         }
 
+        // name is the title of the goal
         if (queryParams.containsKey("name")) {
             String targetContent = (queryParams.get("name")[0]);
             Document contentRegQuery = new Document();
@@ -98,6 +103,7 @@ public class ItemController {
     // by commas as we add them.
     public String addNewItem(String goal, String category, String name) {
 
+        // makes the search Document key-pairs
         Document newItem = new Document();
         newItem.append("goal", name);
         newItem.append("category", category);
