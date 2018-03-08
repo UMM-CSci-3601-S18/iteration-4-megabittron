@@ -1,3 +1,4 @@
+/*
 import {UserPage} from './user-list.po';
 import {browser, protractor, element, by} from 'protractor';
 import {Key} from 'selenium-webdriver';
@@ -160,3 +161,4 @@ describe('User list', () => {
         element(by.id('exitWithoutAddingButton')).click();
     });
 });
+*/
