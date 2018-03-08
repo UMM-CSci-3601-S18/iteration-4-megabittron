@@ -1,7 +1,12 @@
 <body class="whole-body">
 
 <header>
+    <div class ="main-top">Resources</div>
+
+    <!-- This allows for good mobile compatibility -->
+    <!-- It might be nice to switch this over to CSS -->
     <div class ="main-top">{{this.title}}</div>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
 
@@ -33,6 +38,8 @@
         }
 
     </style>
+    <!-- Finish mobile compatibility -->
+
 </header>
 
 <main>
@@ -45,6 +52,7 @@
         <mat-card-subtitle id="phone-numbers-subtitle">If you feel that you are in need of any sort of assistance,
         you can refer to one of these hotlines for help.</mat-card-subtitle>
 
+            <!-- First number -->
             <mat-expansion-panel #elem class="phone-numbers-to-call">
                 <mat-expansion-panel-header>
                     <mat-panel-title class="hotline-company-name">Suicide Prevention Lifeline</mat-panel-title>
@@ -57,6 +65,7 @@
                 <mat-panel-description class="actual-phone-number"><mat-icon class="little-phone-icon">phone</mat-icon> 1-800-273-8255</mat-panel-description>
             </mat-expansion-panel>
 
+        <!-- Second number -->
         <mat-expansion-panel #elem class="phone-numbers-to-call">
             <mat-expansion-panel-header>
                 <mat-panel-title class="hotline-company-name">Crisis Hotline</mat-panel-title>
@@ -70,6 +79,7 @@
             <mat-panel-description class="actual-phone-number"><mat-icon class="little-phone-icon">phone</mat-icon> 775-784-8090</mat-panel-description>
         </mat-expansion-panel>
 
+        <!-- Third number -->
         <mat-expansion-panel #elem class="phone-numbers-to-call">
             <mat-expansion-panel-header>
                 <mat-panel-title class="hotline-company-name">Crisis Text Line</mat-panel-title>
@@ -83,6 +93,7 @@
             <mat-panel-description class="actual-phone-number"><mat-icon class="little-phone-icon">message</mat-icon> 741741</mat-panel-description>
         </mat-expansion-panel>
 
+        <!-- Fourth number (Not Kate's Actual #) -->
         <mat-expansion-panel #elem class="phone-numbers-to-call">
             <mat-expansion-panel-header>
 
@@ -119,7 +130,6 @@
         <mat-card-title id="resources-title">Links</mat-card-title>
         <mat-card-subtitle>These links take you to helpful pages.</mat-card-subtitle>
         <mat-card-content>
-
             <a href="https://depression.org.nz/get-better/self-help/" target="_blank">Depression Help</a>
             <br>
             <a href="https://www.everydayhealth.com/news/cheap-natural-quick-anxiety-remedies/" target="_blank">Anxiety Help</a>
@@ -127,7 +137,6 @@
             <a href="http://www.apa.org/helpcenter/controlling-anger.aspx" target="_blank">Anger Management Help</a>
             <br>
             <a href="http://enlightenmentportal.com/development/self-esteem-building-activities/" target="_blank">Self Esteem Building Activities</a>
-
             <mat-divider></mat-divider>
         </mat-card-content>
     </mat-card>

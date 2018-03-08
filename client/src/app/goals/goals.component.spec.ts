@@ -48,8 +48,6 @@ describe('Goal ', () => {
         TestBed.configureTestingModule({
             imports: [CustomModule],
             declarations: [GoalsComponent],
-            // providers:    [ GoalService ]  // NO! Don't provide the real service!
-            // Provide a test-double instead
             providers: [{provide: GoalsService, useValue: goalServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
