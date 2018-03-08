@@ -13,9 +13,6 @@
             <mat-card-content class="goal-content">
                 <li class="content-item" id="addNewGoal"><button mat-raised-button (click)="openDialog()" class="goal-button"><mat-icon id="add-icon">add</mat-icon>Create</button></li>
                 <br>
-                <!--<li class="content-item"><button mat-raised-button class="goal-button"><mat-icon id="edit-icon">create</mat-icon>Edit</button></li>
-                <br>
-                <li class="content-item"><button mat-raised-button class="goal-button"><mat-icon id="delete-icon">delete_forever</mat-icon>Delete</button></li>-->
             </mat-card-content>
         </mat-card>
     </div>
@@ -27,7 +24,6 @@
             <mat-accordion *ngIf="goals; else goalsError" >
                 <mat-expansion-panel #elem class="goals" [id]="goal.name" [expanded]="this.isHighlighted(goal)" *ngFor="let goal of this.filterGoals(goalGoal, goalCategory, goalName)">
                     <mat-expansion-panel-header>
-                        <mat-panel-title><input id="checkFollower" type="checkbox" aria-label="Follower input">{{goal.name}}</mat-panel-title>
                         <mat-panel-title id="name">{{goal.name}}</mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-panel-description>Purpose of this goal: {{goal.goal}}</mat-panel-description>
@@ -45,32 +41,7 @@
             </ng-template>
         </mat-card>
     </div>
+
     </div>
 </main>
 </body>
-
-
-
-
-<!--<div layout-gt-sm="row">
-    <div flex-gt-sm="80" flex-offset-gt-sm="10">
-
-        <mat-card>
-            <mat-card-title id="goals-title">Goals!</mat-card-title>
-            <mat-card-subtitle>this is a card, for goals.</mat-card-subtitle>
-            <mat-divider></mat-divider>
-            <mat-card-content>
-                card content, for gooooooools
-            </mat-card-content>
-        </mat-card>
-
-        <mat-card>
-            <mat-card-title id="goals-card">Goals!</mat-card-title>
-            <mat-card-subtitle>this is a card, for goals.</mat-card-subtitle>
-            <mat-divider></mat-divider>
-            <mat-card-content>
-                card content, for gooooooools
-            </mat-card-content>
-        </mat-card>
-    </div>
-</div>-->

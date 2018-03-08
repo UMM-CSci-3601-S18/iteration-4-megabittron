@@ -20,24 +20,17 @@ export class GoalsService {
         return this.http.get<Goal[]>(this.goalUrl);
     }
 
+    // This isn't used, but may be useful for future iterations.
     getGoalByID(id: string): Observable<Goal> {
         return this.http.get<Goal>(this.goalUrl + '/' + id);
     }
 
-    /*
-    //This method looks lovely and is more compact, but it does not clear previous searches appropriately.
-    //It might be worth updating it, but it is currently commented out since it is not used (to make that clear)
-    getUsersByCompany(userCompany?: string): Observable<User> {
-        this.userUrl = this.userUrl + (!(userCompany == null || userCompany == "") ? "?company=" + userCompany : "");
-        console.log("The url is: " + this.userUrl);
-        return this.http.request(this.userUrl).map(res => res.json());
-    }
-    */
-
+    // Unfortunately we did not get to implementing specific filters,
+    // but this may useful in the future.
     filterByCategory(goalCategory?: string): void {
         if (!(goalCategory == null || goalCategory === '')) {
             if (this.parameterPresent('category=') ) {
-                // there was a previous search by company that we need to clear
+                // there was a previous search by category that we need to clear
                 this.removeParameter('category=');
             }
             if (this.goalUrl.indexOf('?') !== -1) {
@@ -83,7 +76,7 @@ export class GoalsService {
             }),
         };
 
-        // Send post request to add a new user with the user data as the body with specified headers.
+        // Send post request to add a new goal with the user data as the body with specified headers.
         return this.http.post<{'$oid': string}>(this.goalUrl + '/new', newGoal, httpOptions);
     }
 }

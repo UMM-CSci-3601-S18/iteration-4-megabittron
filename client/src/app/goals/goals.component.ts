@@ -22,10 +22,10 @@ export class GoalsComponent implements OnInit {
     public goalCategory: string;
     public goalName: string;
 
-    // The ID of the
+    // The ID of the goal
     private highlightedID: {'$oid': string} = { '$oid': '' };
 
-    // Inject the UserListService into this component.
+    // Inject the GoalsService into this component.
     constructor(public goalService: GoalsService, public dialog: MatDialog) {
 
     }
@@ -90,11 +90,11 @@ export class GoalsComponent implements OnInit {
     }
 
     /**
-     * Starts an asynchronous operation to update the users list
+     * Starts an asynchronous operation to update the goals list
      *
      */
     refreshGoals(): Observable<Goal[]> {
-        // Get Users returns an Observable, basically a "promise" that
+        // Get Goals returns an Observable, basically a "promise" that
         // we will get the data from the server.
         //
         // Subscribe waits until the data is fully downloaded, then
