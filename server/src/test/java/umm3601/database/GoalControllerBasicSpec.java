@@ -22,7 +22,6 @@ import static org.junit.Assert.assertNull;
 
 public class GoalControllerBasicSpec {
     private GoalController goalController;
-    private GoalController utilGoalController;
     private ObjectId huntersID;
     @Before
     public void clearAndPopulateDB() throws IOException {
