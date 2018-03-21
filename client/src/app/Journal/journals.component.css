@@ -1,0 +1,59 @@
+.main-top {
+    height: 100px;
+    color: white;
+    background-color: #ee6e73;
+    width: 100%;
+    text-align: center;
+    font-size: 36px;
+    font-family: Roboto, sans-serif;
+    font-weight: normal;
+    line-height: 100px;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+}
+
+.whole-body {
+    background-color: rgba(255, 204, 194, 0.73);
+}
+
+.first-sec {
+    width: 325px;
+    margin: 0 auto;
+}
+
+.goal-title {
+    text-align: justify;
+    font-size: 32px;
+}
+
+.goal-content {
+    margin-left: 25px;
+    list-style-type: none;
+    font-size: 21px;
+}
+
+.second-sec {
+    width: 100%
+}
+
+.your-goals-title {
+    text-align: left;
+    font-size: 32px;
+}
+
+#add-icon {
+    color: forestgreen;
+}
+
+#edit-icon {
+    color: lightseagreen;
+}
+
+#delete-icon {
+    color: red;
+}
+
+.goal-button {
+    font-size: 25px;
+}
