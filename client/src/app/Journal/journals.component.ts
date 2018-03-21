@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+/*import {Component, OnInit} from '@angular/core';
 import {GoalsService} from './goals.service';
 import {Goal} from './goal';
 import {Observable} from 'rxjs/Observable';
@@ -89,10 +89,8 @@ export class GoalsComponent implements OnInit {
         return this.filteredGoals;
     }
 
-    /**
-     * Starts an asynchronous operation to update the goals list
-     *
-     */
+
+
     refreshGoals(): Observable<Goal[]> {
         // Get Goals returns an Observable, basically a "promise" that
         // we will get the data from the server.
@@ -131,3 +129,5 @@ export class GoalsComponent implements OnInit {
         this.loadService();
     }
 }
+
+*/

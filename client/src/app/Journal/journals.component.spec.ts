@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed, async} from '@angular/core/testing';
+/*import {ComponentFixture, TestBed, async} from '@angular/core/testing';
 import {Goal} from './goal';
 import {GoalsComponent} from './goals.component';
 import {GoalsService} from './goals.service';
@@ -216,3 +216,4 @@ describe('Adding a goal', () => {
         expect(calledGoal).toEqual(newGoal);
     });
 });
+*/

@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+/*import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {Observable} from 'rxjs/Observable';
@@ -80,3 +80,4 @@ export class GoalsService {
         return this.http.post<{'$oid': string}>(this.goalUrl + '/new', newGoal, httpOptions);
     }
 }
+*/
