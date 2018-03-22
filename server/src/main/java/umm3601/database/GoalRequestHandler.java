@@ -124,7 +124,7 @@ public class GoalRequestHandler {
                     String category = dbO.getString("category");
                     String goal = dbO.getString("name");
 
-                    System.err.println("Editing goal [_id=" + id + "goal=" + goal + ", category=" + category + " name=" + name + ']');
+                    System.err.println("Editing goal [_id=" + id + ", goal=" + goal + ", category=" + category + " name=" + name + ']');
                     return goalController.editGoal(id, goal, category, name);
                 }
                 catch (NullPointerException e)
