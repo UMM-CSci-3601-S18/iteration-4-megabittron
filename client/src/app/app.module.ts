@@ -7,10 +7,14 @@ import {HomeComponent} from './home/home.component';
 import {Routing} from './app.routes';
 import {APP_BASE_HREF} from '@angular/common';
 import {CustomModule} from './custom.module';
+
 import {ResourcesComponent} from "./resources/resources.component";
+
 import {GoalsComponent} from "./goals/goals.component";
-import {AddGoalComponent} from "./goals/add-goal.component";
 import {GoalsService} from "./goals/goals.service";
+import {EditGoalComponent} from "./goals/edit-goal.component";
+import {AddGoalComponent} from "./goals/add-goal.component";
+
 
 @NgModule({
     imports: [
@@ -25,6 +29,7 @@ import {GoalsService} from "./goals/goals.service";
         ResourcesComponent,
         GoalsComponent,
         AddGoalComponent,
+        EditGoalComponent,
     ],
     providers: [
         GoalsService,
@@ -33,6 +38,7 @@ import {GoalsService} from "./goals/goals.service";
     ],
     entryComponents: [
       AddGoalComponent,
+      EditGoalComponent
     ],
     bootstrap: [AppComponent]
 })
