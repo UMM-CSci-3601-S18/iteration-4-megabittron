@@ -32,5 +32,6 @@ describe('Home', () => {
         fixture.detectChanges();
         expect(el.textContent).toContain(component.title);
     });
+
 });
 

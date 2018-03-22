@@ -49,11 +49,13 @@
 
 textarea{
     border:2px solid black;
+    height: 30%;
+    width: 50%;
 }
 
 textarea:focus {
     outline: none !important;
-    border:2px solid blue;
+    border:2px solid blue
 }
 
 #mainCard{
