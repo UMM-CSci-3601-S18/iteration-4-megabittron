@@ -8,9 +8,14 @@ import {Routing} from './app.routes';
 import {APP_BASE_HREF} from '@angular/common';
 import {CustomModule} from './custom.module';
 import {ResourcesComponent} from "./resources/resources.component";
+
 import {GoalsComponent} from "./goals/goals.component";
 import {AddGoalComponent} from "./goals/add-goal.component";
 import {GoalsService} from "./goals/goals.service";
+
+import {JournalsComponent} from "./Journal/journals.component";
+import {AddJournalComponent} from "./Journal/add-journal.component";
+import {JournalsService} from "./Journal/journals.service";
 
 @NgModule({
     imports: [
@@ -23,16 +28,22 @@ import {GoalsService} from "./goals/goals.service";
         AppComponent,
         HomeComponent,
         ResourcesComponent,
+
         GoalsComponent,
         AddGoalComponent,
+
+        JournalsComponent,
+       AddJournalComponent,
     ],
     providers: [
         GoalsService,
+        JournalsService,
         {provide: APP_BASE_HREF, useValue: '/'},
         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}
     ],
     entryComponents: [
       AddGoalComponent,
+        AddJournalComponent,
     ],
     bootstrap: [AppComponent]
 })
