@@ -81,12 +81,14 @@ public class JournalRequestHandler {
                 try {
                     BasicDBObject dbO = (BasicDBObject) o;
 
-                    String name = dbO.getString("journal");
+                    String title = dbO.getString("title");
                     String category = dbO.getString("category");
-                    String journal = dbO.getString("name");
+                    String body = dbO.getString("body");
+                    String time = dbO.getString("time");
+                    String link = dbO.getString("link");
 
-                    System.err.println("Adding new item [journal=" + journal + ", category=" + category + " name=" + name + ']');
-                    return journalController.addNewItem(journal, category, name).toString();
+                    System.err.println("Adding new item [title=" + title + ",category=" + category + ", body=" + body + ", time=" + time +",link="+ link+"]);
+                    return journalController.addNewItem(title,category, body, time, link).toString();
                 }
                 catch(NullPointerException e)
                 {

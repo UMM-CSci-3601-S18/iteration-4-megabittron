@@ -5,13 +5,20 @@
             <mat-divider></mat-divider>
             <mat-card-content>
                 <mat-form-field>
-                    <input matInput #input id="nameField" placeholder="What is the title of the journal?" [(ngModel)]="data.journal.name">
+                    <input matInput #input id="titleField" placeholder="What is the title of the journal?" [(ngModel)]="data.journal.title">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput #input id="categoryField" placeholder="What category is this?" [(ngModel)]="data.journal.category">
+                    <input matInput #input id="categoryField" placeholder="Category of the journal" [(ngModel)]="data.journal.category">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput #input id="purposeField" placeholder="What is the purpose?" [(ngModel)]="data.journal.journal">
+                    <input matInput #input id="bodyField" placeholder="Body of the Journal" [(ngModel)]="data.journal.body">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput #input id="timeField" placeholder="Time when the journal is added" [(ngModel)]="data.journal.time">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput #input id="linkField" placeholder="Link of the source" [(ngModel)]="data.journal.link">
                 </mat-form-field>
             </mat-card-content>
         </mat-card>

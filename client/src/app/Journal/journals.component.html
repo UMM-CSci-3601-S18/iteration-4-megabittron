@@ -22,12 +22,15 @@
         <mat-card> <mat-card-title class="your-journals-title">Your Journals</mat-card-title>
             <mat-card-subtitle class="your-journals-subtitle">All of your journals are displayed here.</mat-card-subtitle>
             <mat-accordion *ngIf="journals; else journalsError" >
-                <mat-expansion-panel #elem class="journals" [id]="journal.name" [expanded]="this.isHighlighted(journal)" *ngFor="let journal of this.filterJournals(journalJournal, journalCategory, journalName)">
+                <mat-expansion-panel #elem class="journals" [id]="journal.title" [expanded]="this.isHighlighted(journal)" *ngFor="let journal of this.filterJournals( journalCategory)">
                     <mat-expansion-panel-header>
-                        <mat-panel-title id="name">{{journal.name}}</mat-panel-title>
+                        <mat-panel-title id="title">{{journal.title}}</mat-panel-title>
                     </mat-expansion-panel-header>
-                    <mat-panel-description>Purpose of this journal: {{journal.journal}}</mat-panel-description>
+                    <mat-panel-description>Body: {{journal.body}}</mat-panel-description>
+                    <mat-panel-description>Date: {{journal.time}}</mat-panel-description>
                     <mat-panel-description>Category: {{journal.category}}</mat-panel-description>
+                    <mat-panel-description>Link to the source: {{journal.link}}</mat-panel-description>
+
                 </mat-expansion-panel>
             </mat-accordion>
             <ng-template #journalsError>
