@@ -65,3 +65,6 @@ textarea:focus {
     background-color: whitesmoke;
 }
 
+.slider{
+    width: 50%;
+}
