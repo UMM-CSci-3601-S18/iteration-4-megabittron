@@ -65,3 +65,16 @@ textarea:focus {
     background-color: whitesmoke;
 }
 
+.entryButtons{
+    text-align:center;
+    padding: 1%;
+}
+
+#save{
+    background-color: lightblue;
+}
+
+#cancel{
+    background-color: silver;
+}
+

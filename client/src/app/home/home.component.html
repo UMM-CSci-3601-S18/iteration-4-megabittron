@@ -38,13 +38,33 @@
             </div>
             <br>
 
+            <div>
+                <h2 class="example-h2">How would you rate the intensity of your feelings?</h2>
+                <p>(1 means mild, 5 means extreme)</p>
+
+                <mat-slider
+                    class="slider"
+                    [max]="5"
+                    [min]="1"
+                    [step]="1"
+                    [thumb-label]="thumbLabel"
+                    [(ngModel)]="emojiRating">
+                </mat-slider>
+
+            </div>
+
+            <br>
             <div class="journalEntry" *ngIf="showTextBox()">
                 I'm feeling this way because...
                 <br>
                 <textarea id="entryBox" rows="4" cols="50"></textarea>
             </div>
             <br>
-        </mat-card>
+            <div class="entryButtons">
+                <button mat-raised-button id="cancel">Cancel</button>
+                <button mat-raised-button id="save">Save</button>
+            </div>
+       </mat-card>
     </div>
 </div>
 
