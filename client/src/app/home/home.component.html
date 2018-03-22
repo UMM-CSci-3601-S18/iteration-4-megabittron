@@ -5,9 +5,26 @@
 <br>
 <div layout-gt-sm="row" class="main-bg">
     <div flex-gt-sm="80" flex-offset-gt-sm="10">
-            <mat-card-title id="hello-world">Friendly Panda</mat-card-title>
+            <mat-card-title id="title">Friendly Panda</mat-card-title>
             <br>
         <mat-card class="page-buttons">
+
+            <mat-card-title style="text-align: center;">
+                How are you feeling today?
+                <br>
+                <br>
+                I'm feeling...
+            </mat-card-title>
+            <br>
+
+            <div class="emotion-buttons">
+                <button mat-fab class="emotionHappy" matTooltip="Happy"></button>
+                <button mat-fab class="emotionSad" matTooltip="Sad"></button>
+                <button mat-fab class="emotionMeh" matTooltip="Meh"></button>
+                <button mat-fab class="emotionMad" matTooltip="Mad"></button>
+                <button mat-fab class="emotionScared" matTooltip="Scared"></button>
+                <button mat-fab class="emotionAnxious" matTooltip="Anxious"></button>
+            </div>
         </mat-card>
     </div>
 </div>
