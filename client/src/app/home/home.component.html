@@ -13,17 +13,28 @@
                 How are you feeling today?
                 <br>
                 <br>
-                I'm feeling...
+                I'm feeling {{emotion()}}.
             </mat-card-title>
             <br>
 
-            <div class="emotion-buttons">
-                <button mat-fab class="emotionHappy" matTooltip="Happy"></button>
-                <button mat-fab class="emotionSad" matTooltip="Sad"></button>
-                <button mat-fab class="emotionMeh" matTooltip="Meh"></button>
-                <button mat-fab class="emotionMad" matTooltip="Mad"></button>
-                <button mat-fab class="emotionScared" matTooltip="Scared"></button>
-                <button mat-fab class="emotionAnxious" matTooltip="Anxious"></button>
+            <div class="emotion-buttons" id="emotion">
+                <button mat-fab class="emotionHappy" id="happy" matTooltip="Happy"
+                        (click)="setEmotion('happy'); selectEmotion('happy')"></button>
+
+                <button mat-fab class="emotionSad" id="sad" matTooltip="Sad"
+                        (click)="setEmotion('sad'); selectEmotion('sad')"></button>
+
+                <button mat-fab class="emotionMeh" id="meh" matTooltip="Meh"
+                        (click)="setEmotion('meh'); selectEmotion('meh')"></button>
+
+                <button mat-fab class="emotionMad" id="mad" matTooltip="Mad"
+                        (click)="setEmotion('mad'); selectEmotion('mad')"></button>
+
+                <button mat-fab class="emotionScared" id="scared" matTooltip="Scared"
+                        (click)="setEmotion('scared'); selectEmotion('scared')"></button>
+
+                <button mat-fab class="emotionAnxious" id="anxious" matTooltip="Anxious"
+                        (click)="setEmotion('anxious'); selectEmotion('anxious')"></button>
             </div>
         </mat-card>
     </div>
