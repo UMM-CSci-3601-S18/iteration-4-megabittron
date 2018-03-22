@@ -8,6 +8,7 @@ import {Component} from '@angular/core';
 export class HomeComponent {
     public title: string;
     private selectedEmotion = "..";
+    private selectedEmoji = "happy";
 
     constructor() {
         this.title = 'Home';
@@ -22,16 +23,18 @@ export class HomeComponent {
     }
 
     selectEmotion(ID){
+        var clickedSize = "12%";
         this.resetSelections();
-        {document.getElementById(ID).style.border = "solid blue"}
+        this.selectedEmoji = ID;
+        {document.getElementById(ID).style.height = clickedSize}
+        {document.getElementById(ID).style.width = clickedSize}
             }
 
     resetSelections(){
-        {document.getElementById("happy").style.border = "none"}
-        {document.getElementById("sad").style.border = "none"}
-        {document.getElementById("mad").style.border = "none"}
-        {document.getElementById("anxious").style.border = "none"}
-        {document.getElementById("scared").style.border = "none"}
-        {document.getElementById("meh").style.border = "none"}
+        var baseSize = "10%";
+
+        {document.getElementById(this.selectedEmoji).style.height = baseSize}
+        {document.getElementById(this.selectedEmoji).style.width = baseSize}
+
     }
 }

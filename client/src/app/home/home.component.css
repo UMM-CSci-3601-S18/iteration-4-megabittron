@@ -28,68 +28,17 @@
     margin: 0 auto;
 }
 
-.emotionAnxious {
-    background: url(../../assets/images/emotions/anxious.svg) no-repeat top left;
-    background-size: contain;
-    cursor: pointer;
-    display: inline-block;
-    height: 128px;
-    width: 128px;
-    margin: auto;
-    margin-bottom: 10px;
+.emotionSelection{
+    text-align: center;
 }
 
-.emotionScared {
-    background: url(../../assets/images/emotions/scared.svg) no-repeat top left;
-    background-size: contain;
-    cursor: pointer;
-    display: inline-block;
-    height: 128px;
-    width: 128px;
-    margin: auto;
-    margin-bottom: 10px;
+.text-block {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: black;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-.emotionHappy {
-    background: url(../../assets/images/emotions/happy.svg) no-repeat top left;
-    background-size: contain;
-    cursor: pointer;
-    display: inline-block;
-    height: 128px;
-    width: 128px;
-    margin: auto;
-    margin-bottom: 10px;
-}
-
-.emotionMeh {
-    background: url(../../assets/images/emotions/meh.svg) no-repeat top left;
-    background-size: contain;
-    cursor: pointer;
-    display: inline-block;
-    height: 128px;
-    width: 128px;
-    margin: auto;
-    margin-bottom: 10px;
-}
-
-.emotionMad{
-    background: url(../../assets/images/emotions/mad.svg) no-repeat top left;
-    background-size: contain;
-    cursor: pointer;
-    display: inline-block;
-    height: 128px;
-    width: 128px;
-    margin: auto;
-    margin-bottom: 10px;
-}
-
-.emotionSad {
-    background: url(../../assets/images/emotions/sad.svg) no-repeat top left;
-    background-size: contain;
-    cursor: pointer;
-    display: inline-block;
-    height: 128px;
-    width: 128px;
-    margin: auto;
-    margin-bottom: 10px;
-}
