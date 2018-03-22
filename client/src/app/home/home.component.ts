@@ -10,6 +10,10 @@ export class HomeComponent {
     private selectedEmotion = "none";
     private selectedEmoji = "happy";
 
+    //used for slider
+    thumbLabel = true;
+    public emojiRating: number = 0;
+
     constructor() {
         this.title = 'Home';
     }

@@ -4,6 +4,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {ResourcesComponent} from "./resources/resources.component";
 import {GoalsComponent} from "./goals/goals.component";
+import {MatSliderModule} from '@angular/material/slider';
 
 // Route Configuration
 export const routes: Routes = [
