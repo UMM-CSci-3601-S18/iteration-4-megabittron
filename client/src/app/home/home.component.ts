@@ -7,7 +7,7 @@ import {Component} from '@angular/core';
 })
 export class HomeComponent {
     public title: string;
-    private selectedEmotion = "..";
+    private selectedEmotion = "none";
     private selectedEmoji = "happy";
 
     constructor() {
@@ -15,6 +15,10 @@ export class HomeComponent {
     }
 
     emotion(){
+        if(this.selectedEmotion == "none"){
+            return "..";
+        }
+
         return this.selectedEmotion;
     }
 
@@ -36,5 +40,13 @@ export class HomeComponent {
         {document.getElementById(this.selectedEmoji).style.height = baseSize}
         {document.getElementById(this.selectedEmoji).style.width = baseSize}
 
+    }
+
+    showTextBox(): boolean{
+        if(this.selectedEmotion == "none"){
+            return false;
+        }
+
+        return true;
     }
 }
