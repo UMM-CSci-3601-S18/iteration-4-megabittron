@@ -1,7 +1,7 @@
-/*export interface Goal {
+export interface Journal {
     _id: string;
-    goal: string;
+    journal: string;
     category: string;
     name: string;
 }
-*/
+

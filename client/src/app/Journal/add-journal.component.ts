@@ -1,19 +1,19 @@
-/*import {Component, Inject} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import {Goal} from './goal';
+import {Journal} from './journal';
 
 @Component({
-    selector: 'app-add-goal.component',
-    templateUrl: 'add-goal.component.html',
+    selector: 'app-add-journal.component',
+    templateUrl: 'add-journal.component.html',
 })
-export class AddGoalComponent {
+export class AddJournalComponent {
     constructor(
-        public dialogRef: MatDialogRef<AddGoalComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: {goal: Goal}) {
+        public dialogRef: MatDialogRef<AddJournalComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: {journal: Journal}) {
     }
 
     onNoClick(): void {
         this.dialogRef.close();
     }
 }
-*/
+

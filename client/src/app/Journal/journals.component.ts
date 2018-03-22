@@ -1,70 +1,70 @@
-/*import {Component, OnInit} from '@angular/core';
-import {GoalsService} from './goals.service';
-import {Goal} from './goal';
+import {Component, OnInit} from '@angular/core';
+import {JournalsService} from './journals.service';
+import {Journal} from './journal';
 import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
-import {AddGoalComponent} from './add-goal.component';
+import {AddJournalComponent} from './add-journal.component';
 
 @Component({
-    selector: 'app-goals-component',
-    templateUrl: 'goals.component.html',
-    styleUrls: ['./goals.component.css'],
+    selector: 'app-journals-component',
+    templateUrl: 'journals.component.html',
+    styleUrls: ['./journals.component.css'],
 })
 
-export class GoalsComponent implements OnInit {
+export class JournalsComponent implements OnInit {
     // These are public so that tests can reference them (.spec.ts)
-    public goals: Goal[];
-    public filteredGoals: Goal[];
+    public journals: Journal[];
+    public filteredJournals: Journal[];
 
     // These are the target values used in searching.
     // We should rename them to make that clearer.
-    public goalGoal: string;
-    public goalCategory: string;
-    public goalName: string;
+    public journalJournal: string;
+    public journalCategory: string;
+    public journalName: string;
 
-    // The ID of the goal
+    // The ID of the journal
     private highlightedID: {'$oid': string} = { '$oid': '' };
 
-    // Inject the GoalsService into this component.
-    constructor(public goalService: GoalsService, public dialog: MatDialog) {
+    // Inject the JournalsService into this component.
+    constructor(public journalService: JournalsService, public dialog: MatDialog) {
 
     }
 
-    isHighlighted(goal: Goal): boolean {
-        return goal._id['$oid'] === this.highlightedID['$oid'];
+    isHighlighted(journal: Journal): boolean {
+        return journal._id['$oid'] === this.highlightedID['$oid'];
     }
 
     openDialog(): void {
-        const newGoal: Goal = {_id: '', goal:'', category:'', name:''};
-        const dialogRef = this.dialog.open(AddGoalComponent, {
+        const newJournal: Journal = {_id: '', journal:'', category:'', name:''};
+        const dialogRef = this.dialog.open(AddJournalComponent, {
             width: '500px',
-            data: { goal : newGoal }
+            data: { journal : newJournal }
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            this.goalService.addNewGoal(result).subscribe(
-                addGoalResult => {
-                    this.highlightedID = addGoalResult;
-                    this.refreshGoals();
+            this.journalService.addNewJournal(result).subscribe(
+                addJournalResult => {
+                    this.highlightedID = addJournalResult;
+                    this.refreshJournals();
                 },
                 err => {
                     // This should probably be turned into some sort of meaningful response.
-                    console.log('There was an error adding the goal.');
+                    console.log('There was an error adding the journal.');
                     console.log('The error was ' + JSON.stringify(err));
                 });
         });
     }
 
-    public filterGoals(searchGoal: string, searchCategory: string, searchName: string): Goal[] {
+    public filterJournals(searchJournal: string, searchCategory: string, searchName: string): Journal[] {
 
-        this.filteredGoals = this.goals;
+        this.filteredJournals = this.journals;
 
-        // Filter by goal
-        if (searchGoal != null) {
-            searchGoal = searchGoal.toLocaleLowerCase();
+        // Filter by journal
+        if (searchJournal != null) {
+            searchJournal = searchJournal.toLocaleLowerCase();
 
-            this.filteredGoals = this.filteredGoals.filter(goal => {
-                return !searchGoal || goal.goal.toLowerCase().indexOf(searchGoal) !== -1;
+            this.filteredJournals = this.filteredJournals.filter(journal => {
+                return !searchJournal || journal.journal.toLowerCase().indexOf(searchJournal) !== -1;
             });
         }
 
@@ -72,8 +72,8 @@ export class GoalsComponent implements OnInit {
         if (searchCategory != null) {
             searchCategory = searchCategory.toLocaleLowerCase();
 
-            this.filteredGoals = this.filteredGoals.filter(goal => {
-                return !searchCategory || goal.category.toLowerCase().indexOf(searchCategory) !== -1;
+            this.filteredJournals = this.filteredJournals.filter(journal => {
+                return !searchCategory || journal.category.toLowerCase().indexOf(searchCategory) !== -1;
             });
         }
 
@@ -81,41 +81,41 @@ export class GoalsComponent implements OnInit {
         if (searchName != null) {
             searchName = searchName.toLocaleLowerCase();
 
-            this.filteredGoals = this.filteredGoals.filter(goal => {
-                return !searchName || goal.name.toLowerCase().indexOf(searchName) !== -1;
+            this.filteredJournals = this.filteredJournals.filter(journal => {
+                return !searchName || journal.name.toLowerCase().indexOf(searchName) !== -1;
             });
         }
 
-        return this.filteredGoals;
+        return this.filteredJournals;
     }
 
 
 
-    refreshGoals(): Observable<Goal[]> {
-        // Get Goals returns an Observable, basically a "promise" that
+    refreshJournals(): Observable<Journal[]> {
+        // Get Journals returns an Observable, basically a "promise" that
         // we will get the data from the server.
         //
         // Subscribe waits until the data is fully downloaded, then
         // performs an action on it (the first lambda)
 
-        const goalObservable: Observable<Goal[]> = this.goalService.getGoals();
-        goalObservable.subscribe(
-            goals => {
-                this.goals = goals;
-                this.filterGoals(this.goalGoal, this.goalCategory, this.goalName);
+        const journalObservable: Observable<Journal[]> = this.journalService.getJournals();
+        journalObservable.subscribe(
+            journals => {
+                this.journals = journals;
+                this.filterJournals(this.journalJournal, this.journalCategory, this.journalName);
             },
             err => {
                 console.log(err);
             });
-        return goalObservable;
+        return journalObservable;
     }
 
 
     loadService(): void {
-        this.goalService.getGoals(this.goalCategory).subscribe(
-            goals => {
-                this.goals = goals;
-                this.filteredGoals = this.goals;
+        this.journalService.getJournals(this.journalCategory).subscribe(
+            journals => {
+                this.journals = journals;
+                this.filteredJournals = this.journals;
             },
             err => {
                 console.log(err);
@@ -125,9 +125,9 @@ export class GoalsComponent implements OnInit {
 
 
     ngOnInit(): void {
-        this.refreshGoals();
+        this.refreshJournals();
         this.loadService();
     }
 }
 
-*/
+
