@@ -95,25 +95,31 @@ public class JournalController {
     /**
      * Helper method which appends received user information to the to-be added document
      *
-     * @param name
-     * @param journal
+     * @param title
+     * @param category
+     * @param body
+     * @param time
+     * @param link
+
      * @return boolean after successfully or unsuccessfully adding a user
      */
     // As of now this only adds the journal, but you can separate multiple arguments
     // by commas as we add them.
-    public String addNewItem(String journal, String category, String name) {
+    public String addNewItem(String title, String category, String body, String time, String link) {
 
         // makes the search Document key-pairs
         Document newItem = new Document();
-        newItem.append("journal", name);
+        newItem.append("title", title);
         newItem.append("category", category);
-        newItem.append("name", journal);
+        newItem.append("body", body);
+        newItem.append("time", time);
+        newItem.append("link", link);
         // Append new items here
 
         try {
             itemCollection.insertOne(newItem);
             ObjectId id = newItem.getObjectId("_id");
-            System.err.println("Successfully added new item [journal=" + journal + ", category=" + category + " name=" + name + ']');
+            System.err.println("Successfully added new item [title=" + title + ", category=" + category + ", body=" + body +", time=" + time + ", link = " + link + ']');
             // return JSON.serialize(newItem);
             return JSON.serialize(id);
         } catch(MongoException me) {

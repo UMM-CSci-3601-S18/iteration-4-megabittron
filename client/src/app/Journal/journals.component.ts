@@ -18,9 +18,11 @@ export class JournalsComponent implements OnInit {
 
     // These are the target values used in searching.
     // We should rename them to make that clearer.
-    public journalJournal: string;
+    public journalTitle: string;
     public journalCategory: string;
-    public journalName: string;
+    public journalBody: string;
+    public journalTime: string;
+    public journalLink: string;
 
     // The ID of the journal
     private highlightedID: {'$oid': string} = { '$oid': '' };
@@ -35,7 +37,7 @@ export class JournalsComponent implements OnInit {
     }
 
     openDialog(): void {
-        const newJournal: Journal = {_id: '', journal:'', category:'', name:''};
+        const newJournal: Journal = {_id: '', title:'', category:'', body:'',time:'', link:''};
         const dialogRef = this.dialog.open(AddJournalComponent, {
             width: '500px',
             data: { journal : newJournal }
@@ -55,16 +57,16 @@ export class JournalsComponent implements OnInit {
         });
     }
 
-    public filterJournals(searchJournal: string, searchCategory: string, searchName: string): Journal[] {
+    public filterJournals(searchTitle: string, searchCategory: string, searchBody: string, searchTime, searchLink): Journal[] {
 
         this.filteredJournals = this.journals;
 
-        // Filter by journal
-        if (searchJournal != null) {
-            searchJournal = searchJournal.toLocaleLowerCase();
+        // Filter by title
+        if (searchTitle != null) {
+            searchTitle = searchTitle.toLocaleLowerCase();
 
             this.filteredJournals = this.filteredJournals.filter(journal => {
-                return !searchJournal || journal.journal.toLowerCase().indexOf(searchJournal) !== -1;
+                return !searchTitle || journal.title.toLowerCase().indexOf(searchTitle) !== -1;
             });
         }
 
@@ -77,14 +79,35 @@ export class JournalsComponent implements OnInit {
             });
         }
 
-        // Filter by name
-        if (searchName != null) {
-            searchName = searchName.toLocaleLowerCase();
+        // Filter by body
+        if (searchBody != null) {
+            searchBody = searchBody.toLocaleLowerCase();
 
             this.filteredJournals = this.filteredJournals.filter(journal => {
-                return !searchName || journal.name.toLowerCase().indexOf(searchName) !== -1;
+                return !searchBody || journal.body.toLowerCase().indexOf(searchBody) !== -1;
             });
         }
+
+        // Filter by body
+        if (searchTime != null) {
+            searchTime = searchTime.toLocaleLowerCase();
+
+            this.filteredJournals = this.filteredJournals.filter(journal => {
+                return !searchTime || journal.time.toLowerCase().indexOf(searchTime) !== -1;
+            });
+        }
+
+
+        // Filter by link
+        if (searchLink != null) {
+            searchLink = searchLink.toLocaleLowerCase();
+
+            this.filteredJournals = this.filteredJournals.filter(journal => {
+                return !searchLink || journal.link.toLowerCase().indexOf(searchLink) !== -1;
+            });
+        }
+
+
 
         return this.filteredJournals;
     }
@@ -102,7 +125,7 @@ export class JournalsComponent implements OnInit {
         journalObservable.subscribe(
             journals => {
                 this.journals = journals;
-                this.filterJournals(this.journalJournal, this.journalCategory, this.journalName);
+                this.filterJournals(this.journalTitle, this.journalCategory, this.journalBody, this.journalTime, this.journalLink);
             },
             err => {
                 console.log(err);
