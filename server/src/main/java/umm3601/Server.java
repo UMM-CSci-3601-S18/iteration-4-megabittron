@@ -6,6 +6,9 @@ import spark.Request;
 import spark.Response;
 import umm3601.database.GoalController;
 import umm3601.database.GoalRequestHandler;
+import umm3601.database.JournalController;
+import umm3601.database.JournalRequestHandler;
+
 
 import java.io.IOException;
 
@@ -25,6 +28,10 @@ public class Server {
 
         GoalController goalController = new GoalController(itemDatabase);
         GoalRequestHandler goalRequestHandler = new GoalRequestHandler(goalController);
+
+        JournalController journalController = new JournalController(itemDatabase);
+        JournalRequestHandler journalRequestHandler = new JournalRequestHandler(journalController);
+
 
         //Configure Spark
         port(serverPort);
@@ -67,6 +74,13 @@ public class Server {
         get("api/goals", goalRequestHandler::getItems);
         get("api/goals/:id", goalRequestHandler::getItemJSON);
         post("api/goals/new", goalRequestHandler::addNewItem);
+
+
+        //List journals, filtered using query parameters
+
+        get("api/journals", journalRequestHandler::getItems);
+        get("api/journals/:id", journalRequestHandler::getItemJSON);
+        post("api/journals/new", journalRequestHandler::addNewItem);
 
 
         // An example of throwing an unhandled exception so you can see how the
