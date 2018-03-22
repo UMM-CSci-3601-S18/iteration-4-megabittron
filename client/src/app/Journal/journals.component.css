@@ -1,7 +1,7 @@
 .main-top {
     height: 100px;
     color: white;
-    background-color: #ee6e73;
+    background-color: black;
     width: 100%;
     text-align: center;
     font-size: 36px;
@@ -14,7 +14,7 @@
 }
 
 .whole-body {
-    background-color: rgba(255, 204, 194, 0.73);
+    background-color: lightgray;
 
 }
 
@@ -39,7 +39,9 @@
 }
 
 .second-sec {
-    width: 100%
+    width: 60%;
+    
+
 }
 
 .your-goals-title {
