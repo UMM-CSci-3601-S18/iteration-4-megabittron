@@ -1,3 +1,4 @@
+
 .main-top {
     height: 100px;
     color: white;
@@ -23,35 +24,15 @@
 
 
 .first-sec {
-    width: 325px;
-    margin: 0 auto;
+
+
+    width: 30%;
+    left: 0px;
 }
 
-.goal-title {
-    text-align: justify;
-    font-size: 32px;
-}
 
-.goal-content {
-    margin-left: 25px;
-    list-style-type: none;
-    font-size: 21px;
-}
 
-.second-sec {
-    width: 60%;
-    
 
-}
-
-.your-goals-title {
-    text-align: left;
-    font-size: 32px;
-}
-
-#add-icon {
-    color: forestgreen;
-}
 
 #edit-icon {
     color: lightseagreen;
@@ -64,4 +45,5 @@
 .goal-button {
     font-size: 25px;
 }
+
 

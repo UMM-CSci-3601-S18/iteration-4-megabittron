@@ -1,6 +1,36 @@
 <body class="whole-body">
 <header>
-    <div class ="main-top" id="journal-main-title">Journals</div>
+ <!--   <div class ="main-top" id="journal-main-title">Journals</div> -->
+<style>
+* {
+            box-sizing: border-box;
+        }
+
+.first-sec{
+    float: left;
+    width: 60%;
+
+}
+
+.resources-div{
+
+            float: left;
+            width: 40%;
+
+        }
+
+
+
+ @media screen and (max-width: 800px) {
+            .first-sec, .resources-div {
+                width: 100%;
+                padding: 0;
+            }
+        }
+
+
+</style>
+
 </header>
 
 <main>
@@ -15,10 +45,10 @@
                 <br>
             </mat-card-content>
         </mat-card>
-    </div>
 
-    <!-- Your Journals Section -->
-        <div class="second-sec">
+
+    <!-- Your Journals Section
+        <div class="second-sec"> -->
         <mat-card> <mat-card-title class="your-journals-title">Your Journals</mat-card-title>
             <mat-card-subtitle class="your-journals-subtitle">All of your journals are displayed here.</mat-card-subtitle>
             <mat-accordion *ngIf="journals; else journalsError" >
@@ -45,6 +75,23 @@
         </mat-card>
     </div>
 
+        <!-- Links Card -->
+        <div class="resources-div">
+            <mat-card class="resources-card">
+                <mat-card-title id="resources-title">Links</mat-card-title>
+                <mat-card-subtitle>These links take you to helpful pages.</mat-card-subtitle>
+                <mat-card-content>
+                    <a href="https://depression.org.nz/get-better/self-help/" target="_blank">Depression Help</a>
+                    <br>
+                    <a href="https://www.everydayhealth.com/news/cheap-natural-quick-anxiety-remedies/" target="_blank">Anxiety Help</a>
+                    <br>
+                    <a href="http://www.apa.org/helpcenter/controlling-anger.aspx" target="_blank">Anger Management Help</a>
+                    <br>
+                    <a href="http://enlightenmentportal.com/development/self-esteem-building-activities/" target="_blank">Self Esteem Building Activities</a>
+                    <mat-divider></mat-divider>
+                </mat-card-content>
+            </mat-card>
+        </div>
     </div>
 </main>
 </body>
