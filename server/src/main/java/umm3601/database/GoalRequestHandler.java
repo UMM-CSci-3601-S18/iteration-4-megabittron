@@ -111,6 +111,7 @@ public class GoalRequestHandler {
 
     public String editGoal(Request req, Response res)
     {
+	System.out.println("it went into GoalRequestHandler::editGoal");
         res.type("application/json");
         Object o = JSON.parse(req.body());
         try {
