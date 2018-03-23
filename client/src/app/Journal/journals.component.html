@@ -1,79 +1,90 @@
+
 <body class="whole-body">
+
 <header>
- <!--   <div class ="main-top" id="journal-main-title">Journals</div> -->
-<style>
-* {
-            box-sizing: border-box;
-        }
+    <!-- This allows for good mobile compatibility -->
+    <!-- It might be nice to switch this over to CSS -->
+    <div class ="main-top">{{this.title}}</div>
 
-.first-sec{
-    float: left;
-    width: 60%;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
 
-}
-
-.resources-div{
-
+        .phone-div{
             float: left;
             width: 40%;
-
         }
 
 
 
- @media screen and (max-width: 800px) {
-            .first-sec, .resources-div {
+        .resources-div{
+
+            float: left;
+            width: 60%;
+        }
+
+        .resources-div{
+            float: left;
+            width: 60%;
+        }
+
+        @media screen and (max-width: 600px) {
+            .phone-div, .main-div, .resources-div{
                 width: 100%;
-                padding: 0;
             }
         }
 
-
-</style>
+    </style>
+    <!-- Finish mobile compatibility -->
 
 </header>
 
 <main>
-    <div layout="column">
+    <div layout='row' layout-xs="column" class="best-div">
 
-    <!-- Managing Journals Card -->
-        <div class="first-sec">
-        <mat-card> <mat-card-title class="journal-title">Managing Journals</mat-card-title>
-            <mat-card-subtitle class="journal-subtitle"></mat-card-subtitle>
-            <mat-card-content class="journal-content">
-                <li class="content-item" id="addNewJournal"><button mat-raised-button (click)="openDialog()" class="journal-button"><mat-icon id="add-icon">add</mat-icon>Add a Journal</button></li>
-                <br>
-            </mat-card-content>
-        </mat-card>
+        <!-- Phone Numbers Card -->
+        <div class="phone-div">
 
 
-    <!-- Your Journals Section
-        <div class="second-sec"> -->
-        <mat-card> <mat-card-title class="your-journals-title">Your Journals</mat-card-title>
-            <mat-card-subtitle class="your-journals-subtitle">All of your journals are displayed here.</mat-card-subtitle>
-            <mat-accordion *ngIf="journals; else journalsError" >
-                <mat-expansion-panel #elem class="journals" [id]="journal.title" [expanded]="this.isHighlighted(journal)" *ngFor="let journal of this.filterJournals( journalCategory)">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title id="title">{{journal.title}}</mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <mat-panel-description>Body: {{journal.body}}</mat-panel-description>
-                    <mat-panel-description>Date: {{journal.time}}</mat-panel-description>
-                    <mat-panel-description>Category: {{journal.category}}</mat-panel-description>
-                    <mat-panel-description>Link to the source: {{journal.link}}</mat-panel-description>
 
-                </mat-expansion-panel>
-            </mat-accordion>
-            <ng-template #journalsError>
-                <mat-error>
-                    There was a problem loading the journals. Possibly the server is down or perhaps there are network
-                    issues.
-                </mat-error>
-                <mat-error>
-                    Please wait a bit and try again or start the server.
-                </mat-error>
-            </ng-template>
-        </mat-card>
-    </div>
+            <mat-card> <mat-card-title class="journal-title">Managing Journals</mat-card-title>
+                <mat-card-subtitle class="journal-subtitle"></mat-card-subtitle>
+                <mat-card-content class="journal-content">
+                    <li class="content-item" id="addNewJournal"><button mat-raised-button (click)="openDialog()" class="journal-button"><mat-icon id="add-icon">add</mat-icon>Add a Journal</button></li>
+                    <br>
+                </mat-card-content>
+            </mat-card>
+
+
+            <!-- Your Journals Section
+                <div class="second-sec"> -->
+            <mat-card> <mat-card-title class="your-journals-title">Your Journals</mat-card-title>
+                <mat-card-subtitle class="your-journals-subtitle">All of your journals are displayed here.</mat-card-subtitle>
+                <mat-accordion *ngIf="journals; else journalsError" >
+                    <mat-expansion-panel #elem class="journals" [id]="journal.title" [expanded]="this.isHighlighted(journal)" *ngFor="let journal of this.filterJournals( journalCategory)">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title id="title">{{journal.title}}</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-panel-description>Body: {{journal.body}}</mat-panel-description>
+                        <mat-panel-description>Date: {{journal.time}}</mat-panel-description>
+                        <mat-panel-description>Category: {{journal.category}}</mat-panel-description>
+                        <mat-panel-description>Link to the source: {{journal.link}}</mat-panel-description>
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+                <ng-template #journalsError>
+                    <mat-error>
+                        There was a problem loading the journals. Possibly the server is down or perhaps there are network
+                        issues.
+                    </mat-error>
+                    <mat-error>
+                        Please wait a bit and try again or start the server.
+                    </mat-error>
+                </ng-template>
+            </mat-card>
+
+        </div>
+
+
 
         <!-- Links Card -->
         <div class="resources-div">
@@ -92,6 +103,7 @@
                 </mat-card-content>
             </mat-card>
         </div>
+
     </div>
 </main>
 </body>
