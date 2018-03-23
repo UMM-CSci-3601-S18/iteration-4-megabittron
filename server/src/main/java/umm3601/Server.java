@@ -17,19 +17,19 @@ import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Server {
-    private static final String itemDatabaseName = "dev";
+    private static final String databaseName = "dev";
 
     private static final int serverPort = 4567;
 
     public static void main(String[] args) throws IOException {
 
         MongoClient mongoClient = new MongoClient();
-        MongoDatabase itemDatabase = mongoClient.getDatabase(itemDatabaseName);
+        MongoDatabase database = mongoClient.getDatabase(databaseName);
 
-        GoalController goalController = new GoalController(itemDatabase);
+        GoalController goalController = new GoalController(database);
         GoalRequestHandler goalRequestHandler = new GoalRequestHandler(goalController);
 
-        JournalController journalController = new JournalController(itemDatabase);
+        JournalController journalController = new JournalController(database);
         JournalRequestHandler journalRequestHandler = new JournalRequestHandler(journalController);
 
 
@@ -71,9 +71,10 @@ public class Server {
 
         //List goals, filtered using query parameters
 
-        get("api/goals", goalRequestHandler::getItems);
-        get("api/goals/:id", goalRequestHandler::getItemJSON);
-        post("api/goals/new", goalRequestHandler::addNewItem);
+        get("api/goals", goalRequestHandler::getGoals);
+        get("api/goals/:id", goalRequestHandler::getGoalJSON);
+        post("api/goals/new", goalRequestHandler::addNewGoal);
+        post("api/goals/edit", goalRequestHandler::editGoal);
 
 
         //List journals, filtered using query parameters

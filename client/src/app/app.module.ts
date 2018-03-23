@@ -7,11 +7,14 @@ import {HomeComponent} from './home/home.component';
 import {Routing} from './app.routes';
 import {APP_BASE_HREF} from '@angular/common';
 import {CustomModule} from './custom.module';
+
 import {ResourcesComponent} from "./resources/resources.component";
 
 import {GoalsComponent} from "./goals/goals.component";
-import {AddGoalComponent} from "./goals/add-goal.component";
 import {GoalsService} from "./goals/goals.service";
+import {EditGoalComponent} from "./goals/edit-goal.component";
+import {AddGoalComponent} from "./goals/add-goal.component";
+
 
 import {JournalsComponent} from "./Journal/journals.component";
 import {AddJournalComponent} from "./Journal/add-journal.component";
@@ -34,6 +37,7 @@ import {JournalsService} from "./Journal/journals.service";
 
         JournalsComponent,
        AddJournalComponent,
+        EditGoalComponent,
     ],
     providers: [
         GoalsService,
@@ -44,6 +48,7 @@ import {JournalsService} from "./Journal/journals.service";
     entryComponents: [
       AddGoalComponent,
         AddJournalComponent,
+      EditGoalComponent
     ],
     bootstrap: [AppComponent]
 })
