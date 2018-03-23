@@ -38,7 +38,7 @@ export class HomeComponent {
         {document.getElementById(ID).style.width = clickedSize}
             }
 
-    resetSelections(){
+    private resetSelections(){
         var baseSize = "10%";
 
         {document.getElementById(this.selectedEmoji).style.height = baseSize}
@@ -60,5 +60,16 @@ export class HomeComponent {
         }
 
         return false;
+    }
+
+    resetPage(){
+        this.resetSelections();
+        this.selectedEmotion = "none";
+        this.emojiRating = 0;
+
+    }
+
+    saveEmotion(){
+        
     }
 }
