@@ -36,7 +36,7 @@ export class HomeComponent {
         this.selectedEmoji = ID;
         {document.getElementById(ID).style.height = clickedSize}
         {document.getElementById(ID).style.width = clickedSize}
-            }
+    }
 
     resetSelections(){
         var baseSize = "10%";
@@ -52,5 +52,10 @@ export class HomeComponent {
         }
 
         return true;
+    }
+
+    //retrieves an appropriate response to an emotion selection
+    appropriateResponsePopUp(){
+
     }
 }
