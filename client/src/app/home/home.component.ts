@@ -53,4 +53,12 @@ export class HomeComponent {
 
         return true;
     }
+
+    showSaveButton(){
+        if(this.selectedEmotion == "none"){
+            return true;
+        }
+
+        return false;
+    }
 }
