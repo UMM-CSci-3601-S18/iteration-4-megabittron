@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Resource} from './resource';
 
 import {Observable} from 'rxjs/Observable';
 
@@ -23,11 +24,11 @@ export class EmotionResponseComponent {
 
 
     onYesClick(): void{
-        var linkObservable: Observable<string[]> = this.getLinks();
+        var linkObservable: Observable<Resource[]> = this.getLinks();
         linkObservable.subscribe(
             links => {
                 var index = Math.floor(Math.random() * links.length);
-                this.selectedResponse = links[index];
+                this.selectedResponse = links[index].resource;
                 if(this.selectedResponse != ""){
                     this.giveResponse=true;
                 }
@@ -39,8 +40,8 @@ export class EmotionResponseComponent {
 
     }
 
-    getLinks(): Observable<string[]> {
-        return this.http.get<string[]>(this.resourceUrl);
+    getLinks(): Observable<Resource[]> {
+        return this.http.get<Resource[]>(this.resourceUrl);
     }
 
     onExitClick(): void {
