@@ -15,7 +15,8 @@ import {GoalsService} from "./goals/goals.service";
 import {EditGoalComponent} from "./goals/edit-goal.component";
 import {AddGoalComponent} from "./goals/add-goal.component";
 
-import {SummaryComponent} from "./summary/summary.component";
+import {SummaryListComponent} from "./summary/summary-list.component";
+import {SummaryListService} from "./summary/summary-list.service";
 
 
 @NgModule({
@@ -32,10 +33,12 @@ import {SummaryComponent} from "./summary/summary.component";
         GoalsComponent,
         AddGoalComponent,
         EditGoalComponent,
-        SummaryComponent,
+        SummaryListComponent,
+
     ],
     providers: [
         GoalsService,
+        SummaryListService,
         {provide: APP_BASE_HREF, useValue: '/'},
         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}
     ],
