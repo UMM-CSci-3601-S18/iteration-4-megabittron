@@ -6,6 +6,7 @@ import {Summary} from './summary';
 import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
+import * as Chart from 'chart.js';
 
 @Component({
     selector: 'app-summary-list-component',
@@ -17,6 +18,9 @@ export class SummaryListComponent implements OnInit {
     startDate;
     endDate;
     getDate;
+
+    canvas: any;
+    ctx: any;
 
     // These are public so that tests can reference them (.spec.ts)
     public summarys: Summary[];
@@ -70,6 +74,133 @@ export class SummaryListComponent implements OnInit {
         }
 
         return this.filteredSummarys;
+    }
+
+    filterChart(weekday, mood): number {
+        /*this.chartEmojis = this.prefilteredEmojis;
+
+
+        // Filter by value
+        this.chartEmojis = this.chartEmojis.filter(emoji => {
+            return !mood.toString() || emoji.mood.toString().indexOf(mood.toString()) !== -1;//??????
+        });
+
+        // Filter by day of the week
+        this.chartEmojis = this.chartEmojis.filter(emoji => {
+            return !weekday || emoji.date.indexOf(weekday) !== -1;
+        });*/
+
+        // return number of emojis left after filter
+        return this.filteredSummarys.length;
+    }
+
+    /**
+     * Starts an asynchronous operation to update the emojis list
+     *
+     */
+
+    buildChart(): void {
+
+        this.canvas = document.getElementById("myChart");
+        this.ctx = this.canvas;
+
+        let days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+
+        let very_sad_daily_totals = {"label":"Very Sad",
+            "data":[
+                this.filterChart('Sun', '1'),
+                this.filterChart('Mon', '1'),
+                this.filterChart('Tue', '1'),
+                this.filterChart('Wed', '1'),
+                this.filterChart('Thu', '1'),
+                this.filterChart('Fri', '1'),
+                this.filterChart('Sat', '1')
+            ],
+            "fill":false,
+            "borderColor":"rgb(150, 0, 100)",
+            "lineTension":0.1};
+
+        let sad_daily_totals = {"label":"Sad",
+            "data":[
+                this.filterChart('Sun', '2'),
+                this.filterChart('Mon', '2'),
+                this.filterChart('Tue', '2'),
+                this.filterChart('Wed', '2'),
+                this.filterChart('Thu', '2'),
+                this.filterChart('Fri', '2'),
+                this.filterChart('Sat', '2')
+            ],
+            "fill":false,
+            "borderColor":"rgb(150, 75, 75)",
+            "lineTension":0.1};
+
+        let neutral_daily_totals = {"label":"Neutral",
+            "data":[
+                this.filterChart('Sun', '3'),
+                this.filterChart('Mon', '3'),
+                this.filterChart('Tue', '3'),
+                this.filterChart('Wed', '3'),
+                this.filterChart('Thu', '3'),
+                this.filterChart('Fri', '3'),
+                this.filterChart('Sat', '3')
+            ],
+            "fill":false,
+            "borderColor":"rgb(175, 175, 175)",
+            "lineTension":0.1};
+
+        let happy_daily_totals = {"label":"Happy",
+            "data":[
+                this.filterChart('Sun', '4'),
+                this.filterChart('Mon', '4'),
+                this.filterChart('Tue', '4'),
+                this.filterChart('Wed', '4'),
+                this.filterChart('Thu', '4'),
+                this.filterChart('Fri', '4'),
+                this.filterChart('Sat', '4')
+            ],
+            "fill":false,
+            "borderColor":"rgb(75, 192, 192)",
+            "lineTension":0.1};
+
+        let very_happy_daily_totals = {"label":"Very Happy",
+            "data":[
+                this.filterChart('Sun', '5'),
+                this.filterChart('Mon', '5'),
+                this.filterChart('Tue', '5'),
+                this.filterChart('Wed', '5'),
+                this.filterChart('Thu', '5'),
+                this.filterChart('Fri', '5'),
+                this.filterChart('Sat', '5')
+            ],
+            "fill":false,
+            "borderColor":"rgb(200, 200, 0)",
+            "lineTension":0.1};
+
+        let myChart = new Chart(this.ctx, {
+            type: 'bar',
+            data: {
+                labels: days,
+                datasets: [very_sad_daily_totals,
+                    sad_daily_totals,
+                    neutral_daily_totals,
+                    happy_daily_totals,
+                    very_happy_daily_totals]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+
+    ngAfterViewInit(): void {
+
+        this.buildChart();
     }
 
     /*
