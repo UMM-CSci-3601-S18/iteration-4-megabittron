@@ -60,8 +60,8 @@ export class HomeComponent {
     appropriateResponsePopUp(): void {
 
         if(this.intenseEmotionResponse){
-            const dialogRef = this.dialog.open(EmotionResponseComponent, {
-                width: '50%',
+            this.dialog.open(EmotionResponseComponent, {
+                width: '70vw',
                 height: '50%',
             });
         }
@@ -72,8 +72,8 @@ export class HomeComponent {
     //checks the emotional response and the intensity to see if a response is needed
     intenseEmotionResponse(): boolean {
 
-        if(this.selectedEmotion == 'sad' || this.selectedEmotion == 'mad' || this.selectedEmotion == 'scared' || this.selectedEmotion == 'anxious'){
-            if(this.emojiRating > 3){
+        if(this.selectedEmotion.toLowerCase() == 'sad' || this.selectedEmotion.toLowerCase() == 'mad' || this.selectedEmotion.toLowerCase() == 'scared' || this.selectedEmotion.toLowerCase() == 'anxious'){
+            if(this.emojiRating >= 3){
                 return true;
             }
         }

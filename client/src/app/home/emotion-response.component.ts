@@ -8,7 +8,7 @@ import {Observable} from 'rxjs/Observable';
 import {environment} from '../../environments/environment';
 
 @Component({
-    selector: 'app-emotion-response.component',
+    selector: 'emotion-response.component',
     templateUrl: 'emotion-response.component.html',
 })
 
