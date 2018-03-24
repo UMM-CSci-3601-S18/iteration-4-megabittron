@@ -41,7 +41,8 @@ import {EmotionResponseComponent} from "./home/emotion-response.component";
     ],
     entryComponents: [
       AddGoalComponent,
-      EditGoalComponent
+      EditGoalComponent,
+      EmotionResponseComponent
     ],
     bootstrap: [AppComponent]
 })
