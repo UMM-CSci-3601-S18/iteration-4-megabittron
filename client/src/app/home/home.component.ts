@@ -1,4 +1,13 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {EmotionService} from './home.service';
+import {MAT_DIALOG_DATA} from '@angular/material';
+
+import {Observable} from 'rxjs/Observable';
+
+import {Emotion} from './emotion';
+import {environment} from '../../environments/environment';
+
 
 @Component({
     selector: 'home-component',
@@ -6,15 +15,28 @@ import {Component} from '@angular/core';
     styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
+    public emotions: Emotion[];
+
+    readonly baseUrl: string = environment.API_URL + 'emotions';
+    private emotionUrl: string = this.baseUrl;
+
+    private highlightedID: {'$oid': string} = { '$oid': '' };
+
     public title: string;
     private selectedEmotion = "none";
     private selectedEmoji = "happy";
+
+    public emotionMood: string;
+    public emotionIntensity: number;
+    public emotionDescription: string;
+    public emotionDate: string;
+
 
     //used for slider
     thumbLabel = true;
     public emojiRating: number = 0;
 
-    constructor() {
+    constructor(public emotionService: EmotionService) {
         this.title = 'Home';
     }
 
@@ -52,7 +74,7 @@ export class HomeComponent {
         }
 
         return true;
-    }
+    }result
 
     showSaveButton(){
         if(this.selectedEmotion == "none"){
@@ -66,10 +88,56 @@ export class HomeComponent {
         this.resetSelections();
         this.selectedEmotion = "none";
         this.emojiRating = 0;
+        this.emotionDescription = "";
 
     }
 
-    saveEmotion(){
-        
+    saveEmotion(): void{
+        const newEmotion: Emotion = {_id: '', mood: this.selectedEmotion, intensity: this.emojiRating, description:this.emotionDescription, date: this.emotionDate};
+
+            console.log("this is the description: " + this.emotionDescription);
+            console.log(newEmotion);
+            this.emotionService.addNewEmotion(newEmotion).subscribe(
+                addEmotionResult => {
+                    console.log("I got here");
+                    this.highlightedID = addEmotionResult;
+                    this.refreshEmotions();
+                    this.resetPage();
+                },
+                err => {
+                    // This should probably be turned into some sort of meaningful response.
+                    console.log('There was an error adding the emotion.');
+                    console.log('The error was ' + JSON.stringify(err));
+                });
+    }
+
+    refreshEmotions(): Observable<Emotion[]> {
+        // Get Goals returns an Observable, basically a "promise" that
+        // we will get the data from the server.
+        //
+        // Subscribe waits until the data is fully downloaded, then
+        // performs an action on it (the first lambda)
+
+        const emotionObservable: Observable<Emotion[]> = this.emotionService.getEmotions();
+        emotionObservable.subscribe(
+            emotions => {
+                this.emotions = emotions;
+                /*this.filterEmotions(this.emotionMood, this.emotionIntensity, this.emotionDescription, this.emotionDate);*/
+            },
+            err => {
+                console.log(err);
+            });
+        return emotionObservable;
+    }
+
+    getDate(){
+        var today = new Date();
+        console.log("today is: " + today.toString());
+        this.emotionDate = today.toString();
+    }
+
+    getDescription(entryBox){
+        this.emotionDescription = entryBox;
+        console.log("this is the description: " + entryBox);
     }
 }

@@ -56,13 +56,13 @@
 
                 I'm feeling this way because...
                 <br>
-                <textarea id="entryBox" rows="4" cols="50"></textarea>
+                <textarea id="entryBox" rows="4" cols="50" (input)="emotionDescription=$event.target.value"></textarea>
             </div>
 
             <div class="entryButtons">
                 <button mat-raised-button id="cancel" (click)="resetPage()">Cancel</button>
                 <button mat-raised-button id="save"
-                        [disabled]="showSaveButton()" (click)="saveEmotion()">Save</button>
+                        [disabled]="showSaveButton()" (click)="getDate();saveEmotion()" >Save</button>
             </div>
 
             <br>
