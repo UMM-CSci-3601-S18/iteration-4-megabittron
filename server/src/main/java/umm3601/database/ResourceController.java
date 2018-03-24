@@ -34,6 +34,8 @@ public class ResourceController {
     // documents if no query parameter is specified.
     public String getResources(Map<String, String[]> queryParams) {
 
+        System.out.println("Entering ResourceController :: getResources");
+
         //in preparation for the future where responses may be separated by emotion selected
         Document filterDoc = new Document();
 
