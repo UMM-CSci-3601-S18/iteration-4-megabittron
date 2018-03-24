@@ -1,3 +1,5 @@
+
+
 <div class="add-journal" layout-gt-sm="row">
     <div flex-gt-sm="80" flex-offset-gt-sm="10">
         <mat-card>
@@ -10,9 +12,11 @@
                 <mat-form-field>
                     <input matInput #input id="categoryField" placeholder="Category of the journal" [(ngModel)]="data.journal.category">
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field> <div class = "body">
                     <input matInput #input id="bodyField" placeholder="Body of the Journal" [(ngModel)]="data.journal.body">
+                </div>
                 </mat-form-field>
+
 
                 <mat-form-field>
                     <input matInput #input id="timeField" placeholder="Time when the journal is added" [(ngModel)]="data.journal.time">

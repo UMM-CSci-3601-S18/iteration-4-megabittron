@@ -4,7 +4,7 @@
 <header>
     <!-- This allows for good mobile compatibility -->
     <!-- It might be nice to switch this over to CSS -->
-    <div class ="main-top">{{this.title}}</div>
+
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
@@ -20,6 +20,7 @@
 
             float: left;
             width: 60%;
+            
         }
 
         .resources-div{
@@ -64,12 +65,15 @@
                         <mat-expansion-panel-header>
                             <mat-panel-title id="title">{{journal.title}}</mat-panel-title>
                         </mat-expansion-panel-header>
-                        <mat-panel-description>Body: {{journal.body}}</mat-panel-description>
+                        <mat-panel-description><Strong>Body: </Strong>{{journal.body}}</mat-panel-description>
                         <mat-panel-description>Date: {{journal.time}}</mat-panel-description>
-                        <mat-panel-description>Category: {{journal.category}}</mat-panel-description>
-                        <mat-panel-description>Link to the source: {{journal.link}}</mat-panel-description>
-
+                        <mat-panel-description><Strong>Category:</Strong> {{journal.category}}</mat-panel-description>
+                        <mat-panel-description><Strong>Link to the source:</Strong> <a href="{{journal.link}}"> Click Here</a></mat-panel-description>
                     </mat-expansion-panel>
+
+
+
+
                 </mat-accordion>
                 <ng-template #journalsError>
                     <mat-error>
@@ -86,20 +90,53 @@
 
 
 
+
         <!-- Links Card -->
         <div class="resources-div">
             <mat-card class="resources-card">
-                <mat-card-title id="resources-title">Links</mat-card-title>
-                <mat-card-subtitle>These links take you to helpful pages.</mat-card-subtitle>
+                <mat-card-title id="resources-title">Journals You May Like</mat-card-title>
+                <mat-card-subtitle>While most journals require pricy subscriptions to access their content, there are several prominent,
+                  <br>  reputable mental health journals that publish all their articles free online.</mat-card-subtitle>
                 <mat-card-content>
-                    <a href="https://depression.org.nz/get-better/self-help/" target="_blank">Depression Help</a>
+
+
+                    <a href="https://www.tandfonline.com/toc/rhpb20/current" target="_blank">Health Psychology and Behavioral Medicine | Publisher: Taylor & Francis
+
+                    </a>
                     <br>
-                    <a href="https://www.everydayhealth.com/news/cheap-natural-quick-anxiety-remedies/" target="_blank">Anxiety Help</a>
+                    <a href="https://www.frontiersin.org/journals/psychology" target="_blank">Frontiers in Psychology |
+                        Publisher: Frontiers</a>
                     <br>
-                    <a href="http://www.apa.org/helpcenter/controlling-anger.aspx" target="_blank">Anger Management Help</a>
+
+                    <a href="https://ijmhs.biomedcentral.com/" target="_blank">International Journal of Mental Health Systems
+                        | Publisher: Biomed Central</a>
                     <br>
-                    <a href="http://enlightenmentportal.com/development/self-esteem-building-activities/" target="_blank">Self Esteem Building Activities</a>
+                    <a href="http://enlightenmentportal.com/development/self-esteem-building-activities/" target="_blank">Mental health evidence and research (MER) | Publisher: World health Organization</a>
+
+
+
+
+                    <br>
+
+                    <a href="https://capmh.biomedcentral.com/" target="_blank">Child and Adolescent Psychiatry and Mental Health
+                        | Publisher: Biomed Central</a>
+
+
+                    <br>
+
+                    <a href="https://bmcpsychiatry.biomedcentral.com/" target="_blank">BMC Psychiatry
+                        | Publisher: BioMed Central</a>
+                    <br>
+
+                    <a href="https://www.imhro.org/" target="_blank">International Mental Health Research Organization
+                        </a>
+                    <br>
+
+
+
                     <mat-divider></mat-divider>
+
+
                 </mat-card-content>
             </mat-card>
         </div>
