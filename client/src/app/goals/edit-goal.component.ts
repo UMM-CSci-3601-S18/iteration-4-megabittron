@@ -5,6 +5,7 @@ import {Goal} from './goal';
 @Component({
     selector: 'app-edit-goal.component',
     templateUrl: 'edit-goal.component.html',
+    styleUrls: ['./manage-goal.component.css'],
 })
 export class EditGoalComponent {
     constructor(
