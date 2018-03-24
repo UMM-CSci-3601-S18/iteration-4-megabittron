@@ -1,0 +1,144 @@
+<body class="whole-body">
+
+<header>
+    <!-- This allows for good mobile compatibility -->
+    <!-- It might be nice to switch this over to CSS -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+        .phone-div{
+            float: left;
+            width: 25%;
+        }
+
+        .main-div{
+            float: left;
+            width: 50%;
+        }
+
+        .resources-div{
+
+            float: left;
+            width: 50%;
+        }
+
+        .resources-div{
+            float: left;
+            width: 25%;
+        }
+
+        @media screen and (max-width: 600px) {
+            .phone-div, .main-div, .resources-div{
+                width: 100%;
+            }
+        }
+
+    </style>
+    <!-- Finish mobile compatibility -->
+
+</header>
+
+<main>
+    <div layout='row' layout-xs="column" class="best-div">
+
+        <!-- Phone Numbers Card -->
+        <div class="phone-div">
+            <mat-card class="phone-numbers">
+                <mat-card-title class="phone-numbers-title"><mat-icon id="phone-icon">phone</mat-icon>Phone Numbers</mat-card-title>
+                <mat-card-subtitle id="phone-numbers-subtitle">If you feel that you are in need of any sort of assistance,
+                    you can refer to one of these hotlines for help.</mat-card-subtitle>
+
+                <!-- First number -->
+                <mat-expansion-panel #elem class="phone-numbers-to-call">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title class="hotline-company-name">Suicide Prevention Lifeline</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-panel-description>We can all help prevent suicide. The Lifeline provides 24/7,
+                        free and confidential support for people in distress, prevention and crisis
+                        resources for you or your loved ones, and best practices
+                        for professionals.</mat-panel-description>
+                    <br>
+                    <mat-panel-description class="actual-phone-number"><mat-icon class="little-phone-icon">phone</mat-icon> 1-800-273-8255</mat-panel-description>
+                </mat-expansion-panel>
+
+                <!-- Second number -->
+                <mat-expansion-panel #elem class="phone-numbers-to-call">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title class="hotline-company-name">Crisis Hotline</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-panel-description>Crisis Call Center’s 24-hour crisis line often
+                        serves as the first point of contact for individuals who are seeking
+                        help, support, and information. Crisis can affect anyone at any time.
+                        The need for emotional support or referral assistance is something most
+                        individuals encounter at some point in their lives.</mat-panel-description>
+                    <br>
+                    <mat-panel-description class="actual-phone-number"><mat-icon class="little-phone-icon">phone</mat-icon> 775-784-8090</mat-panel-description>
+                </mat-expansion-panel>
+
+                <!-- Third number -->
+                <mat-expansion-panel #elem class="phone-numbers-to-call">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title class="hotline-company-name">Crisis Text Line</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-panel-description>Free, 24/7 support for people in crisis. Every texter
+                        is connected with a Crisis Counselor, a real-life human being trained to
+                        bring texters from a hot moment to a cool calm through active listening
+                        and collaborative problem solving. All of our Crisis Counselors are volunteers,
+                        donating their time to helping people in crisis.</mat-panel-description>
+                    <br>
+                    <mat-panel-description class="actual-phone-number"><mat-icon class="little-phone-icon">message</mat-icon> 741741</mat-panel-description>
+                </mat-expansion-panel>
+
+                <!-- Fourth number (Not Kate's Actual #) -->
+                <mat-expansion-panel #elem class="phone-numbers-to-call">
+                    <mat-expansion-panel-header>
+
+                        <mat-panel-title class="hotline-company-name">Kate's phone-number</mat-panel-title>
+
+                    </mat-expansion-panel-header>
+                    <br>
+                    <mat-panel-description class="actual-phone-number"><mat-icon class="little-phone-icon">phone</mat-icon> 555-555-1234</mat-panel-description>
+                </mat-expansion-panel>
+                <br>
+
+            </mat-card>
+        </div>
+
+        <!-- Resources Card -->
+        <div class="main-div">
+            <mat-card class="main-card">
+                <mat-card-title id="main-thing-title">{{ this.title }}</mat-card-title>
+                <mat-divider></mat-divider>
+                <mat-card-header>This is a breathing exercise for when you are feeling stressed out. Breathe in as the image is building and out as the image shrinks.</mat-card-header>
+                <mat-card-content>
+                    <img id="breathing" width= "100%" src="../../assets/images/ezgif.com-resize.gif">
+                </mat-card-content>
+                <br>
+                <mat-card-content>
+                    <img id="do-it" width= "100%" src="../../assets/images/do-it.gif">
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <!-- Links Card -->
+        <div class="resources-div">
+            <mat-card class="resources-card">
+                <mat-card-title id="resources-title">Links</mat-card-title>
+                <mat-card-subtitle>These links take you to helpful pages.</mat-card-subtitle>
+                <mat-card-content>
+                    <a href="https://depression.org.nz/get-better/self-help/" target="_blank">Depression Help</a>
+                    <br>
+                    <a href="https://www.everydayhealth.com/news/cheap-natural-quick-anxiety-remedies/" target="_blank">Anxiety Help</a>
+                    <br>
+                    <a href="http://www.apa.org/helpcenter/controlling-anger.aspx" target="_blank">Anger Management Help</a>
+                    <br>
+                    <a href="http://enlightenmentportal.com/development/self-esteem-building-activities/" target="_blank">Self Esteem Building Activities</a>
+                    <mat-divider></mat-divider>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+    </div>
+</main>
+</body>

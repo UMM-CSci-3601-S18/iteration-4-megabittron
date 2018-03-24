@@ -15,6 +15,8 @@ import {GoalsService} from "./goals/goals.service";
 import {EditGoalComponent} from "./goals/edit-goal.component";
 import {AddGoalComponent} from "./goals/add-goal.component";
 
+import {SummaryComponent} from "./summary/summary.component";
+
 
 @NgModule({
     imports: [
@@ -30,6 +32,7 @@ import {AddGoalComponent} from "./goals/add-goal.component";
         GoalsComponent,
         AddGoalComponent,
         EditGoalComponent,
+        SummaryComponent,
     ],
     providers: [
         GoalsService,
