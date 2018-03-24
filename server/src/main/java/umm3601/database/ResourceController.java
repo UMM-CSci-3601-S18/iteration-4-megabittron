@@ -34,13 +34,17 @@ public class ResourceController {
     // documents if no query parameter is specified.
     public String getResources(Map<String, String[]> queryParams) {
 
-        System.out.println("Entering ResourceController :: getResources");
+        System.out.println("Entering ResourceController :: getResources()");
 
         //in preparation for the future where responses may be separated by emotion selected
         Document filterDoc = new Document();
 
         // FindIterable comes from mongo, Document comes from Gson
         FindIterable<Document> matchingResources = resourceCollection.find(filterDoc);
+
+        System.out.println("Resources: ");
+        System.out.println(JSON.serialize(resourceCollection));
+        System.out.println(JSON.serialize(matchingResources));
 
         return JSON.serialize(matchingResources);
     }
