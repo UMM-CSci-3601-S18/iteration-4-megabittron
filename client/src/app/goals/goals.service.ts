@@ -88,6 +88,7 @@ export class GoalsService {
         };
 
         // Send post request to add a new goal with the user data as the body with specified headers.
+        console.log(id);
         return this.http.post<{'$oid': string}>(this.goalUrl + '/edit', id, httpOptions);
     }
 }

@@ -10,6 +10,8 @@ import {CustomModule} from './custom.module';
 
 import {ResourcesComponent} from "./resources/resources.component";
 
+import {EmotionService} from "./home/home.service";
+
 import {GoalsComponent} from "./goals/goals.component";
 import {GoalsService} from "./goals/goals.service";
 import {EditGoalComponent} from "./goals/edit-goal.component";
@@ -38,6 +40,7 @@ import {SummaryListService} from "./summary/summary-list.service";
     ],
     providers: [
         GoalsService,
+        EmotionService,
         SummaryListService,
         {provide: APP_BASE_HREF, useValue: '/'},
         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}
