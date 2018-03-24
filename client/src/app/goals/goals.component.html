@@ -1,7 +1,4 @@
 <body class="whole-body">
-<header>
-    <div class ="main-top" id="goal-main-title">Goals</div>
-</header>
 
 <main>
     <div layout="column">
@@ -19,8 +16,8 @@
 
     <!-- Your Goals Section -->
         <div class="second-sec">
-        <mat-card> <mat-card-title class="your-goals-title">Your Goals</mat-card-title>
-            <mat-card-subtitle class="your-goals-subtitle">All of your goals are displayed here.</mat-card-subtitle>
+        <mat-card> <mat-card-title id="your-goals" class="your-goals-title">Your Goals</mat-card-title>
+            <mat-card-subtitle class="your-goals-title">All of your goals are displayed here.</mat-card-subtitle>
             <mat-accordion *ngIf="goals; else goalsError" >
                 <mat-expansion-panel #elem class="goals" [id]="goal.name" [expanded]="this.isHighlighted(goal)" *ngFor="let goal of this.filterGoals(goalGoal, goalCategory, goalName)">
                     <mat-expansion-panel-header>
