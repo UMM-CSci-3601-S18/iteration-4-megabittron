@@ -5,11 +5,11 @@
             <br>
             Would you like some help?
             <mat-divider></mat-divider>
-            <div *ngIf="!giveResponse">
+            <div *ngIf="!giveResponse==true">
                 <button mat-raised-button id="yesButton" (click)="onYesClick()" type="button">Yes</button>
                 <button mat-raised-button id="noButton" (click)="onExitClick()" type="button">No</button>
             </div>
-            <div *ngIf="giveResponse">
+            <div *ngIf="giveResponse==true">
                 <a href="{{selectedResponse}}">Here's something that may be useful!</a>
                 <mat-divider></mat-divider>
                 <a [routerLink]="['/resources']" routerLinkActive="active">And there's more stuff here!</a>

@@ -9,7 +9,7 @@ import {environment} from '../../environments/environment';
 
 @Component({
     selector: 'app-emotion-response.component',
-    templateUrl: 'edit-emotion-response.html',
+    templateUrl: 'emotion-response.component.html',
 })
 
 export class EmotionResponseComponent {

@@ -61,7 +61,8 @@ export class HomeComponent {
 
         if(this.intenseEmotionResponse){
             const dialogRef = this.dialog.open(EmotionResponseComponent, {
-                width: '500px',
+                width: '50%',
+                height: '50%',
             });
         }
 
