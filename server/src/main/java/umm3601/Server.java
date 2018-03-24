@@ -7,6 +7,9 @@ import spark.Response;
 import umm3601.database.GoalController;
 import umm3601.database.GoalRequestHandler;
 
+import umm3601.database.EmotionController;
+import umm3601.database.EmotionRequestHandler;
+
 import java.io.IOException;
 
 
@@ -25,6 +28,9 @@ public class Server {
 
         GoalController goalController = new GoalController(database);
         GoalRequestHandler goalRequestHandler = new GoalRequestHandler(goalController);
+
+        EmotionController emotionController = new EmotionController(database);
+        EmotionRequestHandler emotionRequestHandler = new EmotionRequestHandler(emotionController);
 
         //Configure Spark
         port(serverPort);
@@ -63,6 +69,9 @@ public class Server {
         /////////////////////////////////////////////
 
         //List goals, filtered using query parameters
+        get("api/emotions", emotionRequestHandler::getEmotions);
+        get("api/emotions/:id", emotionRequestHandler::getEmotionJSON);
+        post("api/emotions/new", emotionRequestHandler::addNewEmotion);
 
         get("api/goals", goalRequestHandler::getGoals);
         get("api/goals/:id", goalRequestHandler::getGoalJSON);
