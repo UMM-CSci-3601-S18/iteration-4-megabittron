@@ -1,19 +1,24 @@
 <div class="add-goal" layout-gt-sm="row">
     <div flex-gt-sm="80" flex-offset-gt-sm="10">
         <mat-card>
-            <mat-card-title>You mentioned having some extreme emotions.</mat-card-title>
+            <mat-card-title>I'm sorry to hear that.</mat-card-title>
             <br>
             Would you like some help?
             <mat-divider></mat-divider>
-            <button mat-raised-button id="yesButton" (click)="onYesClick()" type="button">Yes</button>
-            <button mat-raised-button id="noButton" (click)="onExitClick()" type="button">No</button>
-            <mat-divider></mat-divider>
-            <div *ngIf="giveResponse=true">
-            <mat-card-content>
-
-            </mat-card-content>
+            <div *ngIf="!giveResponse">
+                <button mat-raised-button id="yesButton" (click)="onYesClick()" type="button">Yes</button>
+                <button mat-raised-button id="noButton" (click)="onExitClick()" type="button">No</button>
             </div>
+            <div *ngIf="giveResponse">
+                <a href="{{selectedResponse}}">Here's something that may be useful!</a>
+                <mat-divider></mat-divider>
+                <a [routerLink]="['/resources']" routerLinkActive="active">And there's more stuff here!</a>
+                <br>
+                <button mat-raised-button id="exitButton" (click)="onExitClick()" type="button">Exit</button>
+            </div>
+
+            <mat-divider></mat-divider>
         </mat-card>
-        <button mat-raised-button id="exitButton" (click)="onExitClick()" type="button">Done</button>
+
     </div>
 </div>

@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {EmotionResponseComponent} from "./emotion-response.component";
+import {MatDialog} from '@angular/material';
 
 @Component({
     selector: 'home-component',
@@ -14,7 +16,7 @@ export class HomeComponent {
     thumbLabel = true;
     public emojiRating: number = 0;
 
-    constructor() {
+    constructor(public dialog: MatDialog) {
         this.title = 'Home';
     }
 
@@ -55,7 +57,25 @@ export class HomeComponent {
     }
 
     //retrieves an appropriate response to an emotion selection
-    appropriateResponsePopUp(){
+    appropriateResponsePopUp(): void {
 
+        if(this.intenseEmotionResponse){
+            const dialogRef = this.dialog.open(EmotionResponseComponent, {
+                width: '500px',
+            });
+        }
+
+
+    }
+
+    //checks the emotional response and the intensity to see if a response is needed
+    intenseEmotionResponse(): boolean {
+
+        if(this.selectedEmotion == 'sad' || this.selectedEmotion == 'mad' || this.selectedEmotion == 'scared' || this.selectedEmotion == 'anxious'){
+            if(this.emojiRating > 3){
+                return true;
+            }
+        }
+        return false;
     }
 }
