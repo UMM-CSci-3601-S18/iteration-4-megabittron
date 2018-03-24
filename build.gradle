@@ -13,9 +13,14 @@ task seedGoalsData(type: Exec) {
     args = ["-d", "dev", "-c", "goals", "--file", "goals.seed.json", "--jsonArray"]
 }
 
+task seedResourcesData(type: Exec) {
+    executable = "mongoimport"
+    args = ["-d", "dev", "-c", "goals", "--file", "resources.seed.json", "--jsonArray"]
+}
 
 task seedMongoDB {
     group = "application"
 }
 seedMongoDB.dependsOn(clearMongoDB)
 seedMongoDB.dependsOn(seedGoalsData)
+seedMongoDB.dependsOn(seedResourcesData)

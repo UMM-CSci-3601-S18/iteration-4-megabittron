@@ -4,8 +4,12 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import spark.Request;
 import spark.Response;
+
 import umm3601.database.GoalController;
 import umm3601.database.GoalRequestHandler;
+
+import umm3601.database.ResourceController;
+import umm3601.database.ResourceRequestHandler;
 
 import java.io.IOException;
 
@@ -25,6 +29,9 @@ public class Server {
 
         GoalController goalController = new GoalController(database);
         GoalRequestHandler goalRequestHandler = new GoalRequestHandler(goalController);
+
+        ResourceController resourceController = new ResourceController(database);
+        ResourceRequestHandler resourceRequestHandler = new ResourceRequestHandler(resourceController);
 
         //Configure Spark
         port(serverPort);
@@ -68,6 +75,9 @@ public class Server {
         get("api/goals/:id", goalRequestHandler::getGoalJSON);
         post("api/goals/new", goalRequestHandler::addNewGoal);
         post("api/goals/edit", goalRequestHandler::editGoal);
+
+        //Resources for appropriate response
+        get("api/resources", resourceRequestHandler::getResources);
 
 
         // An example of throwing an unhandled exception so you can see how the

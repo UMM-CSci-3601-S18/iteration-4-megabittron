@@ -36,6 +36,7 @@ export class EmotionResponseComponent {
             err => {
                 console.log(err);
             });
+
     }
 
     getLinks(): Observable<string[]> {
