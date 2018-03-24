@@ -12,6 +12,9 @@ import umm3601.database.EmotionRequestHandler;
 
 import java.io.IOException;
 
+import umm3601.summary.SummaryController;
+import umm3601.summary.SummaryRequestHandler;
+
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
@@ -31,6 +34,9 @@ public class Server {
 
         EmotionController emotionController = new EmotionController(database);
         EmotionRequestHandler emotionRequestHandler = new EmotionRequestHandler(emotionController);
+
+        SummaryController summaryController = new SummaryController(database);
+        SummaryRequestHandler summaryRequestHandler = new SummaryRequestHandler(summaryController);
 
         //Configure Spark
         port(serverPort);
@@ -77,6 +83,9 @@ public class Server {
         get("api/goals/:id", goalRequestHandler::getGoalJSON);
         post("api/goals/new", goalRequestHandler::addNewGoal);
         post("api/goals/edit", goalRequestHandler::editGoal);
+
+        //List summary page
+        get("api/summarys", summaryRequestHandler::getSummarys);
 
 
         // An example of throwing an unhandled exception so you can see how the
