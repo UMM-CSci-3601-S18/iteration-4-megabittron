@@ -54,6 +54,9 @@ export class SummaryListComponent implements OnInit {
 
         // Filter by Intensity
         if (searchIntensity != null) {
+            if(searchIntensity.toString() =="All"){
+                return this.summarys;
+            }
 
             this.filteredSummarys = this.filteredSummarys.filter(summary => {
                 return !searchIntensity || searchIntensity.toString() == summary.intensity.toString();
