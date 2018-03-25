@@ -45,7 +45,11 @@ export class SummaryListComponent implements OnInit {
 
         // Filter by Mood
         if (searchMood != null) {
+            if(searchMood =="All"){
+                return this.summarys;
+            }
             searchMood = searchMood.toLocaleLowerCase();
+
 
             this.filteredSummarys = this.filteredSummarys.filter(summary => {
                 return !searchMood || summary.mood.toLowerCase().indexOf(searchMood) !== -1;
