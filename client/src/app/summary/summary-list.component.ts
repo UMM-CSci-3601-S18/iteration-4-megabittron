@@ -25,6 +25,7 @@ export class SummaryListComponent implements OnInit {
     // These are the target values used in searching.
     // We should rename them to make that clearer.
     public summaryMood: string;
+    public summaryIntensity: string;
 
     // The ID of the
     private highlightedID: {'$oid': string} = { '$oid': '' };
