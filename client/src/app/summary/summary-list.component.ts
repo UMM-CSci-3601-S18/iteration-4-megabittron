@@ -129,8 +129,8 @@ export class SummaryListComponent implements OnInit {
     }
 
     stringToDate(date: string): any {
-        var test = new Date(date);
-        return test;
+        return new Date(date);
     }
+
 }
 
