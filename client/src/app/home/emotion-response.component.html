@@ -1,9 +1,3 @@
-<script>
-    function refreshIframe(){
-        document.getElementById('responseVideoFrame').contentWindow.location.reload(true);
-    }
-</script>
-
 
 <div flex-gt-sm="80" flex-offset-gt-sm="10">
         <mat-card>
@@ -20,8 +14,11 @@
             <div *ngIf="giveResponse==true">
                 <br>
                 <div class="container">
-                    <iframe id="responseVideoFrame" [src]="selectedResponse"
-                            frameborder="0" allowfullscreen class="video"></iframe>
+                    <iframe id="responseVideoFrame"
+                            [src]="selectedResponse"
+                            frameborder="0"
+                            allowfullscreen
+                            class="video"></iframe>
                 </div>
                 <br>
                 <mat-divider></mat-divider>

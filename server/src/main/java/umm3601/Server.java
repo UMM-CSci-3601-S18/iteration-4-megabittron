@@ -36,6 +36,7 @@ public class Server {
         //Configure Spark
         port(serverPort);
         enableDebugScreen();
+        
 
         // Specify where assets like images will be "stored"
         staticFiles.location("/public");
