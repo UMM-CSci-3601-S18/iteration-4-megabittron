@@ -49,7 +49,8 @@
                         [min]="1"
                         [step]="1"
                         [thumb-label]="thumbLabel"
-                        [(ngModel)]="emojiRating">
+                        [(ngModel)]="emojiRating"
+                        (click)="emojiRating=$event.value">
                     </mat-slider>
 
                 </div>
@@ -61,7 +62,7 @@
 
             <div class="entryButtons">
                 <button mat-raised-button id="cancel">Cancel</button>
-                <button mat-raised-button id="save" (click)="appropriateResponsePopUp()">Save</button>
+                <button mat-raised-button id="save" (click)="appropriateResponsePopUp();">Save</button>
             </div>
 
             <br>

@@ -32,7 +32,7 @@ import {EmotionResponseComponent} from "./home/emotion-response.component";
         GoalsComponent,
         AddGoalComponent,
         EditGoalComponent,
-        EmotionResponseComponent
+        EmotionResponseComponent,
     ],
     providers: [
         GoalsService,
@@ -42,7 +42,7 @@ import {EmotionResponseComponent} from "./home/emotion-response.component";
     entryComponents: [
       AddGoalComponent,
       EditGoalComponent,
-      EmotionResponseComponent
+      EmotionResponseComponent,
     ],
     bootstrap: [AppComponent]
 })

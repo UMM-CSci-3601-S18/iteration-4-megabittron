@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {EmotionResponseComponent} from "./emotion-response.component";
 import {MatDialog} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
     selector: 'home-component',
@@ -16,7 +17,8 @@ export class HomeComponent {
     thumbLabel = true;
     public emojiRating: number = 0;
 
-    constructor(public dialog: MatDialog) {
+    constructor(public dialog: MatDialog,
+                public snackBar: MatSnackBar) {
         this.title = 'Home';
     }
 
@@ -59,24 +61,30 @@ export class HomeComponent {
     //retrieves an appropriate response to an emotion selection
     appropriateResponsePopUp(): void {
 
-        if(this.intenseEmotionResponse){
-            this.dialog.open(EmotionResponseComponent, {
+        if(this.intenseEmotionResponse()){
+            var dialogRef = this.dialog.open(EmotionResponseComponent, {
                 width: '70vw',
                 height: '50%',
             });
         }
 
+        this.saveConfirmation();
 
     }
 
     //checks the emotional response and the intensity to see if a response is needed
     intenseEmotionResponse(): boolean {
 
+        console.log("the selected emoji is: " + this.selectedEmotion);
         if(this.selectedEmotion.toLowerCase() == 'sad' || this.selectedEmotion.toLowerCase() == 'mad' || this.selectedEmotion.toLowerCase() == 'scared' || this.selectedEmotion.toLowerCase() == 'anxious'){
             if(this.emojiRating >= 3){
                 return true;
             }
         }
         return false;
+    }
+
+    saveConfirmation(): void {
+        this.snackBar.open("Your response has been saved.", "close", {duration: 2000});
     }
 }
