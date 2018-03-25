@@ -22,7 +22,8 @@ public class ResourceRequestHandler {
     // Gets the goals from the DB given the query parameters
     public String getResources(Request req, Response res)
     {
-        System.out.println("It went in RRHandler and did getResources()");
+        //debugging code
+        //System.out.println("It went in RRHandler and did getResources()");
         res.type("application/json");
         return resourceController.getResources(req.queryMap().toMap());
     }

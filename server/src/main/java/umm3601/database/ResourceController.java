@@ -14,8 +14,6 @@ import java.util.Map;
 
 import static com.mongodb.client.model.Filters.eq;
 
-
-// Controller that manages information about people's goals.
 public class ResourceController {
 
     private final Gson gson;
