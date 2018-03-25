@@ -60,30 +60,35 @@
             </mat-form-field>
 
             <br>
-            <br>
 
-            <mat-divider></mat-divider>
-            <div *ngFor="let summary of this.filterSummarys(summaryMood, startDate, endDate)">
-            </div>
-            <br>
 
             <p>Total Number of {{summaryMood}} Entries: {{totalNumberMoods()}}</p>
             <br>
             <br>
 
-            <mat-accordion *ngIf="summarys; else summarysError" >
-            </mat-accordion>
-
-
-            <ng-template #summarysError>
-                <mat-error>
-                    There was a problem loading the users. Possibly the server is down or perhaps there are network
-                    issues.
-                </mat-error>
-                <mat-error>
-                    Please wait a bit and try again or start the server.
-                </mat-error>
-            </ng-template>
+            <mat-card> <mat-card-title id="your-summarys" class="your-summarys-title">Your Emotions</mat-card-title>
+                <mat-card-subtitle class="your-summarys-title">All of your emotions are displayed here.</mat-card-subtitle>
+                <mat-accordion *ngIf="summarys; else summarysError" >
+                    <mat-expansion-panel #elem class="summarys" [id]="summary._id" [expanded]="this.isHighlighted(summary)" *ngFor="let summary of this.filterSummarys(summaryMood, startDate, endDate)">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title id="name">You felt {{summary.mood}} on
+                                {{stringToDate(summary.date).toLocaleDateString()}} at
+                                {{stringToDate(summary.date).toLocaleTimeString()}}</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-panel-description>Journal entry: {{summary.description}}</mat-panel-description>
+                        <mat-panel-description>Intensity: {{summary.intensity}}</mat-panel-description>
+                    </mat-expansion-panel>
+                </mat-accordion>
+                <ng-template #summarysError>
+                    <mat-error>
+                        There was a problem loading the goals. Possibly the server is down or perhaps there are network
+                        issues.
+                    </mat-error>
+                    <mat-error>
+                        Please wait a bit and try again or start the server.
+                    </mat-error>
+                </ng-template>
+            </mat-card>
 
 
         </mat-card>
