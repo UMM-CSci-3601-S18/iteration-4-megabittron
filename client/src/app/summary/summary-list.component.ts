@@ -128,5 +128,10 @@ export class SummaryListComponent implements OnInit {
         this.endDate = new Date();
         this.endDate.setHours(23,59,59,0)
     }
+
+    stringToDate(date: string): any {
+        return new Date(date);
+    }
+
 }
 

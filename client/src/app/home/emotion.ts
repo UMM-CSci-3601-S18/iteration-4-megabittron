@@ -1,7 +1,7 @@
 export interface Emotion {
     _id: string;
     mood: string;
-    date: String;
+    date: string;
     intensity: number;
     description: string;
 }
