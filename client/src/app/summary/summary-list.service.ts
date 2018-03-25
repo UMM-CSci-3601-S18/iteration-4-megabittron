@@ -58,6 +58,32 @@ export class SummaryListService {
         }
     }
 
+    filterByIntensity(summaryIntensity?: number): void {
+        if (!(summaryIntensity == null || summaryIntensity)) {
+            if (this.parameterPresent('intensity=') ) {
+                // there was a previous search by company that we need to clear
+                this.removeParameter('intensity=');
+            }
+            if (this.summaryUrl.indexOf('?') !== -1) {
+                // there was already some information passed in this url
+                this.summaryUrl += 'intensity=' + summaryIntensity + '&';
+            } else {
+                // this was the first bit of information to pass in the url
+                this.summaryUrl += '?intensity=' + summaryIntensity + '&';
+            }
+        } else {
+            // there was nothing in the box to put onto the URL... reset
+            if (this.parameterPresent('intensity=')) {
+                let start = this.summaryUrl.indexOf('intensity=');
+                const end = this.summaryUrl.indexOf('&', start);
+                if (this.summaryUrl.substring(start - 1, start) === '?') {
+                    start = start - 1;
+                }
+                this.summaryUrl = this.summaryUrl.substring(0, start) + this.summaryUrl.substring(end + 1);
+            }
+        }
+    }
+
     private parameterPresent(searchParam: string) {
         return this.summaryUrl.indexOf(searchParam) !== -1;
     }
