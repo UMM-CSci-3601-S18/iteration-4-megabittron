@@ -2,7 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Resource} from './resource';
-
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {Observable} from 'rxjs/Observable';
 
 import {environment} from '../../environments/environment';
@@ -15,12 +15,13 @@ import {environment} from '../../environments/environment';
 
 export class EmotionResponseComponent {
     giveResponse : boolean = false;
-    selectedResponse : string = "";
+    selectedResponse : SafeResourceUrl;
     resourceUrl : string = environment.API_URL + 'resources';
 
 
     constructor(public dialogRef: MatDialogRef<EmotionResponseComponent>,
-                private http: HttpClient) {
+                private http: HttpClient,
+                private sanitizer: DomSanitizer) {
     }
 
 
@@ -30,7 +31,10 @@ export class EmotionResponseComponent {
             links => {
                 console.log("successfully retrieved resource links from the database");
                 var index = Math.floor(Math.random() * links.length);
-                this.selectedResponse = links[index].resource;
+                this.selectedResponse = this.sanitizer.bypassSecurityTrustResourceUrl(links[index].resource);
+
+                console.log("this was chosen: " + this.selectedResponse);
+
                 if(this.selectedResponse != ""){
                     this.giveResponse=true;
                 }
@@ -49,4 +53,5 @@ export class EmotionResponseComponent {
     onExitClick(): void {
         this.dialogRef.close();
     }
+
 }

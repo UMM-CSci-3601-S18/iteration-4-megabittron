@@ -1,3 +1,9 @@
+<script>
+    function refreshIframe(){
+        document.getElementById('responseVideoFrame').contentWindow.location.reload(true);
+    }
+</script>
+
 
 <div flex-gt-sm="80" flex-offset-gt-sm="10">
         <mat-card>
@@ -14,7 +20,7 @@
             <div *ngIf="giveResponse==true">
                 <br>
                 <div class="container">
-                    <iframe src="//www.youtube.com/embed/yCOY82UdFrw"
+                    <iframe id="responseVideoFrame" [src]="selectedResponse"
                             frameborder="0" allowfullscreen class="video"></iframe>
                 </div>
                 <br>
