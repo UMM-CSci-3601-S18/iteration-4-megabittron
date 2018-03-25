@@ -91,7 +91,7 @@ export class SummaryListComponent implements OnInit {
         });*/
 
         // return number of emojis left after filter
-        return this.filteredSummarys.length;
+        return this.summarys.length;
     }
 
     /**
@@ -108,85 +108,22 @@ export class SummaryListComponent implements OnInit {
 
         let very_sad_daily_totals = {"label":"Very Sad",
             "data":[
-                this.filterChart('Sun', '1'),
-                this.filterChart('Mon', '1'),
-                this.filterChart('Tue', '1'),
-                this.filterChart('Wed', '1'),
-                this.filterChart('Thu', '1'),
-                this.filterChart('Fri', '1'),
-                this.filterChart('Sat', '1')
+               1,2,3,4,5,6,7
             ],
-            "fill":false,
-            "borderColor":"rgb(150, 0, 100)",
-            "lineTension":0.1};
-
-        let sad_daily_totals = {"label":"Sad",
-            "data":[
-                this.filterChart('Sun', '2'),
-                this.filterChart('Mon', '2'),
-                this.filterChart('Tue', '2'),
-                this.filterChart('Wed', '2'),
-                this.filterChart('Thu', '2'),
-                this.filterChart('Fri', '2'),
-                this.filterChart('Sat', '2')
-            ],
-            "fill":false,
-            "borderColor":"rgb(150, 75, 75)",
-            "lineTension":0.1};
-
-        let neutral_daily_totals = {"label":"Neutral",
-            "data":[
-                this.filterChart('Sun', '3'),
-                this.filterChart('Mon', '3'),
-                this.filterChart('Tue', '3'),
-                this.filterChart('Wed', '3'),
-                this.filterChart('Thu', '3'),
-                this.filterChart('Fri', '3'),
-                this.filterChart('Sat', '3')
-            ],
-            "fill":false,
-            "borderColor":"rgb(175, 175, 175)",
-            "lineTension":0.1};
-
-        let happy_daily_totals = {"label":"Happy",
-            "data":[
-                this.filterChart('Sun', '4'),
-                this.filterChart('Mon', '4'),
-                this.filterChart('Tue', '4'),
-                this.filterChart('Wed', '4'),
-                this.filterChart('Thu', '4'),
-                this.filterChart('Fri', '4'),
-                this.filterChart('Sat', '4')
-            ],
-            "fill":false,
-            "borderColor":"rgb(75, 192, 192)",
-            "lineTension":0.1};
-
-        let very_happy_daily_totals = {"label":"Very Happy",
-            "data":[
-                this.filterChart('Sun', '5'),
-                this.filterChart('Mon', '5'),
-                this.filterChart('Tue', '5'),
-                this.filterChart('Wed', '5'),
-                this.filterChart('Thu', '5'),
-                this.filterChart('Fri', '5'),
-                this.filterChart('Sat', '5')
-            ],
-            "fill":false,
-            "borderColor":"rgb(200, 200, 0)",
+            "fill":true,
+            "backgroundColor": "blue",
+            "borderColor":"black",
             "lineTension":0.1};
 
         let myChart = new Chart(this.ctx, {
             type: 'bar',
             data: {
                 labels: days,
-                datasets: [very_sad_daily_totals,
-                    sad_daily_totals,
-                    neutral_daily_totals,
-                    happy_daily_totals,
-                    very_happy_daily_totals]
+                datasets: [very_sad_daily_totals]
             },
             options: {
+                responsive: true,
+                maintainAspectRation: false,
                 scales: {
                     yAxes: [{
                         ticks: {
