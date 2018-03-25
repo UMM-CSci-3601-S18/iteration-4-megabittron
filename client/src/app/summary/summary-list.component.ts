@@ -25,6 +25,7 @@ export class SummaryListComponent implements OnInit {
     // These are the target values used in searching.
     // We should rename them to make that clearer.
     public summaryMood: string;
+    summary_intensity_filter
     public summaryIntensity: number;
 
     // The ID of the
