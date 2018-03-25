@@ -20,10 +20,10 @@ public class ResourceController {
 
     private final Gson gson;
     private MongoDatabase database;
-    // goalCollection is the collection that the goals data is in.
+    // goalCollection is the collection that the resources data is in.
     private final MongoCollection<Document> resourceCollection;
 
-    // Construct controller for goals.
+    // Construct controller for resources.
     public ResourceController(MongoDatabase database) {
         gson = new Gson();
         this.database = database;
@@ -34,17 +34,36 @@ public class ResourceController {
     // documents if no query parameter is specified.
     public String getResources(Map<String, String[]> queryParams) {
 
-        System.out.println("Entering ResourceController :: getResources()");
-
-        //in preparation for the future where responses may be separated by emotion selected
         Document filterDoc = new Document();
+
+        if (queryParams.containsKey("resource")) {
+            String targetContent = (queryParams.get("resource")[0]);
+            Document contentRegQuery = new Document();
+            contentRegQuery.append("$regex", targetContent);
+            contentRegQuery.append("$options", "i");
+            filterDoc = filterDoc.append("resource", contentRegQuery);
+        }
+
+        // category is the category of the resource
+        if (queryParams.containsKey("category")) {
+            String targetContent = (queryParams.get("category")[0]);
+            Document contentRegQuery = new Document();
+            contentRegQuery.append("$regex", targetContent);
+            contentRegQuery.append("$options", "i");
+            filterDoc = filterDoc.append("category", contentRegQuery);
+        }
+
+        // name is the title of the resource
+        if (queryParams.containsKey("name")) {
+            String targetContent = (queryParams.get("name")[0]);
+            Document contentRegQuery = new Document();
+            contentRegQuery.append("$regex", targetContent);
+            contentRegQuery.append("$options", "i");
+            filterDoc = filterDoc.append("name", contentRegQuery);
+        }
 
         // FindIterable comes from mongo, Document comes from Gson
         FindIterable<Document> matchingResources = resourceCollection.find(filterDoc);
-
-        System.out.println("Resources: ");
-        System.out.println(JSON.serialize(resourceCollection));
-        System.out.println(JSON.serialize(matchingResources));
 
         return JSON.serialize(matchingResources);
     }

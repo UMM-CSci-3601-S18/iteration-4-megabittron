@@ -27,7 +27,7 @@ export class EmotionResponseComponent {
         var linkObservable: Observable<Resource[]> = this.getLinks();
         linkObservable.subscribe(
             links => {
-                console.log("successfully retrieved resource links from the database")
+                console.log("successfully retrieved resource links from the database");
                 var index = Math.floor(Math.random() * links.length);
                 this.selectedResponse = links[index].resource;
                 if(this.selectedResponse != ""){
