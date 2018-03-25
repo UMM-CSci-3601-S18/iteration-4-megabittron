@@ -25,7 +25,8 @@ export class SummaryListComponent implements OnInit {
     // These are the target values used in searching.
     // We should rename them to make that clearer.
     public summaryMood: string;
-    public summaryIntensity: string;
+    summary_intensity_filter
+    public summaryIntensity: number;
 
     // The ID of the
     private highlightedID: {'$oid': string} = { '$oid': '' };
@@ -39,16 +40,31 @@ export class SummaryListComponent implements OnInit {
         return summary._id['$oid'] === this.highlightedID['$oid'];
     }
 
-    public filterSummarys(searchMood: string, searchStartDate: any, searchEndDate: any): Summary[] {
+    public filterSummarys(searchMood: string, searchIntensity: number, searchStartDate: any, searchEndDate: any): Summary[] {
 
         this.filteredSummarys = this.summarys;
 
         // Filter by Mood
         if (searchMood != null) {
+            if(searchMood =="All"){
+                return this.summarys;
+            }
             searchMood = searchMood.toLocaleLowerCase();
+
 
             this.filteredSummarys = this.filteredSummarys.filter(summary => {
                 return !searchMood || summary.mood.toLowerCase().indexOf(searchMood) !== -1;
+            });
+        }
+
+        // Filter by Intensity
+        if (searchIntensity != null) {
+            if(searchIntensity.toString() =="All"){
+                return this.summarys;
+            }
+
+            this.filteredSummarys = this.filteredSummarys.filter(summary => {
+                return !searchIntensity || searchIntensity.toString() == summary.intensity.toString();
             });
         }
 
@@ -87,7 +103,7 @@ export class SummaryListComponent implements OnInit {
         summaryListObservable.subscribe(
             summarys => {
                 this.summarys = summarys;
-                this.filterSummarys(this.summaryMood, this.startDate, this.endDate);
+                this.filterSummarys(this.summaryMood, this.summaryIntensity, this.startDate, this.endDate);
             },
             err => {
                 console.log(err);
