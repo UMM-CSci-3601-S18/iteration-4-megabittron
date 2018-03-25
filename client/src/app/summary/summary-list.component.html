@@ -60,8 +60,8 @@
                     <mat-expansion-panel #elem class="summarys" [id]="summary._id" [expanded]="this.isHighlighted(summary)" *ngFor="let summary of this.filterSummarys(summaryMood, startDate, endDate)">
                         <mat-expansion-panel-header>
                             <mat-panel-title id="name">You felt {{summary.mood}} on
-                                {{stringToDate(summary.date).getMonth()}}/{{stringToDate(summary.date).getDate()}}/{{stringToDate(summary.date).getFullYear()}} at
-                                {{stringToDate(summary.date).getHours()}}:{{stringToDate(summary.date).getMinutes()}}</mat-panel-title>
+                                {{stringToDate(summary.date).toLocaleDateString()}} at
+                                {{stringToDate(summary.date).toLocaleTimeString()}}</mat-panel-title>
                         </mat-expansion-panel-header>
                         <mat-panel-description>Journal entry: {{summary.description}}</mat-panel-description>
                         <mat-panel-description>Intensity: {{summary.intensity}}</mat-panel-description>
