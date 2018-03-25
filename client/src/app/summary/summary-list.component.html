@@ -71,7 +71,7 @@
             <mat-card> <mat-card-title id="your-summarys" class="your-summarys-title">Your Emotions</mat-card-title>
                 <mat-card-subtitle class="your-summarys-title">All of your emotions are displayed here.</mat-card-subtitle>
                 <mat-accordion *ngIf="summarys; else summarysError" >
-                    <mat-expansion-panel #elem class="summarys" [id]="summary._id" [expanded]="this.isHighlighted(summary)" *ngFor="let summary of this.filterSummarys(summaryMood, startDate, endDate)">
+                    <mat-expansion-panel #elem class="summarys" [id]="summary._id" [expanded]="this.isHighlighted(summary)" *ngFor="let summary of this.filterSummarys(summaryMood, summaryIntensity, startDate, endDate)">
                         <mat-expansion-panel-header>
                             <mat-panel-title id="name">You felt {{summary.mood}} on
                                 {{stringToDate(summary.date).toLocaleDateString()}} at

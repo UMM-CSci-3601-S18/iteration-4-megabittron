@@ -16,11 +16,10 @@ export class SummaryListService {
     constructor(private http: HttpClient) {
     }
 
-    getSummarys(summaryMood?: string): Observable<Summary[]> {
+    getSummarys(summaryMood?: string,): Observable<Summary[]> {
         this.filterByMood(summaryMood);
         return this.http.get<Summary[]>(this.summaryUrl);
     }
-
 
     /*
     //This method looks lovely and is more compact, but it does not clear previous searches appropriately.
