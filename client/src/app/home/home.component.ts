@@ -65,7 +65,7 @@ export class HomeComponent {
         if(doPopup){
             var dialogRef = this.dialog.open(EmotionResponseComponent, {
                 width: '70vw',
-                height: '50%',
+                height: '70%',
             });
         }
 
