@@ -15,33 +15,33 @@ import java.util.Map;
 import static com.mongodb.client.model.Filters.eq;
 
 
-// Controller that manages information about people's items.
+// Controller that manages information about people's journals.
 public class JournalController {
 
     private final Gson gson;
     private MongoDatabase database;
-    // itemCollection is the collection that the journals data is in.
-    private final MongoCollection<Document> itemCollection;
+    // journalCollection is the collection that the journals data is in.
+    private final MongoCollection<Document> journalCollection;
 
-    // Construct controller for items.
+    // Construct controller for journals.
     public JournalController(MongoDatabase database) {
         gson = new Gson();
         this.database = database;
-        itemCollection = database.getCollection("journals");
+        journalCollection = database.getCollection("journals");
     }
 
-    // get an item by its ObjectId, not used by client, for potential future use
+    // get an journal by its ObjectId, not used by client, for potential future use
     public String getItem(String id) {
         FindIterable<Document> jsonItems
-            = itemCollection
+            = journalCollection
             .find(eq("_id", new ObjectId(id)));
 
         Iterator<Document> iterator = jsonItems.iterator();
         if (iterator.hasNext()) {
-            Document item = iterator.next();
-            return item.toJson();
+            Document journal = iterator.next();
+            return journal.toJson();
         } else {
-            // We didn't find the desired item
+            // We didn't find the desired journal
             return null;
         }
     }
@@ -87,7 +87,7 @@ public class JournalController {
         }
 
         // FindIterable comes from mongo, Document comes from Gson
-        FindIterable<Document> matchingItems = itemCollection.find(filterDoc);
+        FindIterable<Document> matchingItems = journalCollection.find(filterDoc);
 
         return JSON.serialize(matchingItems);
     }
@@ -114,12 +114,12 @@ public class JournalController {
         newItem.append("body", body);
         newItem.append("time", time);
         newItem.append("link", link);
-        // Append new items here
+        // Append new journals here
 
         try {
-            itemCollection.insertOne(newItem);
+            journalCollection.insertOne(newItem);
             ObjectId id = newItem.getObjectId("_id");
-            System.err.println("Successfully added new item [title=" + title + ", category=" + category + ", body=" + body +", time=" + time + ", link = " + link + ']');
+            System.err.println("Successfully added new journal [title=" + title + ", category=" + category + ", body=" + body +", time=" + time + ", link = " + link + ']');
             // return JSON.serialize(newItem);
             return JSON.serialize(id);
         } catch(MongoException me) {

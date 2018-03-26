@@ -10,7 +10,7 @@ public class JournalRequestHandler {
     public JournalRequestHandler(JournalController journalController){
         this.journalController = journalController;
     }
-    /**Method called from Server when the 'api/items/:id' endpoint is received.
+    /**Method called from Server when the 'api/journals/:id' endpoint is received.
      * Get a JSON response with a list of all the users in the database.
      *
      * @param req the HTTP request
@@ -18,34 +18,34 @@ public class JournalRequestHandler {
      * @return one user in JSON formatted string and if it fails it will return text with a different HTTP status code
      */
 
-    // gets one item using its ObjectId--didn't use, just for potential future functionality
+    // gets one journal using its ObjectId--didn't use, just for potential future functionality
     public String getItemJSON(Request req, Response res){
         res.type("application/json");
         String id = req.params("id");
-        String item;
+        String journal;
         try {
-            item = journalController.getItem(id);
+            journal = journalController.getItem(id);
         } catch (IllegalArgumentException e) {
             // This is thrown if the ID doesn't have the appropriate
             // form for a Mongo Object ID.
             // https://docs.mongodb.com/manual/reference/method/ObjectId/
             res.status(400);
-            res.body("The requested item id " + id + " wasn't a legal Mongo Object ID.\n" +
+            res.body("The requested journal id " + id + " wasn't a legal Mongo Object ID.\n" +
                 "See 'https://docs.mongodb.com/manual/reference/method/ObjectId/' for more info.");
             return "";
         }
-        if (item != null) {
-            return item;
+        if (journal != null) {
+            return journal;
         } else {
             res.status(404);
-            res.body("The requested item with id " + id + " was not found");
+            res.body("The requested journal with id " + id + " was not found");
             return "";
         }
     }
 
 
 
-    /**Method called from Server when the 'api/items' endpoint is received.
+    /**Method called from Server when the 'api/journals' endpoint is received.
      * This handles the request received and the response
      * that will be sent back.
      *@param req the HTTP request
@@ -75,7 +75,7 @@ public class JournalRequestHandler {
         Object o = JSON.parse(req.body());
         try {
             // if the object that is the JSON representation of the request body's class is the class BasicDBObject
-            // then try to add the item with journalController's addNewItem method
+            // then try to add the journal with journalController's addNewItem method
             if(o.getClass().equals(BasicDBObject.class))
             {
                 try {
@@ -87,12 +87,12 @@ public class JournalRequestHandler {
                     String time = dbO.getString("time");
                     String link = dbO.getString("link");
 
-                    System.err.println("Adding new item [title=" + title + ",category=" + category + ", body=" + body + ", time=" + time +",link="+ link+']');
+                    System.err.println("Adding new journal [title=" + title + ",category=" + category + ", body=" + body + ", time=" + time +",link="+ link+']');
                     return journalController.addNewItem(title, category, body, time, link).toString();
                 }
                 catch(NullPointerException e)
                 {
-                    System.err.println("A value was malformed or omitted, new item request failed.");
+                    System.err.println("A value was malformed or omitted, new journal request failed.");
                     return null;
                 }
 
