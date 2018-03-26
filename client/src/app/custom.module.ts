@@ -8,7 +8,6 @@ import {
     MatInputModule, MatMenuModule, MatSidenavModule, MatToolbarModule,
     MatExpansionModule, MatTooltipModule, MatDialogModule,
     MatCheckboxModule,MatSliderModule,MatRadioModule,MatSnackBarModule,
-    MatCheckboxModule,MatSliderModule,MatRadioModule,
     MatDatepickerModule, MatNativeDateModule,
 } from '@angular/material';
 
