@@ -61,7 +61,8 @@ export class HomeComponent {
     //retrieves an appropriate response to an emotion selection
     appropriateResponsePopUp(): void {
 
-        if(this.intenseEmotionResponse()){
+        var doPopup: boolean = this.intenseEmotionResponse();
+        if(doPopup){
             var dialogRef = this.dialog.open(EmotionResponseComponent, {
                 width: '70vw',
                 height: '50%',
@@ -76,6 +77,7 @@ export class HomeComponent {
     intenseEmotionResponse(): boolean {
 
         console.log("the selected emoji is: " + this.selectedEmotion);
+        console.log("the emoji rating is:   " + this.emojiRating);
         if(this.selectedEmotion.toLowerCase() == 'sad' || this.selectedEmotion.toLowerCase() == 'mad' || this.selectedEmotion.toLowerCase() == 'scared' || this.selectedEmotion.toLowerCase() == 'anxious'){
             if(this.emojiRating >= 3){
                 return true;
