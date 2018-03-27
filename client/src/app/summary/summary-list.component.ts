@@ -6,6 +6,7 @@ import {Summary} from './summary';
 import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
+import * as Chart from 'chart.js';
 
 @Component({
     selector: 'app-summary-list-component',
@@ -18,6 +19,10 @@ export class SummaryListComponent implements OnInit {
     endDate;
     getDate;
 
+    canvas: any;
+    ctx: any;
+    myChart: any;
+
     // These are public so that tests can reference them (.spec.ts)
     public summarys: Summary[];
     public filteredSummarys: Summary[];
@@ -25,8 +30,8 @@ export class SummaryListComponent implements OnInit {
     // These are the target values used in searching.
     // We should rename them to make that clearer.
     public summaryMood: string;
-    summary_intensity_filter
     public summaryIntensity: number;
+    public inputType: string;
 
     // The ID of the
     private highlightedID: {'$oid': string} = { '$oid': '' };
@@ -47,25 +52,33 @@ export class SummaryListComponent implements OnInit {
         // Filter by Mood
         if (searchMood != null) {
             if(searchMood =="All"){
-                return this.summarys;
+                this.filteredSummarys = this.filteredSummarys.filter(summary => {
+                    return true;
+                });
+
+            } else{
+                searchMood = searchMood.toLocaleLowerCase();
+                this.filteredSummarys = this.filteredSummarys.filter(summary => {
+                    return !searchMood || summary.mood.toLowerCase().indexOf(searchMood) !== -1;
+                })
             }
-            searchMood = searchMood.toLocaleLowerCase();
 
 
-            this.filteredSummarys = this.filteredSummarys.filter(summary => {
-                return !searchMood || summary.mood.toLowerCase().indexOf(searchMood) !== -1;
-            });
+
         }
 
         // Filter by Intensity
         if (searchIntensity != null) {
-            if(searchIntensity.toString() =="All"){
-                return this.summarys;
+            if (searchIntensity.toString() == "All") {
+                this.filteredSummarys = this.filteredSummarys.filter(summary => {
+                    return true;
+                });
             }
-
-            this.filteredSummarys = this.filteredSummarys.filter(summary => {
-                return !searchIntensity || searchIntensity.toString() == summary.intensity.toString();
-            });
+            else {
+                this.filteredSummarys = this.filteredSummarys.filter(summary => {
+                    return !searchIntensity || searchIntensity.toString() == summary.intensity.toString();
+                });
+            }
         }
 
         // Filter by startDate
@@ -85,8 +98,195 @@ export class SummaryListComponent implements OnInit {
                 return this.getDate <= this.endDate;
             });
         }
-
         return this.filteredSummarys;
+    }
+
+    filterGraph(weekday): number {
+        var filterData = this.filteredSummarys;
+
+        if(this.inputType == "Day") {
+            filterData = filterData.filter(summary => {
+                this.getDate = new Date(summary.date);
+                return this.getDate.getDay() == weekday;
+            });
+        }
+        else {
+            filterData = filterData.filter(summary => {
+                this.getDate = new Date(summary.date);
+                return this.getDate.getHours() == weekday;
+            });
+        }
+
+        return filterData.length;
+    }
+
+    /**
+     * Starts an asynchronous operation to update the emojis list
+     *
+     */
+
+    updateChart(): void{
+
+        this.myChart.destroy();
+
+        this.canvas = document.getElementById("myChart");
+        this.ctx = this.canvas;
+
+        var type;
+        var summaryDays;
+        var summaryHours;
+
+        var displayData;
+
+        var days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+        var hours = ['12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM',
+            '8AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM',
+            '5 PM', '6 PM', '7 PM', '8 PM','9 PM', '10 PM', '11 PM'];
+
+        console.log(this.inputType);
+        if(this.inputType == "Day"){
+            type = days;
+
+            summaryDays = {
+                "label": "Total Number of " + this.summaryMood + " Entries",
+                "data": [
+                    this.filterGraph('0'),
+                    this.filterGraph('1'),
+                    this.filterGraph('2'),
+                    this.filterGraph('3'),
+                    this.filterGraph('4'),
+                    this.filterGraph('5'),
+                    this.filterGraph('6'),
+
+                ],
+
+
+                "fill": true,
+                "backgroundColor": "blue",
+                "borderColor": "black",
+                "lineTension": 0.1
+            };
+
+            displayData = summaryDays;
+        }
+        else {
+            type = hours;
+
+            summaryHours = {
+                "label": "Total Number of " + this.summaryMood + " Entries",
+                "data": [
+                    this.filterGraph('0'),
+                    this.filterGraph('1'),
+                    this.filterGraph('2'),
+                    this.filterGraph('3'),
+                    this.filterGraph('4'),
+                    this.filterGraph('5'),
+                    this.filterGraph('6'),
+                    this.filterGraph('7'),
+                    this.filterGraph('8'),
+                    this.filterGraph('9'),
+                    this.filterGraph('10'),
+                    this.filterGraph('11'),
+                    this.filterGraph('12'),
+                    this.filterGraph('13'),
+                    this.filterGraph('14'),
+                    this.filterGraph('15'),
+                    this.filterGraph('16'),
+                    this.filterGraph('17'),
+                    this.filterGraph('18'),
+                    this.filterGraph('19'),
+                    this.filterGraph('20'),
+                    this.filterGraph('21'),
+                    this.filterGraph('22'),
+                    this.filterGraph('23'),
+                    this.filterGraph('24')
+                ],
+                "fill": true,
+                "backgroundColor": "blue",
+                "borderColor": "black",
+                "lineTension": 0.1
+            };
+            displayData = summaryHours;
+        }
+
+
+        this.myChart = new Chart(this.ctx, {
+            type: 'bar',
+            data: {
+
+                labels: type,
+                datasets: [displayData]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRation: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+
+                        }
+                    }]
+                }
+            }
+        });
+
+
+
+    }
+
+    buildChart(): void {
+
+        this.canvas = document.getElementById("myChart");
+        this.ctx = this.canvas;
+
+        var summaryDays;
+
+        let days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+
+        summaryDays = {
+            "label": "Total Number of Entries",
+            "data": [
+                this.filterGraph('0'),
+                this.filterGraph('1'),
+                this.filterGraph('2'),
+                this.filterGraph('3'),
+                this.filterGraph('4'),
+                this.filterGraph('5'),
+                this.filterGraph('6'),
+
+            ],
+            "fill": true,
+            "backgroundColor": "blue",
+            "borderColor": "black",
+            "lineTension": 0.1
+        };
+
+        this.myChart = new Chart(this.ctx, {
+            type: 'bar',
+            data: {
+                labels: days,
+                datasets: [summaryDays]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRation: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+
+                        }
+                    }]
+                }
+            }
+        });
+
+    }
+
+    ngAfterViewInit(): void {
+
+        this.buildChart();
     }
 
     /*
@@ -140,9 +340,9 @@ export class SummaryListComponent implements OnInit {
         this.refreshSummarys();
         this.loadService();
         this.startDate = new Date();
-        this.startDate.setHours(0,0,0,0)
+        this.startDate.setHours(0,0,0,0);
         this.endDate = new Date();
-        this.endDate.setHours(23,59,59,0)
+        this.endDate.setHours(23,59,59,0);
     }
 
     stringToDate(date: string): any {
