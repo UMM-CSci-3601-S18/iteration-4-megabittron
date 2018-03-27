@@ -1,3 +1,6 @@
+import {EmotionResponseComponent} from "./emotion-response.component";
+import {MatDialog} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 import {Component, Inject} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {EmotionService} from './home.service';
@@ -36,7 +39,9 @@ export class HomeComponent {
     thumbLabel = true;
     public emojiRating: number = 0;
 
-    constructor(public emotionService: EmotionService) {
+    constructor(public dialog: MatDialog,
+                public snackBar: MatSnackBar,
+                public emotionService: EmotionService) {
         this.title = 'Home';
     }
 
@@ -58,7 +63,7 @@ export class HomeComponent {
         this.selectedEmoji = ID;
         {document.getElementById(ID).style.height = clickedSize}
         {document.getElementById(ID).style.width = clickedSize}
-            }
+    }
 
     private resetSelections(){
         var baseSize = "10%";
@@ -139,5 +144,37 @@ export class HomeComponent {
     getDescription(entryBox){
         this.emotionDescription = entryBox;
         console.log("this is the description: " + entryBox);
+    }
+
+    //retrieves an appropriate response to an emotion selection
+    appropriateResponsePopUp(): void {
+
+        var doPopup: boolean = this.intenseEmotionResponse();
+        if(doPopup){
+            var dialogRef = this.dialog.open(EmotionResponseComponent, {
+                width: '70vw',
+                height: '70%',
+            });
+        }
+
+        this.saveConfirmation();
+
+    }
+
+    //checks the emotional response and the intensity to see if a response is needed
+    intenseEmotionResponse(): boolean {
+
+        console.log("the selected emoji is: " + this.selectedEmotion);
+        console.log("the emoji rating is:   " + this.emojiRating);
+        if(this.selectedEmotion.toLowerCase() == 'sad' || this.selectedEmotion.toLowerCase() == 'mad' || this.selectedEmotion.toLowerCase() == 'scared' || this.selectedEmotion.toLowerCase() == 'anxious'){
+            if(this.emojiRating >= 3){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    saveConfirmation(): void {
+        this.snackBar.open("Your response has been saved.", "close", {duration: 2000});
     }
 }

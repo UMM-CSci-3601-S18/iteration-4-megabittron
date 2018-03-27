@@ -4,11 +4,15 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import spark.Request;
 import spark.Response;
+
 import umm3601.database.GoalController;
 import umm3601.database.GoalRequestHandler;
 
 import umm3601.database.EmotionController;
 import umm3601.database.EmotionRequestHandler;
+
+import umm3601.database.ResourceController;
+import umm3601.database.ResourceRequestHandler;
 
 import java.io.IOException;
 
@@ -38,9 +42,13 @@ public class Server {
         SummaryController summaryController = new SummaryController(database);
         SummaryRequestHandler summaryRequestHandler = new SummaryRequestHandler(summaryController);
 
+        ResourceController resourceController = new ResourceController(database);
+        ResourceRequestHandler resourceRequestHandler = new ResourceRequestHandler(resourceController);
+
         //Configure Spark
         port(serverPort);
         enableDebugScreen();
+
 
         // Specify where assets like images will be "stored"
         staticFiles.location("/public");
@@ -86,6 +94,9 @@ public class Server {
 
         //List summary page
         get("api/summarys", summaryRequestHandler::getSummarys);
+
+        //Resources for appropriate response
+        get("api/resources", resourceRequestHandler::getResources);
 
 
         // An example of throwing an unhandled exception so you can see how the

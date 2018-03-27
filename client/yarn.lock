@@ -4050,11 +4050,19 @@ neo-async@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.5.0.tgz#76b1c823130cca26acfbaccc8fbaf0a2fa33b18f"
 
+
 ng2-charts@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/ng2-charts/-/ng2-charts-1.6.0.tgz#108a2133ff62a8623895240fadbddbea2951f29d"
   dependencies:
     chart.js "^2.6.0"
+    
+ngx-youtube-player@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/ngx-youtube-player/-/ngx-youtube-player-0.1.0.tgz#099d73eed9cff5ea82f39150e4da4901b9e636ed"
+  dependencies:
+    tslib "^1.7.1"
+
 
 no-case@^2.2.0:
   version "2.3.2"
