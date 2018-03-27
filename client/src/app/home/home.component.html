@@ -1,7 +1,5 @@
 <body class="whole-body">
-
 <br>
-
 <div layout-gt-sm="row" class="main-bg">
     <div flex-gt-sm="80" flex-offset-gt-sm="10">
             <mat-card-title id="title">Friendly Panda</mat-card-title>
@@ -48,7 +46,8 @@
                         [min]="1"
                         [step]="1"
                         [thumb-label]="thumbLabel"
-                        [(ngModel)]="emojiRating">
+                        [(ngModel)]="emojiRating"
+                        (input)="emojiRating=$event.value">
                     </mat-slider>
 
                 </div>
@@ -61,12 +60,10 @@
             <div class="entryButtons">
                 <button mat-raised-button id="cancel" (click)="resetPage()">Cancel</button>
                 <button mat-raised-button id="save"
-                        [disabled]="showSaveButton()" (click)="getDate();saveEmotion()" >Save</button>
+                        [disabled]="showSaveButton()" (click)="getDate();saveEmotion();appropriateResponsePopUp();" >Save</button>
             </div>
 
             <br>
-
-
         </mat-card>
     </div>
 </div>

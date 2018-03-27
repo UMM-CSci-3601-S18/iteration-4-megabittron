@@ -17,6 +17,8 @@ import {GoalsService} from "./goals/goals.service";
 import {EditGoalComponent} from "./goals/edit-goal.component";
 import {AddGoalComponent} from "./goals/add-goal.component";
 
+import {EmotionResponseComponent} from "./home/emotion-response.component";
+
 import {SummaryListComponent} from "./summary/summary-list.component";
 import {SummaryListService} from "./summary/summary-list.service";
 
@@ -36,7 +38,7 @@ import {SummaryListService} from "./summary/summary-list.service";
         AddGoalComponent,
         EditGoalComponent,
         SummaryListComponent,
-
+        EmotionResponseComponent,
     ],
     providers: [
         GoalsService,
@@ -47,7 +49,8 @@ import {SummaryListService} from "./summary/summary-list.service";
     ],
     entryComponents: [
       AddGoalComponent,
-      EditGoalComponent
+      EditGoalComponent,
+      EmotionResponseComponent,
     ],
     bootstrap: [AppComponent]
 })
