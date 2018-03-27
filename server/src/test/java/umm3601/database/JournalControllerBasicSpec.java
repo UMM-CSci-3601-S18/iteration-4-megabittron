@@ -111,7 +111,8 @@ public class JournalControllerBasicSpec {
 
     }
 
-    /* @Test
+    /*
+     @Test
      public void getJournalByCategory(){
          Map<String, String[]> argMap = new HashMap<>();
          // Mongo in JournalController is doing a regex search so can just take a Java Reg. Expression
