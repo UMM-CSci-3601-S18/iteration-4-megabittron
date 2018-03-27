@@ -23,6 +23,7 @@ import {SummaryListComponent} from "./summary/summary-list.component";
 import {SummaryListService} from "./summary/summary-list.service";
 
 
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -48,6 +49,7 @@ import {SummaryListService} from "./summary/summary-list.service";
         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}
     ],
     entryComponents: [
+
       AddGoalComponent,
       EditGoalComponent,
       EmotionResponseComponent,
