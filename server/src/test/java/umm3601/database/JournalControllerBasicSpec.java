@@ -101,8 +101,14 @@ public class JournalControllerBasicSpec {
             .map(JournalControllerBasicSpec::getlink)
             .sorted()
             .collect(Collectors.toList());
-        List<String> expectedLinks = Arrays.asList("https://www.tandfonline.com/doi/full/10.1080/09638237.2018.1437609", "https://link.springer.com/article/10.1007/s10597-017-0159-y", "https://link.springer.com/article/10.1007/s11469-018-9890-z", "https://link.springer.com/article/10.1007/s11469-018-9890-z");
-        assertEquals("Journals should match", expectedLinks, journals);
+        //List<String> expectedLinks = Arrays.asList("https://www.tandfonline.com/doi/full/10.1080/09638237.2018.1437609", "https://link.springer.com/article/10.1007/s10597-017-0159-y", "https://link.springer.com/article/10.1007/s11469-018-9890-z", "https://link.springer.com/article/10.1007/s11469-018-9890-z");
+        //assertEquals("Journals should match", expectedLinks, journals);
+        List<String> expectedTitle = Arrays.asList("The art of recovery: outcomes from participatory arts activities for people using mental health services", "The Associations of Area-Level Violent Crime Rates and Self-Reported Violent Crime Exposure with Adolescent Behavioral Health",
+            "Effect of Khat Use During Pregnancy on the Birth Weight of Newborn in Jimma", "Effect of Khat Use During Pregnancy on the Birth Weight of Newborn in Jimma");
+        assertEquals("Journals should match", expectedTitle, journals);
+
+
+
     }
 
     /* @Test
@@ -134,8 +140,8 @@ public class JournalControllerBasicSpec {
  */
     @Test
     public void addJournalTest() {
-        String newId = journalController.addNewItem("Health", "Health: is an interdisciplinary journal that engages with and interrogates health and healthcare from the perspectives of the social sciences and the humanities. Focusing on critique of norms and power relationships, the journal provides an international forum for articles reporting on original research, theoretical pieces and review essays from around the world. It offers the breadth of outlook required by sociologists, social psychologists, social and cultural theorists and others who are addressing healthcare issues that cross disciplinary boundaries.",
-            "https://us.sagepub.com/en-us/nam/journal/health#description","","");
+        String newId = journalController.addNewItem("Health", "",
+            "Health: is an interdisciplinary journal that engages with and interrogates health and health care from the perspectives of the social sciences and the humanities. Focusing on critique of norms and power relationships, the journal provides an international forum for articles reporting on original research, theoretical pieces and review essays from around the world. It offers the breadth of outlook required by sociologists, social psychologists, social and cultural theorists and others who are addressing healthcare issues that cross disciplinary boundaries.","","https://us.sagepub.com/en-us/nam/journal/health#description");
 
         assertNotNull("Add new journal should return true when journal is added,", newId);
         Map<String, String[]> argMap = new HashMap<>();
