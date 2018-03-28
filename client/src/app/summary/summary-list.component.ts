@@ -144,32 +144,7 @@ export class SummaryListComponent implements OnInit {
             '5 PM', '6 PM', '7 PM', '8 PM','9 PM', '10 PM', '11 PM'];
 
         console.log(this.inputType);
-        if(this.inputType == "Day"){
-            type = days;
-
-            summaryDays = {
-                "label": "Total Number of " + this.summaryMood + " Entries",
-                "data": [
-                    this.filterGraph('0'),
-                    this.filterGraph('1'),
-                    this.filterGraph('2'),
-                    this.filterGraph('3'),
-                    this.filterGraph('4'),
-                    this.filterGraph('5'),
-                    this.filterGraph('6'),
-
-                ],
-
-
-                "fill": true,
-                "backgroundColor": "blue",
-                "borderColor": "black",
-                "lineTension": 0.1
-            };
-
-            displayData = summaryDays;
-        }
-        else {
+        if(this.inputType == "Hour"){
             type = hours;
 
             summaryHours = {
@@ -207,6 +182,31 @@ export class SummaryListComponent implements OnInit {
                 "lineTension": 0.1
             };
             displayData = summaryHours;
+        }
+        else {
+            type = days;
+
+            summaryDays = {
+                "label": "Total Number of " + this.summaryMood + " Entries",
+                "data": [
+                    this.filterGraph('0'),
+                    this.filterGraph('1'),
+                    this.filterGraph('2'),
+                    this.filterGraph('3'),
+                    this.filterGraph('4'),
+                    this.filterGraph('5'),
+                    this.filterGraph('6'),
+
+                ],
+
+
+                "fill": true,
+                "backgroundColor": "blue",
+                "borderColor": "black",
+                "lineTension": 0.1
+            };
+
+            displayData = summaryDays;
         }
 
 
@@ -339,10 +339,6 @@ export class SummaryListComponent implements OnInit {
     ngOnInit(): void {
         this.refreshSummarys();
         this.loadService();
-        this.startDate = new Date();
-        this.startDate.setHours(0,0,0,0);
-        this.endDate = new Date();
-        this.endDate.setHours(23,59,59,0);
     }
 
     stringToDate(date: string): any {
