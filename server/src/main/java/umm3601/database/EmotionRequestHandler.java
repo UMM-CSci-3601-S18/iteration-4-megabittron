@@ -5,10 +5,12 @@ import com.mongodb.util.JSON;
 import spark.Request;
 import spark.Response;
 
-public class GoalRequestHandler {
-    private final GoalController goalController;
-    public GoalRequestHandler(GoalController goalController){
-        this.goalController = goalController;
+import java.util.Date;
+
+public class EmotionRequestHandler {
+    private final EmotionController emotionController;
+    public EmotionRequestHandler(EmotionController emotionController){
+        this.emotionController = emotionController;
     }
     /**Method called from Server when the 'api/goals/:id' endpoint is received.
      * Get a JSON response with a list of all the users in the database.
@@ -19,26 +21,26 @@ public class GoalRequestHandler {
      */
 
     // gets one goal using its ObjectId--didn't use, just for potential future functionality
-    public String getGoalJSON(Request req, Response res){
+    public String getEmotionJSON(Request req, Response res){
         res.type("application/json");
         String id = req.params("id");
-        String goal;
+        String emotion;
         try {
-            goal = goalController.getGoal(id);
+            emotion = emotionController.getEmotion(id);
         } catch (IllegalArgumentException e) {
             // This is thrown if the ID doesn't have the appropriate
             // form for a Mongo Object ID.
             // https://docs.mongodb.com/manual/reference/method/ObjectId/
             res.status(400);
-            res.body("The requested goal id " + id + " wasn't a legal Mongo Object ID.\n" +
+            res.body("The requested emotion id " + id + " wasn't a legal Mongo Object ID.\n" +
                 "See 'https://docs.mongodb.com/manual/reference/method/ObjectId/' for more info.");
             return "";
         }
-        if (goal != null) {
-            return goal;
+        if (emotion != null) {
+            return emotion;
         } else {
             res.status(404);
-            res.body("The requested goal with id " + id + " was not found");
+            res.body("The requested emotion with id " + id + " was not found");
             return "";
         }
     }
@@ -54,10 +56,10 @@ public class GoalRequestHandler {
      */
 
     // Gets the goals from the DB given the query parameters
-    public String getGoals(Request req, Response res)
+    public String getEmotions(Request req, Response res)
     {
         res.type("application/json");
-        return goalController.getGoals(req.queryMap().toMap());
+        return emotionController.getEmotions(req.queryMap().toMap());
     }
 
     /**Method called from Server when the 'api/users/new'endpoint is recieved.
@@ -68,7 +70,7 @@ public class GoalRequestHandler {
      * @param res the HTTP response
      * @return a boolean as whether the user was added successfully or not
      */
-    public String addNewGoal(Request req, Response res)
+    public String addNewEmotion(Request req, Response res)
     {
 
         res.type("application/json");
@@ -81,12 +83,14 @@ public class GoalRequestHandler {
                 try {
                     BasicDBObject dbO = (BasicDBObject) o;
 
-                    String name = dbO.getString("goal");
-                    String category = dbO.getString("category");
-                    String goal = dbO.getString("name");
+                    String mood = dbO.getString("mood");
+                    Integer intensity = dbO.getInt("intensity");
+                    String description = dbO.getString("description");
+                    String date = dbO.getString("date");
 
-                    System.err.println("Adding new goal [goal=" + goal + ", category=" + category + " name=" + name + ']');
-                    return goalController.addNewGoal(goal, category, name).toString();
+                    System.err.println("Adding new emotion [mood=" + mood + ", intensity="
+                        + intensity + ", description=" + description + ", date=" + date + ']');
+                    return emotionController.addNewEmotion(mood, intensity, description, date).toString();
                 }
                 catch(NullPointerException e)
                 {
@@ -108,43 +112,5 @@ public class GoalRequestHandler {
         }
     }
 
-
-    public String editGoal(Request req, Response res)
-    {
-	System.out.println("it went into GoalRequestHandler::editGoal");
-        res.type("application/json");
-        Object o = JSON.parse(req.body());
-        try {
-            if (o.getClass().equals(BasicDBObject.class))
-            {
-                try {
-                    BasicDBObject dbO = (BasicDBObject) o;
-
-                    String id = dbO.getString("_id");
-                    String name = dbO.getString("goal");
-                    String category = dbO.getString("category");
-                    String goal = dbO.getString("name");
-
-                    System.err.println("Editing goal [_id=" + id + ", goal=" + goal + ", category=" + category + " name=" + name + ']');
-                    return goalController.editGoal(id, goal, category, name);
-                }
-                catch (NullPointerException e)
-                {
-                    System.err.println("A value was malformed or omitted, new journal request failed.");
-                    return null;
-                }
-            }
-            else
-            {
-                System.err.println("Expected BasicDBObject, received " + o.getClass());
-                return null;
-            }
-        }
-        catch (RuntimeException ree)
-        {
-            ree.printStackTrace();
-            return null;
-        }
-    }
 
 }

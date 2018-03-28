@@ -10,10 +10,18 @@ import {CustomModule} from './custom.module';
 
 import {ResourcesComponent} from "./resources/resources.component";
 
+import {EmotionService} from "./home/home.service";
+
 import {GoalsComponent} from "./goals/goals.component";
 import {GoalsService} from "./goals/goals.service";
 import {EditGoalComponent} from "./goals/edit-goal.component";
 import {AddGoalComponent} from "./goals/add-goal.component";
+
+import {EmotionResponseComponent} from "./home/emotion-response.component";
+
+import {SummaryListComponent} from "./summary/summary-list.component";
+import {SummaryListService} from "./summary/summary-list.service";
+
 
 
 import {JournalsComponent} from "./Journal/journals.component";
@@ -37,18 +45,26 @@ import {JournalsService} from "./Journal/journals.service";
 
         JournalsComponent,
        AddJournalComponent,
+
         EditGoalComponent,
+        SummaryListComponent,
+        EmotionResponseComponent,
     ],
     providers: [
-        GoalsService,
-        JournalsService,
-        {provide: APP_BASE_HREF, useValue: '/'},
-        {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}
-    ],
+    GoalsService,
+    JournalsService,
+    EmotionService,
+    SummaryListService,
+    {provide: APP_BASE_HREF, useValue: '/'},
+    {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}
+],
     entryComponents: [
+
       AddGoalComponent,
         AddJournalComponent,
-      EditGoalComponent
+
+      EditGoalComponent,
+      EmotionResponseComponent,
     ],
     bootstrap: [AppComponent]
 })

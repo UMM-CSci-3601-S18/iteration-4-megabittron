@@ -4,13 +4,23 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import spark.Request;
 import spark.Response;
+
 import umm3601.database.GoalController;
 import umm3601.database.GoalRequestHandler;
 import umm3601.database.JournalController;
 import umm3601.database.JournalRequestHandler;
 
 
+import umm3601.database.EmotionController;
+import umm3601.database.EmotionRequestHandler;
+
+import umm3601.database.ResourceController;
+import umm3601.database.ResourceRequestHandler;
+
 import java.io.IOException;
+
+import umm3601.summary.SummaryController;
+import umm3601.summary.SummaryRequestHandler;
 
 
 import static spark.Spark.*;
@@ -29,6 +39,15 @@ public class Server {
         GoalController goalController = new GoalController(database);
         GoalRequestHandler goalRequestHandler = new GoalRequestHandler(goalController);
 
+        EmotionController emotionController = new EmotionController(database);
+        EmotionRequestHandler emotionRequestHandler = new EmotionRequestHandler(emotionController);
+
+        SummaryController summaryController = new SummaryController(database);
+        SummaryRequestHandler summaryRequestHandler = new SummaryRequestHandler(summaryController);
+
+        ResourceController resourceController = new ResourceController(database);
+        ResourceRequestHandler resourceRequestHandler = new ResourceRequestHandler(resourceController);
+
         JournalController journalController = new JournalController(database);
         JournalRequestHandler journalRequestHandler = new JournalRequestHandler(journalController);
 
@@ -36,6 +55,7 @@ public class Server {
         //Configure Spark
         port(serverPort);
         enableDebugScreen();
+
 
         // Specify where assets like images will be "stored"
         staticFiles.location("/public");
@@ -70,11 +90,20 @@ public class Server {
         /////////////////////////////////////////////
 
         //List goals, filtered using query parameters
+        get("api/emotions", emotionRequestHandler::getEmotions);
+        get("api/emotions/:id", emotionRequestHandler::getEmotionJSON);
+        post("api/emotions/new", emotionRequestHandler::addNewEmotion);
 
         get("api/goals", goalRequestHandler::getGoals);
         get("api/goals/:id", goalRequestHandler::getGoalJSON);
         post("api/goals/new", goalRequestHandler::addNewGoal);
         post("api/goals/edit", goalRequestHandler::editGoal);
+
+        //List summary page
+        get("api/summarys", summaryRequestHandler::getSummarys);
+
+        //Resources for appropriate response
+        get("api/resources", resourceRequestHandler::getResources);
 
 
         //List journals, filtered using query parameters
