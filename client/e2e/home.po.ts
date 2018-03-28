@@ -29,5 +29,16 @@ export class HomePage {
         input.click();
     }
 
+    saveButtonExists(): promise.Promise<boolean> {
+        this.highlightElement(by.id('save'));
+        return element(by.id('save')).isPresent();
+    }
+
+    cancelButtonExists(): promise.Promise<boolean> {
+        this.highlightElement(by.id('cancel'));
+        return element(by.id('cancel')).isPresent();
+    }
+
+
 }
 
