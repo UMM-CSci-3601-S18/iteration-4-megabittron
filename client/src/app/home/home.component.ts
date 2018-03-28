@@ -79,7 +79,15 @@ export class HomeComponent {
         }
 
         return true;
-    }result
+    }
+
+    showSlider(): boolean{
+        if(this.selectedEmotion == "meh"){
+            return false;
+        }
+
+        return true;
+    }
 
     showSaveButton(){
         if(this.selectedEmotion == "none"){
