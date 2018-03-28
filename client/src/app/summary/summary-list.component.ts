@@ -148,7 +148,7 @@ export class SummaryListComponent implements OnInit {
             type = hours;
 
             summaryHours = {
-                "label": "Total Number of " + this.summaryMood + " Entries",
+                "label": "Total Number of Entries",
                 "data": [
                     this.filterGraph('0'),
                     this.filterGraph('1'),
@@ -187,7 +187,7 @@ export class SummaryListComponent implements OnInit {
             type = days;
 
             summaryDays = {
-                "label": "Total Number of " + this.summaryMood + " Entries",
+                "label": "Total Number of Entries",
                 "data": [
                     this.filterGraph('0'),
                     this.filterGraph('1'),
@@ -259,7 +259,7 @@ export class SummaryListComponent implements OnInit {
             "fill": true,
             "backgroundColor": "blue",
             "borderColor": "black",
-            "lineTension": 0.1
+            "lineTension": 0.3
         };
 
         this.myChart = new Chart(this.ctx, {

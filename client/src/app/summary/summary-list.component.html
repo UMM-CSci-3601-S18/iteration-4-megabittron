@@ -73,21 +73,20 @@
             </form>
 
             <br>
-            <button mat-raised-button id="filterButton" (click)="updateChart()">Filter</button>
+            <button mat-raised-button id="filterButton" (click)="this.filterSummarys(summaryMood, summaryIntensity, startDate, endDate); updateChart()">Filter</button>
             <br>
             <br>
-
             <mat-divider></mat-divider>
             <br>
 
             </div>
 
-            You have {{totalNumberMoods()}} emotions to view
-
             <mat-tab-group #myTabGroup >
                 <mat-tab label="Graph View">
-
+                    <mat-card> <mat-card-title class="your-summarys-title">Your Emotions</mat-card-title>
+                        <mat-card-subtitle class="your-summarys-title">There are {{totalNumberMoods()}} entries represented</mat-card-subtitle>
                     <canvas id="myChart" height="100%"></canvas>
+                    </mat-card>
 
                 </mat-tab>
 
