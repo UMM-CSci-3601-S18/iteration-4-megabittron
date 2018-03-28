@@ -81,3 +81,11 @@ textarea:focus {
 .slider{
     width: 50%;
 }
+
+#emojiSource{
+    font-size: 10px;
+}
+
+#copyright{
+    text-align: right;
+}
