@@ -1,6 +1,8 @@
 import {browser, element, by, promise} from 'protractor';
 import {Key} from 'selenium-webdriver';
 
+
+
 export class HomePage {
 
     static navigateTo(): promise.Promise<any> {
@@ -38,7 +40,6 @@ export class HomePage {
         this.highlightElement(by.id('cancel'));
         return element(by.id('cancel')).isPresent();
     }
-
 
 }
 
