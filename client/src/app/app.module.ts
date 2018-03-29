@@ -18,11 +18,16 @@ import {EditGoalComponent} from "./goals/edit-goal.component";
 import {AddGoalComponent} from "./goals/add-goal.component";
 
 import {EmotionResponseComponent} from "./home/emotion-response.component";
+import {EmotionResponseHappyComponent} from "./home/emotion-response-happy.component";
 
 import {SummaryListComponent} from "./summary/summary-list.component";
 import {SummaryListService} from "./summary/summary-list.service";
 
 
+
+import {JournalsComponent} from "./Journal/journals.component";
+import {AddJournalComponent} from "./Journal/add-journal.component";
+import {JournalsService} from "./Journal/journals.service";
 
 @NgModule({
     imports: [
@@ -35,24 +40,33 @@ import {SummaryListService} from "./summary/summary-list.service";
         AppComponent,
         HomeComponent,
         ResourcesComponent,
+
         GoalsComponent,
         AddGoalComponent,
+
+        JournalsComponent,
+       AddJournalComponent,
+
         EditGoalComponent,
         SummaryListComponent,
         EmotionResponseComponent,
+        EmotionResponseHappyComponent
     ],
     providers: [
-        GoalsService,
-        EmotionService,
-        SummaryListService,
-        {provide: APP_BASE_HREF, useValue: '/'},
-        {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}
-    ],
+    GoalsService,
+    JournalsService,
+    EmotionService,
+    SummaryListService,
+    {provide: APP_BASE_HREF, useValue: '/'},
+    {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}
+],
     entryComponents: [
 
-      AddGoalComponent,
-      EditGoalComponent,
-      EmotionResponseComponent,
+        AddGoalComponent,
+        EditGoalComponent,
+        EmotionResponseComponent,
+        EmotionResponseHappyComponent,
+        AddJournalComponent
     ],
     bootstrap: [AppComponent]
 })

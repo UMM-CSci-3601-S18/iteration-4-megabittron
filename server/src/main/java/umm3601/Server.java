@@ -7,6 +7,9 @@ import spark.Response;
 
 import umm3601.database.GoalController;
 import umm3601.database.GoalRequestHandler;
+import umm3601.database.JournalController;
+import umm3601.database.JournalRequestHandler;
+
 
 import umm3601.database.EmotionController;
 import umm3601.database.EmotionRequestHandler;
@@ -44,6 +47,10 @@ public class Server {
 
         ResourceController resourceController = new ResourceController(database);
         ResourceRequestHandler resourceRequestHandler = new ResourceRequestHandler(resourceController);
+
+        JournalController journalController = new JournalController(database);
+        JournalRequestHandler journalRequestHandler = new JournalRequestHandler(journalController);
+
 
         //Configure Spark
         port(serverPort);
@@ -97,6 +104,13 @@ public class Server {
 
         //Resources for appropriate response
         get("api/resources", resourceRequestHandler::getResources);
+
+
+        //List journals, filtered using query parameters
+
+        get("api/journals", journalRequestHandler::getJournals);
+        get("api/journals/:id", journalRequestHandler::getJournalJSON);
+        post("api/journals/new", journalRequestHandler::addNewJournal);
 
 
         // An example of throwing an unhandled exception so you can see how the
