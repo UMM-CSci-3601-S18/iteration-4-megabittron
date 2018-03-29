@@ -25,6 +25,10 @@ import {SummaryListService} from "./summary/summary-list.service";
 
 
 
+import {JournalsComponent} from "./Journal/journals.component";
+import {AddJournalComponent} from "./Journal/add-journal.component";
+import {JournalsService} from "./Journal/journals.service";
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -36,26 +40,33 @@ import {SummaryListService} from "./summary/summary-list.service";
         AppComponent,
         HomeComponent,
         ResourcesComponent,
+
         GoalsComponent,
         AddGoalComponent,
+
+        JournalsComponent,
+       AddJournalComponent,
+
         EditGoalComponent,
         SummaryListComponent,
         EmotionResponseComponent,
         EmotionResponseHappyComponent
     ],
     providers: [
-        GoalsService,
-        EmotionService,
-        SummaryListService,
-        {provide: APP_BASE_HREF, useValue: '/'},
-        {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}
-    ],
+    GoalsService,
+    JournalsService,
+    EmotionService,
+    SummaryListService,
+    {provide: APP_BASE_HREF, useValue: '/'},
+    {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}
+],
     entryComponents: [
 
         AddGoalComponent,
         EditGoalComponent,
         EmotionResponseComponent,
-        EmotionResponseHappyComponent
+        EmotionResponseHappyComponent,
+        AddJournalComponent
     ],
     bootstrap: [AppComponent]
 })
