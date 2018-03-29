@@ -3,7 +3,6 @@
     color: white;
     background-color: #ee6e73;
     width: 100%;
-    text-align: center;
     font-size: 36px;
     font-family: Roboto, sans-serif;
     font-weight: normal;
@@ -43,6 +42,7 @@
 }
 
 .second-sec {
+    text-align: center;
     width: 100%;
 
 }
@@ -75,7 +75,9 @@
 .goals{
     width: 30%;
     display: inline-block;
-    text-align: center;
+    /*text-align: center;*/
+    margin: 0 auto;
+    padding: 1%;
     background-color: silver;
     border-width: 2px;
     border-color: black;
@@ -88,7 +90,19 @@
 }
 
 #mainCard{
+    padding: 2%;
     border-width: 5px;
     border-color: black;
     border-style: solid;
+
 }
+
+h2{
+    font-family: Georgia;
+}
+
+.content{
+    font-size: 80%;
+}
+
+
