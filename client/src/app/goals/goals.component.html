@@ -21,9 +21,9 @@
                         <i>Purpose of this goal:</i> {{goal.goal}}
                     </mat-card-content>
 
-                    <div id="editButton">
+                    <div id="editButton" class="editGoal">
                         <button mat-icon-button (click)="openDialogEdit(goal._id['$oid'], goal.name, goal.category, goal.goal)">
-                        <mat-icon>edit</mat-icon>
+                        <mat-icon id="edit-icon">edit</mat-icon>
                     </button>
                     </div>
                 </mat-card>
