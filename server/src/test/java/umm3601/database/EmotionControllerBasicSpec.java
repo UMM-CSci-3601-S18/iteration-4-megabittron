@@ -30,18 +30,18 @@ public class EmotionControllerBasicSpec {
 
         emotionDocuments.drop();
 
-        List<Document> testGoals = new ArrayList<>();
-        testGoals.add(Document.parse("{" +
+        List<Document> testEmotions = new ArrayList<>();
+        testEmotions.add(Document.parse("{" +
             "mood: \"happy\" " +
             "date: \"Wed Mar 1 2018 7:35:02 GMT-0500\" " +
             "intensity: \"2\" " +
             "description: \"I'm feeling good\"}"));
-        testGoals.add(Document.parse("{" +
+        testEmotions.add(Document.parse("{" +
             "mood: \"sad\" " +
             "date: \"Wed Mar 3 2018 12:02:21 GMT-0500\" " +
             "intensity: \"4\" " +
             "description: \"I'm not feeling good\"}"));
-        testGoals.add(Document.parse("{" +
+        testEmotions.add(Document.parse("{" +
             "mood: \"happy\" " +
             "date: \"Wed Mar 1 2018 10:14:41 GMT-0500\" " +
             "intensity: \"4\" " +
@@ -54,7 +54,7 @@ public class EmotionControllerBasicSpec {
             .append("intensity", "5")
             .append("description", "I'm really mad");
 
-        emotionDocuments.insertMany(testGoals);
+        emotionDocuments.insertMany(testEmotions);
         emotionDocuments.insertOne(Document.parse(tester.toJson()));
 
         emotionController = new EmotionController(db);
