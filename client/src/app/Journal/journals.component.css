@@ -26,6 +26,7 @@
 
 
 
+
 .first-sec {
 
 
@@ -59,6 +60,7 @@
 .journals{
     width:30%;
     text-align: center;
+    margin: 0 auto;
     border-width: 2px;
     border-color: black;
     border-style: solid;
