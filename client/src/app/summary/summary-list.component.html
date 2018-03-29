@@ -16,7 +16,7 @@
                 <select name="dropdown" id="summaryMood" #input placeholder="Filter by Mood" (input)="summaryMood = $event.target.value">
                     <option id ="dropdownAllMoods" selected value="All">All Moods</option>
                     <option id = "dropdownHappy" value="Happy">Happy</option>
-                    <option id = "dropdownScared" value="Scared">Happy</option>
+                    <option id = "dropdownScared" value="Scared">Scared</option>
                     <option id ="dropdownSad" value="Sad">Sad</option>
                     <option id ="dropdownMeh" value="Meh">Meh</option>
                     <option id ="dropdownMad" value="Mad">Mad</option>
@@ -73,9 +73,7 @@
                             <label> Represent entries by day or hour?</label>
                             <select name="dropdown" id="labelType" #input placeholder="Show entries by hour or day?" (input)="inputType = $event.target.value">
                                 <option id ="Day" selected value="Day">Day</option>
-        border-width: 2px;
-    border-color: black;
-    border-style: solid;                        <option id = "Hour" value="Hour">Hour</option>
+                        <option id = "Hour" value="Hour">Hour</option>
                             </select>
                             <br>
                         </form>
