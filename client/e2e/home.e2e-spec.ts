@@ -1,7 +1,6 @@
 import {HomePage} from './home.po';
-
-import {browser} from "protractor";
-
+import {browser, protractor, element, by} from 'protractor';
+import {Key} from 'selenium-webdriver';
 
 /*const origFn = browser.driver.controlFlow().execute;
 
@@ -16,17 +15,17 @@ browser.driver.controlFlow().execute = function() {
     return origFn.apply(browser.driver.controlFlow(), args);
 };*/
 
-describe('Emoji Selector', () => {
+describe('Home page', () => {
     let page: HomePage;
 
     beforeEach(() => {
         page = new HomePage();
 
-        /*it('should select an emoji display the correct value', () => {
+        it('should select an emotion display the correct value', () => {
             HomePage.navigateTo();
             page.selectAnEmoji('mad');
             expect(page.getCurrentInput()).toContain('value: mad');
-        })*/
+        })
 
         it('Should have a save button', () => {
             HomePage.navigateTo();
