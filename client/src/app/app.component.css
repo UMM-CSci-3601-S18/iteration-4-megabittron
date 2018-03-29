@@ -28,11 +28,24 @@ li a mat-icon{
 
 li a:hover {
     /* original color was 111*/
+    background-color: grey;
+}
+
+/*.active {
+    background-color: #813772;
+}*/
+
+#home.active{
+    background-color: #6C648B;
+}
+
+#goal.active{
     background-color: #813772;
 }
 
-.active {
-    background-color: #813772;
+#summary.active{
+    background-color: #B6A19E;
 }
+
 
 
