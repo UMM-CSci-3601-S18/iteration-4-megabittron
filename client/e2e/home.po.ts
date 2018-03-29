@@ -5,6 +5,8 @@ import {Key} from 'selenium-webdriver';
 
 export class HomePage {
 
+    private selectedEmoji = "happy";
+
     static navigateTo(): promise.Promise<any> {
         return browser.get('/home');
     }
@@ -18,28 +20,26 @@ export class HomePage {
             }, 200);
             return 'highlighted';
         }
+
         return browser.executeScript(setStyle, element(byObject).getWebElement(), 'color: red; background-color: yellow;');
     }
 
-    getCurrentInput() {
-        const elem = element(by.id('userInputDisplay'));
-        return elem.getText();
-    }
+    selectEmotion(ID){
+        var clickedSize = "12%";
+        this.resetSelections();
+        this.selectedEmoji = ID;
+        {document.getElementById(ID).style.height = clickedSize}
+        {document.getElementById(ID).style.width = clickedSize}
+    };
 
-    selectAnEmoji(emotion: string) {
-        const input = element(by.id(emotion));
-        input.click();
-    }
+    private resetSelections(){
+        var baseSize = "10%";
 
-    saveButtonExists(): promise.Promise<boolean> {
-        this.highlightElement(by.id('save'));
-        return element(by.id('save')).isPresent();
-    }
+        {document.getElementById(this.selectedEmoji).style.height = baseSize}
+        {document.getElementById(this.selectedEmoji).style.width = baseSize}
 
-    cancelButtonExists(): promise.Promise<boolean> {
-        this.highlightElement(by.id('cancel'));
-        return element(by.id('cancel')).isPresent();
-    }
+    };
+
 
 }
 
