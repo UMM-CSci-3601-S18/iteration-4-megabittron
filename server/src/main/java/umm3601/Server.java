@@ -100,7 +100,7 @@ public class Server {
         post("api/goals/edit", goalRequestHandler::editGoal);
 
         //List summary page
-        get("api/summarys", summaryRequestHandler::getSummarys);
+        get("api/summarys", summaryRequestHandler::getSummaries);
 
         //Resources for appropriate response
         get("api/resources", resourceRequestHandler::getResources);

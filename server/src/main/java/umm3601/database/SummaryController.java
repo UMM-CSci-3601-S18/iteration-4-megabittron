@@ -37,33 +37,6 @@ public class SummaryController {
         summaryCollection = database.getCollection("emotions");
     }
 
-
-/*
-     * Helper method that gets a single user specified by the `id`
-     * parameter in the request.
-     *
-     * @param id the Mongo ID of the desired user
-     * @return the desired user as a JSON object if the user with that ID is found,
-     * and `null` if no user with that ID is found
-     */
-
-    public String getSummary(String id) {
-        FindIterable<Document> jsonSummarys
-            = summaryCollection
-            .find(eq("_id", new ObjectId(id)));
-
-        Iterator<Document> iterator = jsonSummarys.iterator();
-        if (iterator.hasNext()) {
-            Document summary = iterator.next();
-            return summary.toJson();
-        } else {
-            // We didn't find the desired user
-            return null;
-        }
-    }
-
-
-
 /* Helper method which iterates through the collection, receiving all
      * documents if no query parameter is specified. If the age query parameter
      * is specified, then the collection is filtered so only documents of that
@@ -73,7 +46,7 @@ public class SummaryController {
      * @return an array of Users in a JSON formatted string
      */
 
-    public String getSummarys(Map<String, String[]> queryParams) {
+    public String getSummaries(Map<String, String[]> queryParams) {
 
         Document filterDoc = new Document();
 
@@ -88,8 +61,8 @@ public class SummaryController {
         }
 
         //FindIterable comes from mongo, Document comes from Gson
-        FindIterable<Document> matchingSummarys = summaryCollection.find(filterDoc);
+        FindIterable<Document> matchingSummaries = summaryCollection.find(filterDoc);
 
-        return JSON.serialize(matchingSummarys);
+        return JSON.serialize(matchingSummaries);
     }
 }
