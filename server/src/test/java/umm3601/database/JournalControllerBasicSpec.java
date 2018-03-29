@@ -39,25 +39,25 @@ public class JournalControllerBasicSpec {
 
             "to investigate the relationship between \n" +
             "\n\",\n" +
-            "                    link: \"https://www.tandfonline.com/doi/full/10.1080/09638237.2018.1437609\",\n" +
+            "                    date: \"https://www.tandfonline.com/doi/full/10.1080/09638237.2018.1437609\",\n" +
             "                }"));
         testJournals.add(Document.parse("{\n" +
             "                   title: \"b\",\n" +
             "                    body: \" n.\n" +
             "\n!\",\n" +
-            "                    link: \"https://link.springer.com/article/10.1007/s10597-017-0159-y\",\n" +
+            "                    date: \"https://link.springer.com/article/10.1007/s10597-017-0159-y\",\n" +
             "                }"));
         testJournals.add(Document.parse("{\n" +
             "                    title: \"c\",\n" +
             "                    body: \" town, \",\n" +
-            "                    link: \"https://link.springer.com/article/10.1007/s11469-018-9888-6\",\n" +
+            "                    date: \"https://link.springer.com/article/10.1007/s11469-018-9888-6\",\n" +
             "                }"));
 
         journalsID = new ObjectId();
         BasicDBObject journal = new BasicDBObject("_id", journalsID);
         journal = journal.append("title", "d")
             .append("body", "present or absent.")
-            .append("link", "https://link.springer.com/article/10.1007/s11469-018-9890-z");
+            .append("date", "https://link.springer.com/article/10.1007/s11469-018-9890-z");
 
         journalDocuments.insertMany(testJournals);
         journalDocuments.insertOne(Document.parse(journal.toJson()));
@@ -135,7 +135,7 @@ public class JournalControllerBasicSpec {
     @Test
     public void addJournalTest() {
         String newId = journalController.addNewJournal("e", "",
-            "Health: is an interdisciplinary journal ","","https://us.sagepub.com/en-us/nam/journal/health#description");
+            "Health: is an interdisciplinary journal ");
 
         assertNotNull("Add new journal should return true when journal is added,", newId);
         Map<String, String[]> argMap = new HashMap<>();
