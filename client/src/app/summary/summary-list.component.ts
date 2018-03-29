@@ -1,4 +1,3 @@
-
 import {Component, OnInit} from '@angular/core';
 import {Inject} from '@angular/core';
 import {SummaryListService} from './summary-list.service';
