@@ -4,7 +4,7 @@
 }
 
 .top {
-    padding: 1%;
+    padding:0.5%;
     text-align: center;
 }
 
@@ -14,11 +14,20 @@
 }
 
 #filtering{
-    width: 100%;
+    width: 99%;
 }
 
-#filterContents{
-    display: inline-block;
+#graphFilter{
+    padding: 1%;
+}
+
+#filterButton{
+    text-align: center;
+    background-color: lightblue;
+}
+
+h3{
+
 }
 
 
