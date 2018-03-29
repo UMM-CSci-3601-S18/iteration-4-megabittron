@@ -36,7 +36,7 @@
 
             <div class="journalEntry" *ngIf="showTextBox()">
 
-                <div class="emotionSelection">
+                <div class="emotionSelection" *ngIf="showSlider()">
                     <h2>How intense are your feelings?</h2>
                     <p>(1 means mild, 5 means extreme)</p>
 
@@ -64,6 +64,10 @@
             </div>
 
             <br>
+
+            <div id="copyright">
+            <a id = "emojiSource" href="https://www.flaticon.com/packs/emoji-3" target="_blank">Emojis designed by Freepik from Flaticon</a>
+            </div>
         </mat-card>
     </div>
 </div>

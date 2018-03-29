@@ -1,4 +1,5 @@
 import {EmotionResponseComponent} from "./emotion-response.component";
+import {EmotionResponseHappyComponent} from "./emotion-response-happy.component";
 import {MatDialog} from '@angular/material';
 import {MatSnackBar} from '@angular/material';
 import {Component, Inject} from '@angular/core';
@@ -79,7 +80,15 @@ export class HomeComponent {
         }
 
         return true;
-    }result
+    }
+
+    showSlider(): boolean{
+        if(this.selectedEmotion == "meh"){
+            return false;
+        }
+
+        return true;
+    }
 
     showSaveButton(){
         if(this.selectedEmotion == "none"){
@@ -147,18 +156,24 @@ export class HomeComponent {
     }
 
     //retrieves an appropriate response to an emotion selection
+    //gives a helpful response for an intense negative emotion
+    //gives an encouraging response for a happy emotion of any intensity
     appropriateResponsePopUp(): void {
 
         var doPopup: boolean = this.intenseEmotionResponse();
         if(doPopup){
-            var dialogRef = this.dialog.open(EmotionResponseComponent, {
+            this.dialog.open(EmotionResponseComponent, {
+                width: '70vw',
+                height: '70%',
+            });
+        } else if(this.selectedEmotion.toLowerCase() == 'happy') {
+            this.dialog.open(EmotionResponseHappyComponent, {
                 width: '70vw',
                 height: '70%',
             });
         }
 
         this.saveConfirmation();
-
     }
 
     //checks the emotional response and the intensity to see if a response is needed
@@ -174,6 +189,7 @@ export class HomeComponent {
         return false;
     }
 
+    //Gives a snackbar message pop-up to let the client know their response has been saved
     saveConfirmation(): void {
         this.snackBar.open("Your response has been saved.", "close", {duration: 2000});
     }
