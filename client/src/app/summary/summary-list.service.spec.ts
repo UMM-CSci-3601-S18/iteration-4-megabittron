@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 
 import {Summary} from "./summary";
 import {SummaryListService} from "./summary-list.service";
+import {SummaryListComponent} from "./summary-list.component";
 
 describe('Summary: ', () => {
     // A small collection of test summaries
