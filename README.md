@@ -12,6 +12,7 @@ Provides ability for consumers to quickly log data about emotion and mood, and p
 - [Running your project](#running-your-project)
 - [Deploying Project for Production](#deploying-project-for-production)
 - [Testing and Continuous Integration](#testing-and-continuous-integration)
+- [Authors](#authors)
 
 <!-- /TOC -->
 
@@ -82,7 +83,13 @@ The server (`run`) needs to be on for this test to work, and you have to
 need to have data in the `dev` database before running the e2e tests!
 * `runServerTests` runs the server tests.
 
-
+## Authors
+- **Travis Warling** 
+- **Xaitheng Yang** 
+- **Charles Menne** 
+- **Abenezer Monjor** 
+- **Hunter Welch** 
+- **Jubair Hassan** 
 
 
 [angular-karma-jasmine]: https://codecraft.tv/courses/angular/unit-testing/jasmine-and-karma/
