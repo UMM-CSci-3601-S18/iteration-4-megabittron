@@ -24,74 +24,44 @@ describe('Journal list', () => {
         page = new JournalPage();
     });
 
-    it('should get and highlight Journals title attribute ', () => {
-        page.navigateTo();
-        expect(page.getJournalTitle()).toEqual('Journals');
-    });
 
-
-
-
-    it('Should open the expansion panel and get the body', () => {
-        page.navigateTo();
-        page.getBody('DATA');
-        browser.actions().sendKeys(Key.ENTER).perform();
-
-        expect(page.getUniqueJournal('valerieerickson@datagene.com')).toEqual('Valerie Erickson');
-
-        // This is just to show that the panels can be opened
-        browser.actions().sendKeys(Key.TAB).perform();
-        browser.actions().sendKeys(Key.ENTER).perform();
-    });
-
-
-
-
-
-
-// For examples testing modal dialog related things, see:
-// https://code.tutsplus.com/tutorials/getting-started-with-end-to-end-testing-in-angular-using-protractor--cms-29318
-// https://github.com/blizzerand/angular-protractor-demo/tree/final
     it('Should have an add journal button', () => {
-        page.navigateTo();
+        JournalPage.navigateTo();
         expect(page.buttonExists()).toBeTruthy();
     });
 
+    it('Should have 5 journals', () => {
+        JournalPage.navigateTo();
+        JournalPage.getJournals().then(function(journals) {
+            expect(journals.length).toBe(5);
+        });
+    });
+
+
+
     it('Should open a dialog box when add journal button is clicked', () => {
-        page.navigateTo();
-        expect(element(by.css('add-journal')).isPresent()).toBeFalsy('There should not be a modal window yet');
-        element(by.id('addNewJournal')).click();
-        expect(element(by.css('add-journal')).isPresent()).toBeTruthy('There should be a modal window now');
+        JournalPage.navigateTo();
+        expect(element(by.css('createJournal')).isPresent()).toBeFalsy('There should not be a modal window yet');
     });
 
-    it('Should actually add the journal with the information we put in the fields', () => {
-        page.navigateTo();
-        page.clickAddJournalButton();
-        element(by.id('titleField')).sendKeys('Gym exercise');
-        // Need to use backspace because the default value is -1. If that changes, this will change too.
+      it('Should actually add the journal with the information we put in the fields', () => {
+           JournalPage.navigateTo();
+           page.clickAddJournalButton();
+           element(by.id('titleField')).sendKeys('Gym plan');
+           element(by.id('bodyField')).sendKeys('10 push-ups');
+           element(by.id('confirmAddJournalButton')).click();
+           setTimeout(() => {
+               expect(page.getUniqueJournal('I meet my friends')).toMatch('I meet my friends');
+           }, 10000);
+       });
 
-        element(by.id('bodyField')).sendKeys('Core, upper body, and total body workout');
-        element(by.id('_idField')).sendKeys('gym_exercise_id');
-        element(by.id('confirmAddJournalButton')).click();
-        // This annoying delay is necessary, otherwise it's possible that we execute the `expect`
-        // line before the add journal has been fully processed and the new journal is available
-        // in the list.
-        setTimeout(() => {
-            expect(page.getUniqueJournal('tracy@awesome.com')).toMatch('Gym exercise'); // toEqual('Gym exercise');
-        }, 10000);
-    });
-
-    it('Should allow us to put information into the fields of the add journal dialog', () => {
-        page.navigateTo();
-        page.clickAddJournalButton();
-        expect(element(by.id('TitleField')).isPresent()).toBeTruthy('There should be a title field');
-        element(by.id('TitleField')).sendKeys('Eat healthy ');
-
-
-        expect(element(by.id('bodyField')).isPresent()).toBeTruthy('There should be a body field');
-        element(by.id('bodyField')).sendKeys('Awesome Startup, LLC');
-       expect(element(by.id('_idField')).isPresent()).toBeTruthy('There should be an email field');
-       element(by.id('_idField')).sendKeys('eat_healthy_id');
-        element(by.id('exitWithoutAddingButton')).click();
-    });
+       it('Should allow us to put information into the fields of the add journal dialog', () => {
+           JournalPage.navigateTo();
+           page.clickAddJournalButton();
+           expect(element(by.id('titleField')).isPresent()).toBeTruthy('There should be a name field');
+           element(by.id('titleField')).sendKeys('Songs to listen');
+           expect(element(by.id('bodyField')).isPresent()).toBeTruthy('There should be a category field');
+           element(by.id('bodyField')).sendKeys('Said by Nasty C');
+           element(by.id('exitWithoutAddingButton')).click();
+       });
 });
