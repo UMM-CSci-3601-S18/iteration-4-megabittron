@@ -1,7 +1,7 @@
-/*import {ComponentFixture, TestBed, async} from '@angular/core/testing';
+import {ComponentFixture, TestBed, async} from '@angular/core/testing';
 import {Journal} from "./journal";
 import {JournalsComponent} from "./journals.component";
-import {JournalsService} from "./journal";
+import {JournalsService} from "./journals.service"
 import {Observable} from 'rxjs/Observable';
 import {FormsModule} from '@angular/forms';
 import {CustomModule} from '../custom.module';
@@ -10,7 +10,6 @@ import {MatDialog} from '@angular/material';
 
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
-import {JournalsComponent} from "./journals.component";
 
 describe('Journal ', () => {
 
@@ -29,19 +28,19 @@ describe('Journal ', () => {
                     _id: '1',
                     title: 'Work',
                     body: 'told boss about...',
-                    link: '',
+                    date: 'Wed Mar 14 2018 10:04:01 GMT-0500',
                 },
                 {
                     _id: '2',
                     title: 'Home',
                     body: 'better',
-                    link: '',
+                    date: 'Wed Mar 15 2018 10:04:01 GMT-0500',
                 },
                 {
                     _id: '3',
                     title: 'Driving',
                     body: 'Bad',
-                    link: '',
+                    date: 'Wed Mar 16 2018 10:04:01 GMT-0500',
                 }
             ])
         };
@@ -63,48 +62,36 @@ describe('Journal ', () => {
     }));
 
     it('contains all the Journals', () => {
-        expect(Journal.Journals.length).toBe(3);
+        expect(Journal.journals.length).toBe(3);
     });
 
-    it('contains a Journal id \'1\'', () => {
-        expect(Journal.Journa
-ls.some((Journal: Journal) => Journal._id === '1')).toBe(true);
-    });
+    it
 
     it('contain a Journal id \'2\'', () => {
-        expect(Journal.Journals.some((Journal: Journal) => Journal._id === '2')).toBe(true);
+        expect(Journal.journals.some((Journal: Journal) => Journal._id === '2')).toBe(true);
     });
 
     it('doesn\'t contain a Journal id \'4\'', () => {
-        expect(Journal.Journals.some((Journal: Journal) => Journal._id === '4')).toBe(false);
+        expect(Journal.journals.some((Journal: Journal) => Journal._id === '4')).toBe(false);
     });
 
-    it('has a category Chores', () => {
-        expect(Journal.Journals.filter((Journal: Journal) => Journal.category === 'Chores').length).toBe(2);
-    });
 
-    it('Journal filters by name', () => {
+
+    it('Journal filters by title', () => {
         expect(Journal.filteredJournals.length).toBe(3);
-        Journal.JournalName = 'o';
+        Journal.journalTitle = 'o';
         Journal.refreshJournals().subscribe(() => {
             expect(Journal.filteredJournals.length).toBe(2);
         });
     });
 
-    it('Journal  filters by chores', () => {
-        expect(Journal.filteredJournals.length).toBe(3);
-        Journal.JournalCategory = 'Chores';
-        Journal.refreshJournals().subscribe(() => {
-            expect(Journal.filteredJournals.length).toBe(2);
-        });
-    });
 
-    it('Journal  filters by name and category', () => {
+    it('Journal  filters by title and body', () => {
         expect(Journal.filteredJournals.length).toBe(3);
-        Journal.JournalCategory = 'Workout';
-        Journal.JournalName = 'y';
+        Journal.journalTitle = 'Workout';
+        Journal.journalBody = 'y';
         Journal.refreshJournals().subscribe(() => {
-            expect(Journal.filteredJournals.length).toBe(1);
+            expect(Journal.filteredJournals.length).toBe(0);
         });
     });
 
@@ -144,7 +131,7 @@ describe('Misbehaving Journal ', () => {
 
     it('generates an error if we don\'t set up a JournalService', () => {
         // Since the observer throws an error, we don't expect Journals to be defined.
-        expect(Journal.Journals).toBeUndefined();
+        expect(Journal.journals).toBeUndefined();
     });
 });
 
@@ -154,9 +141,9 @@ describe('Adding a Journal', () => {
     let fixture: ComponentFixture<JournalsComponent>;
     const newJournal: Journal = {
         _id: '5',
-        Journal: 'Get more sleep.',
-        category: 'Personal health',
-        name: 'Go to bed early',
+        title: 'Sleep.',
+        body: 'Need to work on my sleep cycle',
+        date: 'Wed Mar 30 2018 10:04:01 GMT-0500',
     };
     const newId = '5';
 
@@ -219,4 +206,4 @@ describe('Adding a Journal', () => {
     });
 });
 
-*/
+

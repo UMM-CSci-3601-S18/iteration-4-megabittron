@@ -1,4 +1,3 @@
-
 import {Component, OnInit} from '@angular/core';
 import {Inject} from '@angular/core';
 import {SummaryListService} from './summary-list.service';
@@ -31,7 +30,7 @@ export class SummaryListComponent implements OnInit {
     // We should rename them to make that clearer.
     public summaryMood: string;
     public summaryIntensity: number;
-    public inputType: string;
+    public inputType = "Day";
 
     // The ID of the
     private highlightedID: {'$oid': string} = { '$oid': '' };
@@ -102,6 +101,7 @@ export class SummaryListComponent implements OnInit {
     }
 
     filterGraph(weekday): number {
+        console.log(this.filteredSummarys.length);
         var filterData = this.filteredSummarys;
 
         if(this.inputType == "Day") {
@@ -184,6 +184,7 @@ export class SummaryListComponent implements OnInit {
             displayData = summaryHours;
         }
         else {
+            console.log("here");
             type = days;
 
             summaryDays = {
@@ -285,7 +286,6 @@ export class SummaryListComponent implements OnInit {
     }
 
     ngAfterViewInit(): void {
-
         this.buildChart();
     }
 

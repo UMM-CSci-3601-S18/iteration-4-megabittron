@@ -49,4 +49,14 @@ export class GoalPage {
         return element(by.id('add-icon')).click();
     }
 
+    clickEditGoalButton(): promise.Promise<void> {
+        this.highlightElement(by.id('edit-icon'));
+        return element(by.id('edit-icon')).click();
+    }
+
+    editButtonExists(): promise.Promise<boolean> {
+        this.highlightElement(by.id('edit-icon'));
+        return element(by.id('edit-icon')).isPresent();
+    }
+
 }

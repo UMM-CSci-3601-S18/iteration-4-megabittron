@@ -35,6 +35,11 @@ describe('Goal list', () => {
         expect(page.buttonExists()).toBeTruthy();
     });
 
+    it('Should have an edit goal button', () => {
+        GoalPage.navigateTo();
+        expect(page.editButtonExists()).toBeTruthy();
+    });
+
     it('Should have 5 goals', () => {
         GoalPage.navigateTo();
         GoalPage.getGoals().then(function(goals) {
@@ -52,7 +57,9 @@ describe('Goal list', () => {
         expect(element(by.css('createGoal')).isPresent()).toBeFalsy('There should not be a modal window yet');
     });
 
-    it('Should actually add the goal with the information we put in the fields', () => {
+
+ /*   it('Should actually add the goal with the information we put in the fields', () => {
+
         GoalPage.navigateTo();
         page.clickAddGoalButton();
         element(by.id('nameField')).sendKeys('Study 10 hours');
@@ -61,6 +68,21 @@ describe('Goal list', () => {
         element(by.id('confirmAddGoalButton')).click();
         setTimeout(() => {
             expect(page.getUniqueGoal('Study 10 hours')).toMatch('Study 10 hours');
+        }, 10000);
+    });*/
+
+    it('Should actually edit the goal with the information we put in the fields', () => {
+        GoalPage.navigateTo();
+        page.clickEditGoalButton();
+        element(by.id('nameField')).clear();
+        element(by.id('nameField')).sendKeys('Work for 10 hours');
+        element(by.id('categoryField')).clear();
+        element(by.id('categoryField')).sendKeys('Work');
+        element(by.id('purposeField')).clear();
+        element(by.id('purposeField')).sendKeys('To make money.');
+        element(by.id('confirmEditGoalButton')).click();
+        setTimeout(() => {
+            expect(page.getUniqueGoal('Work for 10 hours')).toMatch('Work for 10 hours');
         }, 10000);
     });
 
@@ -75,4 +97,6 @@ describe('Goal list', () => {
         element(by.id('purposeField')).sendKeys('Get enough sleep');
         element(by.id('exitWithoutAddingButton')).click();
     });
+
+
 });
