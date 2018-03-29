@@ -30,14 +30,17 @@ export class EmotionResponseComponent {
         linkObservable.subscribe(
             links => {
                 console.log("successfully retrieved resource links from the database");
-                var index = Math.floor(Math.random() * links.length);
-                this.selectedResponse = this.sanitizer.bypassSecurityTrustResourceUrl(links[index].resource);
 
-                console.log("this was chosen: " + this.selectedResponse);
+                //code below used for attempt at variable videos. Unable to implement in Iteration 2
+                //var index = Math.floor(Math.random() * links.length);
+                //this.selectedResponse = this.sanitizer.bypassSecurityTrustResourceUrl(links[index].resource);
 
-                if(this.selectedResponse != ""){
-                    this.giveResponse=true;
-                }
+                //console.log("this was chosen: " + this.selectedResponse);
+
+                //if(this.selectedResponse != ""){
+                //    this.giveResponse=true;
+                //}
+                this.giveResponse=true;
 
             },
             err => {
