@@ -19,8 +19,8 @@ import umm3601.database.ResourceRequestHandler;
 
 import java.io.IOException;
 
-import umm3601.summary.SummaryController;
-import umm3601.summary.SummaryRequestHandler;
+import umm3601.database.SummaryController;
+import umm3601.database.SummaryRequestHandler;
 
 
 import static spark.Spark.*;
@@ -100,7 +100,7 @@ public class Server {
         post("api/goals/edit", goalRequestHandler::editGoal);
 
         //List summary page
-        get("api/summarys", summaryRequestHandler::getSummarys);
+        get("api/summarys", summaryRequestHandler::getSummaries);
 
         //Resources for appropriate response
         get("api/resources", resourceRequestHandler::getResources);

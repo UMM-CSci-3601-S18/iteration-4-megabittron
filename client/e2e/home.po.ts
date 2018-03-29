@@ -26,8 +26,8 @@ export class HomePage {
         return elem.getText();
     }
 
-    selectAnEmoji(emoji: string) {
-        const input = element(by.id(emoji));
+    selectAnEmoji(emotion: string) {
+        const input = element(by.id(emotion));
         input.click();
     }
 
