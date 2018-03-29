@@ -85,13 +85,13 @@ describe('Journal list', () => {
         page.navigateTo();
         page.clickAddJournalButton();
         expect(element(by.id('TitleField')).isPresent()).toBeTruthy('There should be a title field');
-        element(by.id('TitleField')).sendKeys('Eat health');
+        element(by.id('TitleField')).sendKeys('Eat healthy ');
 
 
         expect(element(by.id('bodyField')).isPresent()).toBeTruthy('There should be a body field');
         element(by.id('bodyField')).sendKeys('Awesome Startup, LLC');
-       // expect(element(by.id('emailField')).isPresent()).toBeTruthy('There should be an email field');
-       // element(by.id('emailField')).sendKeys('dana@awesome.com');
+       expect(element(by.id('_idField')).isPresent()).toBeTruthy('There should be an email field');
+       element(by.id('_idField')).sendKeys('eat_healthy_id');
         element(by.id('exitWithoutAddingButton')).click();
     });
 });
