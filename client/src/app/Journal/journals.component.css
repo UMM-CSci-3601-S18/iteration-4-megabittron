@@ -15,7 +15,7 @@
 }
 
 .whole-body {
-    background-color: lightgray;
+    background-color: #1E392A;
 
 }
 
@@ -51,4 +51,37 @@
     font-size: 25px;
 }
 
+#addJournalButton{
+    padding-left: 0.5%;
+    padding-top: 1%;
+}
+
+.journals{
+    width:30%;
+    text-align: center;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    background-color: whitesmoke;
+}
+
+#dateContent{
+    font-size: 80%;
+    color: black;
+}
+
+#titleContent{
+    font-family: Georgia;
+    font-size: 105%;
+    text-align: center;
+    color: black;
+}
+
+#bodyContent{
+    color: black;
+}
+
+#contentTitle{
+    text-align: center;
+}
 

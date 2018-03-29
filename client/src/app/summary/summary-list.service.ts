@@ -1,6 +1,5 @@
-
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 import {Observable} from 'rxjs/Observable';
 
@@ -57,7 +56,7 @@ export class SummaryListService {
         }
     }
 
-    filterByIntensity(summaryIntensity?: number): void {
+    /*filterByIntensity(summaryIntensity?: number): void {
         if (!(summaryIntensity == null || summaryIntensity)) {
             if (this.parameterPresent('intensity=') ) {
                 // there was a previous search by company that we need to clear
@@ -81,7 +80,7 @@ export class SummaryListService {
                 this.summaryUrl = this.summaryUrl.substring(0, start) + this.summaryUrl.substring(end + 1);
             }
         }
-    }
+    }*/
 
     private parameterPresent(searchParam: string) {
         return this.summaryUrl.indexOf(searchParam) !== -1;
