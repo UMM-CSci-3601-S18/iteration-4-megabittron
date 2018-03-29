@@ -1,8 +1,5 @@
-package umm3601.summary;
+package umm3601.database;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.util.JSON;
-import org.bson.types.ObjectId;
 import spark.Request;
 import spark.Response;
 

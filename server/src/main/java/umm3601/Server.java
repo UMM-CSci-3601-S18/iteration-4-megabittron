@@ -19,8 +19,8 @@ import umm3601.database.ResourceRequestHandler;
 
 import java.io.IOException;
 
-import umm3601.summary.SummaryController;
-import umm3601.summary.SummaryRequestHandler;
+import umm3601.database.SummaryController;
+import umm3601.database.SummaryRequestHandler;
 
 
 import static spark.Spark.*;

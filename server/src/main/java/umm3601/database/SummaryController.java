@@ -1,4 +1,4 @@
-package umm3601.summary;
+package umm3601.database;
 
 import com.google.gson.Gson;
 import com.mongodb.*;
