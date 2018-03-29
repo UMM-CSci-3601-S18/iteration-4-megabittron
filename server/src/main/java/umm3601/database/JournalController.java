@@ -55,19 +55,7 @@ public class JournalController {
         Document filterDoc = new Document();
 
         // We will need more statements here for different objects,
-        // such as emoji, category, etc.
-
-        // "journal" will be a key to a string object, where the object is
-        // what we get when people enter their journals as a text body.
-        // "journal" is the purpose of the journal
-        if (queryParams.containsKey("journal")) {
-            String targetContent = (queryParams.get("journal")[0]);
-            Document contentRegQuery = new Document();
-            contentRegQuery.append("$regex", targetContent);
-            contentRegQuery.append("$options", "i");
-            filterDoc = filterDoc.append("journal", contentRegQuery);
-        }
-
+        // such as date, etc.
 
 
         // name is the title of the journal
@@ -82,6 +70,8 @@ public class JournalController {
         // FindIterable comes from mongo, Document comes from Gson
         FindIterable<Document> matchingJournals = journalCollection.find(filterDoc);
 
+        System.out.println("It entered Journalcontroller.java and did getJournals()");
+
         return JSON.serialize(matchingJournals);
     }
 
@@ -89,30 +79,26 @@ public class JournalController {
      * Helper method which appends received user information to the to-be added document
      *
      * @param title
-     * @param category
      * @param body
-     * @param time
-     * @param link
+     * @param date
 
      * @return boolean after successfully or unsuccessfully adding a user
      */
     // As of now this only adds the journal, but you can separate multiple arguments
     // by commas as we add them.
-    public String addNewJournal(String title, String category, String body, String time, String link) {
+    public String addNewJournal(String title, String body, String date) {
 
         // makes the search Document key-pairs
         Document newJournal = new Document();
         newJournal.append("title", title);
-        newJournal.append("category", category);
         newJournal.append("body", body);
-        newJournal.append("time", time);
-        newJournal.append("link", link);
+        newJournal.append("date", date);
         // Append new journals here
 
         try {
             journalCollection.insertOne(newJournal);
             ObjectId id = newJournal.getObjectId("_id");
-            System.err.println("Successfully added new journal [title=" + title + ", category=" + category + ", body=" + body +", time=" + time + ", link = " + link + ']');
+            System.err.println("Successfully added new journal [title=" + title + ", body=" + body +", date=" + date + ']');
             // return JSON.serialize(newJournal);
             return JSON.serialize(id);
         } catch(MongoException me) {

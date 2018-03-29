@@ -21,7 +21,7 @@ export class JournalsComponent implements OnInit {
     public journalTitle: string;
     public journalCategory: string;
     public journalBody: string;
-    public journalTime: string;
+    public journalDate: string;
     public journalLink: string;
 
     // The ID of the journal
@@ -37,7 +37,8 @@ export class JournalsComponent implements OnInit {
     }
 
     openDialog(): void {
-        const newJournal: Journal = {_id: '', title:'', category:'', body:'',date:'', link:''};
+        this.getDate();
+        const newJournal: Journal = {_id: '', title:'', body:'',date:this.journalDate};
         const dialogRef = this.dialog.open(AddJournalComponent, {
             width: '500px',
             data: { journal : newJournal }
@@ -46,6 +47,7 @@ export class JournalsComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             this.journalService.addNewJournal(result).subscribe(
                 addJournalResult => {
+                    console.log("It completed the addNewJournal function");
                     this.highlightedID = addJournalResult;
                     this.refreshJournals();
                 },
@@ -57,9 +59,10 @@ export class JournalsComponent implements OnInit {
         });
     }
 
-    public filterJournals(searchTitle: string, searchCategory: string, searchBody: string, searchTime, searchLink): Journal[] {
+    public filterJournals(searchTitle: string, searchBody: string, searchDate): Journal[] {
 
         this.filteredJournals = this.journals;
+
 
         // Filter by title
         if (searchTitle != null) {
@@ -67,15 +70,6 @@ export class JournalsComponent implements OnInit {
 
             this.filteredJournals = this.filteredJournals.filter(journal => {
                 return !searchTitle || journal.title.toLowerCase().indexOf(searchTitle) !== -1;
-            });
-        }
-
-        // Filter by category
-        if (searchCategory != null) {
-            searchCategory = searchCategory.toLocaleLowerCase();
-
-            this.filteredJournals = this.filteredJournals.filter(journal => {
-                return !searchCategory || journal.category.toLowerCase().indexOf(searchCategory) !== -1;
             });
         }
 
@@ -87,40 +81,8 @@ export class JournalsComponent implements OnInit {
                 return !searchBody || journal.body.toLowerCase().indexOf(searchBody) !== -1;
             });
         }
-
-        // Filter by body
-        if (searchTime != null) {
-            searchTime = searchTime.toLocaleLowerCase();
-
-            this.filteredJournals = this.filteredJournals.filter(journal => {
-                return !searchTime || journal.date.toLowerCase().indexOf(searchTime) !== -1;
-            });
-        }
-
-
-        // Filter by link
-        if (searchLink != null) {
-            searchLink = searchLink.toLocaleLowerCase();
-
-            this.filteredJournals = this.filteredJournals.filter(journal => {
-                return !searchLink || journal.link.toLowerCase().indexOf(searchLink) !== -1;
-            });
-        }
-
-
-
         return this.filteredJournals;
     }
-
-
-
-    getDate(){
-        var today = new Date();
-        console.log("today is: " + today.toString());
-        this.JournalDate = today.toString();
-    }
-
-
 
 
     refreshJournals(): Observable<Journal[]> {
@@ -134,7 +96,7 @@ export class JournalsComponent implements OnInit {
         journalObservable.subscribe(
             journals => {
                 this.journals = journals;
-                this.filterJournals(this.journalTitle, this.journalCategory, this.journalBody, this.journalTime, this.journalLink);
+                this.filterJournals(this.journalTitle, this.journalBody, this.journalDate);
             },
             err => {
                 console.log(err);
@@ -159,6 +121,11 @@ export class JournalsComponent implements OnInit {
     ngOnInit(): void {
         this.refreshJournals();
         this.loadService();
+    }
+    getDate(){
+        var today = new Date();
+        console.log("today is: " + today.toString());
+        this.journalDate = today.toString();
     }
 }
 

@@ -1,36 +1,26 @@
-[
-    {
-        _id: {
-            $oid: "58af3a600343927e48e87215"
-        },
-        subject: "I listened to this great song today",
-        body: "Good friends we have. Oh. Good friends we have lost along the way. Yeah! In this great future you cant forget your past. So dry your tears, I say. Yeah.",
-        date: "Fri Mar 2 13:36:47 CST 2018"
-    },
-    {
-        _id: {
-            $oid: "58af3a600343927e48e8720f"
-        },
-        subject: "My busy Saturday",
-        body: "What a busy day today! I never had a moment’s rest. The day started with my alarm clock blaring at 7am. I had to be at the Smith’s house by 8am to baby-sit. I really didn’t want to wake up so early on a Saturday, but I’m saving money to buy a new iPod and couldn’t say no to an all-day babysitting job.",
-        date: "Sat Jan 27 13:36:47 CST 2018"
-    },
-    {
-        _id: {
-            $oid: "58af3a600343927e48e8722c"
-        },
-        subject: "Wednesday",
-        body: "Today was an okay day.",
-        date: "Sat Mar 3 14:39:47 CST 2018"
-    },
-    {
-        _id: {
-            $oid: "5ab84d1e210fbd7847e967ff"
-        },
-        title: "Neural Markers of Resilience in Adolescent Females at Familial Risk for Major Depressive Disorder",
-        category: "",
-        body: "Findings In this longitudinal study of 65 adolescent females, we examined functional connectivity in limbic, salience, and executive control networks. High-risk adolescent females who were resilient to depression had greater connectivity between regions in limbic and executive control networks than did high-risk adolescent females who developed depression and low-risk control adolescents; further, the strength of this connectivity was correlated with positive life events in the group of resilient adolescent females.",
-        time: "",
-        link: "https://jamanetwork.com/journals/jamapsychiatry/article-abstract/2675295?redirect=true"
-    }
-]
+[{
+    "_id": {"$oid": "5ab41f142cf45b9803f9fcd7"},
+    "title": "It was beautiful outside",
+    "body": "I took a nice walk. It looked nice.",
+    "date": "Wed Mar 28 2018 20:04:01 GMT-0500"
+}, {
+    "_id": {"$oid": "5ab41f142cf45b9803f9fcd5"},
+    "title": "I read a cool book",
+    "body": "It was nice",
+    "date": "Wed Mar 23 2018 20:04:01 GMT-0500"
+}, {
+    "_id": {"$oid": "5ab41f142cf45b9803f9fcd4"},
+    "title": "I went to work.",
+    "body": "It was stressful. But, I powered through.",
+    "date": "Wed Mar 14 2018 10:04:01 GMT-0500"
+}, {
+    "_id": {"$oid": "5ab41f142cf45b9803f9fcd3"},
+    "title": "Exercising",
+    "body": "Personal health is important. I'm glad I started working out.",
+    "date": "Wed Mar 1 2018 7:04:01 GMT-0500"
+}, {
+    "_id": {"$oid": "5ab41f142cf45b9803f9fcd1"},
+    "title": "My flower died.",
+    "body": "It's ok. It'll grow again when the snow is gone.",
+    "date": "Wed Mar 3 2018 2:04:01 GMT-0500"
+}]
