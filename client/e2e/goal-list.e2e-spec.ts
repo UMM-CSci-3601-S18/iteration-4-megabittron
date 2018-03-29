@@ -58,6 +58,8 @@ describe('Goal list', () => {
     });
 
 
+    //this works but the timeout messes things up.
+
  /*   it('Should actually add the goal with the information we put in the fields', () => {
 
         GoalPage.navigateTo();
