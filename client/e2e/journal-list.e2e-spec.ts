@@ -77,26 +77,21 @@ describe('Journal list', () => {
         // line before the add journal has been fully processed and the new journal is available
         // in the list.
         setTimeout(() => {
-            expect(page.getUniqueJournal('tracy@awesome.com')).toMatch('Tracy Kim.*'); // toEqual('Tracy Kim');
+            expect(page.getUniqueJournal('tracy@awesome.com')).toMatch('Gym exercise'); // toEqual('Gym exercise');
         }, 10000);
     });
 
     it('Should allow us to put information into the fields of the add journal dialog', () => {
         page.navigateTo();
         page.clickAddJournalButton();
-        expect(element(by.id('nameField')).isPresent()).toBeTruthy('There should be a name field');
-        element(by.id('nameField')).sendKeys('Dana Jones');
-        expect(element(by.id('ageField')).isPresent()).toBeTruthy('There should be an age field');
-        // Need to use backspace because the default value is -1. If that changes, this will change too.
-        element(by.id('ageField')).sendKeys(protractor.Key.BACK_SPACE).then(function() {
-            element(by.id('ageField')).sendKeys(protractor.Key.BACK_SPACE).then(function() {
-                element(by.id('ageField')).sendKeys('24');
-            });
-        });
-        expect(element(by.id('companyField')).isPresent()).toBeTruthy('There should be a company field');
-        element(by.id('companyField')).sendKeys('Awesome Startup, LLC');
-        expect(element(by.id('emailField')).isPresent()).toBeTruthy('There should be an email field');
-        element(by.id('emailField')).sendKeys('dana@awesome.com');
+        expect(element(by.id('TitleField')).isPresent()).toBeTruthy('There should be a title field');
+        element(by.id('TitleField')).sendKeys('Eat health');
+
+
+        expect(element(by.id('bodyField')).isPresent()).toBeTruthy('There should be a body field');
+        element(by.id('bodyField')).sendKeys('Awesome Startup, LLC');
+       // expect(element(by.id('emailField')).isPresent()).toBeTruthy('There should be an email field');
+       // element(by.id('emailField')).sendKeys('dana@awesome.com');
         element(by.id('exitWithoutAddingButton')).click();
     });
 });
