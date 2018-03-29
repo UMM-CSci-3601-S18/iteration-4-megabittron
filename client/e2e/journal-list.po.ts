@@ -1,4 +1,3 @@
-
 import {browser, element, by, promise, ElementFinder} from 'protractor';
 import {Key} from 'selenium-webdriver';
 
@@ -60,7 +59,7 @@ export class JournalPage {
     }
 
     getJournals() {
-        return element.all(by.classTitle('journals'));
+        return element.all(by.className('journals'));
     }
 
 
@@ -71,8 +70,10 @@ export class JournalPage {
     }
 
     clickAddJournalButton(): promise.Promise<void> {
-        this.highlightElement(by.id('addNewJournal'));
-        return element(by.id('addNewJournal')).click();
+        this.highlightElement(by.id('add-icon-journal'));
+        return element(by.id('add-icon-journal')).click();
     }
+
+
 
 }
