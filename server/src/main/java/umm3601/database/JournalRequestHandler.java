@@ -19,12 +19,12 @@ public class JournalRequestHandler {
      */
 
     // gets one journal using its ObjectId--didn't use, just for potential future functionality
-    public String getItemJSON(Request req, Response res){
+    public String getJournalJSON(Request req, Response res){
         res.type("application/json");
         String id = req.params("id");
         String journal;
         try {
-            journal = journalController.getItem(id);
+            journal = journalController.getJournal(id);
         } catch (IllegalArgumentException e) {
             // This is thrown if the ID doesn't have the appropriate
             // form for a Mongo Object ID.
@@ -54,10 +54,10 @@ public class JournalRequestHandler {
      */
 
     // Gets the journals from the DB given the query parameters
-    public String getItems(Request req, Response res)
+    public String getJournals(Request req, Response res)
     {
         res.type("application/json");
-        return journalController.getItems(req.queryMap().toMap());
+        return journalController.getJournals(req.queryMap().toMap());
     }
 
     /**Method called from Server when the 'api/users/new'endpoint is recieved.
@@ -68,14 +68,14 @@ public class JournalRequestHandler {
      * @param res the HTTP response
      * @return a boolean as whether the user was added successfully or not
      */
-    public String addNewItem(Request req, Response res)
+    public String addNewJournal(Request req, Response res)
     {
 
         res.type("application/json");
         Object o = JSON.parse(req.body());
         try {
             // if the object that is the JSON representation of the request body's class is the class BasicDBObject
-            // then try to add the journal with journalController's addNewItem method
+            // then try to add the journal with journalController's addNewJournal method
             if(o.getClass().equals(BasicDBObject.class))
             {
                 try {
@@ -88,7 +88,7 @@ public class JournalRequestHandler {
                     String link = dbO.getString("link");
 
                     System.err.println("Adding new journal [title=" + title + ",category=" + category + ", body=" + body + ", time=" + time +",link="+ link+']');
-                    return journalController.addNewItem(title, category, body, time, link).toString();
+                    return journalController.addNewJournal(title, category, body, time, link).toString();
                 }
                 catch(NullPointerException e)
                 {

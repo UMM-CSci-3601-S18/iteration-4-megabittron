@@ -37,7 +37,7 @@ export class JournalsComponent implements OnInit {
     }
 
     openDialog(): void {
-        const newJournal: Journal = {_id: '', title:'', category:'', body:'',time:'', link:''};
+        const newJournal: Journal = {_id: '', title:'', category:'', body:'',date:'', link:''};
         const dialogRef = this.dialog.open(AddJournalComponent, {
             width: '500px',
             data: { journal : newJournal }
@@ -93,7 +93,7 @@ export class JournalsComponent implements OnInit {
             searchTime = searchTime.toLocaleLowerCase();
 
             this.filteredJournals = this.filteredJournals.filter(journal => {
-                return !searchTime || journal.time.toLowerCase().indexOf(searchTime) !== -1;
+                return !searchTime || journal.date.toLowerCase().indexOf(searchTime) !== -1;
             });
         }
 
@@ -111,6 +111,15 @@ export class JournalsComponent implements OnInit {
 
         return this.filteredJournals;
     }
+
+
+
+    getDate(){
+        var today = new Date();
+        console.log("today is: " + today.toString());
+        this.JournalDate = today.toString();
+    }
+
 
 
 

@@ -1,7 +1,7 @@
 /*import {ComponentFixture, TestBed, async} from '@angular/core/testing';
-import {Goal} from './goal';
-import {GoalsComponent} from './goals.component';
-import {GoalsService} from './goals.service';
+import {Journal} from "./journal";
+import {JournalsComponent} from "./journals.component";
+import {JournalsService} from "./journal";
 import {Observable} from 'rxjs/Observable';
 import {FormsModule} from '@angular/forms';
 import {CustomModule} from '../custom.module';
@@ -10,173 +10,175 @@ import {MatDialog} from '@angular/material';
 
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
+import {JournalsComponent} from "./journals.component";
 
-describe('Goal ', () => {
+describe('Journal ', () => {
 
-    let goal: GoalsComponent;
-    let fixture: ComponentFixture<GoalsComponent>;
+    let Journal: JournalsComponent;
+    let fixture: ComponentFixture<JournalsComponent>;
 
-    let goalServiceStub: {
-        getGoals: () => Observable<Goal[]>
+    let JournalServiceStub: {
+        getJournals: () => Observable<Journal[]>
     };
 
     beforeEach(() => {
-        // stub GoalService for test purposes
-        goalServiceStub = {
-            getGoals: () => Observable.of([
+        // stub JournalService for test purposes
+        JournalServiceStub = {
+            getJournals: () => Observable.of([
                 {
                     _id: '1',
-                    goal: 'To have a more sanitary living environment.',
-                    category: 'Chores',
-                    name: 'Wash the dishes',
+                    title: 'Work',
+                    body: 'told boss about...',
+                    link: '',
                 },
                 {
                     _id: '2',
-                    goal: 'To be beefy.',
-                    category: 'Workout',
-                    name: 'Go to gym',
+                    title: 'Home',
+                    body: 'better',
+                    link: '',
                 },
                 {
                     _id: '3',
-                    goal: 'To have a safer driveway.',
-                    category: 'Chores',
-                    name: 'Shovel driveway',
+                    title: 'Driving',
+                    body: 'Bad',
+                    link: '',
                 }
             ])
         };
 
         TestBed.configureTestingModule({
             imports: [CustomModule],
-            declarations: [GoalsComponent],
-            providers: [{provide: GoalsService, useValue: goalServiceStub},
+            declarations: [JournalsComponent],
+            providers: [{provide: JournalsService, useValue: JournalServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
     });
 
     beforeEach(async(() => {
         TestBed.compileComponents().then(() => {
-            fixture = TestBed.createComponent(GoalsComponent);
-            goal = fixture.componentInstance;
+            fixture = TestBed.createComponent(JournalsComponent);
+            Journal = fixture.componentInstance;
             fixture.detectChanges();
         });
     }));
 
-    it('contains all the goals', () => {
-        expect(goal.goals.length).toBe(3);
+    it('contains all the Journals', () => {
+        expect(Journal.Journals.length).toBe(3);
     });
 
-    it('contains a goal id \'1\'', () => {
-        expect(goal.goals.some((goal: Goal) => goal._id === '1')).toBe(true);
+    it('contains a Journal id \'1\'', () => {
+        expect(Journal.Journa
+ls.some((Journal: Journal) => Journal._id === '1')).toBe(true);
     });
 
-    it('contain a goal id \'2\'', () => {
-        expect(goal.goals.some((goal: Goal) => goal._id === '2')).toBe(true);
+    it('contain a Journal id \'2\'', () => {
+        expect(Journal.Journals.some((Journal: Journal) => Journal._id === '2')).toBe(true);
     });
 
-    it('doesn\'t contain a goal id \'4\'', () => {
-        expect(goal.goals.some((goal: Goal) => goal._id === '4')).toBe(false);
+    it('doesn\'t contain a Journal id \'4\'', () => {
+        expect(Journal.Journals.some((Journal: Journal) => Journal._id === '4')).toBe(false);
     });
 
     it('has a category Chores', () => {
-        expect(goal.goals.filter((goal: Goal) => goal.category === 'Chores').length).toBe(2);
+        expect(Journal.Journals.filter((Journal: Journal) => Journal.category === 'Chores').length).toBe(2);
     });
 
-    it('goal filters by name', () => {
-        expect(goal.filteredGoals.length).toBe(3);
-        goal.goalName = 'o';
-        goal.refreshGoals().subscribe(() => {
-            expect(goal.filteredGoals.length).toBe(2);
+    it('Journal filters by name', () => {
+        expect(Journal.filteredJournals.length).toBe(3);
+        Journal.JournalName = 'o';
+        Journal.refreshJournals().subscribe(() => {
+            expect(Journal.filteredJournals.length).toBe(2);
         });
     });
 
-    it('goal  filters by chores', () => {
-        expect(goal.filteredGoals.length).toBe(3);
-        goal.goalCategory = 'Chores';
-        goal.refreshGoals().subscribe(() => {
-            expect(goal.filteredGoals.length).toBe(2);
+    it('Journal  filters by chores', () => {
+        expect(Journal.filteredJournals.length).toBe(3);
+        Journal.JournalCategory = 'Chores';
+        Journal.refreshJournals().subscribe(() => {
+            expect(Journal.filteredJournals.length).toBe(2);
         });
     });
 
-    it('goal  filters by name and category', () => {
-        expect(goal.filteredGoals.length).toBe(3);
-        goal.goalCategory = 'Workout';
-        goal.goalName = 'y';
-        goal.refreshGoals().subscribe(() => {
-            expect(goal.filteredGoals.length).toBe(1);
+    it('Journal  filters by name and category', () => {
+        expect(Journal.filteredJournals.length).toBe(3);
+        Journal.JournalCategory = 'Workout';
+        Journal.JournalName = 'y';
+        Journal.refreshJournals().subscribe(() => {
+            expect(Journal.filteredJournals.length).toBe(1);
         });
     });
 
 });
 
-describe('Misbehaving Goal ', () => {
-    let goal: GoalsComponent;
-    let fixture: ComponentFixture<GoalsComponent>;
+describe('Misbehaving Journal ', () => {
+    let Journal: JournalsComponent;
+    let fixture: ComponentFixture<JournalsComponent>;
 
-    let goalServiceStub: {
-        getGoals: () => Observable<Goal[]>
+    let JournalServiceStub: {
+        getJournals: () => Observable<Journal[]>
     };
 
     beforeEach(() => {
-        // stub GoalService for test purposes
-        goalServiceStub = {
-            getGoals: () => Observable.create(observer => {
+        // stub JournalService for test purposes
+        JournalServiceStub = {
+            getJournals: () => Observable.create(observer => {
                 observer.error('Error-prone observable');
             })
         };
 
         TestBed.configureTestingModule({
             imports: [FormsModule, CustomModule],
-            declarations: [GoalsComponent],
-            providers: [{provide: GoalsService, useValue: goalServiceStub},
+            declarations: [JournalsComponent],
+            providers: [{provide: JournalsService, useValue: JournalServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
     });
 
     beforeEach(async(() => {
         TestBed.compileComponents().then(() => {
-            fixture = TestBed.createComponent(GoalsComponent);
-            goal = fixture.componentInstance;
+            fixture = TestBed.createComponent(JournalsComponent);
+            Journal = fixture.componentInstance;
             fixture.detectChanges();
         });
     }));
 
-    it('generates an error if we don\'t set up a GoalService', () => {
-        // Since the observer throws an error, we don't expect goals to be defined.
-        expect(goal.goals).toBeUndefined();
+    it('generates an error if we don\'t set up a JournalService', () => {
+        // Since the observer throws an error, we don't expect Journals to be defined.
+        expect(Journal.Journals).toBeUndefined();
     });
 });
 
 
-describe('Adding a goal', () => {
-    let goal: GoalsComponent;
-    let fixture: ComponentFixture<GoalsComponent>;
-    const newGoal: Goal = {
+describe('Adding a Journal', () => {
+    let Journal: JournalsComponent;
+    let fixture: ComponentFixture<JournalsComponent>;
+    const newJournal: Journal = {
         _id: '5',
-        goal: 'Get more sleep.',
+        Journal: 'Get more sleep.',
         category: 'Personal health',
         name: 'Go to bed early',
     };
     const newId = '5';
 
-    let calledGoal: Goal;
+    let calledJournal: Journal;
 
-    let goalServiceStub: {
-        getGoals: () => Observable<Goal[]>,
-        addNewGoal: (newGoal: Goal) => Observable<{'$oid': string}>
+    let JournalServiceStub: {
+        getJournals: () => Observable<Journal[]>,
+        addNewJournal: (newJournal: Journal) => Observable<{'$oid': string}>
     };
     let mockMatDialog: {
-        open: (AddGoalComponent, any) => {
-            afterClosed: () => Observable<Goal>
+        open: (AddJournalComponent, any) => {
+            afterClosed: () => Observable<Journal>
         };
     };
 
     beforeEach(() => {
-        calledGoal = null;
-        // stub GoalService for test purposes
-        goalServiceStub = {
-            getGoals: () => Observable.of([]),
-            addNewGoal: (goalToAdd: Goal) => {
-                calledGoal = goalToAdd;
+        calledJournal = null;
+        // stub JournalService for test purposes
+        JournalServiceStub = {
+            getJournals: () => Observable.of([]),
+            addNewJournal: (JournalToAdd: Journal) => {
+                calledJournal = JournalToAdd;
                 return Observable.of({
                     '$oid': newId
                 });
@@ -186,7 +188,7 @@ describe('Adding a goal', () => {
             open: () => {
                 return {
                     afterClosed: () => {
-                        return Observable.of(newGoal);
+                        return Observable.of(newJournal);
                     }
                 };
             }
@@ -194,9 +196,9 @@ describe('Adding a goal', () => {
 
         TestBed.configureTestingModule({
             imports: [FormsModule, CustomModule],
-            declarations: [GoalsComponent],
+            declarations: [JournalsComponent],
             providers: [
-                {provide: GoalsService, useValue: goalServiceStub},
+                {provide: JournalsService, useValue: JournalServiceStub},
                 {provide: MatDialog, useValue: mockMatDialog},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
@@ -204,16 +206,17 @@ describe('Adding a goal', () => {
 
     beforeEach(async(() => {
         TestBed.compileComponents().then(() => {
-            fixture = TestBed.createComponent(GoalsComponent);
-            goal = fixture.componentInstance;
+            fixture = TestBed.createComponent(JournalsComponent);
+            Journal = fixture.componentInstance;
             fixture.detectChanges();
         });
     }));
 
-    it('calls GoalService.addGoal', () => {
-        expect(calledGoal).toBeNull();
-        goal.openDialog();
-        expect(calledGoal).toEqual(newGoal);
+    it('calls JournalService.addJournal', () => {
+        expect(calledJournal).toBeNull();
+        Journal.openDialog();
+        expect(calledJournal).toEqual(newJournal);
     });
 });
+
 */

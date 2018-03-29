@@ -31,12 +31,12 @@ public class JournalController {
     }
 
     // get an journal by its ObjectId, not used by client, for potential future use
-    public String getItem(String id) {
-        FindIterable<Document> jsonItems
+    public String getJournal(String id) {
+        FindIterable<Document> jsonJournals
             = journalCollection
             .find(eq("_id", new ObjectId(id)));
 
-        Iterator<Document> iterator = jsonItems.iterator();
+        Iterator<Document> iterator = jsonJournals.iterator();
         if (iterator.hasNext()) {
             Document journal = iterator.next();
             return journal.toJson();
@@ -50,7 +50,7 @@ public class JournalController {
     // documents if no query parameter is specified. If the journal parameter is
     // specified, then the collection is filtered so only documents of that
     // specified journal are found.
-    public String getItems(Map<String, String[]> queryParams) {
+    public String getJournals(Map<String, String[]> queryParams) {
 
         Document filterDoc = new Document();
 
@@ -68,18 +68,11 @@ public class JournalController {
             filterDoc = filterDoc.append("journal", contentRegQuery);
         }
 
-        // category is the category of the journal, also a String
-        if (queryParams.containsKey("category")) {
-            String targetContent = (queryParams.get("category")[0]);
-            Document contentRegQuery = new Document();
-            contentRegQuery.append("$regex", targetContent);
-            contentRegQuery.append("$options", "i");
-            filterDoc = filterDoc.append("category", contentRegQuery);
-        }
+
 
         // name is the title of the journal
-        if (queryParams.containsKey("name")) {
-            String targetContent = (queryParams.get("name")[0]);
+        if (queryParams.containsKey("title")) {
+            String targetContent = (queryParams.get("title")[0]);
             Document contentRegQuery = new Document();
             contentRegQuery.append("$regex", targetContent);
             contentRegQuery.append("$options", "i");
@@ -87,9 +80,9 @@ public class JournalController {
         }
 
         // FindIterable comes from mongo, Document comes from Gson
-        FindIterable<Document> matchingItems = journalCollection.find(filterDoc);
+        FindIterable<Document> matchingJournals = journalCollection.find(filterDoc);
 
-        return JSON.serialize(matchingItems);
+        return JSON.serialize(matchingJournals);
     }
 
     /**
@@ -105,22 +98,22 @@ public class JournalController {
      */
     // As of now this only adds the journal, but you can separate multiple arguments
     // by commas as we add them.
-    public String addNewItem(String title, String category, String body, String time, String link) {
+    public String addNewJournal(String title, String category, String body, String time, String link) {
 
         // makes the search Document key-pairs
-        Document newItem = new Document();
-        newItem.append("title", title);
-        newItem.append("category", category);
-        newItem.append("body", body);
-        newItem.append("time", time);
-        newItem.append("link", link);
+        Document newJournal = new Document();
+        newJournal.append("title", title);
+        newJournal.append("category", category);
+        newJournal.append("body", body);
+        newJournal.append("time", time);
+        newJournal.append("link", link);
         // Append new journals here
 
         try {
-            journalCollection.insertOne(newItem);
-            ObjectId id = newItem.getObjectId("_id");
+            journalCollection.insertOne(newJournal);
+            ObjectId id = newJournal.getObjectId("_id");
             System.err.println("Successfully added new journal [title=" + title + ", category=" + category + ", body=" + body +", time=" + time + ", link = " + link + ']');
-            // return JSON.serialize(newItem);
+            // return JSON.serialize(newJournal);
             return JSON.serialize(id);
         } catch(MongoException me) {
             me.printStackTrace();

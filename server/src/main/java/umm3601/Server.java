@@ -108,9 +108,9 @@ public class Server {
 
         //List journals, filtered using query parameters
 
-        get("api/journals", journalRequestHandler::getItems);
-        get("api/journals/:id", journalRequestHandler::getItemJSON);
-        post("api/journals/new", journalRequestHandler::addNewItem);
+        get("api/journals", journalRequestHandler::getJournals);
+        get("api/journals/:id", journalRequestHandler::getJournalJSON);
+        post("api/journals/new", journalRequestHandler::addNewJournal);
 
 
         // An example of throwing an unhandled exception so you can see how the

@@ -1,4 +1,5 @@
 
+
 <body class="whole-body">
 
 <header>
@@ -8,32 +9,15 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-
         .phone-div{
-            float: left;
-            width: 45%;
-        }
-
-
-
-        .resources-div{
-
-            float: left;
-            width: 55%;
-
-
-        }
-
-        .resources-card{
-            background-color: lightyellow;
-        }
+            float: inherit;
+            width: 100%; }
 
         @media screen and (max-width: 600px) {
-            .phone-div, .main-div, .resources-div{
+            .phone-div{
                 width: 100%;
             }
         }
-
     </style>
     <!-- Finish mobile compatibility -->
 
@@ -66,8 +50,8 @@
                             <mat-panel-title id="title">{{journal.title}}</mat-panel-title>
                         </mat-expansion-panel-header>
                         <mat-panel-description><Strong>Body: </Strong>{{journal.body}}</mat-panel-description>
-                    <!--    <mat-panel-description>Date: {{journal.time}}</mat-panel-description>
-                        <mat-panel-description><Strong>Category:</Strong> {{journal.category}}</mat-panel-description>  -->
+                        <!--    <mat-panel-description>Date: {{journal.time}}</mat-panel-description>
+                            <mat-panel-description><Strong>Category:</Strong> {{journal.category}}</mat-panel-description>  -->
                         <mat-panel-description><Strong>Link to the source:</Strong> <a href="{{journal.link}}"> Click Here</a></mat-panel-description>
                     </mat-expansion-panel>
 
@@ -91,64 +75,7 @@
 
 
 
-        <!-- Links Card -->
-        <div class="resources-div">
-            <mat-card class="resources-card">
-                <mat-card-title id="resources-title">Journals You May Like</mat-card-title>
-                <mat-card-subtitle>While most journals require pricy subscriptions to access their content, there are several prominent,
-                  <br>  reputable mental health journals that publish all their articles free online.</mat-card-subtitle>
-                <mat-card-content>
-                    <a href="http://www.asanet.org/research-and-publications/journals/society-and-mental-health">
-                        <img border="0" alt="W3Schools" src="../../assets/images/Journals/mental_health.png" width="90%" height="350px">
-                    </a>
 
-                    <br>
-
-                    <a href="https://link.springer.com/journal/10597">
-                        <img border="0" alt="W3Schools" src="../../assets/images/Journals/community.png" width="90%" height="300px">
-                    </a>
-<br>
-                    <p> Links to other Journals that you  may link.</p>
-                    <br>
-
-                    <a href="https://www.tandfonline.com/toc/rhpb20/current" target="_blank">Health Psychology and Behavioral Medicine | Publisher: Taylor & Francis
-
-                    </a>
-                    <br>
-                    <a href="https://www.frontiersin.org/journals/psychology" target="_blank">Frontiers in Psychology |
-                        Publisher: Frontiers</a>
-                    <br>
-
-                    <a href="https://ijmhs.biomedcentral.com/" target="_blank">International Journal of Mental Health Systems
-                        | Publisher: Biomed Central</a>
-                    <br>
-                    <a href="http://enlightenmentportal.com/development/self-esteem-building-activities/" target="_blank">Mental health evidence and research (MER) | Publisher: World health Organization</a>
-
-
-
-
-                    <br>
-
-                    <a href="https://capmh.biomedcentral.com/" target="_blank">Child and Adolescent Psychiatry and Mental Health
-                        | Publisher: Biomed Central</a>
-
-
-                    <br>
-
-                    <a href="https://bmcpsychiatry.biomedcentral.com/" target="_blank">BMC Psychiatry
-                        | Publisher: BioMed Central</a>
-                    <br>
-
-
-
-
-
-                    <mat-divider></mat-divider>
-
-
-                </mat-card-content>
-            </mat-card>
-        </div>
 
     </div>
 </main>
