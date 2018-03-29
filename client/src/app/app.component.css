@@ -15,7 +15,7 @@ li a {
     display: block;
     color: white;
     text-align: center;
-    padding: 25px 25px;
+    padding: 25px 18px;
     text-decoration: none;
     font-size: 25px;
 }
@@ -45,6 +45,14 @@ li a:hover {
 
 #summary.active{
     background-color: #B6A19E;
+}
+
+#resources.active{
+    background-color: #24305E;
+}
+
+#journal.active{
+    background-color: #1E392A;
 }
 
 

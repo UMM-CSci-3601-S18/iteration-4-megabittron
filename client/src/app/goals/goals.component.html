@@ -11,21 +11,23 @@
 
     <!-- Your Goals Section -->
         <div class="second-sec">
-        <mat-card id="mainCard"> <mat-card-title id="your-goals" class="your-goals-title">Your Goals</mat-card-title>
+        <mat-card id="mainCard"><mat-card-title id="your-goals" class="your-goals-title">Your Goals</mat-card-title>
             <mat-card-subtitle class="your-goals-title">All of your goals are displayed here.</mat-card-subtitle>
+            <div layout="row" layout-wrap>
                 <mat-card #elem class="goals" [id]="goal.name" *ngFor="let goal of this.filterGoals(goalGoal, goalCategory, goalName)">
 
-                    <mat-card-header>
-                        <mat-panel-title id="name">{{goal.name}}</mat-panel-title>
-                    </mat-card-header>
-                    <mat-card-content>Purpose of this goal: {{goal.goal}} <br>
-                    Category: {{goal.category}}</mat-card-content>
+                    <mat-card-content class="content"><h2><i>{{goal.name}}</i></h2>
+                        <i>Category:</i> {{goal.category}}<br>
+                        <i>Purpose of this goal:</i> {{goal.goal}}
+                    </mat-card-content>
+
                     <div id="editButton">
                         <button mat-icon-button (click)="openDialogEdit(goal._id['$oid'], goal.name, goal.category, goal.goal)">
                         <mat-icon>edit</mat-icon>
                     </button>
                     </div>
                 </mat-card>
+            </div>
             <ng-template #goalsError>
                 <mat-error>
                     There was a problem loading the goals. Possibly the server is down or perhaps there are network
