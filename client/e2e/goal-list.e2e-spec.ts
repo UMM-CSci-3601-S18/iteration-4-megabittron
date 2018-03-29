@@ -71,7 +71,7 @@ describe('Goal list', () => {
         }, 10000);
     });*/
 
-    it('Should actually edit the goal with the information we put in the fields', () => {
+   /* it('Should actually edit the goal with the information we put in the fields', () => {
         GoalPage.navigateTo();
         page.clickEditGoalButton();
         element(by.id('nameField')).clear();
@@ -84,7 +84,7 @@ describe('Goal list', () => {
         setTimeout(() => {
             expect(page.getUniqueGoal('Work for 10 hours')).toMatch('Work for 10 hours');
         }, 10000);
-    });
+    });*/
 
     it('Should allow us to put information into the fields of the add goal dialog', () => {
         GoalPage.navigateTo();
