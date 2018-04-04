@@ -148,7 +148,7 @@ public class GoalControllerSpec {
 
     @Test
     public void editGoalTest() {
-        String newId = goalController.editGoal("5ab53a8907d923f68d03e1a3", "To have a better environment", "Family", "Hug KK", true);
+        String newId = goalController.completeGoal("5ab53a8907d923f68d03e1a3", "To have a better environment", "Family", "Hug KK", true);
         assertNotNull("Edit goal should return true when goal is edited,", newId);
         Map<String, String[]> argMap = new HashMap<>();
         String jsonResult = goalController.getGoals(argMap);
@@ -170,28 +170,5 @@ public class GoalControllerSpec {
         BsonArray docs = parseJsonArray(jsonResult);
         assertEquals("Should be 3 goals", 3, docs.size());
 
-//        //Adding new goal
-//        //Then deleting newly added goal and see if it still works
-//        String newId = goalController.addNewGoal("Self defense from Bobs", "Injury", "Kick Bob", false);
-//
-//        assertNotNull("Add new goal should return true when goal is added,", newId);
-//
-//        Map<String, String[]> argMap2 = new HashMap<>();
-//        String jsonResult2 = goalController.getGoals(argMap2);
-//        BsonArray docs2 = parseJsonArray(jsonResult2);
-//        assertEquals("Should be 4 goals", 4, docs2.size());
-//
-//        Map<String, String[]> argMap4 = new HashMap<>();
-//        // Mongo in GoalController is doing a regex search so can just take a Java Reg. Expression
-//        // This will search the category for letters 'f' and 'c'.
-//        argMap4.put("purpose", new String[] { "[Self defense from Bobs]" });
-//        String jsonResult4 = goalController.getGoals(argMap4);
-//        BsonArray docs4 = parseJsonArray(jsonResult4);
-//
-//        //goalController.deleteGoal(newId);
-//        Map<String, String[]> argMap3 = new HashMap<>();
-//        String jsonResult3 = goalController.getGoals(argMap3);
-//        BsonArray docs3 = parseJsonArray(jsonResult3);
-//        assertEquals("Should be 3 goals", 1, docs4.size());
     }
 }

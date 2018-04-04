@@ -4,7 +4,6 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.util.JSON;
 import spark.Request;
 import spark.Response;
-import umm3601.database.GoalController;
 
 public class GoalRequestHandler {
     private final GoalController goalController;
@@ -107,14 +106,14 @@ public class GoalRequestHandler {
         }
     }
 
-    public String editGoal(Request req, Response res)
+    public String completeGoal(Request req, Response res)
     {
 
         res.type("application/json");
         Object o = JSON.parse(req.body());
         try {
             // if the object that is the JSON representation of the request body's class is the class BasicDBObject
-            // then try to add the item with itemController's editGoal method
+            // then try to add the item with itemController's completeGoal method
             if(o.getClass().equals(BasicDBObject.class)) {
                 try {
                     BasicDBObject dbO = (BasicDBObject) o;
@@ -125,8 +124,8 @@ public class GoalRequestHandler {
                     String name = dbO.getString("name");
                     Boolean status = dbO.getBoolean("status");
 
-                    System.err.println("Editing goal [purpose=" + purpose + ", category=" + category + ", name=" + name + ", status=" + status + ']');
-                    return goalController.editGoal(id, purpose, category, name, status).toString();
+                    System.out.println("Completing goal [purpose: " + purpose + ", category: " + category + ", name: " + name + ", status: " + status + ']');
+                    return goalController.completeGoal(id, purpose, category, name, status).toString();
                 } catch (NullPointerException e) {
                     System.err.println("A value was malformed or omitted, new item request failed.");
                     return null;

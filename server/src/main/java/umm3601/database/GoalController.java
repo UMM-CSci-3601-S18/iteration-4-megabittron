@@ -127,7 +127,7 @@ public class GoalController {
         }
     }
 
-    public String editGoal(String id, String purpose, String category, String name, Boolean status){
+    public String completeGoal(String id, String purpose, String category, String name, Boolean status){
         Document newGoal = new Document();
         newGoal.append("purpose", purpose);
         newGoal.append("category", category);
@@ -135,17 +135,14 @@ public class GoalController {
         newGoal.append("status", true);
         Document setQuery = new Document();
         setQuery.append("$set", newGoal);
-
         Document searchQuery = new Document().append("_id", new ObjectId(id));
-
-        System.out.println(id);
-
+        System.out.println("Goal id: " + id);
         try {
             goalCollection.updateOne(searchQuery, setQuery);
-            ObjectId id1 = searchQuery.getObjectId("_id");
-            System.err.println("Successfully updated goal [_id=" + id1 + ", purpose=" + purpose +
-                ", category=" + category + ", name=" + name + ", status=" + status + ']');
-            return JSON.serialize(id1);
+            ObjectId theID = searchQuery.getObjectId("_id");
+            System.out.println("Successfully completed goal [id: " + theID + ", purpose: " + purpose +
+                ", category: " + category + ", name: " + name + ", status: " + status + ']');
+            return JSON.serialize(theID);
         } catch(MongoException me) {
             me.printStackTrace();
             return null;
@@ -154,7 +151,7 @@ public class GoalController {
 
     public void deleteGoal(String id){
         Document searchQuery = new Document().append("_id", new ObjectId(id));
-
+        System.out.println("Goal id: " + id);
         try {
             goalCollection.deleteOne(searchQuery);
             ObjectId theID = searchQuery.getObjectId("_id");

@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public class JournalControllerBasicSpec {
+public class JournalControllerSpec {
     private JournalController journalController;
     private ObjectId journalsID;
 
@@ -97,7 +97,7 @@ public class JournalControllerBasicSpec {
         assertEquals("Should be 4", 4, docs.size());
         List<String> journals = docs
             .stream()
-            .map(JournalControllerBasicSpec::getTitle)
+            .map(JournalControllerSpec::getTitle)
             .sorted()
             .collect(Collectors.toList());
         List<String> expectedTitles = Arrays.asList("a", "b", "c", "d");
@@ -116,7 +116,7 @@ public class JournalControllerBasicSpec {
          assertEquals("Should be 3 journals", 3, docs.size());
          List<String> name = docs
              .stream()
-             .map(JournalControllerBasicSpec::getName)
+             .map(JournalControllerSpec::getName)
              .sorted()
              .collect(Collectors.toList());
          List<String> expectedName = Arrays.asList("Aurora","John","Kai");
@@ -144,7 +144,7 @@ public class JournalControllerBasicSpec {
 
         List<String> title = docs
             .stream()
-            .map(JournalControllerBasicSpec::getTitle)
+            .map(JournalControllerSpec::getTitle)
             .sorted()
             .collect(Collectors.toList());
         // name.get(0) says to get the name of the first person in the database,

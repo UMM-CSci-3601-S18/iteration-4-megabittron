@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
-public class ResourceControllerBasicSpec {
+public class ResourceControllerSpec {
     private ResourceController resourceController;
     private ObjectId testID;
     @Before
@@ -88,7 +88,7 @@ public class ResourceControllerBasicSpec {
         assertEquals("Should be 4", 4, docs.size());
         List<String> resources = docs
             .stream()
-            .map(ResourceControllerBasicSpec::getName)
+            .map(ResourceControllerSpec::getName)
             .sorted()
             .collect(Collectors.toList());
         List<String> expectedNames = Arrays.asList("a", "b", "c", "d");
@@ -106,7 +106,7 @@ public class ResourceControllerBasicSpec {
         assertEquals("Should be 1", 1, docs.size());
         List<String> name = docs
             .stream()
-            .map(ResourceControllerBasicSpec::getName)
+            .map(ResourceControllerSpec::getName)
             .sorted()
             .collect(Collectors.toList());
         List<String> expectedName = Arrays.asList("d");
