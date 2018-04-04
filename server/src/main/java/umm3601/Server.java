@@ -4,27 +4,19 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import spark.Request;
 import spark.Response;
-
+import java.io.IOException;
+import static spark.Spark.*;
+import static spark.debug.DebugScreen.enableDebugScreen;
 import umm3601.database.GoalController;
 import umm3601.database.GoalRequestHandler;
 import umm3601.database.JournalController;
 import umm3601.database.JournalRequestHandler;
-
-
 import umm3601.database.EmotionController;
 import umm3601.database.EmotionRequestHandler;
-
 import umm3601.database.ResourceController;
 import umm3601.database.ResourceRequestHandler;
-
-import java.io.IOException;
-
 import umm3601.database.SummaryController;
 import umm3601.database.SummaryRequestHandler;
-
-
-import static spark.Spark.*;
-import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Server {
     private static final String databaseName = "dev";
@@ -98,6 +90,7 @@ public class Server {
         get("api/goals/:id", goalRequestHandler::getGoalJSON);
         post("api/goals/new", goalRequestHandler::addNewGoal);
         post("api/goals/edit", goalRequestHandler::editGoal);
+        delete("api/goals/delete/:id", goalRequestHandler::deleteGoal);
 
         //List summary page
         get("api/summarys", summaryRequestHandler::getSummaries);

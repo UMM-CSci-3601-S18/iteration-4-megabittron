@@ -1,6 +1,7 @@
 export interface Goal {
     _id: string;
-    goal: string;
+    purpose: string;
     category: string;
     name: string;
+    status: boolean;
 }

@@ -14,7 +14,6 @@ export const routes: Routes = [
     {path: 'resources', component: ResourcesComponent},
     {path: 'goals', component: GoalsComponent},
     {path: 'journals', component: JournalsComponent},
-
     {path: 'summary', component: SummaryListComponent},
 ];
 
