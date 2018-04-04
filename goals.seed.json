@@ -1,26 +1,137 @@
-[{
-    "_id": {"$oid": "5ab41f14052e3c3302664b71"},
-    "goal": "To have a more sanitary living environment.",
-    "category": "Chores",
-    "name": "Wash the dishes."
-}, {
-    "_id": {"$oid": "5ab41f14aafb083c32f58245"},
-    "goal": "To improve my relationship with my mom.",
-    "category": "Family",
-    "name": "Call my mom."
-}, {
-    "_id": {"$oid": "5ab41f142cf45b9803f9fcd8"},
-    "goal": "To have a better connection with my brother.",
-    "category": "Family",
-    "name": "Write letter to brother."
-}, {
-    "_id": {"$oid": "5ab41f149d06a8beceb914ba"},
-    "goal": "To get some more sleep.",
-    "category": "Personal health.",
-    "name": "Go to bed early."
-}, {
-    "_id": {"$oid": "5ab41f14858815fffe2f16f8"},
-    "goal": "To have a safer driveway and sidewalk.",
-    "category": "Chores",
-    "name": "Shovel the snow."
-}]
+[
+    {
+        "_id": {
+            "$oid": "5ab53a89551a3d783599082c"
+        },
+        "purpose": "Improve relationship",
+        "category": "Family",
+        "name": "Call my mom",
+        "status": true
+    },
+    {
+        "_id": {
+            "$oid": "5ab53a890c2c77662aaf3801"
+        },
+        "purpose": "To feel closer to him",
+        "category": "Family",
+        "name": "Write letter to Grandpa",
+        "status": false
+    },
+    {
+        "_id": {
+            "$oid": "5ab53a8944c7c6b223090477"
+        },
+        "purpose": "To get more sleep",
+        "category": "Personal Health",
+        "name": "Go to bed early",
+        "status": true
+    },
+    {
+        "_id": {
+            "$oid": "5ab53a898e1620e3d7e48796"
+        },
+        "purpose": "To give her a piece of my mind",
+        "category": "Family",
+        "name": "Visit sister",
+        "status": false
+    },
+    {
+        "_id": {
+            "$oid": "5ab53a89cc803f25455d4523"
+        },
+        "purpose": "To relieve my anxiety",
+        "category": "Personal Health",
+        "name": "Text a hotline",
+        "status": false
+    },
+    {
+        "_id": {
+            "$oid": "5ab53a89d3902ecd0e105c32"
+        },
+        "purpose": "To be nice to him",
+        "category": "Family",
+        "name": "Say hello to my son",
+        "status": true
+    },
+    {
+        "_id": {
+            "$oid": "5ab53a894b28008631e64eb6"
+        },
+        "purpose": "To surprise Bobby",
+        "category": "Family",
+        "name": "Wave at my cousin",
+        "status": true
+    },
+    {
+        "_id": {
+            "$oid": "5ab53a89dd3b308feb0e14c3"
+        },
+        "purpose": "To have a better environment",
+        "category": "Chores",
+        "name": "Wash the dishes",
+        "status": false
+    },
+    {
+        "_id": {
+            "$oid": "5ab53a8944a44f6ec5e15853"
+        },
+        "purpose": "To have a better living space",
+        "category": "Chores",
+        "name": "Clean my room",
+        "status": false
+    },
+    {
+        "_id": {
+            "$oid": "5ab53a89ea32d59c4e81d5f0"
+        },
+        "purpose": "Do what the doctor says",
+        "category": "Personal Health",
+        "name": "Take my meds",
+        "status": false
+    },
+    {
+        "_id": {
+            "$oid": "5ab53a8938c8106c85b592a4"
+        },
+        "purpose": "To safely park my car out of the snow",
+        "category": "Chores",
+        "name": "Shovel driveway",
+        "status": true
+    },
+    {
+        "_id": {
+            "$oid": "5ab53a898f915a49a7cc8e4c"
+        },
+        "purpose": "Keep my teeth nice",
+        "category": "Personal Health",
+        "name": "Brush my teeth every day",
+        "status": false
+    },
+    {
+        "_id": {
+            "$oid": "5ab53a892beb1a12c3cb8cd0"
+        },
+        "purpose": "Tell her about my new job",
+        "category": "Family",
+        "name": "Write letter to Aunt May",
+        "status": false
+    },
+    {
+        "_id": {
+            "$oid": "5ab53a8907d923f68d03e1a3"
+        },
+        "purpose": "Tell her about my awards",
+        "category": "Family",
+        "name": "Email Grandma",
+        "status": true
+    },
+    {
+        "_id": {
+            "$oid": "5ab53a897a4e4fb3a641aa89"
+        },
+        "purpose": "Keep my clothes clean",
+        "category": "Chores",
+        "name": "Do laundry",
+        "status": false
+    }
+]

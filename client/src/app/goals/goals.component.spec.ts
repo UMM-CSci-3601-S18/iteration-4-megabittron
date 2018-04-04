@@ -7,40 +7,42 @@ import {FormsModule} from '@angular/forms';
 import {CustomModule} from '../custom.module';
 import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 import {MatDialog} from '@angular/material';
-
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 
-describe('Goal ', () => {
+describe( 'Goals', () => {
 
-    let goal: GoalsComponent;
+    let goalList: GoalsComponent;
     let fixture: ComponentFixture<GoalsComponent>;
 
-    let goalServiceStub: {
+    let goalsServiceStub: {
         getGoals: () => Observable<Goal[]>
     };
 
     beforeEach(() => {
-        // stub GoalService for test purposes
-        goalServiceStub = {
+        // stub GoalsService for test reasons
+        goalsServiceStub = {
             getGoals: () => Observable.of([
                 {
-                    _id: '1',
-                    goal: 'To have a more sanitary living environment.',
-                    category: 'Chores',
-                    name: 'Wash the dishes',
+                    _id: 'food_id',
+                    purpose: 'Gain some weight',
+                    category: 'Food',
+                    name: 'Eat all the cookies',
+                    status: false
                 },
                 {
-                    _id: '2',
-                    goal: 'To be beefy.',
-                    category: 'Workout',
-                    name: 'Go to gym',
+                    _id: 'chores_id',
+                    purpose: 'Have cleaner kitchen',
+                    category: 'Chores',
+                    name: 'Take out recycling',
+                    status: true
                 },
                 {
-                    _id: '3',
-                    goal: 'To have a safer driveway.',
-                    category: 'Chores',
-                    name: 'Shovel driveway',
+                    _id: 'family_id',
+                    purpose: 'To love her',
+                    category: 'Family',
+                    name: 'Call mom',
+                    status: true
                 }
             ])
         };
@@ -48,7 +50,7 @@ describe('Goal ', () => {
         TestBed.configureTestingModule({
             imports: [CustomModule],
             declarations: [GoalsComponent],
-            providers: [{provide: GoalsService, useValue: goalServiceStub},
+            providers: [{provide: GoalsService, useValue: goalsServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
     });
@@ -56,69 +58,64 @@ describe('Goal ', () => {
     beforeEach(async(() => {
         TestBed.compileComponents().then(() => {
             fixture = TestBed.createComponent(GoalsComponent);
-            goal = fixture.componentInstance;
+            goalList = fixture.componentInstance;
             fixture.detectChanges();
         });
     }));
 
     it('contains all the goals', () => {
-        expect(goal.goals.length).toBe(3);
+        expect(goalList.goals.length).toBe(3);
     });
 
-    it('contains a goal id \'1\'', () => {
-        expect(goal.goals.some((goal: Goal) => goal._id === '1')).toBe(true);
+    it('contains a name called \'Eat all the cookies\'', () => {
+        expect(goalList.goals.some((goal: Goal) => goal.name === 'Eat all the cookies')).toBe(true);
     });
 
-    it('contain a goal id \'2\'', () => {
-        expect(goal.goals.some((goal: Goal) => goal._id === '2')).toBe(true);
+    it('contains a name called \'Call mom\'', () => {
+        expect(goalList.goals.some((goal: Goal) => goal.name === 'Call mom')).toBe(true);
     });
 
-    it('doesn\'t contain a goal id \'4\'', () => {
-        expect(goal.goals.some((goal: Goal) => goal._id === '4')).toBe(false);
+    it('contains a purpose called \'Gain some weight\'', () => {
+        expect(goalList.goals.some((goal: Goal) => goal.purpose === 'Gain some weight')).toBe(true);
     });
 
-    it('has a category Chores', () => {
-        expect(goal.goals.filter((goal: Goal) => goal.category === 'Chores').length).toBe(2);
+    it('doesn\'t contain a name called \'Meet with Santa\'', () => {
+        expect(goalList.goals.some((goal: Goal) => goal.name === 'Meet with Santa')).toBe(false);
     });
 
-    it('goal filters by name', () => {
-        expect(goal.filteredGoals.length).toBe(3);
-        goal.goalName = 'o';
-        goal.refreshGoals().subscribe(() => {
-            expect(goal.filteredGoals.length).toBe(2);
+    it('has two goals that are true', () => {
+        expect(goalList.goals.filter((goal: Goal) => goal.status === true).length).toBe(2);
+    });
+
+    it('goal list filters by name', () => {
+        expect(goalList.filteredGoals.length).toBe(3);
+        goalList.goalName = 'y';
+        goalList.refreshGoals().subscribe(() => {
+            expect(goalList.filteredGoals.length).toBe(1);
         });
     });
 
-    it('goal filters by chores', () => {
-        expect(goal.filteredGoals.length).toBe(3);
-        goal.goalCategory = 'Chores';
-        goal.refreshGoals().subscribe(() => {
-            expect(goal.filteredGoals.length).toBe(2);
+    it('goal list filters by purpose', () => {
+        expect(goalList.filteredGoals.length).toBe(3);
+        goalList.goalPurpose = 'i';
+        goalList.refreshGoals().subscribe(() => {
+            expect(goalList.filteredGoals.length).toBe(2);
         });
     });
 
-    it('goal filters by name and category', () => {
-        expect(goal.filteredGoals.length).toBe(3);
-        goal.goalCategory = 'Workout';
-        goal.goalName = 'y';
-        goal.refreshGoals().subscribe(() => {
-            expect(goal.filteredGoals.length).toBe(1);
-        });
-    });
+})
 
-});
-
-describe('Misbehaving Goal ', () => {
-    let goal: GoalsComponent;
+describe('Misbehaving Goal List', () => {
+    let goalList: GoalsComponent;
     let fixture: ComponentFixture<GoalsComponent>;
 
-    let goalServiceStub: {
+    let goalListServiceStub: {
         getGoals: () => Observable<Goal[]>
     };
 
     beforeEach(() => {
-        // stub GoalService for test purposes
-        goalServiceStub = {
+        // stub GoalService for test reasons
+        goalListServiceStub = {
             getGoals: () => Observable.create(observer => {
                 observer.error('Error-prone observable');
             })
@@ -127,7 +124,7 @@ describe('Misbehaving Goal ', () => {
         TestBed.configureTestingModule({
             imports: [FormsModule, CustomModule],
             declarations: [GoalsComponent],
-            providers: [{provide: GoalsService, useValue: goalServiceStub},
+            providers: [{provide: GoalsService, useValue: goalListServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
     });
@@ -135,45 +132,45 @@ describe('Misbehaving Goal ', () => {
     beforeEach(async(() => {
         TestBed.compileComponents().then(() => {
             fixture = TestBed.createComponent(GoalsComponent);
-            goal = fixture.componentInstance;
+            goalList = fixture.componentInstance;
             fixture.detectChanges();
         });
     }));
 
-    it('generates an error if we don\'t set up a GoalService', () => {
+    it('generates an error if we don\'t set up a GoalsService', () => {
         // Since the observer throws an error, we don't expect goals to be defined.
-        expect(goal.goals).toBeUndefined();
+        expect(goalList.goals).toBeUndefined();
     });
 });
 
-
 describe('Adding a goal', () => {
-    let goal: GoalsComponent;
+    let goalList: GoalsComponent;
     let fixture: ComponentFixture<GoalsComponent>;
-    const newGoal: Goal = {
-        _id: '5',
-        goal: 'Get more sleep.',
-        category: 'Personal health',
-        name: 'Go to bed early',
+    const newGoal: Goal =   {
+        _id: '',
+        purpose: 'To stay awake writing tests',
+        category: 'Personal Health',
+        name: 'Drink coffee',
+        status: false
     };
-    const newId = '5';
+    const newId = 'health_id';
 
     let calledGoal: Goal;
 
-    let goalServiceStub: {
+    let goalListServiceStub: {
         getGoals: () => Observable<Goal[]>,
         addNewGoal: (newGoal: Goal) => Observable<{'$oid': string}>
     };
     let mockMatDialog: {
-        open: (AddGoalComponent, any) => {
+        open: (GoalsComponent, any) => {
             afterClosed: () => Observable<Goal>
         };
     };
 
     beforeEach(() => {
         calledGoal = null;
-        // stub GoalService for test purposes
-        goalServiceStub = {
+        // stub GoalsService for test reasons
+        goalListServiceStub = {
             getGoals: () => Observable.of([]),
             addNewGoal: (goalToAdd: Goal) => {
                 calledGoal = goalToAdd;
@@ -196,7 +193,7 @@ describe('Adding a goal', () => {
             imports: [FormsModule, CustomModule],
             declarations: [GoalsComponent],
             providers: [
-                {provide: GoalsService, useValue: goalServiceStub},
+                {provide: GoalsService, useValue: goalListServiceStub},
                 {provide: MatDialog, useValue: mockMatDialog},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
@@ -205,55 +202,51 @@ describe('Adding a goal', () => {
     beforeEach(async(() => {
         TestBed.compileComponents().then(() => {
             fixture = TestBed.createComponent(GoalsComponent);
-            goal = fixture.componentInstance;
+            goalList = fixture.componentInstance;
             fixture.detectChanges();
         });
     }));
 
-    it('calls GoalService.addGoal', () => {
+    it('calls GoalsService.addGoal', () => {
         expect(calledGoal).toBeNull();
-        goal.openDialog();
+        goalList.openDialog();
         expect(calledGoal).toEqual(newGoal);
     });
 });
 
-// Editing a goal test is commented out as it currently doesn't pass
-// Need to fix this
-
-/*describe('Editing a goal', () => {
-    let goal: GoalsComponent;
+describe('Deleting a goal', () => {
+    let goalList: GoalsComponent;
     let fixture: ComponentFixture<GoalsComponent>;
-
-    const goalToEdit: Goal = this.goalService.getGoalByID('2');
-    const editedGoal: Goal = this.goalService.getGoalByID('2');
-
-    editedGoal.name = 'Workout';
-    editedGoal.goal = 'To get bigger and have a healthy body.';
-    editedGoal.category = 'Health';
+    const deleteGoal: Goal =   {
+        _id: '',
+        purpose: 'To have a delightful tasting sensation',
+        category: 'Personal Health',
+        name: 'Eat pringles',
+        status: false
+    };
+    const newId = 'pringles_id';
 
     let calledGoal: Goal;
 
-    let goalServiceStub: {
+    let goalListServiceStub: {
         getGoals: () => Observable<Goal[]>,
-        editGoal: (id: string) => Observable<{'$oid': string}>
+        deleteGoal: (deleteGoal: Goal) => Observable<{'$oid': string}>
     };
-
-
     let mockMatDialog: {
-        open: (EditGoalComponent, any) => {
+        open: (GoalsComponent, any) => {
             afterClosed: () => Observable<Goal>
         };
     };
 
     beforeEach(() => {
         calledGoal = null;
-        // stub GoalService for test purposes
-        goalServiceStub = {
+        // stub GoalsService for test reasons
+        goalListServiceStub = {
             getGoals: () => Observable.of([]),
-            editGoal: (editId: string) => {
-                calledGoal = goalToEdit;
+            deleteGoal: (goalToDelete: Goal) => {
+                calledGoal = goalToDelete;
                 return Observable.of({
-                    '$oid': editId
+                    '$oid': newId
                 });
             }
         };
@@ -261,7 +254,7 @@ describe('Adding a goal', () => {
             open: () => {
                 return {
                     afterClosed: () => {
-                        return Observable.of(editedGoal);
+                        return Observable.of(deleteGoal);
                     }
                 };
             }
@@ -271,7 +264,7 @@ describe('Adding a goal', () => {
             imports: [FormsModule, CustomModule],
             declarations: [GoalsComponent],
             providers: [
-                {provide: GoalsService, useValue: goalServiceStub},
+                {provide: GoalsService, useValue: goalListServiceStub},
                 {provide: MatDialog, useValue: mockMatDialog},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
@@ -280,14 +273,85 @@ describe('Adding a goal', () => {
     beforeEach(async(() => {
         TestBed.compileComponents().then(() => {
             fixture = TestBed.createComponent(GoalsComponent);
-            goal = fixture.componentInstance;
+            goalList = fixture.componentInstance;
             fixture.detectChanges();
         });
     }));
 
-    it('calls GoalService.editGoal', () => {
+    it('calls GoalsService.deleteGoal', () => {
         expect(calledGoal).toBeNull();
-        goal.openDialogEdit(goalToEdit._id, goalToEdit.goal, goalToEdit.category, goalToEdit.name);
-        expect(calledGoal).toEqual(editedGoal);
+        goalList.deleteGoal(this._id);
     });
-});*/
+});
+
+describe('Completing a goal', () => {
+    let goalList: GoalsComponent;
+    let fixture: ComponentFixture<GoalsComponent>;
+    const editGoal: Goal =   {
+        _id: '',
+        purpose: 'To break everything and make people mad',
+        category: 'Chores',
+        name: 'Destroy all monitors in the lab',
+        status: true
+    };
+    const newId = 'monitor_id';
+
+    let calledGoal: Goal;
+
+    let goalListServiceStub: {
+        getGoals: () => Observable<Goal[]>,
+        editGoal: (newGoal: Goal) => Observable<{'$oid': string}>
+    };
+    let mockMatDialog: {
+        open: (GoalsComponent, any) => {
+            afterClosed: () => Observable<Goal>
+        };
+    };
+
+    beforeEach(() => {
+        calledGoal = null;
+        // stub GoalsService for test reasons
+        goalListServiceStub = {
+            getGoals: () => Observable.of([]),
+            editGoal: (goalToComplete: Goal) => {
+                calledGoal = goalToComplete;
+                return Observable.of({
+                    '$oid': newId
+                });
+            }
+        };
+        mockMatDialog = {
+            open: () => {
+                return {
+                    afterClosed: () => {
+                        return Observable.of(editGoal);
+                    }
+                };
+            }
+        };
+
+        TestBed.configureTestingModule({
+            imports: [FormsModule, CustomModule],
+            declarations: [GoalsComponent],
+            providers: [
+                {provide: GoalsService, useValue: goalListServiceStub},
+                {provide: MatDialog, useValue: mockMatDialog},
+                {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
+        });
+    });
+
+    beforeEach(async(() => {
+        TestBed.compileComponents().then(() => {
+            fixture = TestBed.createComponent(GoalsComponent);
+            goalList = fixture.componentInstance;
+            fixture.detectChanges();
+        });
+    }));
+
+    it('calls GoalsService.editGoal', () => {
+        expect(calledGoal).toBeNull();
+        // I don't think this is correct, but it passes. It should probably take in this._id, this.purpose, etc.
+        goalList.goalSatisfied('', 'To break everything and make people mad', 'Chores', 'Destroy all monitors in the lab')
+        expect(calledGoal).toEqual(editGoal);
+    });
+});

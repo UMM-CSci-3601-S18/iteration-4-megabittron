@@ -4,7 +4,7 @@ import {Goal} from './goal';
 import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
 import {AddGoalComponent} from './add-goal.component';
-import {EditGoalComponent} from "./edit-goal.component";
+import {MatSnackBar} from '@angular/material';
 
 @Component({
     selector: 'app-goals-component',
@@ -18,16 +18,17 @@ export class GoalsComponent implements OnInit {
     public filteredGoals: Goal[];
 
     // These are the target values used in searching.
-    // We should rename them to make that clearer.
-    public goalGoal: string;
+    public goalPurpose: string;
     public goalCategory: string;
     public goalName: string;
+    public goalStatus: string;
+    showPage = false;
 
     // The ID of the goal
     private highlightedID: {'$oid': string} = { '$oid': '' };
 
     // Inject the GoalsService into this component.
-    constructor(public goalService: GoalsService, public dialog: MatDialog) {
+    constructor(public goalService: GoalsService, public dialog: MatDialog, public snackBar: MatSnackBar ) {
 
     }
 
@@ -36,9 +37,9 @@ export class GoalsComponent implements OnInit {
     }
 
     openDialog(): void {
-        const newGoal: Goal = {_id: '', goal:'', category:'', name:''};
+        const newGoal: Goal = {_id: '', name:'', category:'', purpose:'', status: false};
         const dialogRef = this.dialog.open(AddGoalComponent, {
-            width: '500px',
+            width: '300px',
             data: { goal : newGoal }
         });
 
@@ -56,37 +57,50 @@ export class GoalsComponent implements OnInit {
         });
     }
 
-    openDialogEdit(_id: string, goal: string, category: string, name: string): void {
-        const newGoal: Goal = {_id: _id, goal: name, category: category, name: goal};
-        const dialogRef = this.dialog.open(EditGoalComponent, {
-            width: '500px',
-            data: { goal : newGoal }
-        });
+    deleteGoal(_id: string){
+        this.goalService.deleteGoal(_id).subscribe(
+            goals => {
+                this.refreshGoals();
+                this.loadService();
+            },
+            err => {
+                console.log(err);
+                this.refreshGoals();
+                this.loadService();
+            }
+        );
+    }
 
-        dialogRef.afterClosed().subscribe(result => {
-            this.goalService.editGoal(result).subscribe(
-                editGoalResult => {
-                    //this.highlightedID = editGoalResult;
-                    this.refreshGoals();
-                },
-                err => {
-                    // This should probably be turned into some sort of meaningful response.
-                    console.log('There was an error editing the goal.');
-                    console.log('The error was ' + JSON.stringify(err));
-                });
+    goalSatisfied(_id: string, thePurpose: string, theCategory: string, theName) {
+        const updatedGoal: Goal = {_id: _id, purpose: thePurpose, category: theCategory, name: theName, status: true};
+        this.goalService.editGoal(updatedGoal).subscribe(
+            editGoalResult => {
+                this.highlightedID = editGoalResult;
+                this.refreshGoals();
+            },
+            err => {
+                console.log('There was an error editing the goal.');
+                console.log('The error was ' + JSON.stringify(err));
+            });
+    }
+
+    openSnackBar(message: string, action: string) {
+        this.snackBar.open(message, action, {
+            duration: 2000,
         });
     }
 
-    public filterGoals(searchGoal: string, searchCategory: string, searchName: string): Goal[] {
+    public filterGoals(searchPurpose: string, searchCategory: string,
+                       searchName: string, searchStatus: string): Goal[] {
 
         this.filteredGoals = this.goals;
 
-        // Filter by goal
-        if (searchGoal != null) {
-            searchGoal = searchGoal.toLocaleLowerCase();
+        // Filter by purpose
+        if (searchPurpose != null) {
+            searchPurpose = searchPurpose.toLocaleLowerCase();
 
             this.filteredGoals = this.filteredGoals.filter(goal => {
-                return !searchGoal || goal.goal.toLowerCase().indexOf(searchGoal) !== -1;
+                return !searchPurpose || goal.purpose.toLowerCase().indexOf(searchPurpose) !== -1;
             });
         }
 
@@ -108,6 +122,15 @@ export class GoalsComponent implements OnInit {
             });
         }
 
+        // Filter by status
+        if (searchStatus != null) {
+            searchStatus = searchStatus.toLocaleLowerCase();
+
+            this.filteredGoals = this.filteredGoals.filter(goal => {
+                return !searchStatus || goal.name.toLowerCase().indexOf(searchStatus) !== -1;
+            });
+        }
+
         return this.filteredGoals;
     }
 
@@ -126,7 +149,7 @@ export class GoalsComponent implements OnInit {
         goalObservable.subscribe(
             goals => {
                 this.goals = goals;
-                this.filterGoals(this.goalGoal, this.goalCategory, this.goalName);
+                this.filterGoals(this.goalPurpose, this.goalCategory, this.goalName, this.goalStatus);
             },
             err => {
                 console.log(err);
@@ -147,9 +170,9 @@ export class GoalsComponent implements OnInit {
         );
     }
 
-
     ngOnInit(): void {
         this.refreshGoals();
         this.loadService();
     }
+
 }

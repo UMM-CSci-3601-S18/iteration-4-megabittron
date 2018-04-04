@@ -8,7 +8,7 @@ import {
     MatInputModule, MatMenuModule, MatSidenavModule, MatToolbarModule,
     MatExpansionModule, MatTooltipModule, MatDialogModule,
     MatCheckboxModule,MatSliderModule,MatRadioModule,MatSnackBarModule,
-    MatDatepickerModule, MatNativeDateModule, MatTabsModule,
+    MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatSelectModule,
 } from '@angular/material';
 
 import { FlexLayoutModule, } from '@angular/flex-layout';
@@ -44,6 +44,7 @@ const MATERIAL_MODULES: any[] = [
     MatNativeDateModule,
     MatSnackBarModule,
     MatTabsModule,
+    MatSelectModule,
 ];
 
 const COVALENT_MODULES: any[] = [
