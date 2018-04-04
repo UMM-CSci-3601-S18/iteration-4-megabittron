@@ -13,10 +13,6 @@
     border-style: solid;
 }
 
-.whole-body {
-    background-color: #24305E;
-}
-
 .example-header-image {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
@@ -24,7 +20,6 @@
 
 .best-div {
     padding: 25px;
-    background-color: #24305E;
 }
 
 #phone-icon {
