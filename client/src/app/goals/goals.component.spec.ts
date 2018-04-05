@@ -287,7 +287,7 @@ describe('Deleting a goal', () => {
 describe('Completing a goal', () => {
     let goalList: GoalsComponent;
     let fixture: ComponentFixture<GoalsComponent>;
-    const editGoal: Goal =   {
+    const completeGoal: Goal =   {
         _id: '',
         purpose: 'To break everything and make people mad',
         category: 'Chores',
@@ -300,7 +300,7 @@ describe('Completing a goal', () => {
 
     let goalListServiceStub: {
         getGoals: () => Observable<Goal[]>,
-        editGoal: (newGoal: Goal) => Observable<{'$oid': string}>
+        completeGoal: (newGoal: Goal) => Observable<{'$oid': string}>
     };
     let mockMatDialog: {
         open: (GoalsComponent, any) => {
@@ -313,7 +313,7 @@ describe('Completing a goal', () => {
         // stub GoalsService for test reasons
         goalListServiceStub = {
             getGoals: () => Observable.of([]),
-            editGoal: (goalToComplete: Goal) => {
+            completeGoal: (goalToComplete: Goal) => {
                 calledGoal = goalToComplete;
                 return Observable.of({
                     '$oid': newId
@@ -324,7 +324,7 @@ describe('Completing a goal', () => {
             open: () => {
                 return {
                     afterClosed: () => {
-                        return Observable.of(editGoal);
+                        return Observable.of(completeGoal);
                     }
                 };
             }
@@ -348,10 +348,10 @@ describe('Completing a goal', () => {
         });
     }));
 
-    it('calls GoalsService.editGoal', () => {
+    it('calls GoalsService.completeGoal', () => {
         expect(calledGoal).toBeNull();
         // I don't think this is correct, but it passes. It should probably take in this._id, this.purpose, etc.
         goalList.goalSatisfied('', 'To break everything and make people mad', 'Chores', 'Destroy all monitors in the lab')
-        expect(calledGoal).toEqual(editGoal);
+        expect(calledGoal).toEqual(completeGoal);
     });
 });

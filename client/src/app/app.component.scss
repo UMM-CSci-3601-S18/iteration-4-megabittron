@@ -1,0 +1,30 @@
+@import "../theme";
+
+.nav-things {
+    margin: 0;
+    text-align: left;
+    background-color: #03A9F4;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+li {
+    display: inline-block;
+}
+
+li a {
+    color: white;
+}
+
+.nav-button {
+/*    width: 125px;
+    height: 50px;*/
+    font-size: 20px;
+    padding: 10px;
+}
+
+#mobile-home {
+    align: right;
+    text-align: right;
+    float: right;
+}

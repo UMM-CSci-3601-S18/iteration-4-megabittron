@@ -3,7 +3,6 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {Goal} from './goal';
 import {MatSnackBar} from '@angular/material';
 
-
 @Component({
     selector: 'app-add-goal.component',
     templateUrl: 'add-goal.component.html',
