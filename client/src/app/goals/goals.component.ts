@@ -75,12 +75,12 @@ export class GoalsComponent implements OnInit {
     goalSatisfied(_id: string, thePurpose: string, theCategory: string, theName) {
         const updatedGoal: Goal = {_id: _id, purpose: thePurpose, category: theCategory, name: theName, status: true};
         this.goalService.completeGoal(updatedGoal).subscribe(
-            editGoalResult => {
-                this.highlightedID = editGoalResult;
+            completeGoalResult => {
+                this.highlightedID = completeGoalResult;
                 this.refreshGoals();
             },
             err => {
-                console.log('There was an error editing the goal.');
+                console.log('There was an error completing the goal.');
                 console.log('The error was ' + JSON.stringify(err));
             });
     }
