@@ -28,21 +28,33 @@ describe( 'Goals', () => {
                     purpose: 'Gain some weight',
                     category: 'Food',
                     name: 'Eat all the cookies',
-                    status: false
+                    status: false,
+                    start: "2018-04-05T18:56:24.702Z",
+                    end: "2018-05-05T18:56:24.702Z",
+                    next: "2018-05-05T18:56:24.702Z",
+                    frequency: "Daily"
                 },
                 {
                     _id: 'chores_id',
                     purpose: 'Have cleaner kitchen',
                     category: 'Chores',
                     name: 'Take out recycling',
-                    status: true
+                    status: true,
+                    start: "2018-04-05T18:56:24.702Z",
+                    end: "2018-05-05T18:56:24.702Z",
+                    next: "2018-05-05T18:56:24.702Z",
+                    frequency: "Daily"
                 },
                 {
                     _id: 'family_id',
                     purpose: 'To love her',
                     category: 'Family',
                     name: 'Call mom',
-                    status: true
+                    status: true,
+                    start: "2018-04-05T18:56:24.702Z",
+                    end: "2018-05-05T18:56:24.702Z",
+                    next: "2018-05-05T18:56:24.702Z",
+                    frequency: "Daily"
                 }
             ])
         };
@@ -151,7 +163,11 @@ describe('Adding a goal', () => {
         purpose: 'To stay awake writing tests',
         category: 'Personal Health',
         name: 'Drink coffee',
-        status: false
+        status: false,
+        start: "2018-04-05T18:56:24.702Z",
+        end: "2018-05-05T18:56:24.702Z",
+        next: "2018-05-05T18:56:24.702Z",
+        frequency: "Daily"
     };
     const newId = 'health_id';
 
@@ -222,7 +238,11 @@ describe('Deleting a goal', () => {
         purpose: 'To have a delightful tasting sensation',
         category: 'Personal Health',
         name: 'Eat pringles',
-        status: false
+        status: false,
+        start: "2018-04-05T18:56:24.702Z",
+        end: "2018-05-05T18:56:24.702Z",
+        next: "2018-05-05T18:56:24.702Z",
+        frequency: "Daily"
     };
     const newId = 'pringles_id';
 
@@ -292,7 +312,11 @@ describe('Completing a goal', () => {
         purpose: 'To break everything and make people mad',
         category: 'Chores',
         name: 'Destroy all monitors in the lab',
-        status: true
+        status: true,
+        start: "2018-04-05T18:56:24.702Z",
+        end: "2018-05-05T18:56:24.702Z",
+        next: "2018-05-05T18:56:24.702Z",
+        frequency: "Daily"
     };
     const newId = 'monitor_id';
 
