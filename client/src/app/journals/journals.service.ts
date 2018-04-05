@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-
 import {Observable} from 'rxjs/Observable';
-
 import {Journal} from './journal';
 import {environment} from '../../environments/environment';
 
@@ -15,35 +13,32 @@ export class JournalsService {
     constructor(private http: HttpClient) {
     }
 
-    getJournals(journalCategory?: string): Observable<Journal[]> {
-        this.filterByCategory(journalCategory);
+    getJournals(journalSubject?: string): Observable<Journal[]> {
+        this.filterBySubject(journalSubject);
         return this.http.get<Journal[]>(this.journalUrl);
     }
 
-    // This isn't used, but may be useful for future iterations.
-    getJournalByID(id: string): Observable<Journal> {
+    getJournalById(id: string): Observable<Journal> {
         return this.http.get<Journal>(this.journalUrl + '/' + id);
     }
 
-    // Unfortunately we did not get to implementing specific filters,
-    // but this may useful in the future.
-    filterByCategory(journalCategory?: string): void {
-        if (!(journalCategory == null || journalCategory === '')) {
-            if (this.parameterPresent('category=') ) {
-                // there was a previous search by category that we need to clear
-                this.removeParameter('category=');
+    filterBySubject(journalSubject?: string): void {
+        if (!(journalSubject == null || journalSubject === '')) {
+            if (this.parameterPresent('subject=') ) {
+                // there was a previous search by company that we need to clear
+                this.removeParameter('subject=');
             }
             if (this.journalUrl.indexOf('?') !== -1) {
                 // there was already some information passed in this url
-                this.journalUrl += 'category=' + journalCategory + '&';
+                this.journalUrl += 'subject=' + journalSubject + '&';
             } else {
                 // this was the first bit of information to pass in the url
-                this.journalUrl += '?category=' + journalCategory + '&';
+                this.journalUrl += '?subject=' + journalSubject + '&';
             }
         } else {
             // there was nothing in the box to put onto the URL... reset
-            if (this.parameterPresent('category=')) {
-                let start = this.journalUrl.indexOf('category=');
+            if (this.parameterPresent('subject=')) {
+                let start = this.journalUrl.indexOf('subject=');
                 const end = this.journalUrl.indexOf('&', start);
                 if (this.journalUrl.substring(start - 1, start) === '?') {
                     start = start - 1;
@@ -69,15 +64,26 @@ export class JournalsService {
         this.journalUrl = this.journalUrl.substring(0, start) + this.journalUrl.substring(end);
     }
 
-    addNewJournal(newJournal: Journal): Observable<{'$oid': string}> {
+    addNewJournal(newJournal : Journal): Observable<{'$oid': string}> {
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             }),
         };
 
-        // Send post request to add a new journal with the user data as the body with specified headers.
+        // Send post request to add a new journal with the journal data as the body with specified headers.
         return this.http.post<{'$oid': string}>(this.journalUrl + '/new', newJournal, httpOptions);
     }
-}
 
+    editJournal(id : Journal): Observable<{'$oid': string}> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            }),
+        };
+
+        console.log(id);
+        // Send post request to add a new journal with the journal data as the body with specified headers.
+        return this.http.post<{'$oid': string}>(this.journalUrl + '/edit', id, httpOptions);
+    }
+}

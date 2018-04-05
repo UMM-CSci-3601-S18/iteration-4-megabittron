@@ -2,21 +2,6 @@ import {JournalPage} from './journal-list.po';
 import {browser, protractor, element, by} from 'protractor';
 import {Key} from 'selenium-webdriver';
 
-const origFn = browser.driver.controlFlow().execute;
-
-// https://hassantariqblog.wordpress.com/2015/11/09/reduce-speed-of-angular-e2e-protractor-tests/
-// browser.driver.controlFlow().execute = function () {
-//     let args = arguments;
-//
-//     // queue 100ms wait between test
-//     // This delay is only put here so that you can watch the browser do its thing.
-//     // If you're tired of it taking long you can remove this call
-//     origFn.call(browser.driver.controlFlow(), function () {
-//         return protractor.promise.delayed(100);
-//     });
-//
-//     return origFn.apply(browser.driver.controlFlow(), args);
-// };
 describe('Journal list', () => {
     let page: JournalPage;
 
@@ -24,50 +9,74 @@ describe('Journal list', () => {
         page = new JournalPage();
     });
 
+    it('Should get and highlight Goals title attribute ', () => {
+        page.navigateTo();
+        expect(page.getJournalManageTitle()).toEqual('Your Journals');
+    });
 
     it('Should have an add journal button', () => {
         page.navigateTo();
         expect(page.buttonExists()).toBeTruthy();
     });
 
-    it('Should have 5 journals', () => {
+    it('Total number of journals should be 10', () => {
         page.navigateTo();
-        page.getJournals().then(function (journals) {
-            expect(journals.length).toBe(5);
-        });
+        expect(page.getJournals()).toEqual(10);
     });
 
+    it('Should type something in filter subject box and check that it returned correct element', () => {
+        page.navigateTo();
+        page.typeASubject('Wed');
+        expect(page.getUniqueJournal('58af3a600343927e48e8722c')).toEqual('Wednesday');
+    });
+
+    it('Should type something in filter body box and check that it returned correct element', () => {
+        page.navigateTo();
+        page.typeABody('deserunt est');
+        expect(page.getUniqueJournal('5abab410fc453e83fafbd7f1')).toEqual('Hayes Knowles');
+    });
+
+    it('Should filter by subject and body and check that it returned correct element', () => {
+        page.navigateTo();
+        page.typeASubject('os')
+        page.typeABody('comm');
+        expect(page.getUniqueJournal('5abab410d9dbead292bb89fc')).toEqual('Osborne Henderson');
+    });
+
+    // This test fails. Does not find the id for some reason. I blame Kyle!
+    // -John Hoff, 4/4/18
+    it('Should click on a unique journal in the accordion', () => {
+        page.navigateTo();
+        page.clickUniqueJournal("5abab41029fb8de16b8a3a10")
+    });
 
     it('Should open a dialog box when add journal button is clicked', () => {
         page.navigateTo();
-        expect(element(by.css('the-journal-button')).isPresent()).toBeFalsy('There should not be a modal window yet');
+        expect(element(by.className('add-journal')).isPresent()).toBeFalsy('There should not be a modal window yet');
+        element(by.className('journal-button')).click();
+        expect(element(by.className('add-journal')).isPresent()).toBeTruthy('There should be a modal window now');
     });
 
-    it('Should have the journal I went to work.', () => {
-        page.navigateTo();
-        expect(page.getUniqueJournal('I went to work.')).toMatch('I went to work.');
-    });
-
-
-       //this works but the timeout messes things up.
-
-       /*it('Should actually add the journal with the information we put in the fields', () => {
+    it('Should actually add the journal with the information we put in the fields', () => {
         page.navigateTo();
         page.clickAddJournalButton();
-        element(by.id('titleField')).sendKeys('Exercise');
-        element(by.id('bodyField')).sendKeys('10 pushups');
+        element(by.id('subjectField')).sendKeys('Sad day');
+        element(by.id('bodyField')).sendKeys('Today was sad because my pet rock got hit by a car.');
         element(by.id('confirmAddJournalButton')).click();
-        setTimeout(() => {
-            expect(page.getUniqueJournal('Exercise')).toMatch('Exercise');
-        }, 10000);
-    });*/
-       /*   it('Should allow us to put information into the fields of the add journal dialog', () => {
-              page.navigateTo();
-              page.clickAddJournalButton();
-              expect(element(by.id('titleField')).isPresent()).toBeTruthy('There should be a title field');
-              element(by.id('titleField')).sendKeys('Songs to listen');
-              expect(element(by.id('bodyField')).isPresent()).toBeTruthy('There should be a bodyy field');
-              element(by.id('bodyField')).sendKeys('Said by Nasty C');
-              element(by.id('exitWithoutAddingButton')).click();
-          });*/
+    });
+
+    it('Should actually click the navigation buttons and still have 10 journals on page everytime', () => {
+        page.navigateTo();
+        page.clickFirstIndexButton();
+        expect(page.getJournals()).toEqual(10);
+        page.clickLastIndexButton();
+        expect(page.getJournals()).toEqual(10);
+        page.clickPrevIndexButton();
+        page.clickPrevIndexButton();
+        expect(page.getJournals()).toEqual(10);
+        page.clickNextIndexButton();
+        page.clickNextIndexButton();
+        expect(page.getJournals()).toEqual(10);
+    });
+
 });

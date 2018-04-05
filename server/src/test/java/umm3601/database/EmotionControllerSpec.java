@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
-public class SummaryControllerBasicSpec {
-    private SummaryController summaryController;
+public class EmotionControllerSpec {
+    private EmotionController emotionController;
     private ObjectId testID;
     @Before
     public void clearAndPopulateDB() throws IOException {
@@ -57,7 +57,7 @@ public class SummaryControllerBasicSpec {
         emotionDocuments.insertMany(testEmotions);
         emotionDocuments.insertOne(Document.parse(tester.toJson()));
 
-        summaryController = new SummaryController(db);
+        emotionController = new EmotionController(db);
     }
 
     private BsonArray parseJsonArray(String json) {
@@ -84,15 +84,15 @@ public class SummaryControllerBasicSpec {
     }
 
     @Test
-    public void getAllSummaries() {
+    public void getAllEmotions() {
         Map<String, String[]> emptyMap = new HashMap<>();
-        String jsonResult = summaryController.getSummaries(emptyMap);
+        String jsonResult = emotionController.getEmotions(emptyMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
         assertEquals("Should be 4", 4, docs.size());
         List<String> emotions = docs
             .stream()
-            .map(SummaryControllerBasicSpec::getEmotion)
+            .map(EmotionControllerSpec::getEmotion)
             .sorted()
             .collect(Collectors.toList());
         List<String> expectedNames = Arrays.asList("happy", "happy", "mad", "sad");
@@ -100,20 +100,49 @@ public class SummaryControllerBasicSpec {
     }
 
     @Test
-    public void getSummariesByMood(){
+    public void getEmotionByMood(){
         Map<String, String[]> argMap = new HashMap<>();
-        // Mongo in summaryController is doing a regex search so can just take a Java Reg. Expression
+        // Mongo in EmotionController is doing a regex search so can just take a Java Reg. Expression
         // This will search the category for letters 'f' and 'c'.
         argMap.put("mood", new String[] { "happy" });
-        String jsonResult = summaryController.getSummaries(argMap);
+        String jsonResult = emotionController.getEmotions(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
         assertEquals("Should be 2", 2, docs.size());
         List<String> desc = docs
             .stream()
-            .map(SummaryControllerBasicSpec::getDescription)
+            .map(EmotionControllerSpec::getDescription)
             .sorted()
             .collect(Collectors.toList());
         List<String> expectedDesc = Arrays.asList("I'm feeling fantastic","I'm feeling good");
         assertEquals("Descriptions should match", expectedDesc, desc);
+    }
+
+    @Test
+    public void getTestersIDByID() {
+        String jsonResult = emotionController.getEmotion(testID.toHexString());
+        Document testerDoc = Document.parse(jsonResult);
+        assertEquals("Mood should match", "mad", testerDoc.get("mood"));
+        String noJsonResult = emotionController.getEmotion(new ObjectId().toString());
+        assertNull("No emotion should match",noJsonResult);
+    }
+
+    @Test
+    public void addEmotionTest(){
+        String newId = emotionController.addNewEmotion("happy", 5, "AAAAAAAAMAZING", "Wed Mar 1 2018 7:04:01 GMT-0500");
+
+        assertNotNull("Add new emotion should return true when new emotion record is added,", newId);
+        Map<String, String[]> argMap = new HashMap<>();
+        String jsonResult = emotionController.getEmotions(argMap);
+        BsonArray docs = parseJsonArray(jsonResult);
+
+        List<String> desc = docs
+            .stream()
+            .map(EmotionControllerSpec::getDescription)
+            .sorted()
+            .collect(Collectors.toList());
+        // name.get(0) says to get the name of the first person in the database,
+        // so "Aaron" will probably always be first because it is sorted alphabetically.
+        // 3/4/18: Not necessarily: it is likely that that is how they're stored but we don't know. Find a different way of doing this.
+        assertEquals("Should return the desc. of new emotion", "AAAAAAAAMAZING", desc.get(0));
     }
 }

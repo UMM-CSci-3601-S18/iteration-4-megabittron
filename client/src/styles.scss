@@ -1,18 +1,19 @@
 @import "theme";
 /* You can add global styles to this file, and also import other style files */
-.nav-active {
-    background-color: mat-color($mat-grey, 100) !important;
-    color: mat-color($accent) !important;
-}
 
-.nav-active mat-icon {
-    color: mat-color($accent) !important;
-}
 
 .mat-dialog-container {
-    background-color: rgb(255, 204, 194);
     margin: auto;
 }
+
+html {
+    background-color: #E3F2FD;
+}
+
+body {
+    background-color: #E3F2FD;
+}
+
 
 
 

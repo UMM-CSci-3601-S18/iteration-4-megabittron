@@ -1,17 +1,18 @@
 import {Component, Inject} from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import {Goal} from './goal';
+import {Journal} from './journal';
 import {MatSnackBar} from '@angular/material';
 
 @Component({
-    selector: 'app-add-goal.component',
-    templateUrl: 'add-goal.component.html',
-    styleUrls: ['./add-goal.component.css'],
+    selector: 'app-edit-journal.component',
+    templateUrl: 'edit-journal.component.html',
+    styleUrls: ['./edit-journal.component.css'],
 })
-export class AddGoalComponent {
+
+export class EditJournalComponent {
     constructor(
-        public snackBar: MatSnackBar, public dialogRef: MatDialogRef<AddGoalComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: {goal: Goal}) {
+        public snackBar: MatSnackBar, public dialogRef: MatDialogRef<EditJournalComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: {journal: Journal}) {
     }
 
     onNoClick(): void {
@@ -23,4 +24,5 @@ export class AddGoalComponent {
             duration: 2000,
         });
     }
+
 }

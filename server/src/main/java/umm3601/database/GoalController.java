@@ -15,7 +15,7 @@ import java.util.Map;
 import static com.mongodb.client.model.Filters.eq;
 
 
-// Controller that manages information about people's goals.
+// Controller that manages information about people's items.
 public class GoalController {
 
     private final Gson gson;
@@ -23,7 +23,7 @@ public class GoalController {
     // goalCollection is the collection that the goals data is in.
     private final MongoCollection<Document> goalCollection;
 
-    // Construct controller for goals.
+    // Construct controller for items.
     public GoalController(MongoDatabase database) {
         gson = new Gson();
         this.database = database;
@@ -32,16 +32,16 @@ public class GoalController {
 
     // get a goal by its ObjectId, not used by client, for potential future use
     public String getGoal(String id) {
-        FindIterable<Document> jsonGoals
+        FindIterable<Document> jsonItems
             = goalCollection
             .find(eq("_id", new ObjectId(id)));
 
-        Iterator<Document> iterator = jsonGoals.iterator();
+        Iterator<Document> iterator = jsonItems.iterator();
         if (iterator.hasNext()) {
             Document goal = iterator.next();
             return goal.toJson();
         } else {
-            // We didn't find the desired goal
+            // We didn't find the desired item
             return null;
         }
     }
@@ -54,18 +54,15 @@ public class GoalController {
 
         Document filterDoc = new Document();
 
-        // We will need more statements here for different objects,
-        // such as emoji, category, etc.
-
         // "goal" will be a key to a string object, where the object is
         // what we get when people enter their goals as a text body.
         // "goal" is the purpose of the goal
-        if (queryParams.containsKey("goal")) {
-            String targetContent = (queryParams.get("goal")[0]);
+        if (queryParams.containsKey("purpose")) {
+            String targetContent = (queryParams.get("purpose")[0]);
             Document contentRegQuery = new Document();
             contentRegQuery.append("$regex", targetContent);
             contentRegQuery.append("$options", "i");
-            filterDoc = filterDoc.append("goal", contentRegQuery);
+            filterDoc = filterDoc.append("purpose", contentRegQuery);
         }
 
         // category is the category of the goal, also a String
@@ -86,6 +83,11 @@ public class GoalController {
             filterDoc = filterDoc.append("name", contentRegQuery);
         }
 
+        if (queryParams.containsKey("status")) {
+            boolean targetStatus = Boolean.parseBoolean(queryParams.get("status")[0]);
+            filterDoc = filterDoc.append("status", targetStatus);
+        }
+
         // FindIterable comes from mongo, Document comes from Gson
         FindIterable<Document> matchingGoals = goalCollection.find(filterDoc);
 
@@ -95,26 +97,29 @@ public class GoalController {
     /**
      * Helper method which appends received user information to the to-be added document
      *
+     * @param purpose
+     * @param category
      * @param name
-     * @param goal
      * @return boolean after successfully or unsuccessfully adding a user
      */
     // As of now this only adds the goal, but you can separate multiple arguments
     // by commas as we add them.
-    public String addNewGoal(String goal, String category, String name) {
+    public String addNewGoal(String purpose, String category, String name, Boolean status) {
 
         // makes the search Document key-pairs
         Document newGoal = new Document();
-        newGoal.append("goal", name);
+        newGoal.append("purpose", purpose);
         newGoal.append("category", category);
-        newGoal.append("name", goal);
+        newGoal.append("name", name);
+        newGoal.append("status", status);
         // Append new goals here
 
         try {
             goalCollection.insertOne(newGoal);
             ObjectId id = newGoal.getObjectId("_id");
-            System.err.println("Successfully added new goal [_id=" + id + ", goal=" + goal + ", category=" + category + " name=" + name + ']');
-            // return JSON.serialize(newGoal);
+
+            System.err.println("Successfully added new goal [_id=" + id + ", purpose=" + purpose + ", category=" + category + ", name=" + name + ']');
+            //return id.toHexString();
             return JSON.serialize(id);
         } catch(MongoException me) {
             me.printStackTrace();
@@ -122,27 +127,39 @@ public class GoalController {
         }
     }
 
-    public String editGoal(String id, String goal, String category, String name) {
-
+    public String completeGoal(String id, String purpose, String category, String name, Boolean status){
         Document newGoal = new Document();
-        newGoal.append("goal", name);
+        newGoal.append("purpose", purpose);
         newGoal.append("category", category);
-        newGoal.append("name", goal);
-
+        newGoal.append("name", name);
+        newGoal.append("status", true);
         Document setQuery = new Document();
         setQuery.append("$set", newGoal);
-
         Document searchQuery = new Document().append("_id", new ObjectId(id));
-
-
+        System.out.println("Goal id: " + id);
         try {
             goalCollection.updateOne(searchQuery, setQuery);
-            ObjectId id1 = searchQuery.getObjectId("_id");
-            System.err.println("Successfully updated goal [_id" + id1 + ", goal=" + goal + ", category=" + category + " name=" + name + ']');
-            return JSON.serialize(id1);
-        } catch (MongoException me) {
+            ObjectId theID = searchQuery.getObjectId("_id");
+            System.out.println("Successfully completed goal [id: " + theID + ", purpose: " + purpose +
+                ", category: " + category + ", name: " + name + ", status: " + status + ']');
+            return JSON.serialize(theID);
+        } catch(MongoException me) {
             me.printStackTrace();
             return null;
+        }
+    }
+
+    public void deleteGoal(String id){
+        Document searchQuery = new Document().append("_id", new ObjectId(id));
+        System.out.println("Goal id: " + id);
+        try {
+            goalCollection.deleteOne(searchQuery);
+            ObjectId theID = searchQuery.getObjectId("_id");
+            System.out.println("Succesfully deleted goal with ID: " + theID);
+
+        } catch(MongoException me) {
+            me.printStackTrace();
+            System.out.println("error");
         }
     }
 

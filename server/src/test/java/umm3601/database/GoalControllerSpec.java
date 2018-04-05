@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public class GoalControllerBasicSpec {
+public class GoalControllerSpec {
     private GoalController goalController;
     private ObjectId huntersID;
     @Before
@@ -33,26 +33,26 @@ public class GoalControllerBasicSpec {
 
         List<Document> testGoals = new ArrayList<>();
         testGoals.add(Document.parse("{\n" +
-            "                    name: \"Aurora\",\n" +
-            "                    goal: \"To get an A in software design!\",\n" +
-            "                    category: \"School\",\n" +
+            "                    name: \"Clean my room\",\n" +
+            "                    purpose: \"To have a better environment\",\n" +
+            "                    category: \"Living\",\n" +
             "                }"));
         testGoals.add(Document.parse("{\n" +
-            "                    name: \"Kai\",\n" +
-            "                    goal: \"To take more than 12 credits.\",\n" +
-            "                    category: \"Courses\",\n" +
+            "                    name: \"Wash dishes\",\n" +
+            "                    purpose: \"Cleaner kitchen\",\n" +
+            "                    category: \"Chores\",\n" +
             "                }"));
         testGoals.add(Document.parse("{\n" +
-            "                    name: \"John\",\n" +
-            "                    goal: \"To get some pizza.\",\n" +
+            "                    name: \"Make cookies\",\n" +
+            "                    purpose: \"Get fatter\",\n" +
             "                    category: \"Food\",\n" +
             "                }"));
 
         huntersID = new ObjectId();
         BasicDBObject hunter = new BasicDBObject("_id", huntersID);
-        hunter = hunter.append("name", "Hunter")
-            .append("goal", "To finish his math homework.")
-            .append("category", "Homework");
+        hunter = hunter.append("name", "Call mom")
+            .append("purpose", "Improve relationship")
+            .append("category", "Family");
 
         goalDocuments.insertMany(testGoals);
         goalDocuments.insertOne(Document.parse(hunter.toJson()));
@@ -73,9 +73,9 @@ public class GoalControllerBasicSpec {
         return arrayReader.decode(reader, DecoderContext.builder().build());
     }
 
-    private static String getGoal(BsonValue val) {
+    private static String getPurpose(BsonValue val) {
         BsonDocument doc = val.asDocument();
-        return ((BsonString) doc.get("goal")).getValue();
+        return ((BsonString) doc.get("purpose")).getValue();
     }
 
     private static String getName(BsonValue val) {
@@ -92,10 +92,10 @@ public class GoalControllerBasicSpec {
         assertEquals("Should be 4 goals", 4, docs.size());
         List<String> goals = docs
             .stream()
-            .map(GoalControllerBasicSpec::getGoal)
+            .map(GoalControllerSpec::getPurpose)
             .sorted()
             .collect(Collectors.toList());
-        List<String> expectedNames = Arrays.asList("To finish his math homework.", "To get an A in software design!", "To get some pizza.", "To take more than 12 credits.");
+        List<String> expectedNames = Arrays.asList("Cleaner kitchen", "Get fatter", "Improve relationship", "To have a better environment");
         assertEquals("Goals should match", expectedNames, goals);
     }
 
@@ -110,10 +110,10 @@ public class GoalControllerBasicSpec {
         assertEquals("Should be 3 goals", 3, docs.size());
         List<String> name = docs
             .stream()
-            .map(GoalControllerBasicSpec::getName)
+            .map(GoalControllerSpec::getName)
             .sorted()
             .collect(Collectors.toList());
-        List<String> expectedName = Arrays.asList("Aurora","John","Kai");
+        List<String> expectedName = Arrays.asList("Call mom","Make cookies","Wash dishes");
         assertEquals("Names should match", expectedName, name);
     }
 
@@ -121,55 +121,54 @@ public class GoalControllerBasicSpec {
     public void getHuntersByID() {
         String jsonResult = goalController.getGoal(huntersID.toHexString());
         Document hunterDoc = Document.parse(jsonResult);
-        assertEquals("Name should match", "Hunter", hunterDoc.get("name"));
+        assertEquals("Name should match", "Call mom", hunterDoc.get("name"));
         String noJsonResult = goalController.getGoal(new ObjectId().toString());
         assertNull("No name should match",noJsonResult);
     }
 
     @Test
     public void addGoalTest(){
-        String newId = goalController.addNewGoal("Aaron", "Injury", "Do not stab knee on keyboard holder.");
+        String newId = goalController.addNewGoal("Self defense from Bobs", "Injury", "Kick Bob", false);
 
         assertNotNull("Add new goal should return true when goal is added,", newId);
         Map<String, String[]> argMap = new HashMap<>();
         String jsonResult = goalController.getGoals(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
-        List<String> name = docs
+        List<String> purpose = docs
             .stream()
-            .map(GoalControllerBasicSpec::getName)
+            .map(GoalControllerSpec::getPurpose)
             .sorted()
             .collect(Collectors.toList());
         // name.get(0) says to get the name of the first person in the database,
-        // so "Aaron" will probably always be first because it is sorted alphabetically.
+        // so "Bob" will probably always be first because it is sorted alphabetically.
         // 3/4/18: Not necessarily: it is likely that that is how they're stored but we don't know. Find a different way of doing this.
-        assertEquals("Should return name of new goal", "Aaron", name.get(0));
+        assertEquals("Should return purpose of new goal", "Self defense from Bobs", purpose.get(3));
     }
 
     @Test
-    public void editGoalTest(){
-
-        String hunterJsonResult = goalController.getGoal(huntersID.toHexString());
-        Document hunterDoc = Document.parse(hunterJsonResult);
-
-        String idToEdit = hunterDoc.get("_id").toString();
-
-        String editId = goalController.editGoal(idToEdit, "Zelda", "Shopping", "Buy groceries.");
-
-        assertNotNull("Edit goal should return true when goal is added,", editId);
+    public void editGoalTest() {
+        String newId = goalController.completeGoal("5ab53a8907d923f68d03e1a3", "To have a better environment", "Family", "Hug KK", true);
+        assertNotNull("Edit goal should return true when goal is edited,", newId);
         Map<String, String[]> argMap = new HashMap<>();
         String jsonResult = goalController.getGoals(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
-
-        List<String> name = docs
+        List<String> purpose = docs
             .stream()
-            .map(GoalControllerBasicSpec::getName)
+            .map(GoalControllerSpec::getPurpose)
             .sorted()
             .collect(Collectors.toList());
-
-
-        assertEquals("Should return name of new goal", "Zelda", name.get(3));
+        assertEquals("Should return purpose of edited goal", "To have a better environment", purpose.get(3));
     }
 
+    @Test
+    public void deleteGoalTest(){
+        System.out.println("HuntersID " + huntersID.toHexString());
+        goalController.deleteGoal(huntersID.toHexString());
+        Map<String, String[]> argMap = new HashMap<>();
+        String jsonResult = goalController.getGoals(argMap);
+        BsonArray docs = parseJsonArray(jsonResult);
+        assertEquals("Should be 3 goals", 3, docs.size());
 
+    }
 }
