@@ -192,6 +192,32 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     test2: any;
     test3: any;
 
+    public getPastDays(today: number): String {
+        let strDay = '';
+        if(today == 0){
+            strDay = 'Sun';
+        }
+        if(today == 1){
+            strDay = 'Mon';
+        }
+        if(today == 2){
+            strDay = 'Tues';
+        }
+        if(today == 3){
+            strDay = 'Wed';
+        }
+        if(today == 4){
+            strDay = 'Thurs';
+        }
+        if(today == 5){
+            strDay = 'Fri';
+        }
+        if(today == 6){
+            strDay = 'Sat';
+        }
+        return strDay;
+    }
+
     /**
      * Starts an asynchronous operation to update the emojis list
      *
@@ -322,6 +348,15 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
         let days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
 
+        let pastDays = [
+            this.getPastDays((this.nowDay + 1)%7),
+            this.getPastDays((this.nowDay + 2)%7),
+            this.getPastDays((this.nowDay + 3)%7),
+            this.getPastDays((this.nowDay + 4)%7),
+            this.getPastDays((this.nowDay + 5)%7),
+            this.getPastDays((this.nowDay + 6)%7),
+            this.getPastDays(this.nowDay)];
+
         summaryDays = {
             "label": "Total Number of Entries",
             "data": [
@@ -378,7 +413,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         this.lineChart = new Chart(this.ctxLine, {
             type: 'line',
             data: {
-                labels: days,
+                labels: pastDays,
                 datasets: [
                     meh_daily_totals
                 ]
