@@ -87,13 +87,13 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         return this.dateFilteredSummarys;
     }
 
-    public pastWeekEmotions():Summary[]{
-        this.pastWeekSummarys = this.filterDates(this.summarys, this.lastWeekDate, this.nowDate);
+    public pastWeekEmotions(givenSummarys):Summary[]{
+        this.pastWeekSummarys = this.filterDates(givenSummarys, this.lastWeekDate, this.nowDate);
         return this.pastWeekSummarys;
     }
 
-    public pastDayEmotions():Summary[]{
-        this.pastDaySummarys = this.filterDates(this.summarys, this.lastDayDate, this.nowDate);
+    public pastDayEmotions(givenSummarys):Summary[]{
+        this.pastDaySummarys = this.filterDates(givenSummarys, this.lastDayDate, this.nowDate);
         return this.pastDaySummarys;
     }
 
@@ -158,17 +158,17 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         return filterBarData.length;
     }
 
-    filterLineGraph(xValue, mood): number {
+    filterLineGraph(xValue, Searchmood): number {
         this.test3 = this.summarys.length;
-        mood = mood.toLocaleLowerCase();
+        Searchmood = Searchmood.toLocaleLowerCase();
         let filterLineData = this.summarys.filter(summary => {
-            return !mood || summary.mood.toLowerCase().indexOf(mood) !== -1;
+            return !Searchmood || summary.mood.toLowerCase().indexOf(Searchmood) !== -1;
         });
 
         this.test1 = filterLineData.length;
 
         if(this.lineScale == "Week") {
-            filterLineData = this.pastWeekEmotions();
+            filterLineData = this.pastWeekEmotions(filterLineData);
             filterLineData = filterLineData.filter(summary => {
                 this.getDate = new Date(summary.date);
                 return this.getDate.getDay() == xValue;
@@ -176,14 +176,14 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         }
         else {
             if (this.lineScale == "Day") {
-                filterLineData = this.pastDayEmotions().filter(summary => {
+                filterLineData = this.pastDayEmotions(filterLineData).filter(summary => {
                     this.getDate = new Date(summary.date);
                     return this.getDate.getHours() == xValue;
                 });
             }
         }
 
-        this.test2 = this.pastWeekEmotions().length;
+        this.test2 = this.pastWeekEmotions(filterLineData).length;
 
         return filterLineData.length;
     }
@@ -192,7 +192,14 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     test2: any;
     test3: any;
 
-    public getPastDays(today: number): String {
+    public modDay(day: number): Number {
+        return (this.nowDay + 1 + day)%7;
+    }
+
+    public getPastDays(day: number): String {
+
+        let today = (this.nowDay + 1 + day)%7;
+
         let strDay = '';
         if(today == 0){
             strDay = 'Sun';
@@ -331,9 +338,6 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                 }
             }
         });
-
-
-
     }
 
     buildChart(): void {
@@ -349,13 +353,14 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         let days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
 
         let pastDays = [
-            this.getPastDays((this.nowDay + 1)%7),
-            this.getPastDays((this.nowDay + 2)%7),
-            this.getPastDays((this.nowDay + 3)%7),
-            this.getPastDays((this.nowDay + 4)%7),
-            this.getPastDays((this.nowDay + 5)%7),
-            this.getPastDays((this.nowDay + 6)%7),
-            this.getPastDays(this.nowDay)];
+            this.getPastDays(0),
+            this.getPastDays(1),
+            this.getPastDays(2),
+            this.getPastDays(3),
+            this.getPastDays(4),
+            this.getPastDays(5),
+            this.getPastDays(6)
+        ];
 
         summaryDays = {
             "label": "Total Number of Entries",
@@ -375,15 +380,75 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             "lineTension": 0.3
         };
 
+        let happy_daily_totals = {"label":"Happy",
+            "data":[
+                this.filterLineGraph(this.modDay(0), 'happy'),
+                this.filterLineGraph(this.modDay(1), 'happy'),
+                this.filterLineGraph(this.modDay(2), 'happy'),
+                this.filterLineGraph(this.modDay(3), 'happy'),
+                this.filterLineGraph(this.modDay(4), 'happy'),
+                this.filterLineGraph(this.modDay(5), 'happy'),
+                this.filterLineGraph(this.modDay(6), 'happy')
+            ],
+            hidden: false,
+            "fill":false,
+            "borderColor":"rgb(150, 0, 100)",
+            "lineTension":0.1};
+
+        let sad_daily_totals = {"label":"Sad",
+            "data":[
+                this.filterLineGraph(this.modDay(0), 'sad'),
+                this.filterLineGraph(this.modDay(1), 'sad'),
+                this.filterLineGraph(this.modDay(2), 'sad'),
+                this.filterLineGraph(this.modDay(3), 'sad'),
+                this.filterLineGraph(this.modDay(4), 'sad'),
+                this.filterLineGraph(this.modDay(5), 'sad'),
+                this.filterLineGraph(this.modDay(6), 'sad')
+            ],
+            hidden: false,
+            "fill":false,
+            "borderColor":"rgb(150, 0, 100)",
+            "lineTension":0.1};
+
         let meh_daily_totals = {"label":"Meh",
             "data":[
-                this.filterLineGraph('0', 'meh'),
-                this.filterLineGraph('1', 'meh'),
-                this.filterLineGraph('2', 'meh'),
-                this.filterLineGraph('3', 'meh'),
-                this.filterLineGraph('4', 'meh'),
-                this.filterLineGraph('5', 'meh'),
-                this.filterLineGraph('6', 'meh')
+                this.filterLineGraph(this.modDay(0), 'meh'),
+                this.filterLineGraph(this.modDay(1), 'meh'),
+                this.filterLineGraph(this.modDay(2), 'meh'),
+                this.filterLineGraph(this.modDay(3), 'meh'),
+                this.filterLineGraph(this.modDay(4), 'meh'),
+                this.filterLineGraph(this.modDay(5), 'meh'),
+                this.filterLineGraph(this.modDay(6), 'meh')
+            ],
+            hidden: false,
+            "fill":false,
+            "borderColor":"rgb(150, 0, 100)",
+            "lineTension":0.1};
+
+        let mad_daily_totals = {"label":"Mad",
+            "data":[
+                this.filterLineGraph(this.modDay(0), 'mad'),
+                this.filterLineGraph(this.modDay(1), 'mad'),
+                this.filterLineGraph(this.modDay(2), 'mad'),
+                this.filterLineGraph(this.modDay(3), 'mad'),
+                this.filterLineGraph(this.modDay(4), 'mad'),
+                this.filterLineGraph(this.modDay(5), 'mad'),
+                this.filterLineGraph(this.modDay(6), 'mad')
+            ],
+            hidden: false,
+            "fill":false,
+            "borderColor":"rgb(150, 0, 100)",
+            "lineTension":0.1};
+
+        let anxious_daily_totals = {"label":"Anxious",
+            "data":[
+                this.filterLineGraph(this.modDay(0), 'anxious'),
+                this.filterLineGraph(this.modDay(1), 'anxious'),
+                this.filterLineGraph(this.modDay(2), 'anxious'),
+                this.filterLineGraph(this.modDay(3), 'anxious'),
+                this.filterLineGraph(this.modDay(4), 'anxious'),
+                this.filterLineGraph(this.modDay(5), 'anxious'),
+                this.filterLineGraph(this.modDay(6), 'mad')
             ],
             hidden: false,
             "fill":false,
@@ -415,7 +480,11 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             data: {
                 labels: pastDays,
                 datasets: [
-                    meh_daily_totals
+                    happy_daily_totals,
+                    sad_daily_totals,
+                    meh_daily_totals,
+                    mad_daily_totals,
+                    anxious_daily_totals
                 ]
             },
             options: {
