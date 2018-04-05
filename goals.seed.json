@@ -7,6 +7,9 @@
         "category": "Family",
         "name": "Call my mom",
         "status": true,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-05-05T18:56:24.702Z",
+        "next": "2018-04-12T18:56:24.702Z",
         "frequency": "Weekly"
     },
     {
@@ -17,6 +20,9 @@
         "category": "Family",
         "name": "Write letter to Grandpa",
         "status": false,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2019-04-05T18:56:24.702Z",
+        "next": "2018-04-05T18:56:24.702Z",
         "frequency": "Daily"
     },
     {
@@ -27,6 +33,9 @@
         "category": "Personal Health",
         "name": "Go to bed early",
         "status": true,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-07-05T18:56:24.702Z",
+        "next": "2018-05-05T18:56:24.702Z",
         "frequency": "Monthly"
     },
     {
@@ -37,6 +46,9 @@
         "category": "Family",
         "name": "Visit sister",
         "status": false,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-06-05T18:56:24.702Z",
+        "next": "2018-04-06T18:56:24.702Z",
         "frequency": "Daily"
     },
     {
@@ -47,6 +59,9 @@
         "category": "Personal Health",
         "name": "Text a hotline",
         "status": false,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2019-04-05T18:56:24.702Z",
+        "next": "2018-04-12T18:56:24.702Z",
         "frequency": "Weekly"
     },
     {
@@ -57,6 +72,9 @@
         "category": "Family",
         "name": "Say hello to my son",
         "status": true,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-04-05T18:56:24.702Z",
+        "next": "2020-04-12T18:56:24.702Z",
         "frequency": "Weekly"
     },
     {
@@ -67,6 +85,9 @@
         "category": "Family",
         "name": "Wave at my cousin",
         "status": true,
+        "start": "2018-03-07T18:56:24.702Z",
+        "end": "2018-07-07T18:56:24.702Z",
+        "next": "2018-04-07T18:56:24.702Z",
         "frequency": "Monthly"
     },
     {
@@ -77,6 +98,9 @@
         "category": "Chores",
         "name": "Wash the dishes",
         "status": false,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-08-05T18:56:24.702Z",
+        "next": "2018-04-06T18:56:24.702Z",
         "frequency": "Daily"
     },
     {
@@ -87,6 +111,9 @@
         "category": "Chores",
         "name": "Clean my room",
         "status": false,
+        "start": "2018-01-15T18:56:24.702Z",
+        "end": "2018-10-00T18:56:24.702Z",
+        "next": "2018-04-07T18:56:24.702Z",
         "frequency": "Daily"
     },
     {
@@ -97,6 +124,9 @@
         "category": "Personal Health",
         "name": "Take my meds",
         "status": false,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-07-05T18:56:24.702Z",
+        "next": "2018-04-12T18:56:24.702Z",
         "frequency": "Weekly"
 
     },
@@ -108,6 +138,9 @@
         "category": "Chores",
         "name": "Shovel driveway",
         "status": true,
+        "start": "2017-11-01T18:56:24.702Z",
+        "end": "2018-05-20T18:56:24.702Z",
+        "next": "2018-04-15T18:56:24.702Z",
         "frequency": "Monthly"
 
     },
@@ -119,6 +152,9 @@
         "category": "Personal Health",
         "name": "Brush my teeth every day",
         "status": false,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-08-05T18:56:24.702Z",
+        "next": "2018-05-05T18:56:24.702Z",
         "frequency": "Monthly"
 
     },
@@ -130,6 +166,9 @@
         "category": "Family",
         "name": "Write letter to Aunt May",
         "status": false,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-04-05T18:56:24.702Z",
+        "next": "2018-04-05T18:56:24.702Z",
         "frequency": "Does not repeat"
 
     },
@@ -141,6 +180,9 @@
         "category": "Family",
         "name": "Email Grandma",
         "status": true,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-04-05T18:56:24.702Z",
+        "next": "2018-04-05T18:56:24.702Z",
         "frequency": "Does not repeat"
 
     },
@@ -152,6 +194,9 @@
         "category": "Chores",
         "name": "Do laundry",
         "status": false,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-04-18T18:56:24.702Z",
+        "next": "2018-04-06T18:56:24.702Z",
         "frequency": "Daily"
 
     }

@@ -13,21 +13,33 @@ describe('Goal list service: ', () => {
             purpose: 'Gain some weight',
             category: 'Food',
             name: 'Eat all the cookies',
-            status: false
+            status: false,
+            start: "2018-04-05T18:56:24.702Z",
+            end: "2018-05-05T18:56:24.702Z",
+            next: "2018-05-05T18:56:24.702Z",
+            frequency: "Daily"
         },
         {
             _id: 'chores_id',
             purpose: 'Have cleaner kitchen',
             category: 'Chores',
             name: 'Take out recycling',
-            status: true
+            status: true,
+            start: "2018-04-05T18:56:24.702Z",
+            end: "2018-05-05T18:56:24.702Z",
+            next: "2018-05-05T18:56:24.702Z",
+            frequency: "Daily"
         },
         {
             _id: 'family_id',
             purpose: 'To love her',
             category: 'Family',
             name: 'Call mom',
-            status: true
+            status: true,
+            start: "2018-04-05T18:56:24.702Z",
+            end: "2018-05-05T18:56:24.702Z",
+            next: "2018-05-05T18:56:24.702Z",
+            frequency: "Daily"
         }
     ];
     const mGoals: Goal[] = testGoals.filter(goal =>
@@ -124,7 +136,11 @@ describe('Goal list service: ', () => {
             purpose: 'Have cleaner bathroom',
             category: 'Chores',
             name: 'Plunge toilet',
-            status: false
+            status: false,
+            start: "2018-04-05T18:56:24.702Z",
+            end: "2018-05-05T18:56:24.702Z",
+            next: "2018-05-05T18:56:24.702Z",
+            frequency: "Daily"
         };
 
         goalListService.addNewGoal(newGoal).subscribe(
@@ -146,7 +162,11 @@ describe('Goal list service: ', () => {
             purpose: 'Talk about my classes',
             category: 'Family',
             name: 'Call sister',
-            status: true
+            status: true,
+            start: "2018-04-05T18:56:24.702Z",
+            end: "2018-05-05T18:56:24.702Z",
+            next: "2018-05-05T18:56:24.702Z",
+            frequency: "Daily"
         };
 
         goalListService.editGoal(editGoal).subscribe(
