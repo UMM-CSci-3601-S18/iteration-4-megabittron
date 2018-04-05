@@ -128,7 +128,8 @@ public class GoalControllerSpec {
 
     @Test
     public void addGoalTest(){
-        String newId = goalController.addNewGoal("Self defense from Bobs", "Injury", "Kick Bob", false);
+        String newId = goalController.addNewGoal("Self defense from Bobs", "Injury", "Kick Bob", false,
+            "Daily", "2018-04-05T18:56:24.702Z", "2018-04-05T18:56:24.702Z", "2018-04-05T18:56:24.702Z");
 
         assertNotNull("Add new goal should return true when goal is added,", newId);
         Map<String, String[]> argMap = new HashMap<>();
@@ -148,7 +149,8 @@ public class GoalControllerSpec {
 
     @Test
     public void editGoalTest() {
-        String newId = goalController.completeGoal("5ab53a8907d923f68d03e1a3", "To have a better environment", "Family", "Hug KK", true);
+        String newId = goalController.completeGoal("5ab53a8907d923f68d03e1a3", "To have a better environment", "Family", "Hug KK", true,
+            "Daily");
         assertNotNull("Edit goal should return true when goal is edited,", newId);
         Map<String, String[]> argMap = new HashMap<>();
         String jsonResult = goalController.getGoals(argMap);
