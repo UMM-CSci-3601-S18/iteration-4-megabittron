@@ -149,7 +149,7 @@ describe('Goal list service: ', () => {
             status: true
         };
 
-        goalListService.editGoal(editGoal).subscribe(
+        goalListService.completeGoal(editGoal).subscribe(
             id => {
                 expect(id).toBe(family_id);
             }
