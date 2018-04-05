@@ -1,0 +1,46 @@
+.first-sec {
+    width: 320px;
+    padding: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.manage-journals-card {
+    background-color: rgba(173, 216, 230, 0.14);
+}
+
+#journal-title {
+    font-size: 32px;
+    text-align: center;
+}
+
+.journal-content {
+    margin-left: 25px;
+    list-style-type: none;
+    font-size: 21px;
+}
+
+.your-journals-title {
+    text-align: left;
+    font-size: 32px;
+}
+
+#add-icon {
+    color: forestgreen;
+}
+
+.journals-card {
+    background-color: lightyellow;
+}
+
+#edit-journal-button {
+    background-color: rgba(173, 216, 230, 0.14);
+}
+
+.filter-fields {
+    font-size: 14px;
+}
+
+#journal-subject-field {
+    margin-top: 5px;
+}

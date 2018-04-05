@@ -1,68 +1,65 @@
-import {browser, element, by, promise, ElementFinder} from 'protractor';
+import {browser, element, by, promise} from 'protractor';
 import {Key} from 'selenium-webdriver';
 
 export class JournalPage {
+
     navigateTo(): promise.Promise<any> {
         return browser.get('/journals');
     }
 
-    // http://www.assertselenium.com/protractor/highlight-elements-during-your-protractor-test-run/
     highlightElement(byObject) {
         function setStyle(element, style) {
             const previous = element.getAttribute('style');
             element.setAttribute('style', style);
             setTimeout(() => {
                 element.setAttribute('style', previous);
-            }, 200);
+            }, 100);
             return 'highlighted';
         }
 
         return browser.executeScript(setStyle, element(byObject).getWebElement(), 'color: red; background-color: yellow;');
     }
 
-    getJournalTitle() {
-        const title = element(by.id('journal-list-title')).getText();
-        this.highlightElement(by.id('journal-list-title'));
-
-        return title;
+    getJournals() {
+        return element.all(by.className('journals')).count();
     }
 
-    typeATitle(title: string) {
-        const input = element(by.id('JournalTitle'));
+    typeASubject(subject: string) {
+        const input = element(by.id('journalSubject'));
         input.click();
-        input.sendKeys(title);
+        input.sendKeys(subject);
     }
 
-    selectUpKey() {
-        browser.actions().sendKeys(Key.ARROW_UP).perform();
+    typeABody(body: string) {
+        const input = element(by.id('journalBody'));
+        input.click();
+        input.sendKeys(body);
     }
 
     backspace() {
         browser.actions().sendKeys(Key.BACK_SPACE).perform();
     }
 
-    getBody(body: string) {
-        const input = element(by.id('journalBody'));
-        input.click();
-        input.sendKeys(body);
-        const selectButton = element(by.id('submit'));
-        selectButton.click();
+    getJournalManageTitle() {
+        const title = element(by.id('journal-title')).getText();
+        this.highlightElement(by.id('journal-title'));
+
+        return title;
     }
 
+    getUniqueJournal(anID: string) {
+        const journal = element(by.id(anID)).getText();
+        this.highlightElement(by.id(anID));
 
-
-    getUniqueJournal(_id: string) {
-        const Journal = element(by.id(_id)).getText();
-        this.highlightElement(by.id(_id));
-
-        return Journal;
+        return journal;
     }
 
-    getJournals() {
-        return element.all(by.className('journals'));
+    clickUniqueJournal(anID: string) {
+        const journal = element(by.id(anID));
+        this.highlightElement(by.id(anID));
+        journal.click();
+        return journal;
     }
-
-
 
     buttonExists(): promise.Promise<boolean> {
         this.highlightElement(by.id('addNewJournal'));
@@ -70,10 +67,33 @@ export class JournalPage {
     }
 
     clickAddJournalButton(): promise.Promise<void> {
-        this.highlightElement(by.id('add-icon-journal'));
-        return element(by.id('add-icon-journal')).click();
+        this.highlightElement(by.id('addNewJournal'));
+        return element(by.id('addNewJournal')).click();
     }
 
+    clickNextIndexButton(): promise.Promise<void> {
+        this.highlightElement(by.id('nextIndexJournal'));
+        return element(by.id('nextIndexJournal')).click();
+    }
 
+    clickPrevIndexButton(): promise.Promise<void> {
+        this.highlightElement(by.id('prevIndexJournal'));
+        return element(by.id('prevIndexJournal')).click();
+    }
+
+    clickFirstIndexButton(): promise.Promise<void> {
+        this.highlightElement(by.id('firstIndexJournal'));
+        return element(by.id('firstIndexJournal')).click();
+    }
+
+    clickLastIndexButton(): promise.Promise<void> {
+        this.highlightElement(by.id('lastIndexJournal'));
+        return element(by.id('lastIndexJournal')).click();
+    }
+
+    clickEditJournalButton(): promise.Promise<void> {
+        this.highlightElement(by.id('edit-journal-button'));
+        return element(by.id('edit-journal-button')).click();
+    }
 
 }

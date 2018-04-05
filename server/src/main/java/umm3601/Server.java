@@ -104,6 +104,7 @@ public class Server {
         get("api/journals", journalRequestHandler::getJournals);
         get("api/journals/:id", journalRequestHandler::getJournalJSON);
         post("api/journals/new", journalRequestHandler::addNewJournal);
+        post("api/journals/edit", journalRequestHandler::editJournal);
 
 
         // An example of throwing an unhandled exception so you can see how the
