@@ -1,12 +1,11 @@
 @import "../theme";
 
 .nav-things {
-    list-style: none;
     margin: 0;
-    padding: 10px;
-    overflow: hidden;
     text-align: left;
     background-color: #03A9F4;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 li {
@@ -14,27 +13,18 @@ li {
 }
 
 li a {
-    display: block;
     color: white;
-    text-align: center;
+}
+
+.nav-button {
+/*    width: 125px;
+    height: 50px;*/
+    font-size: 20px;
     padding: 10px;
-    text-decoration: none;
-    font-size: 25px;
 }
 
-li a mat-icon{
-    display: inline-block;
-    vertical-align: middle;
-
+#mobile-home {
+    align: right;
+    text-align: right;
+    float: right;
 }
-
-li a:hover {
-    /* original color was 111*/
-    background-color: #039BE5;
-}
-
-.active {
-    background-color: #039BE5;
-}
-
-

@@ -3,18 +3,18 @@
 <ng-template #computer >
     <div (window:resize)="onResize($event)"></div>
     <ul class="nav-things" >
-        <li><a class="home" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
-        <li><a class="goal" [routerLink]="['/goals']" routerLinkActive="active">Goals</a></li>
-        <li><a class="journal" [routerLink]="['/journals']" routerLinkActive="active">Journals</a></li>
-        <li><a class="resources" [routerLink]="['/resources']" routerLinkActive="active">Resources</a></li>
-        <li><a class="summary" [routerLink]="['/summary']" routerLinkActive="active">Stats</a></li>
+        <li><a id="home" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><button mat-button class="nav-button">Home</button> </a></li>
+        <li><a id="goal" [routerLink]="['/goals']" routerLinkActive="active"><button mat-button class="nav-button">Goals</button></a></li>
+        <li><a id="journal" [routerLink]="['/journals']" routerLinkActive="active"><button mat-button class="nav-button">Journals</button></a></li>
+        <li><a id="resources" [routerLink]="['/resources']" routerLinkActive="active"><button mat-button class="nav-button">Resources</button></a></li>
+        <li><a id="summary" [routerLink]="['/summary']" routerLinkActive="active"><button mat-button class="nav-button">Stats</button></a></li>
     </ul>
     <router-outlet></router-outlet>
 </ng-template>
 <ng-template id="mobile" #mobile>
     <div (window:resize)="onResize($event)"></div>
     <td-layout #layout>
-        <td-navigation-drawer id="navBar"flex sidenavTitle="Menu" >
+        <td-navigation-drawer id="navBar" flex sidenavTitle="Menu" >
             <mat-nav-list class="side-nav-things">
                 <a mat-list-item [routerLink]="['/']" (click)="layout.close()" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact: true}"><mat-icon>mood</mat-icon>Home</a>
                 <a mat-list-item [routerLink]="['/goals']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon>playlist_add_check</mat-icon>Goals</a>
@@ -23,8 +23,8 @@
                 <a mat-list-item [routerLink]="['/summary']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon><i class="material-icons">assessment</i></mat-icon>Stats</a>
             </mat-nav-list>
         </td-navigation-drawer>
-        <td-layout-nav  toolbarTitle="Home" navigationRoute="/">
-            <button mat-icon-button td-menu-button tdLayoutToggle>
+        <td-layout-nav>
+            <button mat-icon-button td-menu-button tdLayoutToggle >
                 <mat-icon>menu</mat-icon>
             </button>
             <router-outlet></router-outlet>
