@@ -59,6 +59,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     public inputType = "Day";
     public lineScale = "Week";
 
+
     // The ID of the
     private highlightedID: {'$oid': string} = { '$oid': '' };
 
@@ -166,15 +167,12 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     }
 
     filterLineGraph(xValue, Searchmood): number {
-        this.test3 = this.summarys.length;
         Searchmood = Searchmood.toLocaleLowerCase();
         let filterLineData = this.summarys.filter(summary => {
             return !Searchmood || summary.mood.toLowerCase().indexOf(Searchmood) !== -1;
         });
 
-        this.test1 = filterLineData.length;
-
-        if(this.lineScale == "Week") {
+        if(this.lineScale == 'Week') {
             filterLineData = this.pastWeekEmotions(filterLineData);
             filterLineData = filterLineData.filter(summary => {
                 this.getDate = new Date(summary.date);
@@ -182,54 +180,117 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             });
         }
         else {
-            if (this.lineScale == "Day") {
-                filterLineData = this.pastDayEmotions(filterLineData).filter(summary => {
+            if (this.lineScale == 'Day') {
+                filterLineData = this.pastDayEmotions(filterLineData);
+                filterLineData = filterLineData.filter(summary => {
                     this.getDate = new Date(summary.date);
                     return this.getDate.getHours() == xValue;
                 });
             }
         }
 
-        this.test2 = this.pastWeekEmotions(filterLineData).length;
-
         return filterLineData.length;
     }
 
-    test1: any;
-    test2: any;
-    test3: any;
 
     public modDay(day: number): Number {
         return (this.nowDay + 1 + day)%7;
     }
 
+    public modHour(hour: number): Number {
+        return (this.nowHour + 1 + hour)%24;
+    }
+
     public getPastDays(day: number): String {
 
-        let today = (this.nowDay + 1 + day)%7;
+        let thisDay = (this.nowDay + 1 + day)%7;
 
         let strDay = '';
-        if(today == 0){
+        if(thisDay == 0){
             strDay = 'Sun';
         }
-        if(today == 1){
+        if(thisDay == 1){
             strDay = 'Mon';
         }
-        if(today == 2){
+        if(thisDay == 2){
             strDay = 'Tues';
         }
-        if(today == 3){
+        if(thisDay == 3){
             strDay = 'Wed';
         }
-        if(today == 4){
+        if(thisDay == 4){
             strDay = 'Thurs';
         }
-        if(today == 5){
+        if(thisDay == 5){
             strDay = 'Fri';
         }
-        if(today == 6){
+        if(thisDay == 6){
             strDay = 'Sat';
         }
         return strDay;
+    }
+
+    public getPastHours(hour: number): String {
+
+        let thisHour = (this.nowHour + 1 + hour)%24;
+
+        let strHour = '';
+        let timeSuffix = '';
+
+        if(thisHour < 12){
+            strHour = thisHour.toString();
+            timeSuffix = ' AM';
+        } else {
+            strHour = (thisHour %12).toString();
+            timeSuffix = ' PM';
+        }
+        if(strHour == '0'){
+            strHour = '12';
+        }
+
+        return strHour + timeSuffix;
+    }
+
+    public getDailyData(emotion){
+        return [
+            this.filterLineGraph(this.modHour(0), emotion),
+            this.filterLineGraph(this.modHour(1), emotion),
+            this.filterLineGraph(this.modHour(2), emotion),
+            this.filterLineGraph(this.modHour(3), emotion),
+            this.filterLineGraph(this.modHour(4), emotion),
+            this.filterLineGraph(this.modHour(5), emotion),
+            this.filterLineGraph(this.modHour(6), emotion)
+        ]
+    }
+
+    public getHourlyData(emotion){
+
+        return [
+            this.filterLineGraph(this.modHour(0), emotion),
+            this.filterLineGraph(this.modHour(1), emotion),
+            this.filterLineGraph(this.modHour(2), emotion),
+            this.filterLineGraph(this.modHour(3), emotion),
+            this.filterLineGraph(this.modHour(4), emotion),
+            this.filterLineGraph(this.modHour(5), emotion),
+            this.filterLineGraph(this.modHour(6), emotion),
+            this.filterLineGraph(this.modHour(7), emotion),
+            this.filterLineGraph(this.modHour(8), emotion),
+            this.filterLineGraph(this.modHour(9), emotion),
+            this.filterLineGraph(this.modHour(10), emotion),
+            this.filterLineGraph(this.modHour(11), emotion),
+            this.filterLineGraph(this.modHour(12), emotion),
+            this.filterLineGraph(this.modHour(13), emotion),
+            this.filterLineGraph(this.modHour(14), emotion),
+            this.filterLineGraph(this.modHour(15), emotion),
+            this.filterLineGraph(this.modHour(16), emotion),
+            this.filterLineGraph(this.modHour(17), emotion),
+            this.filterLineGraph(this.modHour(18), emotion),
+            this.filterLineGraph(this.modHour(19), emotion),
+            this.filterLineGraph(this.modHour(20), emotion),
+            this.filterLineGraph(this.modHour(21), emotion),
+            this.filterLineGraph(this.modHour(22), emotion),
+            this.filterLineGraph(this.modHour(23), emotion)
+        ]
     }
 
     /**
@@ -267,11 +328,11 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         let displayData;
 
         let lineType;
-        let happy_daily_totals;
-        let sad_daily_totals;
-        let meh_daily_totals;
-        let mad_daily_totals;
-        let anxious_daily_totals;
+        let happy_time_totals;
+        let sad_time_totals;
+        let meh_time_totals;
+        let mad_time_totals;
+        let anxious_time_totals;
         let lineData;
 
 
@@ -290,7 +351,30 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             this.getPastDays(6)
         ];
         let pastHours = [
-
+            this.getPastHours(0),
+            this.getPastHours(1),
+            this.getPastHours(2),
+            this.getPastHours(3),
+            this.getPastHours(4),
+            this.getPastHours(5),
+            this.getPastHours(6),
+            this.getPastHours(7),
+            this.getPastHours(8),
+            this.getPastHours(9),
+            this.getPastHours(10),
+            this.getPastHours(11),
+            this.getPastHours(12),
+            this.getPastHours(13),
+            this.getPastHours(14),
+            this.getPastHours(15),
+            this.getPastHours(16),
+            this.getPastHours(17),
+            this.getPastHours(18),
+            this.getPastHours(19),
+            this.getPastHours(20),
+            this.getPastHours(21),
+            this.getPastHours(22),
+            this.getPastHours(23)
         ];
 
         console.log(this.inputType);
@@ -348,7 +432,6 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                         this.filterBarGraph('4'),
                         this.filterBarGraph('5'),
                         this.filterBarGraph('6'),
-
                     ],
 
 
@@ -362,104 +445,111 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             }
         }
 
-        if(this.lineScale == "Week") {
+        if(this.lineScale == 'Week') {
             lineType = pastDays;
 
-            happy_daily_totals = {
-                "label": "Happy",
-                "data": [
-                    this.filterLineGraph(this.modDay(0), 'happy'),
-                    this.filterLineGraph(this.modDay(1), 'happy'),
-                    this.filterLineGraph(this.modDay(2), 'happy'),
-                    this.filterLineGraph(this.modDay(3), 'happy'),
-                    this.filterLineGraph(this.modDay(4), 'happy'),
-                    this.filterLineGraph(this.modDay(5), 'happy'),
-                    this.filterLineGraph(this.modDay(6), 'happy')
-                ],
+            happy_time_totals = {
+                label: "Happy",
+                data: this.getDailyData('happy'),
                 hidden: false,
-                "fill": false,
-                "borderColor": this.happyColor,
-                "lineTension": 0.1
+                fill: false,
+                borderColor: this.happyColor,
+                lineTension: 0.1
             };
 
-            sad_daily_totals = {
+            sad_time_totals = {
                 "label": "Sad",
-                "data": [
-                    this.filterLineGraph(this.modDay(0), 'sad'),
-                    this.filterLineGraph(this.modDay(1), 'sad'),
-                    this.filterLineGraph(this.modDay(2), 'sad'),
-                    this.filterLineGraph(this.modDay(3), 'sad'),
-                    this.filterLineGraph(this.modDay(4), 'sad'),
-                    this.filterLineGraph(this.modDay(5), 'sad'),
-                    this.filterLineGraph(this.modDay(6), 'sad')
-                ],
+                "data": this.getDailyData('sad'),
                 hidden: false,
                 "fill": false,
                 "borderColor": this.sadColor,
                 "lineTension": 0.1
             };
 
-            meh_daily_totals = {
+            meh_time_totals = {
                 "label": "Meh",
-                "data": [
-                    this.filterLineGraph(this.modDay(0), 'meh'),
-                    this.filterLineGraph(this.modDay(1), 'meh'),
-                    this.filterLineGraph(this.modDay(2), 'meh'),
-                    this.filterLineGraph(this.modDay(3), 'meh'),
-                    this.filterLineGraph(this.modDay(4), 'meh'),
-                    this.filterLineGraph(this.modDay(5), 'meh'),
-                    this.filterLineGraph(this.modDay(6), 'meh')
-                ],
+                "data": this.getDailyData('meh'),
                 hidden: false,
                 "fill": false,
                 "borderColor": this.mehColor,
                 "lineTension": 0.1
             };
 
-            mad_daily_totals = {
+            mad_time_totals = {
                 "label": "Mad",
-                "data": [
-                    this.filterLineGraph(this.modDay(0), 'mad'),
-                    this.filterLineGraph(this.modDay(1), 'mad'),
-                    this.filterLineGraph(this.modDay(2), 'mad'),
-                    this.filterLineGraph(this.modDay(3), 'mad'),
-                    this.filterLineGraph(this.modDay(4), 'mad'),
-                    this.filterLineGraph(this.modDay(5), 'mad'),
-                    this.filterLineGraph(this.modDay(6), 'mad')
-                ],
+                "data": this.getDailyData('mad'),
                 hidden: false,
                 "fill": false,
                 "borderColor": this.madColor,
                 "lineTension": 0.1
             };
 
-            anxious_daily_totals = {
+            anxious_time_totals = {
                 "label": "Anxious",
-                "data": [
-                    this.filterLineGraph(this.modDay(0), 'anxious'),
-                    this.filterLineGraph(this.modDay(1), 'anxious'),
-                    this.filterLineGraph(this.modDay(2), 'anxious'),
-                    this.filterLineGraph(this.modDay(3), 'anxious'),
-                    this.filterLineGraph(this.modDay(4), 'anxious'),
-                    this.filterLineGraph(this.modDay(5), 'anxious'),
-                    this.filterLineGraph(this.modDay(6), 'mad')
-                ],
+                "data": this.getDailyData('anxious'),
                 hidden: false,
                 "fill": false,
                 "borderColor": this.anxiousColor,
                 "lineTension": 0.1
             };
-            lineData = [
-                happy_daily_totals,
-                sad_daily_totals,
-                meh_daily_totals,
-                mad_daily_totals,
-                anxious_daily_totals
-            ]
         } else {
+            if(this.lineScale == 'Day') {
+                lineType = pastHours;
 
+                happy_time_totals = {
+                    "label": "Happy",
+                    "data": this.getHourlyData('happy'),
+                    hidden: false,
+                    "fill": false,
+                    "borderColor": this.happyColor,
+                    "lineTension": 0.1
+                };
+
+                sad_time_totals = {
+                    "label": "Sad",
+                    "data": this.getHourlyData('sad'),
+                    hidden: false,
+                    "fill": false,
+                    "borderColor": this.sadColor,
+                    "lineTension": 0.1
+                };
+
+                meh_time_totals = {
+                    "label": "Meh",
+                    "data": this.getHourlyData('meh'),
+                    hidden: false,
+                    "fill": false,
+                    "borderColor": this.mehColor,
+                    "lineTension": 0.1
+                };
+
+                mad_time_totals = {
+                    "label": "Mad",
+                    "data": this.getHourlyData('mad'),
+                    hidden: false,
+                    "fill": false,
+                    "borderColor": this.madColor,
+                    "lineTension": 0.1
+                };
+
+                anxious_time_totals = {
+                    "label": "Anxious",
+                    "data": this.getHourlyData('anxious'),
+                    hidden: false,
+                    "fill": false,
+                    "borderColor": this.anxiousColor,
+                    "lineTension": 0.1
+                };
+            }
         }
 
+        lineData = [
+            happy_time_totals,
+            sad_time_totals,
+            meh_time_totals,
+            mad_time_totals,
+            anxious_time_totals
+        ];
 
         this.barChart = new Chart(this.ctxBar, {
             type: 'bar',
@@ -555,7 +645,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             "lineTension": 0.3
         };
 
-        let happy_daily_totals = {"label":"Happy",
+        let happy_time_totals = {"label":"Happy",
             "data":[
                 this.filterLineGraph(this.modDay(0), 'happy'),
                 this.filterLineGraph(this.modDay(1), 'happy'),
@@ -570,7 +660,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             "borderColor":this.happyColor,
             "lineTension":0.1};
 
-        let sad_daily_totals = {"label":"Sad",
+        let sad_time_totals = {"label":"Sad",
             "data":[
                 this.filterLineGraph(this.modDay(0), 'sad'),
                 this.filterLineGraph(this.modDay(1), 'sad'),
@@ -585,7 +675,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             "borderColor":this.sadColor,
             "lineTension":0.1};
 
-        let meh_daily_totals = {"label":"Meh",
+        let meh_time_totals = {"label":"Meh",
             "data":[
                 this.filterLineGraph(this.modDay(0), 'meh'),
                 this.filterLineGraph(this.modDay(1), 'meh'),
@@ -600,7 +690,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             "borderColor":this.mehColor,
             "lineTension":0.1};
 
-        let mad_daily_totals = {"label":"Mad",
+        let mad_time_totals = {"label":"Mad",
             "data":[
                 this.filterLineGraph(this.modDay(0), 'mad'),
                 this.filterLineGraph(this.modDay(1), 'mad'),
@@ -615,7 +705,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             "borderColor":this.madColor,
             "lineTension":0.1};
 
-        let anxious_daily_totals = {"label":"Anxious",
+        let anxious_time_totals = {"label":"Anxious",
             "data":[
                 this.filterLineGraph(this.modDay(0), 'anxious'),
                 this.filterLineGraph(this.modDay(1), 'anxious'),
@@ -623,7 +713,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                 this.filterLineGraph(this.modDay(3), 'anxious'),
                 this.filterLineGraph(this.modDay(4), 'anxious'),
                 this.filterLineGraph(this.modDay(5), 'anxious'),
-                this.filterLineGraph(this.modDay(6), 'mad')
+                this.filterLineGraph(this.modDay(6), 'anxious')
             ],
             hidden: false,
             "fill":false,
@@ -655,11 +745,11 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             data: {
                 labels: pastDays,
                 datasets: [
-                    happy_daily_totals,
-                    sad_daily_totals,
-                    meh_daily_totals,
-                    mad_daily_totals,
-                    anxious_daily_totals
+                    happy_time_totals,
+                    sad_time_totals,
+                    meh_time_totals,
+                    mad_time_totals,
+                    anxious_time_totals
                 ]
             },
             options: {

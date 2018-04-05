@@ -127,11 +127,20 @@
             </mat-tab-group>
                 <mat-card> <mat-card-title class="your-summarys-title">Your Emotions</mat-card-title>
                     <mat-card-subtitle class="your-summarys-title">There are {{totalNumberMoods()}} entries represented</mat-card-subtitle>
+
                     <mat-checkbox [(ngModel)]="colorblindMode">Colorblind Mode</mat-checkbox>
+                    <br>
+                    <label>Show entries across a day or week?</label>
+                    <select id="LineScale" [(ngModel)]="lineScale">
+                        <option id ="LineDay" selected value="Day">Day</option>
+                        <option id = "LineWeek" value="Week">Week</option>
+                    </select>
+
                     <canvas id="lineChart" height="auto"></canvas>
                 </mat-card>
             </div>
         </mat-card>
+        {{lineScale}}<br>
         {{colorblindMode}}<br>
         {{nowDate}} <br>
         {{lastWeekDate}}<br>
@@ -139,9 +148,6 @@
         {{nowUnix}} <br>
         {{lastWeekUnix}}<br>
         {{lastWeekDate}}<br>
-        {{test1}}<br>
-        {{test2}}<br>
-        {{test3}}<br>
         {{this.filterLineGraph(0, 'happy')}}<br>
         {{this.filterLineGraph(0, 'mad')}}<br>
 
