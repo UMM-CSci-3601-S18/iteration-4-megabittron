@@ -23,7 +23,7 @@
                     <!-- The errors card is commented out beacuse it messes with the goals cards layout -->
                     <!--<mat-card *ngIf="goals; else goalsError"></mat-card>-->
                     <mat-card class="goals-card"
-                              *ngFor="let goal of this.filterGoals(goalPurpose, goalCategory, goalName, goalStatus, goalStart, goalEnd, goalNext, goalFrequency)"
+                              *ngFor="let goal of this.filterGoals(goalPurpose, goalCategory, goalName, goalStatus, goalFrequency)"
                               #elem [id]="goal._id['$oid']">
                         <div class ="goals-image">
                             <img *ngIf="goal.category == 'Family'" src="../../assets/images/goals/family.png"
@@ -41,6 +41,7 @@
                                     <b *ngIf="goal.status" id="goal-complete">Complete</b>
                                     <b *ngIf="!goal.status" id="goal-incomplete">Incomplete</b>
                                 </p>
+                                <p>Frequency: {{goal.frequency}}</p>
                             </mat-card-content>
                         </div>
                         <div class="goals-buttons">

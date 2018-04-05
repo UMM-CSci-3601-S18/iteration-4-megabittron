@@ -84,9 +84,10 @@ public class GoalRequestHandler {
                     String category = dbO.getString("category");
                     String name = dbO.getString("name");
                     Boolean status = dbO.getBoolean("status");
+                    String frequency = dbO.getString("frequency");
 
                     System.err.println("Adding new goal [purpose=" + purpose + ", category=" + category + " name=" + name + " status=" + status + ']');
-                    return goalController.addNewGoal(purpose, category, name, status).toString();
+                    return goalController.addNewGoal(purpose, category, name, status, frequency).toString();
                 } catch (NullPointerException e) {
                     System.err.println("A value was malformed or omitted, new item request failed.");
                     return null;
@@ -123,9 +124,10 @@ public class GoalRequestHandler {
                     String category = dbO.getString("category");
                     String name = dbO.getString("name");
                     Boolean status = dbO.getBoolean("status");
+                    String frequency = dbO.getString("frequency");
 
                     System.out.println("Completing goal [purpose: " + purpose + ", category: " + category + ", name: " + name + ", status: " + status + ']');
-                    return goalController.completeGoal(id, purpose, category, name, status).toString();
+                    return goalController.completeGoal(id, purpose, category, name, status, frequency).toString();
                 } catch (NullPointerException e) {
                     System.err.println("A value was malformed or omitted, new item request failed.");
                     return null;

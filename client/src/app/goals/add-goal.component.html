@@ -18,7 +18,12 @@
                     <input matInput #input id="purposeField" placeholder="What is the purpose?" [(ngModel)]="data.goal.purpose">
                 </mat-form-field>
 
-                
+                <mat-select id="frequency-list" matInput #input [(ngModel)]="data.goal.frequency" placeholder="Frequency" [style.width]="'100%'">
+                    <mat-option value="Does not repeat">Does not repeat</mat-option>
+                    <mat-option value="Daily">Daily</mat-option>
+                    <mat-option value="Weekly">Weekly</mat-option>
+                    <mat-option value="Monthly">Monthly</mat-option>
+                </mat-select>
             </mat-card-content>
         <button mat-raised-button id="confirmAddGoalButton" [mat-dialog-close]="data.goal" type="button" (click)="openSnackBar('Goal Added','')">Confirm</button>
         <button mat-raised-button id="exitWithoutAddingButton" (click)="onNoClick()" type="button">Cancel</button>

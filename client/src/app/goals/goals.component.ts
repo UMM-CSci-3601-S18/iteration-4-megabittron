@@ -95,7 +95,8 @@ export class GoalsComponent implements OnInit {
     }
 
     public filterGoals(searchPurpose: string, searchCategory: string,
-                       searchName: string, searchStatus: string): Goal[] {
+                       searchName: string, searchStatus: string,
+                       searchFrequency: string): Goal[] {
 
         this.filteredGoals = this.goals;
 
@@ -153,7 +154,7 @@ export class GoalsComponent implements OnInit {
         goalObservable.subscribe(
             goals => {
                 this.goals = goals;
-                this.filterGoals(this.goalPurpose, this.goalCategory, this.goalName, this.goalStatus);
+                this.filterGoals(this.goalPurpose, this.goalCategory, this.goalName, this.goalStatus, this.goalFrequency);
             },
             err => {
                 console.log(err);

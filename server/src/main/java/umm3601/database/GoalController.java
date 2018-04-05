@@ -104,7 +104,7 @@ public class GoalController {
      */
     // As of now this only adds the goal, but you can separate multiple arguments
     // by commas as we add them.
-    public String addNewGoal(String purpose, String category, String name, Boolean status) {
+    public String addNewGoal(String purpose, String category, String name, Boolean status, String frequency) {
 
         // makes the search Document key-pairs
         Document newGoal = new Document();
@@ -112,13 +112,14 @@ public class GoalController {
         newGoal.append("category", category);
         newGoal.append("name", name);
         newGoal.append("status", status);
+        newGoal.append("frequency", frequency);
         // Append new goals here
 
         try {
             goalCollection.insertOne(newGoal);
             ObjectId id = newGoal.getObjectId("_id");
 
-            System.err.println("Successfully added new goal [_id=" + id + ", purpose=" + purpose + ", category=" + category + ", name=" + name + ']');
+            System.err.println("Successfully added new goal [_id=" + id + ", purpose=" + purpose + ", category=" + category + ", name=" + name + "frequency= "+ frequency + ']');
             //return id.toHexString();
             return JSON.serialize(id);
         } catch(MongoException me) {
@@ -127,12 +128,13 @@ public class GoalController {
         }
     }
 
-    public String completeGoal(String id, String purpose, String category, String name, Boolean status){
+    public String completeGoal(String id, String purpose, String category, String name, Boolean status, String frequency){
         Document newGoal = new Document();
         newGoal.append("purpose", purpose);
         newGoal.append("category", category);
         newGoal.append("name", name);
         newGoal.append("status", true);
+        newGoal.append("frequency", frequency);
         Document setQuery = new Document();
         setQuery.append("$set", newGoal);
         Document searchQuery = new Document().append("_id", new ObjectId(id));
