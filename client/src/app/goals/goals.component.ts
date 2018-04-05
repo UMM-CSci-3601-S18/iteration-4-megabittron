@@ -26,6 +26,7 @@ export class GoalsComponent implements OnInit {
     public goalEnd;
     public goalNext;
     public goalFrequency;
+    public today;
     showPage = false;
 
     // The ID of the goal
@@ -182,9 +183,54 @@ export class GoalsComponent implements OnInit {
     }
 
     getDate(){
-        var today = new Date();
-        this.goalStart = today;
-        this.goalNext = today;
+        this.today = new Date();
+        this.goalStart = this.today;
+        this.goalNext = this.today;
+    }
+
+    getNext(next, end, frequency): boolean{
+        this.today.setHours(0, 0, 0, 0);
+
+        var nextGoal = new Date(next);
+        nextGoal.setHours(0, 0, 0, 0);
+
+        var endGoal = new Date(end);
+        endGoal.setHours(0, 0, 0, 0);
+
+        var day = nextGoal.getDate();
+        var month = nextGoal.getMonth();
+
+        if(frequency == 'Does not repeat'){
+            if(nextGoal < this.today){
+                return false;
+            }
+
+            else{
+                return true;
+            }
+        }
+
+        while(nextGoal < this.today){
+            if(frequency == "Daily"){
+                next.setDate(day + 1);
+            }
+
+            if(frequency == "Weekly"){
+                next.setDate(day + 7);
+            }
+
+            if(frequency == "Monthly"){
+                next.setMonth(month + 1);
+            }
+        }
+
+       if(nextGoal > this.today){
+            return false;
+       }
+       else{
+           return true;
+       }
+
     }
 
 }
