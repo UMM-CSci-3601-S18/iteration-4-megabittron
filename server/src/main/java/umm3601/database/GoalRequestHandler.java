@@ -86,9 +86,10 @@ public class GoalRequestHandler {
                     Boolean status = dbO.getBoolean("status");
                     String frequency = dbO.getString("frequency");
                     String start = dbO.getString("start");
+                    String end = dbO.getString("end");
 
                     System.err.println("Adding new goal [purpose=" + purpose + ", category=" + category + " name=" + name + " status=" + status + ']');
-                    return goalController.addNewGoal(purpose, category, name, status, frequency, start).toString();
+                    return goalController.addNewGoal(purpose, category, name, status, frequency, start, end).toString();
                 } catch (NullPointerException e) {
                     System.err.println("A value was malformed or omitted, new item request failed.");
                     return null;

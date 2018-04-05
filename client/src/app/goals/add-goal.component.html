@@ -18,6 +18,17 @@
                     <input matInput #input id="purposeField" placeholder="What is the purpose?" [(ngModel)]="data.goal.purpose">
                 </mat-form-field>
 
+                <mat-form-field class="end">
+                    <input
+                        #input
+                        id = "endDate"
+                        matInput [matDatepicker]="end"
+                        placeholder="Choose an End Date"
+                        [(ngModel)]="data.goal.end">
+                    <mat-datepicker-toggle id = "endButton" matSuffix [for]="end"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi="true" #end></mat-datepicker>
+                </mat-form-field>
+
                 <mat-select id="frequency-list" matInput #input [(ngModel)]="data.goal.frequency" placeholder="Frequency" [style.width]="'100%'">
                     <mat-option value="Does not repeat">Does not repeat</mat-option>
                     <mat-option value="Daily">Daily</mat-option>

@@ -183,7 +183,7 @@ export class GoalsComponent implements OnInit {
 
     getDate(){
         var today = new Date();
-        this.goalStart = today.toString();
+        this.goalStart = today;
     }
 
 }
