@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Inject} from '@angular/core';
 import {SummaryListService} from './summary-list.service';
 import {Summary} from './summary';
@@ -13,24 +13,44 @@ import * as Chart from 'chart.js';
     styleUrls: ['./summary-list.component.css'],
 })
 
-export class SummaryListComponent implements OnInit {
+export class SummaryListComponent implements AfterViewInit, OnInit {
     startDate;
     endDate;
     getDate;
 
-    canvas: any;
-    ctx: any;
-    myChart: any;
+    ctxBar: any;
+    barCanvas: any;
+    barChart: any;
+    ctxLine: any;
+    lineCanvas: any;
+    lineChart: any;
+
+    nowDate = new Date(Date.now());
+    nowUnix = this.nowDate.getTime();
+    nowDay = this.nowDate.getDay();
+    nowHour = this.nowDate.getHours();
+
+    lastWeekUnix = this.nowUnix - 604800000;
+    lastWeekDate = new Date(this.lastWeekUnix);
+    lastDayUnix = this.nowUnix - 86400000;
+    lastDayDate = new Date(this.lastDayUnix);
+
 
     // These are public so that tests can reference them (.spec.ts)
     public summarys: Summary[];
     public filteredSummarys: Summary[];
+    public dateFilteredSummarys: Summary[];
+    public pastWeekSummarys: Summary[];
+    public pastDaySummarys: Summary[];
+
+
 
     // These are the target values used in searching.
     // We should rename them to make that clearer.
     public summaryMood: string;
     public summaryIntensity: number;
     public inputType = "Day";
+    public lineScale = "Week";
 
     // The ID of the
     private highlightedID: {'$oid': string} = { '$oid': '' };
@@ -42,6 +62,39 @@ export class SummaryListComponent implements OnInit {
 
     isHighlighted(summary: Summary): boolean {
         return summary._id['$oid'] === this.highlightedID['$oid'];
+    }
+
+    public filterDates(givenlist, searchStartDate: any, searchEndDate: any): Summary[] {
+        this.dateFilteredSummarys = givenlist;
+        // Filter by startDate
+
+        if (searchStartDate != null) {
+
+            this.dateFilteredSummarys = this.dateFilteredSummarys.filter(summary => {
+                this.getDate = new Date(summary.date);
+                return this.getDate >= searchStartDate;
+            });
+        }
+
+        // Filter by endDate
+        if (searchEndDate != null) {
+
+            this.dateFilteredSummarys = this.dateFilteredSummarys.filter(summary => {
+                this.getDate = new Date(summary.date);
+                return this.getDate <= searchEndDate;
+            });
+        }
+        return this.dateFilteredSummarys;
+    }
+
+    public pastWeekEmotions():Summary[]{
+        this.pastWeekSummarys = this.filterDates(this.summarys, this.lastWeekDate, this.nowDate);
+        return this.pastWeekSummarys;
+    }
+
+    public pastDayEmotions():Summary[]{
+        this.pastDaySummarys = this.filterDates(this.summarys, this.lastDayDate, this.nowDate);
+        return this.pastDaySummarys;
     }
 
     public filterSummarys(searchMood: string, searchIntensity: number, searchStartDate: any, searchEndDate: any): Summary[] {
@@ -59,11 +112,8 @@ export class SummaryListComponent implements OnInit {
                 searchMood = searchMood.toLocaleLowerCase();
                 this.filteredSummarys = this.filteredSummarys.filter(summary => {
                     return !searchMood || summary.mood.toLowerCase().indexOf(searchMood) !== -1;
-                })
+                });
             }
-
-
-
         }
 
         // Filter by Intensity
@@ -80,45 +130,67 @@ export class SummaryListComponent implements OnInit {
             }
         }
 
-        // Filter by startDate
-        if (searchStartDate != null) {
+        this.filteredSummarys = this.filterDates(this.filteredSummarys, searchStartDate, searchEndDate);
 
-            this.filteredSummarys = this.filteredSummarys.filter(summary => {
-                this.getDate = new Date(summary.date);
-                return this.getDate >= this.startDate;
-            });
-        }
-
-        // Filter by endDate
-        if (searchEndDate != null) {
-
-            this.filteredSummarys = this.filteredSummarys.filter(summary => {
-                this.getDate = new Date(summary.date);
-                return this.getDate <= this.endDate;
-            });
-        }
         return this.filteredSummarys;
     }
 
-    filterGraph(weekday): number {
+    //xValue can represent hour or weekday
+    filterBarGraph(xValue): number {
         console.log(this.filteredSummarys.length);
-        var filterData = this.filteredSummarys;
+        let filterBarData = this.filteredSummarys;
 
         if(this.inputType == "Day") {
-            filterData = filterData.filter(summary => {
+            filterBarData = filterBarData.filter(summary => {
                 this.getDate = new Date(summary.date);
-                return this.getDate.getDay() == weekday;
+                return this.getDate.getDay() == xValue;
             });
         }
         else {
-            filterData = filterData.filter(summary => {
-                this.getDate = new Date(summary.date);
-                return this.getDate.getHours() == weekday;
-            });
+            if (this.inputType == "Hour") {
+                filterBarData = filterBarData.filter(summary => {
+                    this.getDate = new Date(summary.date);
+                    return this.getDate.getHours() == xValue;
+                });
+            }
         }
 
-        return filterData.length;
+        return filterBarData.length;
     }
+
+    filterLineGraph(xValue, mood): number {
+        this.test3 = this.summarys.length;
+        mood = mood.toLocaleLowerCase();
+        let filterLineData = this.summarys.filter(summary => {
+            return !mood || summary.mood.toLowerCase().indexOf(mood) !== -1;
+        });
+
+        this.test1 = filterLineData.length;
+
+        if(this.lineScale == "Week") {
+            filterLineData = this.pastWeekEmotions();
+            filterLineData = filterLineData.filter(summary => {
+                this.getDate = new Date(summary.date);
+                return this.getDate.getDay() == xValue;
+            });
+        }
+        else {
+            if (this.lineScale == "Day") {
+                filterLineData = this.pastDayEmotions().filter(summary => {
+                    this.getDate = new Date(summary.date);
+                    return this.getDate.getHours() == xValue;
+                });
+            }
+        }
+
+        this.test2 = this.pastWeekEmotions().length;
+
+        return filterLineData.length;
+    }
+
+    test1: any;
+    test2: any;
+    test3: any;
 
     /**
      * Starts an asynchronous operation to update the emojis list
@@ -127,19 +199,19 @@ export class SummaryListComponent implements OnInit {
 
     updateChart(): void{
 
-        this.myChart.destroy();
+        this.barChart.destroy();
 
-        this.canvas = document.getElementById("myChart");
-        this.ctx = this.canvas;
+        this.barCanvas = document.getElementById("barChart");
+        this.ctxBar = this.barCanvas;
 
-        var type;
-        var summaryDays;
-        var summaryHours;
+        let type;
+        let summaryDays;
+        let summaryHours;
 
-        var displayData;
+        let displayData;
 
-        var days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
-        var hours = ['12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM',
+        let days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+        let hours = ['12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM',
             '8AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM',
             '5 PM', '6 PM', '7 PM', '8 PM','9 PM', '10 PM', '11 PM'];
 
@@ -150,31 +222,31 @@ export class SummaryListComponent implements OnInit {
             summaryHours = {
                 "label": "Total Number of Entries",
                 "data": [
-                    this.filterGraph('0'),
-                    this.filterGraph('1'),
-                    this.filterGraph('2'),
-                    this.filterGraph('3'),
-                    this.filterGraph('4'),
-                    this.filterGraph('5'),
-                    this.filterGraph('6'),
-                    this.filterGraph('7'),
-                    this.filterGraph('8'),
-                    this.filterGraph('9'),
-                    this.filterGraph('10'),
-                    this.filterGraph('11'),
-                    this.filterGraph('12'),
-                    this.filterGraph('13'),
-                    this.filterGraph('14'),
-                    this.filterGraph('15'),
-                    this.filterGraph('16'),
-                    this.filterGraph('17'),
-                    this.filterGraph('18'),
-                    this.filterGraph('19'),
-                    this.filterGraph('20'),
-                    this.filterGraph('21'),
-                    this.filterGraph('22'),
-                    this.filterGraph('23'),
-                    this.filterGraph('24')
+                    this.filterBarGraph('0'),
+                    this.filterBarGraph('1'),
+                    this.filterBarGraph('2'),
+                    this.filterBarGraph('3'),
+                    this.filterBarGraph('4'),
+                    this.filterBarGraph('5'),
+                    this.filterBarGraph('6'),
+                    this.filterBarGraph('7'),
+                    this.filterBarGraph('8'),
+                    this.filterBarGraph('9'),
+                    this.filterBarGraph('10'),
+                    this.filterBarGraph('11'),
+                    this.filterBarGraph('12'),
+                    this.filterBarGraph('13'),
+                    this.filterBarGraph('14'),
+                    this.filterBarGraph('15'),
+                    this.filterBarGraph('16'),
+                    this.filterBarGraph('17'),
+                    this.filterBarGraph('18'),
+                    this.filterBarGraph('19'),
+                    this.filterBarGraph('20'),
+                    this.filterBarGraph('21'),
+                    this.filterBarGraph('22'),
+                    this.filterBarGraph('23'),
+                    this.filterBarGraph('24')
                 ],
                 "fill": true,
                 "backgroundColor": "blue",
@@ -184,34 +256,36 @@ export class SummaryListComponent implements OnInit {
             displayData = summaryHours;
         }
         else {
-            console.log("here");
-            type = days;
+            if (this.inputType == "Day") {
+                console.log("here");
+                type = days;
 
-            summaryDays = {
-                "label": "Total Number of Entries",
-                "data": [
-                    this.filterGraph('0'),
-                    this.filterGraph('1'),
-                    this.filterGraph('2'),
-                    this.filterGraph('3'),
-                    this.filterGraph('4'),
-                    this.filterGraph('5'),
-                    this.filterGraph('6'),
+                summaryDays = {
+                    "label": "Total Number of Entries",
+                    "data": [
+                        this.filterBarGraph('0'),
+                        this.filterBarGraph('1'),
+                        this.filterBarGraph('2'),
+                        this.filterBarGraph('3'),
+                        this.filterBarGraph('4'),
+                        this.filterBarGraph('5'),
+                        this.filterBarGraph('6'),
 
-                ],
+                    ],
 
 
-                "fill": true,
-                "backgroundColor": "blue",
-                "borderColor": "black",
-                "lineTension": 0.1
-            };
+                    "fill": true,
+                    "backgroundColor": "blue",
+                    "borderColor": "black",
+                    "lineTension": 0.1
+                };
 
-            displayData = summaryDays;
+                displayData = summaryDays;
+            }
         }
 
 
-        this.myChart = new Chart(this.ctx, {
+       this.barChart = new Chart(this.ctxBar, {
             type: 'bar',
             data: {
 
@@ -238,23 +312,26 @@ export class SummaryListComponent implements OnInit {
 
     buildChart(): void {
 
-        this.canvas = document.getElementById("myChart");
-        this.ctx = this.canvas;
+        this.barCanvas = document.getElementById("barChart");
+        this.ctxBar = this.barCanvas;
 
-        var summaryDays;
+        this.lineCanvas = document.getElementById("lineChart");
+        this.ctxLine= this.lineCanvas;
+
+        let summaryDays;
 
         let days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
 
         summaryDays = {
             "label": "Total Number of Entries",
             "data": [
-                this.filterGraph('0'),
-                this.filterGraph('1'),
-                this.filterGraph('2'),
-                this.filterGraph('3'),
-                this.filterGraph('4'),
-                this.filterGraph('5'),
-                this.filterGraph('6'),
+                this.filterBarGraph('0'),
+                this.filterBarGraph('1'),
+                this.filterBarGraph('2'),
+                this.filterBarGraph('3'),
+                this.filterBarGraph('4'),
+                this.filterBarGraph('5'),
+                this.filterBarGraph('6'),
 
             ],
             "fill": true,
@@ -263,7 +340,22 @@ export class SummaryListComponent implements OnInit {
             "lineTension": 0.3
         };
 
-        this.myChart = new Chart(this.ctx, {
+        let meh_daily_totals = {"label":"Meh",
+            "data":[
+                this.filterLineGraph('0', 'meh'),
+                this.filterLineGraph('1', 'meh'),
+                this.filterLineGraph('2', 'meh'),
+                this.filterLineGraph('3', 'meh'),
+                this.filterLineGraph('4', 'meh'),
+                this.filterLineGraph('5', 'meh'),
+                this.filterLineGraph('6', 'meh')
+            ],
+            hidden: false,
+            "fill":false,
+            "borderColor":"rgb(150, 0, 100)",
+            "lineTension":0.1};
+
+        this.barChart = new Chart(this.ctxBar, {
             type: 'bar',
             data: {
                 labels: days,
@@ -277,6 +369,25 @@ export class SummaryListComponent implements OnInit {
                         ticks: {
                             beginAtZero: true
 
+                        }
+                    }]
+                }
+            }
+        });
+
+        this.lineChart = new Chart(this.ctxLine, {
+            type: 'line',
+            data: {
+                labels: days,
+                datasets: [
+                    meh_daily_totals
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
                         }
                     }]
                 }

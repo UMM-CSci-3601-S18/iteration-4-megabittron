@@ -66,7 +66,8 @@
 
             <div id="tabs">
             <mat-tab-group #myTabGroup >
-                <mat-tab label="Graph View">
+
+                <mat-tab label="Bar Graph">
                     <div id="graphFilter">
                         <form>
                             <!--# The Angular feature-->
@@ -77,13 +78,19 @@
                             </select>
                             <br>
                         </form>
-                        <button mat-raised-button id="filterButton" (click)="this.filterSummarys(summaryMood, summaryIntensity, startDate, endDate); updateChart()">Update Graph</button>
+                        <button mat-raised-button id="filterBarButton" (click)="this.filterSummarys(summaryMood, summaryIntensity, startDate, endDate); updateChart()">Update Graph</button>
                         <br>
                     </div>
                     <mat-card> <mat-card-title class="your-summarys-title">Your Emotions</mat-card-title>
                         <mat-card-subtitle class="your-summarys-title">There are {{totalNumberMoods()}} entries represented</mat-card-subtitle>
-                    <canvas id="myChart" height="auto"></canvas>
+                    <canvas id="barChart" height="auto"></canvas>
                     </mat-card>
+
+                </mat-tab>
+
+                <mat-tab label="Line Graph">
+
+
 
                 </mat-tab>
 
@@ -118,8 +125,21 @@
                     </mat-card>
                 </mat-tab>
             </mat-tab-group>
+                <mat-card> <mat-card-title class="your-summarys-title">Your Emotions</mat-card-title>
+                    <mat-card-subtitle class="your-summarys-title">There are {{totalNumberMoods()}} entries represented</mat-card-subtitle>
+                    <canvas id="lineChart" height="auto"></canvas>
+                </mat-card>
             </div>
         </mat-card>
+        {{nowDate}} <br>
+        {{lastWeekDate}}<br>
+        {{nowDay}}<br>
+        {{nowUnix}} <br>
+        {{lastWeekUnix}}<br>
+        {{lastWeekDate}}<br>
+        {{test1}}<br>
+        {{test2}}<br>
+        {{test3}}
     </div>
 </div>
 </body>
