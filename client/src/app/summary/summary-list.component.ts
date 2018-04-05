@@ -253,13 +253,13 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     public getDailyData(emotion){
         return [
-            this.filterLineGraph(this.modHour(0), emotion),
-            this.filterLineGraph(this.modHour(1), emotion),
-            this.filterLineGraph(this.modHour(2), emotion),
-            this.filterLineGraph(this.modHour(3), emotion),
-            this.filterLineGraph(this.modHour(4), emotion),
-            this.filterLineGraph(this.modHour(5), emotion),
-            this.filterLineGraph(this.modHour(6), emotion)
+            this.filterLineGraph(this.modDay(0), emotion),
+            this.filterLineGraph(this.modDay(1), emotion),
+            this.filterLineGraph(this.modDay(2), emotion),
+            this.filterLineGraph(this.modDay(3), emotion),
+            this.filterLineGraph(this.modDay(4), emotion),
+            this.filterLineGraph(this.modDay(5), emotion),
+            this.filterLineGraph(this.modDay(6), emotion)
         ]
     }
 
@@ -646,75 +646,35 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         };
 
         let happy_time_totals = {"label":"Happy",
-            "data":[
-                this.filterLineGraph(this.modDay(0), 'happy'),
-                this.filterLineGraph(this.modDay(1), 'happy'),
-                this.filterLineGraph(this.modDay(2), 'happy'),
-                this.filterLineGraph(this.modDay(3), 'happy'),
-                this.filterLineGraph(this.modDay(4), 'happy'),
-                this.filterLineGraph(this.modDay(5), 'happy'),
-                this.filterLineGraph(this.modDay(6), 'happy')
-            ],
+            "data":this.getDailyData('happy'),
             hidden: false,
             "fill":false,
             "borderColor":this.happyColor,
             "lineTension":0.1};
 
         let sad_time_totals = {"label":"Sad",
-            "data":[
-                this.filterLineGraph(this.modDay(0), 'sad'),
-                this.filterLineGraph(this.modDay(1), 'sad'),
-                this.filterLineGraph(this.modDay(2), 'sad'),
-                this.filterLineGraph(this.modDay(3), 'sad'),
-                this.filterLineGraph(this.modDay(4), 'sad'),
-                this.filterLineGraph(this.modDay(5), 'sad'),
-                this.filterLineGraph(this.modDay(6), 'sad')
-            ],
+            "data":this.getDailyData('sad'),
             hidden: false,
             "fill":false,
             "borderColor":this.sadColor,
             "lineTension":0.1};
 
         let meh_time_totals = {"label":"Meh",
-            "data":[
-                this.filterLineGraph(this.modDay(0), 'meh'),
-                this.filterLineGraph(this.modDay(1), 'meh'),
-                this.filterLineGraph(this.modDay(2), 'meh'),
-                this.filterLineGraph(this.modDay(3), 'meh'),
-                this.filterLineGraph(this.modDay(4), 'meh'),
-                this.filterLineGraph(this.modDay(5), 'meh'),
-                this.filterLineGraph(this.modDay(6), 'meh')
-            ],
+            "data":this.getDailyData('meh'),
             hidden: false,
             "fill":false,
             "borderColor":this.mehColor,
             "lineTension":0.1};
 
         let mad_time_totals = {"label":"Mad",
-            "data":[
-                this.filterLineGraph(this.modDay(0), 'mad'),
-                this.filterLineGraph(this.modDay(1), 'mad'),
-                this.filterLineGraph(this.modDay(2), 'mad'),
-                this.filterLineGraph(this.modDay(3), 'mad'),
-                this.filterLineGraph(this.modDay(4), 'mad'),
-                this.filterLineGraph(this.modDay(5), 'mad'),
-                this.filterLineGraph(this.modDay(6), 'mad')
-            ],
+            "data":this.getDailyData('mad'),
             hidden: false,
             "fill":false,
             "borderColor":this.madColor,
             "lineTension":0.1};
 
         let anxious_time_totals = {"label":"Anxious",
-            "data":[
-                this.filterLineGraph(this.modDay(0), 'anxious'),
-                this.filterLineGraph(this.modDay(1), 'anxious'),
-                this.filterLineGraph(this.modDay(2), 'anxious'),
-                this.filterLineGraph(this.modDay(3), 'anxious'),
-                this.filterLineGraph(this.modDay(4), 'anxious'),
-                this.filterLineGraph(this.modDay(5), 'anxious'),
-                this.filterLineGraph(this.modDay(6), 'anxious')
-            ],
+            "data":this.getDailyData('anxious'),
             hidden: false,
             "fill":false,
             "borderColor":this.anxiousColor,
