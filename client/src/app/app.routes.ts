@@ -4,7 +4,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {ResourcesComponent} from "./resources/resources.component";
 import {GoalsComponent} from "./goals/goals.component";
-import {JournalsComponent} from "./Journal/journals.component";
+import {JournalsComponent} from "./journals/journals.component";
 
 import {MatSliderModule} from '@angular/material/slider';
 import {SummaryListComponent} from "./summary/summary-list.component";
