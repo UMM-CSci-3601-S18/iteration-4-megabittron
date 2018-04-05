@@ -107,6 +107,19 @@ public class Server {
         post("api/journals/edit", journalRequestHandler::editJournal);
 
 
+
+
+
+        post("api/storeauthcode", (request, response) -> {
+            System.out.println("HEEREEE");
+            response.body("HEEERRREEE");
+
+            return response;
+        });
+
+
+
+
         // An example of throwing an unhandled exception so you can see how the
         // Java Spark debugger displays errors like this.
         get("api/error", (req, res) -> {

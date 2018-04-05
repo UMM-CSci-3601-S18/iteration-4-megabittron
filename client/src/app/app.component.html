@@ -1,4 +1,8 @@
 <body>
+
+<button id="signinButton">Sign in with Google</button>
+
+
 <div *ngIf="currentScreenWidth < 806; then mobile else computer"></div>
 <ng-template #computer >
     <div (window:resize)="onResize($event)"></div>
