@@ -25,6 +25,13 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     lineCanvas: any;
     lineChart: any;
 
+    colorblindMode: boolean;
+    happyColor: string;
+    sadColor: string;
+    mehColor: string;
+    madColor: string;
+    anxiousColor: string;
+
     nowDate = new Date(Date.now());
     nowUnix = this.nowDate.getTime();
     nowDay = this.nowDate.getDay();
@@ -233,20 +240,58 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     updateChart(): void{
 
         this.barChart.destroy();
-
         this.barCanvas = document.getElementById("barChart");
         this.ctxBar = this.barCanvas;
+
+        this.lineChart.destroy();
+        this.lineCanvas = document.getElementById("lineChart");
+        this.ctxLine = this.lineCanvas;
+
+        if(this.colorblindMode){
+            this.happyColor = "rgb(252,141,89)";
+            this.sadColor = "rgb(69,117,180)";
+            this.mehColor = "rgb(254,224,144)";
+            this.madColor = "rgb(215,48,39)";
+            this.anxiousColor = "rgb(145,191,219)";
+        } else {
+            this.happyColor = "rgb(64, 255, 0)";
+            this.sadColor = "rgb(0, 128, 255)";
+            this.mehColor = "rgb(100, 100, 100)";
+            this.madColor = "rgb(255, 0, 0)";
+            this.anxiousColor = "rgb(255, 128, 0)";
+        }
 
         let type;
         let summaryDays;
         let summaryHours;
-
         let displayData;
+
+        let lineType;
+        let happy_daily_totals;
+        let sad_daily_totals;
+        let meh_daily_totals;
+        let mad_daily_totals;
+        let anxious_daily_totals;
+        let lineData;
+
 
         let days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
         let hours = ['12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM',
             '8AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM',
             '5 PM', '6 PM', '7 PM', '8 PM','9 PM', '10 PM', '11 PM'];
+
+        let pastDays = [
+            this.getPastDays(0),
+            this.getPastDays(1),
+            this.getPastDays(2),
+            this.getPastDays(3),
+            this.getPastDays(4),
+            this.getPastDays(5),
+            this.getPastDays(6)
+        ];
+        let pastHours = [
+
+        ];
 
         console.log(this.inputType);
         if(this.inputType == "Hour"){
@@ -317,8 +362,106 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             }
         }
 
+        if(this.lineScale == "Week") {
+            lineType = pastDays;
 
-       this.barChart = new Chart(this.ctxBar, {
+            happy_daily_totals = {
+                "label": "Happy",
+                "data": [
+                    this.filterLineGraph(this.modDay(0), 'happy'),
+                    this.filterLineGraph(this.modDay(1), 'happy'),
+                    this.filterLineGraph(this.modDay(2), 'happy'),
+                    this.filterLineGraph(this.modDay(3), 'happy'),
+                    this.filterLineGraph(this.modDay(4), 'happy'),
+                    this.filterLineGraph(this.modDay(5), 'happy'),
+                    this.filterLineGraph(this.modDay(6), 'happy')
+                ],
+                hidden: false,
+                "fill": false,
+                "borderColor": this.happyColor,
+                "lineTension": 0.1
+            };
+
+            sad_daily_totals = {
+                "label": "Sad",
+                "data": [
+                    this.filterLineGraph(this.modDay(0), 'sad'),
+                    this.filterLineGraph(this.modDay(1), 'sad'),
+                    this.filterLineGraph(this.modDay(2), 'sad'),
+                    this.filterLineGraph(this.modDay(3), 'sad'),
+                    this.filterLineGraph(this.modDay(4), 'sad'),
+                    this.filterLineGraph(this.modDay(5), 'sad'),
+                    this.filterLineGraph(this.modDay(6), 'sad')
+                ],
+                hidden: false,
+                "fill": false,
+                "borderColor": this.sadColor,
+                "lineTension": 0.1
+            };
+
+            meh_daily_totals = {
+                "label": "Meh",
+                "data": [
+                    this.filterLineGraph(this.modDay(0), 'meh'),
+                    this.filterLineGraph(this.modDay(1), 'meh'),
+                    this.filterLineGraph(this.modDay(2), 'meh'),
+                    this.filterLineGraph(this.modDay(3), 'meh'),
+                    this.filterLineGraph(this.modDay(4), 'meh'),
+                    this.filterLineGraph(this.modDay(5), 'meh'),
+                    this.filterLineGraph(this.modDay(6), 'meh')
+                ],
+                hidden: false,
+                "fill": false,
+                "borderColor": this.mehColor,
+                "lineTension": 0.1
+            };
+
+            mad_daily_totals = {
+                "label": "Mad",
+                "data": [
+                    this.filterLineGraph(this.modDay(0), 'mad'),
+                    this.filterLineGraph(this.modDay(1), 'mad'),
+                    this.filterLineGraph(this.modDay(2), 'mad'),
+                    this.filterLineGraph(this.modDay(3), 'mad'),
+                    this.filterLineGraph(this.modDay(4), 'mad'),
+                    this.filterLineGraph(this.modDay(5), 'mad'),
+                    this.filterLineGraph(this.modDay(6), 'mad')
+                ],
+                hidden: false,
+                "fill": false,
+                "borderColor": this.madColor,
+                "lineTension": 0.1
+            };
+
+            anxious_daily_totals = {
+                "label": "Anxious",
+                "data": [
+                    this.filterLineGraph(this.modDay(0), 'anxious'),
+                    this.filterLineGraph(this.modDay(1), 'anxious'),
+                    this.filterLineGraph(this.modDay(2), 'anxious'),
+                    this.filterLineGraph(this.modDay(3), 'anxious'),
+                    this.filterLineGraph(this.modDay(4), 'anxious'),
+                    this.filterLineGraph(this.modDay(5), 'anxious'),
+                    this.filterLineGraph(this.modDay(6), 'mad')
+                ],
+                hidden: false,
+                "fill": false,
+                "borderColor": this.anxiousColor,
+                "lineTension": 0.1
+            };
+            lineData = [
+                happy_daily_totals,
+                sad_daily_totals,
+                meh_daily_totals,
+                mad_daily_totals,
+                anxious_daily_totals
+            ]
+        } else {
+
+        }
+
+
+        this.barChart = new Chart(this.ctxBar, {
             type: 'bar',
             data: {
 
@@ -338,6 +481,23 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                 }
             }
         });
+
+        this.lineChart = new Chart(this.ctxLine, {
+            type: 'line',
+            data: {
+                labels: lineType,
+                datasets: lineData
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
     }
 
     buildChart(): void {
@@ -347,6 +507,21 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
         this.lineCanvas = document.getElementById("lineChart");
         this.ctxLine= this.lineCanvas;
+
+        if(this.colorblindMode){
+            this.happyColor = "rgb(252,141,89)";
+            this.sadColor = "rgb(69,117,180)";
+            this.mehColor = "rgb(254,224,144)";
+            this.madColor = "rgb(215,48,39)";
+            this.anxiousColor = "rgb(145,191,219)";
+        } else {
+            this.happyColor = "rgb(64, 255, 0)";
+            this.sadColor = "rgb(0, 128, 255)";
+            this.mehColor = "rgb(100, 100, 100)";
+            this.madColor = "rgb(255, 0, 0)";
+            this.anxiousColor = "rgb(255, 128, 0)";
+        }
+
 
         let summaryDays;
 
@@ -392,7 +567,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             ],
             hidden: false,
             "fill":false,
-            "borderColor":"rgb(150, 0, 100)",
+            "borderColor":this.happyColor,
             "lineTension":0.1};
 
         let sad_daily_totals = {"label":"Sad",
@@ -407,7 +582,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             ],
             hidden: false,
             "fill":false,
-            "borderColor":"rgb(150, 0, 100)",
+            "borderColor":this.sadColor,
             "lineTension":0.1};
 
         let meh_daily_totals = {"label":"Meh",
@@ -422,7 +597,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             ],
             hidden: false,
             "fill":false,
-            "borderColor":"rgb(150, 0, 100)",
+            "borderColor":this.mehColor,
             "lineTension":0.1};
 
         let mad_daily_totals = {"label":"Mad",
@@ -437,7 +612,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             ],
             hidden: false,
             "fill":false,
-            "borderColor":"rgb(150, 0, 100)",
+            "borderColor":this.madColor,
             "lineTension":0.1};
 
         let anxious_daily_totals = {"label":"Anxious",
@@ -452,7 +627,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             ],
             hidden: false,
             "fill":false,
-            "borderColor":"rgb(150, 0, 100)",
+            "borderColor":this.anxiousColor,
             "lineTension":0.1};
 
         this.barChart = new Chart(this.ctxBar, {
