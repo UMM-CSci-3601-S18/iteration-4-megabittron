@@ -104,7 +104,8 @@ public class GoalController {
      */
     // As of now this only adds the goal, but you can separate multiple arguments
     // by commas as we add them.
-    public String addNewGoal(String purpose, String category, String name, Boolean status, String frequency, String start, String end) {
+    public String addNewGoal(String purpose, String category, String name,
+                             Boolean status, String frequency, String start, String end, String next) {
 
         // makes the search Document key-pairs
         Document newGoal = new Document();
@@ -115,6 +116,7 @@ public class GoalController {
         newGoal.append("frequency", frequency);
         newGoal.append("start", start);
         newGoal.append("end", end);
+        newGoal.append("next", next);
         // Append new goals here
 
         try {
@@ -123,7 +125,7 @@ public class GoalController {
 
             System.err.println("Successfully added new goal [_id=" + id + ", purpose=" + purpose +
                 ", category=" + category + ", name=" + name + ", frequency= "+ frequency +  ", start=" + start +
-                ", end=" + end +']');
+                ", end=" + end + ", next=" + next +']');
             //return id.toHexString();
             return JSON.serialize(id);
         } catch(MongoException me) {

@@ -23,9 +23,9 @@ export class GoalsComponent implements OnInit {
     public goalName: string;
     public goalStatus: string;
     public goalStart;
-    public goalEnd: string;
-    public goalNext: string;
-    public goalFrequency: string;
+    public goalEnd;
+    public goalNext;
+    public goalFrequency;
     showPage = false;
 
     // The ID of the goal
@@ -41,7 +41,7 @@ export class GoalsComponent implements OnInit {
     }
 
     openDialog(): void {
-        const newGoal: Goal = {_id: '', name:'', category:'', purpose:'', status: false, start: this.goalStart, end: '', next: '', frequency: ''};
+        const newGoal: Goal = {_id: '', name:'', category:'', purpose:'', status: false, start: this.goalStart, end: '', next: this.goalNext, frequency: ''};
         const dialogRef = this.dialog.open(AddGoalComponent, {
             width: '300px',
             data: { goal : newGoal }
@@ -184,6 +184,7 @@ export class GoalsComponent implements OnInit {
     getDate(){
         var today = new Date();
         this.goalStart = today;
+        this.goalNext = today;
     }
 
 }
