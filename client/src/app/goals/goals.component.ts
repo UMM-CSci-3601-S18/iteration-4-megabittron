@@ -22,6 +22,10 @@ export class GoalsComponent implements OnInit {
     public goalCategory: string;
     public goalName: string;
     public goalStatus: string;
+    public goalStart: string;
+    public goalEnd: string;
+    public goalNext: string;
+    public goalFrequency: string;
     showPage = false;
 
     // The ID of the goal
@@ -37,7 +41,7 @@ export class GoalsComponent implements OnInit {
     }
 
     openDialog(): void {
-        const newGoal: Goal = {_id: '', name:'', category:'', purpose:'', status: false};
+        const newGoal: Goal = {_id: '', name:'', category:'', purpose:'', status: false, start:'', end: '', next: '', frequency: ''};
         const dialogRef = this.dialog.open(AddGoalComponent, {
             width: '300px',
             data: { goal : newGoal }
@@ -72,7 +76,7 @@ export class GoalsComponent implements OnInit {
     }
 
     goalSatisfied(_id: string, thePurpose: string, theCategory: string, theName) {
-        const updatedGoal: Goal = {_id: _id, purpose: thePurpose, category: theCategory, name: theName, status: true};
+        const updatedGoal: Goal = {_id: _id, purpose: thePurpose, category: theCategory, name: theName, status: true, start: '', end: '', next: '', frequency: ''};
         this.goalService.editGoal(updatedGoal).subscribe(
             editGoalResult => {
                 this.highlightedID = editGoalResult;

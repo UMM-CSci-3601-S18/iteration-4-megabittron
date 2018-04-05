@@ -17,6 +17,8 @@
                 <mat-form-field>
                     <input matInput #input id="purposeField" placeholder="What is the purpose?" [(ngModel)]="data.goal.purpose">
                 </mat-form-field>
+
+                
             </mat-card-content>
         <button mat-raised-button id="confirmAddGoalButton" [mat-dialog-close]="data.goal" type="button" (click)="openSnackBar('Goal Added','')">Confirm</button>
         <button mat-raised-button id="exitWithoutAddingButton" (click)="onNoClick()" type="button">Cancel</button>

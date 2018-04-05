@@ -93,7 +93,7 @@ public class Server {
         delete("api/goals/delete/:id", goalRequestHandler::deleteGoal);
 
         //List summary page
-        get("api/summarys", summaryRequestHandler::getSummaries);
+        get("api/summaries", summaryRequestHandler::getSummaries);
 
         //Resources for appropriate response
         get("api/resources", resourceRequestHandler::getResources);

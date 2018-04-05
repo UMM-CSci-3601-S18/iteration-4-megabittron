@@ -23,7 +23,7 @@
                     <!-- The errors card is commented out beacuse it messes with the goals cards layout -->
                     <!--<mat-card *ngIf="goals; else goalsError"></mat-card>-->
                     <mat-card class="goals-card"
-                              *ngFor="let goal of this.filterGoals(goalPurpose, goalCategory, goalName, goalStatus)"
+                              *ngFor="let goal of this.filterGoals(goalPurpose, goalCategory, goalName, goalStatus, goalStart, goalEnd, goalNext, goalFrequency)"
                               #elem [id]="goal._id['$oid']">
                         <div class ="goals-image">
                             <img *ngIf="goal.category == 'Family'" src="../../assets/images/goals/family.png"
