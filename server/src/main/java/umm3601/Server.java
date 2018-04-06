@@ -110,11 +110,11 @@ public class Server {
 
 
 
-        post("api/storeauthcode", (request, response) -> {
-            System.out.println("HEEREEE");
-            response.body("HEEERRREEE");
+        post("api/login", (request, response) -> {
+            System.out.println("Here");
+            System.out.println(request.body());
 
-            return response;
+            return "";
         });
 
 

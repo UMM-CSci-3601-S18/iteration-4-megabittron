@@ -1,6 +1,7 @@
 <body>
+<div class="g-signin2" (click)="signIn()"></div>
+<button mat-raised-button (click)="signOut()">Sign Out</button>
 
-<button id="signinButton">Sign in with Google</button>
 
 
 <div *ngIf="currentScreenWidth < 806; then mobile else computer"></div>
