@@ -182,7 +182,6 @@ export class JournalsComponent implements OnInit {
         this.refreshJournals();
         this.loadService();
         this.loadProgressBar();
-        console.log(this.showPage + " window.email " + window['email']);
     }
 
 }
