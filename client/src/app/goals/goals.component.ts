@@ -188,7 +188,7 @@ export class GoalsComponent implements OnInit {
         this.goalNext = this.today;
     }
 
-    getNext(next, end, frequency): boolean{
+    getNext(status, next, end, frequency): boolean{
         this.today.setHours(0, 0, 0, 0);
 
         var nextGoal = new Date(next);
@@ -199,6 +199,10 @@ export class GoalsComponent implements OnInit {
 
         var day = nextGoal.getDate();
         var month = nextGoal.getMonth();
+
+        if(status == true){
+            return false;
+        }
 
         if(frequency == 'Does not repeat'){
             if(nextGoal < this.today){
@@ -224,7 +228,7 @@ export class GoalsComponent implements OnInit {
             }
         }
 
-       if(nextGoal > this.today){
+       if(nextGoal > this.today || nextGoal > endGoal){
             return false;
        }
        else{
