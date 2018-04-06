@@ -60,12 +60,14 @@
                     <mat-datepicker touchUi="true" #end></mat-datepicker>
                 </mat-form-field>
             </div>
+                {{myTabGroup.selectedIndex}} <br>
+
             </div>
         </mat-card>
         <mat-card id="graphCard">
 
             <div id="tabs">
-            <mat-tab-group #myTabGroup >
+            <mat-tab-group #myTabGroup>
 
                 <mat-tab label="Bar Graph">
                     <div id="graphFilter">
@@ -78,7 +80,7 @@
                             </select>
                             <br>
                         </form>
-                        <button mat-raised-button id="filterBarButton" (click)="this.filterSummarys(summaryMood, summaryIntensity, startDate, endDate); updateChart()">Update Graph</button>
+                        <button mat-raised-button id="filterBarButton" (click)="this.filterSummarys(summaryMood, summaryIntensity, startDate, endDate); updateBarChart()">Update Graph</button>
                         <br>
                     </div>
                     <mat-card> <mat-card-title class="your-summarys-title">Your Emotions</mat-card-title>
@@ -90,7 +92,24 @@
 
                 <mat-tab label="Line Graph">
 
+                    <mat-card> <mat-card-title class="your-summarys-title">Your Emotions</mat-card-title>
+                        <mat-card-subtitle class="your-summarys-title">There are {{totalNumberMoods()}} entries represented</mat-card-subtitle>
 
+                        <mat-checkbox [(ngModel)]="colorblindMode">Colorblind Mode</mat-checkbox>
+                        <br>
+                        <button mat-raised-button id="filterLineButton" (click)="this.filterSummarys(summaryMood, summaryIntensity, startDate, endDate); updateLineChart()">Update Graph</button>
+
+                        <label>Show entries across a day or week?</label>
+                        <select id="LineScale" [(ngModel)]="lineScale">
+                            <option id ="LineDay" selected value="Day">Day</option>
+                            <option id = "LineWeek" value="Week">Week</option>
+                        </select>
+
+                        <canvas id="lineChart" height="auto"></canvas>
+
+
+
+                    </mat-card>
 
                 </mat-tab>
 
@@ -111,8 +130,6 @@
                             </mat-expansion-panel>
                         </mat-accordion>
 
-
-
                         <ng-template #summarysError>
                             <mat-error>
                                 There was a problem loading the goals. Possibly the server is down or perhaps there are network
@@ -125,21 +142,7 @@
                     </mat-card>
                 </mat-tab>
             </mat-tab-group>
-                <mat-card> <mat-card-title class="your-summarys-title">Your Emotions</mat-card-title>
-                    <mat-card-subtitle class="your-summarys-title">There are {{totalNumberMoods()}} entries represented</mat-card-subtitle>
 
-                    <mat-checkbox [(ngModel)]="colorblindMode">Colorblind Mode</mat-checkbox>
-                    <br>
-                    <button mat-raised-button id="filterLineButton" (click)="this.filterSummarys(summaryMood, summaryIntensity, startDate, endDate); updateChart()">Update Graph</button>
-
-                    <label>Show entries across a day or week?</label>
-                    <select id="LineScale" [(ngModel)]="lineScale">
-                        <option id ="LineDay" selected value="Day">Day</option>
-                        <option id = "LineWeek" value="Week">Week</option>
-                    </select>
-
-                    <canvas id="lineChart" height="auto"></canvas>
-                </mat-card>
             </div>
         </mat-card>
         {{lineScale}}<br>

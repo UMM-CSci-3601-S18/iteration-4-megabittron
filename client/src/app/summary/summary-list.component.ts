@@ -298,84 +298,21 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
      *
      */
 
-    updateChart(): void{
+    updateBarChart(): void{
 
         this.barChart.destroy();
         this.barCanvas = document.getElementById("barChart");
         this.ctxBar = this.barCanvas;
-
-        this.lineChart.destroy();
-        this.lineCanvas = document.getElementById("lineChart");
-        this.ctxLine = this.lineCanvas;
-
-        if(this.colorblindMode){
-            this.happyColor = "rgb(252,141,89)";
-            this.sadColor = "rgb(69,117,180)";
-            this.mehColor = "rgb(254,224,144)";
-            this.madColor = "rgb(215,48,39)";
-            this.anxiousColor = "rgb(145,191,219)";
-        } else {
-            this.happyColor = "rgb(64, 255, 0)";
-            this.sadColor = "rgb(0, 128, 255)";
-            this.mehColor = "rgb(100, 100, 100)";
-            this.madColor = "rgb(255, 0, 0)";
-            this.anxiousColor = "rgb(255, 128, 0)";
-        }
 
         let type;
         let summaryDays;
         let summaryHours;
         let displayData;
 
-        let lineType;
-        let happy_time_totals;
-        let sad_time_totals;
-        let meh_time_totals;
-        let mad_time_totals;
-        let anxious_time_totals;
-        let lineData;
-
-
         let days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
         let hours = ['12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM',
             '8AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM',
             '5 PM', '6 PM', '7 PM', '8 PM','9 PM', '10 PM', '11 PM'];
-
-        let pastDays = [
-            this.getPastDays(0),
-            this.getPastDays(1),
-            this.getPastDays(2),
-            this.getPastDays(3),
-            this.getPastDays(4),
-            this.getPastDays(5),
-            this.getPastDays(6)
-        ];
-        let pastHours = [
-            this.getPastHours(0),
-            this.getPastHours(1),
-            this.getPastHours(2),
-            this.getPastHours(3),
-            this.getPastHours(4),
-            this.getPastHours(5),
-            this.getPastHours(6),
-            this.getPastHours(7),
-            this.getPastHours(8),
-            this.getPastHours(9),
-            this.getPastHours(10),
-            this.getPastHours(11),
-            this.getPastHours(12),
-            this.getPastHours(13),
-            this.getPastHours(14),
-            this.getPastHours(15),
-            this.getPastHours(16),
-            this.getPastHours(17),
-            this.getPastHours(18),
-            this.getPastHours(19),
-            this.getPastHours(20),
-            this.getPastHours(21),
-            this.getPastHours(22),
-            this.getPastHours(23)
-        ];
 
         console.log(this.inputType);
         if(this.inputType == "Hour"){
@@ -444,6 +381,95 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                 displayData = summaryDays;
             }
         }
+
+        this.barChart = new Chart(this.ctxBar, {
+            type: 'bar',
+            data: {
+
+                labels: type,
+                datasets: [displayData]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRation: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+
+                        }
+                    }]
+                }
+            }
+        });
+    }
+public test1: any;
+    updateLineChart(): void{
+
+        if(this.lineChart != null){
+            this.lineChart.destroy();
+        }
+
+        this.lineCanvas = document.getElementById("lineChart");
+        this.ctxLine = this.lineCanvas;
+
+        if(this.colorblindMode){
+            this.happyColor = "rgb(252,141,89)";
+            this.sadColor = "rgb(69,117,180)";
+            this.mehColor = "rgb(254,224,144)";
+            this.madColor = "rgb(215,48,39)";
+            this.anxiousColor = "rgb(145,191,219)";
+        } else {
+            this.happyColor = "rgb(64, 255, 0)";
+            this.sadColor = "rgb(0, 128, 255)";
+            this.mehColor = "rgb(100, 100, 100)";
+            this.madColor = "rgb(255, 0, 0)";
+            this.anxiousColor = "rgb(255, 128, 0)";
+        }
+
+        let lineType;
+        let happy_time_totals;
+        let sad_time_totals;
+        let meh_time_totals;
+        let mad_time_totals;
+        let anxious_time_totals;
+        let lineData;
+
+        let pastDays = [
+            this.getPastDays(0),
+            this.getPastDays(1),
+            this.getPastDays(2),
+            this.getPastDays(3),
+            this.getPastDays(4),
+            this.getPastDays(5),
+            this.getPastDays(6)
+        ];
+        let pastHours = [
+            this.getPastHours(0),
+            this.getPastHours(1),
+            this.getPastHours(2),
+            this.getPastHours(3),
+            this.getPastHours(4),
+            this.getPastHours(5),
+            this.getPastHours(6),
+            this.getPastHours(7),
+            this.getPastHours(8),
+            this.getPastHours(9),
+            this.getPastHours(10),
+            this.getPastHours(11),
+            this.getPastHours(12),
+            this.getPastHours(13),
+            this.getPastHours(14),
+            this.getPastHours(15),
+            this.getPastHours(16),
+            this.getPastHours(17),
+            this.getPastHours(18),
+            this.getPastHours(19),
+            this.getPastHours(20),
+            this.getPastHours(21),
+            this.getPastHours(22),
+            this.getPastHours(23)
+        ];
 
         if(this.lineScale == 'Week') {
             lineType = pastDays;
@@ -551,81 +577,32 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             anxious_time_totals
         ];
 
-        this.barChart = new Chart(this.ctxBar, {
-            type: 'bar',
-            data: {
-
-                labels: type,
-                datasets: [displayData]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRation: false,
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-
+                this.lineChart = new Chart(this.ctxLine, {
+                    type: 'line',
+                    data: {
+                        labels: lineType,
+                        datasets: lineData
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
                         }
-                    }]
-                }
-            }
-        });
-
-        this.lineChart = new Chart(this.ctxLine, {
-            type: 'line',
-            data: {
-                labels: lineType,
-                datasets: lineData
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                        }
-                    }]
-                }
-            }
-        });
+                    }
+                });
     }
 
-    buildChart(): void {
+    buildBarChart(): void {
 
         this.barCanvas = document.getElementById("barChart");
         this.ctxBar = this.barCanvas;
 
-        this.lineCanvas = document.getElementById("lineChart");
-        this.ctxLine= this.lineCanvas;
-
-        if(this.colorblindMode){
-            this.happyColor = "rgb(252,141,89)";
-            this.sadColor = "rgb(69,117,180)";
-            this.mehColor = "rgb(254,224,144)";
-            this.madColor = "rgb(215,48,39)";
-            this.anxiousColor = "rgb(145,191,219)";
-        } else {
-            this.happyColor = "rgb(64, 255, 0)";
-            this.sadColor = "rgb(0, 128, 255)";
-            this.mehColor = "rgb(100, 100, 100)";
-            this.madColor = "rgb(255, 0, 0)";
-            this.anxiousColor = "rgb(255, 128, 0)";
-        }
-
-
         let summaryDays;
 
         let days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
-
-        let pastDays = [
-            this.getPastDays(0),
-            this.getPastDays(1),
-            this.getPastDays(2),
-            this.getPastDays(3),
-            this.getPastDays(4),
-            this.getPastDays(5),
-            this.getPastDays(6)
-        ];
 
         summaryDays = {
             "label": "Total Number of Entries",
@@ -644,6 +621,55 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             "borderColor": "black",
             "lineTension": 0.3
         };
+
+        this.barChart = new Chart(this.ctxBar, {
+            type: 'bar',
+            data: {
+                labels: days,
+                datasets: [summaryDays]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRation: false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+
+                        }
+                    }]
+                }
+            }
+        });
+    }
+
+    buildLineChart(): void {
+
+        this.lineCanvas = document.getElementById("lineChart");
+        this.ctxLine= this.lineCanvas;
+
+        if(this.colorblindMode){
+            this.happyColor = "rgb(252,141,89)";
+            this.sadColor = "rgb(69,117,180)";
+            this.mehColor = "rgb(254,224,144)";
+            this.madColor = "rgb(215,48,39)";
+            this.anxiousColor = "rgb(145,191,219)";
+        } else {
+            this.happyColor = "rgb(64, 255, 0)";
+            this.sadColor = "rgb(0, 128, 255)";
+            this.mehColor = "rgb(100, 100, 100)";
+            this.madColor = "rgb(255, 0, 0)";
+            this.anxiousColor = "rgb(255, 128, 0)";
+        }
+        let pastDays = [
+            this.getPastDays(0),
+            this.getPastDays(1),
+            this.getPastDays(2),
+            this.getPastDays(3),
+            this.getPastDays(4),
+            this.getPastDays(5),
+            this.getPastDays(6)
+        ];
 
         let happy_time_totals = {"label":"Happy",
             "data":this.getDailyData('happy'),
@@ -680,26 +706,6 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             "borderColor":this.anxiousColor,
             "lineTension":0.1};
 
-        this.barChart = new Chart(this.ctxBar, {
-            type: 'bar',
-            data: {
-                labels: days,
-                datasets: [summaryDays]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRation: false,
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-
-                        }
-                    }]
-                }
-            }
-        });
-
         this.lineChart = new Chart(this.ctxLine, {
             type: 'line',
             data: {
@@ -722,11 +728,10 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                 }
             }
         });
-
     }
 
     ngAfterViewInit(): void {
-        this.buildChart();
+        this.buildBarChart();
     }
 
     /*
