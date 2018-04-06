@@ -25,6 +25,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     lineCanvas: any;
     lineChart: any;
 
+    limitedPast: boolean;
     colorblindMode: boolean;
     happyColor: string;
     sadColor: string;
@@ -56,8 +57,8 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     // We should rename them to make that clearer.
     public summaryMood: string;
     public summaryIntensity: number;
-    public inputType = "Day";
-    public lineScale = "Week";
+    public inputType = "week";
+    public CurrentGraph = "Bar";
 
 
     // The ID of the
@@ -148,14 +149,20 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         console.log(this.filteredSummarys.length);
         let filterBarData = this.filteredSummarys;
 
-        if(this.inputType == "Day") {
+        if(this.inputType == "week") {
+            if(this.limitedPast) {
+                filterBarData = this.pastWeekEmotions(filterBarData);
+            }
             filterBarData = filterBarData.filter(summary => {
                 this.getDate = new Date(summary.date);
                 return this.getDate.getDay() == xValue;
             });
         }
         else {
-            if (this.inputType == "Hour") {
+            if (this.inputType == "day") {
+                if(this.limitedPast) {
+                    filterBarData = this.pastDayEmotions(filterBarData);
+                }
                 filterBarData = filterBarData.filter(summary => {
                     this.getDate = new Date(summary.date);
                     return this.getDate.getHours() == xValue;
@@ -172,16 +179,20 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             return !Searchmood || summary.mood.toLowerCase().indexOf(Searchmood) !== -1;
         });
 
-        if(this.lineScale == 'Week') {
-            filterLineData = this.pastWeekEmotions(filterLineData);
+        if(this.inputType == "week") {
+            if(this.limitedPast) {
+                filterLineData = this.pastWeekEmotions(filterLineData);
+            }
             filterLineData = filterLineData.filter(summary => {
                 this.getDate = new Date(summary.date);
                 return this.getDate.getDay() == xValue;
             });
         }
         else {
-            if (this.lineScale == 'Day') {
-                filterLineData = this.pastDayEmotions(filterLineData);
+            if (this.inputType == "day") {
+                if(this.limitedPast) {
+                    filterLineData = this.pastDayEmotions(filterLineData);
+                }
                 filterLineData = filterLineData.filter(summary => {
                     this.getDate = new Date(summary.date);
                     return this.getDate.getHours() == xValue;
@@ -252,133 +263,198 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     }
 
     public getDailyData(emotion){
-        return [
-            this.filterLineGraph(this.modDay(0), emotion),
-            this.filterLineGraph(this.modDay(1), emotion),
-            this.filterLineGraph(this.modDay(2), emotion),
-            this.filterLineGraph(this.modDay(3), emotion),
-            this.filterLineGraph(this.modDay(4), emotion),
-            this.filterLineGraph(this.modDay(5), emotion),
-            this.filterLineGraph(this.modDay(6), emotion)
-        ]
+
+        if(this.CurrentGraph == 'Bar'){
+            return [
+                this.filterBarGraph(this.modDay(0)),
+                this.filterBarGraph(this.modDay(1)),
+                this.filterBarGraph(this.modDay(2)),
+                this.filterBarGraph(this.modDay(3)),
+                this.filterBarGraph(this.modDay(4)),
+                this.filterBarGraph(this.modDay(5)),
+                this.filterBarGraph(this.modDay(6))
+            ]
+        }
+        else {
+            if(this.CurrentGraph == 'Line'){
+                return [
+                    this.filterLineGraph(this.modDay(0), emotion),
+                    this.filterLineGraph(this.modDay(1), emotion),
+                    this.filterLineGraph(this.modDay(2), emotion),
+                    this.filterLineGraph(this.modDay(3), emotion),
+                    this.filterLineGraph(this.modDay(4), emotion),
+                    this.filterLineGraph(this.modDay(5), emotion),
+                    this.filterLineGraph(this.modDay(6), emotion)
+                ]
+            }
+        }
     }
 
     public getHourlyData(emotion){
 
-        return [
-            this.filterLineGraph(this.modHour(0), emotion),
-            this.filterLineGraph(this.modHour(1), emotion),
-            this.filterLineGraph(this.modHour(2), emotion),
-            this.filterLineGraph(this.modHour(3), emotion),
-            this.filterLineGraph(this.modHour(4), emotion),
-            this.filterLineGraph(this.modHour(5), emotion),
-            this.filterLineGraph(this.modHour(6), emotion),
-            this.filterLineGraph(this.modHour(7), emotion),
-            this.filterLineGraph(this.modHour(8), emotion),
-            this.filterLineGraph(this.modHour(9), emotion),
-            this.filterLineGraph(this.modHour(10), emotion),
-            this.filterLineGraph(this.modHour(11), emotion),
-            this.filterLineGraph(this.modHour(12), emotion),
-            this.filterLineGraph(this.modHour(13), emotion),
-            this.filterLineGraph(this.modHour(14), emotion),
-            this.filterLineGraph(this.modHour(15), emotion),
-            this.filterLineGraph(this.modHour(16), emotion),
-            this.filterLineGraph(this.modHour(17), emotion),
-            this.filterLineGraph(this.modHour(18), emotion),
-            this.filterLineGraph(this.modHour(19), emotion),
-            this.filterLineGraph(this.modHour(20), emotion),
-            this.filterLineGraph(this.modHour(21), emotion),
-            this.filterLineGraph(this.modHour(22), emotion),
-            this.filterLineGraph(this.modHour(23), emotion)
-        ]
+        if(this.CurrentGraph == 'Bar'){
+            return [
+                this.filterBarGraph(this.modHour(0)),
+                this.filterBarGraph(this.modHour(1)),
+                this.filterBarGraph(this.modHour(2)),
+                this.filterBarGraph(this.modHour(3)),
+                this.filterBarGraph(this.modHour(4)),
+                this.filterBarGraph(this.modHour(5)),
+                this.filterBarGraph(this.modHour(6)),
+                this.filterBarGraph(this.modHour(7)),
+                this.filterBarGraph(this.modHour(8)),
+                this.filterBarGraph(this.modHour(9)),
+                this.filterBarGraph(this.modHour(10)),
+                this.filterBarGraph(this.modHour(11)),
+                this.filterBarGraph(this.modHour(12)),
+                this.filterBarGraph(this.modHour(13)),
+                this.filterBarGraph(this.modHour(14)),
+                this.filterBarGraph(this.modHour(15)),
+                this.filterBarGraph(this.modHour(16)),
+                this.filterBarGraph(this.modHour(17)),
+                this.filterBarGraph(this.modHour(18)),
+                this.filterBarGraph(this.modHour(19)),
+                this.filterBarGraph(this.modHour(20)),
+                this.filterBarGraph(this.modHour(21)),
+                this.filterBarGraph(this.modHour(22)),
+                this.filterBarGraph(this.modHour(23)),
+            ]
+        }
+        else {
+            if(this.CurrentGraph == 'Line'){
+                return [
+                    this.filterLineGraph(this.modHour(0), emotion),
+                    this.filterLineGraph(this.modHour(1), emotion),
+                    this.filterLineGraph(this.modHour(2), emotion),
+                    this.filterLineGraph(this.modHour(3), emotion),
+                    this.filterLineGraph(this.modHour(4), emotion),
+                    this.filterLineGraph(this.modHour(5), emotion),
+                    this.filterLineGraph(this.modHour(6), emotion),
+                    this.filterLineGraph(this.modHour(7), emotion),
+                    this.filterLineGraph(this.modHour(8), emotion),
+                    this.filterLineGraph(this.modHour(9), emotion),
+                    this.filterLineGraph(this.modHour(10), emotion),
+                    this.filterLineGraph(this.modHour(11), emotion),
+                    this.filterLineGraph(this.modHour(12), emotion),
+                    this.filterLineGraph(this.modHour(13), emotion),
+                    this.filterLineGraph(this.modHour(14), emotion),
+                    this.filterLineGraph(this.modHour(15), emotion),
+                    this.filterLineGraph(this.modHour(16), emotion),
+                    this.filterLineGraph(this.modHour(17), emotion),
+                    this.filterLineGraph(this.modHour(18), emotion),
+                    this.filterLineGraph(this.modHour(19), emotion),
+                    this.filterLineGraph(this.modHour(20), emotion),
+                    this.filterLineGraph(this.modHour(21), emotion),
+                    this.filterLineGraph(this.modHour(22), emotion),
+                    this.filterLineGraph(this.modHour(23), emotion)
+                ]
+            }
+        }
+
     }
 
     /**
      * Starts an asynchronous operation to update the emojis list
      *
      */
+public pastDays = [
+        this.getPastDays(0),
+        this.getPastDays(1),
+        this.getPastDays(2),
+        this.getPastDays(3),
+        this.getPastDays(4),
+        this.getPastDays(5),
+        this.getPastDays(6)
+    ];
+
+public pastHours = [
+    this.getPastHours(0),
+    this.getPastHours(1),
+    this.getPastHours(2),
+    this.getPastHours(3),
+    this.getPastHours(4),
+    this.getPastHours(5),
+    this.getPastHours(6),
+    this.getPastHours(7),
+    this.getPastHours(8),
+    this.getPastHours(9),
+    this.getPastHours(10),
+    this.getPastHours(11),
+    this.getPastHours(12),
+    this.getPastHours(13),
+    this.getPastHours(14),
+    this.getPastHours(15),
+    this.getPastHours(16),
+    this.getPastHours(17),
+    this.getPastHours(18),
+    this.getPastHours(19),
+    this.getPastHours(20),
+    this.getPastHours(21),
+    this.getPastHours(22),
+    this.getPastHours(23)
+];
 
     updateBarChart(): void{
+        this.CurrentGraph = 'Bar';
 
-        this.barChart.destroy();
-        this.barCanvas = document.getElementById("barChart");
+        if(this.barChart != null){
+            this.barChart.destroy();
+        }
+        if(this.lineChart != null){
+            this.lineChart.destroy();
+        }
+
+        this.barCanvas = document.getElementById("Chart");
         this.ctxBar = this.barCanvas;
 
-        let type;
+        let xLabel;
         let summaryDays;
         let summaryHours;
         let displayData;
+        let days;
+        let hours;
 
-        let days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
-        let hours = ['12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM',
-            '8AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM',
-            '5 PM', '6 PM', '7 PM', '8 PM','9 PM', '10 PM', '11 PM'];
+
+        if(this.limitedPast){
+        days = this.pastDays;
+        hours = this.pastHours;
+        }
+        else {
+            days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+            hours = ['12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM',
+                '8AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM',
+                '5 PM', '6 PM', '7 PM', '8 PM','9 PM', '10 PM', '11 PM'];
+        }
 
         console.log(this.inputType);
-        if(this.inputType == "Hour"){
-            type = hours;
+        if(this.inputType == "day"){
+            xLabel = hours;
 
             summaryHours = {
                 "label": "Total Number of Entries",
-                "data": [
-                    this.filterBarGraph('0'),
-                    this.filterBarGraph('1'),
-                    this.filterBarGraph('2'),
-                    this.filterBarGraph('3'),
-                    this.filterBarGraph('4'),
-                    this.filterBarGraph('5'),
-                    this.filterBarGraph('6'),
-                    this.filterBarGraph('7'),
-                    this.filterBarGraph('8'),
-                    this.filterBarGraph('9'),
-                    this.filterBarGraph('10'),
-                    this.filterBarGraph('11'),
-                    this.filterBarGraph('12'),
-                    this.filterBarGraph('13'),
-                    this.filterBarGraph('14'),
-                    this.filterBarGraph('15'),
-                    this.filterBarGraph('16'),
-                    this.filterBarGraph('17'),
-                    this.filterBarGraph('18'),
-                    this.filterBarGraph('19'),
-                    this.filterBarGraph('20'),
-                    this.filterBarGraph('21'),
-                    this.filterBarGraph('22'),
-                    this.filterBarGraph('23'),
-                    this.filterBarGraph('24')
-                ],
+                "data": this.getHourlyData('all'),
                 "fill": true,
                 "backgroundColor": "blue",
                 "borderColor": "black",
                 "lineTension": 0.1
             };
-            displayData = summaryHours;
+            displayData = [summaryHours];
         }
         else {
-            if (this.inputType == "Day") {
+            if (this.inputType == "week") {
                 console.log("here");
-                type = days;
+                xLabel = days;
 
                 summaryDays = {
                     "label": "Total Number of Entries",
-                    "data": [
-                        this.filterBarGraph('0'),
-                        this.filterBarGraph('1'),
-                        this.filterBarGraph('2'),
-                        this.filterBarGraph('3'),
-                        this.filterBarGraph('4'),
-                        this.filterBarGraph('5'),
-                        this.filterBarGraph('6'),
-                    ],
-
-
+                    "data": this.getDailyData('all'),
                     "fill": true,
                     "backgroundColor": "blue",
                     "borderColor": "black",
                     "lineTension": 0.1
                 };
 
-                displayData = summaryDays;
+                displayData = [summaryDays];
             }
         }
 
@@ -386,8 +462,8 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             type: 'bar',
             data: {
 
-                labels: type,
-                datasets: [displayData]
+                labels: xLabel,
+                datasets: displayData,
             },
             options: {
                 responsive: true,
@@ -403,22 +479,27 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             }
         });
     }
-public test1: any;
+
     updateLineChart(): void{
 
         if(this.lineChart != null){
             this.lineChart.destroy();
         }
+        if(this.barChart != null){
+            this.barChart.destroy();
+        }
 
-        this.lineCanvas = document.getElementById("lineChart");
+        this.CurrentGraph = 'Line';
+
+        this.lineCanvas = document.getElementById("Chart");
         this.ctxLine = this.lineCanvas;
 
         if(this.colorblindMode){
-            this.happyColor = "rgb(252,141,89)";
-            this.sadColor = "rgb(69,117,180)";
+            this.happyColor = "rgb(215,48,39)";
+            this.sadColor = "rgb(252,141,89)";
             this.mehColor = "rgb(254,224,144)";
-            this.madColor = "rgb(215,48,39)";
-            this.anxiousColor = "rgb(145,191,219)";
+            this.madColor = "rgb(145,191,219)";
+            this.anxiousColor = "rgb(69,117,180)";
         } else {
             this.happyColor = "rgb(64, 255, 0)";
             this.sadColor = "rgb(0, 128, 255)";
@@ -434,45 +515,22 @@ public test1: any;
         let mad_time_totals;
         let anxious_time_totals;
         let lineData;
+        let days;
+        let hours;
 
-        let pastDays = [
-            this.getPastDays(0),
-            this.getPastDays(1),
-            this.getPastDays(2),
-            this.getPastDays(3),
-            this.getPastDays(4),
-            this.getPastDays(5),
-            this.getPastDays(6)
-        ];
-        let pastHours = [
-            this.getPastHours(0),
-            this.getPastHours(1),
-            this.getPastHours(2),
-            this.getPastHours(3),
-            this.getPastHours(4),
-            this.getPastHours(5),
-            this.getPastHours(6),
-            this.getPastHours(7),
-            this.getPastHours(8),
-            this.getPastHours(9),
-            this.getPastHours(10),
-            this.getPastHours(11),
-            this.getPastHours(12),
-            this.getPastHours(13),
-            this.getPastHours(14),
-            this.getPastHours(15),
-            this.getPastHours(16),
-            this.getPastHours(17),
-            this.getPastHours(18),
-            this.getPastHours(19),
-            this.getPastHours(20),
-            this.getPastHours(21),
-            this.getPastHours(22),
-            this.getPastHours(23)
-        ];
+        if(this.limitedPast){
+            days = this.pastDays;
+            hours = this.pastHours;
+        }
+        else {
+            days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+            hours = ['12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM',
+                '8AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM',
+                '5 PM', '6 PM', '7 PM', '8 PM','9 PM', '10 PM', '11 PM'];
+        }
 
-        if(this.lineScale == 'Week') {
-            lineType = pastDays;
+        if(this.inputType == "week") {
+            lineType = days;
 
             happy_time_totals = {
                 label: "Happy",
@@ -519,8 +577,8 @@ public test1: any;
                 "lineTension": 0.1
             };
         } else {
-            if(this.lineScale == 'Day') {
-                lineType = pastHours;
+            if(this.inputType == "day") {
+                lineType = hours;
 
                 happy_time_totals = {
                     "label": "Happy",
@@ -597,25 +655,23 @@ public test1: any;
 
     buildBarChart(): void {
 
-        this.barCanvas = document.getElementById("barChart");
+        this.barCanvas = document.getElementById("Chart");
         this.ctxBar = this.barCanvas;
 
         let summaryDays;
 
-        let days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+        let days;
+
+        if(this.limitedPast){
+            days = this.pastDays;
+        }
+        else {
+            days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+        }
 
         summaryDays = {
             "label": "Total Number of Entries",
-            "data": [
-                this.filterBarGraph('0'),
-                this.filterBarGraph('1'),
-                this.filterBarGraph('2'),
-                this.filterBarGraph('3'),
-                this.filterBarGraph('4'),
-                this.filterBarGraph('5'),
-                this.filterBarGraph('6'),
-
-            ],
+            "data": this.getDailyData('all'),
             "fill": true,
             "backgroundColor": "blue",
             "borderColor": "black",
@@ -643,6 +699,7 @@ public test1: any;
         });
     }
 
+    /*
     buildLineChart(): void {
 
         this.lineCanvas = document.getElementById("lineChart");
@@ -729,6 +786,7 @@ public test1: any;
             }
         });
     }
+    */
 
     ngAfterViewInit(): void {
         this.buildBarChart();
