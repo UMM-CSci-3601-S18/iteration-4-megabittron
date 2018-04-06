@@ -24,8 +24,8 @@ export class AppComponent {
         this.currentScreenWidth = (window.screen.width);
 
 
-        gapi.load('auth2', function () {
-            gapi.auth2.init({
+        this.gapi.load('auth2', function () {
+            this.gapi.auth2.init({
                 client_id: '1080043572259-h3vk6jgc4skl3uav3g0l13qvlcqpebvu.apps.googleusercontent.com'
             });
         });
@@ -37,13 +37,13 @@ export class AppComponent {
     }
 
     signIn() {
-        let googleAuth = gapi.auth2.getAuthInstance();
+        let googleAuth = this.gapi.auth2.getAuthInstance();
 
         googleAuth.then(() => {
             googleAuth.signIn({scope: 'profile email'}).then(googleUser => {
                 console.log(googleUser.getBasicProfile().getName() + ' has signed in.');
                 this.sendTokenToServer(googleAuth.currentUser.get().getAuthResponse().id_token);
-                gapi.auth2.getAuthInstance().grantOfflineAccess().then(function (resp) {
+                this.gapi.auth2.getAuthInstance().grantOfflineAccess().then(function (resp) {
                     if (resp.code != null) {
 
 
@@ -59,7 +59,7 @@ export class AppComponent {
     }
 
     signOut() {
-        let googleAuth = gapi.auth2.getAuthInstance();
+        let googleAuth = this.gapi.auth2.getAuthInstance();
 
         googleAuth.then(() => {
             googleAuth.signOut();
