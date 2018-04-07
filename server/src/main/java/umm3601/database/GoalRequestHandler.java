@@ -84,9 +84,15 @@ public class GoalRequestHandler {
                     String category = dbO.getString("category");
                     String name = dbO.getString("name");
                     Boolean status = dbO.getBoolean("status");
+                    String frequency = dbO.getString("frequency");
+                    String start = dbO.getString("start");
+                    String end = dbO.getString("end");
+                    String next = dbO.getString("next");
 
-                    System.err.println("Adding new goal [purpose=" + purpose + ", category=" + category + " name=" + name + " status=" + status + ']');
-                    return goalController.addNewGoal(purpose, category, name, status).toString();
+                    System.err.println("Adding new goal [purpose=" + purpose + ", category=" +
+                        category + " name=" + name + " status=" + status + ", frequency= " + frequency +
+                        ", start=" + start + ", end=" + end + ", next=" + next + ']');
+                    return goalController.addNewGoal(purpose, category, name, status, frequency, start, end, next).toString();
                 } catch (NullPointerException e) {
                     System.err.println("A value was malformed or omitted, new item request failed.");
                     return null;
@@ -123,9 +129,13 @@ public class GoalRequestHandler {
                     String category = dbO.getString("category");
                     String name = dbO.getString("name");
                     Boolean status = dbO.getBoolean("status");
+                    String frequency = dbO.getString("frequency");
+                    String start = dbO.getString("start");
+                    String end = dbO.getString("end");
+                    String next = dbO.getString("next");
 
                     System.out.println("Completing goal [purpose: " + purpose + ", category: " + category + ", name: " + name + ", status: " + status + ']');
-                    return goalController.completeGoal(id, purpose, category, name, status).toString();
+                    return goalController.completeGoal(id, purpose, category, name, status, frequency, start, end, next).toString();
                 } catch (NullPointerException e) {
                     System.err.println("A value was malformed or omitted, new item request failed.");
                     return null;
