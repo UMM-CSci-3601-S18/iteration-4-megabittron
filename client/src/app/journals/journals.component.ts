@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material';
 import {AddJournalComponent} from './add-journal.component';
 import {EditJournalComponent} from "./edit-journal.component";
 import {ShowJournalComponent} from "./show-journal.component";
+import {TruncatePipe} from "./truncate-pipe.component";
 
 @Component({
     selector: 'app-journals-component',

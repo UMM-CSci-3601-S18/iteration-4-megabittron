@@ -36,7 +36,7 @@
                             {{journal.subject}}
                         </mat-card-title>
                         <mat-card-subtitle>{{journal.date | date : "MMM d, yyyy 'at' h:mm a"}}</mat-card-subtitle>
-                        <p>{{journal.body | limitTo : 100}}<a (click)="showMoreInfo()">show more</a></p>
+                        <p>{{journal.body | slice : 0:100}}<a (click)="showMoreInfo()">...show more</a></p>
 
                     </mat-card-content>
                 </div>
