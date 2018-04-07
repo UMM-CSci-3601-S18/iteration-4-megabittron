@@ -5,8 +5,13 @@ import com.mongodb.client.MongoDatabase;
 import spark.Request;
 import spark.Response;
 import java.io.IOException;
+import java.net.URLConnection;
+
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
+
+
+
 import umm3601.database.GoalController;
 import umm3601.database.GoalRequestHandler;
 import umm3601.database.JournalController;
@@ -110,9 +115,15 @@ public class Server {
 
 
 
-        post("api/login", (request, response) -> {
+        post("api/login", (req, res) -> {
             System.out.println("Here");
-            System.out.println(request.body());
+            System.out.println(req.headers());
+            System.out.println(req.body());
+            System.out.println(req.cookies());
+            System.out.println(req.attributes());
+            System.out.println(req.params());
+            System.out.println(req.queryMap());
+            System.out.println(req.queryString());
 
             return "";
         });

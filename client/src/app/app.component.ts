@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../environments/environment';
 
 
 
@@ -15,7 +16,7 @@ export class AppComponent {
     appWidth: number;
 
     currentScreenWidth: number;
-    gapi : any;
+    //gapi : any;
 
 
     constructor(private http: HttpClient) {
@@ -23,9 +24,8 @@ export class AppComponent {
         this.appWidth = (window.screen.width);
         this.currentScreenWidth = (window.screen.width);
 
-
-        this.gapi.load('auth2', function () {
-            this.gapi.auth2.init({
+        gapi.load('auth2', function () {
+            gapi.auth2.init({
                 client_id: '1080043572259-h3vk6jgc4skl3uav3g0l13qvlcqpebvu.apps.googleusercontent.com'
             });
         });
@@ -37,29 +37,42 @@ export class AppComponent {
     }
 
     signIn() {
-        let googleAuth = this.gapi.auth2.getAuthInstance();
+        let googleAuth = gapi.auth2.getAuthInstance();
 
         googleAuth.then(() => {
             googleAuth.signIn({scope: 'profile email'}).then(googleUser => {
                 console.log(googleUser.getBasicProfile().getName() + ' has signed in.');
-                this.sendTokenToServer(googleAuth.currentUser.get().getAuthResponse().id_token);
-                this.gapi.auth2.getAuthInstance().grantOfflineAccess().then(function (resp) {
-                    if (resp.code != null) {
+                //this.sendTokenToServer(googleAuth.currentUser.get().getAuthResponse().id_token);
+                this.signInCookie(googleUser.getBasicProfile().getEmail(), googleAuth.currentUser.get().getAuthResponse().id_token);
+                // console.log("these are all the values inside of the getAuthResponse");
+                // console.log(googleAuth.currentUser.get().getAuthResponse(true));
+                // console.log(googleAuth.currentUser.get().getAuthResponse(false));
 
+/*
+                googleAuth.grantOfflineAccess().then(function (resp) {
+                    console.log("It went in here");
+                    console.log(resp.code);
+                    if (resp.code != null) {
+                        console.log("Then resp.code wasn't null");
 
 
 
 
                     } else {
-
+                        console.log("Then resp.code was null");
                     }
                 });
+                */
             });
         });
+
+
+
     }
 
+
     signOut() {
-        let googleAuth = this.gapi.auth2.getAuthInstance();
+        let googleAuth = gapi.auth2.getAuthInstance();
 
         googleAuth.then(() => {
             googleAuth.signOut();
@@ -74,7 +87,7 @@ export class AppComponent {
             }),
         };
 
-        this.http.post("http://localhost:4567/api/login", {token: token}, httpOptions)
+        this.http.post(environment.API_URL + "login", {token: token}, httpOptions)
             .subscribe(onSuccess => {
                 console.log("WE CAN SAVE A COOKIE");
             }, onFail => {
@@ -86,5 +99,25 @@ export class AppComponent {
 
     }
 
+    signInCookie(email: string, token: string) {
+        document.cookie = "token="+token+";";
+        document.cookie = "email="+email+";";
+
+        console.log(document.cookie);
+
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Set-Cookie': "token="+token+";"
+            }),
+        };
+
+        this.http.post(environment.API_URL + "login", {withCredentials: true}, httpOptions)
+            .subscribe(onSuccess => {
+                console.log("WE CAN SAVE A COOKIE");
+            }, onFail => {
+                console.log("no cookie for you");
+            });
+    }
 
 }
