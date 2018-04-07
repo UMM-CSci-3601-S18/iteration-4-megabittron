@@ -5,11 +5,12 @@ import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
 import {AddJournalComponent} from './add-journal.component';
 import {EditJournalComponent} from "./edit-journal.component";
+import {ShowJournalComponent} from "./show-journal.component";
 
 @Component({
     selector: 'app-journals-component',
     templateUrl: 'journals.component.html',
-    styleUrls: ['./journals.component.css'],
+    styleUrls: ['./journals.component.scss'],
 })
 
 export class JournalsComponent implements OnInit {
@@ -76,6 +77,13 @@ export class JournalsComponent implements OnInit {
                     console.log('There was an error editing the journal.');
                     console.log('The error was ' + JSON.stringify(err));
                 });
+        });
+    }
+
+    showMoreInfo(_id: string, subject: string, body: string, date: string): void {
+        const dialogRef = this.dialog.open(ShowJournalComponent, {
+            width: '300px',
+            data: { journal: this.journalBody }
         });
     }
 

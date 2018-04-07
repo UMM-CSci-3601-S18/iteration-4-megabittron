@@ -79,11 +79,12 @@ public class Server {
         /////////////// Endpoints ///////////////////
         /////////////////////////////////////////////
 
-        //List goals, filtered using query parameters
+        //List emotions
         get("api/emotions", emotionRequestHandler::getEmotions);
         get("api/emotions/:id", emotionRequestHandler::getEmotionJSON);
         post("api/emotions/new", emotionRequestHandler::addNewEmotion);
 
+        //List goals
         get("api/goals", goalRequestHandler::getGoals);
         get("api/goals/:id", goalRequestHandler::getGoalJSON);
         post("api/goals/new", goalRequestHandler::addNewGoal);
@@ -98,7 +99,6 @@ public class Server {
 
 
         //List journals, filtered using query parameters
-
         get("api/journals", journalRequestHandler::getJournals);
         get("api/journals/:id", journalRequestHandler::getJournalJSON);
         post("api/journals/new", journalRequestHandler::addNewJournal);

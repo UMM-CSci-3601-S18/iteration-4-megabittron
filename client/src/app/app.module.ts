@@ -20,7 +20,9 @@ import {SummaryListService} from "./summary/summary-list.service";
 import {JournalsComponent} from "./journals/journals.component";
 import {AddJournalComponent} from "./journals/add-journal.component";
 import {EditJournalComponent} from "./journals/edit-journal.component";
+import {ShowJournalComponent} from "./journals/show-journal.component";
 import {JournalsService} from "./journals/journals.service";
+import {TruncatePipe} from "./journals/truncate-pipe.component";
 
 @NgModule({
     imports: [
@@ -39,9 +41,11 @@ import {JournalsService} from "./journals/journals.service";
         AddJournalComponent,
         EditJournalComponent,
         //EditGoalComponent,
+        ShowJournalComponent,
         SummaryListComponent,
         EmotionResponseComponent,
-        EmotionResponseHappyComponent
+        EmotionResponseHappyComponent,
+        TruncatePipe,
     ],
     providers: [
     GoalsService,
@@ -59,6 +63,7 @@ import {JournalsService} from "./journals/journals.service";
         EmotionResponseHappyComponent,
         AddJournalComponent,
         EditJournalComponent,
+        ShowJournalComponent,
     ],
     bootstrap: [AppComponent]
 })

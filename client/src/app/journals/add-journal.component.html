@@ -3,11 +3,11 @@
             <mat-card-title>New Journal</mat-card-title>
             <mat-divider></mat-divider>
             <mat-card-content>
-                <mat-form-field>
-                    <input matInput #input id="subjectField" placeholder="Subject" [(ngModel)]="data.journal.subject">
+                <mat-form-field hintLabel="Max 40 characters">
+                    <input matInput #input maxlength="40" id="subjectField" placeholder="Subject" [(ngModel)]="data.journal.subject">
                 </mat-form-field>
                 <mat-form-field>
-                    <textarea matInput #input id="bodyField" matTextareaAutosize placeholder="Body" [(ngModel)]="data.journal.body"></textarea>
+                    <input matInput #input id="bodyField" matTextareaAutosize placeholder="Body" [(ngModel)]="data.journal.body">
                 </mat-form-field>
             </mat-card-content>
         <button mat-raised-button id="confirmAddJournalButton" [mat-dialog-close]="data.journal" type="button" (click)="openSnackBar('Journal Added','')">Confirm</button>
