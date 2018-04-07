@@ -6,7 +6,6 @@ import {MatDialog} from '@angular/material';
 import {AddJournalComponent} from './add-journal.component';
 import {EditJournalComponent} from "./edit-journal.component";
 import {ShowJournalComponent} from "./show-journal.component";
-import {TruncatePipe} from "./truncate-pipe.component";
 
 @Component({
     selector: 'app-journals-component',
@@ -81,10 +80,11 @@ export class JournalsComponent implements OnInit {
         });
     }
 
-    showMoreInfo(_id: string, subject: string, body: string, date: string): void {
+    showMoreInfo(body: string): void {
+        const showJournal: Journal = {_id: null, subject: null, body: body, date: null};
         const dialogRef = this.dialog.open(ShowJournalComponent, {
             width: '300px',
-            data: { journal: this.journalBody }
+            data: { journal: showJournal }
         });
     }
 

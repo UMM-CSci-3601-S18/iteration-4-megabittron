@@ -6,6 +6,7 @@ import {MatSnackBar} from '@angular/material';
 @Component({
     selector: 'app-show-journal.component',
     templateUrl: 'show-journal.component.html',
+    styleUrls: ['./show-journal.component.scss'],
 })
 
 export class ShowJournalComponent {

@@ -12,10 +12,10 @@
                         Add a Journal</button>
                 <div class="filter-fields">
                 <mat-form-field id="journal-subject-field">
-                    <input matInput id="journalSubject" #input type="text" placeholder="Filter by subject" (input)="journalSubject = $event.target.value">
+                    <input matInput id="journalSubject" #input placeholder="Filter by subject" (input)="journalSubject = $event.target.value">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput id="journalBody" #input type="text" placeholder="Filter by body" (input)="journalBody = $event.target.value">
+                    <input matInput id="journalBody" #input placeholder="Filter by body" (input)="journalBody = $event.target.value">
                 </mat-form-field>
                 </div>
             </mat-card-content>
@@ -24,20 +24,31 @@
     <div class="grid-journals-section" >
         <div layout="row" layout-wrap>
             <mat-card class="journals-card"
-                      *ngFor="let journal of this.filterJournals(journalSubject, journalBody)"
+                      *ngFor="let journal of journals"
                       #elem [id]="journal._id['$oid']">
                 <div class="journals-card-info">
                     <mat-card-content class="journal-info">
                         <mat-card-title class="journal-name">
                             <button mat-icon-button class="edit-journal-button"
                                     (click)="openDialogReview(journal._id['$oid'], journal.subject, journal.body, journal.date)">
-                                <mat-icon>mode_edit</mat-icon>
+                                <mat-icon matTooltip="Edit Journal">mode_edit</mat-icon>
                             </button>
                             {{journal.subject}}
                         </mat-card-title>
-                        <mat-card-subtitle>{{journal.date | date : "MMM d, yyyy 'at' h:mm a"}}</mat-card-subtitle>
-                        <p>{{journal.body | slice : 0:100}}<a (click)="showMoreInfo()">...show more</a></p>
-
+                        <mat-card-subtitle>
+                            {{journal.date | date : "MMM d, yyyy 'at' h:mm a"}}
+                        </mat-card-subtitle>
+                        <p *ngIf="journal.body.length > 100">
+                            {{journal.body | slice : 0:100}}
+                            <a (click)="showMoreInfo(journal.body)">
+                                <button class="show-more-button">
+                                    ...show more
+                                </button>
+                            </a>
+                        </p>
+                        <p *ngIf="journal.body.length <100">
+                            {{journal.body}}
+                        </p>
                     </mat-card-content>
                 </div>
                 <mat-card-actions>

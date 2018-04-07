@@ -2,7 +2,6 @@ import {ComponentFixture, TestBed, async} from '@angular/core/testing';
 import {Journal} from './journal';
 import {JournalsComponent} from './journals.component';
 import {JournalsService} from './journals.service';
-import {TruncatePipe} from "./truncate-pipe.component";
 import {Observable} from 'rxjs/Observable';
 import {FormsModule} from '@angular/forms';
 import {CustomModule} from '../custom.module';

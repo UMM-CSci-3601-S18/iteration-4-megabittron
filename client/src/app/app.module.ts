@@ -22,7 +22,7 @@ import {AddJournalComponent} from "./journals/add-journal.component";
 import {EditJournalComponent} from "./journals/edit-journal.component";
 import {ShowJournalComponent} from "./journals/show-journal.component";
 import {JournalsService} from "./journals/journals.service";
-import {TruncatePipe} from "./journals/truncate-pipe.component";
+import {ArraySortPipe} from "./journals/array-sort-pipe.component";
 
 @NgModule({
     imports: [
@@ -45,7 +45,7 @@ import {TruncatePipe} from "./journals/truncate-pipe.component";
         SummaryListComponent,
         EmotionResponseComponent,
         EmotionResponseHappyComponent,
-        TruncatePipe,
+        ArraySortPipe,
     ],
     providers: [
     GoalsService,
