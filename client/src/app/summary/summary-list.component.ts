@@ -56,7 +56,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     // These are the target values used in searching.
     // We should rename them to make that clearer.
     public summaryMood: string;
-    public summaryIntensity: number;
+    public summaryIntensity: string;
     public inputType = "week";
     public CurrentGraph = "Bar";
 
@@ -73,10 +73,15 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         return summary._id['$oid'] === this.highlightedID['$oid'];
     }
 
+    public clearDateFilter(){
+        this.startDate = null;
+        this.endDate = null;
+    }
+
     public filterDates(givenlist, searchStartDate: any, searchEndDate: any): Summary[] {
         this.dateFilteredSummarys = givenlist;
-        // Filter by startDate
 
+        // Filter by startDate
         if (searchStartDate != null) {
 
             this.dateFilteredSummarys = this.dateFilteredSummarys.filter(summary => {
@@ -106,37 +111,25 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         return this.pastDaySummarys;
     }
 
-    public filterSummarys(searchMood: string, searchIntensity: number, searchStartDate: any, searchEndDate: any): Summary[] {
+    public filterSummarys(searchMood: string, searchIntensity: string, searchStartDate: any, searchEndDate: any): Summary[] {
 
         this.filteredSummarys = this.summarys;
 
         // Filter by Mood
-        if (searchMood != null) {
-            if(searchMood =="All"){
-                this.filteredSummarys = this.filteredSummarys.filter(summary => {
-                    return true;
-                });
-
-            } else{
-                searchMood = searchMood.toLocaleLowerCase();
-                this.filteredSummarys = this.filteredSummarys.filter(summary => {
-                    return !searchMood || summary.mood.toLowerCase().indexOf(searchMood) !== -1;
-                });
-            }
+        if (searchMood != null && searchMood !== "All") {
+            searchMood = searchMood.toLocaleLowerCase();
+            this.filteredSummarys = this.filteredSummarys.filter(summary => {
+                return !searchMood || summary.mood.toLowerCase().indexOf(searchMood) !== -1;
+            });
         }
 
+
         // Filter by Intensity
-        if (searchIntensity != null) {
-            if (searchIntensity.toString() == "All") {
-                this.filteredSummarys = this.filteredSummarys.filter(summary => {
-                    return true;
-                });
-            }
-            else {
-                this.filteredSummarys = this.filteredSummarys.filter(summary => {
-                    return !searchIntensity || searchIntensity.toString() == summary.intensity.toString();
-                });
-            }
+        if (searchIntensity != null && searchIntensity !== "All") {
+            this.filteredSummarys = this.filteredSummarys.filter(summary => {
+                return !searchIntensity || searchIntensity == summary.intensity.toString();
+            });
+
         }
 
         this.filteredSummarys = this.filterDates(this.filteredSummarys, searchStartDate, searchEndDate);
@@ -146,7 +139,6 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     //xValue can represent hour or weekday
     filterBarGraph(xValue): number {
-        console.log(this.filteredSummarys.length);
         let filterBarData = this.filteredSummarys;
 
         if(this.inputType == "week") {
@@ -175,7 +167,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     filterLineGraph(xValue, Searchmood): number {
         Searchmood = Searchmood.toLocaleLowerCase();
-        let filterLineData = this.summarys.filter(summary => {
+        let filterLineData = this.filteredSummarys.filter(summary => {
             return !Searchmood || summary.mood.toLowerCase().indexOf(Searchmood) !== -1;
         });
 

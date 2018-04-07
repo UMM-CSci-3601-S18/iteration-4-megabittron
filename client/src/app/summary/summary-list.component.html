@@ -43,11 +43,11 @@
                         matInput [matDatepicker]="start"
                         placeholder="Choose a Start Date"
                         [(ngModel)]="startDate"
-                        (input)="startDate = $event.target.value">
-                    <mat-datepicker-toggle id = "startButton" matSuffix [for]="start"></mat-datepicker-toggle>
-                    <mat-datepicker touchUi="true" #start></mat-datepicker>
+                        (input)="startDate = $event.target.value"
+                        disabled>
+                    <mat-datepicker-toggle id = "startButton" matSuffix [for]="start" enabled></mat-datepicker-toggle>
+                    <mat-datepicker touchUi="true" #start disabled="false"></mat-datepicker>
                 </mat-form-field> &nbsp;
-
 
                 <mat-form-field class="end">
                     <input
@@ -55,10 +55,13 @@
                         matInput [matDatepicker]="end"
                         placeholder="Choose an End Date"
                         [(ngModel)]="endDate"
-                        (input)="endDate = $event.target.value">
+                        (input)="endDate = $event.target.value"
+                        disabled>
                     <mat-datepicker-toggle id = "endButton" matSuffix [for]="end"></mat-datepicker-toggle>
-                    <mat-datepicker touchUi="true" #end></mat-datepicker>
+                    <mat-datepicker touchUi="true" #end disabled="false"></mat-datepicker>
                 </mat-form-field>
+
+                <button mat-raised-button id="clearDatesButton" (click)="this.clearDateFilter()">Clear Date Filters</button>
             </div>
             </div>
 
