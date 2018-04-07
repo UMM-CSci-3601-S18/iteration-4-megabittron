@@ -150,7 +150,8 @@ public class GoalControllerSpec {
     @Test
     public void editGoalTest() {
         String newId = goalController.completeGoal("5ab53a8907d923f68d03e1a3", "To have a better environment", "Family", "Hug KK", true,
-            "Daily");
+            "Daily", "2018-04-05T18:56:24.702Z", "2018-04-05T18:56:24.702Z", "2018-04-05T18:56:24.702Z");
+
         assertNotNull("Edit goal should return true when goal is edited,", newId);
         Map<String, String[]> argMap = new HashMap<>();
         String jsonResult = goalController.getGoals(argMap);
