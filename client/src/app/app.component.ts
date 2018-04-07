@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../environments/environment';
+
 
 
 
@@ -9,63 +10,73 @@ import {environment} from '../environments/environment';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     title = 'Friendly Panda App';
 
     appHeight: number;
     appWidth: number;
 
     currentScreenWidth: number;
-    //gapi : any;
 
+    isLoggedIn = false;
 
     constructor(private http: HttpClient) {
         this.appHeight = (window.screen.height);
         this.appWidth = (window.screen.width);
         this.currentScreenWidth = (window.screen.width);
+    }
 
-        gapi.load('auth2', function () {
-            gapi.auth2.init({
-                client_id: '1080043572259-h3vk6jgc4skl3uav3g0l13qvlcqpebvu.apps.googleusercontent.com'
-            });
+
+    handleClientLoad() {
+        gapi.load('client:auth2', this.initClient);
+    }
+
+    initClient() {
+
+        gapi.client.init({
+            'clientId': '1080043572259-h3vk6jgc4skl3uav3g0l13qvlcqpebvu.apps.googleusercontent.com'
         });
+
     }
 
-
-    onResize (event) {
-        this.currentScreenWidth = event.target.innerWidth;
-    }
 
     signIn() {
         let googleAuth = gapi.auth2.getAuthInstance();
 
-        googleAuth.then(() => {
+        googleAuth.grantOfflineAccess().then((resp) => {
+            this.sendAuthCode(resp.code);
+        });
+
+
+
+
+
+        /*googleAuth.then(() => {
             googleAuth.signIn({scope: 'profile email'}).then(googleUser => {
-                console.log(googleUser.getBasicProfile().getName() + ' has signed in.');
+
                 //this.sendTokenToServer(googleAuth.currentUser.get().getAuthResponse().id_token);
-                this.signInCookie(googleUser.getBasicProfile().getEmail(), googleAuth.currentUser.get().getAuthResponse().id_token);
+                //this.signInCookie(googleUser.getBasicProfile().getEmail(), googleAuth.currentUser.get().getAuthResponse().id_token);
                 // console.log("these are all the values inside of the getAuthResponse");
                 // console.log(googleAuth.currentUser.get().getAuthResponse(true));
                 // console.log(googleAuth.currentUser.get().getAuthResponse(false));
 
-/*
-                googleAuth.grantOfflineAccess().then(function (resp) {
-                    console.log("It went in here");
-                    console.log(resp.code);
-                    if (resp.code != null) {
-                        console.log("Then resp.code wasn't null");
+                /!*
+                                googleAuth.grantOfflineAccess().then(function (resp) {
+                                    console.log("It went in here");
+                                    console.log(resp.code);
+                                    if (resp.code != null) {
+                                        console.log("Then resp.code wasn't null");
 
 
 
 
-                    } else {
-                        console.log("Then resp.code was null");
-                    }
-                });
-                */
+                                    } else {
+                                        console.log("Then resp.code was null");
+                                    }
+                                });
+                                *!/
             });
-        });
-
+        });*/
 
 
     }
@@ -74,41 +85,51 @@ export class AppComponent {
     signOut() {
         let googleAuth = gapi.auth2.getAuthInstance();
 
+
         googleAuth.then(() => {
             googleAuth.signOut();
-            window.location.reload();
+            //window.location.reload();
         })
     }
 
-    sendTokenToServer(token: string): void {
+    isSignedIn() {
+        let googleAuth = gapi.auth2.getAuthInstance().currentUser.get().isSignedIn();
+
+        this.isLoggedIn = googleAuth;
+
+        console.log(this.isLoggedIn);
+    }
+
+    whoIsSignedIn() {
+        let googleAuth = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile();
+        console.log(googleAuth.getName());
+    }
+
+    sendAuthCode(code: string): void {
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             }),
         };
 
-        this.http.post(environment.API_URL + "login", {token: token}, httpOptions)
+        this.http.post(environment.API_URL + "login", {code: code}, httpOptions)
             .subscribe(onSuccess => {
-                console.log("WE CAN SAVE A COOKIE");
+                console.log("Code sent to server");
             }, onFail => {
-                console.log("no cookie for you");
+                console.log("ERROR: Code couldn't be sent to the server");
             });
     }
 
-    signInCallback(authResult) {
-
-    }
-
     signInCookie(email: string, token: string) {
-        document.cookie = "token="+token+";";
-        document.cookie = "email="+email+";";
+        document.cookie = "token=" + token + ";";
+        document.cookie = "email=" + email + ";";
 
-        console.log(document.cookie);
+        //console.log(document.cookie);
 
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
-                'Set-Cookie': "token="+token+";"
+                'Set-Cookie': "token=" + token + ";"
             }),
         };
 
@@ -118,6 +139,16 @@ export class AppComponent {
             }, onFail => {
                 console.log("no cookie for you");
             });
+    }
+
+
+    onResize(event) {
+        this.currentScreenWidth = event.target.innerWidth;
+
+    }
+
+    ngOnInit() {
+        this.handleClientLoad();
     }
 
 }

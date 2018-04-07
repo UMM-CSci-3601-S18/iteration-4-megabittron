@@ -1,11 +1,16 @@
 <body>
-<div class="g-signin2" (click)="signIn()"></div>
-<button mat-raised-button (click)="signOut()">Sign Out</button>
+
 
 
 
 <div *ngIf="currentScreenWidth < 806; then mobile else computer"></div>
 <ng-template #computer >
+    <div class="g-signin2" (click)="signIn()"></div>
+    <button mat-raised-button (click)="signOut()">Sign Out</button>
+    <button mat-raised-button (click)="isSignedIn()">Check Sign In State</button>
+    <button mat-raised-button (click)="whoIsSignedIn()">Who is signed in?</button>
+
+
     <div (window:resize)="onResize($event)"></div>
     <ul class="nav-things" >
         <li><a id="home" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><button mat-button class="nav-button">Home</button> </a></li>
@@ -17,6 +22,7 @@
     <router-outlet></router-outlet>
 </ng-template>
 <ng-template id="mobile" #mobile>
+
     <div (window:resize)="onResize($event)"></div>
     <td-layout #layout>
         <td-navigation-drawer id="navBar" flex sidenavTitle="Menu" >
@@ -32,6 +38,11 @@
             <button mat-icon-button td-menu-button tdLayoutToggle >
                 <mat-icon>menu</mat-icon>
             </button>
+            <div class="g-signin2" (click)="signIn()"></div>
+            <button mat-raised-button (click)="signOut()">Sign Out</button>
+            <button mat-raised-button (click)="isSignedIn()">Check Sign In State</button>
+            <button mat-raised-button (click)="whoIsSignedIn()">Who is signed in?</button>
+
             <router-outlet></router-outlet>
         </td-layout-nav>
     </td-layout>
