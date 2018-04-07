@@ -17,9 +17,10 @@ import {EmotionResponseComponent} from "./home/emotion-response.component";
 import {EmotionResponseHappyComponent} from "./home/emotion-response-happy.component";
 import {SummaryListComponent} from "./summary/summary-list.component";
 import {SummaryListService} from "./summary/summary-list.service";
-import {JournalsComponent} from "./Journal/journals.component";
-import {AddJournalComponent} from "./Journal/add-journal.component";
-import {JournalsService} from "./Journal/journals.service";
+import {JournalsComponent} from "./journals/journals.component";
+import {AddJournalComponent} from "./journals/add-journal.component";
+import {EditJournalComponent} from "./journals/edit-journal.component";
+import {JournalsService} from "./journals/journals.service";
 
 @NgModule({
     imports: [
@@ -36,6 +37,7 @@ import {JournalsService} from "./Journal/journals.service";
         AddGoalComponent,
         JournalsComponent,
         AddJournalComponent,
+        EditJournalComponent,
         //EditGoalComponent,
         SummaryListComponent,
         EmotionResponseComponent,
@@ -55,7 +57,8 @@ import {JournalsService} from "./Journal/journals.service";
         //EditGoalComponent,
         EmotionResponseComponent,
         EmotionResponseHappyComponent,
-        AddJournalComponent
+        AddJournalComponent,
+        EditJournalComponent,
     ],
     bootstrap: [AppComponent]
 })

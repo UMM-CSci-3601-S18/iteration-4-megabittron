@@ -4,16 +4,17 @@
             <mat-divider></mat-divider>
             <mat-card-content>
                 <br>
-                <mat-form-field>
-                    <input matInput #input id="nameField" placeholder="What is your goal?" [(ngModel)]="data.goal.name">
-                    <mat-error>This field is required</mat-error>
-                </mat-form-field> <br>
-                <mat-select id="category-list" matInput #input [(ngModel)]="data.goal.category" placeholder="Category" [style.width]="'100%'">
+                <mat-form-field hintLabel="Max 45 characters">
+                    <input matInput #input maxlength="45" required id="nameField" placeholder="What is your goal?" [(ngModel)]="data.goal.name">
+                </mat-form-field>
+                <br>
+                <mat-select matInput required id="category-list"  #input [(ngModel)]="data.goal.category" placeholder="Category" [style.width]="'100%'">
                     <mat-option value="Chores">Chores</mat-option>
                     <mat-option value="Family">Family</mat-option>
                     <mat-option value="Personal Health">Personal Health</mat-option>
                 </mat-select>
-                <br><br>
+                <br>
+                <br>
                 <mat-form-field>
                     <input matInput #input id="purposeField" placeholder="What is the purpose?" [(ngModel)]="data.goal.purpose">
                 </mat-form-field>

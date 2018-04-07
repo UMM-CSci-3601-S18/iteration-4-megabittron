@@ -155,9 +155,9 @@ describe('Goal list service: ', () => {
         req.flush(chores_id);
     });
 
-    it('editing a goal calls api/goals/edit', () => {
+    it('completing a goal calls api/goals/edit', () => {
         const family_id = { '$oid': 'family_id' };
-        const editGoal: Goal = {
+        const completeGoal: Goal = {
             _id: 'family_id',
             purpose: 'Talk about my classes',
             category: 'Family',
@@ -169,7 +169,7 @@ describe('Goal list service: ', () => {
             frequency: "Daily"
         };
 
-        goalListService.editGoal(editGoal).subscribe(
+        goalListService.completeGoal(completeGoal).subscribe(
             id => {
                 expect(id).toBe(family_id);
             }

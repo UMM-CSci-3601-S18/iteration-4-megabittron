@@ -1,105 +1,89 @@
 package umm3601.database;
 
 import com.google.gson.Gson;
-import com.mongodb.MongoException;
+import com.mongodb.*;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.util.JSON;
 import org.bson.Document;
 import org.bson.types.ObjectId;
-
 import java.util.Iterator;
 import java.util.Map;
 
+import java.util.Date;
+
 import static com.mongodb.client.model.Filters.eq;
 
-
-// Controller that manages information about people's journals.
 public class JournalController {
 
     private final Gson gson;
     private MongoDatabase database;
-    // journalCollection is the collection that the journals data is in.
     private final MongoCollection<Document> journalCollection;
 
-    // Construct controller for journals.
+    /**
+     * journalController constructor
+     *
+     * @param database
+     */
     public JournalController(MongoDatabase database) {
         gson = new Gson();
         this.database = database;
         journalCollection = database.getCollection("journals");
     }
 
-    // get an journal by its ObjectId, not used by client, for potential future use
     public String getJournal(String id) {
-        FindIterable<Document> jsonJournals
+        FindIterable<Document> jsonUsers
             = journalCollection
             .find(eq("_id", new ObjectId(id)));
 
-        Iterator<Document> iterator = jsonJournals.iterator();
+        Iterator<Document> iterator = jsonUsers.iterator();
         if (iterator.hasNext()) {
-            Document journal = iterator.next();
-            return journal.toJson();
+            Document user = iterator.next();
+            return user.toJson();
         } else {
             // We didn't find the desired journal
             return null;
         }
     }
 
-    // Helper method which iterates through the collection, receiving all
-    // documents if no query parameter is specified. If the journal parameter is
-    // specified, then the collection is filtered so only documents of that
-    // specified journal are found.
     public String getJournals(Map<String, String[]> queryParams) {
 
         Document filterDoc = new Document();
 
-        // We will need more statements here for different objects,
-        // such as date, etc.
-
-
-        // name is the title of the journal
-        if (queryParams.containsKey("title")) {
-            String targetContent = (queryParams.get("title")[0]);
+        if (queryParams.containsKey("subject")) {
+            String targetContent = (queryParams.get("subject")[0]);
             Document contentRegQuery = new Document();
             contentRegQuery.append("$regex", targetContent);
             contentRegQuery.append("$options", "i");
-            filterDoc = filterDoc.append("name", contentRegQuery);
+            filterDoc = filterDoc.append("subject", contentRegQuery);        }
+
+        if (queryParams.containsKey("body")) {
+            String targetContent = (queryParams.get("body")[0]);
+            Document contentRegQuery = new Document();
+            contentRegQuery.append("$regex", targetContent);
+            contentRegQuery.append("$options", "i");
+            filterDoc = filterDoc.append("body", contentRegQuery);
         }
 
-        // FindIterable comes from mongo, Document comes from Gson
+        //FindIterable comes from mongo, Document comes from Gson
         FindIterable<Document> matchingJournals = journalCollection.find(filterDoc);
-
-        System.out.println("It entered Journalcontroller.java and did getJournals()");
 
         return JSON.serialize(matchingJournals);
     }
 
-    /**
-     * Helper method which appends received user information to the to-be added document
-     *
-     * @param title
-     * @param body
-     * @param date
-
-     * @return boolean after successfully or unsuccessfully adding a user
-     */
-    // As of now this only adds the journal, but you can separate multiple arguments
-    // by commas as we add them.
-    public String addNewJournal(String title, String body, String date) {
-
-        // makes the search Document key-pairs
+    public String addNewJournal(String subject, String body) {
         Document newJournal = new Document();
-        newJournal.append("title", title);
-        newJournal.append("body", body);
-        newJournal.append("date", date);
-        // Append new journals here
+        newJournal.append("subject",subject);
+        newJournal.append("body",body);
+
+        Date now = new Date();
+        newJournal.append("date", now.toString());
 
         try {
             journalCollection.insertOne(newJournal);
             ObjectId id = newJournal.getObjectId("_id");
-            System.err.println("Successfully added new journal [title=" + title + ", body=" + body +", date=" + date + ']');
-            // return JSON.serialize(newJournal);
+            System.err.println("Successfully added new journal [_id=" + id + ", subject=" + subject + ", body=" + body + ", date=" + now + ']');
             return JSON.serialize(id);
         } catch(MongoException me) {
             me.printStackTrace();
@@ -107,4 +91,28 @@ public class JournalController {
         }
     }
 
+    public String editJournal(String id, String subject, String body){
+
+        Document newJournal = new Document();
+        newJournal.append("subject", subject);
+        newJournal.append("body", body);
+        Document setQuery = new Document();
+        setQuery.append("$set", newJournal);
+        Document searchQuery = new Document().append("_id", new ObjectId(id));
+        System.out.println(searchQuery + " the search");
+
+
+        try {
+            //System.out.println(journalCollection.find());
+            journalCollection.updateOne(searchQuery, setQuery);
+            System.out.println(journalCollection.find());
+            ObjectId id1 = searchQuery.getObjectId("_id");
+            System.err.println("Successfully updated journal [_id=" + id1 + ", subject=" + subject + ", body=" + body + ']');
+            return JSON.serialize(id1);
+        } catch(MongoException me) {
+            me.printStackTrace();
+            return null;
+        }
+    }
 }
+
