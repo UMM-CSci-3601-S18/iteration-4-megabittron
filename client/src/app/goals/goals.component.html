@@ -21,9 +21,8 @@
             <div class="todays-goals">
                 Today's goals
                 <div layout="row" layout-wrap>
-                    <ng-container *ngFor="let goal of this.filterGoals(goalPurpose, goalCategory, goalName, goalStatus, goalFrequency)">
+                    <ng-container *ngFor="let goal of this.todayGoals">
                         <mat-card class="goals-card"
-                                  *ngIf="getNext(goal.status, goal.next, goal.end, goal.frequency) == true"
                                   #elem [id]="goal._id['$oid']">
                             <div class ="goals-image">
                                 <img *ngIf="goal.category == 'Family'" src="../../assets/images/goals/family.png"
@@ -43,7 +42,6 @@
                                     </p>
                                     <p>Frequency: {{goal.frequency}}</p>
                                     <p>Next: {{goal.next}}</p>
-                                    <p>Today? {{getNext(goal.status, goal.next, goal.end, goal.frequency)}}</p>
                                 </mat-card-content>
                             </div>
                             <div class="goals-buttons">
@@ -66,7 +64,6 @@
                 <div layout="row" layout-wrap>
                    <ng-container *ngFor="let goal of this.filterGoals(goalPurpose, goalCategory, goalName, goalStatus, goalFrequency)">
                     <mat-card class="goals-card"
-                              *ngIf="getNext(goal.status, goal.next, goal.end, goal.frequency) == false"
                               #elem [id]="goal._id['$oid']">
                         <div class ="goals-image">
                             <img *ngIf="goal.category == 'Family'" src="../../assets/images/goals/family.png"
@@ -86,7 +83,6 @@
                                 </p>
                                 <p>Frequency: {{goal.frequency}}</p>
                                 <p>Next: {{goal.next}}</p>
-                                <p>Today? {{getNext(goal.status, goal.next, goal.end, goal.frequency)}}</p>
                             </mat-card-content>
                         </div>
                         <div class="goals-buttons">

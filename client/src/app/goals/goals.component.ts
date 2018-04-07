@@ -15,6 +15,7 @@ import {MatSnackBar} from '@angular/material';
 export class GoalsComponent implements OnInit {
     // These are public so that tests can reference them (.spec.ts)
     public goals: Goal[];
+    public todayGoals: Goal[];
     public filteredGoals: Goal[];
 
     // These are the target values used in searching.
@@ -30,10 +31,10 @@ export class GoalsComponent implements OnInit {
     showPage = false;
 
     // The ID of the goal
-    private highlightedID: {'$oid': string} = { '$oid': '' };
+    private highlightedID: { '$oid': string } = {'$oid': ''};
 
     // Inject the GoalsService into this component.
-    constructor(public goalService: GoalsService, public dialog: MatDialog, public snackBar: MatSnackBar ) {
+    constructor(public goalService: GoalsService, public dialog: MatDialog, public snackBar: MatSnackBar) {
 
     }
 
@@ -42,10 +43,20 @@ export class GoalsComponent implements OnInit {
     }
 
     openDialog(): void {
-        const newGoal: Goal = {_id: '', name:'', category:'', purpose:'', status: false, start: this.goalStart, end: '', next: this.goalNext, frequency: ''};
+        const newGoal: Goal = {
+            _id: '',
+            name: '',
+            category: '',
+            purpose: '',
+            status: false,
+            start: this.goalStart,
+            end: '',
+            next: this.goalNext,
+            frequency: ''
+        };
         const dialogRef = this.dialog.open(AddGoalComponent, {
             width: '300px',
-            data: { goal : newGoal }
+            data: {goal: newGoal}
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -62,7 +73,7 @@ export class GoalsComponent implements OnInit {
         });
     }
 
-    deleteGoal(_id: string){
+    deleteGoal(_id: string) {
         this.goalService.deleteGoal(_id).subscribe(
             goals => {
                 this.refreshGoals();
@@ -77,7 +88,17 @@ export class GoalsComponent implements OnInit {
     }
 
     goalSatisfied(_id: string, thePurpose: string, theCategory: string, theName) {
-        const updatedGoal: Goal = {_id: _id, purpose: thePurpose, category: theCategory, name: theName, status: true};
+        const updatedGoal: Goal = {
+            _id: _id,
+            purpose: thePurpose,
+            category: theCategory,
+            name: theName,
+            status: true,
+            frequency: '',
+            start: '',
+            end: '',
+            next: ''
+        };
         this.goalService.completeGoal(updatedGoal).subscribe(
             completeGoalResult => {
                 this.highlightedID = completeGoalResult;
@@ -88,6 +109,30 @@ export class GoalsComponent implements OnInit {
                 console.log('The error was ' + JSON.stringify(err));
             });
     }
+
+    editGoal(goal, next) {
+        const updatedGoal: Goal = {
+            _id: goal._id,
+            purpose: goal.purpose,
+            category: goal.category,
+            name: goal.name,
+            status: goal.status,
+            frequency: goal.frequency,
+            start: goal.start,
+            end: goal.end,
+            next: next
+        };
+        this.goalService.completeGoal(updatedGoal).subscribe(
+            completeGoalResult => {
+                this.highlightedID = completeGoalResult;
+                //this.refreshGoals();
+            },
+            err => {
+                console.log('There was an error completing the goal.');
+                console.log('The error was ' + JSON.stringify(err));
+            });
+    }
+
 
     openSnackBar(message: string, action: string) {
         this.snackBar.open(message, action, {
@@ -140,6 +185,71 @@ export class GoalsComponent implements OnInit {
         return this.filteredGoals;
     }
 
+    getNext(){
+
+        this.todayGoals = this.filteredGoals.filter(goal => {
+
+                var nextGoal = new Date(goal.next);
+                nextGoal.setHours(0, 0, 0, 0);
+
+                var endGoal = new Date(goal.end);
+                endGoal.setHours(0, 0, 0, 0);
+
+                var day = nextGoal.getDate();
+                var month = nextGoal.getMonth();
+
+                if(endGoal.getTime() < this.today.getTime()){
+                    return false;
+                }
+
+                if(goal.status == true){
+                    return false;
+                }
+
+                if (goal.frequency == 'Does not repeat') {
+                    if (nextGoal.getTime() == this.today.getTime()) {
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+
+                while (nextGoal.getTime() < this.today.getTime()) {
+                    if (goal.frequency == "Daily") {
+                        day = day + 1;
+                        nextGoal.setDate(day);
+                    }
+
+                    if (goal.frequency == "Weekly") {
+                        day = day + 7;
+                        nextGoal.setDate(day);
+                    }
+
+                    if (goal.frequency == "Monthly") {
+                        month = month + 1;
+                        nextGoal.setMonth(month);
+                    }
+                }
+
+                console.log(nextGoal.getTime() == this.today.getTime());
+                if (nextGoal.getTime() == this.today.getTime()){
+                    console.log(nextGoal);
+                    this.editGoal(goal, nextGoal.toString());
+                    return true;
+                }
+
+                else{
+                    return false;
+                }
+
+
+        });
+
+        return this.todayGoals;
+
+    }
+
     /**
      * Starts an asynchronous operation to update the goals list
      *
@@ -156,10 +266,13 @@ export class GoalsComponent implements OnInit {
             goals => {
                 this.goals = goals;
                 this.filterGoals(this.goalPurpose, this.goalCategory, this.goalName, this.goalStatus, this.goalFrequency);
-            },
+                this.getNext();
+                },
             err => {
                 console.log(err);
             });
+
+
         return goalObservable;
     }
 
@@ -174,6 +287,8 @@ export class GoalsComponent implements OnInit {
                 console.log(err);
             }
         );
+
+
     }
 
     ngOnInit(): void {
@@ -182,59 +297,12 @@ export class GoalsComponent implements OnInit {
         this.getDate();
     }
 
-    getDate(){
+    getDate() {
         this.today = new Date();
         this.goalStart = this.today;
         this.goalNext = this.today;
-    }
-
-    getNext(status, next, end, frequency): boolean{
         this.today.setHours(0, 0, 0, 0);
 
-        var nextGoal = new Date(next);
-        nextGoal.setHours(0, 0, 0, 0);
-
-        var endGoal = new Date(end);
-        endGoal.setHours(0, 0, 0, 0);
-
-        var day = nextGoal.getDate();
-        var month = nextGoal.getMonth();
-
-        if(status == true){
-            return false;
-        }
-
-        if(frequency == 'Does not repeat'){
-            if(nextGoal < this.today){
-                return false;
-            }
-
-            else{
-                return true;
-            }
-        }
-
-        while(nextGoal < this.today){
-            if(frequency == "Daily"){
-                next.setDate(day + 1);
-            }
-
-            if(frequency == "Weekly"){
-                next.setDate(day + 7);
-            }
-
-            if(frequency == "Monthly"){
-                next.setMonth(month + 1);
-            }
-        }
-
-       if(nextGoal > this.today || nextGoal > endGoal){
-            return false;
-       }
-       else{
-           return true;
-       }
 
     }
-
 }
