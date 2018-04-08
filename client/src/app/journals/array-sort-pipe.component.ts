@@ -4,15 +4,16 @@ import { Pipe, PipeTransform } from "@angular/core";
     name: "sort"
 })
 export class ArraySortPipe  implements PipeTransform {
-    transform(array: any[], field: string): any[] {
+    transform(array: Array<any>, args: string): Array<any> {
+        if (typeof args[0] === "undefined") {
+            return array;
+        }
+        let direction = args[0][0];
+        let column = args.replace('-','');
         array.sort((a: any, b: any) => {
-            if (a[field] < b[field]) {
-                return -1;
-            } else if (a[field] > b[field]) {
-                return 1;
-            } else {
-                return 0;
-            }
+            let left = Number(new Date(a[column]));
+            let right = Number(new Date(b[column]));
+            return (direction === "-") ? right - left : left - right;
         });
         return array;
     }

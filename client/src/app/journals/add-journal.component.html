@@ -4,10 +4,10 @@
             <mat-divider></mat-divider>
             <mat-card-content>
                 <mat-form-field hintLabel="Max 40 characters">
-                    <input matInput #input maxlength="40" id="subjectField" placeholder="Subject" [(ngModel)]="data.journal.subject">
+                    <input matInput #input required maxlength="40" id="subjectField" placeholder="Subject" [(ngModel)]="data.journal.subject">
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput #input id="bodyField"  placeholder="Body" [(ngModel)]="data.journal.body">
+                    <input matInput #input required id="bodyField"  placeholder="Body" [(ngModel)]="data.journal.body">
                 </mat-form-field>
             </mat-card-content>
         <button mat-raised-button id="confirmAddJournalButton" [mat-dialog-close]="data.journal" type="button" (click)="openSnackBar('Journal Added','')">Confirm</button>

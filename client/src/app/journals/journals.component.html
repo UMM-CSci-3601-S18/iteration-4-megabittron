@@ -21,10 +21,10 @@
             </mat-card-content>
         </mat-card>
     </div>
-    <div class="grid-journals-section" >
+    <div class="grid-journals-section">
         <div layout="row" layout-wrap>
             <mat-card class="journals-card"
-                      *ngFor="let journal of journals"
+                      *ngFor="let journal of filterJournals(journalSubject, journalBody, journalDate) | sort: '-date'"
                       #elem [id]="journal._id['$oid']">
                 <div class="journals-card-info">
                     <mat-card-content class="journal-info">
