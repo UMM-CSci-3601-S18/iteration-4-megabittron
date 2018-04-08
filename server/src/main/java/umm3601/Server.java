@@ -144,37 +144,44 @@ public class Server {
             // After this point error occurs
 
 
-            GoogleTokenResponse tokenResponse =
-                new GoogleAuthorizationCodeTokenRequest(
-                    new NetHttpTransport(),
-                    JacksonFactory.getDefaultInstance(),
-                    "https://www.googleapis.com/oauth2/v4/token",
-                    "1080043572259-h3vk6jgc4skl3uav3g0l13qvlcqpebvu.apps.googleusercontent.com",
+            try {
+                GoogleTokenResponse tokenResponse =
+                    new GoogleAuthorizationCodeTokenRequest(
+                        new NetHttpTransport(),
+                        JacksonFactory.getDefaultInstance(),
+                        "https://www.googleapis.com/oauth2/v4/token",
+                        "1080043572259-h3vk6jgc4skl3uav3g0l13qvlcqpebvu.apps.googleusercontent.com",
 
-                    // Replace clientSecret with the localhost one if testing
-                    "PLACEHOLDER_SECRET_DID_NOT_WANT_TO_POST_ON_GITHUB",
-                    authCode,
-                    "")
-                    //Not sure if we have a redirectUri
+                        // Replace clientSecret with the localhost one if testing
+                        "Use3FzYENcjF7zvx5CA3HfjD",
+                        authCode,
+                        "http://localhost:9000/")
+                        //Not sure if we have a redirectUri
 
-                    // Specify the same redirect URI that you use with your web
-                    // app. If you don't have a web version of your app, you can
-                    // specify an empty string.
-                    .execute();
+                        // Specify the same redirect URI that you use with your web
+                        // app. If you don't have a web version of your app, you can
+                        // specify an empty string.
+                        .execute();
 
-            // Doesn't reach this area of code
+                // Doesn't reach this area of code
 
-            System.out.println("third");
-            GoogleIdToken idToken = tokenResponse.parseIdToken();
-            GoogleIdToken.Payload payload = idToken.getPayload();
-            String userId = payload.getSubject();  // Use this value as a key to identify a user.
-            String email = payload.getEmail();
-            boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
-            String name = (String) payload.get("name");
-            String pictureUrl = (String) payload.get("picture");
-            String locale = (String) payload.get("locale");
-            String familyName = (String) payload.get("family_name");
-            String givenName = (String) payload.get("given_name");
+                System.out.println("third");
+                GoogleIdToken idToken = tokenResponse.parseIdToken();
+                GoogleIdToken.Payload payload = idToken.getPayload();
+                String userId = payload.getSubject();  // Use this value as a key to identify a user.
+                String email = payload.getEmail();
+                boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
+                String name = (String) payload.get("name");
+                String pictureUrl = (String) payload.get("picture");
+                String locale = (String) payload.get("locale");
+                String familyName = (String) payload.get("family_name");
+                String givenName = (String) payload.get("given_name");
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+
+
 
             return "";
         });
