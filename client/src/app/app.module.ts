@@ -11,7 +11,6 @@ import {ResourcesComponent} from "./resources/resources.component";
 import {EmotionService} from "./home/home.service";
 import {GoalsComponent} from "./goals/goals.component";
 import {GoalsService} from "./goals/goals.service";
-//import {EditGoalComponent} from "./goals/edit-goal.component";
 import {AddGoalComponent} from "./goals/add-goal.component";
 import {EmotionResponseComponent} from "./home/emotion-response.component";
 import {EmotionResponseHappyComponent} from "./home/emotion-response-happy.component";
@@ -22,9 +21,12 @@ import {AddJournalComponent} from "./journals/add-journal.component";
 import {EditJournalComponent} from "./journals/edit-journal.component";
 import {ShowJournalComponent} from "./journals/show-journal.component";
 import {JournalsService} from "./journals/journals.service";
-import {ArraySortPipe} from "./journals/array-sort-pipe.component";
+import {ArraySortPipe} from "./journals/array-sort-pipe.pipe";
 
 @NgModule({
+    exports: [
+        ArraySortPipe,
+    ],
     imports: [
         BrowserModule,
         HttpClientModule,
@@ -40,7 +42,6 @@ import {ArraySortPipe} from "./journals/array-sort-pipe.component";
         JournalsComponent,
         AddJournalComponent,
         EditJournalComponent,
-        //EditGoalComponent,
         ShowJournalComponent,
         SummaryListComponent,
         EmotionResponseComponent,
@@ -56,9 +57,7 @@ import {ArraySortPipe} from "./journals/array-sort-pipe.component";
     {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}
 ],
     entryComponents: [
-
         AddGoalComponent,
-        //EditGoalComponent,
         EmotionResponseComponent,
         EmotionResponseHappyComponent,
         AddJournalComponent,

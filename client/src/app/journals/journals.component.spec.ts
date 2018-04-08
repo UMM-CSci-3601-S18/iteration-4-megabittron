@@ -1,4 +1,3 @@
-/*
 import {ComponentFixture, TestBed, async} from '@angular/core/testing';
 import {Journal} from './journal';
 import {JournalsComponent} from './journals.component';
@@ -8,6 +7,7 @@ import {FormsModule} from '@angular/forms';
 import {CustomModule} from '../custom.module';
 import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 import {MatDialog} from '@angular/material';
+import {ArraySortPipe} from "./array-sort-pipe.pipe";
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 
@@ -47,7 +47,7 @@ describe( 'Journals', () => {
 
         TestBed.configureTestingModule({
             imports: [CustomModule],
-            declarations: [JournalsComponent],
+            declarations: [JournalsComponent, ArraySortPipe],
             providers: [{provide: JournalsService, useValue: journalServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
@@ -104,7 +104,7 @@ describe( 'Journals', () => {
 })
 
 // This test is not passing because of sending XML requests. Fix!
-/!*describe('Misbehaving Journal List', () => {
+/*describe('Misbehaving Journal List', () => {
     let journalList: JournalsComponent;
     let fixture: ComponentFixture<JournalsComponent>;
 
@@ -122,7 +122,7 @@ describe( 'Journals', () => {
 
         TestBed.configureTestingModule({
             imports: [FormsModule, CustomModule],
-            declarations: [JournalsComponent],
+            declarations: [JournalsComponent, ArraySortPipe],
             providers: [{provide: JournalsService, useValue: journalListServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
@@ -140,7 +140,7 @@ describe( 'Journals', () => {
         // Since the observer throws an error, we don't expect journals to be defined.
         expect(journalList.journals).toBeUndefined();
     });
-});*!/
+});*/
 
 describe('Adding a journal', () => {
     let journalList: JournalsComponent;
@@ -189,7 +189,7 @@ describe('Adding a journal', () => {
 
         TestBed.configureTestingModule({
             imports: [FormsModule, CustomModule],
-            declarations: [JournalsComponent],
+            declarations: [JournalsComponent, ArraySortPipe],
             providers: [
                 {provide: JournalsService, useValue: journalListServiceStub},
                 {provide: MatDialog, useValue: mockMatDialog},
@@ -259,7 +259,7 @@ describe('Editing a journal', () => {
 
         TestBed.configureTestingModule({
             imports: [FormsModule, CustomModule],
-            declarations: [JournalsComponent],
+            declarations: [JournalsComponent, ArraySortPipe],
             providers: [
                 {provide: JournalsService, useValue: journalListServiceStub},
                 {provide: MatDialog, useValue: mockMatDialog},
@@ -281,4 +281,3 @@ describe('Editing a journal', () => {
         expect(calledJournal).toEqual(editJournal);
     });
 });
-*/
