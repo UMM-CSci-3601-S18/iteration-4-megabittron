@@ -37,11 +37,16 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     nowUnix = this.nowStamp.getTime();
     nowDay = this.nowStamp.getDay();
     nowHour = this.nowStamp.getHours();
+    nowDate = this.nowStamp.getDate();
+    nowMonth = this.nowStamp.getMonth();
 
     lastWeekUnix = this.nowUnix - 604800000;
-    lastWeekDate = new Date(this.lastWeekUnix);
+    lastWeekStamp = new Date(this.lastWeekUnix);
     lastDayUnix = this.nowUnix - 86400000;
-    lastDayDate = new Date(this.lastDayUnix);
+    lastDayStamp = new Date(this.lastDayUnix);
+    lastDateStamp = new Date(this.lastDayUnix);
+    lastMonthUnix = this.nowUnix - 2628000000;
+    lastMonthStamp = new Date(this.lastMonthUnix);
 
 
     // These are public so that tests can reference them (.spec.ts)
@@ -102,12 +107,12 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     }
 
     public pastWeekEmotions(givenSummarys):Summary[]{
-        this.pastWeekSummarys = this.filterDates(givenSummarys, this.lastWeekDate, this.nowStamp);
+        this.pastWeekSummarys = this.filterDates(givenSummarys, this.lastWeekStamp, this.nowStamp);
         return this.pastWeekSummarys;
     }
 
     public pastDayEmotions(givenSummarys):Summary[]{
-        this.pastDaySummarys = this.filterDates(givenSummarys, this.lastDayDate, this.nowStamp);
+        this.pastDaySummarys = this.filterDates(givenSummarys, this.lastDayStamp, this.nowStamp);
         return this.pastDaySummarys;
     }
 
@@ -229,11 +234,11 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     public modDate(date: number): Number {
         return (this.nowDate + 1 + date)%31;
     }
+    */
 
     public modMonth(month: number): Number {
-        return (this.nowMonth + 1 + month)%24;
+        return (this.nowMonth + 1 + month)%12;
     }
-    */
 
 
     public getPastDays(day: number): String {
