@@ -1,37 +1,30 @@
-import {EmotionResponseComponent} from "./emotion-response.component";
-import {EmotionResponseHappyComponent} from "./emotion-response-happy.component";
 import {MatDialog} from '@angular/material';
 import {MatSnackBar} from '@angular/material';
-import {Component, Inject} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
 import {EmotionService} from './home.service';
-import {MAT_DIALOG_DATA} from '@angular/material';
-
 import {Observable} from 'rxjs/Observable';
-
 import {Emotion} from './emotion';
 import {environment} from '../../environments/environment';
-
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'home-component',
     templateUrl: 'home.component.html',
     styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
+export class HomeComponent{
+
     public emotions: Emotion[];
 
     readonly baseUrl: string = environment.API_URL + 'emotions';
-    private emotionUrl: string = this.baseUrl;
 
     private highlightedID: {'$oid': string} = { '$oid': '' };
 
     public title: string;
-    private selectedEmotion = "none";
+    public selectedEmotion = "none";
     private selectedEmoji = "happy";
+    public videoEmotion = "none";
 
-    public emotionMood: string;
-    public emotionIntensity: number;
     public emotionDescription: string;
     public emotionDate: string;
 
@@ -42,7 +35,8 @@ export class HomeComponent {
 
     constructor(public dialog: MatDialog,
                 public snackBar: MatSnackBar,
-                public emotionService: EmotionService) {
+                public emotionService: EmotionService,
+               ) {
         this.title = 'Home';
     }
 
@@ -56,6 +50,7 @@ export class HomeComponent {
 
     setEmotion(emotion){
         this.selectedEmotion = emotion;
+        this.videoEmotion = emotion;
     }
 
     selectEmotion(ID){
@@ -151,42 +146,9 @@ export class HomeComponent {
         this.emotionDescription = entryBox;
     }
 
-    //retrieves an appropriate response to an emotion selection
-    //gives a helpful response for an intense negative emotion
-    //gives an encouraging response for a happy emotion of any intensity
-    appropriateResponsePopUp(): void {
-
-        var doPopup: boolean = this.intenseEmotionResponse();
-        if(doPopup){
-            this.dialog.open(EmotionResponseComponent, {
-                width: '70vw',
-                height: '70%',
-            });
-        } else if(this.selectedEmotion.toLowerCase() == 'happy') {
-            this.dialog.open(EmotionResponseHappyComponent, {
-                width: '70vw',
-                height: '70%',
-            });
-        }
-
-        this.saveConfirmation();
-    }
-
-    //checks the emotional response and the intensity to see if a response is needed
-    intenseEmotionResponse(): boolean {
-
-        console.log("the selected emoji is: " + this.selectedEmotion);
-        console.log("the emoji rating is:   " + this.emojiRating);
-        if(this.selectedEmotion.toLowerCase() == 'sad' || this.selectedEmotion.toLowerCase() == 'mad' || this.selectedEmotion.toLowerCase() == 'scared' || this.selectedEmotion.toLowerCase() == 'anxious'){
-            if(this.emojiRating >= 3){
-                return true;
-            }
-        }
-        return false;
-    }
-
     //Gives a snackbar message pop-up to let the client know their response has been saved
     saveConfirmation(): void {
         this.snackBar.open("Your response has been saved.", "close", {duration: 2000});
     }
+
 }

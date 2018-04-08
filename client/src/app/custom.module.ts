@@ -9,12 +9,12 @@ import {
     MatExpansionModule, MatTooltipModule, MatDialogModule,
     MatCheckboxModule,MatSliderModule,MatRadioModule,MatSnackBarModule,
     MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatSelectModule,
-    MatFormFieldModule,
+    MatFormFieldModule, MatStepperModule,
 } from '@angular/material';
 
 import { FlexLayoutModule, } from '@angular/flex-layout';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 const FLEX_LAYOUT_MODULES: any[] = [
@@ -24,6 +24,9 @@ const FLEX_LAYOUT_MODULES: any[] = [
 const ANGULAR_MODULES: any[] = [
     BrowserAnimationsModule,
     FormsModule,
+    //FormBuilder,
+    //FormGroup,
+    //Validators,
 ];
 
 const MATERIAL_MODULES: any[] = [
@@ -47,6 +50,7 @@ const MATERIAL_MODULES: any[] = [
     MatTabsModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatStepperModule,
 ];
 
 const COVALENT_MODULES: any[] = [

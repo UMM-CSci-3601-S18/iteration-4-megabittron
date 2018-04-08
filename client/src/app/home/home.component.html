@@ -1,11 +1,11 @@
- <html>
+<html>
 <body class="whole-body">
 <br>
-<div layout-gt-sm="row" class="main-bg">
-    <div flex-gt-sm="80" flex-offset-gt-sm="10">
-            <mat-card-title id="title">Friendly Panda</mat-card-title>
-            <br>
-        <mat-card id="mainCard">
+
+<mat-card>
+
+    <mat-horizontal-stepper>
+        <mat-step label="">
 
             <mat-card-title style="text-align: center;">
                 <h2>How are you feeling today?</h2>
@@ -27,50 +27,132 @@
                 <img id="mad" width= "10%" src="../../assets/images/emotions/mad.svg"
                      (click)="setEmotion('mad'); selectEmotion('mad')">
 
-                <img id="scared" width= "10%" src="../../assets/images/emotions/scared.svg"
-                     (click)="setEmotion('scared'); selectEmotion('scared')">
-
                 <img id="anxious" width= "10%" src="../../assets/images/emotions/anxious.svg"
                      (click)="setEmotion('anxious'); selectEmotion('anxious')">
             </div>
+
+            <div class="stepperButtons">
+
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext *ngIf="selectedEmotion != 'none'">Next</button>
+
+            </div>
+
+        </mat-step>
+
+        <mat-step label="">
+
+            <div class="emotionSelection" *ngIf="showSlider()">
+                <h2>How intense are your feelings?</h2>
+                <p>(1 means mild, 5 means extreme)</p>
+
+                <mat-slider
+                    class="slider"
+                    [max]="5"
+                    [min]="1"
+                    [step]="1"
+                    [thumb-label]="thumbLabel"
+                    [(ngModel)]="emojiRating"
+                    (input)="emojiRating=$event.value">
+                </mat-slider>
+
+            </div>
+
+            <div>
+
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext *ngIf="emojiRating != 0">Next</button>
+
+            </div>
+
+        </mat-step>
+
+        <mat-step label="">
+
+            <div>
+            I'm feeling this way because...
             <br>
-
-            <div class="journalEntry" *ngIf="showTextBox()">
-
-                <div class="emotionSelection" *ngIf="showSlider()">
-                    <h2>How intense are your feelings?</h2>
-                    <p>(1 means mild, 5 means extreme)</p>
-
-                    <mat-slider
-                        class="slider"
-                        [max]="5"
-                        [min]="1"
-                        [step]="1"
-                        [thumb-label]="thumbLabel"
-                        [(ngModel)]="emojiRating"
-                        (input)="emojiRating=$event.value">
-                    </mat-slider>
-
-                </div>
-
-                I'm feeling this way because...
-                <br>
-                <textarea id="entryBox" rows="4" cols="50" (input)="emotionDescription=$event.target.value"></textarea>
+            <textarea id="entryBox" rows="4" cols="50" (input)="emotionDescription=$event.target.value"></textarea>
             </div>
 
             <div class="entryButtons">
-                <button mat-raised-button id="cancel" (click)="resetPage()">Cancel</button>
-                <button mat-raised-button id="save"
-                        [disabled]="showSaveButton()" (click)="getDate();saveEmotion();appropriateResponsePopUp();" >Save</button>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-raised-button id="save" matStepperNext
+                        [disabled]="showSaveButton()" (click)="getDate();saveEmotion();" >Next</button>
             </div>
 
-            <br>
+        </mat-step>
 
-            <div id="copyright">
-            <a id = "emojiSource" href="https://www.flaticon.com/packs/emoji-3" target="_blank">Emojis designed by Freepik from Flaticon</a>
+        <mat-step label="">
+            <div *ngIf="videoEmotion == 'happy'">
+                <div class="container">
+                    <iframe id="responseVideoFrame"
+                            src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37D96M-QGXKpwvAs7rEK87AQ"
+                            frameborder="0"
+                            allowfullscreen
+                            class="video"></iframe>
+                </div>
             </div>
-        </mat-card>
-    </div>
-</div>
+            <div *ngIf="videoEmotion == 'sad'">germ</div>
+            <div *ngIf="videoEmotion == 'meh'">fergie</div>
+            <div *ngIf="videoEmotion == 'mad'">hi</div>
+            <div *ngIf="videoEmotion == 'anxious'">ho</div>
+            <div *ngIf="videoEmotion == 'none'">fjsdkfjsdklfj</div>
+
+        </mat-step>
+
+    </mat-horizontal-stepper>
+
+</mat-card>
+
+
+
+
+
+
+
+<!--<div layout-gt-sm="row" class="main-bg">
+   <div flex-gt-sm="80" flex-offset-gt-sm="10">
+           <mat-card-title id="title">Friendly Panda</mat-card-title>
+           <br>
+
+
+
+
+
+
+
+
+
+
+
+      <mat-card id="mainCard">
+
+
+
+
+
+
+
+
+
+
+
+           <br>
+
+           <div class="journalEntry" *ngIf="showTextBox()">
+
+
+
+
+
+           <br>
+
+           <div id="copyright">
+           <a id = "emojiSource" href="https://www.flaticon.com/packs/emoji-3" target="_blank">Emojis designed by Freepik from Flaticon</a>
+           </div>
+       </mat-card>
+   </div>
+</div>-->
 </body>
 </html>
