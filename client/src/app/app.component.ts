@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../environments/environment';
 
 
-
+declare var gapi: any;
 
 @Component({
     selector: 'app-root',
@@ -118,6 +118,7 @@ export class AppComponent implements OnInit {
             }, onFail => {
                 console.log("ERROR: Code couldn't be sent to the server");
             });
+
     }
 
     signInCookie(email: string, token: string) {

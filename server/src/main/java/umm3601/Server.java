@@ -153,9 +153,9 @@ public class Server {
                         "1080043572259-h3vk6jgc4skl3uav3g0l13qvlcqpebvu.apps.googleusercontent.com",
 
                         // Replace clientSecret with the localhost one if testing
-                        "Use3FzYENcjF7zvx5CA3HfjD",
+                        "C",
                         authCode,
-                        "http://localhost:9000/")
+                        "http://localhost:9000")
                         //Not sure if we have a redirectUri
 
                         // Specify the same redirect URI that you use with your web
@@ -176,6 +176,11 @@ public class Server {
                 String locale = (String) payload.get("locale");
                 String familyName = (String) payload.get("family_name");
                 String givenName = (String) payload.get("given_name");
+
+                System.out.println(userId);
+                System.out.println(email);
+                System.out.println(name);
+                System.out.println(locale);
             } catch (Exception e) {
                 System.out.println(e);
             }
