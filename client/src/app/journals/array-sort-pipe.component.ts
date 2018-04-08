@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-    name: "sort"
+    name: "dateSort"
 })
 export class ArraySortPipe  implements PipeTransform {
     transform(array: Array<any>, args: string): Array<any> {

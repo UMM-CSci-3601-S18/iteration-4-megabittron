@@ -24,7 +24,7 @@
     <div class="grid-journals-section">
         <div layout="row" layout-wrap>
             <mat-card class="journals-card"
-                      *ngFor="let journal of filterJournals(journalSubject, journalBody, journalDate) | sort: '-date'"
+                      *ngFor="let journal of filterJournals(journalSubject, journalBody, journalDate) | dateSort: '-date'"
                       #elem [id]="journal._id['$oid']">
                 <div class="journals-card-info">
                     <mat-card-content class="journal-info">
