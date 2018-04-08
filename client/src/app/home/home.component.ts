@@ -109,11 +109,9 @@ export class HomeComponent {
     saveEmotion(): void{
         const newEmotion: Emotion = {_id: '', mood: this.selectedEmotion, intensity: this.emojiRating, description:this.emotionDescription, date: this.emotionDate};
 
-            console.log("this is the description: " + this.emotionDescription);
             console.log(newEmotion);
             this.emotionService.addNewEmotion(newEmotion).subscribe(
                 addEmotionResult => {
-                    console.log("I got here");
                     this.highlightedID = addEmotionResult;
                     this.refreshEmotions();
                     this.resetPage();
@@ -146,13 +144,11 @@ export class HomeComponent {
 
     getDate(){
         var today = new Date();
-        console.log("today is: " + today.toString());
         this.emotionDate = today.toString();
     }
 
     getDescription(entryBox){
         this.emotionDescription = entryBox;
-        console.log("this is the description: " + entryBox);
     }
 
     //retrieves an appropriate response to an emotion selection

@@ -6,7 +6,11 @@
         "purpose": "Improve relationship",
         "category": "Family",
         "name": "Call my mom",
-        "status": true
+        "status": true,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-05-05T18:56:24.702Z",
+        "next": "2018-04-12T18:56:24.702Z",
+        "frequency": "Weekly"
     },
     {
         "_id": {
@@ -15,7 +19,11 @@
         "purpose": "To feel closer to him",
         "category": "Family",
         "name": "Write letter to Grandpa",
-        "status": false
+        "status": false,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2019-04-05T18:56:24.702Z",
+        "next": "2018-04-05T18:56:24.702Z",
+        "frequency": "Daily"
     },
     {
         "_id": {
@@ -24,7 +32,11 @@
         "purpose": "To get more sleep",
         "category": "Personal Health",
         "name": "Go to bed early",
-        "status": true
+        "status": true,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-07-05T18:56:24.702Z",
+        "next": "2018-05-05T18:56:24.702Z",
+        "frequency": "Monthly"
     },
     {
         "_id": {
@@ -33,7 +45,11 @@
         "purpose": "To give her a piece of my mind",
         "category": "Family",
         "name": "Visit sister",
-        "status": false
+        "status": false,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-06-05T18:56:24.702Z",
+        "next": "2018-04-06T18:56:24.702Z",
+        "frequency": "Daily"
     },
     {
         "_id": {
@@ -42,7 +58,11 @@
         "purpose": "To relieve my anxiety",
         "category": "Personal Health",
         "name": "Text a hotline",
-        "status": false
+        "status": false,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2019-04-05T18:56:24.702Z",
+        "next": "2018-04-12T18:56:24.702Z",
+        "frequency": "Weekly"
     },
     {
         "_id": {
@@ -51,7 +71,11 @@
         "purpose": "To be nice to him",
         "category": "Family",
         "name": "Say hello to my son",
-        "status": true
+        "status": true,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-04-05T18:56:24.702Z",
+        "next": "2020-04-12T18:56:24.702Z",
+        "frequency": "Weekly"
     },
     {
         "_id": {
@@ -60,7 +84,11 @@
         "purpose": "To surprise Bobby",
         "category": "Family",
         "name": "Wave at my cousin",
-        "status": true
+        "status": true,
+        "start": "2018-03-07T18:56:24.702Z",
+        "end": "2018-07-07T18:56:24.702Z",
+        "next": "2018-04-07T18:56:24.702Z",
+        "frequency": "Monthly"
     },
     {
         "_id": {
@@ -69,7 +97,11 @@
         "purpose": "To have a better environment",
         "category": "Chores",
         "name": "Wash the dishes",
-        "status": false
+        "status": false,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-08-05T18:56:24.702Z",
+        "next": "2018-04-06T18:56:24.702Z",
+        "frequency": "Daily"
     },
     {
         "_id": {
@@ -78,7 +110,11 @@
         "purpose": "To have a better living space",
         "category": "Chores",
         "name": "Clean my room",
-        "status": false
+        "status": false,
+        "start": "2018-01-15T18:56:24.702Z",
+        "end": "2018-10-00T18:56:24.702Z",
+        "next": "2018-04-07T18:56:24.702Z",
+        "frequency": "Daily"
     },
     {
         "_id": {
@@ -87,7 +123,12 @@
         "purpose": "Do what the doctor says",
         "category": "Personal Health",
         "name": "Take my meds",
-        "status": false
+        "status": false,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-07-05T18:56:24.702Z",
+        "next": "2018-04-12T18:56:24.702Z",
+        "frequency": "Weekly"
+
     },
     {
         "_id": {
@@ -96,7 +137,12 @@
         "purpose": "To safely park my car out of the snow",
         "category": "Chores",
         "name": "Shovel driveway",
-        "status": true
+        "status": true,
+        "start": "2017-11-01T18:56:24.702Z",
+        "end": "2018-05-20T18:56:24.702Z",
+        "next": "2018-04-15T18:56:24.702Z",
+        "frequency": "Monthly"
+
     },
     {
         "_id": {
@@ -105,7 +151,12 @@
         "purpose": "Keep my teeth nice",
         "category": "Personal Health",
         "name": "Brush my teeth every day",
-        "status": false
+        "status": false,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-08-05T18:56:24.702Z",
+        "next": "2018-05-05T18:56:24.702Z",
+        "frequency": "Monthly"
+
     },
     {
         "_id": {
@@ -114,7 +165,12 @@
         "purpose": "Tell her about my new job",
         "category": "Family",
         "name": "Write letter to Aunt May",
-        "status": false
+        "status": false,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-04-05T18:56:24.702Z",
+        "next": "2018-04-05T18:56:24.702Z",
+        "frequency": "Does not repeat"
+
     },
     {
         "_id": {
@@ -123,7 +179,12 @@
         "purpose": "Tell her about my awards",
         "category": "Family",
         "name": "Email Grandma",
-        "status": true
+        "status": true,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-04-05T18:56:24.702Z",
+        "next": "2018-04-05T18:56:24.702Z",
+        "frequency": "Does not repeat"
+
     },
     {
         "_id": {
@@ -132,6 +193,11 @@
         "purpose": "Keep my clothes clean",
         "category": "Chores",
         "name": "Do laundry",
-        "status": false
+        "status": false,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-04-18T18:56:24.702Z",
+        "next": "2018-04-06T18:56:24.702Z",
+        "frequency": "Daily"
+
     }
 ]
