@@ -8,7 +8,9 @@ import spark.Request;
 import spark.Response;
 
 
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.File;
 
 
 import static spark.Spark.*;
@@ -125,35 +127,30 @@ public class Server {
 
 
         post("api/login", (req, res) -> {
-            System.out.println("first");
 
-
-            // Tryed seeing if converting json of req to string would work
             JSONObject obj = new JSONObject(req.body());
             String authCode = obj.getString("code");
-
-
-            // We can create this later to keep our secret safe
-            String CLIENT_SECRET_FILE = "";
-
-            /*GoogleClientSecrets clientSecrets =
-                GoogleClientSecrets.load(
-                    JacksonFactory.getDefaultInstance(), new FileReader(CLIENT_SECRET_FILE));*/
-            System.out.println("second");
-
-            // After this point error occurs
-
+            
 
             try {
+                // We can create this later to keep our secret safe
+
+                String CLIENT_SECRET_FILE = "./src/main/java/umm3601/server_files/client_secret_file.json";
+
+                GoogleClientSecrets clientSecrets =
+                    GoogleClientSecrets.load(
+                        JacksonFactory.getDefaultInstance(), new FileReader(CLIENT_SECRET_FILE));
+
+
                 GoogleTokenResponse tokenResponse =
                     new GoogleAuthorizationCodeTokenRequest(
                         new NetHttpTransport(),
                         JacksonFactory.getDefaultInstance(),
                         "https://www.googleapis.com/oauth2/v4/token",
-                        "1080043572259-h3vk6jgc4skl3uav3g0l13qvlcqpebvu.apps.googleusercontent.com",
+                        clientSecrets.getDetails().getClientId(),
 
                         // Replace clientSecret with the localhost one if testing
-                        "C",
+                        clientSecrets.getDetails().getClientSecret(),
                         authCode,
                         "http://localhost:9000")
                         //Not sure if we have a redirectUri
@@ -163,9 +160,7 @@ public class Server {
                         // specify an empty string.
                         .execute();
 
-                // Doesn't reach this area of code
 
-                System.out.println("third");
                 GoogleIdToken idToken = tokenResponse.parseIdToken();
                 GoogleIdToken.Payload payload = idToken.getPayload();
                 String userId = payload.getSubject();  // Use this value as a key to identify a user.
@@ -177,16 +172,16 @@ public class Server {
                 String familyName = (String) payload.get("family_name");
                 String givenName = (String) payload.get("given_name");
 
+
                 System.out.println(userId);
                 System.out.println(email);
                 System.out.println(name);
                 System.out.println(locale);
+
+
             } catch (Exception e) {
                 System.out.println(e);
             }
-
-
-
 
             return "";
         });
