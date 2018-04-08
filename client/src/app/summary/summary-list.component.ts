@@ -33,10 +33,10 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     madColor: string;
     anxiousColor: string;
 
-    nowDate = new Date(Date.now());
-    nowUnix = this.nowDate.getTime();
-    nowDay = this.nowDate.getDay();
-    nowHour = this.nowDate.getHours();
+    nowStamp = new Date(Date.now());
+    nowUnix = this.nowStamp.getTime();
+    nowDay = this.nowStamp.getDay();
+    nowHour = this.nowStamp.getHours();
 
     lastWeekUnix = this.nowUnix - 604800000;
     lastWeekDate = new Date(this.lastWeekUnix);
@@ -102,12 +102,12 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     }
 
     public pastWeekEmotions(givenSummarys):Summary[]{
-        this.pastWeekSummarys = this.filterDates(givenSummarys, this.lastWeekDate, this.nowDate);
+        this.pastWeekSummarys = this.filterDates(givenSummarys, this.lastWeekDate, this.nowStamp);
         return this.pastWeekSummarys;
     }
 
     public pastDayEmotions(givenSummarys):Summary[]{
-        this.pastDaySummarys = this.filterDates(givenSummarys, this.lastDayDate, this.nowDate);
+        this.pastDaySummarys = this.filterDates(givenSummarys, this.lastDayDate, this.nowStamp);
         return this.pastDaySummarys;
     }
 
@@ -189,7 +189,29 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                     this.getDate = new Date(summary.date);
                     return this.getDate.getHours() == xValue;
                 });
-            }
+            }/*
+            else {
+                if(this.inputType == "month"){
+                    if(this.limitedPast) {
+                        filterLineData = this.pastMonthEmotions(filterLineData);
+                    }
+                    filterLineData = filterLineData.filter(summary => {
+                        this.getDate = new Date(summary.date);
+                        return this.getDate.getDate() == xValue;
+                    });
+                }
+                else {
+                    if(this.inputType == "year"){
+                        if(this.limitedPast) {
+                            filterLineData = this.pastYearEmotions(filterLineData);
+                        }
+                        filterLineData = filterLineData.filter(summary => {
+                            this.getDate = new Date(summary.date);
+                            return this.getDate.getMonth() == xValue;
+                        });
+                    }
+                }
+            }*/
         }
 
         return filterLineData.length;
@@ -203,6 +225,16 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     public modHour(hour: number): Number {
         return (this.nowHour + 1 + hour)%24;
     }
+/*
+    public modDate(date: number): Number {
+        return (this.nowDate + 1 + date)%31;
+    }
+
+    public modMonth(month: number): Number {
+        return (this.nowMonth + 1 + month)%24;
+    }
+    */
+
 
     public getPastDays(day: number): String {
 
