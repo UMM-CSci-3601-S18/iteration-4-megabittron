@@ -1,15 +1,18 @@
 package umm3601;
 
+
+
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import spark.Request;
 import spark.Response;
+
+
 import java.io.IOException;
-import java.net.URLConnection;
+
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
-
 
 
 import umm3601.database.GoalController;
@@ -22,6 +25,13 @@ import umm3601.database.ResourceController;
 import umm3601.database.ResourceRequestHandler;
 import umm3601.database.SummaryController;
 import umm3601.database.SummaryRequestHandler;
+
+
+import com.google.api.client.googleapis.auth.oauth2.*;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.jackson2.JacksonFactory;
+
+import org.json.*;
 
 public class Server {
     private static final String databaseName = "dev";
@@ -114,16 +124,57 @@ public class Server {
 
 
 
-
         post("api/login", (req, res) -> {
-            System.out.println("Here");
-            System.out.println(req.headers());
-            System.out.println(req.body());
-            System.out.println(req.cookies());
-            System.out.println(req.attributes());
-            System.out.println(req.params());
-            System.out.println(req.queryMap());
-            System.out.println(req.queryString());
+            System.out.println("first");
+
+
+            // Tryed seeing if converting json of req to string would work
+            JSONObject obj = new JSONObject(req.body());
+            String authCode = obj.getString("code");
+
+
+            // We can create this later to keep our secret safe
+            String CLIENT_SECRET_FILE = "";
+
+            /*GoogleClientSecrets clientSecrets =
+                GoogleClientSecrets.load(
+                    JacksonFactory.getDefaultInstance(), new FileReader(CLIENT_SECRET_FILE));*/
+            System.out.println("second");
+
+            // After this point error occurs
+
+
+            GoogleTokenResponse tokenResponse =
+                new GoogleAuthorizationCodeTokenRequest(
+                    new NetHttpTransport(),
+                    JacksonFactory.getDefaultInstance(),
+                    "https://www.googleapis.com/oauth2/v4/token",
+                    "1080043572259-h3vk6jgc4skl3uav3g0l13qvlcqpebvu.apps.googleusercontent.com",
+
+                    // Replace clientSecret with the localhost one if testing
+                    "PLACEHOLDER_SECRET_DID_NOT_WANT_TO_POST_ON_GITHUB",
+                    authCode,
+                    "")
+                    //Not sure if we have a redirectUri
+
+                    // Specify the same redirect URI that you use with your web
+                    // app. If you don't have a web version of your app, you can
+                    // specify an empty string.
+                    .execute();
+
+            // Doesn't reach this area of code
+
+            System.out.println("third");
+            GoogleIdToken idToken = tokenResponse.parseIdToken();
+            GoogleIdToken.Payload payload = idToken.getPayload();
+            String userId = payload.getSubject();  // Use this value as a key to identify a user.
+            String email = payload.getEmail();
+            boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
+            String name = (String) payload.get("name");
+            String pictureUrl = (String) payload.get("picture");
+            String locale = (String) payload.get("locale");
+            String familyName = (String) payload.get("family_name");
+            String givenName = (String) payload.get("given_name");
 
             return "";
         });
