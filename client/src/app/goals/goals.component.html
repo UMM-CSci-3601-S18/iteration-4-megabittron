@@ -18,12 +18,52 @@
                     </mat-card-content>
                 </mat-card>
             </div>
-            <div class="grid-goals-section" >
+            <div class="todays-goals">
+                Today's goals
                 <div layout="row" layout-wrap>
-                    <!-- The errors card is commented out beacuse it messes with the goals cards layout -->
-                    <!--<mat-card *ngIf="goals; else goalsError"></mat-card>-->
+                    <ng-container *ngFor="let goal of this.todayGoals">
+                        <mat-card class="goals-card"
+                                  #elem [id]="goal._id['$oid']">
+                            <div class ="goals-image">
+                                <img *ngIf="goal.category == 'Family'" src="../../assets/images/goals/family.png"
+                                     class="goal-card-image" height="75">
+                                <img *ngIf="goal.category == 'Chores'" src="../../assets/images/goals/chores.png"
+                                     class="goal-card-image" height="75">
+                                <img *ngIf="goal.category == 'Personal Health'" src="../../assets/images/goals/health.png"
+                                     class="goal-card-image" height="75">
+                            </div>
+                            <div class="goals-card-info">
+                                <mat-card-content class="goal-info">
+                                    <mat-card-title id="today-goal-name">{{goal.name}}</mat-card-title>
+                                    <p>Purpose: {{goal.purpose}}</p>
+                                    <p>Status:
+                                        <b *ngIf="goal.status" id="today-goal-complete">Complete</b>
+                                        <b *ngIf="!goal.status" id="today-goal-incomplete">Incomplete</b>
+                                    </p>
+                                    <p>Frequency: {{goal.frequency}}</p>
+                                    <p>Next: {{goal.next}}</p>
+                                </mat-card-content>
+                            </div>
+                            <div class="goals-buttons">
+                                <button mat-icon-button class="button delete-button"
+                                        (click)="deleteGoal(goal._id['$oid']); openSnackBar('Goal Deleted')">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                                <button *ngIf="!goal.status" mat-icon-button class="button complete-button" id="today-completeGoal"
+                                        (click)="goalSatisfied(goal._id['$oid'], goal.purpose, goal.category, goal.name); openSnackBar('Goal Completed')">
+                                    <mat-icon>done</mat-icon>
+                                </button>
+                            </div>
+                        </mat-card>
+                    </ng-container>
+                </div>
+            </div>
+
+            <div class="grid-goals-section">
+                Goals that don't need to be completed today.
+                <div layout="row" layout-wrap>
+                   <ng-container *ngFor="let goal of this.filterGoals(goalPurpose, goalCategory, goalName, goalStatus, goalFrequency)">
                     <mat-card class="goals-card"
-                              *ngFor="let goal of this.filterGoals(goalPurpose, goalCategory, goalName, goalStatus)"
                               #elem [id]="goal._id['$oid']">
                         <div class ="goals-image">
                             <img *ngIf="goal.category == 'Family'" src="../../assets/images/goals/family.png"
@@ -41,6 +81,8 @@
                                     <b *ngIf="goal.status" id="goal-complete">Complete</b>
                                     <b *ngIf="!goal.status" id="goal-incomplete">Incomplete</b>
                                 </p>
+                                <p>Frequency: {{goal.frequency}}</p>
+                                <p>Next: {{goal.next}}</p>
                             </mat-card-content>
                         </div>
                         <div class="goals-buttons">
@@ -54,8 +96,10 @@
                             </button>
                         </div>
                     </mat-card>
+                   </ng-container>
+
                     <!-- Errors message card can be uncommented if you fix the layout issue -->
-                    <!--<ng-template #goalsError>
+                    <!--or>
                         <mat-error>
                             There was a problem loading the goals. Possibly the server is down or perhaps there are network
                             issues.
