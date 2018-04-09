@@ -5,11 +5,12 @@ import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
 import {AddJournalComponent} from './add-journal.component';
 import {EditJournalComponent} from "./edit-journal.component";
+import {ShowJournalComponent} from "./show-journal.component";
 
 @Component({
     selector: 'app-journals-component',
     templateUrl: 'journals.component.html',
-    styleUrls: ['./journals.component.css'],
+    styleUrls: ['./journals.component.scss'],
 })
 
 export class JournalsComponent implements OnInit {
@@ -79,7 +80,15 @@ export class JournalsComponent implements OnInit {
         });
     }
 
-    public filterJournals(searchSubject: string, searchBody: string): Journal[] {
+    showMoreInfo(body: string): void {
+        const showJournal: Journal = {_id: null, subject: null, body: body, date: null};
+        const dialogRef = this.dialog.open(ShowJournalComponent, {
+            width: '500px',
+            data: { journal: showJournal }
+        });
+    }
+
+    public filterJournals(searchSubject: string, searchBody: string, searchDate: string): Journal[] {
 
         this.filteredJournals = this.journals;
 
@@ -101,6 +110,15 @@ export class JournalsComponent implements OnInit {
             });
         }
 
+        // Filter by date
+        if (searchDate != null) {
+            searchDate = searchDate.toLocaleLowerCase();
+
+            this.filteredJournals = this.filteredJournals.filter(journal => {
+                return !searchDate || journal.date.toLowerCase().indexOf(searchDate) !== -1;
+            });
+        }
+
         this.length = this.filteredJournals.length;
         if (this.index + 10 > this.length) {
             this.index = this.length - 10;
@@ -119,7 +137,7 @@ export class JournalsComponent implements OnInit {
         journalListObservable.subscribe(
             journals => {
                 this.journals = journals;
-                this.filterJournals(this.journalSubject, this.journalBody);
+                this.filterJournals(this.journalSubject, this.journalBody, this.journalDate);
                 this.length = this.journals.length;
             },
             err => {
@@ -182,7 +200,6 @@ export class JournalsComponent implements OnInit {
         this.refreshJournals();
         this.loadService();
         this.loadProgressBar();
-        console.log(this.showPage + " window.email " + window['email']);
     }
 
 }
