@@ -1,9 +1,9 @@
 <html>
 <body class="whole-body">
 <mat-card>
-    <mat-horizontal-stepper [linear]="isLinear" #stepper>
-
-        <mat-step label="Emotion Selection" [stepControl]="firstFormGroup">
+    <!--<mat-horizontal-stepper [linear]="isLinear" #stepper>-->
+    <mat-horizontal-stepper #stepper>
+        <mat-step [stepControl]="firstFormGroup">
             <form [formGroup]="firstFormGroup">
                 <div class="how-are-you">
                     <p>How are you feeling today?</p>
@@ -30,7 +30,7 @@
                         <img src="../../assets/images/emotions/anxious.svg">
                     </button>
                 </div>
-                <div class="i-feel">
+                <div class="i-feel" *ngIf="selectedEmotion != 'none'">
                     <p>I'm feeling {{selectedEmotion}}.</p>
                 </div>
                 <div class="stepperButtons">
