@@ -1,6 +1,6 @@
 import {MatDialog} from '@angular/material';
 import {MatSnackBar} from '@angular/material';
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EmotionService} from './home.service';
 import {Observable} from 'rxjs/Observable';
 import {Emotion} from './emotion';
@@ -12,9 +12,12 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
     templateUrl: 'home.component.html',
     styleUrls: ['./home.component.css'],
 })
-export class HomeComponent{
+export class HomeComponent implements OnInit {
 
-    public isLinear = false;
+    public firstFormGroup: FormGroup;
+    public secondFormGroup: FormGroup;
+    public isLinear = true;
+
     public emotions: Emotion[];
 
     readonly baseUrl: string = environment.API_URL + 'emotions';
@@ -35,7 +38,8 @@ export class HomeComponent{
 
     constructor(public dialog: MatDialog,
                 public snackBar: MatSnackBar,
-                public emotionService: EmotionService) {
+                public emotionService: EmotionService,
+                private _formBuilder: FormBuilder) {
     }
 
     setEmotion(emotion){
@@ -118,6 +122,15 @@ export class HomeComponent{
     //Gives a snackbar message pop-up to let the client know their response has been saved
     saveConfirmation(): void {
         this.snackBar.open("Your response has been saved.", "close", {duration: 2000});
+    }
+
+    ngOnInit() {
+        this.firstFormGroup = this._formBuilder.group({
+            firstCtrl: ['', Validators.required]
+        });
+        this.secondFormGroup = this._formBuilder.group({
+            secondCtrl: ['', Validators.required]
+        });
     }
 
 }
