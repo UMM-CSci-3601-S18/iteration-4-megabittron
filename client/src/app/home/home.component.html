@@ -29,7 +29,7 @@
                 </button>
             </div>
             <div class="i-feel">
-                <p>I'm feeling {{emotion()}}.</p>
+                <p>I'm feeling {{selectedEmotion}}.</p>
             </div>
             <div class="stepperButtons">
             <button mat-button matStepperNext *ngIf="selectedEmotion != 'none'">
@@ -37,13 +37,11 @@
             </button>
             </div>
         </mat-step>
-
-        <mat-step label="">
-
-            <div class="emotionSelection" *ngIf="showSlider()">
-                <h2>How intense are your feelings?</h2>
-                <p>(1 means mild, 5 means extreme)</p>
-
+        <mat-step>
+            <img class="selected-emoji" src="../../assets/images/emotions/{{selectedEmotion}}.svg">
+            <div class="emotionSelection" *ngIf="selectedEmotion != 'meh'">
+                <h2>How {{selectedEmotion}} do you feel?</h2>
+                <div class="slider-div">
                 <mat-slider
                     class="slider"
                     [max]="5"
@@ -53,7 +51,7 @@
                     [(ngModel)]="emojiRating"
                     (input)="emojiRating=$event.value">
                 </mat-slider>
-
+                </div>
             </div>
 
             <div>
@@ -105,47 +103,14 @@
 
 
 
-
-
-
-
 <!--<div layout-gt-sm="row" class="main-bg">
    <div flex-gt-sm="80" flex-offset-gt-sm="10">
            <mat-card-title id="title">Friendly Panda</mat-card-title>
            <br>
-
-
-
-
-
-
-
-
-
-
-
       <mat-card id="mainCard">
-
-
-
-
-
-
-
-
-
-
-
            <br>
-
            <div class="journalEntry" *ngIf="showTextBox()">
-
-
-
-
-
            <br>
-
            <div id="copyright">
            <a id = "emojiSource" href="https://www.flaticon.com/packs/emoji-3" target="_blank">Emojis designed by Freepik from Flaticon</a>
            </div>

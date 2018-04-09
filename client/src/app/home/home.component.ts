@@ -22,7 +22,7 @@ export class HomeComponent{
 
     public title: string;
     public selectedEmotion = "none";
-    private selectedEmoji = "happy";
+    private highlightedEmotion = "happy";
     public videoEmotion = "none";
     public emotionDescription: string;
     public emotionDate: string;
@@ -34,17 +34,7 @@ export class HomeComponent{
 
     constructor(public dialog: MatDialog,
                 public snackBar: MatSnackBar,
-                public emotionService: EmotionService,
-               ) {
-        this.title = 'Home';
-    }
-
-    emotion(){
-        if(this.selectedEmotion == "none"){
-            return "..";
-        }
-
-        return this.selectedEmotion;
+                public emotionService: EmotionService) {
     }
 
     setEmotion(emotion){
@@ -54,38 +44,20 @@ export class HomeComponent{
 
     selectEmotion(ID){
         this.resetSelections();
-        this.selectedEmoji = ID;
+        this.highlightedEmotion = ID;
         let newClass = document.getElementById(ID);
         newClass.classList.add('on');
-        console.log("clicked!!!");
     }
 
     private resetSelections(){
-        let newClass = document.getElementById(this.selectedEmoji);
+        let newClass = document.getElementById(this.highlightedEmotion);
         newClass.classList.remove('on');
-    }
-
-    showTextBox(): boolean{
-        if(this.selectedEmotion == "none"){
-            return false;
-        }
-
-        return true;
-    }
-
-    showSlider(): boolean{
-        if(this.selectedEmotion == "meh"){
-            return false;
-        }
-
-        return true;
     }
 
     showSaveButton(){
         if(this.selectedEmotion == "none"){
             return true;
         }
-
         return false;
     }
 

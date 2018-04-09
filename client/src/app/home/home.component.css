@@ -62,16 +62,8 @@ textarea:focus {
     padding: 1%;
 }
 
-#save{
-    background-color: lightblue;
-}
-
-#cancel{
-    background-color: silver;
-}
-
 .slider{
-    width: 50%;
+    width: 250px;
 }
 
 #emojiSource{
@@ -112,4 +104,11 @@ textarea:focus {
 .i-feel {
     text-align: center;
     font-size: 25px;
+}
+
+.selected-emoji {
+    margin: 0 auto;
+    padding: 10px;
+    width: 100px;
+    float: left;
 }
