@@ -12,7 +12,7 @@ public class EmotionRequestHandler {
     public EmotionRequestHandler(EmotionController emotionController){
         this.emotionController = emotionController;
     }
-    /**Method called from Server when the 'api/goals/:id' endpoint is received.
+    /**Method called from Server when the 'api/emotions/:id' endpoint is received.
      * Get a JSON response with a list of all the users in the database.
      *
      * @param req the HTTP request
@@ -20,7 +20,7 @@ public class EmotionRequestHandler {
      * @return one user in JSON formatted string and if it fails it will return text with a different HTTP status code
      */
 
-    // gets one goal using its ObjectId--didn't use, just for potential future functionality
+    //didn't use, just for potential future functionality
     public String getEmotionJSON(Request req, Response res){
         res.type("application/json");
         String id = req.params("id");
@@ -47,7 +47,7 @@ public class EmotionRequestHandler {
 
 
 
-    /**Method called from Server when the 'api/goals' endpoint is received.
+    /**Method called from Server when the 'api/emotions' endpoint is received.
      * This handles the request received and the response
      * that will be sent back.
      *@param req the HTTP request
@@ -62,8 +62,8 @@ public class EmotionRequestHandler {
         return emotionController.getEmotions(req.queryMap().toMap());
     }
 
-    /**Method called from Server when the 'api/users/new'endpoint is recieved.
-     * Gets specified user info from request and calls addNewUser helper method
+    /**Method called from Server when the 'api/emotions/new'endpoint is recieved.
+     * Gets specified info from request and calls helper method
      * to append that info to a document
      *
      * @param req the HTTP request
@@ -83,14 +83,15 @@ public class EmotionRequestHandler {
                 try {
                     BasicDBObject dbO = (BasicDBObject) o;
 
+                    String userID = dbO.getString("userID");
                     String mood = dbO.getString("mood");
                     Integer intensity = dbO.getInt("intensity");
                     String description = dbO.getString("description");
                     String date = dbO.getString("date");
 
-                    System.err.println("Adding new emotion [mood=" + mood + ", intensity="
+                    System.err.println("Adding new emotion for user "+ userID + " [mood=" + mood + ", intensity="
                         + intensity + ", description=" + description + ", date=" + date + ']');
-                    return emotionController.addNewEmotion(mood, intensity, description, date).toString();
+                    return emotionController.addNewEmotion(userID, mood, intensity, description, date).toString();
                 }
                 catch(NullPointerException e)
                 {

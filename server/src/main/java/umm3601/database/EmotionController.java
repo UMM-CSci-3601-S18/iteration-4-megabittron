@@ -54,16 +54,24 @@ public class EmotionController {
     public String getEmotions(Map<String, String[]> queryParams) {
 
         Document filterDoc = new Document();
+        String targetContent;
+        Document contentRegQuery = new Document();;
 
-        // We will need more statements here for different objects,
-        // such as emoji, category, etc.
+        //Filter by userID
+        targetContent = (queryParams.get("userID")[0]);
 
-        // "goal" will be a key to a string object, where the object is
-        // what we get when people enter their goals as a text body.
-        // "goal" is the purpose of the goal
+        //If there is no userID provided, return an empty result
+        if(targetContent.equals(null) || targetContent.equals("")) {
+            JSON.serialize(contentRegQuery);
+        }
+        contentRegQuery.append("$regex", targetContent);
+        contentRegQuery.append("$options", "i");
+        filterDoc = filterDoc.append("userID", contentRegQuery);
+
+        //filter by mood
         if (queryParams.containsKey("mood")) {
-            String targetContent = (queryParams.get("mood")[0]);
-            Document contentRegQuery = new Document();
+            targetContent = (queryParams.get("mood")[0]);
+            contentRegQuery = new Document();
             contentRegQuery.append("$regex", targetContent);
             contentRegQuery.append("$options", "i");
             filterDoc = filterDoc.append("mood", contentRegQuery);
@@ -85,10 +93,11 @@ public class EmotionController {
      */
     // As of now this only adds the goal, but you can separate multiple arguments
     // by commas as we add them.
-    public String addNewEmotion(String mood, Integer intensity, String description, String date) {
+    public String addNewEmotion(String userID, String mood, Integer intensity, String description, String date) {
 
         // makes the search Document key-pairs
         Document newEmotion = new Document();
+        newEmotion.append("userID", userID);
         newEmotion.append("mood", mood);
         newEmotion.append("description", description);
         newEmotion.append("intensity", intensity);
@@ -98,7 +107,7 @@ public class EmotionController {
         try {
             emotionCollection.insertOne(newEmotion);
             ObjectId id = newEmotion.getObjectId("_id");
-            System.err.println("Successfully added new goal [_id=" + id + ", mood=" + mood + ", intensity=" + intensity
+            System.err.println("Successfully added new emotion for user " + userID + " [_id=" + id + ", mood=" + mood + ", intensity=" + intensity
                 + " description=" + description + ", date=" + date + ']');
             // return JSON.serialize(newGoal);
             return JSON.serialize(id);
