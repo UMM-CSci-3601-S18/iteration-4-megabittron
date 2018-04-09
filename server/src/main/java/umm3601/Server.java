@@ -61,6 +61,8 @@ public class Server {
         JournalRequestHandler journalRequestHandler = new JournalRequestHandler(journalController);
 
 
+
+
         //Configure Spark
         port(serverPort);
         enableDebugScreen();
@@ -130,7 +132,7 @@ public class Server {
 
             JSONObject obj = new JSONObject(req.body());
             String authCode = obj.getString("code");
-            
+
 
             try {
                 // We can create this later to keep our secret safe

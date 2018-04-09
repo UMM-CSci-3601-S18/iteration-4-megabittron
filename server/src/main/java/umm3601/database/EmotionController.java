@@ -31,7 +31,7 @@ public class EmotionController {
         emotionCollection = database.getCollection("emotions");
     }
 
-    // get a goal by its ObjectId, not used by client, for potential future use
+    // get an emotion by its ObjectId, not used by client, for potential future use
     public String getEmotion(String id) {
         FindIterable<Document> jsonEmotions
             = emotionCollection
