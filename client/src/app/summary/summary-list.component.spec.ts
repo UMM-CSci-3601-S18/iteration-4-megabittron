@@ -12,7 +12,7 @@ import 'rxjs/add/operator/do';
 
 
         /** Tests the filtering used for display of summary list **/
-/*
+
         describe('Summary', () => {
 
             let summary: SummaryListComponent;
@@ -153,9 +153,9 @@ import 'rxjs/add/operator/do';
             });
 
         });
-*/
+
         /** Tests the filtering used for charts when looking at all time **/
-/*
+
         describe('Chart Filtering - no limit', () => {
 
             let summary: SummaryListComponent;
@@ -229,9 +229,9 @@ import 'rxjs/add/operator/do';
             });
 
         });
-*/
+
         /** Tests the filtering used for charts when looking at past day **/
-/*
+
         describe('Chart Filtering - Past Day', () => {
 
             let summary: SummaryListComponent;
@@ -337,9 +337,9 @@ import 'rxjs/add/operator/do';
             });
 
         });
-*/
+
         /** Tests the filtering used for charts when looking at past week **/
-/*
+
         describe('Chart Filtering - Past Week', () => {
 
             let summary: SummaryListComponent;
@@ -444,7 +444,7 @@ import 'rxjs/add/operator/do';
             });
 
         });
-       */
+
 
 
         /** -------------------------------------------------------- **/
