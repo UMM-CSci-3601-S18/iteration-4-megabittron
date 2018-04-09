@@ -9,7 +9,6 @@ import com.mongodb.util.JSON;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -29,60 +28,60 @@ public class UserController {
         userCollection = database.getCollection("users");
     }
     //    /**
-    // WE ARE GOING TO NOT HAVE FILTERING FOR USER COLLECTION FOR THE TIME BEING.
-//     * Helper method that gets a single user specified by the `id`
+    //
+ /**  Helper method that gets a single user specified by the `id`
 //     * parameter in the request.
 //     *
 //     * @param id the Mongo ID of the desired user
 //     * @return the desired user as a JSON object if the user with that ID is found,
 //     * and `null` if no user with that ID is found
 //     */
-//    public String getUser(String id) {
-//        FindIterable<Document> jsonUsers
-//            = collection
-//            .find(eq("_id", new ObjectId(id)));
-//
-//        Iterator<Document> iterator = jsonUsers.iterator();
-//        if (iterator.hasNext()) {
-//            Document user = iterator.next();
-//            return user.toJson();
-//        } else {
-//            // We didn't find the desired user
-//            return null;
-//        }
-//    }
+    public String getUser(String id) {
+        FindIterable<Document> jsonUsers
+            = userCollection
+            .find(eq("_id", new ObjectId(id)));
+
+        Iterator<Document> iterator = jsonUsers.iterator();
+        if (iterator.hasNext()) {
+            Document user = iterator.next();
+            return user.toJson();
+        } else {
+            // We didn't find the desired user
+            return null;
+        }
+    }
     //
 //
-//    /** Helper method which iterates through the collection, receiving all
-//     * documents if no query parameter is specified. If the age query parameter
+    /** Helper method which iterates through the collection, receiving all
+//     * documents if no query parameter is specified. If the SubjectID query parameter
 //     * is specified, then the collection is filtered so only documents of that
-//     * specified age are found.
+//     * specified SubjectID are found.
 //     *
 //     * @param queryParams
 //     * @return an array of Users in a JSON formatted string
 //     */
-//    public String getUsers(Map<String, String[]> queryParams) {
-//
-//        Document filterDoc = new Document();
-//
-//        if (queryParams.containsKey("age")) {
-//            int targetAge = Integer.parseInt(queryParams.get("age")[0]);
-//            filterDoc = filterDoc.append("age", targetAge);
-//        }
-//
-//        if (queryParams.containsKey("company")) {
-//            String targetContent = (queryParams.get("company")[0]);
-//            Document contentRegQuery = new Document();
-//            contentRegQuery.append("$regex", targetContent);
-//            contentRegQuery.append("$options", "i");
-//            filterDoc = filterDoc.append("company", contentRegQuery);
-//        }
-//
-//        //FindIterable comes from mongo, Document comes from Gson
-//        FindIterable<Document> matchingUsers = collection.find(filterDoc);
-//
-//        return JSON.serialize(matchingUsers);
-//    }
+    public String getUsers(Map<String, String[]> queryParams) {
+
+        Document filterDoc = new Document();
+
+        if (queryParams.containsKey("SubjectID")) {
+            int targetAge = Integer.parseInt(queryParams.get("SubjectID")[0]);
+            filterDoc = filterDoc.append("SubjectID", targetAge);
+        }
+
+       if (queryParams.containsKey("FirstName")) {
+            String targetContent = (queryParams.get("FirstName")[0]);
+            Document contentRegQuery = new Document();
+            contentRegQuery.append("$regex", targetContent);
+            contentRegQuery.append("$options", "i");
+            filterDoc = filterDoc.append("company", contentRegQuery);
+       }
+
+        //FindIterable comes from mongo, Document comes from Gson
+        FindIterable<Document> matchingUsers = userCollection.find(filterDoc);
+
+        return JSON.serialize(matchingUsers);
+    }
 
     public String addNewUser(String _id, String SubjectID, String FirstName, String LastName) {
 
