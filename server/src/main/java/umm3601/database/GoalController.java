@@ -53,13 +53,26 @@ public class GoalController {
     public String getGoals(Map<String, String[]> queryParams) {
 
         Document filterDoc = new Document();
+        String targetContent;
+        Document contentRegQuery = new Document();;
+
+        //Filter by userID
+        targetContent = (queryParams.get("userID")[0]);
+        //If there is no userID provided, return an empty result
+        if(targetContent.equals(null) || targetContent.equals("")) {
+            JSON.serialize(contentRegQuery);
+        }
+        contentRegQuery.append("$regex", targetContent);
+        contentRegQuery.append("$options", "i");
+        filterDoc = filterDoc.append("userID", contentRegQuery);
+
 
         // "goal" will be a key to a string object, where the object is
         // what we get when people enter their goals as a text body.
         // "goal" is the purpose of the goal
         if (queryParams.containsKey("purpose")) {
-            String targetContent = (queryParams.get("purpose")[0]);
-            Document contentRegQuery = new Document();
+            targetContent = (queryParams.get("purpose")[0]);
+            contentRegQuery = new Document();
             contentRegQuery.append("$regex", targetContent);
             contentRegQuery.append("$options", "i");
             filterDoc = filterDoc.append("purpose", contentRegQuery);
@@ -67,8 +80,8 @@ public class GoalController {
 
         // category is the category of the goal, also a String
         if (queryParams.containsKey("category")) {
-            String targetContent = (queryParams.get("category")[0]);
-            Document contentRegQuery = new Document();
+            targetContent = (queryParams.get("category")[0]);
+            contentRegQuery = new Document();
             contentRegQuery.append("$regex", targetContent);
             contentRegQuery.append("$options", "i");
             filterDoc = filterDoc.append("category", contentRegQuery);
@@ -76,8 +89,8 @@ public class GoalController {
 
         // name is the title of the goal
         if (queryParams.containsKey("name")) {
-            String targetContent = (queryParams.get("name")[0]);
-            Document contentRegQuery = new Document();
+            targetContent = (queryParams.get("name")[0]);
+            contentRegQuery = new Document();
             contentRegQuery.append("$regex", targetContent);
             contentRegQuery.append("$options", "i");
             filterDoc = filterDoc.append("name", contentRegQuery);
@@ -94,21 +107,13 @@ public class GoalController {
         return JSON.serialize(matchingGoals);
     }
 
-    /**
-     * Helper method which appends received user information to the to-be added document
-     *
-     * @param purpose
-     * @param category
-     * @param name
-     * @return boolean after successfully or unsuccessfully adding a user
-     */
-    // As of now this only adds the goal, but you can separate multiple arguments
-    // by commas as we add them.
-    public String addNewGoal(String purpose, String category, String name,
+
+    public String addNewGoal(String userID, String purpose, String category, String name,
                              Boolean status, String frequency, String start, String end, String next) {
 
         // makes the search Document key-pairs
         Document newGoal = new Document();
+        newGoal.append("userID", userID);
         newGoal.append("purpose", purpose);
         newGoal.append("category", category);
         newGoal.append("name", name);
@@ -123,7 +128,7 @@ public class GoalController {
             goalCollection.insertOne(newGoal);
             ObjectId id = newGoal.getObjectId("_id");
 
-            System.err.println("Successfully added new goal [_id=" + id + ", purpose=" + purpose +
+            System.err.println("Successfully added new goal " + userID + " [_id=" + id + ", purpose=" + purpose +
                 ", category=" + category + ", name=" + name + ", frequency= "+ frequency +  ", start=" + start +
                 ", end=" + end + ", next=" + next +']');
             //return id.toHexString();
