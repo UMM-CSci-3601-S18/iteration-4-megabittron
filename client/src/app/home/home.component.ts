@@ -1,6 +1,6 @@
 import {MatDialog} from '@angular/material';
 import {MatSnackBar} from '@angular/material';
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {EmotionService} from './home.service';
 import {Observable} from 'rxjs/Observable';
 import {Emotion} from './emotion';
@@ -14,6 +14,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class HomeComponent{
 
+    public isLinear = false;
     public emotions: Emotion[];
 
     readonly baseUrl: string = environment.API_URL + 'emotions';

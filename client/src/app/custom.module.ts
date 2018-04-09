@@ -14,7 +14,7 @@ import {
 
 import { FlexLayoutModule, } from '@angular/flex-layout';
 
-import { FormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormsModule, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 const FLEX_LAYOUT_MODULES: any[] = [
@@ -24,6 +24,7 @@ const FLEX_LAYOUT_MODULES: any[] = [
 const ANGULAR_MODULES: any[] = [
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     //FormBuilder,
     //FormGroup,
     //Validators,

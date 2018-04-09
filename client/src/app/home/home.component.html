@@ -1,12 +1,13 @@
 <html>
 <body class="whole-body">
 <mat-card>
-    <mat-horizontal-stepper>
-        <mat-step>
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+
+        <mat-step label="Emotion Selection">
             <div class="how-are-you">
                 <p>How are you feeling today?</p>
             </div>
-            <div class="emotion-selection" id="emotion">
+            <div class="emotion-selection" id="emotion" >
                 <button mat-button id="happy" class="emotion-img" matTooltip="Happy"
                         (click)="setEmotion('happy'); selectEmotion('happy')">
                     <img src="../../assets/images/emotions/happy.svg">
@@ -37,7 +38,9 @@
             </button>
             </div>
         </mat-step>
-        <mat-step>
+
+
+        <mat-step label="Intensity">
             <img class="selected-emoji" src="../../assets/images/emotions/{{selectedEmotion}}.svg">
             <div class="emotionSelection" *ngIf="selectedEmotion != 'meh'">
                 <h2>How {{selectedEmotion}} do you feel?</h2>
@@ -55,16 +58,13 @@
             </div>
 
             <div>
-
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button matStepperNext *ngIf="emojiRating != 0">Next</button>
-
             </div>
-
         </mat-step>
 
-        <mat-step label="">
 
+        <mat-step label="Journal">
             <div>
             I'm feeling this way because...
             <br>
@@ -79,43 +79,60 @@
 
         </mat-step>
 
-        <mat-step label="">
+
+        <mat-step label="Video">
             <div *ngIf="videoEmotion == 'happy'">
                 <div class="container">
-                    <iframe id="responseVideoFrame"
+                    <iframe id="responseHappyVideoFrame"
                             src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37D96M-QGXKpwvAs7rEK87AQ"
                             frameborder="0"
                             allowfullscreen
                             class="video"></iframe>
                 </div>
             </div>
-            <div *ngIf="videoEmotion == 'sad'">germ</div>
-            <div *ngIf="videoEmotion == 'meh'">fergie</div>
-            <div *ngIf="videoEmotion == 'mad'">hi</div>
-            <div *ngIf="videoEmotion == 'anxious'">ho</div>
-            <div *ngIf="videoEmotion == 'none'">fjsdkfjsdklfj</div>
-
+            <div *ngIf="videoEmotion == 'sad'">
+                <div class="container">
+                    <iframe id="responseSadVideoFrame"
+                            src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37AsI6fa8O9oZuX0kRtu8QqV"
+                            frameborder="0"
+                            allowfullscreen
+                            class="video"></iframe>
+                </div>
+            </div>
+            <div *ngIf="videoEmotion == 'meh'">
+                <div class="container">
+                    <iframe id="responseMehVideoFrame"
+                            src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37D96M-QGXKpwvAs7rEK87AQ"
+                            frameborder="0"
+                            allowfullscreen
+                            class="video"></iframe>
+                </div>
+            </div>
+            <div *ngIf="videoEmotion == 'mad'">
+                <div class="container">
+                    <iframe id="responseMadVideoFrame"
+                            src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37AitimsbRhFMaojjSfSBXp4"
+                            frameborder="0"
+                            allowfullscreen
+                            class="video"></iframe>
+                </div>
+            </div>
+            <div *ngIf="videoEmotion == 'anxious'">
+                <div class="container">
+                    <iframe id="responseAnxiousVideoFrame"
+                            src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37AsI6fa8O9oZuX0kRtu8QqV"
+                            frameborder="0"
+                            allowfullscreen
+                            class="video"></iframe>
+                </div>
+            </div>
+            <div *ngIf="videoEmotion == 'none'">Oops! Something happened...*runs away*
+            </div>
         </mat-step>
 
     </mat-horizontal-stepper>
 
 </mat-card>
 
-
-
-<!--<div layout-gt-sm="row" class="main-bg">
-   <div flex-gt-sm="80" flex-offset-gt-sm="10">
-           <mat-card-title id="title">Friendly Panda</mat-card-title>
-           <br>
-      <mat-card id="mainCard">
-           <br>
-           <div class="journalEntry" *ngIf="showTextBox()">
-           <br>
-           <div id="copyright">
-           <a id = "emojiSource" href="https://www.flaticon.com/packs/emoji-3" target="_blank">Emojis designed by Freepik from Flaticon</a>
-           </div>
-       </mat-card>
-   </div>
-</div>-->
 </body>
 </html>
