@@ -50,11 +50,11 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
 
     // These are public so that tests can reference them (.spec.ts)
-    public summarys: Summary[];
-    public filteredSummarys: Summary[];
-    public dateFilteredSummarys: Summary[];
-    public pastWeekSummarys: Summary[];
-    public pastDaySummarys: Summary[];
+    public summaries: Summary[];
+    public filteredSummaries: Summary[];
+    public dateFilteredSummaries: Summary[];
+    public pastWeekSummaries: Summary[];
+    public pastDaySummaries: Summary[];
 
 
 
@@ -84,12 +84,12 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     }
 
     public filterDates(givenlist, searchStartDate: any, searchEndDate: any): Summary[] {
-        this.dateFilteredSummarys = givenlist;
+        this.dateFilteredSummaries = givenlist;
 
         // Filter by startDate
         if (searchStartDate != null) {
 
-            this.dateFilteredSummarys = this.dateFilteredSummarys.filter(summary => {
+            this.dateFilteredSummaries = this.dateFilteredSummaries.filter(summary => {
                 this.getDate = new Date(summary.date);
                 return this.getDate >= searchStartDate;
             });
@@ -98,32 +98,32 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         // Filter by endDate
         if (searchEndDate != null) {
 
-            this.dateFilteredSummarys = this.dateFilteredSummarys.filter(summary => {
+            this.dateFilteredSummaries = this.dateFilteredSummaries.filter(summary => {
                 this.getDate = new Date(summary.date);
                 return this.getDate <= searchEndDate;
             });
         }
-        return this.dateFilteredSummarys;
+        return this.dateFilteredSummaries;
     }
 
-    public pastWeekEmotions(givenSummarys):Summary[]{
-        this.pastWeekSummarys = this.filterDates(givenSummarys, this.lastWeekStamp, this.nowStamp);
-        return this.pastWeekSummarys;
+    public pastWeekEmotions(givenSummaries):Summary[]{
+        this.pastWeekSummaries = this.filterDates(givenSummaries, this.lastWeekStamp, this.nowStamp);
+        return this.pastWeekSummaries;
     }
 
-    public pastDayEmotions(givenSummarys):Summary[]{
-        this.pastDaySummarys = this.filterDates(givenSummarys, this.lastDayStamp, this.nowStamp);
-        return this.pastDaySummarys;
+    public pastDayEmotions(givenSummaries):Summary[]{
+        this.pastDaySummaries = this.filterDates(givenSummaries, this.lastDayStamp, this.nowStamp);
+        return this.pastDaySummaries;
     }
 
-    public filterSummarys(searchMood: string, searchIntensity: string, searchStartDate: any, searchEndDate: any): Summary[] {
+    public filterSummaries(searchMood: string, searchIntensity: string, searchStartDate: any, searchEndDate: any): Summary[] {
 
-        this.filteredSummarys = this.summarys;
+        this.filteredSummaries = this.summaries;
 
         // Filter by Mood
         if (searchMood != null && searchMood !== "All") {
             searchMood = searchMood.toLocaleLowerCase();
-            this.filteredSummarys = this.filteredSummarys.filter(summary => {
+            this.filteredSummaries = this.filteredSummaries.filter(summary => {
                 return !searchMood || summary.mood.toLowerCase().indexOf(searchMood) !== -1;
             });
         }
@@ -131,20 +131,20 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
         // Filter by Intensity
         if (searchIntensity != null && searchIntensity !== "All") {
-            this.filteredSummarys = this.filteredSummarys.filter(summary => {
+            this.filteredSummaries = this.filteredSummaries.filter(summary => {
                 return !searchIntensity || searchIntensity == summary.intensity.toString();
             });
 
         }
 
-        this.filteredSummarys = this.filterDates(this.filteredSummarys, searchStartDate, searchEndDate);
+        this.filteredSummaries = this.filterDates(this.filteredSummaries, searchStartDate, searchEndDate);
 
-        return this.filteredSummarys;
+        return this.filteredSummaries;
     }
 
     //xValue can represent hour or weekday
     filterBarGraph(xValue): number {
-        let filterBarData = this.filteredSummarys;
+        let filterBarData = this.filteredSummaries;
 
         if(this.inputType == "week") {
             if(this.limitedPast) {
@@ -172,7 +172,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     filterLineGraph(xValue, Searchmood): number {
         Searchmood = Searchmood.toLocaleLowerCase();
-        let filterLineData = this.filteredSummarys.filter(summary => {
+        let filterLineData = this.filteredSummaries.filter(summary => {
             return !Searchmood || summary.mood.toLowerCase().indexOf(Searchmood) !== -1;
         });
 
@@ -825,17 +825,17 @@ public pastHours = [
      * Starts an asynchronous operation to update the users list
      *
      */
-    refreshSummarys(): Observable<Summary[]> {
+    refreshSummaries(): Observable<Summary[]> {
         // Get Users returns an Observable, basically a "promise" that
         // we will get the data from the server.
         //
         // Subscribe waits until the data is fully downloaded, then
         // performs an action on it (the first lambda)
-        const summaryListObservable: Observable<Summary[]> = this.summaryListService.getSummarys();
+        const summaryListObservable: Observable<Summary[]> = this.summaryListService.getSummaries();
         summaryListObservable.subscribe(
-            summarys => {
-                this.summarys = summarys;
-                this.filterSummarys(this.summaryMood, this.summaryIntensity, this.startDate, this.endDate);
+            summaries => {
+                this.summaries = summaries;
+                this.filterSummaries(this.summaryMood, this.summaryIntensity, this.startDate, this.endDate);
             },
             err => {
                 console.log(err);
@@ -845,10 +845,10 @@ public pastHours = [
 
 
     loadService(): void {
-        this.summaryListService.getSummarys(this.summaryMood).subscribe(
-            summarys => {
-                this.summarys = summarys;
-                this.filteredSummarys = this.summarys;
+        this.summaryListService.getSummaries(this.summaryMood).subscribe(
+            summaries => {
+                this.summaries = summaries;
+                this.filteredSummaries = this.summaries;
             },
             err => {
                 console.log(err);
@@ -857,11 +857,11 @@ public pastHours = [
     }
 
     totalNumberEntries(): number{
-        return this.summarys.length;
+        return this.summaries.length;
     }
 
     totalNumberMoods(): number{
-        return this.filteredSummarys.length;
+        return this.filteredSummaries.length;
     }
 
     returnTime(mood: string): string{
@@ -869,7 +869,7 @@ public pastHours = [
     }
 
     ngOnInit(): void {
-        this.refreshSummarys();
+        this.refreshSummaries();
         this.loadService();
     }
 

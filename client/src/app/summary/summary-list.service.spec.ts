@@ -9,7 +9,7 @@ import {SummaryListComponent} from "./summary-list.component";
 describe('Summary: ', () => {
     // A small collection of test summaries
 
-    const testSummarys: Summary[] = [
+    const testSummaries: Summary[] = [
         {
             _id: '1',
             mood: 'happy',
@@ -32,7 +32,7 @@ describe('Summary: ', () => {
             description: 'didnt sleep',
         },
     ];
-    const mSummarys: Summary[] = testSummarys.filter(summary =>
+    const mSummaries: Summary[] = testSummaries.filter(summary =>
         summary.mood.toLowerCase().indexOf('a') !== 3
     );
 
@@ -64,15 +64,15 @@ describe('Summary: ', () => {
         httpTestingController.verify();
     });
 
-    it('getSummarys() calls api/summarys', () => {
-        // Assert that the summarys we get from this call to getSummarys()
-        // should be our set of test summarys. Because we're subscribing
-        // to the result of getSummarys(), this won't actually get
+    it('getSummaries() calls api/summaries', () => {
+        // Assert that the summaries we get from this call to getSummaries()
+        // should be our set of test summaries. Because we're subscribing
+        // to the result of getSummaries(), this won't actually get
         // checked until the mocked HTTP request "returns" a response.
-        // This happens when we call req.flush(testSummarys) a few lines
+        // This happens when we call req.flush(testSummaries) a few lines
         // down.
-        summaryService.getSummarys().subscribe(
-            summarys => expect(summarys).toBe(testSummarys)
+        summaryService.getSummaries().subscribe(
+            summaries => expect(summaries).toBe(testSummaries)
         );
 
         // Specify that (exactly) one request will be made to the specified URL.
@@ -82,17 +82,17 @@ describe('Summary: ', () => {
         // Specify the content of the response to that request. This
         // triggers the subscribe above, which leads to that check
         // actually being performed.
-        req.flush(testSummarys);
+        req.flush(testSummaries);
     });
 
-    it('getSummarys(summaryCategory) adds appropriate param string to called URL', () => {
-        summaryService.getSummarys('a').subscribe(
-            summarys => expect(summarys).toEqual(mSummarys)
+    it('getSummaries(summaryCategory) adds appropriate param string to called URL', () => {
+        summaryService.getSummaries('a').subscribe(
+            summaries => expect(summaries).toEqual(mSummaries)
         );
 
         const req = httpTestingController.expectOne(summaryService.baseUrl + '?mood=a&');
         expect(req.request.method).toEqual('GET');
-        req.flush(mSummarys);
+        req.flush(mSummaries);
     });
 
     it('filterByMood(summaryMood) deals appropriately with a URL that already had a mood', () => {

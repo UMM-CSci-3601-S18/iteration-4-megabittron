@@ -19,13 +19,13 @@ import 'rxjs/add/operator/do';
             let fixture: ComponentFixture<SummaryListComponent>;
 
             let summaryServiceStub: {
-                getSummarys: () => Observable<Summary[]>
+                getSummaries: () => Observable<Summary[]>
             };
 
             beforeEach(() => {
                 // stub SummaryListService for test purposes
                 summaryServiceStub = {
-                    getSummarys: () => Observable.of([
+                    getSummaries: () => Observable.of([
                         {
                             _id: '1',
                             mood: 'happy',
@@ -72,76 +72,76 @@ import 'rxjs/add/operator/do';
                 });
             }));
 
-            it('contains all the summarys', () => {
-        expect(summary.summarys.length).toBe(3);
+            it('contains all the summaries', () => {
+        expect(summary.summaries.length).toBe(3);
             });
 
             it('contains a summary mood \'happy\'', () => {
-        expect(summary.summarys.some((summary: Summary) => summary.mood === 'happy')).toBe(true);
+        expect(summary.summaries.some((summary: Summary) => summary.mood === 'happy')).toBe(true);
             });
 
             it('contain a summary id \'2\'', () => {
-        expect(summary.summarys.some((summary: Summary) => summary._id === '2')).toBe(true);
+        expect(summary.summaries.some((summary: Summary) => summary._id === '2')).toBe(true);
             });
 
             it('doesn\'t contain a summary id \'4\'', () => {
-        expect(summary.summarys.some((summary: Summary) => summary._id === '4')).toBe(false);
+        expect(summary.summaries.some((summary: Summary) => summary._id === '4')).toBe(false);
             });
 
             it('summary filters by mood', () => {
-                expect(summary.filteredSummarys.length).toBe(3);
+                expect(summary.filteredSummaries.length).toBe(3);
                 summary.summaryMood = 'sad';
-                summary.refreshSummarys().subscribe(() => {
-                    expect(summary.filteredSummarys.length).toBe(1);
+                summary.refreshSummaries().subscribe(() => {
+                    expect(summary.filteredSummaries.length).toBe(1);
                 });
             });
 
             it('summary filters by intensity', () => {
-                expect(summary.filteredSummarys.length).toBe(3);
+                expect(summary.filteredSummaries.length).toBe(3);
                 summary.summaryIntensity = '4';
-                summary.refreshSummarys().subscribe(() => {
-                    expect(summary.filteredSummarys.length).toBe(1);
+                summary.refreshSummaries().subscribe(() => {
+                    expect(summary.filteredSummaries.length).toBe(1);
                 });
             });
 
             it('summary filters by mood and intensity', () => {
-                expect(summary.filteredSummarys.length).toBe(3);
+                expect(summary.filteredSummaries.length).toBe(3);
                 summary.summaryMood = 'sad';
                 summary.summaryIntensity = '4';
-                summary.refreshSummarys().subscribe(() => {
-                    expect(summary.filteredSummarys.length).toBe(1);
+                summary.refreshSummaries().subscribe(() => {
+                    expect(summary.filteredSummaries.length).toBe(1);
                 });
             });
 
             it('summary filters by start date', () => {
-                expect(summary.filteredSummarys.length).toBe(3);
+                expect(summary.filteredSummaries.length).toBe(3);
                 summary.startDate = new Date('Fri Apr 06 2018 15:23:28 GMT-0500 (CDT)');
-                summary.refreshSummarys().subscribe(() => {
-                    expect(summary.filteredSummarys.length).toBe(2);
+                summary.refreshSummaries().subscribe(() => {
+                    expect(summary.filteredSummaries.length).toBe(2);
                 });
             });
 
             it('summary filters by end date', () => {
-                expect(summary.filteredSummarys.length).toBe(3);
+                expect(summary.filteredSummaries.length).toBe(3);
                 summary.endDate = new Date('Fri Apr 06 2018 15:23:28 GMT-0500 (CDT)');
-                summary.refreshSummarys().subscribe(() => {
-                    expect(summary.filteredSummarys.length).toBe(1);
+                summary.refreshSummaries().subscribe(() => {
+                    expect(summary.filteredSummaries.length).toBe(1);
                 });
             });
 
             it('summary filters by mood, intensity, start and end date', () => {
-                expect(summary.filteredSummarys.length).toBe(3);
+                expect(summary.filteredSummaries.length).toBe(3);
                 summary.summaryMood = 'happy';
                 summary.summaryIntensity = '2';
                 summary.startDate = new Date('Fri Apr 06 2018 15:23:28 GMT-0500 (CDT)');
                 summary.endDate = new Date('Sat Apr 07 2018 20:00:00 GMT-0500 (CDT)');
-                summary.refreshSummarys().subscribe(() => {
-                    expect(summary.filteredSummarys.length).toBe(1);
+                summary.refreshSummaries().subscribe(() => {
+                    expect(summary.filteredSummaries.length).toBe(1);
                 });
             });
 
             it('clearDateFilter() works', () => {
-                expect(summary.filteredSummarys.length).toBe(3);
+                expect(summary.filteredSummaries.length).toBe(3);
                 summary.startDate = 'Fri Apr 06 2018 15:23:28 GMT-0500 (CDT)';
                 summary.endDate = 'Sat Apr 07 2018 20:00:00 GMT-0500 (CDT)';
                 expect(summary.startDate).toBe('Fri Apr 06 2018 15:23:28 GMT-0500 (CDT)');
@@ -162,13 +162,13 @@ import 'rxjs/add/operator/do';
             let fixture: ComponentFixture<SummaryListComponent>;
 
             let summaryServiceStub: {
-                getSummarys: () => Observable<Summary[]>
+                getSummaries: () => Observable<Summary[]>
             };
 
             beforeEach(() => {
                 // stub SummaryListService for test purposes
                 summaryServiceStub = {
-                    getSummarys: () => Observable.of([
+                    getSummaries: () => Observable.of([
                         {
                             _id: '1',
                             mood: 'happy',
@@ -217,13 +217,13 @@ import 'rxjs/add/operator/do';
             }));
 
             it('filterLineGraph filters correctly for all time', () => {
-                expect(summary.summarys.length).toBe(3);
+                expect(summary.summaries.length).toBe(3);
                 expect(summary.filterLineGraph(0, 'mad')).toBe(1);
                 expect(summary.filterLineGraph(2, 'mad')).toBe(0);
             });
 
             it('filterBarGraph filters correctly for all time', () => {
-                expect(summary.filteredSummarys.length).toBe(3);
+                expect(summary.filteredSummaries.length).toBe(3);
                 expect(summary.filterBarGraph(0)).toBe(1);
                 expect(summary.filterBarGraph(2)).toBe(0);
             });
@@ -238,13 +238,13 @@ import 'rxjs/add/operator/do';
             let fixture: ComponentFixture<SummaryListComponent>;
 
             let summaryServiceStub: {
-                getSummarys: () => Observable<Summary[]>
+                getSummaries: () => Observable<Summary[]>
             };
 
             beforeEach(() => {
                 // stub SummaryListService for test purposes
                 summaryServiceStub = {
-                    getSummarys: () => Observable.of([
+                    getSummaries: () => Observable.of([
                         {
                             _id: '1',
                             mood: 'happy',
@@ -300,13 +300,13 @@ import 'rxjs/add/operator/do';
             }));
 
             it('filterLineGraph filters correctly for inputType = day', () => {
-                expect(summary.summarys.length).toBe(3);
+                expect(summary.summaries.length).toBe(3);
                 expect(summary.filterLineGraph(15, 'mad')).toBe(1);
                 expect(summary.filterLineGraph(2, 'mad')).toBe(0);
             });
 
             it('filterBarGraph filters correctly for inputType = day', () => {
-                expect(summary.filteredSummarys.length).toBe(3);
+                expect(summary.filteredSummaries.length).toBe(3);
                 expect(summary.filterBarGraph(15)).toBe(1);
                 expect(summary.filterBarGraph(2)).toBe(0);
             });
@@ -318,13 +318,13 @@ import 'rxjs/add/operator/do';
             });
 
             it('filterLineGraph works correctly when using modHour', () => {
-                expect(summary.summarys.length).toBe(3);
+                expect(summary.summaries.length).toBe(3);
                 expect(summary.filterLineGraph(summary.modHour(18), 'mad')).toBe(1);
                 expect(summary.filterLineGraph(summary.modHour(0), 'mad')).toBe(0);
             });
 
             it('filterBarGraph works correctly when using modHour', () => {
-                expect(summary.filteredSummarys.length).toBe(3);
+                expect(summary.filteredSummaries.length).toBe(3);
                 expect(summary.filterBarGraph(summary.modHour(18))).toBe(1);
                 expect(summary.filterBarGraph(summary.modHour(0))).toBe(0);
             });
@@ -346,13 +346,13 @@ import 'rxjs/add/operator/do';
             let fixture: ComponentFixture<SummaryListComponent>;
 
             let summaryServiceStub: {
-                getSummarys: () => Observable<Summary[]>
+                getSummaries: () => Observable<Summary[]>
             };
 
             beforeEach(() => {
                 // stub SummaryListService for test purposes
                 summaryServiceStub = {
-                    getSummarys: () => Observable.of([
+                    getSummaries: () => Observable.of([
                         {
                             _id: '1',
                             mood: 'happy',
@@ -408,13 +408,13 @@ import 'rxjs/add/operator/do';
             }));
 
             it('filterLineGraph filters correctly for inputType = week', () => {
-                expect(summary.summarys.length).toBe(3);
+                expect(summary.summaries.length).toBe(3);
                 expect(summary.filterLineGraph(4, 'sad')).toBe(1);
                 expect(summary.filterLineGraph(2, 'sad')).toBe(0);
             });
 
             it('filterBarGraph filters correctly for inputType = week', () => {
-                expect(summary.filteredSummarys.length).toBe(3);
+                expect(summary.filteredSummaries.length).toBe(3);
                 expect(summary.filterBarGraph(4)).toBe(1);
                 expect(summary.filterBarGraph(2)).toBe(0);
             });
@@ -426,13 +426,13 @@ import 'rxjs/add/operator/do';
             });
 
             it('filterLineGraph works correctly when using modDay', () => {
-                expect(summary.summarys.length).toBe(3);
+                expect(summary.summaries.length).toBe(3);
                 expect(summary.filterLineGraph(summary.modDay(10), 'sad')).toBe(1);
                 expect(summary.filterLineGraph(summary.modDay(0), 'sad')).toBe(0);
             });
 
             it('filterBarGraph works correctly when using modDay', () => {
-                expect(summary.filteredSummarys.length).toBe(3);
+                expect(summary.filteredSummaries.length).toBe(3);
                 expect(summary.filterBarGraph(summary.modDay(10))).toBe(1);
                 expect(summary.filterBarGraph(summary.modDay(0))).toBe(0);
             });
@@ -454,13 +454,13 @@ describe('Misbehaving Summary ', () => {
     let fixture: ComponentFixture<SummaryListComponent>;
 
     let summaryServiceStub: {
-        getSummarys: () => Observable<Summary[]>
+        getSummaries: () => Observable<Summary[]>
     };
 
     beforeEach(() => {
         // stub SummaryService for test purposes
         summaryServiceStub = {
-            getSummarys: () => Observable.create(observer => {
+            getSummaries: () => Observable.create(observer => {
                 observer.error('Error-prone observable');
             })
         };
@@ -482,8 +482,8 @@ describe('Misbehaving Summary ', () => {
     }));
 
     it('generates an error if we don\'t set up a SummaryService', () => {
-        // Since the observer throws an error, we don't expect summarys to be defined.
-        expect(summary.summarys).toBeUndefined();
+        // Since the observer throws an error, we don't expect summaries to be defined.
+        expect(summary.summaries).toBeUndefined();
     });
 });
 */
