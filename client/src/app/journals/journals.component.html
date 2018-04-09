@@ -1,80 +1,61 @@
 <body>
 <main>
-    <!-- Managing Journals Card -->
-        <div class="first-sec">
-            <mat-card class="manage-journals-card">
-                <mat-card-title id="journal-title">Your Journals</mat-card-title>
-                <mat-card-subtitle class="journal-subtitle">Journals can help you
-                    track daily activities in your life.
-                </mat-card-subtitle>
-                <mat-card-content class="journal-content">
-                        <button mat-raised-button (click)="openDialog()" class="journal-button" id="addNewJournal">
-                            <mat-icon id="add-icon">add</mat-icon>
-                            Add a Journal</button>
-                    <div class="filter-fields">
-                    <mat-form-field id="journal-subject-field">
-                        <input matInput id="journalSubject" #input type="text" placeholder="Filter by subject" (input)="journalSubject = $event.target.value">
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput id="journalBody" #input type="text" placeholder="Filter by body" (input)="journalBody = $event.target.value">
-                    </mat-form-field>
-                    </div>
-                </mat-card-content>
-            </mat-card>
-        </div>
-
-<div layout-gt-sm="row">
-    <div flex-gt-sm="80" flex-offset-gt-sm="10">
-        <mat-card class="journals-card">
-            <mat-divider></mat-divider>
-            <mat-card-content>
-                <mat-accordion *ngIf="journals; else journalsError">
-                    <mat-expansion-panel #elem class="journals" [id]="journal._id['$oid']" [expanded]="this.isHighlighted(journal)" *ngFor="let journal of this.filterJournals(journalSubject, journalBody) | slice:index:index+10; let i=index;">
-                        <mat-expansion-panel-header>
-                            <mat-panel-title >{{journal.subject}}</mat-panel-title>
-
-                        </mat-expansion-panel-header>
-                        <mat-panel-description>{{journal.body}}</mat-panel-description>
-                        <br>
-                        <mat-panel-description>{{journal.date}}</mat-panel-description>
-                        <br>
-                        <mat-panel-description><button mat-raised-button id="edit-journal-button" (click)="openDialogReview(journal._id['$oid'], journal.subject, journal.body, journal.date)">Edit Journal</button> </mat-panel-description>
-                    </mat-expansion-panel>
-
-                    <button mat-button type="button" matSuffix mat-icon-button aria-label="clear" id="firstIndexJournal" (click)="firstIndex()">
-                        <mat-icon>first_page</mat-icon>
-                    </button>
-                    <button mat-button type="button" matSuffix mat-icon-button aria-label="clear" id="prevIndexJournal" (click)="prevIndex()">
-                        <mat-icon>arrow_back</mat-icon>
-                    </button>
-                    <button mat-button type="button" matSuffix mat-icon-button aria-label="clear" id="nextIndexJournal" (click)="nextIndex()">
-                        <mat-icon>arrow_forward</mat-icon>
-                    </button>
-                    <button mat-button type="button" matSuffix mat-icon-button aria-label="clear" id="lastIndexJournal" (click)="lastIndex()">
-                        <mat-icon>last_page</mat-icon>
-                    </button>
-
-                </mat-accordion>
-                <ng-template #journalsError>
-                    <mat-error>
-                        There was a problem loading the journals. Possibly the server is down or perhaps there are network
-                        issues.
-                    </mat-error>
-                    <mat-error>
-                        Please wait a bit and try again or start the server.
-                    </mat-error>
-                </ng-template>
+    <div class="first-sec">
+        <mat-card class="manage-journals-card">
+            <mat-card-title id="journal-title">Your Journals</mat-card-title>
+            <mat-card-subtitle class="journal-subtitle">Journals can help you
+                track daily activities in your life.
+            </mat-card-subtitle>
+            <mat-card-content class="journal-content">
+                    <button mat-raised-button (click)="openDialog()" class="journal-button" id="addNewJournal">
+                        <mat-icon id="add-icon">add</mat-icon>
+                        Add a Journal</button>
+                <div class="filter-fields">
+                <mat-form-field id="journal-subject-field">
+                    <input matInput id="journalSubject" #input placeholder="Filter by subject" (input)="journalSubject = $event.target.value">
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput id="journalBody" #input placeholder="Filter by body" (input)="journalBody = $event.target.value">
+                </mat-form-field>
+                </div>
             </mat-card-content>
-
-<!--            <section>
-                <mat-progress-bar
-                    [value]="progress">
-                </mat-progress-bar>
-            </section>-->
-
         </mat-card>
     </div>
-</div>
+    <div class="grid-journals-section">
+        <div layout="row" layout-wrap>
+            <mat-card class="journals-card"
+                      *ngFor="let journal of filterJournals(journalSubject, journalBody, journalDate) | dateSort: '-date'"
+                      #elem [id]="journal._id['$oid']">
+                <div class="journals-card-info">
+                    <mat-card-content class="journal-info">
+                        <mat-card-title class="journal-name">
+                            <button mat-icon-button class="edit-journal-button"
+                                    (click)="openDialogReview(journal._id['$oid'], journal.subject, journal.body, journal.date)">
+                                <mat-icon matTooltip="Edit Journal">mode_edit</mat-icon>
+                            </button>
+                            {{journal.subject}}
+                        </mat-card-title>
+                        <mat-card-subtitle>
+                            {{journal.date | date : "MMM d, yyyy 'at' h:mm a"}}
+                        </mat-card-subtitle>
+                        <p *ngIf="journal.body.length > 100">
+                            {{journal.body | slice : 0:100}}
+                            <a (click)="showMoreInfo(journal.body)">
+                                <button class="show-more-button">
+                                    ...show more
+                                </button>
+                            </a>
+                        </p>
+                        <p *ngIf="journal.body.length <100">
+                            {{journal.body}}
+                        </p>
+                    </mat-card-content>
+                </div>
+                <mat-card-actions>
+                </mat-card-actions>
+            </mat-card>
+            </div>
+        </div>
 </main>
 </body>
 
