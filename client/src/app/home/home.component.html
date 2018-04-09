@@ -1,43 +1,41 @@
 <html>
 <body class="whole-body">
-<br>
-
 <mat-card>
-
     <mat-horizontal-stepper>
-        <mat-step label="">
-
-            <mat-card-title style="text-align: center;">
-                <h2>How are you feeling today?</h2>
-                <br>
-                I'm feeling {{emotion()}}.
-            </mat-card-title>
-            <br>
-
-            <div class="emotionSelection" id="emotion">
-                <img id="happy" width= "10%" src="../../assets/images/emotions/happy.svg"
-                     (click)="setEmotion('happy'); selectEmotion('happy')">
-
-                <img id="sad" width= "10%" src="../../assets/images/emotions/sad.svg"
-                     (click)="setEmotion('sad'); selectEmotion('sad')">
-
-                <img id="meh" width= "10%" src="../../assets/images/emotions/meh.svg"
-                     (click)="setEmotion('meh'); selectEmotion('meh')">
-
-                <img id="mad" width= "10%" src="../../assets/images/emotions/mad.svg"
-                     (click)="setEmotion('mad'); selectEmotion('mad')">
-
-                <img id="anxious" width= "10%" src="../../assets/images/emotions/anxious.svg"
-                     (click)="setEmotion('anxious'); selectEmotion('anxious')">
+        <mat-step>
+            <div class="how-are-you">
+                <p>How are you feeling today?</p>
             </div>
-
+            <div class="emotion-selection" id="emotion">
+                <button mat-button id="happy" class="emotion-img" matTooltip="Happy"
+                        (click)="setEmotion('happy'); selectEmotion('happy')">
+                    <img src="../../assets/images/emotions/happy.svg">
+                </button>
+                <button mat-button id="sad" class="emotion-img" matTooltip="Sad"
+                        (click)="setEmotion('sad'); selectEmotion('sad')">
+                    <img src="../../assets/images/emotions/sad.svg">
+                </button>
+                <button mat-button id="meh" class="emotion-img" matTooltip="Meh"
+                        (click)="setEmotion('meh'); selectEmotion('meh')">
+                    <img src="../../assets/images/emotions/meh.svg">
+                </button>
+                <button mat-button id="mad" class="emotion-img" matTooltip="Mad"
+                        (click)="setEmotion('mad'); selectEmotion('mad')">
+                    <img src="../../assets/images/emotions/mad.svg">
+                </button>
+                <button mat-button id="anxious" class="emotion-img" matTooltip="Anxious"
+                        (click)="setEmotion('anxious'); selectEmotion('anxious')">
+                    <img src="../../assets/images/emotions/anxious.svg">
+                </button>
+            </div>
+            <div class="i-feel">
+                <p>I'm feeling {{emotion()}}.</p>
+            </div>
             <div class="stepperButtons">
-
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext *ngIf="selectedEmotion != 'none'">Next</button>
-
+            <button mat-button matStepperNext *ngIf="selectedEmotion != 'none'">
+                Next
+            </button>
             </div>
-
         </mat-step>
 
         <mat-step label="">

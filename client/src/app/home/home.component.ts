@@ -24,7 +24,6 @@ export class HomeComponent{
     public selectedEmotion = "none";
     private selectedEmoji = "happy";
     public videoEmotion = "none";
-
     public emotionDescription: string;
     public emotionDate: string;
 
@@ -54,19 +53,16 @@ export class HomeComponent{
     }
 
     selectEmotion(ID){
-        var clickedSize = "12%";
         this.resetSelections();
         this.selectedEmoji = ID;
-        {document.getElementById(ID).style.height = clickedSize}
-        {document.getElementById(ID).style.width = clickedSize}
+        let newClass = document.getElementById(ID);
+        newClass.classList.add('on');
+        console.log("clicked!!!");
     }
 
     private resetSelections(){
-        var baseSize = "10%";
-
-        {document.getElementById(this.selectedEmoji).style.height = baseSize}
-        {document.getElementById(this.selectedEmoji).style.width = baseSize}
-
+        let newClass = document.getElementById(this.selectedEmoji);
+        newClass.classList.remove('on');
     }
 
     showTextBox(): boolean{

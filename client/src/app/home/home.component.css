@@ -24,11 +24,6 @@
     margin: 0 auto;
 }
 
-.emotionSelection{
-    text-align: center;
-    padding: 1%;
-}
-
 .text-block {
     position: absolute;
     bottom: 20px;
@@ -91,3 +86,30 @@ textarea:focus {
     text-align: center;
 }
 
+.on {
+    background-color: #C8E6C9;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    border-radius: 15px;
+}
+
+.emotion-img {
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.emotion-selection {
+    padding-bottom: 40px;
+    text-align: center;
+}
+
+.how-are-you {
+    text-align: center;
+    font-size: 25px;
+}
+
+.i-feel {
+    text-align: center;
+    font-size: 25px;
+}
