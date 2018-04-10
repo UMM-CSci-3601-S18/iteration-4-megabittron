@@ -124,6 +124,11 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         return this.pastYearSummaries;
     }
 
+    public pastMonthEmotions(givenSummaries):Summary[]{
+        this.pastMonthSummaries = this.filterDates(givenSummaries, this.lastMonthStamp, this.nowStamp);
+        return this.pastMonthSummaries;
+    }
+
     public filterSummaries(searchMood: string, searchIntensity: string, searchStartDate: any, searchEndDate: any): Summary[] {
 
         this.filteredSummaries = this.summaries;
@@ -182,18 +187,18 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                         this.getDate = new Date(summary.date);
                         return this.getDate.getMonth() == xValue;
                     });
-                }/*
+                }
                 else {
                     if(this.inputType == "month"){
                         if(this.limitedPast) {
-                            filterBarData = this.pastYearEmotions(filterBarData);
+                            filterBarData = this.pastMonthEmotions(filterBarData);
                         }
                         filterBarData = filterBarData.filter(summary => {
                             this.getDate = new Date(summary.date);
                             return this.getDate.getDate() == xValue;
                         });
                     }
-                }*/
+                }
             }
         }
 
@@ -234,18 +239,18 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                         this.getDate = new Date(summary.date);
                         return this.getDate.getMonth() == xValue;
                     });
-                }/*
+                }
                 else {
                     if(this.inputType == "month"){
                         if(this.limitedPast) {
-                            filterLineData = this.pastYearEmotions(filterLineData);
+                            filterLineData = this.pastMonthEmotions(filterLineData);
                         }
                         filterLineData = filterLineData.filter(summary => {
                             this.getDate = new Date(summary.date);
                             return this.getDate.getDate() == xValue;
                         });
                     }
-                }*/
+                }
             }
         }
 
@@ -270,11 +275,11 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             return hour;
         }
     }
-/*
+
     public modDate(date: number): Number {
         return (this.nowDate + 1 + date)%31;
     }
-    */
+
 
     public modMonth(month: number): Number {
         if(this.limitedPast){
@@ -286,9 +291,9 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     }
 
 
-    public getPastDays(day: number): String {
+    public getPastDays(xValue: number): String {
 
-        let thisDay = (this.nowDay + 1 + day)%7;
+        let thisDay = (this.nowDay + 1 + xValue)%7;
 
         let strDay = '';
 
@@ -316,9 +321,9 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         return strDay;
     }
 
-    public getPastHours(hour: number): String {
+    public getPastHours(xValue: number): String {
 
-        let thisHour = (this.nowHour + 1 + hour)%24;
+        let thisHour = (this.nowHour + 1 + xValue)%24;
 
         let strHour = '';
         let timeSuffix = '';
@@ -337,8 +342,8 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         return strHour + timeSuffix;
     }
 
-    public getPastMonths(month: number): String {
-        let thisMonth = (this.nowMonth + 1 + month)%12;
+    public getPastMonths(xValue: number): String {
+        let thisMonth = (this.nowMonth + 1 + xValue)%12;
 
         let strMonth = '';
 
@@ -380,6 +385,36 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         }
         return strMonth;
     }
+
+    /*
+    public getPastDates(xValue: number): String {
+        let thisDate = (this.nowDate + 1 + xValue)%31;
+        let strDate = '';
+        // should get past 31 days
+        // if last month had less than 31 days, it should be reflected
+
+        if(){//last month had 31 days or today is 31st
+            strDate = (thisDate + 1).toString();
+        }
+        else {
+            if(){//last month had 30 days
+                strDate = ((thisDate)).toString;
+            }
+            else {
+                if(){//last month has 28 days
+                strDate = ((thisDate - 1)%31) .toString; //needs work, may return 0
+                }
+                else {
+                    if(){//last month has 29 days, leap year?
+                        //need to calculate
+                    }
+                }
+            }
+        }
+        return strDate;
+    }
+    */
+
 
     public getDailyData(emotion){
 
