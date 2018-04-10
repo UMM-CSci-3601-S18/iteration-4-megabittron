@@ -17,6 +17,7 @@ export class GoalsService {
 
     getGoals(goalCategory?: string): Observable<Goal[]> {
         this.filterByCategory(goalCategory);
+
         return this.http.get<Goal[]>(this.goalUrl);
     }
 
@@ -44,6 +45,32 @@ export class GoalsService {
             // there was nothing in the box to put onto the URL... reset
             if (this.parameterPresent('category=')) {
                 let start = this.goalUrl.indexOf('category=');
+                const end = this.goalUrl.indexOf('&', start);
+                if (this.goalUrl.substring(start - 1, start) === '?') {
+                    start = start - 1;
+                }
+                this.goalUrl = this.goalUrl.substring(0, start) + this.goalUrl.substring(end + 1);
+            }
+        }
+    }
+
+    filterByUserID(userID: string): void {
+        if (!(userID == null || userID === '')) {
+            if (this.parameterPresent('category=') ) {
+                // there was a previous search by category that we need to clear
+                this.removeParameter('category=');
+            }
+            if (this.goalUrl.indexOf('?') !== -1) {
+                // there was already some information passed in this url
+                this.goalUrl += 'userID=' + userID + '&';
+            } else {
+                // this was the first bit of information to pass in the url
+                this.goalUrl += '?userID=' + userID + '&';
+            }
+        } else {
+            // there was nothing in the box to put onto the URL... reset
+            if (this.parameterPresent('userID=')) {
+                let start = this.goalUrl.indexOf('userID=');
                 const end = this.goalUrl.indexOf('&', start);
                 if (this.goalUrl.substring(start - 1, start) === '?') {
                     start = start - 1;
