@@ -29,7 +29,7 @@
                     </mat-card>
                 </div>
                 <div layout="row" layout-wrap>
-                    <ng-container *ngFor="let goal of this.todayGoals">
+                    <ng-container *ngFor="let goal of this.shownGoals">
                         <mat-card class="goals-card"
                                   #elem [id]="goal._id['$oid']">
                             <mat-expansion-panel class="goalPanel">
@@ -68,6 +68,24 @@
                             </mat-expansion-panel>
                         </mat-card>
                     </ng-container>
+                </div>
+                <div class="pagescrollbuttons">
+                    <button *ngIf="this.currentPage == 1" mat-icon-button class="previousPage" (click)="this.currentPage = this.currentPage - 1;
+                    showGoals()" [disabled]="true">
+                        <mat-icon>keyboard_arrow_left</mat-icon>
+                    </button>
+                    <button *ngIf="this.currentPage != 1" mat-icon-button class="previousPage" (click)="this.currentPage = this.currentPage - 1;
+                    showGoals()" [disabled]="false">
+                        <mat-icon>keyboard_arrow_left</mat-icon>
+                    </button>
+                    <button *ngIf="this.currentPage == maxNumPages() " mat-icon-button class="nextPage" (click)="this.currentPage = this.currentPage + 1;
+                    showGoals()" [disabled]="true">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                    </button>
+                    <button *ngIf="this.currentPage != maxNumPages() " mat-icon-button class="nextPage" (click)="this.currentPage = this.currentPage + 1;
+                    showGoals()" [disabled]="false">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                    </button>
                 </div>
             </div>
 
@@ -123,6 +141,7 @@
                            </mat-expansion-panel>
                        </mat-card>
                    </ng-container>
+
 
                     <!-- Errors message card can be uncommented if you fix the layout issue -->
                     <!--or>

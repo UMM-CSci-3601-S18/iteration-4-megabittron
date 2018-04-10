@@ -16,6 +16,7 @@ export class GoalsComponent implements OnInit {
     // These are public so that tests can reference them (.spec.ts)
     public goals: Goal[];
     public todayGoals: Goal[];
+    public shownGoals: Goal[];
     public filteredGoals: Goal[];
 
     // These are the target values used in searching.
@@ -29,6 +30,8 @@ export class GoalsComponent implements OnInit {
     public goalFrequency;
     public today;
     public showAllGoals = false;
+    public goalsPerPage = 4;
+    public currentPage = 1;
 
     // The ID of the goal
     private highlightedID: { '$oid': string } = {'$oid': ''};
@@ -252,9 +255,31 @@ export class GoalsComponent implements OnInit {
 
         });
 
+        this.showGoals();
         return this.todayGoals;
 
     }
+
+    showGoals(){
+        var count = this.currentPage * this.goalsPerPage;
+        this.shownGoals = this.todayGoals.filter(goal => {
+            if(count > this.goalsPerPage){
+                count--;
+                return false;
+            }
+
+            if(count <= this.goalsPerPage && count != 0){
+                count--;
+                return true;
+            }
+
+        });
+    }
+
+    maxNumPages(){
+        return Math.round(this.todayGoals.length/this.goalsPerPage);
+    }
+
 
     /**
      * Starts an asynchronous operation to update the goals list
