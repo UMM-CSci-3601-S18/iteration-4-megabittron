@@ -75,3 +75,17 @@
     align-items: right;
 }
 
+.todayGoalTitle{
+    text-align: center;
+    font-size: 200%;
+    font-family: inherit;
+    padding: 0.5%;
+}
+
+.goalTitleDiv{
+    width: 15%;
+    margin: 0 auto;
+    padding-bottom: 0.5%;
+}
+
+

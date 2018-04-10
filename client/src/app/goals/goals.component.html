@@ -19,7 +19,11 @@
                 </mat-card>
             </div>
             <div class="todays-goals">
-                Today's goals
+                <div class="goalTitleDiv">
+                    <mat-card class="todayGoalTitle">
+                        Today's goals
+                    </mat-card>
+                </div>
                 <div layout="row" layout-wrap>
                     <ng-container *ngFor="let goal of this.todayGoals">
                         <mat-card class="goals-card"
