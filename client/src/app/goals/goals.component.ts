@@ -276,8 +276,8 @@ export class GoalsComponent implements OnInit {
         });
     }
 
-    maxNumPages(){
-        return Math.round(this.todayGoals.length/this.goalsPerPage);
+    maxNumPages(): boolean{
+        return (this.goalsPerPage * this.currentPage) < this.todayGoals.length;
     }
 
 
