@@ -110,16 +110,16 @@ export class GoalsComponent implements OnInit {
             });
     }
 
-    editGoal(goal, next) {
+    editGoal(_id, name, purpose, category, status, frequency, start, end, next) {
         const updatedGoal: Goal = {
-            _id: goal._id,
-            purpose: goal.purpose,
-            category: goal.category,
-            name: goal.name,
-            status: goal.status,
-            frequency: goal.frequency,
-            start: goal.start,
-            end: goal.end,
+            _id: _id,
+            purpose: purpose,
+            category: category,
+            name: name,
+            status: status,
+            frequency: frequency,
+            start: start,
+            end: end,
             next: next
         };
         this.goalService.completeGoal(updatedGoal).subscribe(
@@ -198,11 +198,14 @@ export class GoalsComponent implements OnInit {
                 var day = nextGoal.getDate();
                 var month = nextGoal.getMonth();
 
-                if(endGoal.getTime() < this.today.getTime()){
-                    return false;
+                if(nextGoal.getTime() < this.today.getTime()
+                && goal.frequency != "Does not repeat"
+                && goal.status == true
+                && endGoal.getTime() >= this.today.getTime()){
+                    this.editGoal(goal._id, goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)
                 }
 
-                if(goal.status == true){
+                if(endGoal.getTime() < this.today.getTime()){
                     return false;
                 }
 
@@ -235,7 +238,7 @@ export class GoalsComponent implements OnInit {
                 console.log(nextGoal.getTime() == this.today.getTime());
                 if (nextGoal.getTime() == this.today.getTime()){
                     console.log(nextGoal);
-                    this.editGoal(goal, nextGoal.toString());
+                    this.editGoal(goal._id, goal.name, goal.purpose, goal.category, goal.status, goal.frequency, goal.start, goal.end, nextGoal.toString());
                     return true;
                 }
 
