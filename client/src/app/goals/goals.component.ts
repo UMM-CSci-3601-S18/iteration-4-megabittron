@@ -186,12 +186,14 @@ export class GoalsComponent implements OnInit {
             });
         }
 
+        this.showGoals("all")
         return this.filteredGoals;
     }
 
     getNext(){
 
-        this.todayGoals = this.filteredGoals.filter(goal => {
+        if(this.showAllGoals == false) {
+            this.todayGoals = this.filteredGoals.filter(goal => {
 
                 var nextGoal = new Date(goal.next);
                 nextGoal.setHours(0, 0, 0, 0);
@@ -202,18 +204,18 @@ export class GoalsComponent implements OnInit {
                 var day = nextGoal.getDate();
                 var month = nextGoal.getMonth();
 
-                if(nextGoal.getTime() < this.today.getTime()
-                && goal.frequency != "Does not repeat"
-                && goal.status == true
-                && endGoal.getTime() >= this.today.getTime()){
+                if (nextGoal.getTime() < this.today.getTime()
+                    && goal.frequency != "Does not repeat"
+                    && goal.status == true
+                    && endGoal.getTime() >= this.today.getTime()) {
                     this.updateNext(goal._id, goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)
                 }
 
-                if(goal.status == true){
+                if (goal.status == true) {
                     return false;
                 }
 
-                if(endGoal.getTime() < this.today.getTime()){
+                if (endGoal.getTime() < this.today.getTime()) {
                     return false;
                 }
 
@@ -221,7 +223,7 @@ export class GoalsComponent implements OnInit {
                     if (nextGoal.getTime() == this.today.getTime()) {
                         return true;
                     }
-                    else{
+                    else {
                         return false;
                     }
                 }
@@ -243,41 +245,72 @@ export class GoalsComponent implements OnInit {
                     }
                 }
 
-                if (nextGoal.getTime() == this.today.getTime()){
+                if (nextGoal.getTime() == this.today.getTime()) {
                     this.updateNext(goal._id, goal.name, goal.purpose, goal.category, goal.status, goal.frequency, goal.start, goal.end, nextGoal.toString());
                     return true;
                 }
 
-                else{
+                else {
                     return false;
                 }
 
 
-        });
+            });
 
-        this.showGoals();
+            this.showGoals("today");
+        }
+
+        else{
+            this.showGoals("all");
+        }
         return this.todayGoals;
 
     }
 
-    showGoals(){
+    showGoals(type){
         var count = this.currentPage * this.goalsPerPage;
-        this.shownGoals = this.todayGoals.filter(goal => {
-            if(count > this.goalsPerPage){
-                count--;
-                return false;
-            }
 
-            if(count <= this.goalsPerPage && count != 0){
-                count--;
-                return true;
-            }
+        if(type == "today") {
+            console.log("today");
 
-        });
+            this.shownGoals = this.todayGoals.filter(goal => {
+                if (count > this.goalsPerPage) {
+                    count--;
+                    return false;
+                }
+
+                if (count <= this.goalsPerPage && count != 0) {
+                    count--;
+                    return true;
+                }
+
+            });
+        }
+
+        else{
+            console.log("all");
+            this.shownGoals = this.filteredGoals.filter(goal => {
+                if (count > this.goalsPerPage) {
+                    count--;
+                    return false;
+                }
+
+                if (count <= this.goalsPerPage && count != 0) {
+                    count--;
+                    return true;
+                }
+
+            });
+        }
     }
 
-    maxNumPages(): boolean{
-        return (this.goalsPerPage * this.currentPage) < this.todayGoals.length;
+    maxNumPages(type): boolean{
+        if(type == "today") {
+            return (this.goalsPerPage * this.currentPage) < this.todayGoals.length;
+        }
+        else{
+            return (this.goalsPerPage * this.currentPage) < this.filteredGoals.length;
+        }
     }
 
 
