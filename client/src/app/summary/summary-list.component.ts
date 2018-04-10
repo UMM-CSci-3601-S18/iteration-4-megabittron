@@ -44,9 +44,10 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     lastWeekStamp = new Date(this.lastWeekUnix);
     lastDayUnix = this.nowUnix - 86400000;
     lastDayStamp = new Date(this.lastDayUnix);
-    lastDateStamp = new Date(this.lastDayUnix);
     lastMonthUnix = this.nowUnix - 2628000000;
     lastMonthStamp = new Date(this.lastMonthUnix);
+    lastYearUnix = this.nowUnix - 31540000000;
+    lastYearStamp = new Date(this.lastYearUnix);
 
 
     // These are public so that tests can reference them (.spec.ts)
@@ -55,6 +56,8 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     public dateFilteredSummaries: Summary[];
     public pastWeekSummaries: Summary[];
     public pastDaySummaries: Summary[];
+    public pastMonthSummaries: Summary[];
+    public pastYearSummaries: Summary[];
 
 
 
@@ -116,6 +119,11 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         return this.pastDaySummaries;
     }
 
+    public pastYearEmotions(givenSummaries):Summary[]{
+        this.pastYearSummaries = this.filterDates(givenSummaries, this.lastYearStamp, this.nowStamp);
+        return this.pastYearSummaries;
+    }
+
     public filterSummaries(searchMood: string, searchIntensity: string, searchStartDate: any, searchEndDate: any): Summary[] {
 
         this.filteredSummaries = this.summaries;
@@ -165,6 +173,28 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                     return this.getDate.getHours() == xValue;
                 });
             }
+            else {
+                if(this.inputType == "year"){
+                    if(this.limitedPast) {
+                        filterBarData = this.pastYearEmotions(filterBarData);
+                    }
+                    filterBarData = filterBarData.filter(summary => {
+                        this.getDate = new Date(summary.date);
+                        return this.getDate.getMonth() == xValue;
+                    });
+                }/*
+                else {
+                    if(this.inputType == "month"){
+                        if(this.limitedPast) {
+                            filterBarData = this.pastYearEmotions(filterBarData);
+                        }
+                        filterBarData = filterBarData.filter(summary => {
+                            this.getDate = new Date(summary.date);
+                            return this.getDate.getDate() == xValue;
+                        });
+                    }
+                }*/
+            }
         }
 
         return filterBarData.length;
@@ -194,29 +224,29 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                     this.getDate = new Date(summary.date);
                     return this.getDate.getHours() == xValue;
                 });
-            }/*
+            }
             else {
-                if(this.inputType == "month"){
+                if(this.inputType == "year"){
                     if(this.limitedPast) {
-                        filterLineData = this.pastMonthEmotions(filterLineData);
+                        filterLineData = this.pastYearEmotions(filterLineData);
                     }
                     filterLineData = filterLineData.filter(summary => {
                         this.getDate = new Date(summary.date);
-                        return this.getDate.getDate() == xValue;
+                        return this.getDate.getMonth() == xValue;
                     });
-                }
+                }/*
                 else {
-                    if(this.inputType == "year"){
+                    if(this.inputType == "month"){
                         if(this.limitedPast) {
                             filterLineData = this.pastYearEmotions(filterLineData);
                         }
                         filterLineData = filterLineData.filter(summary => {
                             this.getDate = new Date(summary.date);
-                            return this.getDate.getMonth() == xValue;
+                            return this.getDate.getDate() == xValue;
                         });
                     }
-                }
-            }*/
+                }*/
+            }
         }
 
         return filterLineData.length;
@@ -224,11 +254,21 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
 
     public modDay(day: number): Number {
-        return (this.nowDay + 1 + day)%7;
+        if(this.limitedPast){
+            return (this.nowDay + 1 + day)%7;
+        }
+        else {
+            return day;
+        }
     }
 
     public modHour(hour: number): Number {
-        return (this.nowHour + 1 + hour)%24;
+        if(this.limitedPast){
+            return (this.nowHour + 1 + hour)%24;
+        }
+        else {
+            return hour;
+        }
     }
 /*
     public modDate(date: number): Number {
@@ -237,7 +277,12 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     */
 
     public modMonth(month: number): Number {
-        return (this.nowMonth + 1 + month)%12;
+        if(this.limitedPast){
+            return (this.nowMonth + 1 + month)%12;
+        }
+        else {
+            return month;
+        }
     }
 
 
@@ -246,6 +291,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         let thisDay = (this.nowDay + 1 + day)%7;
 
         let strDay = '';
+
         if(thisDay == 0){
             strDay = 'Sun';
         }
@@ -289,6 +335,50 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         }
 
         return strHour + timeSuffix;
+    }
+
+    public getPastMonths(month: number): String {
+        let thisMonth = (this.nowMonth + 1 + month)%12;
+
+        let strMonth = '';
+
+        if(thisMonth == 0){
+            strMonth = 'Jan';
+        }
+        if(thisMonth == 1){
+            strMonth = 'Feb';
+        }
+        if(thisMonth == 2){
+            strMonth = 'Mar';
+        }
+        if(thisMonth == 3){
+            strMonth = 'Apr';
+        }
+        if(thisMonth == 4){
+            strMonth = 'May';
+        }
+        if(thisMonth == 5){
+            strMonth = 'June';
+        }
+        if(thisMonth == 6){
+            strMonth = 'July';
+        }
+        if(thisMonth == 7){
+            strMonth = 'Aug';
+        }
+        if(thisMonth == 8){
+            strMonth = 'Sep';
+        }
+        if(thisMonth == 9){
+            strMonth = 'Oct';
+        }
+        if(thisMonth == 10){
+            strMonth = 'Nov';
+        }
+        if(thisMonth == 11){
+            strMonth = 'Dec';
+        }
+        return strMonth;
     }
 
     public getDailyData(emotion){
@@ -382,6 +472,60 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     }
 
+    public getMonthlyData(emotion){
+
+        if(this.CurrentGraph == 'Bar'){
+            return [
+                this.filterBarGraph(this.modMonth(0)),
+                this.filterBarGraph(this.modMonth(1)),
+                this.filterBarGraph(this.modMonth(2)),
+                this.filterBarGraph(this.modMonth(3)),
+                this.filterBarGraph(this.modMonth(4)),
+                this.filterBarGraph(this.modMonth(5)),
+                this.filterBarGraph(this.modMonth(6)),
+                this.filterBarGraph(this.modMonth(7)),
+                this.filterBarGraph(this.modMonth(8)),
+                this.filterBarGraph(this.modMonth(9)),
+                this.filterBarGraph(this.modMonth(10)),
+                this.filterBarGraph(this.modMonth(11))
+            ]
+        }
+        else {
+            if(this.CurrentGraph == 'Line'){
+                return [
+                    this.filterLineGraph(this.modMonth(0), emotion),
+                    this.filterLineGraph(this.modMonth(1), emotion),
+                    this.filterLineGraph(this.modMonth(2), emotion),
+                    this.filterLineGraph(this.modMonth(3), emotion),
+                    this.filterLineGraph(this.modMonth(4), emotion),
+                    this.filterLineGraph(this.modMonth(5), emotion),
+                    this.filterLineGraph(this.modMonth(6), emotion),
+                    this.filterLineGraph(this.modMonth(7), emotion),
+                    this.filterLineGraph(this.modMonth(8), emotion),
+                    this.filterLineGraph(this.modMonth(9), emotion),
+                    this.filterLineGraph(this.modMonth(10), emotion),
+                    this.filterLineGraph(this.modMonth(11), emotion),
+                ]
+            }
+        }
+    }
+
+    public getTypeData(type, emotion) {
+        if(type == "week"){
+            return this.getDailyData(emotion);
+        }
+        else {
+            if(type == "day"){
+                return this.getHourlyData(emotion);
+            }
+
+            else {
+                if(type == "year"){
+                    return this.getMonthlyData(emotion);
+                }
+            }
+        }
+    }
     /**
      * Starts an asynchronous operation to update the emojis list
      *
@@ -423,6 +567,21 @@ public pastHours = [
     this.getPastHours(23)
 ];
 
+public pastMonths = [
+    this.getPastMonths(0),
+    this.getPastMonths(1),
+    this.getPastMonths(2),
+    this.getPastMonths(3),
+    this.getPastMonths(4),
+    this.getPastMonths(5),
+    this.getPastMonths(6),
+    this.getPastMonths(7),
+    this.getPastMonths(8),
+    this.getPastMonths(9),
+    this.getPastMonths(10),
+    this.getPastMonths(11)
+];
+
     updateBarChart(): void{
         this.CurrentGraph = 'Bar';
 
@@ -437,62 +596,53 @@ public pastHours = [
         this.ctxBar = this.barCanvas;
 
         let xLabel;
-        let summaryDays;
-        let summaryHours;
-        let displayData;
         let days;
         let hours;
-
+        let months;
 
         if(this.limitedPast){
-        days = this.pastDays;
-        hours = this.pastHours;
+            days = this.pastDays;
+            hours = this.pastHours;
+            months = this.pastMonths;
         }
         else {
             days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
             hours = ['12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM',
                 '8AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM',
                 '5 PM', '6 PM', '7 PM', '8 PM','9 PM', '10 PM', '11 PM'];
+            months = ['Jan', 'Feb', 'Mar','Apr', 'May', 'June',
+                'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         }
 
         console.log(this.inputType);
         if(this.inputType == "day"){
             xLabel = hours;
-
-            summaryHours = {
-                "label": "Total Number of Entries",
-                "data": this.getHourlyData('all'),
-                "fill": true,
-                "backgroundColor": "blue",
-                "borderColor": "black",
-                "lineTension": 0.1
-            };
-            displayData = [summaryHours];
         }
         else {
             if (this.inputType == "week") {
-                console.log("here");
                 xLabel = days;
-
-                summaryDays = {
-                    "label": "Total Number of Entries",
-                    "data": this.getDailyData('all'),
-                    "fill": true,
-                    "backgroundColor": "blue",
-                    "borderColor": "black",
-                    "lineTension": 0.1
-                };
-
-                displayData = [summaryDays];
+            }
+            else {
+                if (this.inputType == "year") {
+                    xLabel = months;
+                }
             }
         }
 
         this.barChart = new Chart(this.ctxBar, {
             type: 'bar',
             data: {
-
                 labels: xLabel,
-                datasets: displayData,
+                datasets: [
+                    {
+                    "label": "Total Number of Entries",
+                    "data": this.getTypeData(this.inputType, 'all'),
+                    "fill": true,
+                    "backgroundColor": "blue",
+                    "borderColor": "black",
+                    "lineTension": 0.1
+                }
+                ],
             },
             options: {
                 responsive: true,
@@ -538,148 +688,93 @@ public pastHours = [
         }
 
         let lineType;
-        let happy_time_totals;
-        let sad_time_totals;
-        let meh_time_totals;
-        let mad_time_totals;
-        let anxious_time_totals;
-        let lineData;
         let days;
         let hours;
+        let months;
 
         if(this.limitedPast){
             days = this.pastDays;
             hours = this.pastHours;
+            months = this.pastMonths;
         }
         else {
             days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
             hours = ['12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM',
                 '8AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM',
                 '5 PM', '6 PM', '7 PM', '8 PM','9 PM', '10 PM', '11 PM'];
+            months = ['Jan', 'Feb', 'Mar','Apr', 'May', 'June',
+                'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         }
 
         if(this.inputType == "week") {
             lineType = days;
-
-            happy_time_totals = {
-                label: "Happy",
-                data: this.getDailyData('happy'),
-                hidden: false,
-                fill: false,
-                borderColor: this.happyColor,
-                lineTension: 0.1
-            };
-
-            sad_time_totals = {
-                "label": "Sad",
-                "data": this.getDailyData('sad'),
-                hidden: false,
-                "fill": false,
-                "borderColor": this.sadColor,
-                "lineTension": 0.1
-            };
-
-            meh_time_totals = {
-                "label": "Meh",
-                "data": this.getDailyData('meh'),
-                hidden: false,
-                "fill": false,
-                "borderColor": this.mehColor,
-                "lineTension": 0.1
-            };
-
-            mad_time_totals = {
-                "label": "Mad",
-                "data": this.getDailyData('mad'),
-                hidden: false,
-                "fill": false,
-                "borderColor": this.madColor,
-                "lineTension": 0.1
-            };
-
-            anxious_time_totals = {
-                "label": "Anxious",
-                "data": this.getDailyData('anxious'),
-                hidden: false,
-                "fill": false,
-                "borderColor": this.anxiousColor,
-                "lineTension": 0.1
-            };
         } else {
             if(this.inputType == "day") {
                 lineType = hours;
-
-                happy_time_totals = {
-                    "label": "Happy",
-                    "data": this.getHourlyData('happy'),
-                    hidden: false,
-                    "fill": false,
-                    "borderColor": this.happyColor,
-                    "lineTension": 0.1
-                };
-
-                sad_time_totals = {
-                    "label": "Sad",
-                    "data": this.getHourlyData('sad'),
-                    hidden: false,
-                    "fill": false,
-                    "borderColor": this.sadColor,
-                    "lineTension": 0.1
-                };
-
-                meh_time_totals = {
-                    "label": "Meh",
-                    "data": this.getHourlyData('meh'),
-                    hidden: false,
-                    "fill": false,
-                    "borderColor": this.mehColor,
-                    "lineTension": 0.1
-                };
-
-                mad_time_totals = {
-                    "label": "Mad",
-                    "data": this.getHourlyData('mad'),
-                    hidden: false,
-                    "fill": false,
-                    "borderColor": this.madColor,
-                    "lineTension": 0.1
-                };
-
-                anxious_time_totals = {
-                    "label": "Anxious",
-                    "data": this.getHourlyData('anxious'),
-                    hidden: false,
-                    "fill": false,
-                    "borderColor": this.anxiousColor,
-                    "lineTension": 0.1
-                };
+            }
+            else {
+                if(this.inputType == "year"){
+                    lineType = months;
+                }
             }
         }
-
-        lineData = [
-            happy_time_totals,
-            sad_time_totals,
-            meh_time_totals,
-            mad_time_totals,
-            anxious_time_totals
-        ];
-
-                this.lineChart = new Chart(this.ctxLine, {
-                    type: 'line',
-                    data: {
-                        labels: lineType,
-                        datasets: lineData
+        this.lineChart = new Chart(this.ctxLine, {
+            type: 'line',
+            data: {
+                labels: lineType,
+                datasets: [
+                    {
+                        "label": "Happy",
+                        "data": this.getTypeData(this.inputType, 'happy'),
+                        hidden: false,
+                        "fill": false,
+                        "borderColor": this.happyColor,
+                        "lineTension": 0.1
                     },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero:true
-                                }
-                            }]
-                        }
+                    {
+                        "label": "Sad",
+                        "data": this.getTypeData(this.inputType, 'sad'),
+                        hidden: false,
+                        "fill": false,
+                        "borderColor": this.sadColor,
+                        "lineTension": 0.1
+                    },
+                    {
+                        "label": "Meh",
+                        "data": this.getTypeData(this.inputType, 'meh'),
+                        hidden: false,
+                        "fill": false,
+                        "borderColor": this.mehColor,
+                        "lineTension": 0.1
+                    },
+                    {
+                        "label": "Mad",
+                        "data": this.getTypeData(this.inputType, 'mad'),
+                        hidden: false,
+                        "fill": false,
+                        "borderColor": this.madColor,
+                        "lineTension": 0.1
+                    },
+                    {
+                        "label": "Anxious",
+                        "data": this.getTypeData(this.inputType, 'anxious'),
+                        hidden: false,
+                        "fill": false,
+                        "borderColor": this.anxiousColor,
+                        "lineTension": 0.1
                     }
-                });
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
     }
 
     buildBarChart(): void {
@@ -720,13 +815,13 @@ public pastHours = [
                     yAxes: [{
                         ticks: {
                             beginAtZero: true
-
                         }
                     }]
                 }
             }
         });
     }
+
 
     /*
     buildLineChart(): void {
