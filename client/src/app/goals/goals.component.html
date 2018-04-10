@@ -60,8 +60,8 @@
                                             (click)="deleteGoal(goal._id['$oid']); openSnackBar('Goal Deleted')">
                                         <mat-icon>delete</mat-icon>
                                     </button>
-                                    <button *ngIf="!goal.status" mat-icon-button class="button complete-button" id="todayCompleteGoal"
-                                            (click)="goalSatisfied(goal._id['$oid'], goal.purpose, goal.category, goal.name); openSnackBar('Goal Completed')">
+                                    <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" id="todayCompleteGoal"
+                                            (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next); openSnackBar('Goal Completed')">
                                         <mat-icon>done</mat-icon>
                                     </button>
                                 </div>
@@ -111,9 +111,13 @@
                                            (click)="deleteGoal(goal._id['$oid']); openSnackBar('Goal Deleted')">
                                        <mat-icon>delete</mat-icon>
                                    </button>
-                                   <button *ngIf="!goal.status" mat-icon-button class="button complete-button" id="allCompleteGoal"
-                                           (click)="goalSatisfied(goal._id['$oid'], goal.purpose, goal.category, goal.name); openSnackBar('Goal Completed')">
+                                   <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" id="allCompleteGoal"
+                                           (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next); openSnackBar('Goal Completed')">
                                        <mat-icon>done</mat-icon>
+                                   </button>
+                                   <button *ngIf="goal.status == true" mat-icon-button class="button complete-button" id="uncompleteGoal"
+                                           (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next); openSnackBar('Goal Uncompleted')">
+                                       <mat-icon>add</mat-icon>
                                    </button>
                                </div>
                            </mat-expansion-panel>

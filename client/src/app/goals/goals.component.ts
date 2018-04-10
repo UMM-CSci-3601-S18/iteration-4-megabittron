@@ -88,17 +88,17 @@ export class GoalsComponent implements OnInit {
         );
     }
 
-    goalSatisfied(_id: string, thePurpose: string, theCategory: string, theName) {
+    editGoal(_id, name, purpose, category, status, frequency, start, end, next) {
         const updatedGoal: Goal = {
             _id: _id,
-            purpose: thePurpose,
-            category: theCategory,
-            name: theName,
-            status: true,
-            frequency: '',
-            start: '',
-            end: '',
-            next: ''
+            purpose: purpose,
+            category: category,
+            name: name,
+            status: status,
+            frequency: frequency,
+            start: start,
+            end: end,
+            next: next
         };
         this.goalService.completeGoal(updatedGoal).subscribe(
             completeGoalResult => {
@@ -111,7 +111,7 @@ export class GoalsComponent implements OnInit {
             });
     }
 
-    editGoal(_id, name, purpose, category, status, frequency, start, end, next) {
+    updateNext(_id, name, purpose, category, status, frequency, start, end, next) {
         const updatedGoal: Goal = {
             _id: _id,
             purpose: purpose,
@@ -203,7 +203,11 @@ export class GoalsComponent implements OnInit {
                 && goal.frequency != "Does not repeat"
                 && goal.status == true
                 && endGoal.getTime() >= this.today.getTime()){
-                    this.editGoal(goal._id, goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)
+                    this.updateNext(goal._id, goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)
+                }
+
+                if(goal.status == true){
+                    return false;
                 }
 
                 if(endGoal.getTime() < this.today.getTime()){
@@ -236,10 +240,8 @@ export class GoalsComponent implements OnInit {
                     }
                 }
 
-                console.log(nextGoal.getTime() == this.today.getTime());
                 if (nextGoal.getTime() == this.today.getTime()){
-                    console.log(nextGoal);
-                    this.editGoal(goal._id, goal.name, goal.purpose, goal.category, goal.status, goal.frequency, goal.start, goal.end, nextGoal.toString());
+                    this.updateNext(goal._id, goal.name, goal.purpose, goal.category, goal.status, goal.frequency, goal.start, goal.end, nextGoal.toString());
                     return true;
                 }
 
