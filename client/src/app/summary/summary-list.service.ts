@@ -10,13 +10,13 @@ import {environment} from '../../environments/environment';
 
 @Injectable()
 export class SummaryListService {
-    readonly baseUrl: string = environment.API_URL + 'summarys';
+    readonly baseUrl: string = environment.API_URL + 'summaries';
     private summaryUrl: string = this.baseUrl;
 
     constructor(private http: HttpClient) {
     }
 
-    getSummarys(summaryMood?: string,): Observable<Summary[]> {
+    getSummaries(summaryMood?: string,): Observable<Summary[]> {
         this.filterByMood(summaryMood);
         return this.http.get<Summary[]>(this.summaryUrl);
     }
