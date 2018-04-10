@@ -88,14 +88,14 @@
                         <br>
                         <mat-checkbox [(ngModel)]="colorblindMode">Colorblind Mode</mat-checkbox>
                         <br>
-                        <button mat-raised-button id="filterBarButton" (click)="this.filterSummarys(summaryMood, summaryIntensity, startDate, endDate); updateBarChart()">Summary Graph</button>
-                        <button mat-raised-button id="filterLineButton" (click)="this.filterSummarys(summaryMood, summaryIntensity, startDate, endDate); updateLineChart()">Detailed Graph</button>
+                        <button mat-raised-button id="filterBarButton" (click)="this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate); updateBarChart()">Summary Graph</button>
+                        <button mat-raised-button id="filterLineButton" (click)="this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate); updateLineChart()">Detailed Graph</button>
                         <br>
 
 
                     </div>
-                    <mat-card> <mat-card-title class="your-summarys-title">Your Emotions</mat-card-title>
-                        <mat-card-subtitle class="your-summarys-title">There are {{totalNumberMoods()}} entries represented</mat-card-subtitle>
+                    <mat-card> <mat-card-title class="your-summaries-title">Your Emotions</mat-card-title>
+                        <mat-card-subtitle class="your-summaries-title">There are {{totalNumberMoods()}} entries represented</mat-card-subtitle>
                     <canvas id="Chart" height="auto"></canvas>
                     </mat-card>
 
@@ -103,12 +103,12 @@
                 <!--
                 <mat-tab label="Line Graph">
 
-                    <mat-card> <mat-card-title class="your-summarys-title">Your Emotions</mat-card-title>
-                        <mat-card-subtitle class="your-summarys-title">There are {{totalNumberMoods()}} entries represented</mat-card-subtitle>
+                    <mat-card> <mat-card-title class="your-summaries-title">Your Emotions</mat-card-title>
+                        <mat-card-subtitle class="your-summaries-title">There are {{totalNumberMoods()}} entries represented</mat-card-subtitle>
 
                         <mat-checkbox [(ngModel)]="colorblindMode">Colorblind Mode</mat-checkbox>
                         <br>
-                        <button mat-raised-button id="filterLineButton" (click)="this.filterSummarys(summaryMood, summaryIntensity, startDate, endDate); updateLineChart()">Update Graph</button>
+                        <button mat-raised-button id="filterLineButton" (click)="this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate); updateLineChart()">Update Graph</button>
 
                         <label>Show entries across a day or week?</label>
                         <select id="LineScale" [(ngModel)]="lineScale">
@@ -124,11 +124,11 @@
                 -->
                 <mat-tab label="List View">
 
-                    <mat-card> <mat-card-title class="your-summarys-title">Your Emotions</mat-card-title>
+                    <mat-card> <mat-card-title class="your-summaries-title">Your Emotions</mat-card-title>
 
-                        <mat-card-subtitle class="your-summarys-title">You have {{totalNumberMoods()}} emotions to view</mat-card-subtitle>
-                        <mat-accordion *ngIf="summarys && myTabGroup.selectedIndex == 1; else summarysError">
-                            <mat-expansion-panel #elem class="summarys" [id]="summary._id" [expanded]="this.isHighlighted(summary)" *ngFor="let summary of this.filterSummarys(summaryMood, summaryIntensity, startDate, endDate)">
+                        <mat-card-subtitle class="your-summaries-title">You have {{totalNumberMoods()}} emotions to view</mat-card-subtitle>
+                        <mat-accordion *ngIf="summaries && myTabGroup.selectedIndex == 1; else summariesError">
+                            <mat-expansion-panel #elem class="summaries" [id]="summary._id" [expanded]="this.isHighlighted(summary)" *ngFor="let summary of this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate)">
                                 <mat-expansion-panel-header>
                                     <mat-panel-title id="name">You felt {{summary.mood}} on
                                         {{stringToDate(summary.date).toLocaleDateString()}} at
@@ -139,7 +139,7 @@
                             </mat-expansion-panel>
                         </mat-accordion>
 
-                        <ng-template #summarysError>
+                        <ng-template #summariesError>
                             <mat-error>
                                 There was a problem loading the goals. Possibly the server is down or perhaps there are network
                                 issues.

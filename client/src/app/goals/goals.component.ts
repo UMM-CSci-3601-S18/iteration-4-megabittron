@@ -16,6 +16,7 @@ export class GoalsComponent implements OnInit {
     // These are public so that tests can reference them (.spec.ts)
     public goals: Goal[];
     public todayGoals: Goal[];
+    public shownGoals: Goal[];
     public filteredGoals: Goal[];
 
     // These are the target values used in searching.
@@ -28,7 +29,9 @@ export class GoalsComponent implements OnInit {
     public goalNext;
     public goalFrequency;
     public today;
-    showPage = false;
+    public showAllGoals = false;
+    public goalsPerPage = 4;
+    public currentPage = 1;
 
     // The ID of the goal
     private highlightedID: { '$oid': string } = {'$oid': ''};
@@ -41,6 +44,7 @@ export class GoalsComponent implements OnInit {
     isHighlighted(goal: Goal): boolean {
         return goal._id['$oid'] === this.highlightedID['$oid'];
     }
+
 
     openDialog(): void {
         const newGoal: Goal = {
@@ -87,17 +91,17 @@ export class GoalsComponent implements OnInit {
         );
     }
 
-    goalSatisfied(_id: string, thePurpose: string, theCategory: string, theName) {
+    editGoal(_id, name, purpose, category, status, frequency, start, end, next) {
         const updatedGoal: Goal = {
             _id: _id,
-            purpose: thePurpose,
-            category: theCategory,
-            name: theName,
-            status: true,
-            frequency: '',
-            start: '',
-            end: '',
-            next: ''
+            purpose: purpose,
+            category: category,
+            name: name,
+            status: status,
+            frequency: frequency,
+            start: start,
+            end: end,
+            next: next
         };
         this.goalService.completeGoal(updatedGoal).subscribe(
             completeGoalResult => {
@@ -110,16 +114,16 @@ export class GoalsComponent implements OnInit {
             });
     }
 
-    editGoal(goal, next) {
+    updateNext(_id, name, purpose, category, status, frequency, start, end, next) {
         const updatedGoal: Goal = {
-            _id: goal._id,
-            purpose: goal.purpose,
-            category: goal.category,
-            name: goal.name,
-            status: goal.status,
-            frequency: goal.frequency,
-            start: goal.start,
-            end: goal.end,
+            _id: _id,
+            purpose: purpose,
+            category: category,
+            name: name,
+            status: status,
+            frequency: frequency,
+            start: start,
+            end: end,
             next: next
         };
         this.goalService.completeGoal(updatedGoal).subscribe(
@@ -198,11 +202,18 @@ export class GoalsComponent implements OnInit {
                 var day = nextGoal.getDate();
                 var month = nextGoal.getMonth();
 
-                if(endGoal.getTime() < this.today.getTime()){
-                    return false;
+                if(nextGoal.getTime() < this.today.getTime()
+                && goal.frequency != "Does not repeat"
+                && goal.status == true
+                && endGoal.getTime() >= this.today.getTime()){
+                    this.updateNext(goal._id, goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)
                 }
 
                 if(goal.status == true){
+                    return false;
+                }
+
+                if(endGoal.getTime() < this.today.getTime()){
                     return false;
                 }
 
@@ -232,10 +243,8 @@ export class GoalsComponent implements OnInit {
                     }
                 }
 
-                console.log(nextGoal.getTime() == this.today.getTime());
                 if (nextGoal.getTime() == this.today.getTime()){
-                    console.log(nextGoal);
-                    this.editGoal(goal, nextGoal.toString());
+                    this.updateNext(goal._id, goal.name, goal.purpose, goal.category, goal.status, goal.frequency, goal.start, goal.end, nextGoal.toString());
                     return true;
                 }
 
@@ -246,9 +255,31 @@ export class GoalsComponent implements OnInit {
 
         });
 
+        this.showGoals();
         return this.todayGoals;
 
     }
+
+    showGoals(){
+        var count = this.currentPage * this.goalsPerPage;
+        this.shownGoals = this.todayGoals.filter(goal => {
+            if(count > this.goalsPerPage){
+                count--;
+                return false;
+            }
+
+            if(count <= this.goalsPerPage && count != 0){
+                count--;
+                return true;
+            }
+
+        });
+    }
+
+    maxNumPages(): boolean{
+        return (this.goalsPerPage * this.currentPage) < this.todayGoals.length;
+    }
+
 
     /**
      * Starts an asynchronous operation to update the goals list
