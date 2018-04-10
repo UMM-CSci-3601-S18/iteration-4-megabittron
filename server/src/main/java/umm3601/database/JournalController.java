@@ -50,17 +50,29 @@ public class JournalController {
     public String getJournals(Map<String, String[]> queryParams) {
 
         Document filterDoc = new Document();
+        String targetContent;
+        Document contentRegQuery = new Document();;
+
+        //Filter by userID
+        targetContent = (queryParams.get("userID")[0]);
+        //If there is no userID provided, return an empty result
+        if(targetContent.equals(null) || targetContent.equals("")) {
+            JSON.serialize(contentRegQuery);
+        }
+        contentRegQuery.append("$regex", targetContent);
+        contentRegQuery.append("$options", "i");
+        filterDoc = filterDoc.append("userID", contentRegQuery);
 
         if (queryParams.containsKey("subject")) {
-            String targetContent = (queryParams.get("subject")[0]);
-            Document contentRegQuery = new Document();
+            targetContent = (queryParams.get("subject")[0]);
+            contentRegQuery = new Document();
             contentRegQuery.append("$regex", targetContent);
             contentRegQuery.append("$options", "i");
             filterDoc = filterDoc.append("subject", contentRegQuery);        }
 
         if (queryParams.containsKey("body")) {
-            String targetContent = (queryParams.get("body")[0]);
-            Document contentRegQuery = new Document();
+            targetContent = (queryParams.get("body")[0]);
+            contentRegQuery = new Document();
             contentRegQuery.append("$regex", targetContent);
             contentRegQuery.append("$options", "i");
             filterDoc = filterDoc.append("body", contentRegQuery);
@@ -72,8 +84,9 @@ public class JournalController {
         return JSON.serialize(matchingJournals);
     }
 
-    public String addNewJournal(String subject, String body) {
+    public String addNewJournal(String userID, String subject, String body) {
         Document newJournal = new Document();
+        newJournal.append("userID", userID);
         newJournal.append("subject",subject);
         newJournal.append("body",body);
 
