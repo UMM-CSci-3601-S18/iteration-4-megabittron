@@ -1,6 +1,6 @@
 import {MatDialog} from '@angular/material';
 import {MatSnackBar} from '@angular/material';
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {EmotionService} from './home.service';
 import {Observable} from 'rxjs/Observable';
 import {Emotion} from './emotion';
@@ -12,12 +12,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
     templateUrl: 'home.component.html',
     styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit {
-
-    public firstFormGroup: FormGroup;
-    public secondFormGroup: FormGroup;
-    public isLinear = true;
-
+export class HomeComponent {
     public emotions: Emotion[];
 
     readonly baseUrl: string = environment.API_URL + 'emotions';
@@ -31,15 +26,13 @@ export class HomeComponent implements OnInit {
     public emotionDescription: string;
     public emotionDate: string;
 
-
     //used for slider
     thumbLabel = true;
     public emojiRating: number = 0;
 
     constructor(public dialog: MatDialog,
                 public snackBar: MatSnackBar,
-                public emotionService: EmotionService,
-                private _formBuilder: FormBuilder) {
+                public emotionService: EmotionService) {
     }
 
     setEmotion(emotion){
@@ -71,7 +64,6 @@ export class HomeComponent implements OnInit {
         this.selectedEmotion = "none";
         this.emojiRating = 0;
         this.emotionDescription = "";
-
     }
 
     saveEmotion(): void{
@@ -97,7 +89,6 @@ export class HomeComponent implements OnInit {
         //
         // Subscribe waits until the data is fully downloaded, then
         // performs an action on it (the first lambda)
-
         const emotionObservable: Observable<Emotion[]> = this.emotionService.getEmotions();
         emotionObservable.subscribe(
             emotions => {
@@ -113,24 +104,6 @@ export class HomeComponent implements OnInit {
     getDate(){
         var today = new Date();
         this.emotionDate = today.toString();
-    }
-
-    getDescription(entryBox){
-        this.emotionDescription = entryBox;
-    }
-
-    //Gives a snackbar message pop-up to let the client know their response has been saved
-    saveConfirmation(): void {
-        this.snackBar.open("Your response has been saved.", "close", {duration: 2000});
-    }
-
-    ngOnInit() {
-        this.firstFormGroup = this._formBuilder.group({
-            firstCtrl: ['', Validators.required]
-        });
-        this.secondFormGroup = this._formBuilder.group({
-            secondCtrl: ['', Validators.required]
-        });
     }
 
 }

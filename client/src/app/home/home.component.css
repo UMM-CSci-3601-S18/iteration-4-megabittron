@@ -76,6 +76,7 @@ textarea:focus {
 
 .stepperButtons{
     text-align: center;
+    padding-bottom: 10px;
 }
 
 .on {
@@ -110,5 +111,13 @@ textarea:focus {
     margin: 0 auto;
     padding: 10px;
     width: 100px;
-    float: left;
+}
+
+.next-button:hover {
+    background-color: #E0E0E0;
+}
+
+.emotion-intensity {
+    text-align: center;
+    font-size: 25px;
 }
