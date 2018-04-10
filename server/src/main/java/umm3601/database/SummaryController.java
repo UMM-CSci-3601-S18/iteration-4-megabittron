@@ -49,6 +49,18 @@ public class SummaryController {
     public String getSummaries(Map<String, String[]> queryParams) {
 
         Document filterDoc = new Document();
+        String targetContent;
+        Document contentRegQuery = new Document();;
+
+        //Filter by userID
+        targetContent = (queryParams.get("userID")[0]);
+        //If there is no userID provided, return an empty result
+        if(targetContent.equals(null) || targetContent.equals("")) {
+            JSON.serialize(contentRegQuery);
+        }
+        contentRegQuery.append("$regex", targetContent);
+        contentRegQuery.append("$options", "i");
+        filterDoc = filterDoc.append("userID", contentRegQuery);
 
         if (queryParams.containsKey("mood")) {
             String targetMood = queryParams.get("mood")[0];
