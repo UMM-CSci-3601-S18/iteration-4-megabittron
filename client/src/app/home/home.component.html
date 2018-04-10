@@ -2,7 +2,8 @@
 <body class="whole-body">
 <mat-card>
     <mat-horizontal-stepper #stepper>
-        <mat-step editable="false">
+
+        <mat-step label="Emotion Selection">
             <div class="how-are-you">
                 <p>How are you feeling today?</p>
             </div>
@@ -39,23 +40,26 @@
                     Next
                 </button>
             </div>
+
         </mat-step>
 
 
-        <mat-step editable="false">
+        <mat-step label="Emotion Intensity" *ngIf="selectedEmotion == 'happy' || selectedEmotion == 'sad' ||
+        selectedEmotion == 'mad' || selectedEmotion == 'anxious' ">
+
             <div class="emotion-intensity" *ngIf="selectedEmotion != 'meh'">
                 <img class="selected-emoji" src="../../assets/images/emotions/{{selectedEmotion}}.svg">
                 <p>How {{selectedEmotion}} do you feel?</p>
                 <div class="slider-div">
-                <mat-slider
-                    class="slider"
-                    [max]="5"
-                    [min]="1"
-                    [step]="1"
-                    [thumb-label]="thumbLabel"
-                    [(ngModel)]="emojiRating"
-                    (input)="emojiRating=$event.value">
-                </mat-slider>
+                    <mat-slider
+                        class="slider"
+                        [max]="5"
+                        [min]="1"
+                        [step]="1"
+                        [thumb-label]="thumbLabel"
+                        [(ngModel)]="emojiRating"
+                        (input)="emojiRating=$event.value">
+                    </mat-slider>
                 </div>
                 <div class="stepperButtons">
                     <button mat-raised-button
@@ -68,7 +72,8 @@
             </div>
             <div class="emotion-intensity" *ngIf="selectedEmotion == 'meh'">
                 <img class="selected-emoji" src="../../assets/images/emotions/{{selectedEmotion}}.svg">
-                <p>If you're feeling {{selectedEmotion}}, there's no need to know the intensity. Click next!</p>
+                <p>¯\_(ツ)_/¯</p>
+                <!--<p>If you're feeling {{selectedEmotion}}, there's no need to know the intensity. Click next!</p>-->
                 <div class="stepperButtons">
                     <button mat-raised-button
                             matStepperNext
@@ -77,24 +82,32 @@
                     </button>
                 </div>
             </div>
+
         </mat-step>
-        <mat-step editable="false">
+
+
+        <mat-step label="Journaling" editable="true" *ngIf="emojiRating > 0 || selectedEmotion == 'meh'">
+
             <div>
-            I'm feeling this way because...
-            <br>
-            <textarea id="entryBox" rows="4" cols="50" (input)="emotionDescription=$event.target.value"></textarea>
+                I'm feeling this way because...
+                <br>
+                <textarea id="entryBox" rows="4" cols="50" (input)="emotionDescription=$event.target.value"></textarea>
             </div>
             <div class="stepperButtons">
                 <button mat-raised-button
                         matStepperNext
                         class="next-button"
                         [disabled]="showSaveButton()"
-                        (click)="getDate();saveEmotion();">
-                    Next
+                        (click)="videoEnablerSwitch();getDate();saveEmotion()">
+                    Submit
                 </button>
             </div>
+
         </mat-step>
-        <mat-step>
+
+
+        <mat-step label="Video" *ngIf="videoBooleanSwitch == true">
+
             <div *ngIf="videoEmotion == 'happy'">
                 <div class="container">
                     <iframe id="responseHappyVideoFrame"
@@ -140,8 +153,7 @@
                             class="video"></iframe>
                 </div>
             </div>
-            <div *ngIf="videoEmotion == 'none'">Oops! Something happened...*runs away*
-            </div>
+
         </mat-step>
 
     </mat-horizontal-stepper>

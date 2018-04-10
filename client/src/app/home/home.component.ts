@@ -5,7 +5,6 @@ import {EmotionService} from './home.service';
 import {Observable} from 'rxjs/Observable';
 import {Emotion} from './emotion';
 import {environment} from '../../environments/environment';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'home-component',
@@ -25,6 +24,12 @@ export class HomeComponent {
     public videoEmotion = "none";
     public emotionDescription: string;
     public emotionDate: string;
+
+    public videoBooleanSwitch = false;
+
+    videoEnablerSwitch(){
+        this.videoBooleanSwitch = true;
+    }
 
     //used for slider
     thumbLabel = true;
@@ -53,10 +58,14 @@ export class HomeComponent {
     }
 
     showSaveButton(){
-        if(this.selectedEmotion == "none"){
+
+        if (this.selectedEmotion == 'meh') {
+            return false;
+        }
+
+        if (this.selectedEmotion != 'meh' && this.emojiRating < 1) {
             return true;
         }
-        return false;
     }
 
     resetPage(){
