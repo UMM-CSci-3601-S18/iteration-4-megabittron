@@ -22,6 +22,9 @@ import {EditJournalComponent} from "./journals/edit-journal.component";
 import {ShowJournalComponent} from "./journals/show-journal.component";
 import {JournalsService} from "./journals/journals.service";
 import {ArraySortPipe} from "./journals/array-sort-pipe.pipe";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+
 
 @NgModule({
     exports: [
@@ -32,6 +35,7 @@ import {ArraySortPipe} from "./journals/array-sort-pipe.pipe";
         HttpClientModule,
         Routing,
         CustomModule,
+        ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
     ],
     declarations: [
         AppComponent,
