@@ -11,14 +11,20 @@ import {environment} from '../../environments/environment';
 export class GoalsService {
     readonly baseUrl: string = environment.API_URL + 'goals';
     private goalUrl: string = this.baseUrl;
+    private noID: boolean = false;
 
     constructor(private http: HttpClient) {
     }
 
-    getGoals(goalCategory?: string): Observable<Goal[]> {
+    getGoals(userID: string, goalCategory?: string): Observable<Goal[]> {
         this.filterByCategory(goalCategory);
+        this.filterByUserID(userID);
 
-        return this.http.get<Goal[]>(this.goalUrl);
+        //require a userID
+        if(this.noID == false){
+            return this.http.get<Goal[]>(this.goalUrl);
+        }
+        return null;
     }
 
     // This isn't used, but may be useful for future iterations.
@@ -56,9 +62,9 @@ export class GoalsService {
 
     filterByUserID(userID: string): void {
         if (!(userID == null || userID === '')) {
-            if (this.parameterPresent('category=') ) {
+            if (this.parameterPresent('userID=') ) {
                 // there was a previous search by category that we need to clear
-                this.removeParameter('category=');
+                this.removeParameter('userID=');
             }
             if (this.goalUrl.indexOf('?') !== -1) {
                 // there was already some information passed in this url
@@ -68,15 +74,8 @@ export class GoalsService {
                 this.goalUrl += '?userID=' + userID + '&';
             }
         } else {
-            // there was nothing in the box to put onto the URL... reset
-            if (this.parameterPresent('userID=')) {
-                let start = this.goalUrl.indexOf('userID=');
-                const end = this.goalUrl.indexOf('&', start);
-                if (this.goalUrl.substring(start - 1, start) === '?') {
-                    start = start - 1;
-                }
-                this.goalUrl = this.goalUrl.substring(0, start) + this.goalUrl.substring(end + 1);
-            }
+            // there was no userID
+            this.noID = true;
         }
     }
 

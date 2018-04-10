@@ -62,7 +62,7 @@ public class EmotionController {
 
         //If there is no userID provided, return an empty result
         if(targetContent.equals(null) || targetContent.equals("")) {
-            JSON.serialize(contentRegQuery);
+            return JSON.serialize(contentRegQuery);
         }
         contentRegQuery.append("$regex", targetContent);
         contentRegQuery.append("$options", "i");

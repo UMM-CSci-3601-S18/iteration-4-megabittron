@@ -52,6 +52,8 @@ public class GoalController {
     // specified goal are found.
     public String getGoals(Map<String, String[]> queryParams) {
 
+        System.out.println("It began getGoals() in GoalController");
+
         Document filterDoc = new Document();
         String targetContent;
         Document contentRegQuery = new Document();;
@@ -60,7 +62,8 @@ public class GoalController {
         targetContent = (queryParams.get("userID")[0]);
         //If there is no userID provided, return an empty result
         if(targetContent.equals(null) || targetContent.equals("")) {
-            JSON.serialize(contentRegQuery);
+            System.out.println("It had no userID");
+            return JSON.serialize(contentRegQuery);
         }
         contentRegQuery.append("$regex", targetContent);
         contentRegQuery.append("$options", "i");

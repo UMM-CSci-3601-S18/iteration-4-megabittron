@@ -292,7 +292,7 @@ export class GoalsComponent implements OnInit {
         // Subscribe waits until the data is fully downloaded, then
         // performs an action on it (the first lambda)
 
-        const goalObservable: Observable<Goal[]> = this.goalService.getGoals();
+        const goalObservable: Observable<Goal[]> = this.goalService.getGoals(localStorage.getItem("userID"));
         goalObservable.subscribe(
             goals => {
                 this.goals = goals;
@@ -309,7 +309,8 @@ export class GoalsComponent implements OnInit {
 
 
     loadService(): void {
-        this.goalService.getGoals(this.goalCategory).subscribe(
+        console.log(localStorage.getItem("userID"));
+        this.goalService.getGoals(localStorage.getItem("userID"),this.goalCategory).subscribe(
             goals => {
                 this.goals = goals;
                 this.filteredGoals = this.goals;
@@ -323,6 +324,7 @@ export class GoalsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        localStorage.setItem("userID", "4cb56a89541a2d783595012c");
         this.refreshGoals();
         this.loadService();
         this.getDate();
