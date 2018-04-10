@@ -1,7 +1,7 @@
 <body class="whole-body">
 <main>
     <div  layout="column" >
-        <div layout="column">
+        <div layout="column" id="allGoals">
             <div class="first-sec">
                 <mat-card class="manage-goals-card">
                     <mat-card-title id="goal-title">Your Goals</mat-card-title>
@@ -12,16 +12,20 @@
                         <li class="content-item" id="addNewGoal">
                             <button mat-raised-button (click)="openDialog()" class="goal-button">
                                 <mat-icon id="add-icon">add</mat-icon>
-                                Add a Goal</button>
+                                Add a Goal
+                            </button>
                         </li>
+                        <br>
+                        <mat-slide-toggle id="showAllGoals" (change)="showAllGoals = $event.checked">Show all goals</mat-slide-toggle>
                         <br>
                     </mat-card-content>
                 </mat-card>
             </div>
-            <div class="todays-goals">
+
+            <div class="todays-goals" *ngIf="this.showAllGoals == false">
                 <div class="goalTitleDiv">
-                    <mat-card class="todayGoalTitle">
-                        Today's goals
+                    <mat-card class="cardGoalTitle">
+                        Today's Goals
                     </mat-card>
                 </div>
                 <div layout="row" layout-wrap>
@@ -67,8 +71,14 @@
                 </div>
             </div>
 
-            <div class="grid-goals-section">
-                Goals that don't need to be completed today.
+
+
+            <div class="grid-goals-section" *ngIf="this.showAllGoals == true">
+                <div class="goalTitleDiv">
+                    <mat-card class="cardGoalTitle">
+                        All Goals
+                    </mat-card>
+                </div>
                 <div layout="row" layout-wrap>
                    <ng-container *ngFor="let goal of this.filterGoals(goalPurpose, goalCategory, goalName, goalStatus, goalFrequency)">
                        <mat-card class="goals-card"

@@ -28,7 +28,7 @@ export class GoalsComponent implements OnInit {
     public goalNext;
     public goalFrequency;
     public today;
-    showPage = false;
+    public showAllGoals = false;
 
     // The ID of the goal
     private highlightedID: { '$oid': string } = {'$oid': ''};
@@ -41,6 +41,7 @@ export class GoalsComponent implements OnInit {
     isHighlighted(goal: Goal): boolean {
         return goal._id['$oid'] === this.highlightedID['$oid'];
     }
+
 
     openDialog(): void {
         const newGoal: Goal = {
