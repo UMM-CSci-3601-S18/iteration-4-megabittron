@@ -16,7 +16,7 @@
                             </button>
                         </li>
                         <br>
-                        <mat-slide-toggle id="showAllGoals" (change)="showAllGoals = $event.checked">Show all goals</mat-slide-toggle>
+                        <mat-slide-toggle id="showAllGoals" (change)="showAllGoals = $event.checked; this.getNext()">Show all goals</mat-slide-toggle>
                         <br>
                     </mat-card-content>
                 </mat-card>
@@ -78,11 +78,11 @@
                     showGoals()" [disabled]="false">
                         <mat-icon>keyboard_arrow_left</mat-icon>
                     </button>
-                    <button *ngIf="maxNumPages() == false" mat-icon-button class="nextPage" (click)="this.currentPage = this.currentPage + 1;
+                    <button *ngIf="maxNumPages('today') == false" mat-icon-button class="nextPage" (click)="this.currentPage = this.currentPage + 1;
                     showGoals()" [disabled]="true">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                     </button>
-                    <button *ngIf="maxNumPages() == true " mat-icon-button class="nextPage" (click)="this.currentPage = this.currentPage + 1;
+                    <button *ngIf="maxNumPages('today') == true " mat-icon-button class="nextPage" (click)="this.currentPage = this.currentPage + 1;
                     showGoals()" [disabled]="false">
                         <mat-icon>keyboard_arrow_right</mat-icon>
                     </button>
@@ -98,7 +98,7 @@
                     </mat-card>
                 </div>
                 <div layout="row" layout-wrap>
-                   <ng-container *ngFor="let goal of this.filterGoals(goalPurpose, goalCategory, goalName, goalStatus, goalFrequency)">
+                   <ng-container *ngFor="let goal of this.shownGoals">
                        <mat-card class="goals-card"
                                  #elem [id]="goal._id['$oid']">
                            <mat-expansion-panel class="goalPanel">
@@ -153,6 +153,24 @@
                             Please wait a bit and try again or start the server.
                         </mat-error>
                     </ng-template>-->
+                </div>
+                <div class="pagescrollbuttons">
+                    <button *ngIf="this.currentPage == 1" mat-icon-button class="previousPage" (click)="this.currentPage = this.currentPage - 1;
+                    showGoals()" [disabled]="true">
+                        <mat-icon>keyboard_arrow_left</mat-icon>
+                    </button>
+                    <button *ngIf="this.currentPage != 1" mat-icon-button class="previousPage" (click)="this.currentPage = this.currentPage - 1;
+                    showGoals()" [disabled]="false">
+                        <mat-icon>keyboard_arrow_left</mat-icon>
+                    </button>
+                    <button *ngIf="maxNumPages('all') == false" mat-icon-button class="nextPage" (click)="this.currentPage = this.currentPage + 1;
+                    showGoals()" [disabled]="true">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                    </button>
+                    <button *ngIf="maxNumPages('all') == true " mat-icon-button class="nextPage" (click)="this.currentPage = this.currentPage + 1;
+                    showGoals()" [disabled]="false">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                    </button>
                 </div>
             </div>
         </div>
