@@ -1,22 +1,23 @@
 <body class="whole-body">
 <main>
     <div  layout="column" >
-        <div layout="column" id="allGoals">
+        <div layout="column" id="desktopAllGoals" *ngIf="this.currentScreenWidth > 500">
             <div class="first-sec">
+              <!--  <div (window:resize)="onResize($event,'today')"></div>-->
                 <mat-card class="manage-goals-card">
-                    <mat-card-title id="goal-title">Your Goals</mat-card-title>
+                    <mat-card-title id="desktopGoal-title">Your Goals</mat-card-title>
                     <mat-card-subtitle class="goal-subtitle">Goals can help you stay on
                         track with daily activities in your life.
                     </mat-card-subtitle>
                     <mat-card-content class="goal-content">
-                        <li class="content-item" id="addNewGoal">
+                        <li class="content-item" id="desktopAddNewGoal">
                             <button mat-raised-button (click)="openDialog()" class="goal-button">
-                                <mat-icon id="add-icon">add</mat-icon>
+                                <mat-icon id="desktpAdd-icon">add</mat-icon>
                                 Add a Goal
                             </button>
                         </li>
                         <br>
-                        <mat-slide-toggle id="showAllGoals" (change)="showAllGoals = $event.checked; this.getNext()">Show all goals</mat-slide-toggle>
+                        <mat-slide-toggle id="desktopShowAllGoals" (change)="showAllGoals = $event.checked; this.getNext()">Show all goals</mat-slide-toggle>
                         <br>
                     </mat-card-content>
                 </mat-card>
@@ -60,7 +61,7 @@
                                             (click)="deleteGoal(goal._id['$oid']); openSnackBar('Goal Deleted')">
                                         <mat-icon>delete</mat-icon>
                                     </button>
-                                    <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" id="todayCompleteGoal"
+                                    <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" id="desktopTodayCompleteGoal"
                                             (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next); openSnackBar('Goal Completed')">
                                         <mat-icon>done</mat-icon>
                                     </button>
@@ -129,11 +130,11 @@
                                            (click)="deleteGoal(goal._id['$oid']); openSnackBar('Goal Deleted')">
                                        <mat-icon>delete</mat-icon>
                                    </button>
-                                   <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" id="allCompleteGoal"
+                                   <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" id="desktopAllCompleteGoal"
                                            (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next); openSnackBar('Goal Completed')">
                                        <mat-icon>done</mat-icon>
                                    </button>
-                                   <button *ngIf="goal.status == true" mat-icon-button class="button complete-button" id="uncompleteGoal"
+                                   <button *ngIf="goal.status == true" mat-icon-button class="button complete-button" id="desktopUncompleteGoal"
                                            (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next); openSnackBar('Goal Uncompleted')">
                                        <mat-icon>add</mat-icon>
                                    </button>
@@ -141,6 +142,182 @@
                            </mat-expansion-panel>
                        </mat-card>
                    </ng-container>
+
+
+                    <!-- Errors message card can be uncommented if you fix the layout issue -->
+                    <!--or>
+                        <mat-error>
+                            There was a problem loading the goals. Possibly the server is down or perhaps there are network
+                            issues.
+                        </mat-error>
+                        <mat-error>
+                            Please wait a bit and try again or start the server.
+                        </mat-error>
+                    </ng-template>-->
+                </div>
+                <div class="pagescrollbuttons">
+                    <button *ngIf="this.currentPage == 1" mat-icon-button class="previousPage" (click)="this.currentPage = this.currentPage - 1;
+                    showGoals()" [disabled]="true">
+                        <mat-icon>keyboard_arrow_left</mat-icon>
+                    </button>
+                    <button *ngIf="this.currentPage != 1" mat-icon-button class="previousPage" (click)="this.currentPage = this.currentPage - 1;
+                    showGoals()" [disabled]="false">
+                        <mat-icon>keyboard_arrow_left</mat-icon>
+                    </button>
+                    <button *ngIf="maxNumPages('all') == false" mat-icon-button class="nextPage" (click)="this.currentPage = this.currentPage + 1;
+                    showGoals()" [disabled]="true">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                    </button>
+                    <button *ngIf="maxNumPages('all') == true " mat-icon-button class="nextPage" (click)="this.currentPage = this.currentPage + 1;
+                    showGoals()" [disabled]="false">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div layout="column" id="allGoals" *ngIf="this.currentScreenWidth <= 500">
+            <div class="first-sec">
+                <!--  <div (window:resize)="onResize($event,'today')"></div>-->
+                <mat-card class="manage-goals-card">
+                    <mat-card-title id="goal-title">Your Goals</mat-card-title>
+                    <mat-card-subtitle class="goal-subtitle">Goals can help you stay on
+                        track with daily activities in your life.
+                    </mat-card-subtitle>
+                    <mat-card-content class="goal-content">
+                        <li class="content-item" id="addNewGoal">
+                            <button mat-raised-button (click)="openDialog()" class="goal-button">
+                                <mat-icon id="add-icon">add</mat-icon>
+                                Add a Goal
+                            </button>
+                        </li>
+                        <br>
+                        <mat-slide-toggle id="showAllGoals" (change)="showAllGoals = $event.checked; this.getNext()">Show all goals</mat-slide-toggle>
+                        <br>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+            <div class="todays-goals" *ngIf="this.showAllGoals == false">
+                <div class="goalTitleDiv">
+                    <mat-card class="cardGoalTitle">
+                        Today's Goals
+                    </mat-card>
+                </div>
+                <div layout="row" layout-wrap>
+                        <mat-card class="goals-card">
+                            <mat-accordion>
+                            <mat-expansion-panel class="goalPanel" *ngFor="let goal of this.shownGoals" #elem [id]="goal._id['$oid']">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        {{goal.name}}
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+
+                                <div class ="goals-image">
+                                    <img *ngIf="goal.category == 'Family'" src="../../assets/images/goals/family.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Chores'" src="../../assets/images/goals/chores.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Personal Health'" src="../../assets/images/goals/health.png"
+                                         class="goal-card-image" height="75">
+                                </div>
+
+                                <div class="goals-card-info">
+                                    <!--<mat-card-content class="goal-info">
+                                        <mat-card-title id="today-goal-name">{{goal.name}}</mat-card-title>-->
+                                    <p>Purpose: {{goal.purpose}}</p>
+                                    <p>Frequency: {{goal.frequency}}</p>
+                                    <!--</mat-card-content>-->
+                                </div>
+                                <div class="goals-buttons">
+                                    <button mat-icon-button class="button delete-button"
+                                            (click)="deleteGoal(goal._id['$oid']); openSnackBar('Goal Deleted')">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                    <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" id="todayCompleteGoal"
+                                            (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next); openSnackBar('Goal Completed')">
+                                        <mat-icon>done</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-expansion-panel>
+                            </mat-accordion>
+                        </mat-card>
+                </div>
+                <div class="pagescrollbuttons">
+                    <button *ngIf="this.currentPage == 1" mat-icon-button class="previousPage" (click)="this.currentPage = this.currentPage - 1;
+                    showGoals()" [disabled]="true">
+                        <mat-icon>keyboard_arrow_left</mat-icon>
+                    </button>
+                    <button *ngIf="this.currentPage != 1" mat-icon-button class="previousPage" (click)="this.currentPage = this.currentPage - 1;
+                    showGoals()" [disabled]="false">
+                        <mat-icon>keyboard_arrow_left</mat-icon>
+                    </button>
+                    <button *ngIf="maxNumPages('today') == false" mat-icon-button class="nextPage" (click)="this.currentPage = this.currentPage + 1;
+                    showGoals()" [disabled]="true">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                    </button>
+                    <button *ngIf="maxNumPages('today') == true " mat-icon-button class="nextPage" (click)="this.currentPage = this.currentPage + 1;
+                    showGoals()" [disabled]="false">
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+
+
+            <div class="grid-goals-section" *ngIf="this.showAllGoals == true">
+                <div class="goalTitleDiv">
+                    <mat-card class="cardGoalTitle">
+                        All Goals
+                    </mat-card>
+                </div>
+                <div layout="row" layout-wrap>
+                    <ng-container>
+                        <mat-card class="goals-card">
+                            <mat-accordion>
+                            <mat-expansion-panel class="goalPanel" *ngFor="let goal of this.shownGoals"
+                                                 #elem [id]="goal._id['$oid']">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        {{goal.name}}
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+
+                                <div class ="goals-image">
+                                    <img *ngIf="goal.category == 'Family'" src="../../assets/images/goals/family.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Chores'" src="../../assets/images/goals/chores.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Personal Health'" src="../../assets/images/goals/health.png"
+                                         class="goal-card-image" height="75">
+                                </div>
+
+                                <div class="goals-card-info">
+                                    <!--<mat-card-content class="goal-info">
+                                        <mat-card-title id="today-goal-name">{{goal.name}}</mat-card-title>-->
+                                    <p>Purpose: {{goal.purpose}}</p>
+                                    <p>Frequency: {{goal.frequency}}</p>
+                                    <!--</mat-card-content>-->
+                                </div>
+                                <div class="goals-buttons">
+                                    <button mat-icon-button class="button delete-button"
+                                            (click)="deleteGoal(goal._id['$oid']); openSnackBar('Goal Deleted')">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                    <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" id="allCompleteGoal"
+                                            (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next); openSnackBar('Goal Completed')">
+                                        <mat-icon>done</mat-icon>
+                                    </button>
+                                    <button *ngIf="goal.status == true" mat-icon-button class="button complete-button" id="uncompleteGoal"
+                                            (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next); openSnackBar('Goal Uncompleted')">
+                                        <mat-icon>add</mat-icon>
+                                    </button>
+                                </div>
+                            </mat-expansion-panel>
+                            </mat-accordion>
+                        </mat-card>
+                    </ng-container>
 
 
                     <!-- Errors message card can be uncommented if you fix the layout issue -->

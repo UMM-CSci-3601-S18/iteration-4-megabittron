@@ -30,15 +30,16 @@ export class GoalsComponent implements OnInit {
     public goalFrequency;
     public today;
     public showAllGoals = false;
-    public goalsPerPage = 4;
+    public goalsPerPage = 5;
     public currentPage = 1;
+
+    public currentScreenWidth: number;
 
     // The ID of the goal
     private highlightedID: { '$oid': string } = {'$oid': ''};
 
     // Inject the GoalsService into this component.
     constructor(public goalService: GoalsService, public dialog: MatDialog, public snackBar: MatSnackBar) {
-
     }
 
     isHighlighted(goal: Goal): boolean {
@@ -186,9 +187,17 @@ export class GoalsComponent implements OnInit {
             });
         }
 
-        this.showGoals("all")
+        this.showGoals("all");
         return this.filteredGoals;
     }
+
+  /*  onResize (event, type) {
+        this.currentScreenWidth = event.target.innerWidth;
+        if(this.currentScreenWidth <= 1700){
+
+            this.goalsPerPage = 4;
+        }
+    }*/
 
     getNext(){
 
@@ -271,7 +280,6 @@ export class GoalsComponent implements OnInit {
         var count = this.currentPage * this.goalsPerPage;
 
         if(type == "today") {
-            console.log("today");
 
             this.shownGoals = this.todayGoals.filter(goal => {
                 if (count > this.goalsPerPage) {
@@ -288,7 +296,6 @@ export class GoalsComponent implements OnInit {
         }
 
         else{
-            console.log("all");
             this.shownGoals = this.filteredGoals.filter(goal => {
                 if (count > this.goalsPerPage) {
                     count--;
@@ -311,6 +318,25 @@ export class GoalsComponent implements OnInit {
         else{
             return (this.goalsPerPage * this.currentPage) < this.filteredGoals.length;
         }
+    }
+
+    setNumGoals(){
+        this.currentScreenWidth = (window.screen.width);
+
+       /* if(this.currentScreenWidth > 1300 && this.currentScreenWidth <= 1700){
+            this.goalsPerPage = 4;
+            this.showGoals("today");
+        }
+
+        if(this.currentScreenWidth > 1100 && this.currentScreenWidth <= 1300){
+            this.goalsPerPage = 3;
+            this.showGoals("today");
+        }
+
+        if(this.currentScreenWidth > 700 && this.currentScreenWidth <= 1100){
+            this.goalsPerPage = 2;
+            this.showGoals("today");
+        }*/
     }
 
 
@@ -359,6 +385,8 @@ export class GoalsComponent implements OnInit {
         this.refreshGoals();
         this.loadService();
         this.getDate();
+        this.setNumGoals();
+
     }
 
     getDate() {
