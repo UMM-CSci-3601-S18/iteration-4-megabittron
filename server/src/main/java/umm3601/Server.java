@@ -27,6 +27,8 @@ import umm3601.database.ResourceController;
 import umm3601.database.ResourceRequestHandler;
 import umm3601.database.SummaryController;
 import umm3601.database.SummaryRequestHandler;
+import umm3601.database.UserController;
+import umm3601.database.UserRequestHandler;
 
 
 import com.google.api.client.googleapis.auth.oauth2.*;
@@ -60,7 +62,8 @@ public class Server {
         JournalController journalController = new JournalController(database);
         JournalRequestHandler journalRequestHandler = new JournalRequestHandler(journalController);
 
-
+        UserController userController = new UserController(database);
+        UserRequestHandler userRequestHandler = new UserRequestHandler(userController);
 
 
         //Configure Spark
@@ -125,7 +128,7 @@ public class Server {
         post("api/journals/new", journalRequestHandler::addNewJournal);
         post("api/journals/edit", journalRequestHandler::editJournal);
 
-
+        //Did not create a api route for users
 
 
         post("api/login", (req, res) -> {

@@ -21,7 +21,7 @@ public class UserController {
     // userCollection is the collection that the users data is in.
     private final MongoCollection<Document> userCollection;
 
-    // Construct controller for users.
+    // Construct controller for usersk.
     public UserController(MongoDatabase database) {
         gson = new Gson();
         this.database = database;
