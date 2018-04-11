@@ -1,21 +1,24 @@
 package umm3601.database;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import org.bson.*;
-import org.bson.types.ObjectId;
-import org.junit.Before;
-import org.junit.Test;
+    import com.mongodb.BasicDBObject;
+    import com.mongodb.MongoClient;
+    import com.mongodb.client.MongoCollection;
+    import com.mongodb.client.MongoDatabase;
+    import org.bson.*;
+    import org.bson.codecs.*;
+    import org.bson.codecs.configuration.CodecRegistries;
+    import org.bson.codecs.configuration.CodecRegistry;
+    import org.bson.json.JsonReader;
+    import org.bson.types.ObjectId;
+    import org.junit.Before;
+    import org.junit.Test;
 
-import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
+    import java.util.*;
+    import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+    import static org.junit.Assert.assertEquals;
+    import static org.junit.Assert.assertNotNull;
+    import static org.junit.Assert.assertNull;
 
 public class UserControllerSpec {
     private UserController userController;
@@ -65,10 +68,27 @@ public class UserControllerSpec {
         userController = new UserController(db);
     }
 
+    // http://stackoverflow.com/questions/34436952/json-parse-equivalent-in-mongo-driver-3-x-for-java
+    private BsonArray parseJsonArray(String json) {
+        final CodecRegistry codecRegistry
+            = CodecRegistries.fromProviders(Arrays.asList(
+            new ValueCodecProvider(),
+            new BsonValueCodecProvider(),
+            new DocumentCodecProvider()));
+
+        JsonReader reader = new JsonReader(json);
+        BsonArrayCodec arrayReader = new BsonArrayCodec(codecRegistry);
+
+        return arrayReader.decode(reader, DecoderContext.builder().build());
+    }
+
+
     private static String getSubjectID(BsonValue val) {
         BsonDocument doc = val.asDocument();
         return ((BsonString) doc.get("SubjectID")).getValue();
     }
+
+
 
     @Test
     public void getAllUsers() {
@@ -100,11 +120,11 @@ public class UserControllerSpec {
 
     @Test
     public void addUserTest(){
-        String newId = userController.addNewUser("171717","181818","Travis","Warling")
+        String newId = userController.addNewUser("171717","181818","Travis","Warling");
 
         assertNotNull("Adding new user should return true,", newId);
         Map<String, String[]> argMap = new HashMap<>();
-        argMap.put("Matt2", new String[] { "Matt2" });
+        argMap.put("171717", new String[] { "171717" });
         String jsonResult = userController.getUsers(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
@@ -113,9 +133,8 @@ public class UserControllerSpec {
             .map(UserControllerSpec::getSubjectID)
             .sorted()
             .collect(Collectors.toList());
-        assertEquals("Should return the new owner", "Matt2", name.get(5));
+        assertEquals("Should return the new user", "171717", name.get(5));
     }
-
 
 
 
