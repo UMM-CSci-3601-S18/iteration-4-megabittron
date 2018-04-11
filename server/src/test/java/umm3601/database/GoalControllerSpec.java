@@ -22,7 +22,7 @@ import static org.junit.Assert.assertNull;
 
 public class GoalControllerSpec {
     private GoalController goalController;
-    private ObjectId huntersID;
+    private ObjectId anID;
     @Before
     public void clearAndPopulateDB() throws IOException {
         MongoClient mongoClient = new MongoClient();
@@ -34,23 +34,27 @@ public class GoalControllerSpec {
         List<Document> testGoals = new ArrayList<>();
         testGoals.add(Document.parse("{\n" +
             "                    name: \"Clean my room\",\n" +
+            "                    userID: \"4cb56a89541a2d783595012c\",\n " +
             "                    purpose: \"To have a better environment\",\n" +
             "                    category: \"Living\",\n" +
             "                }"));
         testGoals.add(Document.parse("{\n" +
             "                    name: \"Wash dishes\",\n" +
+            "                    userID: \"4cb56a89541a2d783595012c\",\n " +
             "                    purpose: \"Cleaner kitchen\",\n" +
             "                    category: \"Chores\",\n" +
             "                }"));
         testGoals.add(Document.parse("{\n" +
             "                    name: \"Make cookies\",\n" +
+            "                    userID: \"4cb56a89541a2d783595012c\",\n " +
             "                    purpose: \"Get fatter\",\n" +
             "                    category: \"Food\",\n" +
             "                }"));
 
-        huntersID = new ObjectId();
-        BasicDBObject hunter = new BasicDBObject("_id", huntersID);
+        anID = new ObjectId();
+        BasicDBObject hunter = new BasicDBObject("_id", anID);
         hunter = hunter.append("name", "Call mom")
+            .append("userID", "2cb45a89541a2d783595012b")
             .append("purpose", "Improve relationship")
             .append("category", "Family");
 
@@ -84,27 +88,27 @@ public class GoalControllerSpec {
     }
 
     @Test
-    public void getAllGoals() {
+    public void getNoGoals() {
         Map<String, String[]> emptyMap = new HashMap<>();
         String jsonResult = goalController.getGoals(emptyMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
-        assertEquals("Should be 4 goals", 4, docs.size());
+        assertEquals("Should be 0 goals", 0, docs.size());
         List<String> goals = docs
             .stream()
             .map(GoalControllerSpec::getPurpose)
             .sorted()
             .collect(Collectors.toList());
-        List<String> expectedNames = Arrays.asList("Cleaner kitchen", "Get fatter", "Improve relationship", "To have a better environment");
+        List<String> expectedNames = Arrays.asList();
         assertEquals("Goals should match", expectedNames, goals);
     }
 
     @Test
-    public void getGoalByCategory(){
+    public void getOneUsersGoals(){
         Map<String, String[]> argMap = new HashMap<>();
         // Mongo in GoalController is doing a regex search so can just take a Java Reg. Expression
         // This will search the category for letters 'f' and 'c'.
-        argMap.put("category", new String[] { "[f, c]" });
+        argMap.put("userID", new String[] { "4cb56a89541a2d783595012c" });
         String jsonResult = goalController.getGoals(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
         assertEquals("Should be 3 goals", 3, docs.size());
@@ -113,13 +117,32 @@ public class GoalControllerSpec {
             .map(GoalControllerSpec::getName)
             .sorted()
             .collect(Collectors.toList());
-        List<String> expectedName = Arrays.asList("Call mom","Make cookies","Wash dishes");
+        List<String> expectedName = Arrays.asList("Clean my room", "Make cookies","Wash dishes");
         assertEquals("Names should match", expectedName, name);
     }
 
     @Test
-    public void getHuntersByID() {
-        String jsonResult = goalController.getGoal(huntersID.toHexString());
+    public void getGoalByCategory(){
+        Map<String, String[]> argMap = new HashMap<>();
+        // Mongo in GoalController is doing a regex search so can just take a Java Reg. Expression
+        // This will search the category for letters 'f' and 'c'.
+        argMap.put("userID", new String[] { "4cb56a89541a2d783595012c" });
+        argMap.put("category", new String[] { "[F, C]" });
+        String jsonResult = goalController.getGoals(argMap);
+        BsonArray docs = parseJsonArray(jsonResult);
+        assertEquals("Should be 2 goals", 2, docs.size());
+        List<String> name = docs
+            .stream()
+            .map(GoalControllerSpec::getName)
+            .sorted()
+            .collect(Collectors.toList());
+        List<String> expectedName = Arrays.asList("Make cookies","Wash dishes");
+        assertEquals("Names should match", expectedName, name);
+    }
+
+    @Test
+    public void getGoalByID() {
+        String jsonResult = goalController.getGoal(anID.toHexString());
         Document hunterDoc = Document.parse(jsonResult);
         assertEquals("Name should match", "Call mom", hunterDoc.get("name"));
         String noJsonResult = goalController.getGoal(new ObjectId().toString());
@@ -128,7 +151,7 @@ public class GoalControllerSpec {
 
     @Test
     public void addGoalTest(){
-        String newId = goalController.addNewGoal("Self defense from Bobs", "Injury", "Kick Bob", false,
+        String newId = goalController.addNewGoal("4cb56a89541a2d783595012c","AAAAAA Self defense from Bobs", "Injury", "Kick Bob", false,
             "Daily", "2018-04-05T18:56:24.702Z", "2018-04-05T18:56:24.702Z", "2018-04-05T18:56:24.702Z");
 
         assertNotNull("Add new goal should return true when goal is added,", newId);
@@ -141,10 +164,7 @@ public class GoalControllerSpec {
             .map(GoalControllerSpec::getPurpose)
             .sorted()
             .collect(Collectors.toList());
-        // name.get(0) says to get the name of the first person in the database,
-        // so "Bob" will probably always be first because it is sorted alphabetically.
-        // 3/4/18: Not necessarily: it is likely that that is how they're stored but we don't know. Find a different way of doing this.
-        assertEquals("Should return purpose of new goal", "Self defense from Bobs", purpose.get(3));
+        assertEquals("Should return purpose of new goal", "AAAAAA Self defense from Bobs", purpose.get(0));
     }
 
     @Test
@@ -166,8 +186,8 @@ public class GoalControllerSpec {
 
     @Test
     public void deleteGoalTest(){
-        System.out.println("HuntersID " + huntersID.toHexString());
-        goalController.deleteGoal(huntersID.toHexString());
+        System.out.println("anID " + anID.toHexString());
+        goalController.deleteGoal(anID.toHexString());
         Map<String, String[]> argMap = new HashMap<>();
         String jsonResult = goalController.getGoals(argMap);
         BsonArray docs = parseJsonArray(jsonResult);

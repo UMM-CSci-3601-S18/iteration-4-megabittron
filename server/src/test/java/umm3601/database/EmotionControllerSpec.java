@@ -33,16 +33,19 @@ public class EmotionControllerSpec {
         List<Document> testEmotions = new ArrayList<>();
         testEmotions.add(Document.parse("{" +
             "mood: \"happy\" " +
+            "userID: \"4cb56a89541a2d783595012c\" " +
             "date: \"Wed Mar 1 2018 7:35:02 GMT-0500\" " +
             "intensity: \"2\" " +
             "description: \"I'm feeling good\"}"));
         testEmotions.add(Document.parse("{" +
             "mood: \"sad\" " +
+            "userID: \"4cb56a89541a2d783595012c\" " +
             "date: \"Wed Mar 3 2018 12:02:21 GMT-0500\" " +
             "intensity: \"4\" " +
             "description: \"I'm not feeling good\"}"));
         testEmotions.add(Document.parse("{" +
             "mood: \"happy\" " +
+            "userID: \"4cb56a89541a2d783595012c\" " +
             "date: \"Wed Mar 1 2018 10:14:41 GMT-0500\" " +
             "intensity: \"4\" " +
             "description: \"I'm feeling fantastic\"}"));
@@ -50,6 +53,7 @@ public class EmotionControllerSpec {
         testID = new ObjectId();
         BasicDBObject tester = new BasicDBObject("_id", testID);
         tester = tester.append("mood", "mad")
+            .append("userID", "2cb45a89541a2d783595012b")
             .append("date", "Wed Mar 8 2018 10:17:41 GMT-0500")
             .append("intensity", "5")
             .append("description", "I'm really mad");
@@ -84,18 +88,28 @@ public class EmotionControllerSpec {
     }
 
     @Test
-    public void getAllEmotions() {
+    public void getNoEmotions() {
         Map<String, String[]> emptyMap = new HashMap<>();
         String jsonResult = emotionController.getEmotions(emptyMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
-        assertEquals("Should be 4", 4, docs.size());
+        assertEquals("Should be 0", 0, docs.size());
+    }
+
+    @Test
+    public void getOneUsersEmotions() {
+        Map<String, String[]> argMap = new HashMap<>();
+        String jsonResult = emotionController.getEmotions(argMap);
+        argMap.put("userID", new String[] { "4cb56a89541a2d783595012c" });
+        BsonArray docs = parseJsonArray(jsonResult);
+
+        assertEquals("Should be 3", 3, docs.size());
         List<String> emotions = docs
             .stream()
             .map(EmotionControllerSpec::getEmotion)
             .sorted()
             .collect(Collectors.toList());
-        List<String> expectedNames = Arrays.asList("happy", "happy", "mad", "sad");
+        List<String> expectedNames = Arrays.asList("happy", "happy", "sad");
         assertEquals("Emotions should match", expectedNames, emotions);
     }
 
@@ -104,6 +118,7 @@ public class EmotionControllerSpec {
         Map<String, String[]> argMap = new HashMap<>();
         // Mongo in EmotionController is doing a regex search so can just take a Java Reg. Expression
         // This will search the category for letters 'f' and 'c'.
+        argMap.put("userID", new String[] { "4cb56a89541a2d783595012c" });
         argMap.put("mood", new String[] { "happy" });
         String jsonResult = emotionController.getEmotions(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
@@ -128,7 +143,7 @@ public class EmotionControllerSpec {
 
     @Test
     public void addEmotionTest(){
-        String newId = emotionController.addNewEmotion("happy", 5, "AAAAAAAAMAZING", "Wed Mar 1 2018 7:04:01 GMT-0500");
+        String newId = emotionController.addNewEmotion("4cb56a89541a2d783595012c","happy", 5, "AAAAAAAAMAZING", "Wed Mar 1 2018 7:04:01 GMT-0500");
 
         assertNotNull("Add new emotion should return true when new emotion record is added,", newId);
         Map<String, String[]> argMap = new HashMap<>();
