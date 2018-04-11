@@ -14,10 +14,10 @@ import {MatSnackBar} from '@angular/material';
 
 export class GoalsComponent implements OnInit {
     // These are public so that tests can reference them (.spec.ts)
-    public goals: Goal[];
-    public todayGoals: Goal[];
-    public shownGoals: Goal[];
-    public filteredGoals: Goal[];
+    public goals: Goal[] = [];
+    public todayGoals: Goal[] = [];
+    public shownGoals: Goal[] = [];
+    public filteredGoals: Goal[] = [];
 
     // These are the target values used in searching.
     public goalPurpose: string;
@@ -47,6 +47,7 @@ export class GoalsComponent implements OnInit {
 
 
     openDialog(): void {
+        console.log(localStorage.getItem("userID"));
         const newGoal: Goal = {
             _id: '',
             userID: localStorage.getItem("userID"),

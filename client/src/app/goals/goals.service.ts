@@ -18,7 +18,7 @@ export class GoalsService {
 
     getGoals(userID: string, goalCategory?: string): Observable<Goal[]> {
         this.goalUrl = this.baseUrl;
-        this.filterByCategory(goalCategory);
+        //this.filterByCategory(goalCategory);
         this.filterByUserID(userID);
 
         //require a userID
@@ -36,6 +36,7 @@ export class GoalsService {
 
     // Unfortunately we did not get to implementing specific filters,
     // but this may useful in the future.
+    /*
     filterByCategory(goalCategory?: string): void {
         if (!(goalCategory == null || goalCategory === '')) {
             if (this.parameterPresent('category=') ) {
@@ -61,7 +62,7 @@ export class GoalsService {
             }
         }
     }
-
+*/
     filterByUserID(userID: string): void {
         if (!(userID == null || userID === '')) {
             if (this.parameterPresent('userID=') ) {

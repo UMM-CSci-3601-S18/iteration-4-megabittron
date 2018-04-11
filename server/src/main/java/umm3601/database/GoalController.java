@@ -157,7 +157,7 @@ public class GoalController {
         Document setQuery = new Document();
         setQuery.append("$set", newGoal);
         Document searchQuery = new Document().append("_id", new ObjectId(id));
-        System.out.println("Goal id: " + id);
+
         try {
             goalCollection.updateOne(searchQuery, setQuery);
             ObjectId theID = searchQuery.getObjectId("_id");
