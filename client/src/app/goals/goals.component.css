@@ -32,7 +32,16 @@
     color: red;
 }
 
-.goals-card {
+.desktopGoals-card {
+    width: 100%;
+    height: 0%;
+    padding: 15px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    background-color: lightsteelblue;
+}
+
+.mobileGoals-card {
     width: 100%;
     height: 0%;
     padding: 15px;
@@ -57,15 +66,23 @@
     float: right;
 }
 
-.goals-buttons {
+.desktopGoals-buttons {
     float: right;
 }
 
-.goalPanel{
+.mobileGoals-buttons {
+    float: right;
+}
+
+.desktopGoalPanel{
     width: 100%;
 }
 
-.cardGoalTitle{
+.mobileGoalPanel{
+    width: 100%;
+}
+
+.desktopCardGoalTitle{
     width: auto;
     text-align: center;
     font-size: 200%;
@@ -73,22 +90,42 @@
     padding: 0.5%;
 }
 
-.goalTitleDiv{
+.mobileCardGoalTitle{
+    width: auto;
+    text-align: center;
+    font-size: 200%;
+    font-family: inherit;
+    padding: 0.5%;
+}
+
+.desktopGoalTitleDiv{
     width: 45%;
     margin-right: auto;
     margin-left: auto;
     padding: 15px;
 }
 
+.mobileGoalTitleDiv{
+    width: 45%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 15px;
+}
+
+
 .pagescrollbuttons{
     text-align: center;
 }
 
-.todays-goals{
+.desktopTodays-goals{
     margin: 0 auto;
     width: 100%;
 }
 
+.mobileTodays-goals{
+    margin: 0 auto;
+    width: 100%;
+}
 
 
 
