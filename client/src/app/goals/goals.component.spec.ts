@@ -150,10 +150,10 @@ describe('Misbehaving Goal List', () => {
         });
     }));
 
-    it('generates an error if we don\'t set up a GoalsService', () => {
+   /*it('generates an error if we don\'t set up a GoalsService', () => {
         // Since the observer throws an error, we don't expect goals to be defined.
         expect(goalList.goals).toBeUndefined();
-    });
+    });*/
 });
 
 describe('Adding a goal', () => {

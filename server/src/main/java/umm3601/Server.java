@@ -1,20 +1,23 @@
 package umm3601;
 
-
-
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
+import org.apache.commons.io.IOUtils;
 import spark.Request;
 import spark.Response;
 
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+
 import java.io.File;
 
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
+
+import spark.Route;
 
 
 import umm3601.database.GoalController;
@@ -93,6 +96,18 @@ public class Server {
         // Redirects for the "home" page
         redirect.get("", "/");
 
+        Route clientRoute = (req, res) -> {
+            InputStream stream = goalController.getClass().getResourceAsStream("/public/index.html");
+            return stream != null ? IOUtils.toString(stream) : "Sorry, we couldn't find that!";
+        };
+        Route notFoundRoute = (req, res) -> {
+            res.type("text");
+            res.status(404);
+            return "Sorry, we couldn't find that!";
+        };
+
+        get("/", clientRoute);
+
         /////////////// Endpoints ///////////////////
         /////////////////////////////////////////////
 
@@ -128,7 +143,7 @@ public class Server {
 
             JSONObject obj = new JSONObject(req.body());
             String authCode = obj.getString("code");
-            
+
 
             try {
                 // We can create this later to keep our secret safe
@@ -200,12 +215,13 @@ public class Server {
         // before they they're processed by things like `get`.
         after("*", Server::addGzipHeader);
 
+
+        get("api/*", notFoundRoute);
+
+        get("/*", clientRoute);
+
         // Handle "404" file not found requests:
-        notFound((req, res) -> {
-            res.type("text");
-            res.status(404);
-            return "Sorry, we couldn't find that!";
-        });
+        notFound(notFoundRoute);
     }
 
     // Enable GZIP for all responses

@@ -185,6 +185,12 @@
   dependencies:
     tslib "^1.7.1"
 
+"@angular/service-worker@^5.2.9":
+  version "5.2.9"
+  resolved "https://registry.yarnpkg.com/@angular/service-worker/-/service-worker-5.2.9.tgz#47ee439f2f896ac701fee271d046589a6c46b6af"
+  dependencies:
+    tslib "^1.7.1"
+
 "@covalent/core@1.0.0-beta.8":
   version "1.0.0-beta.8"
   resolved "https://registry.yarnpkg.com/@covalent/core/-/core-1.0.0-beta.8.tgz#b28f19f8de1f46b8cfbbd06b5c71fdc13f2496bc"
