@@ -18,10 +18,10 @@ public class UserController {
 
     private final Gson gson;
     private MongoDatabase database;
-    // goalCollection is the collection that the goals data is in.
+    // userCollection is the collection that the users data is in.
     private final MongoCollection<Document> userCollection;
 
-    // Construct controller for items.
+    // Construct controller for users.
     public UserController(MongoDatabase database) {
         gson = new Gson();
         this.database = database;
