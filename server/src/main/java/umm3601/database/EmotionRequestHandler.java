@@ -12,7 +12,7 @@ public class EmotionRequestHandler {
     public EmotionRequestHandler(EmotionController emotionController){
         this.emotionController = emotionController;
     }
-    /**Method called from Server when the 'api/goals/:id' endpoint is received.
+    /**Method called from Server when the 'api/emotions/:id' endpoint is received.
      * Get a JSON response with a list of all the users in the database.
      *
      * @param req the HTTP request
@@ -20,7 +20,7 @@ public class EmotionRequestHandler {
      * @return one user in JSON formatted string and if it fails it will return text with a different HTTP status code
      */
 
-    // gets one goal using its ObjectId--didn't use, just for potential future functionality
+    // gets one emotion using its ObjectId--didn't use, just for potential future functionality
     public String getEmotionJSON(Request req, Response res){
         res.type("application/json");
         String id = req.params("id");
@@ -47,7 +47,7 @@ public class EmotionRequestHandler {
 
 
 
-    /**Method called from Server when the 'api/goals' endpoint is received.
+    /**Method called from Server when the 'api/emotions' endpoint is received.
      * This handles the request received and the response
      * that will be sent back.
      *@param req the HTTP request
@@ -55,7 +55,7 @@ public class EmotionRequestHandler {
      * @return an array of users in JSON formatted String
      */
 
-    // Gets the goals from the DB given the query parameters
+    // Gets the emotions from the DB given the query parameters
     public String getEmotions(Request req, Response res)
     {
         res.type("application/json");
@@ -77,7 +77,7 @@ public class EmotionRequestHandler {
         Object o = JSON.parse(req.body());
         try {
             // if the object that is the JSON representation of the request body's class is the class BasicDBObject
-            // then try to add the goal with goalController's addNewGoal method
+            // then try to add the emotion with emotionController's addNewGoal method
             if(o.getClass().equals(BasicDBObject.class))
             {
                 try {
@@ -94,7 +94,7 @@ public class EmotionRequestHandler {
                 }
                 catch(NullPointerException e)
                 {
-                    System.err.println("A value was malformed or omitted, new goal request failed.");
+                    System.err.println("A value was malformed or omitted, new emotion request failed.");
                     return null;
                 }
 
