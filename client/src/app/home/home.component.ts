@@ -1,17 +1,10 @@
-import {EmotionResponseComponent} from "./emotion-response.component";
-import {EmotionResponseHappyComponent} from "./emotion-response-happy.component";
 import {MatDialog} from '@angular/material';
 import {MatSnackBar} from '@angular/material';
-import {Component, Inject} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Component} from '@angular/core';
 import {EmotionService} from './home.service';
-import {MAT_DIALOG_DATA} from '@angular/material';
-
 import {Observable} from 'rxjs/Observable';
-
 import {Emotion} from './emotion';
 import {environment} from '../../environments/environment';
-
 
 @Component({
     selector: 'home-component',
@@ -22,19 +15,25 @@ export class HomeComponent {
     public emotions: Emotion[];
 
     readonly baseUrl: string = environment.API_URL + 'emotions';
-    private emotionUrl: string = this.baseUrl;
 
     private highlightedID: {'$oid': string} = { '$oid': '' };
 
     public title: string;
-    private selectedEmotion = "none";
-    private selectedEmoji = "happy";
-
-    public emotionMood: string;
-    public emotionIntensity: number;
+    public selectedEmotion = "none";
+    private highlightedEmotion = "happy";
+    public videoEmotion = "none";
     public emotionDescription: string;
     public emotionDate: string;
 
+    public videoBooleanSwitch = false;
+
+    videoEnablerSwitch(){
+        this.videoBooleanSwitch = true;
+    }
+
+    restart(){
+        this.resetPage();
+    }
 
     //used for slider
     thumbLabel = true;
@@ -43,67 +42,39 @@ export class HomeComponent {
     constructor(public dialog: MatDialog,
                 public snackBar: MatSnackBar,
                 public emotionService: EmotionService) {
-        this.title = 'Home';
-    }
-
-    emotion(){
-        if(this.selectedEmotion == "none"){
-            return "..";
-        }
-
-        return this.selectedEmotion;
     }
 
     setEmotion(emotion){
         this.selectedEmotion = emotion;
+        this.videoEmotion = emotion;
     }
 
     selectEmotion(ID){
-        var clickedSize = "12%";
         this.resetSelections();
-        this.selectedEmoji = ID;
-        {document.getElementById(ID).style.height = clickedSize}
-        {document.getElementById(ID).style.width = clickedSize}
+        this.highlightedEmotion = ID;
+        let newClass = document.getElementById(ID);
+        newClass.classList.add('on');
     }
 
     private resetSelections(){
-        var baseSize = "10%";
-
-        {document.getElementById(this.selectedEmoji).style.height = baseSize}
-        {document.getElementById(this.selectedEmoji).style.width = baseSize}
-
+        let newClass = document.getElementById(this.highlightedEmotion);
+        newClass.classList.remove('on');
     }
 
-    showTextBox(): boolean{
-        if(this.selectedEmotion == "none"){
+    /*showSaveButton(){
+        if (this.selectedEmotion == 'meh') {
             return false;
         }
-
-        return true;
-    }
-
-    showSlider(): boolean{
-        if(this.selectedEmotion == "meh"){
-            return false;
-        }
-
-        return true;
-    }
-
-    showSaveButton(){
-        if(this.selectedEmotion == "none"){
+        if (this.selectedEmotion != 'meh' && this.emojiRating < 1) {
             return true;
         }
-
-        return false;
-    }
+    }*/
 
     resetPage(){
         this.resetSelections();
         this.selectedEmotion = "none";
         this.emojiRating = 0;
         this.emotionDescription = "";
-
     }
 
     saveEmotion(): void{
@@ -114,7 +85,7 @@ export class HomeComponent {
                 addEmotionResult => {
                     this.highlightedID = addEmotionResult;
                     this.refreshEmotions();
-                    this.resetPage();
+                    //this.resetPage();
                 },
                 err => {
                     // This should probably be turned into some sort of meaningful response.
@@ -129,7 +100,6 @@ export class HomeComponent {
         //
         // Subscribe waits until the data is fully downloaded, then
         // performs an action on it (the first lambda)
-
         const emotionObservable: Observable<Emotion[]> = this.emotionService.getEmotions();
         emotionObservable.subscribe(
             emotions => {
@@ -143,50 +113,8 @@ export class HomeComponent {
     }
 
     getDate(){
-        var today = new Date();
+        let today = new Date();
         this.emotionDate = today.toString();
     }
 
-    getDescription(entryBox){
-        this.emotionDescription = entryBox;
-    }
-
-    //retrieves an appropriate response to an emotion selection
-    //gives a helpful response for an intense negative emotion
-    //gives an encouraging response for a happy emotion of any intensity
-    appropriateResponsePopUp(): void {
-
-        var doPopup: boolean = this.intenseEmotionResponse();
-        if(doPopup){
-            this.dialog.open(EmotionResponseComponent, {
-                width: '70vw',
-                height: '70%',
-            });
-        } else if(this.selectedEmotion.toLowerCase() == 'happy') {
-            this.dialog.open(EmotionResponseHappyComponent, {
-                width: '70vw',
-                height: '70%',
-            });
-        }
-
-        this.saveConfirmation();
-    }
-
-    //checks the emotional response and the intensity to see if a response is needed
-    intenseEmotionResponse(): boolean {
-
-        console.log("the selected emoji is: " + this.selectedEmotion);
-        console.log("the emoji rating is:   " + this.emojiRating);
-        if(this.selectedEmotion.toLowerCase() == 'sad' || this.selectedEmotion.toLowerCase() == 'mad' || this.selectedEmotion.toLowerCase() == 'scared' || this.selectedEmotion.toLowerCase() == 'anxious'){
-            if(this.emojiRating >= 3){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    //Gives a snackbar message pop-up to let the client know their response has been saved
-    saveConfirmation(): void {
-        this.snackBar.open("Your response has been saved.", "close", {duration: 2000});
-    }
 }
