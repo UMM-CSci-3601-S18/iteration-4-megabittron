@@ -21,10 +21,10 @@ export class GoalsService {
         this.filterByUserID(userID);
 
         //require a userID
-        if(this.noID == false){
-            return this.http.get<Goal[]>(this.goalUrl);
+        if(this.noID){
+            return null;
         }
-        return null;
+        return this.http.get<Goal[]>(this.goalUrl);
     }
 
     // This isn't used, but may be useful for future iterations.
