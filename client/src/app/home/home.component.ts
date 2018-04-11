@@ -33,6 +33,7 @@ export class HomeComponent {
 
     restart(){
         this.resetPage();
+        window.location.reload();
     }
 
     //used for slider

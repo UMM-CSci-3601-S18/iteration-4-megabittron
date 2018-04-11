@@ -24,39 +24,6 @@
     margin: 0 auto;
 }
 
-.text-block {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    background-color: black;
-    color: white;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-.journalEntry{
-    text-align: center;
-
-}
-
-textarea{
-    border:2px solid black;
-    height: 30%;
-    width: 50%;
-}
-
-textarea:focus {
-    outline: none !important;
-    border:2px solid #6C648B;
-}
-
-#mainCard{
-    border-width: 5px;
-    border-color: black;
-    border-style: solid;
-    background-color: whitesmoke;
-}
-
 .entryButtons{
     text-align:center;
     padding: 1%;
@@ -107,6 +74,11 @@ textarea:focus {
     font-size: 25px;
 }
 
+.text-description {
+    text-align: center;
+    font-size: 25px;
+}
+
 .selected-emoji {
     margin: 0 auto;
     padding: 10px;
@@ -120,4 +92,12 @@ textarea:focus {
 .emotion-intensity {
     text-align: center;
     font-size: 25px;
+}
+
+.text-info {
+    text-align: center;
+}
+
+.text-form-field {
+    width: 100%;
 }

@@ -4,12 +4,28 @@ import { CommonModule, } from '@angular/common';
 import { CovalentLayoutModule, CovalentStepsModule, CovalentCommonModule /*, any other modules */ } from '@covalent/core';
 
 import {
-    MatListModule, MatButtonModule, MatCardModule, MatIconModule,
-    MatInputModule, MatMenuModule, MatSidenavModule, MatToolbarModule,
-    MatExpansionModule, MatTooltipModule, MatDialogModule,
-    MatCheckboxModule,MatSliderModule,MatRadioModule,MatSnackBarModule,
-    MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatSelectModule,
-    MatFormFieldModule, MatSlideToggleModule, MatStepperModule,
+    MatListModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatExpansionModule,
+    MatTooltipModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatSliderModule,
+    MatRadioModule,
+    MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTabsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatSlideToggleModule,
+    MatStepperModule,
 } from '@angular/material';
 
 import { FlexLayoutModule, } from '@angular/flex-layout';
