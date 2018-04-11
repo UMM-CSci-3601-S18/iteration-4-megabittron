@@ -67,7 +67,8 @@ public class GoalController {
             filterDoc = filterDoc.append("userID", contentRegQuery);
         } else {
             System.out.println("It had no userID");
-            return "";
+            Document emptyDoc = new Document();
+            return JSON.serialize(emptyDoc);
         }
 
         // "goal" will be a key to a string object, where the object is

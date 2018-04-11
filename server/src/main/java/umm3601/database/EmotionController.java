@@ -54,24 +54,25 @@ public class EmotionController {
     public String getEmotions(Map<String, String[]> queryParams) {
 
         Document filterDoc = new Document();
-        String targetContent;
-        Document contentRegQuery = new Document();;
 
         //Filter by userID
-        targetContent = (queryParams.get("userID")[0]);
-
         //If there is no userID provided, return an empty result
-        if(targetContent.equals(null) || targetContent.equals("")) {
-            return JSON.serialize(contentRegQuery);
+        if (queryParams.containsKey("userID")) {
+            String targetContent = (queryParams.get("userID")[0]);
+            Document contentRegQuery = new Document();
+            contentRegQuery.append("$regex", targetContent);
+            contentRegQuery.append("$options", "i");
+            filterDoc = filterDoc.append("userID", contentRegQuery);
+        } else {
+            System.out.println("It had no userID");
+            Document emptyDoc = new Document();
+            return JSON.serialize(emptyDoc);
         }
-        contentRegQuery.append("$regex", targetContent);
-        contentRegQuery.append("$options", "i");
-        filterDoc = filterDoc.append("userID", contentRegQuery);
 
         //filter by mood
         if (queryParams.containsKey("mood")) {
-            targetContent = (queryParams.get("mood")[0]);
-            contentRegQuery = new Document();
+            String targetContent = (queryParams.get("mood")[0]);
+            Document contentRegQuery = new Document();
             contentRegQuery.append("$regex", targetContent);
             contentRegQuery.append("$options", "i");
             filterDoc = filterDoc.append("mood", contentRegQuery);
