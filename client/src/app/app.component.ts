@@ -18,8 +18,6 @@ export class AppComponent implements OnInit {
 
     currentScreenWidth: number;
 
-    isLoggedIn = false;
-
     constructor(private http: HttpClient) {
         this.appHeight = (window.screen.height);
         this.appWidth = (window.screen.width);
@@ -27,23 +25,12 @@ export class AppComponent implements OnInit {
     }
 
 
-    handleClientLoad() {
-        gapi.load('client:auth2', this.initClient);
-    }
-
-    initClient() {
-
-        gapi.client.init({
-            'clientId': '1080043572259-h3vk6jgc4skl3uav3g0l13qvlcqpebvu.apps.googleusercontent.com'
-        });
-
-    }
-
 
     signIn() {
         let googleAuth = gapi.auth2.getAuthInstance();
 
         googleAuth.grantOfflineAccess().then((resp) => {
+            localStorage.setItem('isSignedIn', 'true');
             this.sendAuthCode(resp.code);
         });
 
@@ -88,16 +75,22 @@ export class AppComponent implements OnInit {
 
         googleAuth.then(() => {
             googleAuth.signOut();
+            localStorage.setItem('isSignedIn', 'false');
             //window.location.reload();
         })
     }
 
-    isSignedIn() {
-        let googleAuth = gapi.auth2.getAuthInstance().currentUser.get().isSignedIn();
+    isSignedIn(): boolean {
+        status = localStorage.getItem('isSignedIn');
 
-        this.isLoggedIn = googleAuth;
+        if (status == 'true') {
+            console.log('true');
 
-        console.log(this.isLoggedIn);
+            return true;
+        } else {
+            console.log('false');
+            return false;
+        }
     }
 
     whoIsSignedIn() {
@@ -121,7 +114,7 @@ export class AppComponent implements OnInit {
 
     }
 
-    signInCookie(email: string, token: string) {
+    /*signInCookie(email: string, token: string) {
         document.cookie = "token=" + token + ";";
         document.cookie = "email=" + email + ";";
 
@@ -140,16 +133,28 @@ export class AppComponent implements OnInit {
             }, onFail => {
                 console.log("no cookie for you");
             });
+    }*/
+
+    handleClientLoad() {
+        gapi.load('client:auth2', this.initClient);
     }
 
+    initClient() {
+
+        gapi.client.init({
+            'clientId': '1080043572259-h3vk6jgc4skl3uav3g0l13qvlcqpebvu.apps.googleusercontent.com',
+            'scope': 'profile email'
+        });
+
+    }
 
     onResize(event) {
         this.currentScreenWidth = event.target.innerWidth;
-
     }
 
     ngOnInit() {
         this.handleClientLoad();
+
     }
 
 }
