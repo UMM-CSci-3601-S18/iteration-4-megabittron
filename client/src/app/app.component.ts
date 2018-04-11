@@ -22,9 +22,5 @@ export class AppComponent {
     }
 
 
-    onResize (event) {
-        this.currentScreenWidth = event.target.innerWidth;
-    }
-
 
 }
