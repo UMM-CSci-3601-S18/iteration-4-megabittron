@@ -11,7 +11,7 @@
                 </mat-form-field>
 
             </mat-card-content>
-        <button mat-raised-button="" id="confirmEditJournalButton" [mat-dialog-close]="data.journal" type="button" (click)="openSnackBar('Journal Edited','')">Confirm</button>
-        <button mat-raised-button id="exitWithoutEditingButton" (click)="onNoClick()" type="button">Cancel</button>
+        <button mat-raised-button="" id="confirmEditJournalButton" [mat-dialog-close]="data.journal">Confirm</button>
+        <button mat-raised-button id="exitWithoutEditingButton" (click)="onNoClick()">Cancel</button>
     </div>
 </div>

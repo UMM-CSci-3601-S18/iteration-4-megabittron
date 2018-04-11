@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {JournalsService} from './journals.service';
 import {Journal} from './journal';
 import {Observable} from 'rxjs/Observable';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {AddJournalComponent} from './add-journal.component';
 import {EditJournalComponent} from "./edit-journal.component";
 import {ShowJournalComponent} from "./show-journal.component";
@@ -22,14 +22,14 @@ export class JournalsComponent implements OnInit {
     public journalDate: any;
     public length: number;
     public index = 0;
-    public progress: number;
-    showPage = false;
 
-    // The ID of the
+    // The ID of the journal
     private highlightedID: {'$oid': string} = { '$oid': '' };
 
     // Inject the JournalsService into this component.
-    constructor(public journalListService: JournalsService, public dialog: MatDialog) {
+    constructor(public journalListService: JournalsService,
+                public dialog: MatDialog,
+                public snackBar: MatSnackBar) {
 
     }
 
@@ -52,13 +52,16 @@ export class JournalsComponent implements OnInit {
                 this.journalListService.addNewJournal(result).subscribe(
                     addJournalResult => {
                         this.highlightedID = addJournalResult;
-                        this.refreshJournals();
                     },
                     err => {
                         // This should probably be turned into some sort of meaningful response.
                         console.log('There was an error adding the journal.');
                         console.log('The error was ' + JSON.stringify(err));
                     });
+                this.snackBar.open("Added Journal", "CLOSE", {
+                    duration: 2000,
+                });
+                this.refreshJournals();
             }
         });
     }
@@ -84,13 +87,17 @@ export class JournalsComponent implements OnInit {
                         console.log('There was an error editing the journal.');
                         console.log('The error was ' + JSON.stringify(err));
                     });
+                this.snackBar.open("Edited Journal", "CLOSE", {
+                    duration: 2000,
+                });
+                this.refreshJournals();
             }
         });
     }
 
     showMoreInfo(body: string): void {
         const showJournal: Journal = {_id: null, subject: null, body: body, date: null};
-        const dialogRef = this.dialog.open(ShowJournalComponent, {
+        this.dialog.open(ShowJournalComponent, {
             width: '500px',
             data: { journal: showJournal }
         });
@@ -127,19 +134,10 @@ export class JournalsComponent implements OnInit {
             });
         }
 
-        this.length = this.filteredJournals.length;
-        if (this.index + 10 > this.length) {
-            this.index = this.length - 10;
-        }
-        if (this.index - 10 < 0) {
-            this.index = 0;
-        }
-
         return this.filteredJournals;
     }
 
     // Starts an asynchronous operation to update the journals list
-
     refreshJournals(): Observable<Journal[]> {
         const journalListObservable: Observable<Journal[]> = this.journalListService.getJournals();
         journalListObservable.subscribe(
@@ -154,11 +152,6 @@ export class JournalsComponent implements OnInit {
         return journalListObservable;
     }
 
-    loadProgressBar(): void {
-
-        this.progress = (this.index / this.length) * 100;
-    }
-
     loadService(): void {
         this.journalListService.getJournals(this.journalSubject).subscribe(
             journals => {
@@ -171,43 +164,9 @@ export class JournalsComponent implements OnInit {
         );
     }
 
-    prevIndex(): void{
-        if(this.index == this.length - 10){
-            this.index = this.index - 10;
-        }
-        else if(this.index % 10 != 0){
-            while(this.index % 10 != 0){
-                this.index = this.index - 1;
-            }
-        }
-        else{
-            this.index = this.index - 10;
-        }
-        this.loadProgressBar();
-    }
-
-    nextIndex(): void{
-        this.index = this.index + 10;
-        if(this.index + 10 >= this.length){
-            this.index = this.length;
-        }
-        this.loadProgressBar();
-    }
-
-    firstIndex(): void{
-        this.index = 0;
-        this.loadProgressBar();
-    }
-
-    lastIndex(): void{
-        this.index = this.length;
-        this.loadProgressBar();
-    }
-
     ngOnInit(): void {
         this.refreshJournals();
         this.loadService();
-        this.loadProgressBar();
     }
 
 }
