@@ -1,5 +1,6 @@
 export interface Goal {
     _id: string;
+    userID: string;
     purpose: string;
     category: string;
     name: string;

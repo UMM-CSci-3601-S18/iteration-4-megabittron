@@ -17,6 +17,7 @@ export class GoalsService {
     }
 
     getGoals(userID: string, goalCategory?: string): Observable<Goal[]> {
+        this.goalUrl = this.baseUrl;
         this.filterByCategory(goalCategory);
         this.filterByUserID(userID);
 
@@ -29,6 +30,7 @@ export class GoalsService {
 
     // This isn't used, but may be useful for future iterations.
     getGoalByID(id: string): Observable<Goal> {
+        this.goalUrl = this.baseUrl;
         return this.http.get<Goal>(this.goalUrl + '/' + id);
     }
 
@@ -96,6 +98,7 @@ export class GoalsService {
     }
 
     addNewGoal(newGoal: Goal): Observable<{'$oid': string}> {
+        this.goalUrl = this.baseUrl;
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
@@ -106,6 +109,7 @@ export class GoalsService {
     }
 
     completeGoal(completedGoal: Goal): Observable<{'$oid': string}> {
+        this.goalUrl = this.baseUrl;
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
@@ -117,6 +121,7 @@ export class GoalsService {
     }
 
     deleteGoal(goaldID: String) {
+        this.goalUrl = this.baseUrl;
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'

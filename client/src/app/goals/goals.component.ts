@@ -49,6 +49,7 @@ export class GoalsComponent implements OnInit {
     openDialog(): void {
         const newGoal: Goal = {
             _id: '',
+            userID: localStorage.getItem("userID"),
             name: '',
             category: '',
             purpose: '',
@@ -94,6 +95,7 @@ export class GoalsComponent implements OnInit {
     editGoal(_id, name, purpose, category, status, frequency, start, end, next) {
         const updatedGoal: Goal = {
             _id: _id,
+            userID: localStorage.getItem("userID"),
             purpose: purpose,
             category: category,
             name: name,
@@ -117,6 +119,7 @@ export class GoalsComponent implements OnInit {
     updateNext(_id, name, purpose, category, status, frequency, start, end, next) {
         const updatedGoal: Goal = {
             _id: _id,
+            userID: localStorage.getItem("userID"),
             purpose: purpose,
             category: category,
             name: name,

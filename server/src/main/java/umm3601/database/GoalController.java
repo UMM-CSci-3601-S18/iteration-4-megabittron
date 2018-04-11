@@ -55,27 +55,27 @@ public class GoalController {
         System.out.println("It began getGoals() in GoalController");
 
         Document filterDoc = new Document();
-        String targetContent;
-        Document contentRegQuery = new Document();;
 
         //Filter by userID
-        targetContent = (queryParams.get("userID")[0]);
         //If there is no userID provided, return an empty result
-        if(targetContent.equals(null) || targetContent.equals("")) {
-            System.out.println("It had no userID");
-            return JSON.serialize(contentRegQuery);
-        }
-        contentRegQuery.append("$regex", targetContent);
-        contentRegQuery.append("$options", "i");
-        filterDoc = filterDoc.append("userID", contentRegQuery);
+        if (queryParams.containsKey("userID")) {
+            String targetContent = (queryParams.get("userID")[0]);
 
+            Document contentRegQuery = new Document();
+            contentRegQuery.append("$regex", targetContent);
+            contentRegQuery.append("$options", "i");
+            filterDoc = filterDoc.append("userID", contentRegQuery);
+        } else {
+            System.out.println("It had no userID");
+            return "";
+        }
 
         // "goal" will be a key to a string object, where the object is
         // what we get when people enter their goals as a text body.
         // "goal" is the purpose of the goal
         if (queryParams.containsKey("purpose")) {
-            targetContent = (queryParams.get("purpose")[0]);
-            contentRegQuery = new Document();
+            String targetContent = (queryParams.get("purpose")[0]);
+            Document contentRegQuery = new Document();
             contentRegQuery.append("$regex", targetContent);
             contentRegQuery.append("$options", "i");
             filterDoc = filterDoc.append("purpose", contentRegQuery);
@@ -83,8 +83,8 @@ public class GoalController {
 
         // category is the category of the goal, also a String
         if (queryParams.containsKey("category")) {
-            targetContent = (queryParams.get("category")[0]);
-            contentRegQuery = new Document();
+            String targetContent = (queryParams.get("category")[0]);
+            Document contentRegQuery = new Document();
             contentRegQuery.append("$regex", targetContent);
             contentRegQuery.append("$options", "i");
             filterDoc = filterDoc.append("category", contentRegQuery);
@@ -92,8 +92,8 @@ public class GoalController {
 
         // name is the title of the goal
         if (queryParams.containsKey("name")) {
-            targetContent = (queryParams.get("name")[0]);
-            contentRegQuery = new Document();
+            String targetContent = (queryParams.get("name")[0]);
+            Document contentRegQuery = new Document();
             contentRegQuery.append("$regex", targetContent);
             contentRegQuery.append("$options", "i");
             filterDoc = filterDoc.append("name", contentRegQuery);
