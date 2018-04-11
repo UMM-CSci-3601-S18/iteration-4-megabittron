@@ -31,6 +31,10 @@ export class HomeComponent {
         this.videoBooleanSwitch = true;
     }
 
+    restart(){
+        this.resetPage();
+    }
+
     //used for slider
     thumbLabel = true;
     public emojiRating: number = 0;
@@ -57,16 +61,14 @@ export class HomeComponent {
         newClass.classList.remove('on');
     }
 
-    showSaveButton(){
-
+    /*showSaveButton(){
         if (this.selectedEmotion == 'meh') {
             return false;
         }
-
         if (this.selectedEmotion != 'meh' && this.emojiRating < 1) {
             return true;
         }
-    }
+    }*/
 
     resetPage(){
         this.resetSelections();
@@ -83,7 +85,7 @@ export class HomeComponent {
                 addEmotionResult => {
                     this.highlightedID = addEmotionResult;
                     this.refreshEmotions();
-                    this.resetPage();
+                    //this.resetPage();
                 },
                 err => {
                     // This should probably be turned into some sort of meaningful response.
@@ -111,7 +113,7 @@ export class HomeComponent {
     }
 
     getDate(){
-        var today = new Date();
+        let today = new Date();
         this.emotionDate = today.toString();
     }
 
