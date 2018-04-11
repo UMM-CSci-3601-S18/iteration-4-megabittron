@@ -4,17 +4,33 @@ import { CommonModule, } from '@angular/common';
 import { CovalentLayoutModule, CovalentStepsModule, CovalentCommonModule /*, any other modules */ } from '@covalent/core';
 
 import {
-    MatListModule, MatButtonModule, MatCardModule, MatIconModule,
-    MatInputModule, MatMenuModule, MatSidenavModule, MatToolbarModule,
-    MatExpansionModule, MatTooltipModule, MatDialogModule,
-    MatCheckboxModule,MatSliderModule,MatRadioModule,MatSnackBarModule,
-    MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatSelectModule,
-    MatFormFieldModule, MatSlideToggleModule
+    MatListModule,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatExpansionModule,
+    MatTooltipModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatSliderModule,
+    MatRadioModule,
+    MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTabsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatSlideToggleModule,
+    MatStepperModule,
 } from '@angular/material';
 
 import { FlexLayoutModule, } from '@angular/flex-layout';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 const FLEX_LAYOUT_MODULES: any[] = [
@@ -24,6 +40,7 @@ const FLEX_LAYOUT_MODULES: any[] = [
 const ANGULAR_MODULES: any[] = [
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
 ];
 
 const MATERIAL_MODULES: any[] = [
@@ -47,7 +64,8 @@ const MATERIAL_MODULES: any[] = [
     MatTabsModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatStepperModule,
 ];
 
 const COVALENT_MODULES: any[] = [
