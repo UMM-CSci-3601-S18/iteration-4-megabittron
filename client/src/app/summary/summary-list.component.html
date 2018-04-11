@@ -86,8 +86,18 @@
                         <br>
                         <mat-checkbox [(ngModel)]="limitedPast">Show only entries from the past {{inputType}}</mat-checkbox>
                         <br>
+                        <hr>
+                        Detailed Graph Options
+                        <br>
                         <mat-checkbox [(ngModel)]="colorblindMode">Colorblind Mode</mat-checkbox>
                         <br>
+                        <mat-radio-group [(ngModel)]="graphMode">
+                        <mat-radio-button value="line">Line Graph</mat-radio-button>
+                            |
+                        <mat-radio-button value="bar">Stacked Bar Graph</mat-radio-button>
+                        </mat-radio-group>
+                        <br>
+                        <hr>
                         <button mat-raised-button id="filterBarButton" (click)="this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate); updateBarChart()">Summary Graph</button>
                         <button mat-raised-button id="filterLineButton" (click)="this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate); updateLineChart()">Detailed Graph</button>
                         <br>

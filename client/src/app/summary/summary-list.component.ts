@@ -27,6 +27,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     limitedPast: boolean;
     colorblindMode: boolean;
+    graphMode = 'line';
     happyColor: string;
     sadColor: string;
     mehColor: string;
@@ -46,6 +47,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     lastDayStamp = new Date(this.lastDayUnix);
     lastMonthUnix = this.nowUnix - 2628000000;
     lastMonthStamp = new Date(this.lastMonthUnix);
+    lastMonth = this.lastMonthStamp.getMonth();
     lastYearUnix = this.nowUnix - 31540000000;
     lastYearStamp = new Date(this.lastYearUnix);
 
@@ -277,9 +279,13 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     }
 
     public modDate(date: number): Number {
-        return (this.nowDate + 1 + date)%31;
+        if(this.limitedPast){
+            return (this.nowDate + 1 + date)%31;
+        }
+        else {
+            return date;
+        }
     }
-
 
     public modMonth(month: number): Number {
         if(this.limitedPast){
@@ -386,34 +392,42 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         return strMonth;
     }
 
-    /*
+
     public getPastDates(xValue: number): String {
         let thisDate = (this.nowDate + 1 + xValue)%31;
-        let strDate = '';
+        let numDate;
+        let M31Ds = [0, 2, 4, 6, 7, 9, 11];
+        let M30Ds = [3, 5, 8, 10];
+        let thisYear = this.nowStamp.getFullYear();
         // should get past 31 days
         // if last month had less than 31 days, it should be reflected
 
-        if(){//last month had 31 days or today is 31st
-            strDate = (thisDate + 1).toString();
+        if(this.lastMonth in M31Ds || this.nowDate == 30){
+            //last month had 31 days or today is 31st
+            numDate = thisDate + 1;
         }
         else {
-            if(){//last month had 30 days
-                strDate = ((thisDate)).toString;
+            if(this.lastMonth in M30Ds){
+                //last month had 30 days
+                numDate = thisDate;
             }
             else {
-                if(){//last month has 28 days
-                strDate = ((thisDate - 1)%31) .toString; //needs work, may return 0
+                if(((thisYear % 4 == 0) && (thisYear % 100) != 0) || (thisYear % 400) == 0){
+                    //last month has 29 days, leap year
+                    numDate = thisDate - 1;
                 }
                 else {
-                    if(){//last month has 29 days, leap year?
-                        //need to calculate
-                    }
+                    //last month has 28 days
+                    numDate = thisDate - 2;
                 }
             }
         }
-        return strDate;
+        if(numDate <= 0){
+            numDate = numDate + 31;
+        }
+        return numDate.toString();
     }
-    */
+
 
 
     public getDailyData(emotion){
@@ -545,6 +559,82 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         }
     }
 
+    public getDatelyData(emotion){
+
+        if(this.CurrentGraph == 'Bar'){
+            return [
+                this.filterBarGraph(this.modDate(0)),
+                this.filterBarGraph(this.modDate(1)),
+                this.filterBarGraph(this.modDate(2)),
+                this.filterBarGraph(this.modDate(3)),
+                this.filterBarGraph(this.modDate(4)),
+                this.filterBarGraph(this.modDate(5)),
+                this.filterBarGraph(this.modDate(6)),
+                this.filterBarGraph(this.modDate(7)),
+                this.filterBarGraph(this.modDate(8)),
+                this.filterBarGraph(this.modDate(9)),
+                this.filterBarGraph(this.modDate(10)),
+                this.filterBarGraph(this.modDate(11)),
+                this.filterBarGraph(this.modDate(12)),
+                this.filterBarGraph(this.modDate(13)),
+                this.filterBarGraph(this.modDate(14)),
+                this.filterBarGraph(this.modDate(15)),
+                this.filterBarGraph(this.modDate(16)),
+                this.filterBarGraph(this.modDate(17)),
+                this.filterBarGraph(this.modDate(18)),
+                this.filterBarGraph(this.modDate(19)),
+                this.filterBarGraph(this.modDate(20)),
+                this.filterBarGraph(this.modDate(21)),
+                this.filterBarGraph(this.modDate(22)),
+                this.filterBarGraph(this.modDate(23)),
+                this.filterBarGraph(this.modDate(24)),
+                this.filterBarGraph(this.modDate(25)),
+                this.filterBarGraph(this.modDate(26)),
+                this.filterBarGraph(this.modDate(27)),
+                this.filterBarGraph(this.modDate(28)),
+                this.filterBarGraph(this.modDate(29)),
+                this.filterBarGraph(this.modDate(30))
+            ]
+        }
+        else {
+            if(this.CurrentGraph == 'Line'){
+                return [
+                    this.filterLineGraph(this.modDate(0), emotion),
+                    this.filterLineGraph(this.modDate(1), emotion),
+                    this.filterLineGraph(this.modDate(2), emotion),
+                    this.filterLineGraph(this.modDate(3), emotion),
+                    this.filterLineGraph(this.modDate(4), emotion),
+                    this.filterLineGraph(this.modDate(5), emotion),
+                    this.filterLineGraph(this.modDate(6), emotion),
+                    this.filterLineGraph(this.modDate(7), emotion),
+                    this.filterLineGraph(this.modDate(8), emotion),
+                    this.filterLineGraph(this.modDate(9), emotion),
+                    this.filterLineGraph(this.modDate(10), emotion),
+                    this.filterLineGraph(this.modDate(11), emotion),
+                    this.filterLineGraph(this.modDate(12), emotion),
+                    this.filterLineGraph(this.modDate(13), emotion),
+                    this.filterLineGraph(this.modDate(14), emotion),
+                    this.filterLineGraph(this.modDate(15), emotion),
+                    this.filterLineGraph(this.modDate(16), emotion),
+                    this.filterLineGraph(this.modDate(17), emotion),
+                    this.filterLineGraph(this.modDate(18), emotion),
+                    this.filterLineGraph(this.modDate(19), emotion),
+                    this.filterLineGraph(this.modDate(20), emotion),
+                    this.filterLineGraph(this.modDate(21), emotion),
+                    this.filterLineGraph(this.modDate(22), emotion),
+                    this.filterLineGraph(this.modDate(23), emotion),
+                    this.filterLineGraph(this.modDate(24), emotion),
+                    this.filterLineGraph(this.modDate(25), emotion),
+                    this.filterLineGraph(this.modDate(26), emotion),
+                    this.filterLineGraph(this.modDate(27), emotion),
+                    this.filterLineGraph(this.modDate(28), emotion),
+                    this.filterLineGraph(this.modDate(29), emotion),
+                    this.filterLineGraph(this.modDate(30), emotion)
+                ]
+            }
+        }
+    }
+
     public getTypeData(type, emotion) {
         if(type == "week"){
             return this.getDailyData(emotion);
@@ -553,10 +643,12 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             if(type == "day"){
                 return this.getHourlyData(emotion);
             }
-
             else {
                 if(type == "year"){
                     return this.getMonthlyData(emotion);
+                }
+                else {
+                    return this.getDatelyData(emotion);
                 }
             }
         }
@@ -617,6 +709,40 @@ public pastMonths = [
     this.getPastMonths(11)
 ];
 
+public pastDates = [
+    this.getPastDates(0),
+    this.getPastDates(1),
+    this.getPastDates(2),
+    this.getPastDates(3),
+    this.getPastDates(4),
+    this.getPastDates(5),
+    this.getPastDates(6),
+    this.getPastDates(7),
+    this.getPastDates(8),
+    this.getPastDates(9),
+    this.getPastDates(10),
+    this.getPastDates(11),
+    this.getPastDates(12),
+    this.getPastDates(13),
+    this.getPastDates(14),
+    this.getPastDates(15),
+    this.getPastDates(16),
+    this.getPastDates(17),
+    this.getPastDates(18),
+    this.getPastDates(19),
+    this.getPastDates(20),
+    this.getPastDates(21),
+    this.getPastDates(22),
+    this.getPastDates(23),
+    this.getPastDates(24),
+    this.getPastDates(25),
+    this.getPastDates(26),
+    this.getPastDates(27),
+    this.getPastDates(28),
+    this.getPastDates(29),
+    this.getPastDates(30)
+];
+
     updateBarChart(): void{
         this.CurrentGraph = 'Bar';
 
@@ -634,19 +760,28 @@ public pastMonths = [
         let days;
         let hours;
         let months;
+        let dates;
 
         if(this.limitedPast){
             days = this.pastDays;
             hours = this.pastHours;
             months = this.pastMonths;
+            dates = this.pastDates;
         }
         else {
             days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
-            hours = ['12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM',
-                '8AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM',
-                '5 PM', '6 PM', '7 PM', '8 PM','9 PM', '10 PM', '11 PM'];
-            months = ['Jan', 'Feb', 'Mar','Apr', 'May', 'June',
+            hours = [
+                '12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM',
+                '6 AM', '7 AM', '8AM', '9 AM', '10 AM', '11 AM',
+                '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM',
+                '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM'];
+            months = [
+                'Jan', 'Feb', 'Mar','Apr', 'May', 'June',
                 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            dates = [
+                '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
+                '12', '13', '14', '15', '16', '17', '18', '19', '20', '21',
+                '22', '23', '24', '25', '26', '27', '28', '29', '30', '31',];
         }
 
         console.log(this.inputType);
@@ -660,6 +795,9 @@ public pastMonths = [
             else {
                 if (this.inputType == "year") {
                     xLabel = months;
+                }
+                else {
+                    xLabel = dates
                 }
             }
         }
@@ -703,6 +841,12 @@ public pastMonths = [
             this.barChart.destroy();
         }
 
+        let stackBool = true;
+
+        if(this.graphMode == 'line'){
+            stackBool = false;
+        }
+
         this.CurrentGraph = 'Line';
 
         this.lineCanvas = document.getElementById("Chart");
@@ -722,41 +866,56 @@ public pastMonths = [
             this.anxiousColor = "rgb(255, 128, 0)";
         }
 
-        let lineType;
+        let xLabel;
         let days;
         let hours;
         let months;
+        let dates;
 
         if(this.limitedPast){
             days = this.pastDays;
             hours = this.pastHours;
             months = this.pastMonths;
+            dates = this.pastDates;
         }
         else {
             days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
-            hours = ['12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM',
-                '8AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM',
-                '5 PM', '6 PM', '7 PM', '8 PM','9 PM', '10 PM', '11 PM'];
-            months = ['Jan', 'Feb', 'Mar','Apr', 'May', 'June',
+            hours = [
+                '12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM',
+                '6 AM', '7 AM', '8AM', '9 AM', '10 AM', '11 AM',
+                '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM',
+                '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM'];
+            months = [
+                'Jan', 'Feb', 'Mar','Apr', 'May', 'June',
                 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            dates = [
+                '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
+                '12', '13', '14', '15', '16', '17', '18', '19', '20', '21',
+                '22', '23', '24', '25', '26', '27', '28', '29', '30', '31',];
         }
 
-        if(this.inputType == "week") {
-            lineType = days;
-        } else {
-            if(this.inputType == "day") {
-                lineType = hours;
+        console.log(this.inputType);
+        if(this.inputType == "day"){
+            xLabel = hours;
+        }
+        else {
+            if (this.inputType == "week") {
+                xLabel = days;
             }
             else {
-                if(this.inputType == "year"){
-                    lineType = months;
+                if (this.inputType == "year") {
+                    xLabel = months;
+                }
+                else {
+                    xLabel = dates
                 }
             }
         }
+
         this.lineChart = new Chart(this.ctxLine, {
-            type: 'line',
+            type: this.graphMode,
             data: {
-                labels: lineType,
+                labels: xLabel,
                 datasets: [
                     {
                         "label": "Happy",
@@ -764,7 +923,8 @@ public pastMonths = [
                         hidden: false,
                         "fill": false,
                         "borderColor": this.happyColor,
-                        "lineTension": 0.1
+                        "lineTension": 0.1,
+                        "backgroundColor": this.happyColor,
                     },
                     {
                         "label": "Sad",
@@ -772,7 +932,8 @@ public pastMonths = [
                         hidden: false,
                         "fill": false,
                         "borderColor": this.sadColor,
-                        "lineTension": 0.1
+                        "lineTension": 0.1,
+                        "backgroundColor": this.sadColor,
                     },
                     {
                         "label": "Meh",
@@ -780,7 +941,8 @@ public pastMonths = [
                         hidden: false,
                         "fill": false,
                         "borderColor": this.mehColor,
-                        "lineTension": 0.1
+                        "lineTension": 0.1,
+                        "backgroundColor": this.mehColor,
                     },
                     {
                         "label": "Mad",
@@ -788,7 +950,8 @@ public pastMonths = [
                         hidden: false,
                         "fill": false,
                         "borderColor": this.madColor,
-                        "lineTension": 0.1
+                        "lineTension": 0.1,
+                        "backgroundColor": this.madColor,
                     },
                     {
                         "label": "Anxious",
@@ -796,13 +959,16 @@ public pastMonths = [
                         hidden: false,
                         "fill": false,
                         "borderColor": this.anxiousColor,
-                        "lineTension": 0.1
+                        "lineTension": 0.1,
+                        "backgroundColor": this.anxiousColor,
                     }
                 ]
             },
             options: {
                 scales: {
+                    xAxes: [{ stacked: stackBool }],
                     yAxes: [{
+                        stacked: stackBool,
                         ticks: {
                             beginAtZero:true
                         }
