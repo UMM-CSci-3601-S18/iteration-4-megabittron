@@ -37,29 +37,33 @@ export class JournalsComponent implements OnInit {
         return journal._id['$oid'] === this.highlightedID['$oid'];
     }
 
-    openDialog(): void {
+    openAddJournalDialog(): void {
         const newJournal: Journal = {_id: '', subject: '', body: '', date: ''};
         const dialogRef = this.dialog.open(AddJournalComponent, {
             width: '300px',
             data: { journal: newJournal }
+
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            this.journalListService.addNewJournal(result).subscribe(
-                addJournalResult => {
-                    this.highlightedID = addJournalResult;
-                    this.refreshJournals();
-                },
-                err => {
-                    // This should probably be turned into some sort of meaningful response.
-                    console.log('There was an error adding the journal.');
-                    console.log('The error was ' + JSON.stringify(err));
-                });
+            if (result == undefined) {
+                console.log("Cancelled without adding a journal.");
+            } else {
+                this.journalListService.addNewJournal(result).subscribe(
+                    addJournalResult => {
+                        this.highlightedID = addJournalResult;
+                        this.refreshJournals();
+                    },
+                    err => {
+                        // This should probably be turned into some sort of meaningful response.
+                        console.log('There was an error adding the journal.');
+                        console.log('The error was ' + JSON.stringify(err));
+                    });
+            }
         });
     }
 
-    openDialogReview(_id: string, subject: string, body: string, date: string): void {
-        console.log(_id + ' ' + subject + body + date);
+    openEditJournalDialog(_id: string, subject: string, body: string, date: string): void {
         const newJournal: Journal = {_id: _id, subject: subject, body: body, date: date};
         const dialogRef = this.dialog.open(EditJournalComponent, {
             width: '300px',
@@ -67,16 +71,20 @@ export class JournalsComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            this.journalListService.editJournal(result).subscribe(
-                editJournalResult => {
-                    this.highlightedID = editJournalResult;
-                    this.refreshJournals();
-                },
-                err => {
-                    // This should probably be turned into some sort of meaningful response.
-                    console.log('There was an error editing the journal.');
-                    console.log('The error was ' + JSON.stringify(err));
-                });
+            if (result == undefined) {
+                console.log("Cancelled without editing the journal.");
+            } else {
+                this.journalListService.editJournal(result).subscribe(
+                    editJournalResult => {
+                        this.highlightedID = editJournalResult;
+                        this.refreshJournals();
+                    },
+                    err => {
+                        // This should probably be turned into some sort of meaningful response.
+                        console.log('There was an error editing the journal.');
+                        console.log('The error was ' + JSON.stringify(err));
+                    });
+            }
         });
     }
 

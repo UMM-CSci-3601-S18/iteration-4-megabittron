@@ -64,16 +64,20 @@ export class GoalsComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            this.goalService.addNewGoal(result).subscribe(
-                addGoalResult => {
-                    this.highlightedID = addGoalResult;
-                    this.refreshGoals();
-                },
-                err => {
-                    // This should probably be turned into some sort of meaningful response.
-                    console.log('There was an error adding the goal.');
-                    console.log('The error was ' + JSON.stringify(err));
-                });
+            if (result == undefined) {
+                console.log("Cancelled without adding a goal");
+            } else {
+                this.goalService.addNewGoal(result).subscribe(
+                    addGoalResult => {
+                        this.highlightedID = addGoalResult;
+                        this.refreshGoals();
+                    },
+                    err => {
+                        // This should probably be turned into some sort of meaningful response.
+                        console.log('There was an error adding the goal.');
+                        console.log('The error was ' + JSON.stringify(err));
+                    });
+            }
         });
     }
 
