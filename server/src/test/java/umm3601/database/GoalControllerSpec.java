@@ -143,8 +143,8 @@ public class GoalControllerSpec {
     @Test
     public void getGoalByID() {
         String jsonResult = goalController.getGoal(anID.toHexString());
-        Document hunterDoc = Document.parse(jsonResult);
-        assertEquals("Name should match", "Call mom", hunterDoc.get("name"));
+        Document aDoc = Document.parse(jsonResult);
+        assertEquals("Name should match", "Call mom", aDoc.get("name"));
         String noJsonResult = goalController.getGoal(new ObjectId().toString());
         assertNull("No name should match",noJsonResult);
     }
