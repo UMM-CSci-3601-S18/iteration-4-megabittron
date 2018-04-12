@@ -79,7 +79,7 @@ export class GoalsService {
         return this.http.post<{'$oid': string}>(this.goalUrl + '/new', newGoal, httpOptions);
     }
 
-    completeGoal(completedGoal: Goal): Observable<{'$oid': string}> {
+    editGoal(completedGoal: Goal): Observable<{'$oid': string}> {
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'

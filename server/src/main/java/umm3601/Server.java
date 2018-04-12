@@ -106,7 +106,7 @@ public class Server {
         get("api/goals", goalRequestHandler::getGoals);
         get("api/goals/:id", goalRequestHandler::getGoalJSON);
         post("api/goals/new", goalRequestHandler::addNewGoal);
-        post("api/goals/edit", goalRequestHandler::completeGoal);
+        post("api/goals/edit", goalRequestHandler::editGoal);
         delete("api/goals/delete/:id", goalRequestHandler::deleteGoal);
 
         //List summary page
