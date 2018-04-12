@@ -125,7 +125,7 @@
                                </div>
                                <div class="goals-buttons">
                                    <button mat-icon-button class="button delete-button"
-                                           (click)="deleteGoal(goal._id['$oid']); openSnackBar('Goal Deleted')">
+                                           (click)="deleteGoal(goal._id['$oid'])">
                                        <mat-icon>delete</mat-icon>
                                    </button>
                                    <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" id="allCompleteGoal"

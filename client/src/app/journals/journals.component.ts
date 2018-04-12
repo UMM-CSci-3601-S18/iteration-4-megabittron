@@ -38,6 +38,7 @@ export class JournalsComponent implements OnInit {
     }
 
     openAddJournalDialog(): void {
+        console.log("Add journal button clicked.");
         const newJournal: Journal = {_id: '', subject: '', body: '', date: ''};
         const dialogRef = this.dialog.open(AddJournalComponent, {
             width: '300px',
@@ -62,11 +63,13 @@ export class JournalsComponent implements OnInit {
                     duration: 2000,
                 });
                 this.refreshJournals();
+                console.log("Journal added.");
             }
         });
     }
 
     openEditJournalDialog(_id: string, subject: string, body: string, date: string): void {
+        console.log("Edit journal button clicked.");
         const newJournal: Journal = {_id: _id, subject: subject, body: body, date: date};
         const dialogRef = this.dialog.open(EditJournalComponent, {
             width: '300px',
@@ -91,6 +94,7 @@ export class JournalsComponent implements OnInit {
                     duration: 2000,
                 });
                 this.refreshJournals();
+                console.log("Journal edited.");
             }
         });
     }
@@ -101,6 +105,7 @@ export class JournalsComponent implements OnInit {
             width: '500px',
             data: { journal: showJournal }
         });
+        console.log("Showing more journal info.");
     }
 
     public filterJournals(searchSubject: string, searchBody: string, searchDate: string): Journal[] {
