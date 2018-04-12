@@ -13,8 +13,7 @@ export class GoalsService {
     readonly baseUrl: string = environment.API_URL + 'goals';
     private goalUrl: string = this.baseUrl;
     private noID: boolean = false;
-    private emptyGoalArray: Goal[] = [];
-    private emptythingy: Observable<Goal[]> = Observable.of([]);
+    private emptyObservable: Observable<Goal[]> = Observable.of([]);
 
     constructor(private http: HttpClient) {
     }
@@ -22,12 +21,12 @@ export class GoalsService {
     getGoals(userID: string, goalCategory?: string): Observable<Goal[]> {
         this.goalUrl = this.baseUrl;
         this.noID = false;
-        //this.filterByCategory(goalCategory);
+
         this.filterByUserID(userID);
 
         //require a userID
         if(this.noID){
-            return this.emptythingy;
+            return this.emptyObservable;
         }
         console.log(this.goalUrl);
         return this.http.get<Goal[]>(this.goalUrl);

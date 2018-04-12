@@ -15,8 +15,8 @@ import {ShowJournalComponent} from "./show-journal.component";
 
 export class JournalsComponent implements OnInit {
     // These are public so that tests can reference them (.spec.ts)
-    public journals: Journal[];
-    public filteredJournals: Journal[];
+    public journals: Journal[] = [];
+    public filteredJournals: Journal[] = [];
     public journalSubject: string;
     public journalBody: string;
     public journalDate: any;
@@ -38,7 +38,7 @@ export class JournalsComponent implements OnInit {
     }
 
     openDialog(): void {
-        const newJournal: Journal = {_id: '', subject: '', body: '', date: ''};
+        const newJournal: Journal = {_id: '', userID: localStorage.getItem('userID'), subject: '', body: '', date: ''};
         const dialogRef = this.dialog.open(AddJournalComponent, {
             width: '300px',
             data: { journal: newJournal }
@@ -60,7 +60,7 @@ export class JournalsComponent implements OnInit {
 
     openDialogReview(_id: string, subject: string, body: string, date: string): void {
         console.log(_id + ' ' + subject + body + date);
-        const newJournal: Journal = {_id: _id, subject: subject, body: body, date: date};
+        const newJournal: Journal = {_id: _id, userID: localStorage.getItem('userID'), subject: subject, body: body, date: date};
         const dialogRef = this.dialog.open(EditJournalComponent, {
             width: '300px',
             data: { journal: newJournal }
@@ -81,7 +81,7 @@ export class JournalsComponent implements OnInit {
     }
 
     showMoreInfo(body: string): void {
-        const showJournal: Journal = {_id: null, subject: null, body: body, date: null};
+        const showJournal: Journal = {_id: null, userID: null, subject: null, body: body, date: null};
         const dialogRef = this.dialog.open(ShowJournalComponent, {
             width: '500px',
             data: { journal: showJournal }
@@ -133,7 +133,7 @@ export class JournalsComponent implements OnInit {
     // Starts an asynchronous operation to update the journals list
 
     refreshJournals(): Observable<Journal[]> {
-        const journalListObservable: Observable<Journal[]> = this.journalListService.getJournals();
+        const journalListObservable: Observable<Journal[]> = this.journalListService.getJournals(localStorage.getItem("userID"));
         journalListObservable.subscribe(
             journals => {
                 this.journals = journals;
@@ -152,7 +152,7 @@ export class JournalsComponent implements OnInit {
     }
 
     loadService(): void {
-        this.journalListService.getJournals(this.journalSubject).subscribe(
+        this.journalListService.getJournals(localStorage.getItem("userID")).subscribe(
             journals => {
                 this.journals = journals;
                 this.filteredJournals = this.journals;

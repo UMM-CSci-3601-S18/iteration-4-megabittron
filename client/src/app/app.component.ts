@@ -24,8 +24,8 @@ export class AppComponent implements OnInit {
 
             localStorage.setItem('isSignedIn', 'true');
             this.sendAuthCode(resp.code);
-        });
 
+        });
 
 
     }
@@ -66,6 +66,7 @@ export class AppComponent implements OnInit {
                 console.log("Code sent to server");
                 console.log(onSuccess["$oid"]);
                 localStorage.setItem("userID", onSuccess["$oid"]);
+                window.location.reload();
             }, onFail => {
                 console.log("ERROR: Code couldn't be sent to the server");
             });
