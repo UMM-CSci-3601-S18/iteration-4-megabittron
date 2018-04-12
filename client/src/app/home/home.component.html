@@ -42,7 +42,7 @@
                         </button>
                     </div>
                 </mat-step>
-                <mat-step label="Emotion Intensity" editable="false" *ngIf="selectedEmotion != 'meh' && selectedEmotion != 'none'">
+                <mat-step label="Emotion Intensity" editable="true" *ngIf="selectedEmotion != 'meh' && selectedEmotion != 'none'">
                     <div class="emotion-intensity">
                         <img class="selected-emoji" src="../../assets/images/emotions/{{selectedEmotion}}.svg">
                         <p>How {{selectedEmotion}} do you feel?</p>
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                 </mat-step>
-                <mat-step label="Journaling" editable="false" *ngIf="emojiRating > 0 || selectedEmotion == 'meh'">
+                <mat-step label="Journaling" editable="true" *ngIf="emojiRating > 0 || selectedEmotion == 'meh'">
                     <div class="text-info">
                         <p class="text-description">
                             I'm feeling this way because...
