@@ -208,9 +208,7 @@ export class GoalsComponent implements OnInit {
         if(this.showAllGoals == false) {
             this.todayGoals = this.filteredGoals.filter(goal => {
 
-
                 var nextGoal = new Date(goal.next);
-
                 nextGoal.setHours(0, 0, 0, 0);
 
                 var endGoal = new Date(goal.end);
@@ -229,7 +227,6 @@ export class GoalsComponent implements OnInit {
                 if (goal.status == true) {
                     return false;
                 }
-
 
                 if (endGoal.getTime() < this.today.getTime()) {
                     return false;
@@ -279,6 +276,7 @@ export class GoalsComponent implements OnInit {
 
 
             });
+
             this.showGoals("today");
             return this.todayGoals;
         }
@@ -330,19 +328,21 @@ export class GoalsComponent implements OnInit {
     maxNumPages(type): boolean{
         if(type == "today") {
 
-            if(typeof this.todayGoals.length === "undefined"){
-                return false
+            if(this.todayGoals !== undefined){
+                return (this.goalsPerPage * this.currentPage) < this.todayGoals.length;
             }
-
-            return (this.goalsPerPage * this.currentPage) < this.todayGoals.length;
+            return false;
         }
         else{
-            if(typeof this.filteredGoals.length === "undefined"){
-                return false
+            if(this.filteredGoals !== undefined){
+                return (this.goalsPerPage * this.currentPage) < this.todayGoals.length;
             }
-
-            return (this.goalsPerPage * this.currentPage) < this.filteredGoals.length;
+            return false;
         }
+    }
+
+    setNumGoals(){
+        this.currentScreenWidth = (window.screen.width);
     }
 
 
