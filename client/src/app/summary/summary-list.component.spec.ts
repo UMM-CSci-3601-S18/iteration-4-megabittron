@@ -216,16 +216,16 @@ import 'rxjs/add/operator/do';
                 });
             }));
 
-            it('filterLineGraph filters correctly for all time', () => {
+            it('filterDetailedGraph filters correctly for all time', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterLineGraph(0, 'mad')).toBe(1);
-                expect(summary.filterLineGraph(2, 'mad')).toBe(0);
+                expect(summary.filterDetailedGraph(0, 'mad')).toBe(1);
+                expect(summary.filterDetailedGraph(2, 'mad')).toBe(0);
             });
 
-            it('filterBarGraph filters correctly for all time', () => {
+            it('filterBasicGraph filters correctly for all time', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBarGraph(0)).toBe(1);
-                expect(summary.filterBarGraph(2)).toBe(0);
+                expect(summary.filterBasicGraph(0)).toBe(1);
+                expect(summary.filterBasicGraph(2)).toBe(0);
             });
 
         });
@@ -299,16 +299,16 @@ import 'rxjs/add/operator/do';
                 });
             }));
 
-            it('filterLineGraph filters correctly for inputType = day', () => {
+            it('filterDetailedGraph filters correctly for inputType = day', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterLineGraph(15, 'mad')).toBe(1);
-                expect(summary.filterLineGraph(2, 'mad')).toBe(0);
+                expect(summary.filterDetailedGraph(15, 'mad')).toBe(1);
+                expect(summary.filterDetailedGraph(2, 'mad')).toBe(0);
             });
 
-            it('filterBarGraph filters correctly for inputType = day', () => {
+            it('filterBasicGraph filters correctly for inputType = day', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBarGraph(15)).toBe(1);
-                expect(summary.filterBarGraph(2)).toBe(0);
+                expect(summary.filterBasicGraph(15)).toBe(1);
+                expect(summary.filterBasicGraph(2)).toBe(0);
             });
 
             it('modHour works as intended', () => {
@@ -317,16 +317,16 @@ import 'rxjs/add/operator/do';
                 expect(summary.modHour(30)).toBe(3);
             });
 
-            it('filterLineGraph works correctly when using modHour', () => {
+            it('filterDetailedGraph works correctly when using modHour', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterLineGraph(summary.modHour(18), 'mad')).toBe(1);
-                expect(summary.filterLineGraph(summary.modHour(0), 'mad')).toBe(0);
+                expect(summary.filterDetailedGraph(summary.modHour(18), 'mad')).toBe(1);
+                expect(summary.filterDetailedGraph(summary.modHour(0), 'mad')).toBe(0);
             });
 
-            it('filterBarGraph works correctly when using modHour', () => {
+            it('filterBasicGraph works correctly when using modHour', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBarGraph(summary.modHour(18))).toBe(1);
-                expect(summary.filterBarGraph(summary.modHour(0))).toBe(0);
+                expect(summary.filterBasicGraph(summary.modHour(18))).toBe(1);
+                expect(summary.filterBasicGraph(summary.modHour(0))).toBe(0);
             });
 
             it('getPastHours works as intended', () => {
@@ -407,16 +407,16 @@ import 'rxjs/add/operator/do';
                 });
             }));
 
-            it('filterLineGraph filters correctly for inputType = week', () => {
+            it('filterDetailedGraph filters correctly for inputType = week', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterLineGraph(4, 'sad')).toBe(1);
-                expect(summary.filterLineGraph(2, 'sad')).toBe(0);
+                expect(summary.filterDetailedGraph(4, 'sad')).toBe(1);
+                expect(summary.filterDetailedGraph(2, 'sad')).toBe(0);
             });
 
-            it('filterBarGraph filters correctly for inputType = week', () => {
+            it('filterBasicGraph filters correctly for inputType = week', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBarGraph(4)).toBe(1);
-                expect(summary.filterBarGraph(2)).toBe(0);
+                expect(summary.filterBasicGraph(4)).toBe(1);
+                expect(summary.filterBasicGraph(2)).toBe(0);
             });
 
             it('modDay works as intended', () => {
@@ -425,16 +425,16 @@ import 'rxjs/add/operator/do';
                 expect(summary.modDay(30)).toBe(3);
             });
 
-            it('filterLineGraph works correctly when using modDay', () => {
+            it('filterDetailedGraph works correctly when using modDay', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterLineGraph(summary.modDay(10), 'sad')).toBe(1);
-                expect(summary.filterLineGraph(summary.modDay(0), 'sad')).toBe(0);
+                expect(summary.filterDetailedGraph(summary.modDay(10), 'sad')).toBe(1);
+                expect(summary.filterDetailedGraph(summary.modDay(0), 'sad')).toBe(0);
             });
 
-            it('filterBarGraph works correctly when using modDay', () => {
+            it('filterBasicGraph works correctly when using modDay', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBarGraph(summary.modDay(10))).toBe(1);
-                expect(summary.filterBarGraph(summary.modDay(0))).toBe(0);
+                expect(summary.filterBasicGraph(summary.modDay(10))).toBe(1);
+                expect(summary.filterBasicGraph(summary.modDay(0))).toBe(0);
             });
 
             it('getPastDays works as intended', () => {
