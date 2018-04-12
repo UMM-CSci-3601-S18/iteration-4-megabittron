@@ -70,13 +70,16 @@ export class GoalsComponent implements OnInit {
                 this.goalService.addNewGoal(result).subscribe(
                     addGoalResult => {
                         this.highlightedID = addGoalResult;
-                        this.refreshGoals();
                     },
                     err => {
                         // This should probably be turned into some sort of meaningful response.
                         console.log('There was an error adding the goal.');
                         console.log('The error was ' + JSON.stringify(err));
                     });
+                this.snackBar.open("Added Goal", "CLOSE", {
+                    duration: 2000,
+                });
+                this.refreshGoals();
             }
         });
     }
@@ -91,6 +94,9 @@ export class GoalsComponent implements OnInit {
                 console.log(err);
                 this.refreshGoals();
                 this.loadService();
+                this.snackBar.open("Deleted Goal", "CLOSE", {
+                    duration: 2000,
+                });
             }
         );
     }
@@ -110,6 +116,9 @@ export class GoalsComponent implements OnInit {
         this.goalService.completeGoal(updatedGoal).subscribe(
             completeGoalResult => {
                 this.highlightedID = completeGoalResult;
+                this.snackBar.open("Completed Goal", "CLOSE", {
+                    duration: 2000,
+                });
                 this.refreshGoals();
             },
             err => {
@@ -139,13 +148,6 @@ export class GoalsComponent implements OnInit {
                 console.log('There was an error completing the goal.');
                 console.log('The error was ' + JSON.stringify(err));
             });
-    }
-
-
-    openSnackBar(message: string, action: string) {
-        this.snackBar.open(message, action, {
-            duration: 2000,
-        });
     }
 
     public filterGoals(searchPurpose: string, searchCategory: string,

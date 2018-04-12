@@ -37,8 +37,8 @@
                     <mat-option value="Monthly">Monthly</mat-option>
                 </mat-select>
             </mat-card-content>
-        <button mat-raised-button id="confirmAddGoalButton" [mat-dialog-close]="data.goal" type="button" (click)="openSnackBar('Goal Added','')">Confirm</button>
-        <button mat-raised-button id="exitWithoutAddingButton" (click)="onNoClick()" type="button">Cancel</button>
+        <button mat-raised-button id="confirmAddGoalButton" [mat-dialog-close]="data.goal">Confirm</button>
+        <button mat-raised-button id="exitWithoutAddingButton" (click)="onNoClick()">Cancel</button>
     </div>
 </div>
 
