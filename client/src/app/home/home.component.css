@@ -101,3 +101,18 @@
 .text-form-field {
     width: 100%;
 }
+
+.container {
+    position:relative;
+    padding-bottom: 54%; /*use to be 56.25 but that caused scrolling. 54% does not*/
+    height:0;
+    overflow:hidden;
+}
+
+.container iframe, .container object, .container embed {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
