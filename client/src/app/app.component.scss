@@ -1,30 +1,16 @@
 @import "../theme";
 
-.nav-things {
-    margin: 0;
-    text-align: left;
-    background-color: #03A9F4;
-    padding-top: 10px;
-    padding-bottom: 10px;
+.nav-drawer {
+    .nav-active {
+        background-color: mat-color($mat-grey, 100) !important;
+        color: mat-color($accent) !important;
+    }
+
+    .nav-active mat-icon {
+        color: mat-color($accent) !important;
+    }
 }
 
-li {
-    display: inline-block;
-}
+.computer {
 
-li a {
-    color: white;
-}
-
-.nav-button {
-/*    width: 125px;
-    height: 50px;*/
-    font-size: 20px;
-    padding: 10px;
-}
-
-#mobile-home {
-    align: right;
-    text-align: right;
-    float: right;
 }

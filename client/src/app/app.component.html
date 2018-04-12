@@ -1,50 +1,30 @@
-<body>
-
-<ng-container *ngIf="currentScreenWidth < 806; then mobile else computer"></ng-container>
-
-<ng-template #computer>
-
-
-    <button mat-raised-button (click)="signOut()">Sign Out</button>
-    <button mat-raised-button (click)="isSignedIn()">Check Sign In State</button>
-    <button mat-raised-button (click)="whoIsSignedIn()">Who is signed in?</button>
-
-
-    <div (window:resize)="onResize($event)"></div>
-    <ul class="nav-things" >
-        <li><a id="home" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><button mat-button class="nav-button">Home</button> </a></li>
-        <li><a id="goal" [routerLink]="['/goals']" routerLinkActive="active"><button mat-button class="nav-button">Goals</button></a></li>
-        <li><a id="journal" [routerLink]="['/journals']" routerLinkActive="active"><button mat-button class="nav-button">Journals</button></a></li>
-        <li><a id="resources" [routerLink]="['/resources']" routerLinkActive="active"><button mat-button class="nav-button">Resources</button></a></li>
-        <li><a id="summary" [routerLink]="['/summary']" routerLinkActive="active"><button mat-button class="nav-button">Stats</button></a></li>
-        <li *ngIf="!isSignedIn()"><div class="g-signin2" (click)="signIn()"></div></li>
-    </ul>
-    <router-outlet></router-outlet>
-</ng-template>
-<ng-template id="mobile" #mobile>
-
-    <div (window:resize)="onResize($event)"></div>
-    <td-layout #layout>
-        <td-navigation-drawer id="navBar" flex sidenavTitle="Menu" >
-            <mat-nav-list class="side-nav-things">
-                <a mat-list-item [routerLink]="['/']" (click)="layout.close()" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact: true}"><mat-icon>mood</mat-icon>Home</a>
-                <a mat-list-item [routerLink]="['/goals']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon>playlist_add_check</mat-icon>Goals</a>
-                <a mat-list-item [routerLink]="['/journals']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon><i class="material-icons">import_contacts</i></mat-icon>Journals</a>
-                <a mat-list-item [routerLink]="['/resources']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon><i class="material-icons">contact_phone</i></mat-icon>Resources</a>
-                <a mat-list-item [routerLink]="['/summary']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon><i class="material-icons">assessment</i></mat-icon>Stats</a>
-            </mat-nav-list>
-        </td-navigation-drawer>
-        <td-layout-nav>
-            <button mat-icon-button td-menu-button tdLayoutToggle >
+<td-layout #layout>
+    <td-navigation-drawer id="navBar" class="nav-drawer" flex sidenavTitle="Menu" >
+        <mat-nav-list class="side-nav-things">
+            <a mat-list-item [routerLink]="['/']" (click)="layout.close()" routerLinkActive="nav-active" [routerLinkActiveOptions]="{ exact: true }"><mat-icon>mood</mat-icon>Home</a>
+            <a mat-list-item [routerLink]="['/goals']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon>playlist_add_check</mat-icon>Goals</a>
+            <a mat-list-item [routerLink]="['/journals']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon><i class="material-icons">import_contacts</i></mat-icon>Journals</a>
+            <a mat-list-item [routerLink]="['/resources']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon><i class="material-icons">contact_phone</i></mat-icon>Resources</a>
+            <a mat-list-item [routerLink]="['/summary']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon><i class="material-icons">assessment</i></mat-icon>Stats</a>
+        </mat-nav-list>
+    </td-navigation-drawer>
+    <td-layout-nav class="nav-bar">
+        <div td-toolbar-content layout="row" layout-align="start center" flex>
+            <button mat-icon-button td-menu-button tdLayoutToggle hide-gt-xs>
                 <mat-icon>menu</mat-icon>
             </button>
-            <div class="g-signin2" (click)="signIn()"></div>
-            <button mat-raised-button (click)="signOut()">Sign Out</button>
-            <button mat-raised-button (click)="isSignedIn()">Check Sign In State</button>
-            <button mat-raised-button (click)="whoIsSignedIn()">Who is signed in?</button>
+            <span hide-xs class="desktop-title"><button mat-button class="computer" [routerLink]="['/']">My Panda</button></span>
+            <span hide-gt-xs>My Panda</span>
+            <span flex></span>
+            <a class="desktop-home computer" mat-button [routerLink]="['/']" routerLinkActive="nav-active" [routerLinkActiveOptions]="{ exact: true }" hide-xs>Home</a>
+            <a class="desktop-goals computer" mat-button [routerLink]="['/goals']" routerLinkActive="nav-active" hide-xs>Goals</a>
+            <a class="desktop-journals computer" mat-button [routerLink]="['/journals']" routerLinkActive="nav-active" hide-xs>Journals</a>
+            <a class="desktop-resources computer" mat-button [routerLink]="['/resources']" routerLinkActive="nav-active" hide-xs>Resources</a>
+            <a class="desktop-stats computer" mat-button [routerLink]="['/summary']" routerLinkActive="nav-active" hide-xs>Stats</a>
+            <div *ngIf="!isSignedIn()" class="g-signin2" (click)="signIn()"></div>
+            <button *ngIf="isSignedIn()" mat-raised-button (click)="signOut()">Sign Out</button>
+        </div>
+        <router-outlet></router-outlet>
+    </td-layout-nav>
+</td-layout>
 
-            <router-outlet></router-outlet>
-        </td-layout-nav>
-    </td-layout>
-</ng-template>
-</body>
