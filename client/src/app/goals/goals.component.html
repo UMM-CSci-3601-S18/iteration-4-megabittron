@@ -1,9 +1,7 @@
-<body class="whole-body">
-<main>
+
     <div  layout="column" >
         <div layout="column" id="desktopAllGoals">
             <div class="first-sec">
-              <!--  <div (window:resize)="onResize($event,'today')"></div>-->
                 <mat-card class="manage-goals-card">
                     <mat-card-title id="desktopGoal-title">Your Goals</mat-card-title>
                     <mat-card-subtitle class="goal-subtitle">Goals can help you stay on
@@ -333,14 +331,10 @@
                         </button>
                         <button *ngIf="maxNumPages('all') == true " mat-icon-button class="nextPage" (click)="this.currentPage = this.currentPage + 1;
                     showGoals()" [disabled]="false">
-                            <mat-icon>keyboard_arrow_right</mat-icon>
-                        </button>
-                    </div>
+                        <mat-icon>keyboard_arrow_right</mat-icon>
+                    </button>
                 </div>
             </div>
         </div>
-</main>
-</body>
-
-
+    </div>
 

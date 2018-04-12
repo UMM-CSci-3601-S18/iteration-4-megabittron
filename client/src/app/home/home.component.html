@@ -1,76 +1,149 @@
- <html>
-<body class="whole-body">
-<br>
 <div layout-gt-sm="row" class="main-bg">
     <div flex-gt-sm="80" flex-offset-gt-sm="10">
-            <mat-card-title id="title">Friendly Panda</mat-card-title>
-            <br>
         <mat-card id="mainCard">
+            <mat-horizontal-stepper #stepper>
+                <mat-step label="Emotion Selection" editable="false">
+                    <div class="how-are-you">
+                        <p>How are you feeling today?</p>
+                    </div>
+                    <div class="emotion-selection" id="emotion">
+                        <button mat-button id="happy" class="emotion-img" matTooltip="Happy"
+                                (click)="setEmotion('happy'); selectEmotion('happy')">
+                            <img src="../../assets/images/emotions/happy.svg">
+                        </button>
+                        <button mat-button id="sad" class="emotion-img" matTooltip="Sad"
+                                (click)="setEmotion('sad'); selectEmotion('sad')">
+                            <img src="../../assets/images/emotions/sad.svg">
+                        </button>
+                        <button mat-button id="meh" class="emotion-img" matTooltip="Meh"
+                                (click)="setEmotion('meh'); selectEmotion('meh')">
+                            <img src="../../assets/images/emotions/meh.svg">
+                        </button>
+                        <button mat-button id="mad" class="emotion-img" matTooltip="Mad"
+                                (click)="setEmotion('mad'); selectEmotion('mad')">
+                            <img src="../../assets/images/emotions/mad.svg">
+                        </button>
+                        <button mat-button id="anxious" class="emotion-img" matTooltip="Anxious"
+                                (click)="setEmotion('anxious'); selectEmotion('anxious')">
+                            <img src="../../assets/images/emotions/anxious.svg">
+                        </button>
+                    </div>
 
-            <mat-card-title style="text-align: center;">
-                <h2>How are you feeling today?</h2>
-                <br>
-                I'm feeling {{emotion()}}.
-            </mat-card-title>
-            <br>
+                    <div class="i-feel" *ngIf="selectedEmotion != 'none'">
+                        <p>I'm feeling {{selectedEmotion}}.</p>
+                    </div>
 
-            <div class="emotionSelection" id="emotion">
-                <img id="happy" width= "10%" src="../../assets/images/emotions/happy.svg"
-                     (click)="setEmotion('happy'); selectEmotion('happy')">
+                    <div class="stepperButtons">
+                        <button mat-raised-button
+                                matStepperNext
+                                class="next-button"
+                                *ngIf="selectedEmotion != 'none'">
+                            Next
+                        </button>
+                    </div>
+                </mat-step>
+                <mat-step label="Emotion Intensity" editable="false" *ngIf="selectedEmotion != 'meh' && selectedEmotion != 'none'">
+                    <div class="emotion-intensity">
+                        <img class="selected-emoji" src="../../assets/images/emotions/{{selectedEmotion}}.svg">
+                        <p>How {{selectedEmotion}} do you feel?</p>
+                        <div class="slider-div">
+                            <mat-slider
+                                class="slider"
+                                [max]="5"
+                                [min]="1"
+                                [step]="1"
+                                [thumb-label]="thumbLabel"
+                                [(ngModel)]="emojiRating"
+                                (input)="emojiRating=$event.value">
+                            </mat-slider>
+                        </div>
+                        <div class="stepperButtons">
+                            <button mat-raised-button
+                                    matStepperNext
+                                    class="next-button"
+                                    *ngIf="emojiRating != 0">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                </mat-step>
+                <mat-step label="Journaling" editable="false" *ngIf="emojiRating > 0 || selectedEmotion == 'meh'">
+                    <div class="text-info">
+                        <p class="text-description">
+                            I'm feeling this way because...
+                        </p>
+                        <mat-form-field class="text-form-field">
+                            <textarea matInput
+                                      placeholder="Text entry"
+                                      rows="4"
+                                      cols="70"
+                                      (input)="emotionDescription=$event.target.value"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="stepperButtons">
+                        <button mat-raised-button
+                                matStepperNext
+                                class="next-button"
+                                (click)="videoEnablerSwitch();getDate();saveEmotion()">
+                            Submit
+                        </button>
+                    </div>
+                </mat-step>
+                <mat-step label="Video" editable="false" *ngIf="videoBooleanSwitch == true">
+                    <div *ngIf="videoEmotion == 'happy'">
+                        <div class="container">
+                            <iframe id="responseHappyVideoFrame"
+                                    src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37AO-nqegk5cEwS1ElAoQLNr"
+                                    frameborder="0"
+                                    allowfullscreen
+                                    class="video"></iframe>
+                        </div>
+                    </div>
+                    <div *ngIf="videoEmotion == 'sad'">
 
-                <img id="sad" width= "10%" src="../../assets/images/emotions/sad.svg"
-                     (click)="setEmotion('sad'); selectEmotion('sad')">
+                        <div class="container">
+                            <iframe id="responseSadVideoFrame"
+                                    src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37CvQMRHaqg-6yEQpLWjAdWu"
+                                    frameborder="0"
+                                    allowfullscreen
+                                    class="video"></iframe>
+                        </div>
+                    </div>
+                    <div *ngIf="videoEmotion == 'meh'">
 
-                <img id="meh" width= "10%" src="../../assets/images/emotions/meh.svg"
-                     (click)="setEmotion('meh'); selectEmotion('meh')">
+                        <div class="container">
+                            <iframe id="responseMehVideoFrame"
+                                    src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37D36KCVAns9LYvh1BV4m6YX"
+                                    frameborder="0"
+                                    allowfullscreen
+                                    class="video"></iframe>
+                        </div>
+                    </div>
+                    <div *ngIf="videoEmotion == 'mad'">
 
-                <img id="mad" width= "10%" src="../../assets/images/emotions/mad.svg"
-                     (click)="setEmotion('mad'); selectEmotion('mad')">
+                        <div class="container">
+                            <iframe id="responseMadVideoFrame"
+                                    src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37Dx6Ohz5al_e1GljuZqvZ_M"
+                                    frameborder="0"
+                                    allowfullscreen
+                                    class="video"></iframe>
+                        </div>
+                    </div>
+                    <div *ngIf="videoEmotion == 'anxious'">
 
-                <img id="scared" width= "10%" src="../../assets/images/emotions/scared.svg"
-                     (click)="setEmotion('scared'); selectEmotion('scared')">
-
-                <img id="anxious" width= "10%" src="../../assets/images/emotions/anxious.svg"
-                     (click)="setEmotion('anxious'); selectEmotion('anxious')">
-            </div>
-            <br>
-
-            <div class="journalEntry" *ngIf="showTextBox()">
-
-                <div class="emotionSelection" *ngIf="showSlider()">
-                    <h2>How intense are your feelings?</h2>
-                    <p>(1 means mild, 5 means extreme)</p>
-
-                    <mat-slider
-                        class="slider"
-                        [max]="5"
-                        [min]="1"
-                        [step]="1"
-                        [thumb-label]="thumbLabel"
-                        [(ngModel)]="emojiRating"
-                        (input)="emojiRating=$event.value">
-                    </mat-slider>
-
-                </div>
-
-                I'm feeling this way because...
-                <br>
-                <textarea id="entryBox" rows="4" cols="50" (input)="emotionDescription=$event.target.value"></textarea>
-            </div>
-
-            <div class="entryButtons">
-                <button mat-raised-button id="cancel" (click)="resetPage()">Cancel</button>
-                <button mat-raised-button id="save"
-                        [disabled]="showSaveButton()" (click)="getDate();saveEmotion();appropriateResponsePopUp();" >Save</button>
-            </div>
-
-            <br>
-
-            <div id="copyright">
-            <a id = "emojiSource" href="https://www.flaticon.com/packs/emoji-3" target="_blank">Emojis designed by Freepik from Flaticon</a>
-            </div>
+                        <div class="container">
+                            <iframe id="responseAnxiousVideoFrame"
+                                    src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37BVBh18FtFKX-fEEroV6tQ9"
+                                    frameborder="0"
+                                    allowfullscreen
+                                    class="video"></iframe>
+                        </div>
+                    </div>
+                </mat-step>
+            </mat-horizontal-stepper>
+            <button mat-raised-button mat-button id="restart" matTooltip="Restart" (click)="restart()">
+                Restart
+            </button>
         </mat-card>
     </div>
 </div>
-</body>
-</html>
