@@ -923,7 +923,7 @@ public pastDates = [
                         hidden: false,
                         "fill": false,
                         "borderColor": this.happyColor,
-                        "lineTension": 0.1,
+                        "lineTension": 0.2,
                         "backgroundColor": this.happyColor,
                     },
                     {
@@ -932,7 +932,7 @@ public pastDates = [
                         hidden: false,
                         "fill": false,
                         "borderColor": this.sadColor,
-                        "lineTension": 0.1,
+                        "lineTension": 0.2,
                         "backgroundColor": this.sadColor,
                     },
                     {
@@ -941,7 +941,7 @@ public pastDates = [
                         hidden: false,
                         "fill": false,
                         "borderColor": this.mehColor,
-                        "lineTension": 0.1,
+                        "lineTension": 0.2,
                         "backgroundColor": this.mehColor,
                     },
                     {
@@ -950,7 +950,7 @@ public pastDates = [
                         hidden: false,
                         "fill": false,
                         "borderColor": this.madColor,
-                        "lineTension": 0.1,
+                        "lineTension": 0.2,
                         "backgroundColor": this.madColor,
                     },
                     {
@@ -959,7 +959,7 @@ public pastDates = [
                         hidden: false,
                         "fill": false,
                         "borderColor": this.anxiousColor,
-                        "lineTension": 0.1,
+                        "lineTension": 0.2,
                         "backgroundColor": this.anxiousColor,
                     }
                 ]
@@ -978,6 +978,7 @@ public pastDates = [
         });
     }
 
+    /*
     buildBasicChart(): void {
 
         this.basicCanvas = document.getElementById("Chart");
@@ -1022,7 +1023,7 @@ public pastDates = [
             }
         });
     }
-
+    */
 
     /*
     buildDetailedChart(): void {
@@ -1114,7 +1115,7 @@ public pastDates = [
     */
 
     ngAfterViewInit(): void {
-        this.buildBasicChart();
+        this.updateBasicChart();
     }
 
     /*
@@ -1158,10 +1159,6 @@ public pastDates = [
 
     totalNumberMoods(): number{
         return this.filteredSummaries.length;
-    }
-
-    returnTime(mood: string): string{
-        return "";
     }
 
     ngOnInit(): void {
