@@ -14,10 +14,10 @@ import {MatSnackBar} from '@angular/material';
 
 export class GoalsComponent implements OnInit {
     // These are public so that tests can reference them (.spec.ts)
-    public goals: Goal[];
-    public todayGoals: Goal[];
-    public shownGoals: Goal[];
-    public filteredGoals: Goal[];
+    public goals: Goal[] = [];
+    public todayGoals: Goal[] = [];
+    public shownGoals: Goal[] = [];
+    public filteredGoals: Goal[] = [];
 
     // These are the target values used in searching.
     public goalPurpose: string;
@@ -49,6 +49,7 @@ export class GoalsComponent implements OnInit {
     openDialog(): void {
         const newGoal: Goal = {
             _id: '',
+            userID: localStorage.getItem("userID"),
             name: '',
             category: '',
             purpose: '',
@@ -94,6 +95,7 @@ export class GoalsComponent implements OnInit {
     editGoal(_id, name, purpose, category, status, frequency, start, end, next) {
         const updatedGoal: Goal = {
             _id: _id,
+            userID: localStorage.getItem("userID"),
             purpose: purpose,
             category: category,
             name: name,
@@ -117,6 +119,7 @@ export class GoalsComponent implements OnInit {
     updateNext(_id, name, purpose, category, status, frequency, start, end, next) {
         const updatedGoal: Goal = {
             _id: _id,
+            userID: localStorage.getItem("userID"),
             purpose: purpose,
             category: category,
             name: name,
@@ -204,10 +207,10 @@ export class GoalsComponent implements OnInit {
                 var day = nextGoal.getDate();
                 var month = nextGoal.getMonth();
 
-                if (nextGoal.getTime() < this.today.getTime()
-                    && goal.frequency != "Does not repeat"
-                    && goal.status == true
-                    && endGoal.getTime() >= this.today.getTime()) {
+                if(nextGoal.getTime() < this.today.getTime()
+                && goal.frequency != "Does not repeat"
+                && goal.status == true
+                && endGoal.getTime() >= this.today.getTime()){
                     this.updateNext(goal._id, goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)
                 }
 
@@ -215,7 +218,7 @@ export class GoalsComponent implements OnInit {
                     return false;
                 }
 
-                if (endGoal.getTime() < this.today.getTime()) {
+                if(endGoal.getTime() < this.today.getTime()){
                     return false;
                 }
 
@@ -245,7 +248,7 @@ export class GoalsComponent implements OnInit {
                     }
                 }
 
-                if (nextGoal.getTime() == this.today.getTime()) {
+                if (nextGoal.getTime() == this.today.getTime()){
                     this.updateNext(goal._id, goal.name, goal.purpose, goal.category, goal.status, goal.frequency, goal.start, goal.end, nextGoal.toString());
                     return true;
                 }
@@ -325,7 +328,7 @@ export class GoalsComponent implements OnInit {
         // Subscribe waits until the data is fully downloaded, then
         // performs an action on it (the first lambda)
 
-        const goalObservable: Observable<Goal[]> = this.goalService.getGoals();
+        const goalObservable: Observable<Goal[]> = this.goalService.getGoals(localStorage.getItem("userID"));
         goalObservable.subscribe(
             goals => {
                 this.goals = goals;
@@ -342,7 +345,8 @@ export class GoalsComponent implements OnInit {
 
 
     loadService(): void {
-        this.goalService.getGoals(this.goalCategory).subscribe(
+        console.log(localStorage.getItem("userID"));
+        this.goalService.getGoals(localStorage.getItem("userID"),this.goalCategory).subscribe(
             goals => {
                 this.goals = goals;
                 this.filteredGoals = this.goals;
@@ -356,6 +360,7 @@ export class GoalsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        localStorage.setItem("userID", "4cb56a89541a2d783595012c");
         this.refreshGoals();
         this.loadService();
         this.getDate();

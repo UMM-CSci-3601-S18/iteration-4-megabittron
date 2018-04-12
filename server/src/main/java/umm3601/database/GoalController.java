@@ -52,7 +52,24 @@ public class GoalController {
     // specified goal are found.
     public String getGoals(Map<String, String[]> queryParams) {
 
+        System.out.println("It began getGoals() in GoalController");
+
         Document filterDoc = new Document();
+
+        //Filter by userID
+        //If there is no userID provided, return an empty result
+        if (queryParams.containsKey("userID")) {
+            String targetContent = (queryParams.get("userID")[0]);
+
+            Document contentRegQuery = new Document();
+            contentRegQuery.append("$regex", targetContent);
+            contentRegQuery.append("$options", "i");
+            filterDoc = filterDoc.append("userID", contentRegQuery);
+        } else {
+            System.out.println("It had no userID");
+            Document emptyDoc = new Document();
+            return JSON.serialize(emptyDoc);
+        }
 
         // "goal" will be a key to a string object, where the object is
         // what we get when people enter their goals as a text body.
@@ -94,21 +111,13 @@ public class GoalController {
         return JSON.serialize(matchingGoals);
     }
 
-    /**
-     * Helper method which appends received user information to the to-be added document
-     *
-     * @param purpose
-     * @param category
-     * @param name
-     * @return boolean after successfully or unsuccessfully adding a user
-     */
-    // As of now this only adds the goal, but you can separate multiple arguments
-    // by commas as we add them.
-    public String addNewGoal(String purpose, String category, String name,
+
+    public String addNewGoal(String userID, String purpose, String category, String name,
                              Boolean status, String frequency, String start, String end, String next) {
 
         // makes the search Document key-pairs
         Document newGoal = new Document();
+        newGoal.append("userID", userID);
         newGoal.append("purpose", purpose);
         newGoal.append("category", category);
         newGoal.append("name", name);
@@ -123,7 +132,7 @@ public class GoalController {
             goalCollection.insertOne(newGoal);
             ObjectId id = newGoal.getObjectId("_id");
 
-            System.err.println("Successfully added new goal [_id=" + id + ", purpose=" + purpose +
+            System.err.println("Successfully added new goal " + userID + " [_id=" + id + ", purpose=" + purpose +
                 ", category=" + category + ", name=" + name + ", frequency= "+ frequency +  ", start=" + start +
                 ", end=" + end + ", next=" + next +']');
             //return id.toHexString();
@@ -149,7 +158,7 @@ public class GoalController {
         Document setQuery = new Document();
         setQuery.append("$set", newGoal);
         Document searchQuery = new Document().append("_id", new ObjectId(id));
-        System.out.println("Goal id: " + id);
+
         try {
             goalCollection.updateOne(searchQuery, setQuery);
             ObjectId theID = searchQuery.getObjectId("_id");

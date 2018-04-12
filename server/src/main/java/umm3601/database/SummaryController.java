@@ -50,6 +50,20 @@ public class SummaryController {
 
         Document filterDoc = new Document();
 
+        //Filter by userID
+        //If there is no userID provided, return an empty result
+        if (queryParams.containsKey("userID")) {
+            String targetContent = (queryParams.get("userID")[0]);
+            Document contentRegQuery = new Document();
+            contentRegQuery.append("$regex", targetContent);
+            contentRegQuery.append("$options", "i");
+            filterDoc = filterDoc.append("userID", contentRegQuery);
+        } else {
+            System.out.println("It had no userID");
+            Document emptyDoc = new Document();
+            return JSON.serialize(emptyDoc);
+        }
+
         if (queryParams.containsKey("mood")) {
             String targetMood = queryParams.get("mood")[0];
             filterDoc = filterDoc.append("mood", targetMood);
