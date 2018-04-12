@@ -78,6 +78,13 @@ export class GoalsComponent implements OnInit {
         });
     }
 
+    returnStatus(status): string{
+        if(status == true){
+            return "Complete";
+        }
+
+        return "Incomplete";
+    }
     deleteGoal(_id: string) {
         this.goalService.deleteGoal(_id).subscribe(
             goals => {

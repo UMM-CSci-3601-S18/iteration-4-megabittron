@@ -21,10 +21,10 @@
                 </mat-card>
             </div>
 
-            <div *ngIf="this.currentScreenWidth > 500">
+           <span hide-xs>
             <div class="desktopTodays-goals" *ngIf="this.showAllGoals == false">
                 <div class="desktopGoalTitleDiv">
-                    <mat-card class="desktopCardGoalTitle">
+                    <mat-card class="sectionTitle">
                         Today's Goals
                     </mat-card>
                 </div>
@@ -32,13 +32,17 @@
                     <ng-container *ngFor="let goal of this.shownGoals">
                         <mat-card class="desktopGoals-card"
                                   #elem [id]="goal._id['$oid']">
-                            <mat-expansion-panel class="desktopGoalPanel">
+                           <!-- <mat-expansion-panel class="desktopGoalPanel">
                                 <mat-expansion-panel-header>
-                                    <mat-panel-title>
+                                    <mat-panel-title>-->
+                            <mat-card-title class="cardGoalTitle">
                                         {{goal.name}}
-                                    </mat-panel-title>
-                                </mat-expansion-panel-header>
-
+                            </mat-card-title>
+                            <mat-card-subtitle class="desktopCardSubtitle">{{returnStatus(goal.status)}}</mat-card-subtitle>
+                            <mat-divider></mat-divider>
+                                    <!--</mat-panel-title>
+                                </mat-expansion-panel-header>-->
+                            <mat-card-content>
                                 <div class ="goals-image">
                                     <img *ngIf="goal.category == 'Family'" src="../../assets/images/goals/family.png"
                                          class="goal-card-image" height="75">
@@ -51,8 +55,9 @@
                             <div class="desktopGoals-card-info">
                                 <!--<mat-card-content class="goal-info">
                                     <mat-card-title id="today-goal-name">{{goal.name}}</mat-card-title>-->
-                                    <p>Purpose: {{goal.purpose}}</p>
-                                    <p>Frequency: {{goal.frequency}}</p>
+                                <p><i>Purpose:</i> {{goal.purpose}}</p>
+                                <p><i>Frequency:</i> {{goal.frequency}}</p>
+                                <p><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
                                 <!--</mat-card-content>-->
                             </div>
                                 <div class="dekstopGoals-buttons">
@@ -65,7 +70,8 @@
                                         <mat-icon>done</mat-icon>
                                     </button>
                                 </div>
-                            </mat-expansion-panel>
+                           <!-- </mat-expansion-panel>-->
+                            </mat-card-content>
                         </mat-card>
                     </ng-container>
                 </div>
@@ -89,13 +95,13 @@
                     </button>
                 </div>
             </div>
-            </div>
+           </span>
 
 
-            <div *ngIf="this.currentScreenWidth <= 500">
+            <span hide-gt-xs>
             <div class="mobileTodays-goals" *ngIf="this.showAllGoals == false">
                 <div class="mobileGoalTitleDiv">
-                    <mat-card class="mobileCardGoalTitle">
+                    <mat-card class="sectionTitle">
                         Today's Goals
                     </mat-card>
                 </div>
@@ -121,8 +127,9 @@
                                 <div class="mobileGoals-card-info">
                                     <!--<mat-card-content class="goal-info">
                                         <mat-card-title id="today-goal-name">{{goal.name}}</mat-card-title>-->
-                                    <p>Purpose: {{goal.purpose}}</p>
-                                    <p>Frequency: {{goal.frequency}}</p>
+                                       <p><i>Purpose:</i> {{goal.purpose}}</p>
+                                <p><i>Frequency:</i> {{goal.frequency}}</p>
+                                <p><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
                                     <!--</mat-card-content>-->
                                 </div>
                                 <div class="mobileGoals-buttons">
@@ -159,14 +166,14 @@
                     </button>
                 </div>
             </div>
-            </div>
-        </div>
+            </span>
 
 
-            <div *ngIf="this.currentScreenWidth > 500">
+
+            <span hide-xs>
             <div class="desktopGrid-goals-section" *ngIf="this.showAllGoals == true">
                 <div class="desktopGoalTitleDiv">
-                    <mat-card class="desktopCardGoalTitle">
+                    <mat-card class="sectionTitle">
                         All Goals
                     </mat-card>
                 </div>
@@ -174,29 +181,32 @@
                    <ng-container *ngFor="let goal of this.shownGoals">
                        <mat-card class="desktopGoals-card"
                                  #elem [id]="goal._id['$oid']">
-                           <mat-expansion-panel class="desktopGoalPanel">
-                               <mat-expansion-panel-header>
-                                   <mat-panel-title>
+                           <mat-card-title class="cardGoalTitle">
                                        {{goal.name}}
-                                   </mat-panel-title>
-                               </mat-expansion-panel-header>
+                           </mat-card-title>
 
-                               <div class ="goals-image">
-                                   <img *ngIf="goal.category == 'Family'" src="../../assets/images/goals/family.png"
-                                        class="goal-card-image" height="75">
-                                   <img *ngIf="goal.category == 'Chores'" src="../../assets/images/goals/chores.png"
-                                        class="goal-card-image" height="75">
-                                   <img *ngIf="goal.category == 'Personal Health'" src="../../assets/images/goals/health.png"
-                                        class="goal-card-image" height="75">
-                               </div>
+                           <mat-card-subtitle class="desktopCardSubtitle">{{returnStatus(goal.status)}}</mat-card-subtitle>
+                            <mat-divider></mat-divider>
+                           <!--</mat-panel-title>
+                       </mat-expansion-panel-header>-->
+                            <mat-card-content>
+                                <div class ="goals-image">
+                                    <img *ngIf="goal.category == 'Family'" src="../../assets/images/goals/family.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Chores'" src="../../assets/images/goals/chores.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Personal Health'" src="../../assets/images/goals/health.png"
+                                         class="goal-card-image" height="75">
+                                </div>
 
-                               <div class="desktopGoals-card-info">
-                                   <!--<mat-card-content class="goal-info">
-                                       <mat-card-title id="today-goal-name">{{goal.name}}</mat-card-title>-->
-                                   <p>Purpose: {{goal.purpose}}</p>
-                                   <p>Frequency: {{goal.frequency}}</p>
-                                   <!--</mat-card-content>-->
-                               </div>
+                            <div class="desktopGoals-card-info">
+                                <!--<mat-card-content class="goal-info">
+                                    <mat-card-title id="today-goal-name">{{goal.name}}</mat-card-title>-->
+                                       <p><i>Purpose:</i> {{goal.purpose}}</p>
+                                <p><i>Frequency:</i> {{goal.frequency}}</p>
+                                <p><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
+                                <!--</mat-card-content>-->
+                            </div>
                                <div class="desktopGoals-buttons">
                                    <button mat-icon-button class="button delete-button"
                                            (click)="deleteGoal(goal._id['$oid']); openSnackBar('Goal Deleted')">
@@ -211,7 +221,7 @@
                                        <mat-icon>add</mat-icon>
                                    </button>
                                </div>
-                           </mat-expansion-panel>
+                            </mat-card-content>
                        </mat-card>
                    </ng-container>
 
@@ -247,12 +257,12 @@
                     </button>
                 </div>
             </div>
-            </div>
+            </span>
 
-            <div *ngIf="this.currentScreenWidth <= 500">
+            <span hide-gt-xs>
                 <div class="mobileGrid-goals-section" *ngIf="this.showAllGoals == true">
                     <div class="mobileGoalTitleDiv">
-                        <mat-card class="mobileCardGoalTitle">
+                        <mat-card class="sectionTitle">
                             All Goals
                         </mat-card>
                     </div>
@@ -280,8 +290,9 @@
                                         <div class="mobileGoals-card-info">
                                             <!--<mat-card-content class="goal-info">
                                                 <mat-card-title id="today-goal-name">{{goal.name}}</mat-card-title>-->
-                                            <p>Purpose: {{goal.purpose}}</p>
-                                            <p>Frequency: {{goal.frequency}}</p>
+                                               <p><i>Purpose:</i> {{goal.purpose}}</p>
+                                <p><i>Frequency:</i> {{goal.frequency}}</p>
+                                <p><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
                                             <!--</mat-card-content>-->
                                         </div>
                                         <div class="mobileGoals-buttons">
@@ -335,6 +346,7 @@
                     </button>
                 </div>
             </div>
+            </span>
         </div>
     </div>
 
