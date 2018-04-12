@@ -56,11 +56,11 @@
                             </div>
                                 <div class="goals-buttons">
                                     <button mat-icon-button class="button delete-button"
-                                            (click)="deleteGoal(goal._id['$oid']); openSnackBar('Goal Deleted')">
+                                            (click)="deleteGoal(goal._id['$oid'])">
                                         <mat-icon>delete</mat-icon>
                                     </button>
                                     <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" id="todayCompleteGoal"
-                                            (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next); openSnackBar('Goal Completed')">
+                                            (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next)">
                                         <mat-icon>done</mat-icon>
                                     </button>
                                 </div>
@@ -125,7 +125,7 @@
                                </div>
                                <div class="goals-buttons">
                                    <button mat-icon-button class="button delete-button"
-                                           (click)="deleteGoal(goal._id['$oid']); openSnackBar('Goal Deleted')">
+                                           (click)="deleteGoal(goal._id['$oid'])">
                                        <mat-icon>delete</mat-icon>
                                    </button>
                                    <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" id="allCompleteGoal"

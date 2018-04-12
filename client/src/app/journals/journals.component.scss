@@ -18,10 +18,15 @@
     font-size: 14px;
 }
 
+.journal-info {
+    word-wrap: break-word;
+}
+
 .edit-journal-button {
     color: #00838F;
     margin-bottom: -16px;
     padding-bottom: 0;
+    float: right;
 }
 
 .journals-section {
@@ -33,6 +38,7 @@
     margin: 0 auto;
     margin-bottom: 15px;
     width: 325px;
+    height: 200px;
 }
 
 .show-more-button {
