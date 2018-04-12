@@ -2,7 +2,7 @@
     <div flex-gt-sm="80" flex-offset-gt-sm="10">
         <mat-card id="mainCard">
             <mat-horizontal-stepper #stepper>
-                <mat-step label="Emotion Selection" editable="false">
+                <mat-step label="Emotion Selection" editable="true">
                     <div class="how-are-you">
                         <p>How are you feeling today?</p>
                     </div>
@@ -84,12 +84,12 @@
                         <button mat-raised-button
                                 matStepperNext
                                 class="next-button"
-                                (click)="videoEnablerSwitch();getDate();saveEmotion()">
+                                (click)="getDate();saveEmotion()">
                             Submit
                         </button>
                     </div>
                 </mat-step>
-                <mat-step label="Video" editable="false" *ngIf="videoBooleanSwitch == true">
+                <mat-step label="Video" editable="false" *ngIf="emojiRating > 0 || selectedEmotion == 'meh'">
                     <div *ngIf="videoEmotion == 'happy'">
                         <div class="container">
                             <iframe id="responseHappyVideoFrame"
@@ -103,7 +103,7 @@
 
                         <div class="container">
                             <iframe id="responseSadVideoFrame"
-                                    src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37CvQMRHaqg-6yEQpLWjAdWu"
+                                    src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37CvQMRHaqg-6yEQpLWjAdWu&index=2"
                                     frameborder="0"
                                     allowfullscreen
                                     class="video"></iframe>
@@ -133,7 +133,7 @@
 
                         <div class="container">
                             <iframe id="responseAnxiousVideoFrame"
-                                    src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37BVBh18FtFKX-fEEroV6tQ9"
+                                    src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37BVBh18FtFKX-fEEroV6tQ9&index=8"
                                     frameborder="0"
                                     allowfullscreen
                                     class="video"></iframe>
