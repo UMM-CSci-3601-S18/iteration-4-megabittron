@@ -15,6 +15,6 @@ export const routes: Routes = [
     {path: 'summary', component: SummaryListComponent},
 ];
 
-export const Routing: ModuleWithProviders = RouterModule.forRoot(routes,{
+export const Routing: ModuleWithProviders = RouterModule.forRoot(routes,/*{
     useHash: true
-});
+}*/);

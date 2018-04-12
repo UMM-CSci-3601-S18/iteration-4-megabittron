@@ -325,8 +325,12 @@ export class GoalsComponent implements OnInit {
     }
 
     maxNumPages(type): boolean{
+
         if(type == "today") {
-            return (this.goalsPerPage * this.currentPage) < this.todayGoals.length;
+            if(this.todayGoals !== undefined){
+                return (this.goalsPerPage * this.currentPage) < this.todayGoals.length;
+            }
+            return false;
         }
         else{
             return (this.goalsPerPage * this.currentPage) < this.filteredGoals.length;
