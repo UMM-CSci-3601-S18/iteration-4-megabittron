@@ -134,7 +134,7 @@ public class GoalController {
         }
     }
 
-    public String completeGoal(String id, String purpose, String category,
+    public String editGoal(String id, String purpose, String category,
                                String name, Boolean status, String frequency, String start,
                                String end, String next){
         Document newGoal = new Document();
