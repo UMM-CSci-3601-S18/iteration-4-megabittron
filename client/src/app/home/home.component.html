@@ -2,7 +2,7 @@
     <div flex-gt-sm="80" flex-offset-gt-sm="10">
         <mat-card id="mainCard">
             <mat-horizontal-stepper #stepper>
-                <mat-step editable="true">
+                <mat-step editable="false">
                     <div class="how-are-you">
                         <p>How are you feeling today?</p>
                     </div>
@@ -42,7 +42,7 @@
                         </button>
                     </div>
                 </mat-step>
-                <mat-step editable="true" *ngIf="selectedEmotion != 'meh' && selectedEmotion != 'none'">
+                <mat-step editable="false" *ngIf="selectedEmotion != 'meh' && selectedEmotion != 'none'">
                     <div class="emotion-intensity">
                         <img class="selected-emoji" src="../../assets/images/emotions/{{selectedEmotion}}.svg">
                         <p>How {{selectedEmotion}} do you feel?</p>
@@ -67,7 +67,8 @@
                         </div>
                     </div>
                 </mat-step>
-                <mat-step editable="true" *ngIf="emojiRating > 0 || selectedEmotion == 'meh'">
+                <!--<mat-step editable="false" *ngIf="emojiRating > 0 || selectedEmotion == 'meh'">-->
+                <mat-step editable="false">
                     <div class="text-info">
                         <p class="text-description">
                             I'm feeling this way because...
@@ -89,7 +90,8 @@
                         </button>
                     </div>
                 </mat-step>
-                <mat-step editable="false" *ngIf="emojiRating > 0 || selectedEmotion == 'meh'">
+                <!--<mat-step editable="false" *ngIf="emojiRating > 0 || selectedEmotion == 'meh'">-->
+                <mat-step editable="false">
                     <div *ngIf="videoEmotion == 'happy'">
                         <div class="container">
                             <iframe id="responseHappyVideoFrame"
