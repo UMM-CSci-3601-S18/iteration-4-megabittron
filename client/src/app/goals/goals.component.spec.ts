@@ -25,6 +25,7 @@ describe( 'Goals', () => {
             getGoals: () => Observable.of([
                 {
                     _id: 'food_id',
+                    userID: 'userID1',
                     purpose: 'Gain some weight',
                     category: 'Food',
                     name: 'Eat all the cookies',
@@ -36,6 +37,7 @@ describe( 'Goals', () => {
                 },
                 {
                     _id: 'chores_id',
+                    userID: 'userID1',
                     purpose: 'Have cleaner kitchen',
                     category: 'Chores',
                     name: 'Take out recycling',
@@ -47,6 +49,7 @@ describe( 'Goals', () => {
                 },
                 {
                     _id: 'family_id',
+                    userID: 'userID1',
                     purpose: 'To love her',
                     category: 'Family',
                     name: 'Call mom',
@@ -161,6 +164,7 @@ describe('Adding a goal', () => {
     let fixture: ComponentFixture<GoalsComponent>;
     const newGoal: Goal =   {
         _id: '',
+        userID: 'userID1',
         purpose: 'To stay awake writing tests',
         category: 'Personal Health',
         name: 'Drink coffee',
@@ -236,6 +240,7 @@ describe('Deleting a goal', () => {
     let fixture: ComponentFixture<GoalsComponent>;
     const deleteGoal: Goal =   {
         _id: '',
+        userID: 'userID1',
         purpose: 'To have a delightful tasting sensation',
         category: 'Personal Health',
         name: 'Eat pringles',
@@ -310,6 +315,7 @@ describe('Completing a goal', () => {
     let fixture: ComponentFixture<GoalsComponent>;
     const completeGoal: Goal =   {
         _id: '',
+        userID: 'userID1',
         purpose: 'To break everything and make people mad',
         category: 'Chores',
         name: 'Destroy all monitors in the lab',
