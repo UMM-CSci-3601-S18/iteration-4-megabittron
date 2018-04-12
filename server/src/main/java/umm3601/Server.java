@@ -181,7 +181,7 @@ public class Server {
 
                 GoogleIdToken idToken = tokenResponse.parseIdToken();
                 GoogleIdToken.Payload payload = idToken.getPayload();
-                String userId = payload.getSubject();  // Use this value as a key to identify a user.
+                String subjectId = payload.getSubject();  // Use this value as a key to identify a user.
                 String email = payload.getEmail();
                 boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
                 String name = (String) payload.get("name");
@@ -191,11 +191,12 @@ public class Server {
                 String givenName = (String) payload.get("given_name");
 
 
-                System.out.println(userId);
+                System.out.println(subjectId);
                 System.out.println(email);
                 System.out.println(name);
                 System.out.println(locale);
 
+                return userController.addNewUser(subjectId, givenName, familyName);
 
             } catch (Exception e) {
                 System.out.println(e);

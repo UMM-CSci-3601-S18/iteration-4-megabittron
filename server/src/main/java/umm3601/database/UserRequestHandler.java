@@ -67,28 +67,16 @@ public class UserRequestHandler {
      * Gets specified user info from request and calls addNewUser helper method
      * to append that info to a document
      *
-     * @param req the HTTP request
-     * @param res the HTTP response
      * @return a boolean as whether the user was added successfully or not
      */
-    public String addNewUser(Request req, Response res)
+    public String addNewUser(String subjectID, String firstName, String lastName)
     {
 
-        res.type("application/json");
-        Object o = JSON.parse(req.body());
-        try {
-            if(o.getClass().equals(BasicDBObject.class))
-            {
+
                 try {
-                    BasicDBObject dbO = (BasicDBObject) o;
-                    String _id = dbO.getString("_id");
-                    String SubjectID = dbO.getString("SubjectID");
-                    String FirstName = dbO.getString("FirstName");
-                    String LastName = dbO.getString("LastName");
 
-
-                    System.err.println("Adding new user [_id=" + _id + "SubjectID=" + SubjectID + " FirstName=" + FirstName + " LastName=" + LastName + ']');
-                    return userController.addNewUser(_id, SubjectID, FirstName, LastName).toString();
+                    System.err.println("Adding new user [" + "SubjectID=" + subjectID + " FirstName=" + firstName + " LastName=" + lastName + ']');
+                    return userController.addNewUser(subjectID, firstName, lastName).toString();
                 }
                 catch(NullPointerException e)
                 {
@@ -96,17 +84,6 @@ public class UserRequestHandler {
                     return null;
                 }
 
-            }
-            else
-            {
-                System.err.println("Expected BasicDBObject, received " + o.getClass());
-                return null;
-            }
-        }
-        catch(RuntimeException ree)
-        {
-            ree.printStackTrace();
-            return null;
-        }
+
     }
 }

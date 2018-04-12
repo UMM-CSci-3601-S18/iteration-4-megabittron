@@ -83,24 +83,43 @@ public class UserController {
         return JSON.serialize(matchingUsers);
     }
 
-    public String addNewUser(String _id, String SubjectID, String FirstName, String LastName) {
+    public String addNewUser(String SubjectID, String FirstName, String LastName) {
 
-        Document newUser = new Document();
-        newUser.append("_id", _id);
-        newUser.append("SubjectID", SubjectID);
-        newUser.append("FirstName", FirstName);
-        newUser.append("LastName", LastName);
+        Document filterDoc = new Document();
 
-        try {
-            userCollection.insertOne(newUser);
-            ObjectId id = newUser.getObjectId("_id");
-            System.err.println("Successfully added new user [_id=" + id + ", SubjectID=" + SubjectID + " FirstName=" + FirstName + " LastName=" + LastName + ']');
-            // return JSON.serialize(newUser);
-            return JSON.serialize(id);
-        } catch(MongoException me) {
-            me.printStackTrace();
-            return null;
+        Document contentRegQuery = new Document();
+        contentRegQuery.append("$regex", SubjectID);
+        contentRegQuery.append("$options", "i");
+        filterDoc = filterDoc.append("SubjectID", contentRegQuery);
+
+        FindIterable<Document> matchingUsers = userCollection.find(filterDoc);
+
+        if(JSON.serialize(matchingUsers).equals("[ ]")){
+            ObjectId id = new ObjectId();
+
+            Document newUser = new Document();
+            newUser.append("_id", id);
+            newUser.append("SubjectID", SubjectID);
+            newUser.append("FirstName", FirstName);
+            newUser.append("LastName", LastName);
+
+            try {
+                userCollection.insertOne(newUser);
+                System.err.println("Successfully added new user [_id=" + id + ", SubjectID=" + SubjectID + " FirstName=" + FirstName + " LastName=" + LastName + ']');
+                // return JSON.serialize(newUser);
+                return JSON.serialize(id);
+            } catch(MongoException me) {
+                me.printStackTrace();
+                return null;
+            }
+        } else {
+            //assumes there will only be 1 user returned
+            return JSON.serialize(matchingUsers.first().get("_id"));
         }
+
+        //----------------------------
+
+
     }
 
 

@@ -26,6 +26,8 @@ export class AppComponent implements OnInit {
             this.sendAuthCode(resp.code);
         });
 
+
+
     }
 
     signOut() {
@@ -59,6 +61,7 @@ export class AppComponent implements OnInit {
         this.http.post(environment.API_URL + "login", {code: code}, httpOptions)
             .subscribe(onSuccess => {
                 console.log("Code sent to server");
+                console.log(onSuccess);
             }, onFail => {
                 console.log("ERROR: Code couldn't be sent to the server");
             });

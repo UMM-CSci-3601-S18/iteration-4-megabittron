@@ -360,7 +360,8 @@ export class GoalsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        localStorage.setItem("userID", "4cb56a89541a2d783595012c");
+        //For testing
+        //localStorage.setItem("userID", "4cb56a89541a2d783595012c");
         this.refreshGoals();
         this.loadService();
         this.getDate();
