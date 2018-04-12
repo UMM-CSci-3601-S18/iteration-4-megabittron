@@ -2,7 +2,7 @@
     <div flex-gt-sm="80" flex-offset-gt-sm="10">
         <mat-card id="mainCard">
             <mat-horizontal-stepper #stepper>
-                <mat-step label="Emotion Selection" editable="true">
+                <mat-step editable="true">
                     <div class="how-are-you">
                         <p>How are you feeling today?</p>
                     </div>
@@ -42,7 +42,7 @@
                         </button>
                     </div>
                 </mat-step>
-                <mat-step label="Emotion Intensity" editable="true" *ngIf="selectedEmotion != 'meh' && selectedEmotion != 'none'">
+                <mat-step editable="true" *ngIf="selectedEmotion != 'meh' && selectedEmotion != 'none'">
                     <div class="emotion-intensity">
                         <img class="selected-emoji" src="../../assets/images/emotions/{{selectedEmotion}}.svg">
                         <p>How {{selectedEmotion}} do you feel?</p>
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                 </mat-step>
-                <mat-step label="Journaling" editable="true" *ngIf="emojiRating > 0 || selectedEmotion == 'meh'">
+                <mat-step editable="true" *ngIf="emojiRating > 0 || selectedEmotion == 'meh'">
                     <div class="text-info">
                         <p class="text-description">
                             I'm feeling this way because...
@@ -89,54 +89,59 @@
                         </button>
                     </div>
                 </mat-step>
-                <mat-step label="Video" editable="false" *ngIf="emojiRating > 0 || selectedEmotion == 'meh'">
+                <mat-step editable="false" *ngIf="emojiRating > 0 || selectedEmotion == 'meh'">
                     <div *ngIf="videoEmotion == 'happy'">
-                        <div class="container">
+                        <div class="container" style="text-align: center">
                             <iframe id="responseHappyVideoFrame"
                                     src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37AO-nqegk5cEwS1ElAoQLNr"
                                     frameborder="0"
                                     allowfullscreen
-                                    class="video"></iframe>
+                                    class="video"
+                                    height="325px"></iframe>
                         </div>
                     </div>
                     <div *ngIf="videoEmotion == 'sad'">
 
-                        <div class="container">
+                        <div class="container" style="text-align: center">
                             <iframe id="responseSadVideoFrame"
                                     src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37CvQMRHaqg-6yEQpLWjAdWu&index=2"
                                     frameborder="0"
                                     allowfullscreen
-                                    class="video"></iframe>
+                                    class="video"
+                                    height="325px"></iframe>
                         </div>
                     </div>
                     <div *ngIf="videoEmotion == 'meh'">
 
-                        <div class="container">
+                        <div class="container" style="text-align: center">
                             <iframe id="responseMehVideoFrame"
                                     src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37D36KCVAns9LYvh1BV4m6YX"
                                     frameborder="0"
                                     allowfullscreen
-                                    class="video"></iframe>
+                                    class="video"
+                                    height="325px"></iframe>
                         </div>
                     </div>
                     <div *ngIf="videoEmotion == 'mad'">
 
-                        <div class="container">
+                        <div class="container" style="text-align: center">
                             <iframe id="responseMadVideoFrame"
                                     src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37Dx6Ohz5al_e1GljuZqvZ_M"
                                     frameborder="0"
                                     allowfullscreen
-                                    class="video"></iframe>
+                                    class="video"
+                                    height="325px"></iframe>
                         </div>
                     </div>
                     <div *ngIf="videoEmotion == 'anxious'">
 
-                        <div class="container">
+                        <div class="container" style="text-align: center">
                             <iframe id="responseAnxiousVideoFrame"
                                     src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37BVBh18FtFKX-fEEroV6tQ9&index=8"
                                     frameborder="0"
                                     allowfullscreen
-                                    class="video"></iframe>
+                                    class="video"
+                                    height="325px"></iframe>
                         </div>
                     </div>
                 </mat-step>
