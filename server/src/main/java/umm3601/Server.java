@@ -93,6 +93,7 @@ public class Server {
 
         get("/", clientRoute);
 
+
         /////////////// Endpoints ///////////////////
         /////////////////////////////////////////////
 
@@ -142,6 +143,7 @@ public class Server {
 
         // Handle "404" file not found requests:
         notFound(notFoundRoute);
+
     }
 
     // Enable GZIP for all responses
