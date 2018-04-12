@@ -121,7 +121,7 @@ export class GoalsComponent implements OnInit {
             end: end,
             next: next
         };
-        this.goalService.completeGoal(updatedGoal).subscribe(
+        this.goalService.editGoal(updatedGoal).subscribe(
             completeGoalResult => {
                 this.highlightedID = completeGoalResult;
                 this.snackBar.open("Completed Goal", "CLOSE", {
@@ -147,7 +147,7 @@ export class GoalsComponent implements OnInit {
             end: end,
             next: next
         };
-        this.goalService.completeGoal(updatedGoal).subscribe(
+        this.goalService.editGoal(updatedGoal).subscribe(
             completeGoalResult => {
                 this.highlightedID = completeGoalResult;
                 //this.refreshGoals();
@@ -204,7 +204,7 @@ export class GoalsComponent implements OnInit {
     }
 
     getNext(){
-
+        this.currentPage = 1;
         if(this.showAllGoals == false) {
             this.todayGoals = this.filteredGoals.filter(goal => {
                 console.log("showAllGoals was false, which means we are on the show today's goals page");
@@ -224,7 +224,7 @@ export class GoalsComponent implements OnInit {
                 var month = nextGoal.getMonth();
                 console.log("making the var month and setting it to nextGoal.getDate()")
 
-                if (nextGoal.getTime() < this.today.getTime()
+                if (nextGoal.getTime() <= this.today.getTime()
                     && goal.frequency != "Does not repeat"
                     && goal.status == true
                     && endGoal.getTime() >= this.today.getTime()) {
@@ -257,7 +257,7 @@ export class GoalsComponent implements OnInit {
                 while (nextGoal.getTime() < this.today.getTime()) {
                     console.log("Inside the while loop. nextGoal < this.today");
                     if (goal.frequency == "Daily") {
-                        console.log("goal.frequency == daily")
+                        console.log("goal.frequency == daily");
                         day = day + 1;
                         console.log("incrementing day by 1");
                         nextGoal.setDate(day);
@@ -297,14 +297,18 @@ export class GoalsComponent implements OnInit {
             });
             console.log("going to the showGoals function, stating we are on the today page");
             this.showGoals("today");
+            console.log("returning this.todayGoals");
+            return this.todayGoals;
         }
 
         else{
             console.log("going to showGoals function, stating we are on the all page");
             this.showGoals("all");
+            console.log("returning this.filteredGoals");
+            return this.filteredGoals;
         }
-        console.log("returning this.todayGoals");
-        return this.todayGoals;
+
+
 
     }
 
@@ -321,7 +325,7 @@ export class GoalsComponent implements OnInit {
                 if (count > this.goalsPerPage) {
                     console.log("count > this.goalsPerPage");
                     count--;
-                    console.log("decrease count by 1 and returning fasle; this goal doesn't need to be shown");
+                    console.log("decrease count by 1 and returning false; this goal doesn't need to be shown");
                     return false;
                 }
 
@@ -426,9 +430,10 @@ export class GoalsComponent implements OnInit {
 
     getDate() {
         this.today = new Date();
+        this.today.setHours(0, 0, 0, 0);
         this.goalStart = this.today;
         this.goalNext = this.today;
-        this.today.setHours(0, 0, 0, 0);
+
 
 
     }
