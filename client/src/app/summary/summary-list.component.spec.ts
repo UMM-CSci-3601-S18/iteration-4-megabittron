@@ -11,8 +11,8 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 
 
-        /** Tests the filtering used for display of summary list **/
-/*
+        /** Tests the filtering used for display of summary list ---------------------------------------------------------------------------------- **/
+
         describe('Summary', () => {
 
             let summary: SummaryListComponent;
@@ -153,9 +153,9 @@ import 'rxjs/add/operator/do';
             });
 
         });
-*/
-        /** Tests the filtering used for charts when looking at all time **/
-/*
+
+        /** Tests the filtering used for charts when looking at all time ---------------------------------------------------------------------------------- **/
+
         describe('Chart Filtering - no limit', () => {
 
             let summary: SummaryListComponent;
@@ -229,9 +229,9 @@ import 'rxjs/add/operator/do';
             });
 
         });
-*/
-        /** Tests the filtering used for charts when looking at past day **/
-/*
+
+        /** Tests the filtering used for charts when looking at past day ---------------------------------------------------------------------------------- **/
+
         describe('Chart Filtering - Past Day', () => {
 
             let summary: SummaryListComponent;
@@ -337,9 +337,9 @@ import 'rxjs/add/operator/do';
             });
 
         });
-*/
-        /** Tests the filtering used for charts when looking at past week **/
-/*
+
+        /** Tests the filtering used for charts when looking at past week ---------------------------------------------------------------------------------- **/
+
         describe('Chart Filtering - Past Week', () => {
 
             let summary: SummaryListComponent;
@@ -444,10 +444,230 @@ import 'rxjs/add/operator/do';
             });
 
         });
-*/
 
 
-        /** -------------------------------------------------------- **/
+        /** Tests the filtering used for charts when looking at past month ---------------------------------------------------------------------------------- **/
+
+        describe('Chart Filtering - Past Month', () => {
+
+            let summary: SummaryListComponent;
+            let fixture: ComponentFixture<SummaryListComponent>;
+
+            let summaryServiceStub: {
+                getSummaries: () => Observable<Summary[]>
+            };
+
+            beforeEach(() => {
+                // stub SummaryListService for test purposes
+                summaryServiceStub = {
+                    getSummaries: () => Observable.of([
+                        {
+                            _id: '1',
+                            mood: 'happy',
+                            date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (CDT)',
+                            intensity: 2,
+                            description: 'slept',
+                        },
+                        {
+                            _id: '2',
+                            mood: 'sad',
+                            date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (CDT)',
+                            intensity: 4,
+                            description: 'friend died',
+                        },
+                        {
+                            _id: '3',
+                            mood: 'mad',
+                            date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)',
+                            intensity: 5,
+                            description: 'didn\'t sleep',
+                        },
+                    ])
+                };
+
+
+                TestBed.configureTestingModule({
+                    imports: [CustomModule],
+                    declarations: [SummaryListComponent],
+                    providers: [{provide: SummaryListService, useValue: summaryServiceStub},
+                        {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
+                });
+            });
+
+            beforeEach(async(() => {
+                TestBed.compileComponents().then(() => {
+                    fixture = TestBed.createComponent(SummaryListComponent);
+                    summary = fixture.componentInstance;
+                    fixture.detectChanges();
+
+                    summary.summaryMood = 'All';
+                    summary.summaryIntensity = 'All';
+                    summary.startDate = null;
+                    summary.endDate = null;
+                    summary.limitedPast = true;
+                    summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0500 (CDT)');
+                    // Above means nowDate becomes 8
+                    summary.nowUnix = summary.nowStamp.getTime();
+                    summary.nowDate = summary.nowStamp.getDate();
+                    summary.lastMonthUnix = summary.nowUnix - 604800000;
+                    summary.lastMonthStamp = new Date(summary.lastMonthUnix);
+                    summary.inputType = "month";
+                });
+            }));
+
+            it('filterDetailedGraph filters correctly for inputType = month', () => {
+                expect(summary.summaries.length).toBe(3);
+                expect(summary.filterDetailedGraph(5, 'sad')).toBe(1);
+                expect(summary.filterDetailedGraph(2, 'sad')).toBe(0);
+            });
+
+            it('filterBasicGraph filters correctly for inputType = month', () => {
+                expect(summary.filteredSummaries.length).toBe(3);
+                expect(summary.filterBasicGraph(5)).toBe(1);
+                expect(summary.filterBasicGraph(2)).toBe(0);
+            });
+
+            it('modDate works as intended', () => {
+                expect(summary.modDate(6)).toBe(14);
+                expect(summary.modDate(0)).toBe(8);
+                expect(summary.modDate(30)).toBe(7);
+            });
+
+            it('filterDetailedGraph works correctly when using modDate', () => {
+                expect(summary.summaries.length).toBe(3);
+                expect(summary.filterDetailedGraph(summary.modDate(29), 'sad')).toBe(1);
+                expect(summary.filterDetailedGraph(summary.modDate(0), 'sad')).toBe(0);
+            });
+
+            it('filterBasicGraph works correctly when using modDate', () => {
+                expect(summary.filteredSummaries.length).toBe(3);
+                expect(summary.filterBasicGraph(summary.modDate(29))).toBe(1);
+                expect(summary.filterBasicGraph(summary.modDate(0))).toBe(0);
+            });
+
+            it('getPastMonths works as intended', () => {
+                expect(summary.getPastDates(0)).toBe('9');
+                expect(summary.getPastDates(6)).toBe('15');
+                expect(summary.getPastDates(3)).toBe('12');
+            });
+
+        });
+
+
+        /** Tests the filtering used for charts when looking at past year ---------------------------------------------------------------------------------- **/
+
+        describe('Chart Filtering - Past Year', () => {
+
+            let summary: SummaryListComponent;
+            let fixture: ComponentFixture<SummaryListComponent>;
+
+            let summaryServiceStub: {
+                getSummaries: () => Observable<Summary[]>
+            };
+
+            beforeEach(() => {
+                // stub SummaryListService for test purposes
+                summaryServiceStub = {
+                    getSummaries: () => Observable.of([
+                        {
+                            _id: '1',
+                            mood: 'happy',
+                            date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (CDT)',
+                            intensity: 2,
+                            description: 'slept',
+                        },
+                        {
+                            _id: '2',
+                            mood: 'sad',
+                            date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (CDT)',
+                            intensity: 4,
+                            description: 'friend died',
+                        },
+                        {
+                            _id: '3',
+                            mood: 'mad',
+                            date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)',
+                            intensity: 5,
+                            description: 'didn\'t sleep',
+                        },
+                    ])
+                };
+
+
+                TestBed.configureTestingModule({
+                    imports: [CustomModule],
+                    declarations: [SummaryListComponent],
+                    providers: [{provide: SummaryListService, useValue: summaryServiceStub},
+                        {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
+                });
+            });
+
+            beforeEach(async(() => {
+                TestBed.compileComponents().then(() => {
+                    fixture = TestBed.createComponent(SummaryListComponent);
+                    summary = fixture.componentInstance;
+                    fixture.detectChanges();
+
+                    summary.summaryMood = 'All';
+                    summary.summaryIntensity = 'All';
+                    summary.startDate = null;
+                    summary.endDate = null;
+                    summary.limitedPast = true;
+                    summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0500 (CDT)');
+                    // Above means nowMonth becomes 3
+                    summary.nowUnix = summary.nowStamp.getTime();
+                    summary.nowMonth = summary.nowStamp.getMonth();
+                    summary.lastWeekUnix = summary.nowUnix - 604800000;
+                    summary.lastWeekStamp = new Date(summary.lastWeekUnix);
+                    summary.inputType = "year";
+                });
+            }));
+
+            it('filterDetailedGraph filters correctly for inputType = year', () => {
+                expect(summary.summaries.length).toBe(3);
+                expect(summary.filterDetailedGraph(2018, 'sad')).toBe(1);
+                expect(summary.filterDetailedGraph(2014, 'sad')).toBe(0);
+            });
+
+            it('filterBasicGraph filters correctly for inputType = year', () => {
+                expect(summary.filteredSummaries.length).toBe(3);
+                expect(summary.filterBasicGraph(2018)).toBe(3);
+                expect(summary.filterBasicGraph(2014)).toBe(0);
+            });
+
+            it('modMonth works as intended', () => {
+                expect(summary.modMonth(6)).toBe(10);
+                expect(summary.modMonth(0)).toBe(4);
+                expect(summary.modMonth(30)).toBe(10);
+            });
+
+            it('filterDetailedGraph works correctly when using modMonth', () => {
+                expect(summary.summaries.length).toBe(3);
+                expect(summary.filterDetailedGraph(summary.modMonth(3), 'sad')).toBe(1);
+                expect(summary.filterDetailedGraph(summary.modMonth(0), 'sad')).toBe(0);
+            });
+
+            it('filterBasicGraph works correctly when using modMonth', () => {
+                expect(summary.filteredSummaries.length).toBe(3);
+                expect(summary.filterBasicGraph(summary.modMonth(3))).toBe(1);
+                expect(summary.filterBasicGraph(summary.modMonth(0))).toBe(0);
+            });
+
+            it('getPastMonths works as intended', () => {
+                expect(summary.getPastMonths(0)).toBe('May');
+                expect(summary.getPastMonths(6)).toBe('Nov');
+                expect(summary.getPastMonths(3)).toBe('Aug');
+            });
+
+        });
+
+
+
+
+
+
+
+/** -------------------------------------------------------- ---------------------------------------------------------------------------------- **/
 /*
 describe('Misbehaving Summary ', () => {
     let summary: SummaryListComponent;
