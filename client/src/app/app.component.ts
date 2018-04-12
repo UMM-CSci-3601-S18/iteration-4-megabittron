@@ -37,6 +37,9 @@ export class AppComponent implements OnInit {
         googleAuth.then(() => {
             googleAuth.signOut();
             localStorage.setItem('isSignedIn', 'false');
+            localStorage.setItem("userID", "");
+
+
             window.location.reload();
         })
     }
@@ -61,7 +64,8 @@ export class AppComponent implements OnInit {
         this.http.post(environment.API_URL + "login", {code: code}, httpOptions)
             .subscribe(onSuccess => {
                 console.log("Code sent to server");
-                console.log(onSuccess);
+                console.log(onSuccess["$oid"]);
+                localStorage.setItem("userID", onSuccess["$oid"]);
             }, onFail => {
                 console.log("ERROR: Code couldn't be sent to the server");
             });

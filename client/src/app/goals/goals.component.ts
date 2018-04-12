@@ -328,13 +328,24 @@ export class GoalsComponent implements OnInit {
         // Subscribe waits until the data is fully downloaded, then
         // performs an action on it (the first lambda)
 
-        const goalObservable: Observable<Goal[]> = this.goalService.getGoals(localStorage.getItem("userID"));
+        console.log("this is goals.component.ts and it has this for userID: " + localStorage.getItem("userID"));
+
+        var userID = localStorage.getItem("userID");
+
+        if(userID == null){
+            userID = "";
+        }
+        const goalObservable: Observable<Goal[]> = this.goalService.getGoals(userID);
+        console.log(goalObservable);
         goalObservable.subscribe(
             goals => {
-                this.goals = goals;
-                this.filterGoals(this.goalPurpose, this.goalCategory, this.goalName, this.goalStatus, this.goalFrequency);
-                this.getNext();
-                },
+                console.log(goals);
+                if(goals != null){
+                    this.goals = goals;
+                    this.filterGoals(this.goalPurpose, this.goalCategory, this.goalName, this.goalStatus, this.goalFrequency);
+                    this.getNext();
+                }
+            },
             err => {
                 console.log(err);
             });

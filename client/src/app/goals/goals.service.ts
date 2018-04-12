@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 import {Goal} from './goal';
 import {environment} from '../../environments/environment';
@@ -12,19 +13,23 @@ export class GoalsService {
     readonly baseUrl: string = environment.API_URL + 'goals';
     private goalUrl: string = this.baseUrl;
     private noID: boolean = false;
+    private emptyGoalArray: Goal[] = [];
+    private emptythingy: Observable<Goal[]> = Observable.of([]);
 
     constructor(private http: HttpClient) {
     }
 
     getGoals(userID: string, goalCategory?: string): Observable<Goal[]> {
         this.goalUrl = this.baseUrl;
+        this.noID = false;
         //this.filterByCategory(goalCategory);
         this.filterByUserID(userID);
 
         //require a userID
         if(this.noID){
-            return null;
+            return this.emptythingy;
         }
+        console.log(this.goalUrl);
         return this.http.get<Goal[]>(this.goalUrl);
     }
 
