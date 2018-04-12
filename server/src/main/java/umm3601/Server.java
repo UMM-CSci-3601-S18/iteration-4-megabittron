@@ -81,6 +81,11 @@ public class Server {
         // Redirects for the "home" page
         redirect.get("", "/");
 
+
+        // This client route solves the droplet refreshing issue, but messes up the referencing
+        // to the material icons (so, no icons will load). We are using hashing for routing
+        // until we know how to solve the icon referencing issue.
+        /*
         Route clientRoute = (req, res) -> {
             InputStream stream = goalController.getClass().getResourceAsStream("/public/index.html");
             return stream != null ? IOUtils.toString(stream) : "Sorry, we couldn't find that!";
@@ -92,6 +97,7 @@ public class Server {
         };
 
         get("/", clientRoute);
+*/
 
         /////////////// Endpoints ///////////////////
         /////////////////////////////////////////////
@@ -136,12 +142,19 @@ public class Server {
         after("*", Server::addGzipHeader);
 
 
-        get("api/*", notFoundRoute);
+        // The following is part of the clientRoute talked about above.
+/*        get("api/*", notFoundRoute);
 
         get("/*", clientRoute);
 
         // Handle "404" file not found requests:
         notFound(notFoundRoute);
+        */
+        notFound((req, res) -> {
+            res.type("text");
+            res.status(404);
+            return "Sorry, we couldn't find that!";
+        });
     }
 
     // Enable GZIP for all responses
