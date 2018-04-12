@@ -41,6 +41,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     nowDate = this.nowStamp.getDate();
     nowMonth = this.nowStamp.getMonth();
 
+
     lastWeekUnix = this.nowUnix - 604800000;
     lastWeekStamp = new Date(this.lastWeekUnix);
     lastDayUnix = this.nowUnix - 86400000;
@@ -280,7 +281,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     public modDate(date: number): Number {
         if(this.limitedPast){
-            return (this.nowDate + 1 + date)%31;
+            return (this.nowDate + date - 1)%31 + 1;
         }
         else {
             return date;
@@ -394,7 +395,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
 
     public getPastDates(xValue: number): String {
-        let thisDate = (this.nowDate + 1 + xValue)%31;
+        let thisDate = (this.nowDate + xValue)%31;
         let numDate;
         let M31Ds = [0, 2, 4, 6, 7, 9, 11];
         let M30Ds = [3, 5, 8, 10];
@@ -563,7 +564,6 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
         if(this.CurrentGraph == 'Basic'){
             return [
-                this.filterBasicGraph(this.modDate(0)),
                 this.filterBasicGraph(this.modDate(1)),
                 this.filterBasicGraph(this.modDate(2)),
                 this.filterBasicGraph(this.modDate(3)),
@@ -593,13 +593,13 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                 this.filterBasicGraph(this.modDate(27)),
                 this.filterBasicGraph(this.modDate(28)),
                 this.filterBasicGraph(this.modDate(29)),
-                this.filterBasicGraph(this.modDate(30))
+                this.filterBasicGraph(this.modDate(30)),
+                this.filterBasicGraph(this.modDate(31))
             ]
         }
         else {
             if(this.CurrentGraph == 'Detailed'){
                 return [
-                    this.filterDetailedGraph(this.modDate(0), emotion),
                     this.filterDetailedGraph(this.modDate(1), emotion),
                     this.filterDetailedGraph(this.modDate(2), emotion),
                     this.filterDetailedGraph(this.modDate(3), emotion),
@@ -629,7 +629,9 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                     this.filterDetailedGraph(this.modDate(27), emotion),
                     this.filterDetailedGraph(this.modDate(28), emotion),
                     this.filterDetailedGraph(this.modDate(29), emotion),
-                    this.filterDetailedGraph(this.modDate(30), emotion)
+                    this.filterDetailedGraph(this.modDate(30), emotion),
+                    this.filterDetailedGraph(this.modDate(31), emotion)
+
                 ]
             }
         }
@@ -853,11 +855,11 @@ public pastDates = [
         this.ctxDetail = this.detailedCanvas;
 
         if(this.colorblindMode){
-            this.happyColor = "rgb(215,48,39)";
-            this.sadColor = "rgb(252,141,89)";
-            this.mehColor = "rgb(254,224,144)";
-            this.madColor = "rgb(145,191,219)";
-            this.anxiousColor = "rgb(69,117,180)";
+            this.happyColor = "rgb(178,24,43)";
+            this.sadColor = "rgb(239,138,98)";
+            this.mehColor = "rgb(253,219,199)";
+            this.madColor = "rgb(103,169,207)";
+            this.anxiousColor = "rgb(33,102,172)";
         } else {
             this.happyColor = "rgb(64, 255, 0)";
             this.sadColor = "rgb(0, 128, 255)";
