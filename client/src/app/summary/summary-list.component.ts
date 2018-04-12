@@ -18,12 +18,12 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     endDate;
     getDate;
 
-    ctxBar: any;
-    barCanvas: any;
-    barChart: any;
-    ctxLine: any;
-    lineCanvas: any;
-    lineChart: any;
+    ctxBasic: any;
+    basicCanvas: any;
+    basicChart: any;
+    ctxDetail: any;
+    detailedCanvas: any;
+    detailedChart: any;
 
     limitedPast: boolean;
     colorblindMode: boolean;
@@ -68,7 +68,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     public summaryMood: string;
     public summaryIntensity: string;
     public inputType = "week";
-    public CurrentGraph = "Bar";
+    public CurrentGraph = "Basic";
 
 
     // The ID of the
@@ -158,14 +158,14 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     }
 
     //xValue can represent hour or weekday
-    filterBarGraph(xValue): number {
-        let filterBarData = this.filteredSummaries;
+    filterBasicGraph(xValue): number {
+        let filterBasicData = this.filteredSummaries;
 
         if(this.inputType == "week") {
             if(this.limitedPast) {
-                filterBarData = this.pastWeekEmotions(filterBarData);
+                filterBasicData = this.pastWeekEmotions(filterBasicData);
             }
-            filterBarData = filterBarData.filter(summary => {
+            filterBasicData = filterBasicData.filter(summary => {
                 this.getDate = new Date(summary.date);
                 return this.getDate.getDay() == xValue;
             });
@@ -173,9 +173,9 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         else {
             if (this.inputType == "day") {
                 if(this.limitedPast) {
-                    filterBarData = this.pastDayEmotions(filterBarData);
+                    filterBasicData = this.pastDayEmotions(filterBasicData);
                 }
-                filterBarData = filterBarData.filter(summary => {
+                filterBasicData = filterBasicData.filter(summary => {
                     this.getDate = new Date(summary.date);
                     return this.getDate.getHours() == xValue;
                 });
@@ -183,9 +183,9 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             else {
                 if(this.inputType == "year"){
                     if(this.limitedPast) {
-                        filterBarData = this.pastYearEmotions(filterBarData);
+                        filterBasicData = this.pastYearEmotions(filterBasicData);
                     }
-                    filterBarData = filterBarData.filter(summary => {
+                    filterBasicData = filterBasicData.filter(summary => {
                         this.getDate = new Date(summary.date);
                         return this.getDate.getMonth() == xValue;
                     });
@@ -193,9 +193,9 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                 else {
                     if(this.inputType == "month"){
                         if(this.limitedPast) {
-                            filterBarData = this.pastMonthEmotions(filterBarData);
+                            filterBasicData = this.pastMonthEmotions(filterBasicData);
                         }
-                        filterBarData = filterBarData.filter(summary => {
+                        filterBasicData = filterBasicData.filter(summary => {
                             this.getDate = new Date(summary.date);
                             return this.getDate.getDate() == xValue;
                         });
@@ -204,20 +204,20 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             }
         }
 
-        return filterBarData.length;
+        return filterBasicData.length;
     }
 
-    filterLineGraph(xValue, Searchmood): number {
+    filterDetailedGraph(xValue, Searchmood): number {
         Searchmood = Searchmood.toLocaleLowerCase();
-        let filterLineData = this.filteredSummaries.filter(summary => {
+        let filterDetailedData = this.filteredSummaries.filter(summary => {
             return !Searchmood || summary.mood.toLowerCase().indexOf(Searchmood) !== -1;
         });
 
         if(this.inputType == "week") {
             if(this.limitedPast) {
-                filterLineData = this.pastWeekEmotions(filterLineData);
+                filterDetailedData = this.pastWeekEmotions(filterDetailedData);
             }
-            filterLineData = filterLineData.filter(summary => {
+            filterDetailedData = filterDetailedData.filter(summary => {
                 this.getDate = new Date(summary.date);
                 return this.getDate.getDay() == xValue;
             });
@@ -225,9 +225,9 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         else {
             if (this.inputType == "day") {
                 if(this.limitedPast) {
-                    filterLineData = this.pastDayEmotions(filterLineData);
+                    filterDetailedData = this.pastDayEmotions(filterDetailedData);
                 }
-                filterLineData = filterLineData.filter(summary => {
+                filterDetailedData = filterDetailedData.filter(summary => {
                     this.getDate = new Date(summary.date);
                     return this.getDate.getHours() == xValue;
                 });
@@ -235,9 +235,9 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             else {
                 if(this.inputType == "year"){
                     if(this.limitedPast) {
-                        filterLineData = this.pastYearEmotions(filterLineData);
+                        filterDetailedData = this.pastYearEmotions(filterDetailedData);
                     }
-                    filterLineData = filterLineData.filter(summary => {
+                    filterDetailedData = filterDetailedData.filter(summary => {
                         this.getDate = new Date(summary.date);
                         return this.getDate.getMonth() == xValue;
                     });
@@ -245,9 +245,9 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                 else {
                     if(this.inputType == "month"){
                         if(this.limitedPast) {
-                            filterLineData = this.pastMonthEmotions(filterLineData);
+                            filterDetailedData = this.pastMonthEmotions(filterDetailedData);
                         }
-                        filterLineData = filterLineData.filter(summary => {
+                        filterDetailedData = filterDetailedData.filter(summary => {
                             this.getDate = new Date(summary.date);
                             return this.getDate.getDate() == xValue;
                         });
@@ -256,7 +256,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             }
         }
 
-        return filterLineData.length;
+        return filterDetailedData.length;
     }
 
 
@@ -432,27 +432,27 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     public getDailyData(emotion){
 
-        if(this.CurrentGraph == 'Bar'){
+        if(this.CurrentGraph == 'Basic'){
             return [
-                this.filterBarGraph(this.modDay(0)),
-                this.filterBarGraph(this.modDay(1)),
-                this.filterBarGraph(this.modDay(2)),
-                this.filterBarGraph(this.modDay(3)),
-                this.filterBarGraph(this.modDay(4)),
-                this.filterBarGraph(this.modDay(5)),
-                this.filterBarGraph(this.modDay(6))
+                this.filterBasicGraph(this.modDay(0)),
+                this.filterBasicGraph(this.modDay(1)),
+                this.filterBasicGraph(this.modDay(2)),
+                this.filterBasicGraph(this.modDay(3)),
+                this.filterBasicGraph(this.modDay(4)),
+                this.filterBasicGraph(this.modDay(5)),
+                this.filterBasicGraph(this.modDay(6))
             ]
         }
         else {
-            if(this.CurrentGraph == 'Line'){
+            if(this.CurrentGraph == 'Detailed'){
                 return [
-                    this.filterLineGraph(this.modDay(0), emotion),
-                    this.filterLineGraph(this.modDay(1), emotion),
-                    this.filterLineGraph(this.modDay(2), emotion),
-                    this.filterLineGraph(this.modDay(3), emotion),
-                    this.filterLineGraph(this.modDay(4), emotion),
-                    this.filterLineGraph(this.modDay(5), emotion),
-                    this.filterLineGraph(this.modDay(6), emotion)
+                    this.filterDetailedGraph(this.modDay(0), emotion),
+                    this.filterDetailedGraph(this.modDay(1), emotion),
+                    this.filterDetailedGraph(this.modDay(2), emotion),
+                    this.filterDetailedGraph(this.modDay(3), emotion),
+                    this.filterDetailedGraph(this.modDay(4), emotion),
+                    this.filterDetailedGraph(this.modDay(5), emotion),
+                    this.filterDetailedGraph(this.modDay(6), emotion)
                 ]
             }
         }
@@ -460,61 +460,61 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     public getHourlyData(emotion){
 
-        if(this.CurrentGraph == 'Bar'){
+        if(this.CurrentGraph == 'Basic'){
             return [
-                this.filterBarGraph(this.modHour(0)),
-                this.filterBarGraph(this.modHour(1)),
-                this.filterBarGraph(this.modHour(2)),
-                this.filterBarGraph(this.modHour(3)),
-                this.filterBarGraph(this.modHour(4)),
-                this.filterBarGraph(this.modHour(5)),
-                this.filterBarGraph(this.modHour(6)),
-                this.filterBarGraph(this.modHour(7)),
-                this.filterBarGraph(this.modHour(8)),
-                this.filterBarGraph(this.modHour(9)),
-                this.filterBarGraph(this.modHour(10)),
-                this.filterBarGraph(this.modHour(11)),
-                this.filterBarGraph(this.modHour(12)),
-                this.filterBarGraph(this.modHour(13)),
-                this.filterBarGraph(this.modHour(14)),
-                this.filterBarGraph(this.modHour(15)),
-                this.filterBarGraph(this.modHour(16)),
-                this.filterBarGraph(this.modHour(17)),
-                this.filterBarGraph(this.modHour(18)),
-                this.filterBarGraph(this.modHour(19)),
-                this.filterBarGraph(this.modHour(20)),
-                this.filterBarGraph(this.modHour(21)),
-                this.filterBarGraph(this.modHour(22)),
-                this.filterBarGraph(this.modHour(23)),
+                this.filterBasicGraph(this.modHour(0)),
+                this.filterBasicGraph(this.modHour(1)),
+                this.filterBasicGraph(this.modHour(2)),
+                this.filterBasicGraph(this.modHour(3)),
+                this.filterBasicGraph(this.modHour(4)),
+                this.filterBasicGraph(this.modHour(5)),
+                this.filterBasicGraph(this.modHour(6)),
+                this.filterBasicGraph(this.modHour(7)),
+                this.filterBasicGraph(this.modHour(8)),
+                this.filterBasicGraph(this.modHour(9)),
+                this.filterBasicGraph(this.modHour(10)),
+                this.filterBasicGraph(this.modHour(11)),
+                this.filterBasicGraph(this.modHour(12)),
+                this.filterBasicGraph(this.modHour(13)),
+                this.filterBasicGraph(this.modHour(14)),
+                this.filterBasicGraph(this.modHour(15)),
+                this.filterBasicGraph(this.modHour(16)),
+                this.filterBasicGraph(this.modHour(17)),
+                this.filterBasicGraph(this.modHour(18)),
+                this.filterBasicGraph(this.modHour(19)),
+                this.filterBasicGraph(this.modHour(20)),
+                this.filterBasicGraph(this.modHour(21)),
+                this.filterBasicGraph(this.modHour(22)),
+                this.filterBasicGraph(this.modHour(23)),
             ]
         }
         else {
-            if(this.CurrentGraph == 'Line'){
+            if(this.CurrentGraph == 'Detailed'){
                 return [
-                    this.filterLineGraph(this.modHour(0), emotion),
-                    this.filterLineGraph(this.modHour(1), emotion),
-                    this.filterLineGraph(this.modHour(2), emotion),
-                    this.filterLineGraph(this.modHour(3), emotion),
-                    this.filterLineGraph(this.modHour(4), emotion),
-                    this.filterLineGraph(this.modHour(5), emotion),
-                    this.filterLineGraph(this.modHour(6), emotion),
-                    this.filterLineGraph(this.modHour(7), emotion),
-                    this.filterLineGraph(this.modHour(8), emotion),
-                    this.filterLineGraph(this.modHour(9), emotion),
-                    this.filterLineGraph(this.modHour(10), emotion),
-                    this.filterLineGraph(this.modHour(11), emotion),
-                    this.filterLineGraph(this.modHour(12), emotion),
-                    this.filterLineGraph(this.modHour(13), emotion),
-                    this.filterLineGraph(this.modHour(14), emotion),
-                    this.filterLineGraph(this.modHour(15), emotion),
-                    this.filterLineGraph(this.modHour(16), emotion),
-                    this.filterLineGraph(this.modHour(17), emotion),
-                    this.filterLineGraph(this.modHour(18), emotion),
-                    this.filterLineGraph(this.modHour(19), emotion),
-                    this.filterLineGraph(this.modHour(20), emotion),
-                    this.filterLineGraph(this.modHour(21), emotion),
-                    this.filterLineGraph(this.modHour(22), emotion),
-                    this.filterLineGraph(this.modHour(23), emotion)
+                    this.filterDetailedGraph(this.modHour(0), emotion),
+                    this.filterDetailedGraph(this.modHour(1), emotion),
+                    this.filterDetailedGraph(this.modHour(2), emotion),
+                    this.filterDetailedGraph(this.modHour(3), emotion),
+                    this.filterDetailedGraph(this.modHour(4), emotion),
+                    this.filterDetailedGraph(this.modHour(5), emotion),
+                    this.filterDetailedGraph(this.modHour(6), emotion),
+                    this.filterDetailedGraph(this.modHour(7), emotion),
+                    this.filterDetailedGraph(this.modHour(8), emotion),
+                    this.filterDetailedGraph(this.modHour(9), emotion),
+                    this.filterDetailedGraph(this.modHour(10), emotion),
+                    this.filterDetailedGraph(this.modHour(11), emotion),
+                    this.filterDetailedGraph(this.modHour(12), emotion),
+                    this.filterDetailedGraph(this.modHour(13), emotion),
+                    this.filterDetailedGraph(this.modHour(14), emotion),
+                    this.filterDetailedGraph(this.modHour(15), emotion),
+                    this.filterDetailedGraph(this.modHour(16), emotion),
+                    this.filterDetailedGraph(this.modHour(17), emotion),
+                    this.filterDetailedGraph(this.modHour(18), emotion),
+                    this.filterDetailedGraph(this.modHour(19), emotion),
+                    this.filterDetailedGraph(this.modHour(20), emotion),
+                    this.filterDetailedGraph(this.modHour(21), emotion),
+                    this.filterDetailedGraph(this.modHour(22), emotion),
+                    this.filterDetailedGraph(this.modHour(23), emotion)
                 ]
             }
         }
@@ -523,37 +523,37 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     public getMonthlyData(emotion){
 
-        if(this.CurrentGraph == 'Bar'){
+        if(this.CurrentGraph == 'Basic'){
             return [
-                this.filterBarGraph(this.modMonth(0)),
-                this.filterBarGraph(this.modMonth(1)),
-                this.filterBarGraph(this.modMonth(2)),
-                this.filterBarGraph(this.modMonth(3)),
-                this.filterBarGraph(this.modMonth(4)),
-                this.filterBarGraph(this.modMonth(5)),
-                this.filterBarGraph(this.modMonth(6)),
-                this.filterBarGraph(this.modMonth(7)),
-                this.filterBarGraph(this.modMonth(8)),
-                this.filterBarGraph(this.modMonth(9)),
-                this.filterBarGraph(this.modMonth(10)),
-                this.filterBarGraph(this.modMonth(11))
+                this.filterBasicGraph(this.modMonth(0)),
+                this.filterBasicGraph(this.modMonth(1)),
+                this.filterBasicGraph(this.modMonth(2)),
+                this.filterBasicGraph(this.modMonth(3)),
+                this.filterBasicGraph(this.modMonth(4)),
+                this.filterBasicGraph(this.modMonth(5)),
+                this.filterBasicGraph(this.modMonth(6)),
+                this.filterBasicGraph(this.modMonth(7)),
+                this.filterBasicGraph(this.modMonth(8)),
+                this.filterBasicGraph(this.modMonth(9)),
+                this.filterBasicGraph(this.modMonth(10)),
+                this.filterBasicGraph(this.modMonth(11))
             ]
         }
         else {
-            if(this.CurrentGraph == 'Line'){
+            if(this.CurrentGraph == 'Detailed'){
                 return [
-                    this.filterLineGraph(this.modMonth(0), emotion),
-                    this.filterLineGraph(this.modMonth(1), emotion),
-                    this.filterLineGraph(this.modMonth(2), emotion),
-                    this.filterLineGraph(this.modMonth(3), emotion),
-                    this.filterLineGraph(this.modMonth(4), emotion),
-                    this.filterLineGraph(this.modMonth(5), emotion),
-                    this.filterLineGraph(this.modMonth(6), emotion),
-                    this.filterLineGraph(this.modMonth(7), emotion),
-                    this.filterLineGraph(this.modMonth(8), emotion),
-                    this.filterLineGraph(this.modMonth(9), emotion),
-                    this.filterLineGraph(this.modMonth(10), emotion),
-                    this.filterLineGraph(this.modMonth(11), emotion),
+                    this.filterDetailedGraph(this.modMonth(0), emotion),
+                    this.filterDetailedGraph(this.modMonth(1), emotion),
+                    this.filterDetailedGraph(this.modMonth(2), emotion),
+                    this.filterDetailedGraph(this.modMonth(3), emotion),
+                    this.filterDetailedGraph(this.modMonth(4), emotion),
+                    this.filterDetailedGraph(this.modMonth(5), emotion),
+                    this.filterDetailedGraph(this.modMonth(6), emotion),
+                    this.filterDetailedGraph(this.modMonth(7), emotion),
+                    this.filterDetailedGraph(this.modMonth(8), emotion),
+                    this.filterDetailedGraph(this.modMonth(9), emotion),
+                    this.filterDetailedGraph(this.modMonth(10), emotion),
+                    this.filterDetailedGraph(this.modMonth(11), emotion),
                 ]
             }
         }
@@ -561,75 +561,75 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     public getDatelyData(emotion){
 
-        if(this.CurrentGraph == 'Bar'){
+        if(this.CurrentGraph == 'Basic'){
             return [
-                this.filterBarGraph(this.modDate(0)),
-                this.filterBarGraph(this.modDate(1)),
-                this.filterBarGraph(this.modDate(2)),
-                this.filterBarGraph(this.modDate(3)),
-                this.filterBarGraph(this.modDate(4)),
-                this.filterBarGraph(this.modDate(5)),
-                this.filterBarGraph(this.modDate(6)),
-                this.filterBarGraph(this.modDate(7)),
-                this.filterBarGraph(this.modDate(8)),
-                this.filterBarGraph(this.modDate(9)),
-                this.filterBarGraph(this.modDate(10)),
-                this.filterBarGraph(this.modDate(11)),
-                this.filterBarGraph(this.modDate(12)),
-                this.filterBarGraph(this.modDate(13)),
-                this.filterBarGraph(this.modDate(14)),
-                this.filterBarGraph(this.modDate(15)),
-                this.filterBarGraph(this.modDate(16)),
-                this.filterBarGraph(this.modDate(17)),
-                this.filterBarGraph(this.modDate(18)),
-                this.filterBarGraph(this.modDate(19)),
-                this.filterBarGraph(this.modDate(20)),
-                this.filterBarGraph(this.modDate(21)),
-                this.filterBarGraph(this.modDate(22)),
-                this.filterBarGraph(this.modDate(23)),
-                this.filterBarGraph(this.modDate(24)),
-                this.filterBarGraph(this.modDate(25)),
-                this.filterBarGraph(this.modDate(26)),
-                this.filterBarGraph(this.modDate(27)),
-                this.filterBarGraph(this.modDate(28)),
-                this.filterBarGraph(this.modDate(29)),
-                this.filterBarGraph(this.modDate(30))
+                this.filterBasicGraph(this.modDate(0)),
+                this.filterBasicGraph(this.modDate(1)),
+                this.filterBasicGraph(this.modDate(2)),
+                this.filterBasicGraph(this.modDate(3)),
+                this.filterBasicGraph(this.modDate(4)),
+                this.filterBasicGraph(this.modDate(5)),
+                this.filterBasicGraph(this.modDate(6)),
+                this.filterBasicGraph(this.modDate(7)),
+                this.filterBasicGraph(this.modDate(8)),
+                this.filterBasicGraph(this.modDate(9)),
+                this.filterBasicGraph(this.modDate(10)),
+                this.filterBasicGraph(this.modDate(11)),
+                this.filterBasicGraph(this.modDate(12)),
+                this.filterBasicGraph(this.modDate(13)),
+                this.filterBasicGraph(this.modDate(14)),
+                this.filterBasicGraph(this.modDate(15)),
+                this.filterBasicGraph(this.modDate(16)),
+                this.filterBasicGraph(this.modDate(17)),
+                this.filterBasicGraph(this.modDate(18)),
+                this.filterBasicGraph(this.modDate(19)),
+                this.filterBasicGraph(this.modDate(20)),
+                this.filterBasicGraph(this.modDate(21)),
+                this.filterBasicGraph(this.modDate(22)),
+                this.filterBasicGraph(this.modDate(23)),
+                this.filterBasicGraph(this.modDate(24)),
+                this.filterBasicGraph(this.modDate(25)),
+                this.filterBasicGraph(this.modDate(26)),
+                this.filterBasicGraph(this.modDate(27)),
+                this.filterBasicGraph(this.modDate(28)),
+                this.filterBasicGraph(this.modDate(29)),
+                this.filterBasicGraph(this.modDate(30))
             ]
         }
         else {
-            if(this.CurrentGraph == 'Line'){
+            if(this.CurrentGraph == 'Detailed'){
                 return [
-                    this.filterLineGraph(this.modDate(0), emotion),
-                    this.filterLineGraph(this.modDate(1), emotion),
-                    this.filterLineGraph(this.modDate(2), emotion),
-                    this.filterLineGraph(this.modDate(3), emotion),
-                    this.filterLineGraph(this.modDate(4), emotion),
-                    this.filterLineGraph(this.modDate(5), emotion),
-                    this.filterLineGraph(this.modDate(6), emotion),
-                    this.filterLineGraph(this.modDate(7), emotion),
-                    this.filterLineGraph(this.modDate(8), emotion),
-                    this.filterLineGraph(this.modDate(9), emotion),
-                    this.filterLineGraph(this.modDate(10), emotion),
-                    this.filterLineGraph(this.modDate(11), emotion),
-                    this.filterLineGraph(this.modDate(12), emotion),
-                    this.filterLineGraph(this.modDate(13), emotion),
-                    this.filterLineGraph(this.modDate(14), emotion),
-                    this.filterLineGraph(this.modDate(15), emotion),
-                    this.filterLineGraph(this.modDate(16), emotion),
-                    this.filterLineGraph(this.modDate(17), emotion),
-                    this.filterLineGraph(this.modDate(18), emotion),
-                    this.filterLineGraph(this.modDate(19), emotion),
-                    this.filterLineGraph(this.modDate(20), emotion),
-                    this.filterLineGraph(this.modDate(21), emotion),
-                    this.filterLineGraph(this.modDate(22), emotion),
-                    this.filterLineGraph(this.modDate(23), emotion),
-                    this.filterLineGraph(this.modDate(24), emotion),
-                    this.filterLineGraph(this.modDate(25), emotion),
-                    this.filterLineGraph(this.modDate(26), emotion),
-                    this.filterLineGraph(this.modDate(27), emotion),
-                    this.filterLineGraph(this.modDate(28), emotion),
-                    this.filterLineGraph(this.modDate(29), emotion),
-                    this.filterLineGraph(this.modDate(30), emotion)
+                    this.filterDetailedGraph(this.modDate(0), emotion),
+                    this.filterDetailedGraph(this.modDate(1), emotion),
+                    this.filterDetailedGraph(this.modDate(2), emotion),
+                    this.filterDetailedGraph(this.modDate(3), emotion),
+                    this.filterDetailedGraph(this.modDate(4), emotion),
+                    this.filterDetailedGraph(this.modDate(5), emotion),
+                    this.filterDetailedGraph(this.modDate(6), emotion),
+                    this.filterDetailedGraph(this.modDate(7), emotion),
+                    this.filterDetailedGraph(this.modDate(8), emotion),
+                    this.filterDetailedGraph(this.modDate(9), emotion),
+                    this.filterDetailedGraph(this.modDate(10), emotion),
+                    this.filterDetailedGraph(this.modDate(11), emotion),
+                    this.filterDetailedGraph(this.modDate(12), emotion),
+                    this.filterDetailedGraph(this.modDate(13), emotion),
+                    this.filterDetailedGraph(this.modDate(14), emotion),
+                    this.filterDetailedGraph(this.modDate(15), emotion),
+                    this.filterDetailedGraph(this.modDate(16), emotion),
+                    this.filterDetailedGraph(this.modDate(17), emotion),
+                    this.filterDetailedGraph(this.modDate(18), emotion),
+                    this.filterDetailedGraph(this.modDate(19), emotion),
+                    this.filterDetailedGraph(this.modDate(20), emotion),
+                    this.filterDetailedGraph(this.modDate(21), emotion),
+                    this.filterDetailedGraph(this.modDate(22), emotion),
+                    this.filterDetailedGraph(this.modDate(23), emotion),
+                    this.filterDetailedGraph(this.modDate(24), emotion),
+                    this.filterDetailedGraph(this.modDate(25), emotion),
+                    this.filterDetailedGraph(this.modDate(26), emotion),
+                    this.filterDetailedGraph(this.modDate(27), emotion),
+                    this.filterDetailedGraph(this.modDate(28), emotion),
+                    this.filterDetailedGraph(this.modDate(29), emotion),
+                    this.filterDetailedGraph(this.modDate(30), emotion)
                 ]
             }
         }
@@ -743,18 +743,18 @@ public pastDates = [
     this.getPastDates(30)
 ];
 
-    updateBarChart(): void{
-        this.CurrentGraph = 'Bar';
+    updateBasicChart(): void{
+        this.CurrentGraph = 'Basic';
 
-        if(this.barChart != null){
-            this.barChart.destroy();
+        if(this.basicChart != null){
+            this.basicChart.destroy();
         }
-        if(this.lineChart != null){
-            this.lineChart.destroy();
+        if(this.detailedChart != null){
+            this.detailedChart.destroy();
         }
 
-        this.barCanvas = document.getElementById("Chart");
-        this.ctxBar = this.barCanvas;
+        this.basicCanvas = document.getElementById("Chart");
+        this.ctxBasic = this.basicCanvas;
 
         let xLabel;
         let days;
@@ -802,7 +802,7 @@ public pastDates = [
             }
         }
 
-        this.barChart = new Chart(this.ctxBar, {
+        this.basicChart = new Chart(this.ctxBasic, {
             type: 'bar',
             data: {
                 labels: xLabel,
@@ -832,25 +832,25 @@ public pastDates = [
         });
     }
 
-    updateLineChart(): void{
+    updateDetailedChart(): void{
 
-        if(this.lineChart != null){
-            this.lineChart.destroy();
+        if(this.detailedChart != null){
+            this.detailedChart.destroy();
         }
-        if(this.barChart != null){
-            this.barChart.destroy();
-        }
-
-        let stackBool = true;
-
-        if(this.graphMode == 'line'){
-            stackBool = false;
+        if(this.basicChart != null){
+            this.basicChart.destroy();
         }
 
-        this.CurrentGraph = 'Line';
+        let stackBool = false;
 
-        this.lineCanvas = document.getElementById("Chart");
-        this.ctxLine = this.lineCanvas;
+        if(this.graphMode == 'bar'){
+            stackBool = true;
+        }
+
+        this.CurrentGraph = 'Detailed';
+
+        this.detailedCanvas = document.getElementById("Chart");
+        this.ctxDetail = this.detailedCanvas;
 
         if(this.colorblindMode){
             this.happyColor = "rgb(215,48,39)";
@@ -912,7 +912,7 @@ public pastDates = [
             }
         }
 
-        this.lineChart = new Chart(this.ctxLine, {
+        this.detailedChart = new Chart(this.ctxDetail, {
             type: this.graphMode,
             data: {
                 labels: xLabel,
@@ -978,10 +978,10 @@ public pastDates = [
         });
     }
 
-    buildBarChart(): void {
+    buildBasicChart(): void {
 
-        this.barCanvas = document.getElementById("Chart");
-        this.ctxBar = this.barCanvas;
+        this.basicCanvas = document.getElementById("Chart");
+        this.ctxBasic = this.basicCanvas;
 
         let summaryDays;
 
@@ -1003,7 +1003,7 @@ public pastDates = [
             "lineTension": 0.3
         };
 
-        this.barChart = new Chart(this.ctxBar, {
+        this.basicChart = new Chart(this.ctxBasic, {
             type: 'bar',
             data: {
                 labels: days,
@@ -1025,10 +1025,10 @@ public pastDates = [
 
 
     /*
-    buildLineChart(): void {
+    buildDetailedChart(): void {
 
-        this.lineCanvas = document.getElementById("lineChart");
-        this.ctxLine= this.lineCanvas;
+        this.detailedCanvas = document.getElementById("Chart");
+        this.ctxDetail= this.detailedCanvas;
 
         if(this.colorblindMode){
             this.happyColor = "rgb(252,141,89)";
@@ -1088,7 +1088,7 @@ public pastDates = [
             "borderColor":this.anxiousColor,
             "lineTension":0.1};
 
-        this.lineChart = new Chart(this.ctxLine, {
+        this.detailedChart = new Chart(this.ctxDetail, {
             type: 'line',
             data: {
                 labels: pastDays,
@@ -1114,7 +1114,7 @@ public pastDates = [
     */
 
     ngAfterViewInit(): void {
-        this.buildBarChart();
+        this.buildBasicChart();
     }
 
     /*
