@@ -200,108 +200,135 @@ export class GoalsComponent implements OnInit {
             });
         }
 
-        this.showGoals("all");
         return this.filteredGoals;
     }
-
-  /*  onResize (event, type) {
-        this.currentScreenWidth = event.target.innerWidth;
-        if(this.currentScreenWidth <= 1700){
-
-            this.goalsPerPage = 4;
-        }
-    }*/
 
     getNext(){
 
         if(this.showAllGoals == false) {
             this.todayGoals = this.filteredGoals.filter(goal => {
+                console.log("showAllGoals was false, which means we are on the show today's goals page");
 
                 var nextGoal = new Date(goal.next);
+                console.log("setting nextGoal to the current goal.next");
                 nextGoal.setHours(0, 0, 0, 0);
+                console.log("setting the hours of nextGoal to 0 for comparison");
 
                 var endGoal = new Date(goal.end);
+                console.log("setting nextGoal to the current goal.end");
                 endGoal.setHours(0, 0, 0, 0);
+                console.log("setting the hours of endGoal to 0 for comparison");
 
                 var day = nextGoal.getDate();
+                console.log("making the var day and setting it to nextGoal.getDate()");
                 var month = nextGoal.getMonth();
+                console.log("making the var month and setting it to nextGoal.getDate()")
 
                 if (nextGoal.getTime() < this.today.getTime()
                     && goal.frequency != "Does not repeat"
                     && goal.status == true
                     && endGoal.getTime() >= this.today.getTime()) {
+                    console.log("nextGoal was < than this.today, the frequency did not equal 'Does not repeat' and status equaled true. Updating goal.next");
                     this.updateNext(goal._id, goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)
                 }
 
                 if (goal.status == true) {
+                    console.log("status equaled true, this goal doesn't need to be on the today page");
                     return false;
                 }
 
                 if (endGoal.getTime() < this.today.getTime()) {
+                    console.log("endGoal was < than this.today meaning that it doesn't need to be on the today page");
                     return false;
                 }
 
                 if (goal.frequency == 'Does not repeat') {
+                    console.log("goal.frequency equaled Does not repeat");
                     if (nextGoal.getTime() == this.today.getTime()) {
+                        console.log("goal.frequency == does not repeat and nextGoal == this.today")
                         return true;
                     }
                     else {
+                        console.log("goal.frequency == does not repeat but nextGoal != this.today")
                         return false;
                     }
                 }
 
                 while (nextGoal.getTime() < this.today.getTime()) {
+                    console.log("Inside the while loop. nextGoal < this.today");
                     if (goal.frequency == "Daily") {
+                        console.log("goal.frequency == daily")
                         day = day + 1;
+                        console.log("incrementing day by 1");
                         nextGoal.setDate(day);
+                        console.log("setting the nextGoal date to the new day");
                     }
 
                     if (goal.frequency == "Weekly") {
+                        console.log("goal.frequency == weekly");
                         day = day + 7;
+                        console.log("incrementing day by 7");
                         nextGoal.setDate(day);
+                        console.log("setting nextGoal to the new day");
                     }
 
                     if (goal.frequency == "Monthly") {
+                        console.log("goal.frequency == monthly");
                         month = month + 1;
+                        console.log("incrementing month by 1");
                         nextGoal.setMonth(month);
+                        console.log("setting nextGoal to the new month");
                     }
                 }
 
                 if (nextGoal.getTime() == this.today.getTime()) {
+                    console.log("nextGoal == this.today, updating goal.next value");
                     this.updateNext(goal._id, goal.name, goal.purpose, goal.category, goal.status, goal.frequency, goal.start, goal.end, nextGoal.toString());
+                    console.log("updated goal.next value, returning true");
                     return true;
                 }
 
                 else {
+                    console.log("nextGoal != this.today, returning false");
                     return false;
                 }
 
 
             });
-
+            console.log("going to the showGoals function, stating we are on the today page");
             this.showGoals("today");
         }
 
         else{
+            console.log("going to showGoals function, stating we are on the all page");
             this.showGoals("all");
         }
+        console.log("returning this.todayGoals");
         return this.todayGoals;
 
     }
 
     showGoals(type){
+        console.log("enter showGoals function");
         var count = this.currentPage * this.goalsPerPage;
+        console.log("setting up var count");
 
         if(type == "today") {
+            console.log("type == today");
 
             this.shownGoals = this.todayGoals.filter(goal => {
+                console.log("entering filtering part");
                 if (count > this.goalsPerPage) {
+                    console.log("count > this.goalsPerPage");
                     count--;
+                    console.log("decrease count by 1 and returning fasle; this goal doesn't need to be shown");
                     return false;
                 }
 
                 if (count <= this.goalsPerPage && count != 0) {
+                    console.log("count <= this.goalsPerpage and count != 0");
                     count--;
+                    console.log("decreasing count and returning true; this goal needs to be shown");
                     return true;
                 }
 
@@ -309,47 +336,37 @@ export class GoalsComponent implements OnInit {
         }
 
         else{
+            console.log("type == all");
             this.shownGoals = this.filteredGoals.filter(goal => {
+                console.log("entering filtering part");
                 if (count > this.goalsPerPage) {
+                    console.log("count > this.goalsPerPage");
                     count--;
+                    console.log("decreasing count and returning false; this goal doesn't need to be shown");
                     return false;
                 }
 
                 if (count <= this.goalsPerPage && count != 0) {
+                    console.log("count <= this.goalsPerPage and count != 0");
                     count--;
+                    console.log("decreasing count and returning true; this goal needs to be shown");
                     return true;
                 }
 
             });
         }
+        console.log("finished with showGoals()");
     }
 
     maxNumPages(type): boolean{
         if(type == "today") {
+
             return (this.goalsPerPage * this.currentPage) < this.todayGoals.length;
         }
         else{
+
             return (this.goalsPerPage * this.currentPage) < this.filteredGoals.length;
         }
-    }
-
-    setNumGoals(){
-        this.currentScreenWidth = (window.screen.width);
-
-       /* if(this.currentScreenWidth > 1300 && this.currentScreenWidth <= 1700){
-            this.goalsPerPage = 4;
-            this.showGoals("today");
-        }
-
-        if(this.currentScreenWidth > 1100 && this.currentScreenWidth <= 1300){
-            this.goalsPerPage = 3;
-            this.showGoals("today");
-        }
-
-        if(this.currentScreenWidth > 700 && this.currentScreenWidth <= 1100){
-            this.goalsPerPage = 2;
-            this.showGoals("today");
-        }*/
     }
 
 
@@ -395,10 +412,15 @@ export class GoalsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        console.log("starting refeshGoals()");
         this.refreshGoals();
+        console.log("finished refreshGoals()");
+        console.log("starting loadService");
         this.loadService();
+        console.log("finished loadService()");
+        console.log("starting getDate()");
         this.getDate();
-        this.setNumGoals();
+        console.log("finished getDate()");
 
     }
 
