@@ -70,6 +70,7 @@ export class GoalsComponent implements OnInit {
                 this.goalService.addNewGoal(result).subscribe(
                     addGoalResult => {
                         this.highlightedID = addGoalResult;
+                        this.refreshGoals();
                     },
                     err => {
                         // This should probably be turned into some sort of meaningful response.
@@ -79,7 +80,6 @@ export class GoalsComponent implements OnInit {
                 this.snackBar.open("Added Goal", "CLOSE", {
                     duration: 2000,
                 });
-                this.refreshGoals();
             }
         });
     }

@@ -53,6 +53,7 @@ export class JournalsComponent implements OnInit {
                 this.journalListService.addNewJournal(result).subscribe(
                     addJournalResult => {
                         this.highlightedID = addJournalResult;
+                        this.refreshJournals();
                     },
                     err => {
                         // This should probably be turned into some sort of meaningful response.
@@ -62,7 +63,6 @@ export class JournalsComponent implements OnInit {
                 this.snackBar.open("Added Journal", "CLOSE", {
                     duration: 2000,
                 });
-                this.refreshJournals();
                 console.log("Journal added.");
             }
         });
