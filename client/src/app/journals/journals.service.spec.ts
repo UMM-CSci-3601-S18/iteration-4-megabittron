@@ -80,7 +80,7 @@ describe('Journal list service: ', () => {
         // Specify the content of the response to that request. This
         // triggers the subscribe above, which leads to that check
         // actually being performed.
-        req.flush(testJournals);
+        req.flush(testJournal);
     });
 
     /*
