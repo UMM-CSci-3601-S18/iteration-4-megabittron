@@ -7,7 +7,7 @@ import {FormsModule} from '@angular/forms';
 import {CustomModule} from '../custom.module';
 import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 import {MatDialog} from '@angular/material';
-import {ArraySortPipe} from "./array-sort-pipe.pipe";
+import {ArraySortPipe} from "./array-sort.pipe";
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 
@@ -104,7 +104,7 @@ describe( 'Journals', () => {
 })
 
 // This test is not passing because of sending XML requests. Fix!
-/*describe('Misbehaving Journal List', () => {
+describe('Misbehaving Journal List', () => {
     let journalList: JournalsComponent;
     let fixture: ComponentFixture<JournalsComponent>;
 
@@ -140,7 +140,7 @@ describe( 'Journals', () => {
         // Since the observer throws an error, we don't expect journals to be defined.
         expect(journalList.journals).toBeUndefined();
     });
-});*/
+});
 
 describe('Adding a journal', () => {
     let journalList: JournalsComponent;
