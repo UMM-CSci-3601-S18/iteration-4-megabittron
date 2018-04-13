@@ -28,6 +28,7 @@ import 'rxjs/add/operator/do';
                     getSummaries: () => Observable.of([
                         {
                             _id: '1',
+                            userID: 'userID1',
                             mood: 'happy',
                             date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (CDT)',
                             intensity: 2,
@@ -35,6 +36,7 @@ import 'rxjs/add/operator/do';
                         },
                         {
                             _id: '2',
+                            userID: 'userID1',
                             mood: 'sad',
                             date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (CDT)',
                             intensity: 4,
@@ -42,6 +44,7 @@ import 'rxjs/add/operator/do';
                         },
                         {
                             _id: '3',
+                            userID: 'userID1',
                             mood: 'mad',
                             date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)',
                             intensity: 5,
@@ -171,6 +174,7 @@ import 'rxjs/add/operator/do';
                     getSummaries: () => Observable.of([
                         {
                             _id: '1',
+                            userID: 'userID1',
                             mood: 'happy',
                             date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (CDT)',
                             intensity: 2,
@@ -178,6 +182,7 @@ import 'rxjs/add/operator/do';
                         },
                         {
                             _id: '2',
+                            userID: 'userID1',
                             mood: 'sad',
                             date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (CDT)',
                             intensity: 4,
@@ -185,6 +190,7 @@ import 'rxjs/add/operator/do';
                         },
                         {
                             _id: '3',
+                            userID: 'userID1',
                             mood: 'mad',
                             date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)',
                             intensity: 5,
@@ -247,6 +253,7 @@ import 'rxjs/add/operator/do';
                     getSummaries: () => Observable.of([
                         {
                             _id: '1',
+                            userID: 'userID1',
                             mood: 'happy',
                             date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (CDT)',
                             intensity: 2,
@@ -254,6 +261,7 @@ import 'rxjs/add/operator/do';
                         },
                         {
                             _id: '2',
+                            userID: 'userID1',
                             mood: 'sad',
                             date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (CDT)',
                             intensity: 4,
@@ -261,6 +269,7 @@ import 'rxjs/add/operator/do';
                         },
                         {
                             _id: '3',
+                            userID: 'userID1',
                             mood: 'mad',
                             date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)',
                             intensity: 5,
@@ -355,6 +364,7 @@ import 'rxjs/add/operator/do';
                     getSummaries: () => Observable.of([
                         {
                             _id: '1',
+                            userID: 'userID1',
                             mood: 'happy',
                             date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (CDT)',
                             intensity: 2,
@@ -362,6 +372,7 @@ import 'rxjs/add/operator/do';
                         },
                         {
                             _id: '2',
+                            userID: 'userID1',
                             mood: 'sad',
                             date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (CDT)',
                             intensity: 4,
@@ -369,6 +380,7 @@ import 'rxjs/add/operator/do';
                         },
                         {
                             _id: '3',
+                            userID: 'userID1',
                             mood: 'mad',
                             date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)',
                             intensity: 5,
@@ -463,6 +475,7 @@ import 'rxjs/add/operator/do';
                     getSummaries: () => Observable.of([
                         {
                             _id: '1',
+                            userID: 'userID1',
                             mood: 'happy',
                             date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (CDT)',
                             intensity: 2,
@@ -470,6 +483,7 @@ import 'rxjs/add/operator/do';
                         },
                         {
                             _id: '2',
+                            userID: 'userID1',
                             mood: 'sad',
                             date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (CDT)',
                             intensity: 4,
@@ -477,6 +491,7 @@ import 'rxjs/add/operator/do';
                         },
                         {
                             _id: '3',
+                            userID: 'userID1',
                             mood: 'mad',
                             date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)',
                             intensity: 5,
@@ -573,6 +588,7 @@ import 'rxjs/add/operator/do';
                     getSummaries: () => Observable.of([
                         {
                             _id: '1',
+                            userID: 'userID1',
                             mood: 'happy',
                             date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (CDT)',
                             intensity: 2,
@@ -580,6 +596,7 @@ import 'rxjs/add/operator/do';
                         },
                         {
                             _id: '2',
+                            userID: 'userID1',
                             mood: 'sad',
                             date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (CDT)',
                             intensity: 4,
@@ -587,6 +604,7 @@ import 'rxjs/add/operator/do';
                         },
                         {
                             _id: '3',
+                            userID: 'userID1',
                             mood: 'mad',
                             date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)',
                             intensity: 5,

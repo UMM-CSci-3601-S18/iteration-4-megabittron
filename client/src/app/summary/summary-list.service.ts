@@ -1,9 +1,6 @@
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-
 import {Observable} from 'rxjs/Observable';
-
 import {Summary} from './summary';
 import {environment} from '../../environments/environment';
 
@@ -22,8 +19,8 @@ export class SummaryListService {
         this.summaryUrl = this.baseUrl;
         this.noID = false;
 
-        this.filterByMood(summaryMood);
         this.filterByUserID(userID);
+        this.filterByMood(summaryMood);
 
         if(this.noID) {
             return this.emptyObservable;
