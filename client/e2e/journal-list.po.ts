@@ -36,10 +36,6 @@ export class JournalPage {
         input.sendKeys(body);
     }
 
-    backspace() {
-        browser.actions().sendKeys(Key.BACK_SPACE).perform();
-    }
-
     getJournalManageTitle() {
         const title = element(by.id('journal-title')).getText();
         this.highlightElement(by.id('journal-title'));
@@ -53,13 +49,6 @@ export class JournalPage {
         return journal;
     }
 
-    clickUniqueJournal(anID: string) {
-        const journal = element(by.id(anID));
-        this.highlightElement(by.id(anID));
-        journal.click();
-        return journal;
-    }
-
     buttonExists(): promise.Promise<boolean> {
         this.highlightElement(by.id('addNewJournal'));
         return element(by.id('addNewJournal')).isPresent();
@@ -70,29 +59,9 @@ export class JournalPage {
         return element(by.id('addNewJournal')).click();
     }
 
-    clickNextIndexButton(): promise.Promise<void> {
-        this.highlightElement(by.id('nextIndexJournal'));
-        return element(by.id('nextIndexJournal')).click();
-    }
-
-    clickPrevIndexButton(): promise.Promise<void> {
-        this.highlightElement(by.id('prevIndexJournal'));
-        return element(by.id('prevIndexJournal')).click();
-    }
-
-    clickFirstIndexButton(): promise.Promise<void> {
-        this.highlightElement(by.id('firstIndexJournal'));
-        return element(by.id('firstIndexJournal')).click();
-    }
-
-    clickLastIndexButton(): promise.Promise<void> {
-        this.highlightElement(by.id('lastIndexJournal'));
-        return element(by.id('lastIndexJournal')).click();
-    }
-
     clickEditJournalButton(): promise.Promise<void> {
-        this.highlightElement(by.id('edit-journal-button'));
-        return element(by.id('edit-journal-button')).click();
+        this.highlightElement(by.className('edit-journal-button'));
+        return element(by.className('edit-journal-button')).click();
     }
 
 }
