@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
+import {NgModule} from '@angular/core';
+import {BrowserModule } from '@angular/platform-browser';
+import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
@@ -21,9 +21,9 @@ import {AddJournalComponent} from "./journals/add-journal.component";
 import {EditJournalComponent} from "./journals/edit-journal.component";
 import {ShowJournalComponent} from "./journals/show-journal.component";
 import {JournalsService} from "./journals/journals.service";
-import {ArraySortPipe} from "./journals/array-sort-pipe.pipe";
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import {ArraySortPipe} from "./journals/array-sort.pipe";
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {environment} from '../environments/environment';
 
 
 @NgModule({
@@ -53,12 +53,12 @@ import { environment } from '../environments/environment';
         ArraySortPipe,
     ],
     providers: [
-    GoalsService,
-    JournalsService,
-    EmotionService,
-    SummaryListService,
-    {provide: APP_BASE_HREF, useValue: '/'},
-    {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}
+        GoalsService,
+        JournalsService,
+        EmotionService,
+        SummaryListService,
+        {provide: APP_BASE_HREF, useValue: '/'},
+        {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}
 ],
     entryComponents: [
         AddGoalComponent,
@@ -68,7 +68,9 @@ import { environment } from '../environments/environment';
         EditJournalComponent,
         ShowJournalComponent,
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [
+        AppComponent
+    ]
 })
 
 export class AppModule {

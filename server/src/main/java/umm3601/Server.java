@@ -5,13 +5,21 @@ import com.mongodb.client.MongoDatabase;
 import org.apache.commons.io.IOUtils;
 import spark.Request;
 import spark.Response;
+
+
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+
+import java.io.File;
+
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
 
 import spark.Route;
+
+
 import umm3601.database.GoalController;
 import umm3601.database.GoalRequestHandler;
 import umm3601.database.JournalController;
@@ -22,6 +30,15 @@ import umm3601.database.ResourceController;
 import umm3601.database.ResourceRequestHandler;
 import umm3601.database.SummaryController;
 import umm3601.database.SummaryRequestHandler;
+import umm3601.database.UserController;
+import umm3601.database.UserRequestHandler;
+
+
+import com.google.api.client.googleapis.auth.oauth2.*;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.jackson2.JacksonFactory;
+
+import org.json.*;
 
 public class Server {
     private static final String databaseName = "dev";
@@ -47,6 +64,9 @@ public class Server {
 
         JournalController journalController = new JournalController(database);
         JournalRequestHandler journalRequestHandler = new JournalRequestHandler(journalController);
+
+        UserController userController = new UserController(database);
+        UserRequestHandler userRequestHandler = new UserRequestHandler(userController);
 
 
         //Configure Spark
@@ -93,7 +113,6 @@ public class Server {
 
         get("/", clientRoute);
 
-
         /////////////// Endpoints ///////////////////
         /////////////////////////////////////////////
 
@@ -121,6 +140,72 @@ public class Server {
         get("api/journals/:id", journalRequestHandler::getJournalJSON);
         post("api/journals/new", journalRequestHandler::addNewJournal);
         post("api/journals/edit", journalRequestHandler::editJournal);
+
+        //Did not create a api route for users
+
+
+        post("api/login", (req, res) -> {
+
+            JSONObject obj = new JSONObject(req.body());
+            String authCode = obj.getString("code");
+
+
+            try {
+                // We can create this later to keep our secret safe
+
+                String CLIENT_SECRET_FILE = "./src/main/java/umm3601/server_files/client_secret_file.json";
+
+                GoogleClientSecrets clientSecrets =
+                    GoogleClientSecrets.load(
+                        JacksonFactory.getDefaultInstance(), new FileReader(CLIENT_SECRET_FILE));
+
+
+                GoogleTokenResponse tokenResponse =
+                    new GoogleAuthorizationCodeTokenRequest(
+                        new NetHttpTransport(),
+                        JacksonFactory.getDefaultInstance(),
+                        "https://www.googleapis.com/oauth2/v4/token",
+                        clientSecrets.getDetails().getClientId(),
+
+                        // Replace clientSecret with the localhost one if testing
+                        clientSecrets.getDetails().getClientSecret(),
+                        authCode,
+                        "http://localhost:9000")
+                        //Not sure if we have a redirectUri
+
+                        // Specify the same redirect URI that you use with your web
+                        // app. If you don't have a web version of your app, you can
+                        // specify an empty string.
+                        .execute();
+
+
+                GoogleIdToken idToken = tokenResponse.parseIdToken();
+                GoogleIdToken.Payload payload = idToken.getPayload();
+                String subjectId = payload.getSubject();  // Use this value as a key to identify a user.
+                String email = payload.getEmail();
+                boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
+                String name = (String) payload.get("name");
+                String pictureUrl = (String) payload.get("picture");
+                String locale = (String) payload.get("locale");
+                String familyName = (String) payload.get("family_name");
+                String givenName = (String) payload.get("given_name");
+
+
+                System.out.println(subjectId);
+                System.out.println(email);
+                System.out.println(name);
+                System.out.println(locale);
+
+                return userController.addNewUser(subjectId, givenName, familyName);
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+            return "";
+        });
+
+
 
 
         // An example of throwing an unhandled exception so you can see how the

@@ -14,10 +14,10 @@ import {MatSnackBar} from '@angular/material';
 
 export class GoalsComponent implements OnInit {
     // These are public so that tests can reference them (.spec.ts)
-    public goals: Goal[];
-    public todayGoals: Goal[];
-    public shownGoals: Goal[];
-    public filteredGoals: Goal[];
+    public goals: Goal[] = [];
+    public todayGoals: Goal[] = [];
+    public shownGoals: Goal[] = [];
+    public filteredGoals: Goal[] = [];
 
     // These are the target values used in searching.
     public goalPurpose: string;
@@ -50,6 +50,7 @@ export class GoalsComponent implements OnInit {
     openDialog(): void {
         const newGoal: Goal = {
             _id: '',
+            userID: localStorage.getItem("userID"),
             name: '',
             category: '',
             purpose: '',
@@ -112,6 +113,7 @@ export class GoalsComponent implements OnInit {
     editGoal(_id, name, purpose, category, status, frequency, start, end, next) {
         const updatedGoal: Goal = {
             _id: _id,
+            userID: localStorage.getItem("userID"),
             purpose: purpose,
             category: category,
             name: name,
@@ -138,6 +140,7 @@ export class GoalsComponent implements OnInit {
     updateNext(_id, name, purpose, category, status, frequency, start, end, next) {
         const updatedGoal: Goal = {
             _id: _id,
+            userID: localStorage.getItem("userID"),
             purpose: purpose,
             category: category,
             name: name,
@@ -200,6 +203,7 @@ export class GoalsComponent implements OnInit {
             });
         }
 
+        this.showGoals("all")
         return this.filteredGoals;
     }
 
@@ -357,13 +361,24 @@ export class GoalsComponent implements OnInit {
         // Subscribe waits until the data is fully downloaded, then
         // performs an action on it (the first lambda)
 
-        const goalObservable: Observable<Goal[]> = this.goalService.getGoals();
+        console.log("this is goals.component.ts and it has this for userID: " + localStorage.getItem("userID"));
+
+        var userID = localStorage.getItem("userID");
+
+        if(userID == null){
+            userID = "";
+        }
+        const goalObservable: Observable<Goal[]> = this.goalService.getGoals(userID);
+        console.log(goalObservable);
         goalObservable.subscribe(
             goals => {
-                this.goals = goals;
-                this.filterGoals(this.goalPurpose, this.goalCategory, this.goalName, this.goalStatus, this.goalFrequency);
-                this.getNext();
-                },
+                console.log(goals);
+                if(goals != null){
+                    this.goals = goals;
+                    this.filterGoals(this.goalPurpose, this.goalCategory, this.goalName, this.goalStatus, this.goalFrequency);
+                    this.getNext();
+                }
+            },
             err => {
                 console.log(err);
             });
@@ -374,7 +389,8 @@ export class GoalsComponent implements OnInit {
 
 
     loadService(): void {
-        this.goalService.getGoals(this.goalCategory).subscribe(
+        console.log(localStorage.getItem("userID"));
+        this.goalService.getGoals(localStorage.getItem("userID"),this.goalCategory).subscribe(
             goals => {
                 this.goals = goals;
                 this.filteredGoals = this.goals;
@@ -388,6 +404,8 @@ export class GoalsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        //For testing
+        //localStorage.setItem("userID", "4cb56a89541a2d783595012c");
         this.refreshGoals();
         this.loadService();
         this.getDate();

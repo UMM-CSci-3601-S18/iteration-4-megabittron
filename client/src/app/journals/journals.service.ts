@@ -9,19 +9,33 @@ import {environment} from '../../environments/environment';
 export class JournalsService {
     readonly baseUrl: string = environment.API_URL + 'journals';
     private journalUrl: string = this.baseUrl;
+    private noID: boolean = false;
+    private emptyObservable: Observable<Journal[]> = Observable.of([]);
 
     constructor(private http: HttpClient) {
     }
 
-    getJournals(journalSubject?: string): Observable<Journal[]> {
-        this.filterBySubject(journalSubject);
+    getJournals(userID: string, journalSubject?: string): Observable<Journal[]> {
+        this.journalUrl = this.baseUrl;
+        this.noID = false;
+
+        this.filterByUserID(userID);
+
+        //require a userID
+        if(this.noID){
+            return this.emptyObservable;
+        }
+        console.log(this.journalUrl);
+
         return this.http.get<Journal[]>(this.journalUrl);
     }
 
     getJournalById(id: string): Observable<Journal> {
+        this.journalUrl = this.baseUrl;
         return this.http.get<Journal>(this.journalUrl + '/' + id);
     }
 
+    /*
     filterBySubject(journalSubject?: string): void {
         if (!(journalSubject == null || journalSubject === '')) {
             if (this.parameterPresent('subject=') ) {
@@ -47,6 +61,26 @@ export class JournalsService {
             }
         }
     }
+*/
+
+    filterByUserID(userID: string): void {
+        if (!(userID == null || userID === '')) {
+            if (this.parameterPresent('userID=') ) {
+                // there was a previous search by category that we need to clear
+                this.removeParameter('userID=');
+            }
+            if (this.journalUrl.indexOf('?') !== -1) {
+                // there was already some information passed in this url
+                this.journalUrl += 'userID=' + userID + '&';
+            } else {
+                // this was the first bit of information to pass in the url
+                this.journalUrl += '?userID=' + userID + '&';
+            }
+        } else {
+            // there was no userID
+            this.noID = true;
+        }
+    }
 
     private parameterPresent(searchParam: string) {
         return this.journalUrl.indexOf(searchParam) !== -1;
@@ -65,6 +99,7 @@ export class JournalsService {
     }
 
     addNewJournal(newJournal : Journal): Observable<{'$oid': string}> {
+        this.journalUrl = this.baseUrl;
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
@@ -77,6 +112,7 @@ export class JournalsService {
     }
 
     editJournal(id : Journal): Observable<{'$oid': string}> {
+        this.journalUrl = this.baseUrl;
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'

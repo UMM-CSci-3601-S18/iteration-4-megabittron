@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 import {Goal} from './goal';
 import {environment} from '../../environments/environment';
@@ -11,22 +12,35 @@ import {environment} from '../../environments/environment';
 export class GoalsService {
     readonly baseUrl: string = environment.API_URL + 'goals';
     private goalUrl: string = this.baseUrl;
+    private noID: boolean = false;
+    private emptyObservable: Observable<Goal[]> = Observable.of([]);
 
     constructor(private http: HttpClient) {
     }
 
-    getGoals(goalCategory?: string): Observable<Goal[]> {
-        this.filterByCategory(goalCategory);
+    getGoals(userID: string, goalCategory?: string): Observable<Goal[]> {
+        this.goalUrl = this.baseUrl;
+        this.noID = false;
+
+        this.filterByUserID(userID);
+
+        //require a userID
+        if(this.noID){
+            return this.emptyObservable;
+        }
+        console.log(this.goalUrl);
         return this.http.get<Goal[]>(this.goalUrl);
     }
 
     // This isn't used, but may be useful for future iterations.
     getGoalByID(id: string): Observable<Goal> {
+        this.goalUrl = this.baseUrl;
         return this.http.get<Goal>(this.goalUrl + '/' + id);
     }
 
     // Unfortunately we did not get to implementing specific filters,
     // but this may useful in the future.
+    /*
     filterByCategory(goalCategory?: string): void {
         if (!(goalCategory == null || goalCategory === '')) {
             if (this.parameterPresent('category=') ) {
@@ -52,6 +66,25 @@ export class GoalsService {
             }
         }
     }
+*/
+    filterByUserID(userID: string): void {
+        if (!(userID == null || userID === '')) {
+            if (this.parameterPresent('userID=') ) {
+                // there was a previous search by category that we need to clear
+                this.removeParameter('userID=');
+            }
+            if (this.goalUrl.indexOf('?') !== -1) {
+                // there was already some information passed in this url
+                this.goalUrl += 'userID=' + userID + '&';
+            } else {
+                // this was the first bit of information to pass in the url
+                this.goalUrl += '?userID=' + userID + '&';
+            }
+        } else {
+            // there was no userID
+            this.noID = true;
+        }
+    }
 
     private parameterPresent(searchParam: string) {
         return this.goalUrl.indexOf(searchParam) !== -1;
@@ -70,6 +103,7 @@ export class GoalsService {
     }
 
     addNewGoal(newGoal: Goal): Observable<{'$oid': string}> {
+        this.goalUrl = this.baseUrl;
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
@@ -80,6 +114,7 @@ export class GoalsService {
     }
 
     editGoal(completedGoal: Goal): Observable<{'$oid': string}> {
+        this.goalUrl = this.baseUrl;
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
@@ -91,6 +126,7 @@ export class GoalsService {
     }
 
     deleteGoal(goaldID: String) {
+        this.goalUrl = this.baseUrl;
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'

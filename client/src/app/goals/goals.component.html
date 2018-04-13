@@ -21,16 +21,16 @@
                 </mat-card>
             </div>
 
-           <span hide-xs>
-            <div class="desktopTodays-goals" *ngIf="this.showAllGoals == false">
-                <div class="desktopGoalTitleDiv">
-                    <mat-card class="sectionTitle">
+            <span hide-xs>
+            <div class="todays-goals" *ngIf="showAllGoals == false">
+                <div class="goalTitleDiv">
+                    <mat-card class="cardGoalTitle">
                         Today's Goals
                     </mat-card>
                 </div>
                 <div layout="row" layout-wrap>
                     <ng-container *ngFor="let goal of this.shownGoals">
-                        <mat-card class="desktopGoals-card"
+                        <mat-card class="goals-card"
                                   #elem [id]="goal._id['$oid']">
                            <!-- <mat-expansion-panel class="desktopGoalPanel">
                                 <mat-expansion-panel-header>

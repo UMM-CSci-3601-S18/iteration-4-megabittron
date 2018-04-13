@@ -31,7 +31,7 @@ public class EmotionController {
         emotionCollection = database.getCollection("emotions");
     }
 
-    // get a emotion by its ObjectId, not used by client, for potential future use
+    // get an emotion by its ObjectId, not used by client, for potential future use
     public String getEmotion(String id) {
         FindIterable<Document> jsonEmotions
             = emotionCollection
@@ -55,8 +55,19 @@ public class EmotionController {
 
         Document filterDoc = new Document();
 
-        // We will need more statements here for different objects,
-        // such as emoji, category, etc.
+        //Filter by userID
+        //If there is no userID provided, return an empty result
+        if (queryParams.containsKey("userID")) {
+            String targetContent = (queryParams.get("userID")[0]);
+            Document contentRegQuery = new Document();
+            contentRegQuery.append("$regex", targetContent);
+            contentRegQuery.append("$options", "i");
+            filterDoc = filterDoc.append("userID", contentRegQuery);
+        } else {
+            System.out.println("It had no userID");
+            Document emptyDoc = new Document();
+            return JSON.serialize(emptyDoc);
+        }
 
         // "emotion" will be a key to a string object, where the object is
         // what we get when people enter their emotions as a text body.
@@ -85,10 +96,11 @@ public class EmotionController {
      */
     // As of now this only adds the emotion, but you can separate multiple arguments
     // by commas as we add them.
-    public String addNewEmotion(String mood, Integer intensity, String description, String date) {
+    public String addNewEmotion(String userID, String mood, Integer intensity, String description, String date) {
 
         // makes the search Document key-pairs
         Document newEmotion = new Document();
+        newEmotion.append("userID", userID);
         newEmotion.append("mood", mood);
         newEmotion.append("description", description);
         newEmotion.append("intensity", intensity);

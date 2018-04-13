@@ -62,8 +62,8 @@ public class EmotionRequestHandler {
         return emotionController.getEmotions(req.queryMap().toMap());
     }
 
-    /**Method called from Server when the 'api/users/new'endpoint is recieved.
-     * Gets specified user info from request and calls addNewUser helper method
+    /**Method called from Server when the 'api/emotions/new'endpoint is recieved.
+     * Gets specified info from request and calls helper method
      * to append that info to a document
      *
      * @param req the HTTP request
@@ -83,14 +83,15 @@ public class EmotionRequestHandler {
                 try {
                     BasicDBObject dbO = (BasicDBObject) o;
 
+                    String userID = dbO.getString("userID");
                     String mood = dbO.getString("mood");
                     Integer intensity = dbO.getInt("intensity");
                     String description = dbO.getString("description");
                     String date = dbO.getString("date");
 
-                    System.err.println("Adding new emotion [mood=" + mood + ", intensity="
+                    System.err.println("Adding new emotion for user "+ userID + " [mood=" + mood + ", intensity="
                         + intensity + ", description=" + description + ", date=" + date + ']');
-                    return emotionController.addNewEmotion(mood, intensity, description, date).toString();
+                    return emotionController.addNewEmotion(userID, mood, intensity, description, date).toString();
                 }
                 catch(NullPointerException e)
                 {

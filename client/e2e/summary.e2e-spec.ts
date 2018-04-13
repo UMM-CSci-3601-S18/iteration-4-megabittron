@@ -1,3 +1,4 @@
+/*
 import {SummaryPage} from './summary.po';
 import {browser, protractor, element, by} from 'protractor';
 import {Key} from 'selenium-webdriver';
@@ -110,9 +111,10 @@ describe('Summary', () => {
     });
 
     // makes sure it clicks on the choose end date calendar button
-  /*  it('Should click on the choose an end date calendar button ', () => {
+  /!*  it('Should click on the choose an end date calendar button ', () => {
         SummaryPage.navigateTo();
         element(by.id('endButton')).click();
-    });*/
+    });*!/
 
 });
+*/

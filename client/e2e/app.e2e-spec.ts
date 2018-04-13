@@ -1,3 +1,4 @@
+/*
 import {AppPage} from './app.po';
 
 describe('angular-spark-lab', () => {
@@ -11,3 +12,4 @@ describe('angular-spark-lab', () => {
         AppPage.navigateTo();
     });
 });
+*/

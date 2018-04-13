@@ -51,6 +51,20 @@ public class JournalController {
 
         Document filterDoc = new Document();
 
+        //Filter by userID
+        //If there is no userID provided, return an empty result
+        if (queryParams.containsKey("userID")) {
+            String targetContent = (queryParams.get("userID")[0]);
+            Document contentRegQuery = new Document();
+            contentRegQuery.append("$regex", targetContent);
+            contentRegQuery.append("$options", "i");
+            filterDoc = filterDoc.append("userID", contentRegQuery);
+        } else {
+            System.out.println("It had no userID");
+            Document emptyDoc = new Document();
+            return JSON.serialize(emptyDoc);
+        }
+
         if (queryParams.containsKey("subject")) {
             String targetContent = (queryParams.get("subject")[0]);
             Document contentRegQuery = new Document();
@@ -72,8 +86,9 @@ public class JournalController {
         return JSON.serialize(matchingJournals);
     }
 
-    public String addNewJournal(String subject, String body) {
+    public String addNewJournal(String userID, String subject, String body) {
         Document newJournal = new Document();
+        newJournal.append("userID", userID);
         newJournal.append("subject",subject);
         newJournal.append("body",body);
 

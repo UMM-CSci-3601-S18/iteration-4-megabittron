@@ -45,7 +45,7 @@ public class GoalRequestHandler {
 
 
 
-    /**Method called from Server when the 'api/items' endpoint is received.
+    /**Method called from Server when the 'api/goals' endpoint is received.
      * This handles the request received and the response
      * that will be sent back.
      *@param req the HTTP request
@@ -60,13 +60,13 @@ public class GoalRequestHandler {
         return goalController.getGoals(req.queryMap().toMap());
     }
 
-    /**Method called from Server when the 'api/users/new'endpoint is received.
+    /**Method called from Server when the 'api/goals/new'endpoint is received.
      * Gets specified user info from request and calls addNewUser helper method
      * to append that info to a document
      *
      * @param req the HTTP request
      * @param res the HTTP response
-     * @return a boolean as whether the user was added successfully or not
+     * @return a boolean as whether the goal was added successfully or not
      */
     public String addNewGoal(Request req, Response res)
     {
@@ -80,6 +80,7 @@ public class GoalRequestHandler {
                 try {
                     BasicDBObject dbO = (BasicDBObject) o;
 
+                    String userID = dbO.getString("userID");
                     String purpose = dbO.getString("purpose");
                     String category = dbO.getString("category");
                     String name = dbO.getString("name");
@@ -89,10 +90,10 @@ public class GoalRequestHandler {
                     String end = dbO.getString("end");
                     String next = dbO.getString("next");
 
-                    System.err.println("Adding new goal [purpose=" + purpose + ", category=" +
+                    System.err.println("Adding new goal for user "+ userID + " [purpose=" + purpose + ", category=" +
                         category + " name=" + name + " status=" + status + ", frequency= " + frequency +
                         ", start=" + start + ", end=" + end + ", next=" + next + ']');
-                    return goalController.addNewGoal(purpose, category, name, status, frequency, start, end, next).toString();
+                    return goalController.addNewGoal(userID, purpose, category, name, status, frequency, start, end, next).toString();
                 } catch (NullPointerException e) {
                     System.err.println("A value was malformed or omitted, new item request failed.");
                     return null;

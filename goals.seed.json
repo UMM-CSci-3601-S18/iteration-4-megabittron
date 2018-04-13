@@ -3,6 +3,7 @@
         "_id": {
             "$oid": "5ab53a89551a3d783599082c"
         },
+        "userID": "5ab53a89541a2d783599082c",
         "purpose": "Improve relationship",
         "category": "Family",
         "name": "Call my mom",
@@ -16,6 +17,7 @@
         "_id": {
             "$oid": "5ab53a890c2c77662aaf3801"
         },
+        "userID": "5ab53a89541a2d783599082c",
         "purpose": "To feel closer to him",
         "category": "Family",
         "name": "Write letter to Grandpa",
@@ -29,6 +31,7 @@
         "_id": {
             "$oid": "5ab53a8944c7c6b223090477"
         },
+        "userID": "5ab53a89541a2d783599082c",
         "purpose": "To get more sleep",
         "category": "Personal Health",
         "name": "Go to bed early",
@@ -42,6 +45,7 @@
         "_id": {
             "$oid": "5ab53a898e1620e3d7e48796"
         },
+        "userID": "5ab53a89541a2d783595011c",
         "purpose": "To give her a piece of my mind",
         "category": "Family",
         "name": "Visit sister",
@@ -55,6 +59,7 @@
         "_id": {
             "$oid": "5ab53a89cc803f25455d4523"
         },
+        "userID": "5ab53a89541a2d783595011c",
         "purpose": "To relieve my anxiety",
         "category": "Personal Health",
         "name": "Text a hotline",
@@ -68,6 +73,7 @@
         "_id": {
             "$oid": "5ab53a89d3902ecd0e105c32"
         },
+        "userID": "5ab53a89541a2d783595011c",
         "purpose": "To be nice to him",
         "category": "Family",
         "name": "Say hello to my son",
@@ -81,6 +87,7 @@
         "_id": {
             "$oid": "5ab53a894b28008631e64eb6"
         },
+        "userID": "5ab53a89541a2d783595011c",
         "purpose": "To surprise Bobby",
         "category": "Family",
         "name": "Wave at my cousin",
@@ -94,6 +101,7 @@
         "_id": {
             "$oid": "5ab53a89dd3b308feb0e14c3"
         },
+        "userID": "4cb56a89541a2d783595012c",
         "purpose": "To have a better environment",
         "category": "Chores",
         "name": "Wash the dishes",
@@ -107,6 +115,7 @@
         "_id": {
             "$oid": "5ab53a8944a44f6ec5e15853"
         },
+        "userID": "4cb56a89541a2d783595012c",
         "purpose": "To have a better living space",
         "category": "Chores",
         "name": "Clean my room",
@@ -120,6 +129,7 @@
         "_id": {
             "$oid": "5ab53a89ea32d59c4e81d5f0"
         },
+        "userID": "4cb56a89541a2d783595012c",
         "purpose": "Do what the doctor says",
         "category": "Personal Health",
         "name": "Take my meds",
@@ -134,6 +144,7 @@
         "_id": {
             "$oid": "5ab53a8938c8106c85b592a4"
         },
+        "userID": "4cb56a89541a2d783595012c",
         "purpose": "To safely park my car out of the snow",
         "category": "Chores",
         "name": "Shovel driveway",
@@ -148,6 +159,7 @@
         "_id": {
             "$oid": "5ab53a898f915a49a7cc8e4c"
         },
+        "userID": "4cb56a89541a2d783595012c",
         "purpose": "Keep my teeth nice",
         "category": "Personal Health",
         "name": "Brush my teeth every day",
@@ -162,6 +174,7 @@
         "_id": {
             "$oid": "5ab53a892beb1a12c3cb8cd0"
         },
+        "userID": "4cb56a89541a2d783595012c",
         "purpose": "Tell her about my new job",
         "category": "Family",
         "name": "Write letter to Aunt May",
@@ -176,6 +189,7 @@
         "_id": {
             "$oid": "5ab53a8907d923f68d03e1a3"
         },
+        "userID": "4cb56a89541a2d783595012c",
         "purpose": "Tell her about my awards",
         "category": "Family",
         "name": "Email Grandma",
@@ -190,6 +204,7 @@
         "_id": {
             "$oid": "5ab53a897a4e4fb3a641aa89"
         },
+        "userID": "4cb56a89541a2d783595012c",
         "purpose": "Keep my clothes clean",
         "category": "Chores",
         "name": "Do laundry",

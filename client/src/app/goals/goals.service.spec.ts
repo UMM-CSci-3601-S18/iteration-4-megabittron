@@ -1,4 +1,4 @@
-/*
+
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {TestBed} from '@angular/core/testing';
 import {HttpClient} from '@angular/common/http';
@@ -11,6 +11,7 @@ describe('Goal list service: ', () => {
     const testGoals: Goal[] = [
         {
             _id: 'food_id',
+            userID: 'userID1',
             purpose: 'Gain some weight',
             category: 'Food',
             name: 'Eat all the cookies',
@@ -22,6 +23,7 @@ describe('Goal list service: ', () => {
         },
         {
             _id: 'chores_id',
+            userID: 'userID2',
             purpose: 'Have cleaner kitchen',
             category: 'Chores',
             name: 'Take out recycling',
@@ -33,6 +35,7 @@ describe('Goal list service: ', () => {
         },
         {
             _id: 'family_id',
+            userID: 'userID3',
             purpose: 'To love her',
             category: 'Family',
             name: 'Call mom',
@@ -72,21 +75,35 @@ describe('Goal list service: ', () => {
 
     it('getGoals() calls api/goals', () => {
 
-        goalListService.getGoals().subscribe(
-            goals => expect(goals).toBe(testGoals)
+        const testGoal: Goal[] = [
+            {
+                _id: 'food_id',
+                userID: 'userID1',
+                purpose: 'Gain some weight',
+                category: 'Food',
+                name: 'Eat all the cookies',
+                status: false,
+                start: "2018-04-05T18:56:24.702Z",
+                end: "2018-05-05T18:56:24.702Z",
+                next: "2018-05-05T18:56:24.702Z",
+                frequency: "Daily"
+            }];
+
+        goalListService.getGoals('userID1').subscribe(
+            goals => expect(goals).toBe(testGoal)
         );
 
         // Specify that (exactly) one request will be made to the specified URL.
-        const req = httpTestingController.expectOne(goalListService.baseUrl);
+        const req = httpTestingController.expectOne(goalListService.baseUrl + '?userID=userID1&');
         // Check that the request made to that URL was a GET request.
         expect(req.request.method).toEqual('GET');
         // Specify the content of the response to that request. This
         // triggers the subscribe above, which leads to that check
         // actually being performed.
-        req.flush(testGoals);
+        req.flush(testGoal);
     });
 
-    it('getGoals(goalCategory) adds appropriate param string to called URL', () => {
+    /*it('getGoals(goalCategory) adds appropriate param string to called URL', () => {
         goalListService.getGoals('m').subscribe(
             users => expect(users).toEqual(mGoals)
         );
@@ -110,12 +127,14 @@ describe('Goal list service: ', () => {
         expect(goalListService['goalUrl']).toEqual(goalListService.baseUrl + '?something=k&category=m&');
     });
 
+
     it('filterByCategory(goalCategory) deals appropriately with a URL has the keyword category, but nothing after the =', () => {
         currentlyImpossibleToGenerateSearchGoalUrl = goalListService.baseUrl + '?category=&';
         goalListService['goalUrl'] = currentlyImpossibleToGenerateSearchGoalUrl;
         goalListService.filterByCategory('');
         expect(goalListService['goalUrl']).toEqual(goalListService.baseUrl + '');
     });
+    */
 
     it('getGoalByID() calls api/goals/id', () => {
         const targetGoal: Goal = testGoals[1];
@@ -134,6 +153,7 @@ describe('Goal list service: ', () => {
         const chores_id = { '$oid': 'chores_id' };
         const newGoal: Goal = {
             _id: 'chores_id',
+            userID: 'userID1',
             purpose: 'Have cleaner bathroom',
             category: 'Chores',
             name: 'Plunge toilet',
@@ -160,6 +180,7 @@ describe('Goal list service: ', () => {
         const family_id = { '$oid': 'family_id' };
         const completeGoal: Goal = {
             _id: 'family_id',
+            userID: 'userID1',
             purpose: 'Talk about my classes',
             category: 'Family',
             name: 'Call sister',
@@ -170,7 +191,7 @@ describe('Goal list service: ', () => {
             frequency: "Daily"
         };
 
-        goalListService.completeGoal(completeGoal).subscribe(
+        goalListService.editGoal(completeGoal).subscribe(
             id => {
                 expect(id).toBe(family_id);
             }
@@ -183,4 +204,4 @@ describe('Goal list service: ', () => {
     });
 
 });
-*/
+

@@ -21,7 +21,7 @@ export class JournalPage {
     }
 
     getJournals() {
-        return element.all(by.className('journals')).count();
+        return element.all(by.className('journals-card')).count();
     }
 
     typeASubject(subject: string) {
@@ -43,7 +43,6 @@ export class JournalPage {
     getJournalManageTitle() {
         const title = element(by.id('journal-title')).getText();
         this.highlightElement(by.id('journal-title'));
-
         return title;
     }
 
