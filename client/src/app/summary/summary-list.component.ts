@@ -763,6 +763,7 @@ public pastDates = [
         let hours;
         let months;
         let dates;
+        this.ctxBasic.style.backgroundColor = "rgb(250,250,250)";
 
         if(this.limitedPast){
             days = this.pastDays;
@@ -857,15 +858,18 @@ public pastDates = [
         if(this.colorblindMode){
             this.happyColor = "rgb(178,24,43)";
             this.sadColor = "rgb(239,138,98)";
-            this.mehColor = "rgb(253,219,199)";
+            this.mehColor = "rgb(254,224,144)";
+            //this.mehColor = "rgb(253,219,199)";
             this.madColor = "rgb(103,169,207)";
             this.anxiousColor = "rgb(33,102,172)";
+            this.ctxDetail.style.backgroundColor = "rgb(224,243,248)";
         } else {
-            this.happyColor = "rgb(64, 255, 0)";
-            this.sadColor = "rgb(0, 128, 255)";
-            this.mehColor = "rgb(100, 100, 100)";
-            this.madColor = "rgb(255, 0, 0)";
-            this.anxiousColor = "rgb(255, 128, 0)";
+            this.happyColor = "rgb(64,255,0)";
+            this.sadColor = "rgb(0,128,255)";
+            this.mehColor = "rgb(100,100,100)";
+            this.madColor = "rgb(255,0,0)";
+            this.anxiousColor = "rgb(255,128,0)";
+            this.ctxDetail.style.backgroundColor = "rgb(250,250,250)";
         }
 
         let xLabel;
