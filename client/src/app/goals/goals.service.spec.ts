@@ -22,7 +22,7 @@ describe('Goal list service: ', () => {
         },
         {
             _id: 'chores_id',
-            userID: 'userID1',
+            userID: 'userID2',
             purpose: 'Have cleaner kitchen',
             category: 'Chores',
             name: 'Take out recycling',
@@ -34,7 +34,7 @@ describe('Goal list service: ', () => {
         },
         {
             _id: 'family_id',
-            userID: 'userID1',
+            userID: 'userID3',
             purpose: 'To love her',
             category: 'Family',
             name: 'Call mom',
@@ -74,8 +74,22 @@ describe('Goal list service: ', () => {
 
     it('getGoals() calls api/goals', () => {
 
+        const testGoal: Goal[] = [
+            {
+                _id: 'food_id',
+                userID: 'userID1',
+                purpose: 'Gain some weight',
+                category: 'Food',
+                name: 'Eat all the cookies',
+                status: false,
+                start: "2018-04-05T18:56:24.702Z",
+                end: "2018-05-05T18:56:24.702Z",
+                next: "2018-05-05T18:56:24.702Z",
+                frequency: "Daily"
+            }];
+
         goalListService.getGoals('userID1').subscribe(
-            goals => expect(goals).toBe(testGoals)
+            goals => expect(goals).toBe(testGoal)
         );
 
         // Specify that (exactly) one request will be made to the specified URL.
@@ -88,7 +102,7 @@ describe('Goal list service: ', () => {
         req.flush(testGoals);
     });
 
-    it('getGoals(goalCategory) adds appropriate param string to called URL', () => {
+    /*it('getGoals(goalCategory) adds appropriate param string to called URL', () => {
         goalListService.getGoals('m').subscribe(
             users => expect(users).toEqual(mGoals)
         );
@@ -98,7 +112,6 @@ describe('Goal list service: ', () => {
         req.flush(mGoals);
     });
 
-    /*
     it('filterByCategory(goalCategory) deals appropriately with a URL that already had a category', () => {
         currentlyImpossibleToGenerateSearchGoalUrl = goalListService.baseUrl + '?category=f&something=k&';
         goalListService['goalUrl'] = currentlyImpossibleToGenerateSearchGoalUrl;

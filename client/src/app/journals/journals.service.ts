@@ -35,6 +35,7 @@ export class JournalsService {
         return this.http.get<Journal>(this.journalUrl + '/' + id);
     }
 
+    /*
     filterBySubject(journalSubject?: string): void {
         if (!(journalSubject == null || journalSubject === '')) {
             if (this.parameterPresent('subject=') ) {
@@ -60,6 +61,7 @@ export class JournalsService {
             }
         }
     }
+*/
 
     filterByUserID(userID: string): void {
         if (!(userID == null || userID === '')) {

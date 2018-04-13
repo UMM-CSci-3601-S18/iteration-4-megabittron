@@ -26,18 +26,21 @@ describe( 'Journals', () => {
             getJournals: () => Observable.of([
                 {
                     _id: 'buying_id',
+                    userID: 'userID1',
                     subject: 'Buying food',
                     body: 'I went to the ice cream store today for a sundae.',
                     date: "Sat Jan 27 13:36:47 CST 2018"
                 },
                 {
                     _id: 'visit_id',
+                    userID: 'userID2',
                     subject: 'Visit mom',
                     body: 'I went to my Mom\'s house to talk to her.',
                     date: "Sun Feb 12 16:32:41 CST 2018"
                 },
                 {
                     _id: 'running_id',
+                    userID: 'userID3',
                     subject: 'Go on run',
                     body: 'I went on a 25 mile run today!',
                     date: "Mon Mar 11 19:26:37 CST 2018"
@@ -147,6 +150,7 @@ describe('Adding a journal', () => {
     let fixture: ComponentFixture<JournalsComponent>;
     const newJournal: Journal =   {
         _id: '',
+        userID: 'userID4',
         body: 'To stay awake writing tests',
         subject: 'Drink coffee',
         date: "Sun Feb 16 17:12:43 CST 2018"
@@ -217,6 +221,7 @@ describe('Editing a journal', () => {
     let fixture: ComponentFixture<JournalsComponent>;
     const editJournal: Journal =   {
         _id: '',
+        userID: 'userID5',
         body: 'I fell asleep in class today',
         subject: 'Classes',
         date: "Sun Feb 16 17:12:43 CST 2018"

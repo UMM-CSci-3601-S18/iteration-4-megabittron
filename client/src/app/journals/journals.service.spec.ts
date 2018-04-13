@@ -9,26 +9,31 @@ describe('Journal list service: ', () => {
     const testJournals: Journal[] = [
         {
             _id: 'buying_id',
+            userID: 'weare1',
             subject: 'Buying food',
             body: 'I went to the ice cream store today for a sundae.',
             date: "Sat Jan 27 13:36:47 CST 2018"
         },
         {
             _id: 'visit_id',
+            userID: 'usermcuserface',
             subject: 'Visit mom',
             body: 'I went to my Mom\'s house to talk to her.',
             date: "Sun Feb 12 16:32:41 CST 2018"
         },
         {
             _id: 'running_id',
+            userID: 'theguyoverthere',
             subject: 'Go on amazing run',
             body: 'I went on a 25 mile run today!',
             date: "Mon Mar 11 19:26:37 CST 2018"
         }
     ];
+    /*
     const mJournals: Journal[] = testJournals.filter(journal =>
         journal.subject.toLowerCase().indexOf('m') !== -1
     );
+    */
 
     let journalListService: JournalsService;
     let currentlyImpossibleToGenerateSearchJournalUrl: string;
@@ -55,12 +60,21 @@ describe('Journal list service: ', () => {
 
     it('getJournals() calls api/journals', () => {
 
-        journalListService.getJournals().subscribe(
-            journals => expect(journals).toBe(testJournals)
+        const testJournal: Journal[] = [
+            {
+                _id: 'buying_id',
+                userID: 'weare1',
+                subject: 'Buying food',
+                body: 'I went to the ice cream store today for a sundae.',
+                date: "Sat Jan 27 13:36:47 CST 2018"
+            }
+        ];
+        journalListService.getJournals('weare1').subscribe(
+            resultjournals => expect(resultjournals).toBe(testJournal)
         );
 
         // Specify that (exactly) one request will be made to the specified URL.
-        const req = httpTestingController.expectOne(journalListService.baseUrl);
+        const req = httpTestingController.expectOne(journalListService.baseUrl + '?userID=weare1&');
         // Check that the request made to that URL was a GET request.
         expect(req.request.method).toEqual('GET');
         // Specify the content of the response to that request. This
@@ -69,6 +83,7 @@ describe('Journal list service: ', () => {
         req.flush(testJournals);
     });
 
+    /*
     it('getJournals(journalSubject) adds appropriate param string to called URL', () => {
         journalListService.getJournals('m').subscribe(
             journals => expect(journals).toEqual(mJournals)
@@ -78,6 +93,7 @@ describe('Journal list service: ', () => {
         expect(req.request.method).toEqual('GET');
         req.flush(mJournals);
     });
+
 
     it('filterBySubject(journalSubject) deals appropriately with a URL that already had a subject', () => {
         currentlyImpossibleToGenerateSearchJournalUrl = journalListService.baseUrl + '?subject=f&something=k&';
@@ -99,6 +115,7 @@ describe('Journal list service: ', () => {
         journalListService.filterBySubject('');
         expect(journalListService['journalUrl']).toEqual(journalListService.baseUrl + '');
     });
+    */
 
     it('getJournalByID() calls api/journals/id', () => {
         const targetJournal: Journal = testJournals[1];
@@ -117,6 +134,7 @@ describe('Journal list service: ', () => {
         const plunging_id = { '$oid': 'plunging_id' };
         const newJournal: Journal = {
             _id: 'plunging_id',
+            userID: 'userID99',
             subject: 'Bathroom duties today',
             body: 'Incidents occurred, so the toilet was plunged asap.',
             date: "Mon Mar 11 19:26:37 CST 2018"
@@ -138,6 +156,7 @@ describe('Journal list service: ', () => {
         const washing_id = { '$oid': 'washing_id' };
         const editJournal: Journal = {
             _id: 'washing_id',
+            userID: 'userID1',
             subject: 'After cleaning today',
             body: 'My hands got a little dirty doing chores, so I washed them.',
             date: "Sat Feb 21 19:16:37 CST 2018"
