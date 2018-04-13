@@ -10,6 +10,11 @@
     background-color: #e3f2fd;
 }
 
+/*prevents clicking forward on mat stepper steps*/
+.mat-horizontal-stepper-header{
+    pointer-events: none !important;
+}
+
 /* fallback */
 @font-face {
     font-family: 'Material Icons';
@@ -33,4 +38,3 @@
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
 }
-
