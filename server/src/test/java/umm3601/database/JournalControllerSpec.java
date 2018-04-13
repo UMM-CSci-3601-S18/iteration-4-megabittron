@@ -4,6 +4,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.util.JSON;
 import org.bson.*;
 import org.bson.codecs.*;
 import org.bson.codecs.configuration.CodecRegistries;
@@ -107,9 +108,8 @@ public class JournalControllerSpec {
     public void getNoJournals() {
         Map<String, String[]> emptyMap = new HashMap<>();
         String jsonResult = journalController.getJournals(emptyMap);
-        BsonArray docs = parseJsonArray(jsonResult);
 
-        assertEquals("Should be 0 journals", 0, docs.size());
+        assertEquals("Should be 0 journals", jsonResult, JSON.serialize("[ ]"));
     }
 
     @Test
@@ -198,6 +198,7 @@ public class JournalControllerSpec {
     public void editJournalTest() {
         journalController.editJournal(samsId.toHexString(), "Friday", "It's Friday");
         Map<String, String[]> argMap = new HashMap<>();
+        argMap.put("userID", new String[]{"2cb45a89541a2d783595012b"});
         argMap.put("body", new String[]{"It's Friday"});
         String jsonResult = journalController.getJournals(argMap);
         BsonArray docs = parseJsonArray(jsonResult);

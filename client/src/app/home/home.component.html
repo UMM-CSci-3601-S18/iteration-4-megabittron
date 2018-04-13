@@ -37,7 +37,7 @@
                         <button mat-raised-button
                                 matStepperNext
                                 class="next-button"
-                                *ngIf="selectedEmotion != 'none'">
+                                [disabled]="showNext1Button()">
                             Next
                         </button>
                     </div>
@@ -61,7 +61,7 @@
                             <button mat-raised-button
                                     matStepperNext
                                     class="next-button"
-                                    *ngIf="emojiRating != 0">
+                                    [disabled]="showNext2Button()">
                                 Next
                             </button>
                         </div>
@@ -84,7 +84,7 @@
                     <div class="stepperButtons">
                         <button mat-raised-button
                                 matStepperNext
-                                class="next-button"
+                                class="next-button submit"
                                 (click)="getDate();saveEmotion()">
                             Submit
                         </button>
@@ -143,9 +143,11 @@
                     </div>
                 </mat-step>
             </mat-horizontal-stepper>
+            <div class="restartButton">
             <button mat-raised-button mat-button id="restart" matTooltip="Restart" (click)="restart()">
                 Restart
             </button>
+            </div>
         </mat-card>
     </div>
 </div>

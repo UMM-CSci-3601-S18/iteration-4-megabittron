@@ -65,8 +65,7 @@ public class EmotionController {
             filterDoc = filterDoc.append("userID", contentRegQuery);
         } else {
             System.out.println("It had no userID");
-            Document emptyDoc = new Document();
-            return JSON.serialize(emptyDoc);
+            return JSON.serialize("[ ]");
         }
 
         // "emotion" will be a key to a string object, where the object is

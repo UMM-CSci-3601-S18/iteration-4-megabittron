@@ -1,4 +1,3 @@
-/*
 import {HomePage} from './home.po';
 import {browser, protractor, element, by} from 'protractor';
 import {Key} from 'selenium-webdriver';
@@ -15,13 +14,12 @@ describe('Home page', () => {
         HomePage.navigateTo();
     });
 
-    /!*it('Should click on mad', () => {
+    /*it('Should click on mad', () => {
         HomePage.navigateTo();
         //page.clickMoodDropdown();
        // element(by.id('mad')).click();
         return page.selectEmotion('mad')
     });
-*!/
+*/
 });
 
-*/

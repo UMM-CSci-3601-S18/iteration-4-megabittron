@@ -4,6 +4,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.util.JSON;
 import org.bson.*;
 import org.bson.codecs.*;
 import org.bson.codecs.configuration.CodecRegistries;
@@ -91,16 +92,17 @@ public class EmotionControllerSpec {
     public void getNoEmotions() {
         Map<String, String[]> emptyMap = new HashMap<>();
         String jsonResult = emotionController.getEmotions(emptyMap);
-        BsonArray docs = parseJsonArray(jsonResult);
 
-        assertEquals("Should be 0", 0, docs.size());
+        assertEquals("Should be 0", jsonResult, JSON.serialize("[ ]"));
     }
 
     @Test
     public void getOneUsersEmotions() {
         Map<String, String[]> argMap = new HashMap<>();
-        String jsonResult = emotionController.getEmotions(argMap);
         argMap.put("userID", new String[] { "4cb56a89541a2d783595012c" });
+
+        String jsonResult = emotionController.getEmotions(argMap);
+
         BsonArray docs = parseJsonArray(jsonResult);
 
         assertEquals("Should be 3", 3, docs.size());
@@ -147,6 +149,8 @@ public class EmotionControllerSpec {
 
         assertNotNull("Add new emotion should return true when new emotion record is added,", newId);
         Map<String, String[]> argMap = new HashMap<>();
+        argMap.put("userID", new String[] { "4cb56a89541a2d783595012c" });
+
         String jsonResult = emotionController.getEmotions(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
 

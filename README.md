@@ -3,7 +3,7 @@
 An emotion tracking web application which can be used by health practioners and their consumers.
 Provides ability for consumers to quickly log data about emotion and mood, and provides convenient, helpful links.
 
-[![Build Status](https://travis-ci.org/UMM-CSci-3601-S18/iteration-3-optimize-prime.svg?branch=master)](https://travis-ci.org/UMM-CSci-3601-S18/iteration-3-optimize-prime.svg?branch=master)
+[![Build Status](https://travis-ci.org/UMM-CSci-3601-S18/iteration-3-optimize-prime.svg?branch=master)](https://travis-ci.org/UMM-CSci-3601-S18/iteration-3-optimize-prime)
 
 <!-- TOC depthFrom:1 depthTo:5 withLinks:1 updateOnSave:1 orderedList:0 -->
 ## Table of Contents
@@ -87,9 +87,10 @@ need to have data in the `dev` database before running the e2e tests!
 - **Travis Warling** 
 - **Xaitheng Yang** 
 - **Charles Menne** 
-- **Abenezer Monjor** 
-- **Hunter Welch** 
-- **Jubair Hassan** 
+- **Ahnaf Prio** 
+- **John Hoff** 
+- **Dustin Blake** 
+- **Francisco Montanez** 
 
 
 [angular-karma-jasmine]: https://codecraft.tv/courses/angular/unit-testing/jasmine-and-karma/
