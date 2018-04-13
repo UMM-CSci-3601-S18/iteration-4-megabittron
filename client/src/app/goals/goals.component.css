@@ -38,6 +38,7 @@
     padding: 15px;
     margin: 0 auto;
     margin-bottom: 15px;
+    word-wrap: break-word;
 }
 
 .desktopCardSubtitle{
@@ -50,6 +51,7 @@
     margin: 0 auto;
     margin-bottom: 15px;
     background-color: lightsteelblue;
+    word-wrap: break-word;
 }
 
 .delete-button {
