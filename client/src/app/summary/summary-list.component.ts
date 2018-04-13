@@ -37,7 +37,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     nowStamp = new Date(Date.now());
     nowUnix = this.nowStamp.getTime();
     nowDay = this.nowStamp.getDay();
-    nowHour = this.nowStamp.getHours();
+    nowHour = this.nowStamp.getUTCHours();
     nowDate = this.nowStamp.getDate();
     nowMonth = this.nowStamp.getMonth();
 
@@ -52,6 +52,13 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     lastYearUnix = this.nowUnix - 31540000000;
     lastYearStamp = new Date(this.lastYearUnix);
 
+
+    /** --------------------------------------- **/
+    timeZone: number = -5;
+    //timeZone offsets the hour from UTC.
+    //Currently everything is passed around as UTC.
+    //This changes it to CDT for display
+    /** --------------------------------------- **/
 
     // These are public so that tests can reference them (.spec.ts)
     public summaries: Summary[] = [];
@@ -87,6 +94,12 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     public clearDateFilter(){
         this.startDate = null;
         this.endDate = null;
+    }
+
+    public testfunc(){
+       let test = new Date('Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)');
+
+        return test.getUTCHours() + this.timeZone;
     }
 
     public filterDates(givenlist, searchStartDate: any, searchEndDate: any): Summary[] {
@@ -178,7 +191,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                 }
                 filterBasicData = filterBasicData.filter(summary => {
                     this.getDate = new Date(summary.date);
-                    return this.getDate.getHours() == xValue;
+                    return this.getDate.getUTCHours() == xValue;
                 });
             }
             else {
@@ -230,7 +243,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                 }
                 filterDetailedData = filterDetailedData.filter(summary => {
                     this.getDate = new Date(summary.date);
-                    return this.getDate.getHours() == xValue;
+                    return this.getDate.getUTCHours() == xValue;
                 });
             }
             else {
@@ -272,7 +285,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     public modHour(hour: number): Number {
         if(this.limitedPast){
-            return (this.nowHour + 1 + hour)%24;
+            return (this.nowHour + 1 + hour + this.timeZone)%24;
         }
         else {
             return hour;
@@ -330,7 +343,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     public getPastHours(xValue: number): String {
 
-        let thisHour = (this.nowHour + 1 + xValue)%24;
+        let thisHour = (this.nowHour + 1 + xValue + this.timeZone)%24;
 
         let strHour = '';
         let timeSuffix = '';

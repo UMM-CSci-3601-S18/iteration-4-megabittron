@@ -300,10 +300,8 @@ import 'rxjs/add/operator/do';
                     summary.limitedPast = true;
                     summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0000 (UTC)');
                     // Above means nowHour becomes 20
-                    summary.nowUnix = summary.nowStamp.getTime();
-                    summary.nowHour = summary.nowStamp.getHours();
-                    summary.lastDayUnix = summary.nowUnix - 86400000;
-                    summary.lastDayStamp = new Date(summary.lastDayUnix);
+                    summary.nowHour = 20;
+                    summary.lastDayStamp = new Date('Sat Apr 07 2018 20:00:00 GMT-0000 (UTC)');
                     summary.inputType = "day";
                 });
             }));
@@ -312,7 +310,6 @@ import 'rxjs/add/operator/do';
                 expect(summary.summaries.length).toBe(3);
                 console.log(summary.nowStamp.toString());
                 console.log(summary.nowHour.toString());
-                console.log((new Date("Sun Apr 08 2018 15:23:28 GMT-0000 (UTC)")).getHours.toString());
                 expect(summary.filterDetailedGraph(15, 'mad')).toBe(1);
                 expect(summary.filterDetailedGraph(2, 'mad')).toBe(0);
             });
@@ -324,28 +321,28 @@ import 'rxjs/add/operator/do';
             });
 
             it('modHour works as intended', () => {
-                expect(summary.modHour(23)).toBe(20);
-                expect(summary.modHour(0)).toBe(21);
-                expect(summary.modHour(30)).toBe(3);
+                expect(summary.modHour(23)).toBe(15);
+                expect(summary.modHour(0)).toBe(16);
+                expect(summary.modHour(30)).toBe(22);
             });
 
             it('filterDetailedGraph works correctly when using modHour', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(summary.modHour(18), 'mad')).toBe(1);
+                expect(summary.filterDetailedGraph(summary.modHour(23), 'mad')).toBe(1);
                 expect(summary.filterDetailedGraph(summary.modHour(0), 'mad')).toBe(0);
             });
 
             it('filterBasicGraph works correctly when using modHour', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBasicGraph(summary.modHour(18))).toBe(1);
+                expect(summary.filterBasicGraph(summary.modHour(23))).toBe(1);
                 expect(summary.filterBasicGraph(summary.modHour(0))).toBe(0);
             });
 
             it('getPastHours works as intended', () => {
-                expect(summary.getPastHours(1)).toBe('10 PM');
-                expect(summary.getPastHours(13)).toBe('10 AM');
-                expect(summary.getPastHours(0)).toBe('9 PM');
-                expect(summary.getPastHours(12)).toBe('9 AM');
+                expect(summary.getPastHours(1)).toBe('5 PM');
+                expect(summary.getPastHours(13)).toBe('5 AM');
+                expect(summary.getPastHours(0)).toBe('4 PM');
+                expect(summary.getPastHours(12)).toBe('4 AM');
             });
 
         });
@@ -414,10 +411,8 @@ import 'rxjs/add/operator/do';
                     summary.limitedPast = true;
                     summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0000 (UTC)');
                     // Above means nowDay becomes 0
-                    summary.nowUnix = summary.nowStamp.getTime();
-                    summary.nowDay = summary.nowStamp.getDay();
-                    summary.lastWeekUnix = summary.nowUnix - 604800000;
-                    summary.lastWeekStamp = new Date(summary.lastWeekUnix);
+                    summary.nowDay = 0;
+                    summary.lastWeekStamp = new Date('Sun Apr 01 2018 20:00:00 GMT-0000 (UTC)');
                     summary.inputType = "week";
                 });
             }));
@@ -527,10 +522,8 @@ import 'rxjs/add/operator/do';
                     summary.limitedPast = true;
                     summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0000 (UTC)');
                     // Above means nowDate becomes 8
-                    summary.nowUnix = summary.nowStamp.getTime();
-                    summary.nowDate = summary.nowStamp.getDate();
-                    summary.lastMonthUnix = summary.nowUnix - 604800000;
-                    summary.lastMonthStamp = new Date(summary.lastMonthUnix);
+                    summary.nowDate = 8;
+                    summary.lastMonthStamp = new Date('Thu Mar 08 2018 20:00:00 GMT-0000 (UTC)');
                     summary.inputType = "month";
                 });
             }));
@@ -638,10 +631,8 @@ import 'rxjs/add/operator/do';
                     summary.limitedPast = true;
                     summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0000 (UTC)');
                     // Above means nowMonth becomes 3
-                    summary.nowUnix = summary.nowStamp.getTime();
-                    summary.nowMonth = summary.nowStamp.getMonth();
-                    summary.lastWeekUnix = summary.nowUnix - 604800000;
-                    summary.lastWeekStamp = new Date(summary.lastWeekUnix);
+                    summary.nowMonth = 3;
+                    summary.lastYearStamp = new Date('Sun Apr 08 2017 20:00:00 GMT-0000 (UTC)');
                     summary.inputType = "year";
                 });
             }));
