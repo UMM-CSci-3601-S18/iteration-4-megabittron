@@ -82,9 +82,6 @@ export class HomeComponent {
             this.emotionService.addNewEmotion(newEmotion).subscribe(
                 addEmotionResult => {
                     this.highlightedID = addEmotionResult;
-                    //this.refreshEmotions();
-                    //this.resetPage();
-                    this.refreshEmotions();
                     this.snackBar.open("Response Submitted", "CLOSE", {
                         duration: 2000,
                     });
