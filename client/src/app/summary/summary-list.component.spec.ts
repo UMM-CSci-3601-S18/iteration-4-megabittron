@@ -30,7 +30,7 @@ import 'rxjs/add/operator/do';
                             _id: '1',
                             userID: 'userID1',
                             mood: 'happy',
-                            date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (UTC)',
                             intensity: 2,
                             description: 'slept',
                         },
@@ -38,7 +38,7 @@ import 'rxjs/add/operator/do';
                             _id: '2',
                             userID: 'userID1',
                             mood: 'sad',
-                            date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (UTC)',
                             intensity: 4,
                             description: 'friend died',
                         },
@@ -46,7 +46,7 @@ import 'rxjs/add/operator/do';
                             _id: '3',
                             userID: 'userID1',
                             mood: 'mad',
-                            date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
                         },
@@ -118,7 +118,7 @@ import 'rxjs/add/operator/do';
 
             it('summary filters by start date', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                summary.startDate = new Date('Fri Apr 06 2018 15:23:28 GMT-0500 (CDT)');
+                summary.startDate = new Date('Fri Apr 06 2018 15:23:28 GMT-0500 (UTC)');
                 summary.refreshSummaries().subscribe(() => {
                     expect(summary.filteredSummaries.length).toBe(2);
                 });
@@ -126,7 +126,7 @@ import 'rxjs/add/operator/do';
 
             it('summary filters by end date', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                summary.endDate = new Date('Fri Apr 06 2018 15:23:28 GMT-0500 (CDT)');
+                summary.endDate = new Date('Fri Apr 06 2018 15:23:28 GMT-0500 (UTC)');
                 summary.refreshSummaries().subscribe(() => {
                     expect(summary.filteredSummaries.length).toBe(1);
                 });
@@ -136,8 +136,8 @@ import 'rxjs/add/operator/do';
                 expect(summary.filteredSummaries.length).toBe(3);
                 summary.summaryMood = 'happy';
                 summary.summaryIntensity = '2';
-                summary.startDate = new Date('Fri Apr 06 2018 15:23:28 GMT-0500 (CDT)');
-                summary.endDate = new Date('Sat Apr 07 2018 20:00:00 GMT-0500 (CDT)');
+                summary.startDate = new Date('Fri Apr 06 2018 15:23:28 GMT-0500 (UTC)');
+                summary.endDate = new Date('Sat Apr 07 2018 20:00:00 GMT-0500 (UTC)');
                 summary.refreshSummaries().subscribe(() => {
                     expect(summary.filteredSummaries.length).toBe(1);
                 });
@@ -145,10 +145,10 @@ import 'rxjs/add/operator/do';
 
             it('clearDateFilter() works', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                summary.startDate = 'Fri Apr 06 2018 15:23:28 GMT-0500 (CDT)';
-                summary.endDate = 'Sat Apr 07 2018 20:00:00 GMT-0500 (CDT)';
-                expect(summary.startDate).toBe('Fri Apr 06 2018 15:23:28 GMT-0500 (CDT)');
-                expect(summary.endDate).toBe('Sat Apr 07 2018 20:00:00 GMT-0500 (CDT)');
+                summary.startDate = 'Fri Apr 06 2018 15:23:28 GMT-0500 (UTC)';
+                summary.endDate = 'Sat Apr 07 2018 20:00:00 GMT-0500 (UTC)';
+                expect(summary.startDate).toBe('Fri Apr 06 2018 15:23:28 GMT-0500 (UTC)');
+                expect(summary.endDate).toBe('Sat Apr 07 2018 20:00:00 GMT-0500 (UTC)');
                 summary.clearDateFilter();
                 expect(summary.startDate).toBe(null);
                 expect(summary.endDate).toBe(null);
@@ -176,7 +176,7 @@ import 'rxjs/add/operator/do';
                             _id: '1',
                             userID: 'userID1',
                             mood: 'happy',
-                            date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (UTC)',
                             intensity: 2,
                             description: 'slept',
                         },
@@ -184,7 +184,7 @@ import 'rxjs/add/operator/do';
                             _id: '2',
                             userID: 'userID1',
                             mood: 'sad',
-                            date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (UTC)',
                             intensity: 4,
                             description: 'friend died',
                         },
@@ -192,7 +192,7 @@ import 'rxjs/add/operator/do';
                             _id: '3',
                             userID: 'userID1',
                             mood: 'mad',
-                            date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
                         },
@@ -255,7 +255,7 @@ import 'rxjs/add/operator/do';
                             _id: '1',
                             userID: 'userID1',
                             mood: 'happy',
-                            date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (UTC)',
                             intensity: 2,
                             description: 'slept',
                         },
@@ -263,7 +263,7 @@ import 'rxjs/add/operator/do';
                             _id: '2',
                             userID: 'userID1',
                             mood: 'sad',
-                            date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (UTC)',
                             intensity: 4,
                             description: 'friend died',
                         },
@@ -271,7 +271,7 @@ import 'rxjs/add/operator/do';
                             _id: '3',
                             userID: 'userID1',
                             mood: 'mad',
-                            date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
                         },
@@ -298,7 +298,7 @@ import 'rxjs/add/operator/do';
                     summary.startDate = null;
                     summary.endDate = null;
                     summary.limitedPast = true;
-                    summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0500 (CDT)');
+                    summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0500 (UTC)');
                     // Above means nowHour becomes 20
                     summary.nowUnix = summary.nowStamp.getTime();
                     summary.nowHour = summary.nowStamp.getHours();
@@ -312,7 +312,7 @@ import 'rxjs/add/operator/do';
                 expect(summary.summaries.length).toBe(3);
                 console.log(summary.nowStamp.toString());
                 console.log(summary.nowHour.toString());
-                console.log((new Date("Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)")).getHours.toString());
+                console.log((new Date("Sun Apr 08 2018 15:23:28 GMT-0500 (UTC)")).getHours.toString());
                 expect(summary.filterDetailedGraph(15, 'mad')).toBe(1);
                 expect(summary.filterDetailedGraph(2, 'mad')).toBe(0);
             });
@@ -369,7 +369,7 @@ import 'rxjs/add/operator/do';
                             _id: '1',
                             userID: 'userID1',
                             mood: 'happy',
-                            date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (UTC)',
                             intensity: 2,
                             description: 'slept',
                         },
@@ -377,7 +377,7 @@ import 'rxjs/add/operator/do';
                             _id: '2',
                             userID: 'userID1',
                             mood: 'sad',
-                            date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (UTC)',
                             intensity: 4,
                             description: 'friend died',
                         },
@@ -385,7 +385,7 @@ import 'rxjs/add/operator/do';
                             _id: '3',
                             userID: 'userID1',
                             mood: 'mad',
-                            date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
                         },
@@ -412,7 +412,7 @@ import 'rxjs/add/operator/do';
                     summary.startDate = null;
                     summary.endDate = null;
                     summary.limitedPast = true;
-                    summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0500 (CDT)');
+                    summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0500 (UTC)');
                     // Above means nowDay becomes 0
                     summary.nowUnix = summary.nowStamp.getTime();
                     summary.nowDay = summary.nowStamp.getDay();
@@ -480,7 +480,7 @@ import 'rxjs/add/operator/do';
                             _id: '1',
                             userID: 'userID1',
                             mood: 'happy',
-                            date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (UTC)',
                             intensity: 2,
                             description: 'slept',
                         },
@@ -488,7 +488,7 @@ import 'rxjs/add/operator/do';
                             _id: '2',
                             userID: 'userID1',
                             mood: 'sad',
-                            date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (UTC)',
                             intensity: 4,
                             description: 'friend died',
                         },
@@ -496,7 +496,7 @@ import 'rxjs/add/operator/do';
                             _id: '3',
                             userID: 'userID1',
                             mood: 'mad',
-                            date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
                         },
@@ -525,7 +525,7 @@ import 'rxjs/add/operator/do';
                     //summary.filterSummaries(summary.summaryMood,
                    //     summary.summaryIntensity, summary.startDate, summary.endDate);
                     summary.limitedPast = true;
-                    summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0500 (CDT)');
+                    summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0500 (UTC)');
                     // Above means nowDate becomes 8
                     summary.nowUnix = summary.nowStamp.getTime();
                     summary.nowDate = summary.nowStamp.getDate();
@@ -593,7 +593,7 @@ import 'rxjs/add/operator/do';
                             _id: '1',
                             userID: 'userID1',
                             mood: 'happy',
-                            date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (UTC)',
                             intensity: 2,
                             description: 'slept',
                         },
@@ -601,7 +601,7 @@ import 'rxjs/add/operator/do';
                             _id: '2',
                             userID: 'userID1',
                             mood: 'sad',
-                            date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (UTC)',
                             intensity: 4,
                             description: 'friend died',
                         },
@@ -609,7 +609,7 @@ import 'rxjs/add/operator/do';
                             _id: '3',
                             userID: 'userID1',
                             mood: 'mad',
-                            date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
                         },
@@ -636,7 +636,7 @@ import 'rxjs/add/operator/do';
                     summary.startDate = null;
                     summary.endDate = null;
                     summary.limitedPast = true;
-                    summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0500 (CDT)');
+                    summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0500 (UTC)');
                     // Above means nowMonth becomes 3
                     summary.nowUnix = summary.nowStamp.getTime();
                     summary.nowMonth = summary.nowStamp.getMonth();
