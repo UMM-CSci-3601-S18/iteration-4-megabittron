@@ -71,17 +71,18 @@ export class HomeComponent {
                 addEmotionResult => {
                     this.highlightedID = addEmotionResult;
                     this.refreshEmotions();
-                    //this.resetPage();
+                    this.snackBar.open("Response Submitted", "CLOSE", {
+                        duration: 2000,
+                    });
                 },
                 err => {
-                    // This should probably be turned into some sort of meaningful response.
                     console.log('There was an error adding the emotion.');
                     console.log('The error was ' + JSON.stringify(err));
                 });
     }
 
     refreshEmotions(): Observable<Emotion[]> {
-        // Get Goals returns an Observable, basically a "promise" that
+        // Get Emotions returns an Observable, basically a "promise" that
         // we will get the data from the server.
         //
         // Subscribe waits until the data is fully downloaded, then
