@@ -25,29 +25,42 @@ describe('Goal list', () => {
         expect(page.getGoalManageTitle()).toEqual('Your Goals');
     });
 
-    it('Should check that goal with name: \'Go to bed early\' matches unique id', () => {
+    it('Should check that goal with name: \'Visit sister\' matches unique id', () => {
         page.navigateTo();
-        expect(page.getUniqueGoal('5ab53a8944c7c6b223090477')).toContain('Go to bed early');
+        expect(page.getUniqueGoal('5ab53a898e1620e3d7e48796')).toContain('Visit sister');
     });
 
-    it('Total number of goals should be 15', () => {
+    it('Total number of goals should be 5', () => {
         page.navigateTo();
-        expect(page.getGoals()).toEqual(15);
+        expect(page.getGoals()).toEqual(5);
     });
 
-    it('Should check that goal with purpose: \'To surprise Bobby\' matches unique id', () => {
+    it('Should check that goal with purpose: \'Text a hotline\' matches unique id', () => {
         page.navigateTo();
-        expect(page.getUniqueGoal('5ab53a894b28008631e64eb6')).toContain('To surprise Bobby');
+        expect(page.getUniqueGoal('5ab53a89cc803f25455d4523')).toContain('Text a hotline');
     });
 
     it('Should check that goal with status: \'Incomplete\' matches unique id', () => {
         page.navigateTo();
-        expect(page.getUniqueGoal('5ab53a89ea32d59c4e81d5f0')).toContain('Status: Incomplete');
+        expect(page.getUniqueGoal('5ab53a89dd3b308feb0e14c3')).toContain('Incomplete');
     });
 
-    it('Should check that goal with status: \'Complete\' matches unique id', () => {
+    it('Should switch between pages', () => {
         page.navigateTo();
-        expect(page.getUniqueGoal('5ab53a8907d923f68d03e1a3')).toContain('Status: Complete');
+        element(by.className('nextPage')).click();
+        expect(page.getGoals()).toEqual(3);
+    });
+
+    it('Should switch between pages', () => {
+        page.navigateTo();
+        element(by.className('previousPage')).click();
+        expect(page.getGoals()).toEqual(5);
+    });
+
+    it('Should switch between todays goals and all goals', () =>{
+        page.navigateTo();
+        element(by.id('desktopShowAllGoals')).click();
+        expect(page.getGoals()).toEqual(5);
     });
 
     it('Should have an add goal button', () => {
