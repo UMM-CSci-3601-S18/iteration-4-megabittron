@@ -25,6 +25,7 @@ export class SummaryListService {
         if(this.noID) {
             return this.emptyObservable;
         }
+        console.log(this.summaryUrl);
 
         return this.http.get<Summary[]>(this.summaryUrl);
     }

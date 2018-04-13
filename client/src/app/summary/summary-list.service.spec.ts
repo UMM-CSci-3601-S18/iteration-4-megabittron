@@ -72,7 +72,7 @@ describe('Summary: ', () => {
         const testSummary: Summary[] = [
             {
                 _id: '1',
-                userID: 'userID2',
+                userID: 'userID1',
                 mood: 'happy',
                 date: '03/13/2018',
                 intensity: 2,
@@ -80,18 +80,18 @@ describe('Summary: ', () => {
             }
         ];
 
-        summaryService.getSummaries('userID2').subscribe(
+        summaryService.getSummaries('userID1').subscribe(
             summaries => expect(summaries).toBe(testSummary)
         );
 
         // Specify that (exactly) one request will be made to the specified URL.
-        const req = httpTestingController.expectOne(summaryService.baseUrl);
+        const req = httpTestingController.expectOne(summaryService.baseUrl + '?userID=userID1&');
         // Check that the request made to that URL was a GET request.
         expect(req.request.method).toEqual('GET');
         // Specify the content of the response to that request. This
         // triggers the subscribe above, which leads to that check
         // actually being performed.
-        req.flush(testSummaries);
+        req.flush(testSummary);
     });
 
     it('getSummaries(summaryCategory) adds appropriate param string to called URL', () => {
@@ -99,7 +99,7 @@ describe('Summary: ', () => {
             summaries => expect(summaries).toEqual(mSummaries)
         );
 
-        const req = httpTestingController.expectOne(summaryService.baseUrl + '?mood=a&');
+        const req = httpTestingController.expectOne(summaryService.baseUrl + '?userID=userID1&' + 'mood=a&');
         expect(req.request.method).toEqual('GET');
         req.flush(mSummaries);
     });
