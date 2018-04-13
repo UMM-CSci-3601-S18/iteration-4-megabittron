@@ -160,6 +160,7 @@ describe('Next Goals', () => {
             getGoals: () => Observable.of([
                 {
                     "_id": "5ab53a89551a3d783599082c",
+                    "userID": 'userID1',
                     "purpose": "Improve relationship",
                     "category": "Family",
                     "name": "Call my mom",
@@ -171,6 +172,7 @@ describe('Next Goals', () => {
                 },
                 {
                     "_id": "5ab53a89551a3d783599082c",
+                    "userID": 'userID1',
                     "purpose": "Improve relationship",
                     "category": "Family",
                     "name": "Call my mom",
@@ -182,6 +184,7 @@ describe('Next Goals', () => {
                 },
                 {
                     "_id": "5ab53a89551a3d783599082c",
+                    "userID": 'userID1',
                     "purpose": "Improve relationship",
                     "category": "Family",
                     "name": "Call my mom",
