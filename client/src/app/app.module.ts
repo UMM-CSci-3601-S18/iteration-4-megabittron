@@ -12,8 +12,6 @@ import {EmotionService} from "./home/home.service";
 import {GoalsComponent} from "./goals/goals.component";
 import {GoalsService} from "./goals/goals.service";
 import {AddGoalComponent} from "./goals/add-goal.component";
-import {EmotionResponseComponent} from "./home/emotion-response.component";
-import {EmotionResponseHappyComponent} from "./home/emotion-response-happy.component";
 import {SummaryListComponent} from "./summary/summary-list.component";
 import {SummaryListService} from "./summary/summary-list.service";
 import {JournalsComponent} from "./journals/journals.component";
@@ -48,8 +46,6 @@ import {environment} from '../environments/environment';
         EditJournalComponent,
         ShowJournalComponent,
         SummaryListComponent,
-        EmotionResponseComponent,
-        EmotionResponseHappyComponent,
         ArraySortPipe,
     ],
     providers: [
@@ -62,8 +58,6 @@ import {environment} from '../environments/environment';
 ],
     entryComponents: [
         AddGoalComponent,
-        EmotionResponseComponent,
-        EmotionResponseHappyComponent,
         AddJournalComponent,
         EditJournalComponent,
         ShowJournalComponent,
