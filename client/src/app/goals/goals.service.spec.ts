@@ -94,13 +94,13 @@ describe('Goal list service: ', () => {
         );
 
         // Specify that (exactly) one request will be made to the specified URL.
-        const req = httpTestingController.expectOne(goalListService.baseUrl);
+        const req = httpTestingController.expectOne(goalListService.baseUrl + '?userID=userID1&');
         // Check that the request made to that URL was a GET request.
         expect(req.request.method).toEqual('GET');
         // Specify the content of the response to that request. This
         // triggers the subscribe above, which leads to that check
         // actually being performed.
-        req.flush(testGoals);
+        req.flush(testGoal);
     });
 
     /*it('getGoals(goalCategory) adds appropriate param string to called URL', () => {
