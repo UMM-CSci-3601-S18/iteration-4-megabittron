@@ -1,8 +1,7 @@
-/*
 import {GoalPage} from './goals.po';
 import {browser, protractor, element, by} from 'protractor';
 
-/!*const origFn = browser.driver.controlFlow().execute;
+/*const origFn = browser.driver.controlFlow().execute;
 
 browser.driver.controlFlow().execute = function () {
     let args = arguments;
@@ -12,7 +11,7 @@ browser.driver.controlFlow().execute = function () {
        return protractor.promise.delayed(100);
     });
     return origFn.apply(browser.driver.controlFlow(), args);
- };*!/
+ };*/
 
 describe('Goal list', () => {
     let page: GoalPage;
@@ -63,7 +62,7 @@ describe('Goal list', () => {
         expect(element(by.className('add-goal')).isPresent()).toBeTruthy('There should be a modal window now');
     });
 
- /!*   // This test has timing issues. Slow down to run properly.
+ /*   // This test has timing issues. Slow down to run properly.
     it('Should actually add the goal with the information we put in the fields', () => {
         page.navigateTo();
         page.clickAddGoalButton();
@@ -71,14 +70,13 @@ describe('Goal list', () => {
         page.pickChoresOption();
         element(by.id('purposeField')).sendKeys('Get more people to come');
         page.actuallyAddGoal();
-    });*!/
+    });*/
 
-   /!* it('Should click check button to change goal to complete', () => {
+   /* it('Should click check button to change goal to complete', () => {
         page.navigateTo();
         expect(page.getUniqueGoal('5ab53a89ea32d59c4e81d5f0')).toContain('Status: Incomplete');
         expect(element(by.id('completeGoal')).isPresent()).toBeTruthy('There should be a \'complete goal\' green check button');
         element(by.id('completeGoal')).click();
-    });*!/
+    });*/
 
 });
-*/
