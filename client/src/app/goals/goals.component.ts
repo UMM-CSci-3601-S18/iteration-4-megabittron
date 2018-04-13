@@ -14,10 +14,10 @@ import {MatSnackBar} from '@angular/material';
 
 export class GoalsComponent implements OnInit {
     // These are public so that tests can reference them (.spec.ts)
-    public goals: Goal[];
-    public todayGoals: Goal[];
-    public shownGoals: Goal[];
-    public filteredGoals: Goal[];
+    public goals: Goal[] = [];
+    public todayGoals: Goal[] = [];
+    public shownGoals: Goal[] = [];
+    public filteredGoals: Goal[] = [];
 
     // These are the target values used in searching.
     public goalPurpose: string;
@@ -135,7 +135,7 @@ export class GoalsComponent implements OnInit {
             });
     }
 
-    updateNext(_id, name, purpose, category, status, frequency, start, end, next) {
+    updateNext(_id, name, purpose, category, status, frequency, start, end, next): void {
         const updatedGoal: Goal = {
             _id: _id,
             purpose: purpose,
@@ -148,9 +148,8 @@ export class GoalsComponent implements OnInit {
             next: next
         };
         this.goalService.editGoal(updatedGoal).subscribe(
-            completeGoalResult => {
-                this.highlightedID = completeGoalResult;
-                //this.refreshGoals();
+            editGoalResult => {
+                this.highlightedID = editGoalResult;
             },
             err => {
                 console.log('There was an error completing the goal.');
@@ -158,124 +157,93 @@ export class GoalsComponent implements OnInit {
             });
     }
 
-    public filterGoals(searchPurpose: string, searchCategory: string,
+   public filterGoals(searchPurpose: string, searchCategory: string,
                        searchName: string, searchStatus: string,
                        searchFrequency: string): Goal[] {
 
         this.filteredGoals = this.goals;
 
-        // Filter by purpose
-        if (searchPurpose != null) {
-            searchPurpose = searchPurpose.toLocaleLowerCase();
 
-            this.filteredGoals = this.filteredGoals.filter(goal => {
-                return !searchPurpose || goal.purpose.toLowerCase().indexOf(searchPurpose) !== -1;
-            });
-        }
-
-        // Filter by category
-        if (searchCategory != null) {
-            searchCategory = searchCategory.toLocaleLowerCase();
-
-            this.filteredGoals = this.filteredGoals.filter(goal => {
-                return !searchCategory || goal.category.toLowerCase().indexOf(searchCategory) !== -1;
-            });
-        }
-
-        // Filter by name
-        if (searchName != null) {
-            searchName = searchName.toLocaleLowerCase();
-
-            this.filteredGoals = this.filteredGoals.filter(goal => {
-                return !searchName || goal.name.toLowerCase().indexOf(searchName) !== -1;
-            });
-        }
-
-        // Filter by status
-        if (searchStatus != null) {
-            searchStatus = searchStatus.toLocaleLowerCase();
-
-            this.filteredGoals = this.filteredGoals.filter(goal => {
-                return !searchStatus || goal.name.toLowerCase().indexOf(searchStatus) !== -1;
-            });
-        }
 
         return this.filteredGoals;
     }
 
     getNext(){
         this.currentPage = 1;
+
         if(this.showAllGoals == false) {
-            this.todayGoals = this.filteredGoals.filter(goal => {
+            if(this.today !== undefined) {
+                this.todayGoals = this.filteredGoals.filter(goal => {
 
-                var nextGoal = new Date(goal.next);
-                nextGoal.setHours(0, 0, 0, 0);
 
-                var endGoal = new Date(goal.end);
-                endGoal.setHours(0, 0, 0, 0);
+                    var nextGoal = new Date(goal.next);
+                    nextGoal.setHours(0, 0, 0, 0);
 
-                var day = nextGoal.getDate();
-                var month = nextGoal.getMonth();
+                    var endGoal = new Date(goal.end);
+                    endGoal.setHours(0, 0, 0, 0);
 
-                if (nextGoal.getTime() <= this.today.getTime()
-                    && goal.frequency != "Does not repeat"
-                    && goal.status == true
-                    && endGoal.getTime() >= this.today.getTime()) {
-                    this.updateNext(goal._id, goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)
-                }
+                    var day = nextGoal.getDate();
+                    var month = nextGoal.getMonth();
 
-                if (goal.status == true) {
-                    return false;
-                }
+                    if (nextGoal.getTime() <= this.today.getTime()
+                        && goal.frequency != "Does not repeat"
+                        && goal.status == true
+                        && endGoal.getTime() >= this.today.getTime()) {
+                        this.updateNext(goal._id, goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)
+                    }
 
-                if (endGoal.getTime() < this.today.getTime()) {
-                    return false;
-                }
+                    if (goal.status == true) {
+                        return false;
+                    }
 
-                if (goal.frequency == 'Does not repeat') {
+                    if (endGoal.getTime() < this.today.getTime()) {
+                        return false;
+                    }
+
+                    if (goal.frequency == 'Does not repeat') {
+                        if (nextGoal.getTime() == this.today.getTime()) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+
+                    if (goal.frequency != 'Does not repeat' &&
+                        goal.frequency != 'Daily' &&
+                        goal.frequency != 'Weekly' &&
+                        goal.frequency != 'Monthly') {
+                        return false;
+                    }
+
+                    while (nextGoal.getTime() < this.today.getTime()) {
+                        if (goal.frequency == "Daily") {
+                            day = day + 1;
+                            nextGoal.setDate(day);
+                        }
+
+                        if (goal.frequency == "Weekly") {
+                            day = day + 7;
+                            nextGoal.setDate(day);
+                        }
+
+                        if (goal.frequency == "Monthly") {
+                            month = month + 1;
+                            nextGoal.setMonth(month);
+                        }
+                    }
+
                     if (nextGoal.getTime() == this.today.getTime()) {
+                        this.updateNext(goal._id, goal.name, goal.purpose, goal.category, goal.status, goal.frequency, goal.start, goal.end, nextGoal.toString());
                         return true;
                     }
+
                     else {
                         return false;
                     }
-                }
 
-                if(goal.frequency != 'Does not repeat' &&
-                goal.frequency != 'Daily' &&
-                goal.frequency != 'Weekly' &&
-                goal.frequency != 'Monthly'){
-                    return false;
-                }
-
-                while (nextGoal.getTime() < this.today.getTime()) {
-                    if (goal.frequency == "Daily") {
-                        day = day + 1;
-                        nextGoal.setDate(day);
-                    }
-
-                    if (goal.frequency == "Weekly") {
-                        day = day + 7;
-                        nextGoal.setDate(day);
-                    }
-
-                    if (goal.frequency == "Monthly") {
-                        month = month + 1;
-                        nextGoal.setMonth(month);
-                    }
-                }
-
-                if (nextGoal.getTime() == this.today.getTime()) {
-                    this.updateNext(goal._id, goal.name, goal.purpose, goal.category, goal.status, goal.frequency, goal.start, goal.end, nextGoal.toString());
-                    return true;
-                }
-
-                else {
-                    return false;
-                }
-
-
-            });
+                });
+            }
 
             this.showGoals("today");
             return this.todayGoals;
@@ -295,18 +263,20 @@ export class GoalsComponent implements OnInit {
 
         if(type == "today") {
 
-            this.shownGoals = this.todayGoals.filter(goal => {
-                if (count > this.goalsPerPage) {
-                    count--;
-                    return false;
-                }
+            if(this.todayGoals !== undefined) {
+                this.shownGoals = this.todayGoals.filter(goal => {
+                    if (count > this.goalsPerPage) {
+                        count--;
+                        return false;
+                    }
 
-                if (count <= this.goalsPerPage && count != 0) {
-                    count--;
-                    return true;
-                }
+                    if (count <= this.goalsPerPage && count != 0) {
+                        count--;
+                        return true;
+                    }
 
-            });
+                });
+            }
         }
 
         else{
