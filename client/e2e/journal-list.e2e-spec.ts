@@ -58,6 +58,23 @@ describe('Journal list', () => {
         element(by.id('confirmAddJournalButton')).click();
     });
 
+    it('Should open a dialog box when edit journal button is clicked', () => {
+        page.navigateTo();
+        page.typeABody('Id consectetur cupidatat Lorem elit');
+        expect(element(by.className('edit-journal')).isPresent()).toBeFalsy('There should not be a modal window yet');
+        element(by.className('edit-journal-button')).click();
+        expect(element(by.className('edit-journal')).isPresent()).toBeTruthy('There should be a modal window now');
+    });
+
+    it('Should actually edit the journal with the information we put in the fields', () => {
+        page.navigateTo();
+        page.typeABody('Id consectetur cupidatat Lorem elit');
+        page.clickEditJournalButton();
+        element(by.id('subjectField')).sendKeys('Great day!');
+        element(by.id('bodyField')).sendKeys('Today my snail won a race against a rabbit.');
+        element(by.id('confirmEditJournalButton')).click();
+    });
+
 /*    it('Should actually click the navigation buttons and still have 10 journals on page everytime', () => {
         page.navigateTo();
         page.clickFirstIndexButton();
