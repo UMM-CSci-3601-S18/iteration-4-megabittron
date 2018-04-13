@@ -1130,7 +1130,7 @@ public pastDates = [
         //
         // Subscribe waits until the data is fully downloaded, then
         // performs an action on it (the first lambda)
-        const summaryListObservable: Observable<Summary[]> = this.summaryListService.getSummaries();
+        const summaryListObservable: Observable<Summary[]> = this.summaryListService.getSummaries(localStorage.getItem("userID"));
         summaryListObservable.subscribe(
             summaries => {
                 this.summaries = summaries;
@@ -1144,7 +1144,7 @@ public pastDates = [
 
 
     loadService(): void {
-        this.summaryListService.getSummaries(this.summaryMood).subscribe(
+        this.summaryListService.getSummaries(localStorage.getItem("userID"),this.summaryMood).subscribe(
             summaries => {
                 this.summaries = summaries;
                 this.filteredSummaries = this.summaries;
@@ -1164,6 +1164,9 @@ public pastDates = [
     }
 
     ngOnInit(): void {
+        /** ----------------------------------------------------- **/
+        //localStorage.setItem("userID", "5acd1a31fc0ccccabe562d1a");
+        /** ----------------------------------------------------- **/
         this.refreshSummaries();
         this.loadService();
     }

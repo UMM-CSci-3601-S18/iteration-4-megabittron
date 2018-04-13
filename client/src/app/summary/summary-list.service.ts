@@ -12,12 +12,23 @@ import {environment} from '../../environments/environment';
 export class SummaryListService {
     readonly baseUrl: string = environment.API_URL + 'summaries';
     private summaryUrl: string = this.baseUrl;
+    private noID: boolean = false;
+    private emptyObservable: Observable<Summary[]> = Observable.of([]);
 
     constructor(private http: HttpClient) {
     }
 
-    getSummaries(summaryMood?: string,): Observable<Summary[]> {
+    getSummaries(userID: string, summaryMood?: string,): Observable<Summary[]> {
+        this.summaryUrl = this.baseUrl;
+        this.noID = false;
+
         this.filterByMood(summaryMood);
+        this.filterByUserID(userID);
+
+        if(this.noID) {
+            return this.emptyObservable;
+        }
+
         return this.http.get<Summary[]>(this.summaryUrl);
     }
 
@@ -30,6 +41,25 @@ export class SummaryListService {
         return this.http.request(this.userUrl).map(res => res.json());
     }
     */
+
+    filterByUserID(userID: string): void {
+        if (!(userID == null || userID === '')) {
+            if (this.parameterPresent('userID=') ) {
+                // there was a previous search by category that we need to clear
+                this.removeParameter('userID=');
+            }
+            if (this.summaryUrl.indexOf('?') !== -1) {
+                // there was already some information passed in this url
+                this.summaryUrl += 'userID=' + userID + '&';
+            } else {
+                // this was the first bit of information to pass in the url
+                this.summaryUrl += '?userID=' + userID + '&';
+            }
+        } else {
+            // there was no userID
+            this.noID = true;
+        }
+    }
 
     filterByMood(summaryMood?: string): void {
         if (!(summaryMood == null || summaryMood === '')) {
