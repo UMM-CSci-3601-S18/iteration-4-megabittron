@@ -500,10 +500,12 @@ import 'rxjs/add/operator/do';
                     summary = fixture.componentInstance;
                     fixture.detectChanges();
 
-                    summary.summaryMood = 'All';
-                    summary.summaryIntensity = 'All';
+                    summary.summaryMood = "All";
+                    summary.summaryIntensity = "All";
                     summary.startDate = null;
                     summary.endDate = null;
+                    //summary.filterSummaries(summary.summaryMood,
+                   //     summary.summaryIntensity, summary.startDate, summary.endDate);
                     summary.limitedPast = true;
                     summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0500 (CDT)');
                     // Above means nowDate becomes 8
@@ -535,14 +537,14 @@ import 'rxjs/add/operator/do';
 
             it('filterDetailedGraph works correctly when using modDate', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(summary.modDate(29), 'sad')).toBe(1);
-                expect(summary.filterDetailedGraph(summary.modDate(0), 'sad')).toBe(0);
+                expect(summary.filterDetailedGraph(summary.modDate(28), 'sad')).toBe(1);
+                expect(summary.filterDetailedGraph(summary.modDate(1), 'sad')).toBe(0);
             });
 
             it('filterBasicGraph works correctly when using modDate', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBasicGraph(summary.modDate(29))).toBe(1);
-                expect(summary.filterBasicGraph(summary.modDate(0))).toBe(0);
+                expect(summary.filterBasicGraph(summary.modDate(28))).toBe(1);
+                expect(summary.filterBasicGraph(summary.modDate(1))).toBe(0);
             });
 
             it('getPastMonths works as intended', () => {
@@ -625,14 +627,14 @@ import 'rxjs/add/operator/do';
 
             it('filterDetailedGraph filters correctly for inputType = year', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(2018, 'sad')).toBe(1);
-                expect(summary.filterDetailedGraph(2014, 'sad')).toBe(0);
+                expect(summary.filterDetailedGraph(3, 'sad')).toBe(1);
+                expect(summary.filterDetailedGraph(0, 'sad')).toBe(0);
             });
 
             it('filterBasicGraph filters correctly for inputType = year', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBasicGraph(2018)).toBe(3);
-                expect(summary.filterBasicGraph(2014)).toBe(0);
+                expect(summary.filterBasicGraph(3)).toBe(3);
+                expect(summary.filterBasicGraph(0)).toBe(0);
             });
 
             it('modMonth works as intended', () => {
@@ -643,13 +645,13 @@ import 'rxjs/add/operator/do';
 
             it('filterDetailedGraph works correctly when using modMonth', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(summary.modMonth(3), 'sad')).toBe(1);
+                expect(summary.filterDetailedGraph(summary.modMonth(11), 'sad')).toBe(1);
                 expect(summary.filterDetailedGraph(summary.modMonth(0), 'sad')).toBe(0);
             });
 
             it('filterBasicGraph works correctly when using modMonth', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBasicGraph(summary.modMonth(3))).toBe(1);
+                expect(summary.filterBasicGraph(summary.modMonth(11))).toBe(3);
                 expect(summary.filterBasicGraph(summary.modMonth(0))).toBe(0);
             });
 
