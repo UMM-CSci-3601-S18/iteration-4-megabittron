@@ -310,6 +310,9 @@ import 'rxjs/add/operator/do';
 
             it('filterDetailedGraph filters correctly for inputType = day', () => {
                 expect(summary.summaries.length).toBe(3);
+                console.log(summary.nowStamp);
+                console.log(summary.nowHour);
+                console.log(new Date("Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)").getHours);
                 expect(summary.filterDetailedGraph(15, 'mad')).toBe(1);
                 expect(summary.filterDetailedGraph(2, 'mad')).toBe(0);
             });
