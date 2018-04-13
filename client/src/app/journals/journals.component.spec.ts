@@ -207,7 +207,7 @@ describe('Adding a journal', () => {
 
     it('calls JournalsService.addJournal', () => {
         expect(calledJournal).toBeNull();
-        journalList.openDialog();
+        journalList.openAddJournalDialog();
         expect(calledJournal).toEqual(newJournal);
     });
 });
@@ -277,7 +277,7 @@ describe('Editing a journal', () => {
 
     it('calls JournalsService.editJournal', () => {
         expect(calledJournal).toBeNull();
-        journalList.openDialogReview(this._id, this.subject, this.body, this.date);
+        journalList.openEditJournalDialog(this._id, this.subject, this.body, this.date);
         expect(calledJournal).toEqual(editJournal);
     });
 });

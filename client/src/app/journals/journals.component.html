@@ -1,61 +1,59 @@
-<body>
-<main>
-    <div class="first-sec">
-        <mat-card class="manage-journals-card">
-            <mat-card-title id="journal-title">Your Journals</mat-card-title>
-            <mat-card-subtitle class="journal-subtitle">Journals can help you
-                track daily activities in your life.
-            </mat-card-subtitle>
-            <mat-card-content class="journal-content">
-                    <button mat-raised-button (click)="openDialog()" class="journal-button" id="addNewJournal">
-                        <mat-icon id="add-icon">add</mat-icon>
-                        Add a Journal</button>
-                <div class="filter-fields">
-                <mat-form-field id="journal-subject-field">
-                    <input matInput id="journalSubject" #input placeholder="Filter by subject" (input)="journalSubject = $event.target.value">
-                </mat-form-field>
-                <mat-form-field>
-                    <input matInput id="journalBody" #input placeholder="Filter by body" (input)="journalBody = $event.target.value">
-                </mat-form-field>
-                </div>
-            </mat-card-content>
+<div class="first-sec">
+    <mat-card class="manage-journals-card">
+        <mat-card-title id="journal-title">Your Journals</mat-card-title>
+        <mat-card-subtitle class="journal-subtitle">Journals can help you
+            track daily activities in your life.
+        </mat-card-subtitle>
+        <mat-divider></mat-divider>
+        <mat-card-content class="journal-content">
+                <button mat-raised-button (click)="openAddJournalDialog()" class="add-journal-button" id="addNewJournal">
+                    <mat-icon id="add-icon">add</mat-icon>
+                    Add a Journal</button>
+            <div class="filter-fields">
+            <mat-form-field id="journal-subject-field">
+                <input matInput id="journalSubject" #input placeholder="Filter by subject" (input)="journalSubject = $event.target.value">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput id="journalBody" #input placeholder="Filter by body" (input)="journalBody = $event.target.value">
+            </mat-form-field>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+<div class="grid-journals-section">
+    <div layout="row" layout-wrap>
+        <mat-card class="journals-card"
+                  *ngFor="let journal of filterJournals(journalSubject, journalBody, journalDate) | dateSort: '-date'"
+                  #elem [id]="journal._id['$oid']">
+            <div class="journals-card-info">
+                <mat-card-content class="journal-info">
+                    <mat-card-title class="journal-name">
+                        {{journal.subject}}
+                        <button mat-icon-button class="edit-journal-button"
+                                (click)="openEditJournalDialog(journal._id['$oid'], journal.subject, journal.body, journal.date)">
+                            <mat-icon matTooltip="Edit Journal">mode_edit</mat-icon>
+                        </button>
+                    </mat-card-title>
+                    <mat-card-subtitle class="date-subtitle">
+                        {{journal.date | date : "MMM d, yyyy 'at' h:mm a"}}
+                    </mat-card-subtitle>
+                    <mat-divider></mat-divider>
+                    <p *ngIf="journal.body.length > 100">
+                        {{journal.body | slice : 0:100}}
+                        <a (click)="showMoreInfo(journal.body)">
+                            <button class="show-more-button">
+                                ...show more
+                            </button>
+                        </a>
+                    </p>
+                    <p *ngIf="journal.body.length <100">
+                        {{journal.body}}
+                    </p>
+                </mat-card-content>
+            </div>
+            <mat-card-actions>
+            </mat-card-actions>
         </mat-card>
     </div>
-    <div class="grid-journals-section">
-        <div layout="row" layout-wrap>
-            <mat-card class="journals-card"
-                      *ngFor="let journal of filterJournals(journalSubject, journalBody, journalDate) | dateSort: '-date'"
-                      #elem [id]="journal._id['$oid']">
-                <div class="journals-card-info">
-                    <mat-card-content class="journal-info">
-                        <mat-card-title class="journal-name">
-                            <button mat-icon-button class="edit-journal-button"
-                                    (click)="openDialogReview(journal._id['$oid'], journal.subject, journal.body, journal.date)">
-                                <mat-icon matTooltip="Edit Journal">mode_edit</mat-icon>
-                            </button>
-                            {{journal.subject}}
-                        </mat-card-title>
-                        <mat-card-subtitle>
-                            {{journal.date | date : "MMM d, yyyy 'at' h:mm a"}}
-                        </mat-card-subtitle>
-                        <p *ngIf="journal.body.length > 100">
-                            {{journal.body | slice : 0:100}}
-                            <a (click)="showMoreInfo(journal.body)">
-                                <button class="show-more-button">
-                                    ...show more
-                                </button>
-                            </a>
-                        </p>
-                        <p *ngIf="journal.body.length <100">
-                            {{journal.body}}
-                        </p>
-                    </mat-card-content>
-                </div>
-                <mat-card-actions>
-                </mat-card-actions>
-            </mat-card>
-            </div>
-        </div>
-</main>
-</body>
+</div>
 

@@ -2,11 +2,16 @@ package umm3601;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
+import org.apache.commons.io.IOUtils;
 import spark.Request;
 import spark.Response;
 import java.io.IOException;
+import java.io.InputStream;
+
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
+
+import spark.Route;
 import umm3601.database.GoalController;
 import umm3601.database.GoalRequestHandler;
 import umm3601.database.JournalController;
@@ -76,6 +81,19 @@ public class Server {
         // Redirects for the "home" page
         redirect.get("", "/");
 
+        Route clientRoute = (req, res) -> {
+            InputStream stream = goalController.getClass().getResourceAsStream("/public/index.html");
+            return stream != null ? IOUtils.toString(stream) : "Sorry, we couldn't find that!";
+        };
+        Route notFoundRoute = (req, res) -> {
+            res.type("text");
+            res.status(404);
+            return "Sorry, we couldn't find that!";
+        };
+
+        get("/", clientRoute);
+
+
         /////////////// Endpoints ///////////////////
         /////////////////////////////////////////////
 
@@ -88,7 +106,7 @@ public class Server {
         get("api/goals", goalRequestHandler::getGoals);
         get("api/goals/:id", goalRequestHandler::getGoalJSON);
         post("api/goals/new", goalRequestHandler::addNewGoal);
-        post("api/goals/edit", goalRequestHandler::completeGoal);
+        post("api/goals/edit", goalRequestHandler::editGoal);
         delete("api/goals/delete/:id", goalRequestHandler::deleteGoal);
 
         //List summary page
@@ -118,12 +136,14 @@ public class Server {
         // before they they're processed by things like `get`.
         after("*", Server::addGzipHeader);
 
+
+        get("api/*", notFoundRoute);
+
+        get("/*", clientRoute);
+
         // Handle "404" file not found requests:
-        notFound((req, res) -> {
-            res.type("text");
-            res.status(404);
-            return "Sorry, we couldn't find that!";
-        });
+        notFound(notFoundRoute);
+
     }
 
     // Enable GZIP for all responses

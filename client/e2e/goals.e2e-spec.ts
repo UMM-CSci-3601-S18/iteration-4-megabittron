@@ -72,11 +72,11 @@ describe('Goal list', () => {
         page.actuallyAddGoal();
     });*/
 
-    it('Should click check button to change goal to complete', () => {
+   /* it('Should click check button to change goal to complete', () => {
         page.navigateTo();
         expect(page.getUniqueGoal('5ab53a89ea32d59c4e81d5f0')).toContain('Status: Incomplete');
         expect(element(by.id('completeGoal')).isPresent()).toBeTruthy('There should be a \'complete goal\' green check button');
         element(by.id('completeGoal')).click();
-    });
+    });*/
 
 });

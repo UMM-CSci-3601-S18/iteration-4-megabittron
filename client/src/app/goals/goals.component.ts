@@ -16,6 +16,7 @@ export class GoalsComponent implements OnInit {
     // These are public so that tests can reference them (.spec.ts)
     public goals: Goal[];
     public todayGoals: Goal[];
+    public shownGoals: Goal[];
     public filteredGoals: Goal[];
 
     // These are the target values used in searching.
@@ -28,19 +29,23 @@ export class GoalsComponent implements OnInit {
     public goalNext;
     public goalFrequency;
     public today;
-    showPage = false;
+    public showAllGoals = false;
+    public goalsPerPage = 5;
+    public currentPage = 1;
+
+    public currentScreenWidth: number;
 
     // The ID of the goal
     private highlightedID: { '$oid': string } = {'$oid': ''};
 
     // Inject the GoalsService into this component.
     constructor(public goalService: GoalsService, public dialog: MatDialog, public snackBar: MatSnackBar) {
-
     }
 
     isHighlighted(goal: Goal): boolean {
         return goal._id['$oid'] === this.highlightedID['$oid'];
     }
+
 
     openDialog(): void {
         const newGoal: Goal = {
@@ -60,19 +65,33 @@ export class GoalsComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            this.goalService.addNewGoal(result).subscribe(
-                addGoalResult => {
-                    this.highlightedID = addGoalResult;
-                    this.refreshGoals();
-                },
-                err => {
-                    // This should probably be turned into some sort of meaningful response.
-                    console.log('There was an error adding the goal.');
-                    console.log('The error was ' + JSON.stringify(err));
+            if (result == undefined) {
+                console.log("Cancelled without adding a goal");
+            } else {
+                this.goalService.addNewGoal(result).subscribe(
+                    addGoalResult => {
+                        this.highlightedID = addGoalResult;
+                        this.refreshGoals();
+                    },
+                    err => {
+                        // This should probably be turned into some sort of meaningful response.
+                        console.log('There was an error adding the goal.');
+                        console.log('The error was ' + JSON.stringify(err));
+                    });
+                this.snackBar.open("Added Goal", "CLOSE", {
+                    duration: 2000,
                 });
+            }
         });
     }
 
+    returnStatus(status): string{
+        if(status == true){
+            return "Complete";
+        }
+
+        return "Incomplete";
+    }
     deleteGoal(_id: string) {
         this.goalService.deleteGoal(_id).subscribe(
             goals => {
@@ -83,25 +102,31 @@ export class GoalsComponent implements OnInit {
                 console.log(err);
                 this.refreshGoals();
                 this.loadService();
+                this.snackBar.open("Deleted Goal", "CLOSE", {
+                    duration: 2000,
+                });
             }
         );
     }
 
-    goalSatisfied(_id: string, thePurpose: string, theCategory: string, theName) {
+    editGoal(_id, name, purpose, category, status, frequency, start, end, next) {
         const updatedGoal: Goal = {
             _id: _id,
-            purpose: thePurpose,
-            category: theCategory,
-            name: theName,
-            status: true,
-            frequency: '',
-            start: '',
-            end: '',
-            next: ''
+            purpose: purpose,
+            category: category,
+            name: name,
+            status: status,
+            frequency: frequency,
+            start: start,
+            end: end,
+            next: next
         };
-        this.goalService.completeGoal(updatedGoal).subscribe(
+        this.goalService.editGoal(updatedGoal).subscribe(
             completeGoalResult => {
                 this.highlightedID = completeGoalResult;
+                this.snackBar.open("Completed Goal", "CLOSE", {
+                    duration: 2000,
+                });
                 this.refreshGoals();
             },
             err => {
@@ -110,19 +135,19 @@ export class GoalsComponent implements OnInit {
             });
     }
 
-    editGoal(goal, next) {
+    updateNext(_id, name, purpose, category, status, frequency, start, end, next) {
         const updatedGoal: Goal = {
-            _id: goal._id,
-            purpose: goal.purpose,
-            category: goal.category,
-            name: goal.name,
-            status: goal.status,
-            frequency: goal.frequency,
-            start: goal.start,
-            end: goal.end,
+            _id: _id,
+            purpose: purpose,
+            category: category,
+            name: name,
+            status: status,
+            frequency: frequency,
+            start: start,
+            end: end,
             next: next
         };
-        this.goalService.completeGoal(updatedGoal).subscribe(
+        this.goalService.editGoal(updatedGoal).subscribe(
             completeGoalResult => {
                 this.highlightedID = completeGoalResult;
                 //this.refreshGoals();
@@ -131,13 +156,6 @@ export class GoalsComponent implements OnInit {
                 console.log('There was an error completing the goal.');
                 console.log('The error was ' + JSON.stringify(err));
             });
-    }
-
-
-    openSnackBar(message: string, action: string) {
-        this.snackBar.open(message, action, {
-            duration: 2000,
-        });
     }
 
     public filterGoals(searchPurpose: string, searchCategory: string,
@@ -186,8 +204,9 @@ export class GoalsComponent implements OnInit {
     }
 
     getNext(){
-
-        this.todayGoals = this.filteredGoals.filter(goal => {
+        this.currentPage = 1;
+        if(this.showAllGoals == false) {
+            this.todayGoals = this.filteredGoals.filter(goal => {
 
                 var nextGoal = new Date(goal.next);
                 nextGoal.setHours(0, 0, 0, 0);
@@ -198,11 +217,18 @@ export class GoalsComponent implements OnInit {
                 var day = nextGoal.getDate();
                 var month = nextGoal.getMonth();
 
-                if(endGoal.getTime() < this.today.getTime()){
+                if (nextGoal.getTime() <= this.today.getTime()
+                    && goal.frequency != "Does not repeat"
+                    && goal.status == true
+                    && endGoal.getTime() >= this.today.getTime()) {
+                    this.updateNext(goal._id, goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)
+                }
+
+                if (goal.status == true) {
                     return false;
                 }
 
-                if(goal.status == true){
+                if (endGoal.getTime() < this.today.getTime()) {
                     return false;
                 }
 
@@ -210,9 +236,16 @@ export class GoalsComponent implements OnInit {
                     if (nextGoal.getTime() == this.today.getTime()) {
                         return true;
                     }
-                    else{
+                    else {
                         return false;
                     }
+                }
+
+                if(goal.frequency != 'Does not repeat' &&
+                goal.frequency != 'Daily' &&
+                goal.frequency != 'Weekly' &&
+                goal.frequency != 'Monthly'){
+                    return false;
                 }
 
                 while (nextGoal.getTime() < this.today.getTime()) {
@@ -232,23 +265,86 @@ export class GoalsComponent implements OnInit {
                     }
                 }
 
-                console.log(nextGoal.getTime() == this.today.getTime());
-                if (nextGoal.getTime() == this.today.getTime()){
-                    console.log(nextGoal);
-                    this.editGoal(goal, nextGoal.toString());
+                if (nextGoal.getTime() == this.today.getTime()) {
+                    this.updateNext(goal._id, goal.name, goal.purpose, goal.category, goal.status, goal.frequency, goal.start, goal.end, nextGoal.toString());
                     return true;
                 }
 
-                else{
+                else {
                     return false;
                 }
 
 
-        });
+            });
 
-        return this.todayGoals;
+            this.showGoals("today");
+            return this.todayGoals;
+        }
+
+        else{
+            this.showGoals("all");
+            return this.filteredGoals;
+        }
+
+
 
     }
+
+    showGoals(type){
+        var count = this.currentPage * this.goalsPerPage;
+
+        if(type == "today") {
+
+            this.shownGoals = this.todayGoals.filter(goal => {
+                if (count > this.goalsPerPage) {
+                    count--;
+                    return false;
+                }
+
+                if (count <= this.goalsPerPage && count != 0) {
+                    count--;
+                    return true;
+                }
+
+            });
+        }
+
+        else{
+            this.shownGoals = this.filteredGoals.filter(goal => {
+                if (count > this.goalsPerPage) {
+                    count--;
+                    return false;
+                }
+
+                if (count <= this.goalsPerPage && count != 0) {
+                    count--;
+                    return true;
+                }
+
+            });
+        }
+    }
+
+    maxNumPages(type): boolean{
+        if(type == "today") {
+
+            if(this.todayGoals !== undefined){
+                return (this.goalsPerPage * this.currentPage) < this.todayGoals.length;
+            }
+            return false;
+        }
+        else{
+            if(this.filteredGoals !== undefined){
+                return (this.goalsPerPage * this.currentPage) < this.todayGoals.length;
+            }
+            return false;
+        }
+    }
+
+    setNumGoals(){
+        this.currentScreenWidth = (window.screen.width);
+    }
+
 
     /**
      * Starts an asynchronous operation to update the goals list
@@ -295,13 +391,15 @@ export class GoalsComponent implements OnInit {
         this.refreshGoals();
         this.loadService();
         this.getDate();
+
     }
 
     getDate() {
         this.today = new Date();
+        this.today.setHours(0, 0, 0, 0);
         this.goalStart = this.today;
         this.goalNext = this.today;
-        this.today.setHours(0, 0, 0, 0);
+
 
 
     }
