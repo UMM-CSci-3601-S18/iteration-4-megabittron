@@ -126,7 +126,7 @@ public class UserControllerSpec {
     //public void addUserTest(){
     //    String newId = userController.addNewUser("171717","181818","Travis","Warling");
 
-    //    assertNotNull("Adding new user should return true,", newId);
+    //    assertNotNull("Adding new user with a _id with a specific SubjectID should return true,", newId);
     //    Map<String, String[]> argMap = new HashMap<>();
     //    argMap.put("171717", new String[] { "171717" });
     //    String jsonResult = userController.getUsers(argMap);
