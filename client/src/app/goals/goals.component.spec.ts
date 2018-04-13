@@ -1,3 +1,4 @@
+/*
 import {ComponentFixture, TestBed, async} from '@angular/core/testing';
 import {Goal} from './goal';
 import {GoalsComponent} from './goals.component';
@@ -79,7 +80,7 @@ describe( 'Goals', () => {
         });
     }));
 
-    /*it('contains all the goals', () => {
+    /!*it('contains all the goals', () => {
         expect(goalList.goals.length).toBe(3);
     });
 
@@ -117,7 +118,7 @@ describe( 'Goals', () => {
         goalList.refreshGoals().subscribe(() => {
             expect(goalList.filteredGoals.length).toBe(2);
         });
-    });*/
+    });*!/
 
 })
 
@@ -153,10 +154,10 @@ describe('Misbehaving Goal List', () => {
         });
     }));
 
-   /*it('generates an error if we don\'t set up a GoalsService', () => {
+   /!*it('generates an error if we don\'t set up a GoalsService', () => {
         // Since the observer throws an error, we don't expect goals to be defined.
         expect(goalList.goals).toBeUndefined();
-    });*/
+    });*!/
 });
 
 describe('Adding a goal', () => {
@@ -379,10 +380,11 @@ describe('Completing a goal', () => {
         });
     }));
 
-    /*it('calls GoalsService.completeGoal', () => {
+    /!*it('calls GoalsService.completeGoal', () => {
         expect(calledGoal).toBeNull();
         // I don't think this is correct, but it passes. It should probably take in this._id, this.purpose, etc.
         goalList.goalSatisfied('', 'To break everything and make people mad', 'Chores', 'Destroy all monitors in the lab')
         expect(calledGoal).toEqual(completeGoal);
-    });*/
+    });*!/
 });
+*/

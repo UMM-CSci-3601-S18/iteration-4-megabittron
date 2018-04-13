@@ -1,3 +1,4 @@
+/*
 import {browser} from 'protractor';
 
 export class AppPage {
@@ -6,3 +7,4 @@ export class AppPage {
     }
 
 }
+*/

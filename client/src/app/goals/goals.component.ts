@@ -30,15 +30,16 @@ export class GoalsComponent implements OnInit {
     public goalFrequency;
     public today;
     public showAllGoals = false;
-    public goalsPerPage = 4;
+    public goalsPerPage = 5;
     public currentPage = 1;
+
+    public currentScreenWidth: number;
 
     // The ID of the goal
     private highlightedID: { '$oid': string } = {'$oid': ''};
 
     // Inject the GoalsService into this component.
     constructor(public goalService: GoalsService, public dialog: MatDialog, public snackBar: MatSnackBar) {
-
     }
 
     isHighlighted(goal: Goal): boolean {
@@ -65,19 +66,33 @@ export class GoalsComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            this.goalService.addNewGoal(result).subscribe(
-                addGoalResult => {
-                    this.highlightedID = addGoalResult;
-                    this.refreshGoals();
-                },
-                err => {
-                    // This should probably be turned into some sort of meaningful response.
-                    console.log('There was an error adding the goal.');
-                    console.log('The error was ' + JSON.stringify(err));
+            if (result == undefined) {
+                console.log("Cancelled without adding a goal");
+            } else {
+                this.goalService.addNewGoal(result).subscribe(
+                    addGoalResult => {
+                        this.highlightedID = addGoalResult;
+                        this.refreshGoals();
+                    },
+                    err => {
+                        // This should probably be turned into some sort of meaningful response.
+                        console.log('There was an error adding the goal.');
+                        console.log('The error was ' + JSON.stringify(err));
+                    });
+                this.snackBar.open("Added Goal", "CLOSE", {
+                    duration: 2000,
                 });
+            }
         });
     }
 
+    returnStatus(status): string{
+        if(status == true){
+            return "Complete";
+        }
+
+        return "Incomplete";
+    }
     deleteGoal(_id: string) {
         this.goalService.deleteGoal(_id).subscribe(
             goals => {
@@ -88,6 +103,9 @@ export class GoalsComponent implements OnInit {
                 console.log(err);
                 this.refreshGoals();
                 this.loadService();
+                this.snackBar.open("Deleted Goal", "CLOSE", {
+                    duration: 2000,
+                });
             }
         );
     }
@@ -105,9 +123,12 @@ export class GoalsComponent implements OnInit {
             end: end,
             next: next
         };
-        this.goalService.completeGoal(updatedGoal).subscribe(
+        this.goalService.editGoal(updatedGoal).subscribe(
             completeGoalResult => {
                 this.highlightedID = completeGoalResult;
+                this.snackBar.open("Completed Goal", "CLOSE", {
+                    duration: 2000,
+                });
                 this.refreshGoals();
             },
             err => {
@@ -129,7 +150,7 @@ export class GoalsComponent implements OnInit {
             end: end,
             next: next
         };
-        this.goalService.completeGoal(updatedGoal).subscribe(
+        this.goalService.editGoal(updatedGoal).subscribe(
             completeGoalResult => {
                 this.highlightedID = completeGoalResult;
                 //this.refreshGoals();
@@ -138,13 +159,6 @@ export class GoalsComponent implements OnInit {
                 console.log('There was an error completing the goal.');
                 console.log('The error was ' + JSON.stringify(err));
             });
-    }
-
-
-    openSnackBar(message: string, action: string) {
-        this.snackBar.open(message, action, {
-            duration: 2000,
-        });
     }
 
     public filterGoals(searchPurpose: string, searchCategory: string,
@@ -194,7 +208,7 @@ export class GoalsComponent implements OnInit {
     }
 
     getNext(){
-
+        this.currentPage = 1;
         if(this.showAllGoals == false) {
             this.todayGoals = this.filteredGoals.filter(goal => {
 
@@ -207,10 +221,10 @@ export class GoalsComponent implements OnInit {
                 var day = nextGoal.getDate();
                 var month = nextGoal.getMonth();
 
-                if(nextGoal.getTime() < this.today.getTime()
-                && goal.frequency != "Does not repeat"
-                && goal.status == true
-                && endGoal.getTime() >= this.today.getTime()){
+                if (nextGoal.getTime() <= this.today.getTime()
+                    && goal.frequency != "Does not repeat"
+                    && goal.status == true
+                    && endGoal.getTime() >= this.today.getTime()) {
                     this.updateNext(goal._id, goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)
                 }
 
@@ -218,7 +232,7 @@ export class GoalsComponent implements OnInit {
                     return false;
                 }
 
-                if(endGoal.getTime() < this.today.getTime()){
+                if (endGoal.getTime() < this.today.getTime()) {
                     return false;
                 }
 
@@ -229,6 +243,13 @@ export class GoalsComponent implements OnInit {
                     else {
                         return false;
                     }
+                }
+
+                if(goal.frequency != 'Does not repeat' &&
+                goal.frequency != 'Daily' &&
+                goal.frequency != 'Weekly' &&
+                goal.frequency != 'Monthly'){
+                    return false;
                 }
 
                 while (nextGoal.getTime() < this.today.getTime()) {
@@ -248,7 +269,7 @@ export class GoalsComponent implements OnInit {
                     }
                 }
 
-                if (nextGoal.getTime() == this.today.getTime()){
+                if (nextGoal.getTime() == this.today.getTime()) {
                     this.updateNext(goal._id, goal.name, goal.purpose, goal.category, goal.status, goal.frequency, goal.start, goal.end, nextGoal.toString());
                     return true;
                 }
@@ -261,12 +282,15 @@ export class GoalsComponent implements OnInit {
             });
 
             this.showGoals("today");
+            return this.todayGoals;
         }
 
         else{
             this.showGoals("all");
+            return this.filteredGoals;
         }
-        return this.todayGoals;
+
+
 
     }
 
@@ -274,7 +298,6 @@ export class GoalsComponent implements OnInit {
         var count = this.currentPage * this.goalsPerPage;
 
         if(type == "today") {
-            console.log("today");
 
             this.shownGoals = this.todayGoals.filter(goal => {
                 if (count > this.goalsPerPage) {
@@ -291,7 +314,6 @@ export class GoalsComponent implements OnInit {
         }
 
         else{
-            console.log("all");
             this.shownGoals = this.filteredGoals.filter(goal => {
                 if (count > this.goalsPerPage) {
                     count--;
@@ -309,11 +331,22 @@ export class GoalsComponent implements OnInit {
 
     maxNumPages(type): boolean{
         if(type == "today") {
-            return (this.goalsPerPage * this.currentPage) < this.todayGoals.length;
+
+            if(this.todayGoals !== undefined){
+                return (this.goalsPerPage * this.currentPage) < this.todayGoals.length;
+            }
+            return false;
         }
         else{
-            return (this.goalsPerPage * this.currentPage) < this.filteredGoals.length;
+            if(this.filteredGoals !== undefined){
+                return (this.goalsPerPage * this.currentPage) < this.todayGoals.length;
+            }
+            return false;
         }
+    }
+
+    setNumGoals(){
+        this.currentScreenWidth = (window.screen.width);
     }
 
 
@@ -376,13 +409,15 @@ export class GoalsComponent implements OnInit {
         this.refreshGoals();
         this.loadService();
         this.getDate();
+
     }
 
     getDate() {
         this.today = new Date();
+        this.today.setHours(0, 0, 0, 0);
         this.goalStart = this.today;
         this.goalNext = this.today;
-        this.today.setHours(0, 0, 0, 0);
+
 
 
     }

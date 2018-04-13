@@ -143,7 +143,7 @@ public class GoalController {
         }
     }
 
-    public String completeGoal(String id, String purpose, String category,
+    public String editGoal(String id, String purpose, String category,
                                String name, Boolean status, String frequency, String start,
                                String end, String next){
         Document newGoal = new Document();
@@ -162,9 +162,9 @@ public class GoalController {
         try {
             goalCollection.updateOne(searchQuery, setQuery);
             ObjectId theID = searchQuery.getObjectId("_id");
-            System.out.println("Successfully completed goal [id: " + theID + ", purpose: " + purpose +
+            /*System.out.println("Successfully completed goal [id: " + theID + ", purpose: " + purpose +
                 ", category: " + category + ", name: " + name + ", status: " + status + ", frequency: " + frequency
-            + ", start: " + start + ", end: " + end + ", next: " + next + ']');
+            + ", start: " + start + ", end: " + end + ", next: " + next + ']');*/
             return JSON.serialize(theID);
         } catch(MongoException me) {
             me.printStackTrace();

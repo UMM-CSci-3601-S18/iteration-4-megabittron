@@ -106,6 +106,7 @@ export class JournalsService {
             }),
         };
 
+        console.log(newJournal);
         // Send post request to add a new journal with the journal data as the body with specified headers.
         return this.http.post<{'$oid': string}>(this.journalUrl + '/new', newJournal, httpOptions);
     }
