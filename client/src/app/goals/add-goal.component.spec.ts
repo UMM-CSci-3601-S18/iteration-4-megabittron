@@ -1,4 +1,3 @@
-/*
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MatDialogRef, MAT_DIALOG_DATA, MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
@@ -39,4 +38,3 @@ describe('Add goal component', () => {
         expect(calledClose).toBe(true);
     });
 });
-*/

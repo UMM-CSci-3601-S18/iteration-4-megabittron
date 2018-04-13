@@ -1,4 +1,3 @@
-
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {TestBed} from '@angular/core/testing';
 import {HttpClient} from '@angular/common/http';
@@ -17,7 +16,7 @@ describe('Goal list service: ', () => {
             name: 'Eat all the cookies',
             status: false,
             start: "2018-04-05T18:56:24.702Z",
-            end: "2018-05-05T18:56:24.702Z",
+            end: "2019-07-05T18:56:24.702Z",
             next: "2018-05-05T18:56:24.702Z",
             frequency: "Daily"
         },
@@ -28,9 +27,9 @@ describe('Goal list service: ', () => {
             category: 'Chores',
             name: 'Take out recycling',
             status: true,
-            start: "2018-04-05T18:56:24.702Z",
-            end: "2018-05-05T18:56:24.702Z",
-            next: "2018-05-05T18:56:24.702Z",
+            start: "2017-05-07T18:56:24.702Z",
+            end: "2019-05-05T18:56:24.702Z",
+            next: "2018-05-12T18:56:24.702Z",
             frequency: "Daily"
         },
         {
@@ -41,8 +40,8 @@ describe('Goal list service: ', () => {
             name: 'Call mom',
             status: true,
             start: "2018-04-05T18:56:24.702Z",
-            end: "2018-05-05T18:56:24.702Z",
-            next: "2018-05-05T18:56:24.702Z",
+            end: "2017-08-10T18:56:24.702Z",
+            next: "2017-05-05T18:56:24.702Z",
             frequency: "Daily"
         }
     ];
@@ -159,8 +158,8 @@ describe('Goal list service: ', () => {
             name: 'Plunge toilet',
             status: false,
             start: "2018-04-05T18:56:24.702Z",
-            end: "2018-05-05T18:56:24.702Z",
-            next: "2018-05-05T18:56:24.702Z",
+            end: "2018-05-15T18:56:24.702Z",
+            next: "2018-05-12T18:56:24.702Z",
             frequency: "Daily"
         };
 
@@ -186,8 +185,8 @@ describe('Goal list service: ', () => {
             name: 'Call sister',
             status: true,
             start: "2018-04-05T18:56:24.702Z",
-            end: "2018-05-05T18:56:24.702Z",
-            next: "2018-05-05T18:56:24.702Z",
+            end: "2018-05-29T18:56:24.702Z",
+            next: "2018-05-18T18:56:24.702Z",
             frequency: "Daily"
         };
 

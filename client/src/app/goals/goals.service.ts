@@ -113,7 +113,7 @@ export class GoalsService {
         return this.http.post<{'$oid': string}>(this.goalUrl + '/new', newGoal, httpOptions);
     }
 
-    editGoal(completedGoal: Goal): Observable<{'$oid': string}> {
+    editGoal(editedGoal: Goal): Observable<{'$oid': string}> {
         this.goalUrl = this.baseUrl;
         const httpOptions = {
             headers: new HttpHeaders({
@@ -122,7 +122,7 @@ export class GoalsService {
         };
 
         // Send post request to add a new journal with the journal data as the body with specified headers.
-        return this.http.post<{'$oid': string}>(this.goalUrl + '/edit', completedGoal, httpOptions);
+        return this.http.post<{'$oid': string}>(this.goalUrl + '/edit', editedGoal, httpOptions);
     }
 
     deleteGoal(goaldID: String) {
