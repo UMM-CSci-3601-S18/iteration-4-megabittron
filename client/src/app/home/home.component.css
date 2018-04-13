@@ -121,3 +121,8 @@
 .submit-button {
     background-color: #E8F5E9;
 }
+
+.restartButton {
+    text-align: center;
+    padding-bottom: 3%;
+}
