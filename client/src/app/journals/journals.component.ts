@@ -85,17 +85,16 @@ export class JournalsComponent implements OnInit {
                     editJournalResult => {
                         this.highlightedID = editJournalResult;
                         this.refreshJournals();
+                        this.snackBar.open("Edited Journal", "CLOSE", {
+                            duration: 2000,
+                        });
+                        console.log("Journal edited.");
                     },
                     err => {
                         // This should probably be turned into some sort of meaningful response.
                         console.log('There was an error editing the journal.');
                         console.log('The error was ' + JSON.stringify(err));
                     });
-                this.snackBar.open("Edited Journal", "CLOSE", {
-                    duration: 2000,
-                });
-                this.refreshJournals();
-                console.log("Journal edited.");
             }
         });
     }
