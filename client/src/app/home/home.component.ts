@@ -25,12 +25,6 @@ export class HomeComponent {
     public emotionDescription: string;
     public emotionDate: string;
 
-    public videoBooleanSwitch = false;
-
-    videoEnablerSwitch(){
-        this.videoBooleanSwitch = true;
-    }
-
     restart(){
         this.resetPage();
         window.location.reload();
@@ -61,15 +55,6 @@ export class HomeComponent {
         let newClass = document.getElementById(this.highlightedEmotion);
         newClass.classList.remove('on');
     }
-
-    /*showSaveButton(){
-        if (this.selectedEmotion == 'meh') {
-            return false;
-        }
-        if (this.selectedEmotion != 'meh' && this.emojiRating < 1) {
-            return true;
-        }
-    }*/
 
     resetPage(){
         this.resetSelections();
