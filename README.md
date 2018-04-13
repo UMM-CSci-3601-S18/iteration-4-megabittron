@@ -87,9 +87,10 @@ need to have data in the `dev` database before running the e2e tests!
 - **Travis Warling** 
 - **Xaitheng Yang** 
 - **Charles Menne** 
-- **Abenezer Monjor** 
-- **Hunter Welch** 
-- **Jubair Hassan** 
+- **Ahnaf Prio** 
+- **John Hoff** 
+- **Dustin Blake** 
+- **Francisco Montanez** 
 
 
 [angular-karma-jasmine]: https://codecraft.tv/courses/angular/unit-testing/jasmine-and-karma/
