@@ -12,37 +12,18 @@ declare var gapi: any;
 })
 export class AppComponent implements OnInit {
     title = 'Friendly Panda App';
-    private highlightedEmotion = "happy";
-    public emotionDescription: string;
-    public emojiRating: number = 0;
-    public selectedEmotion = "none";
+    googleAuth;
 
     constructor(private http: HttpClient) {
 
     }
 
-    // from home component, for going to home page and reloading on double click
-    restart(){
-        this.resetPage();
-        window.location.reload();
-    }
-
-    resetPage(){
-        this.resetSelections();
-        this.selectedEmotion = "none";
-        this.emojiRating = 0;
-        this.emotionDescription = "";
-    }
-
-    private resetSelections(){
-        let newClass = document.getElementById(this.highlightedEmotion);
-        newClass.classList.remove('on');
-    }
 
     signIn() {
-        let googleAuth = gapi.auth2.getAuthInstance();
+        //let googleAuth = gapi.auth2.getAuthInstance();
 
-        googleAuth.grantOfflineAccess().then((resp) => {
+        this.googleAuth = gapi.auth2.getAuthInstance();
+        this.googleAuth.grantOfflineAccess().then((resp) => {
 
             localStorage.setItem('isSignedIn', 'true');
             this.sendAuthCode(resp.code);
@@ -53,11 +34,11 @@ export class AppComponent implements OnInit {
     }
 
     signOut() {
-        let googleAuth = gapi.auth2.getAuthInstance();
+        //let googleAuth = gapi.auth2.getAuthInstance();
 
 
-        googleAuth.then(() => {
-            googleAuth.signOut();
+        this.googleAuth.then(() => {
+            this.googleAuth.signOut();
             localStorage.setItem('isSignedIn', 'false');
             localStorage.setItem("userID", "");
 
@@ -106,10 +87,12 @@ export class AppComponent implements OnInit {
             'scope': 'profile email'
         });
 
+
     }
 
     ngOnInit() {
         this.handleClientLoad();
 
+        this.googleAuth = gapi.auth2.getAuthInstance();
     }
 }
