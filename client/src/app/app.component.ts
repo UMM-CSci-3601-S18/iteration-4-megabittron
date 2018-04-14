@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     }
 
     resetPage(){
-        this.resetSelections();
+        //this.resetSelections();
         this.selectedEmotion = "none";
         this.emojiRating = 0;
         this.emotionDescription = "";
