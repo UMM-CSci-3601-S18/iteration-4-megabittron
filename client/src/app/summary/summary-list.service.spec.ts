@@ -12,6 +12,7 @@ describe('Summary: ', () => {
     const testSummaries: Summary[] = [
         {
             _id: '1',
+            userID: 'userID1',
             mood: 'happy',
             date: '03/13/2018',
             intensity: 2,
@@ -19,6 +20,7 @@ describe('Summary: ', () => {
         },
         {
             _id: '2',
+            userID: 'userID1',
             mood: 'sad',
             date: '03/14/2018',
             intensity: 4,
@@ -26,6 +28,7 @@ describe('Summary: ', () => {
         },
         {
             _id: '3',
+            userID: 'userID1',
             mood: 'mad',
             date: '03/15/2018',
             intensity: 5,
@@ -65,32 +68,38 @@ describe('Summary: ', () => {
     });
 
     it('getSummaries() calls api/summaries', () => {
-        // Assert that the summaries we get from this call to getSummaries()
-        // should be our set of test summaries. Because we're subscribing
-        // to the result of getSummaries(), this won't actually get
-        // checked until the mocked HTTP request "returns" a response.
-        // This happens when we call req.flush(testSummaries) a few lines
-        // down.
-        summaryService.getSummaries().subscribe(
-            summaries => expect(summaries).toBe(testSummaries)
+
+        const testSummary: Summary[] = [
+            {
+                _id: '1',
+                userID: 'userID1',
+                mood: 'happy',
+                date: '03/13/2018',
+                intensity: 2,
+                description: 'slept',
+            }
+        ];
+
+        summaryService.getSummaries('userID1').subscribe(
+            summaries => expect(summaries).toBe(testSummary)
         );
 
         // Specify that (exactly) one request will be made to the specified URL.
-        const req = httpTestingController.expectOne(summaryService.baseUrl);
+        const req = httpTestingController.expectOne(summaryService.baseUrl + '?userID=userID1&');
         // Check that the request made to that URL was a GET request.
         expect(req.request.method).toEqual('GET');
         // Specify the content of the response to that request. This
         // triggers the subscribe above, which leads to that check
         // actually being performed.
-        req.flush(testSummaries);
+        req.flush(testSummary);
     });
 
     it('getSummaries(summaryCategory) adds appropriate param string to called URL', () => {
-        summaryService.getSummaries('a').subscribe(
+        summaryService.getSummaries('userID1','a').subscribe(
             summaries => expect(summaries).toEqual(mSummaries)
         );
 
-        const req = httpTestingController.expectOne(summaryService.baseUrl + '?mood=a&');
+        const req = httpTestingController.expectOne(summaryService.baseUrl + '?userID=userID1&' + 'mood=a&');
         expect(req.request.method).toEqual('GET');
         req.flush(mSummaries);
     });

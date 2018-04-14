@@ -73,15 +73,15 @@ export class GoalsComponent implements OnInit {
                     addGoalResult => {
                         this.highlightedID = addGoalResult;
                         this.refreshGoals();
+                        this.snackBar.open("Added Goal", "CLOSE", {
+                            duration: 2000,
+                        });
                     },
                     err => {
                         // This should probably be turned into some sort of meaningful response.
                         console.log('There was an error adding the goal.');
                         console.log('The error was ' + JSON.stringify(err));
                     });
-                this.snackBar.open("Added Goal", "CLOSE", {
-                    duration: 2000,
-                });
             }
         });
     }

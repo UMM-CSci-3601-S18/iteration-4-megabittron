@@ -13,10 +13,9 @@
             <button mat-icon-button td-menu-button tdLayoutToggle hide-gt-xs>
                 <mat-icon>menu</mat-icon>
             </button>
-            <span hide-xs class="desktop-title"><button mat-button class="computer" [routerLink]="['/']">My Panda</button></span>
+            <span hide-xs class="desktop-title"><button mat-button class="computer" (click)="restart()" [routerLink]="['/']">My Panda</button></span>
             <span hide-gt-xs>My Panda</span>
             <span flex></span>
-            <a class="desktop-home computer" mat-button [routerLink]="['/']" routerLinkActive="nav-active" [routerLinkActiveOptions]="{ exact: true }" hide-xs>Home</a>
             <a class="desktop-goals computer" mat-button [routerLink]="['/goals']" routerLinkActive="nav-active" hide-xs>Goals</a>
             <a class="desktop-journals computer" mat-button [routerLink]="['/journals']" routerLinkActive="nav-active" hide-xs>Journals</a>
             <a class="desktop-resources computer" mat-button [routerLink]="['/resources']" routerLinkActive="nav-active" hide-xs>Resources</a>

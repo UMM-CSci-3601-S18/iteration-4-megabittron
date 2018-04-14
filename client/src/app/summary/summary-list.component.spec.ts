@@ -11,8 +11,8 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 
 
-        /** Tests the filtering used for display of summary list **/
-/*
+        /** Tests the filtering used for display of summary list ---------------------------------------------------------------------------------- **/
+
         describe('Summary', () => {
 
             let summary: SummaryListComponent;
@@ -28,22 +28,25 @@ import 'rxjs/add/operator/do';
                     getSummaries: () => Observable.of([
                         {
                             _id: '1',
+                            userID: 'userID1',
                             mood: 'happy',
-                            date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 2,
                             description: 'slept',
                         },
                         {
                             _id: '2',
+                            userID: 'userID1',
                             mood: 'sad',
-                            date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Thu Apr 05 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 4,
                             description: 'friend died',
                         },
                         {
                             _id: '3',
+                            userID: 'userID1',
                             mood: 'mad',
-                            date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sun Apr 08 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
                         },
@@ -115,7 +118,7 @@ import 'rxjs/add/operator/do';
 
             it('summary filters by start date', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                summary.startDate = new Date('Fri Apr 06 2018 15:23:28 GMT-0500 (CDT)');
+                summary.startDate = new Date('Fri Apr 06 2018 15:23:28 GMT-0000 (UTC)');
                 summary.refreshSummaries().subscribe(() => {
                     expect(summary.filteredSummaries.length).toBe(2);
                 });
@@ -123,7 +126,7 @@ import 'rxjs/add/operator/do';
 
             it('summary filters by end date', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                summary.endDate = new Date('Fri Apr 06 2018 15:23:28 GMT-0500 (CDT)');
+                summary.endDate = new Date('Fri Apr 06 2018 15:23:28 GMT-0000 (UTC)');
                 summary.refreshSummaries().subscribe(() => {
                     expect(summary.filteredSummaries.length).toBe(1);
                 });
@@ -133,8 +136,8 @@ import 'rxjs/add/operator/do';
                 expect(summary.filteredSummaries.length).toBe(3);
                 summary.summaryMood = 'happy';
                 summary.summaryIntensity = '2';
-                summary.startDate = new Date('Fri Apr 06 2018 15:23:28 GMT-0500 (CDT)');
-                summary.endDate = new Date('Sat Apr 07 2018 20:00:00 GMT-0500 (CDT)');
+                summary.startDate = new Date('Fri Apr 06 2018 15:23:28 GMT-0000 (UTC)');
+                summary.endDate = new Date('Sat Apr 07 2018 20:00:00 GMT-0000 (UTC)');
                 summary.refreshSummaries().subscribe(() => {
                     expect(summary.filteredSummaries.length).toBe(1);
                 });
@@ -142,10 +145,10 @@ import 'rxjs/add/operator/do';
 
             it('clearDateFilter() works', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                summary.startDate = 'Fri Apr 06 2018 15:23:28 GMT-0500 (CDT)';
-                summary.endDate = 'Sat Apr 07 2018 20:00:00 GMT-0500 (CDT)';
-                expect(summary.startDate).toBe('Fri Apr 06 2018 15:23:28 GMT-0500 (CDT)');
-                expect(summary.endDate).toBe('Sat Apr 07 2018 20:00:00 GMT-0500 (CDT)');
+                summary.startDate = 'Fri Apr 06 2018 15:23:28 GMT-0000 (UTC)';
+                summary.endDate = 'Sat Apr 07 2018 20:00:00 GMT-0000 (UTC)';
+                expect(summary.startDate).toBe('Fri Apr 06 2018 15:23:28 GMT-0000 (UTC)');
+                expect(summary.endDate).toBe('Sat Apr 07 2018 20:00:00 GMT-0000 (UTC)');
                 summary.clearDateFilter();
                 expect(summary.startDate).toBe(null);
                 expect(summary.endDate).toBe(null);
@@ -153,9 +156,9 @@ import 'rxjs/add/operator/do';
             });
 
         });
-*/
-        /** Tests the filtering used for charts when looking at all time **/
-/*
+
+        /** Tests the filtering used for charts when looking at all time ---------------------------------------------------------------------------------- **/
+
         describe('Chart Filtering - no limit', () => {
 
             let summary: SummaryListComponent;
@@ -171,22 +174,25 @@ import 'rxjs/add/operator/do';
                     getSummaries: () => Observable.of([
                         {
                             _id: '1',
+                            userID: 'userID1',
                             mood: 'happy',
-                            date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 2,
                             description: 'slept',
                         },
                         {
                             _id: '2',
+                            userID: 'userID1',
                             mood: 'sad',
-                            date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Thu Apr 05 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 4,
                             description: 'friend died',
                         },
                         {
                             _id: '3',
+                            userID: 'userID1',
                             mood: 'mad',
-                            date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sun Apr 08 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
                         },
@@ -216,22 +222,22 @@ import 'rxjs/add/operator/do';
                 });
             }));
 
-            it('filterLineGraph filters correctly for all time', () => {
+            it('filterDetailedGraph filters correctly for all time', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterLineGraph(0, 'mad')).toBe(1);
-                expect(summary.filterLineGraph(2, 'mad')).toBe(0);
+                expect(summary.filterDetailedGraph(0, 'mad')).toBe(1);
+                expect(summary.filterDetailedGraph(2, 'mad')).toBe(0);
             });
 
-            it('filterBarGraph filters correctly for all time', () => {
+            it('filterBasicGraph filters correctly for all time', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBarGraph(0)).toBe(1);
-                expect(summary.filterBarGraph(2)).toBe(0);
+                expect(summary.filterBasicGraph(0)).toBe(1);
+                expect(summary.filterBasicGraph(2)).toBe(0);
             });
 
         });
-*/
-        /** Tests the filtering used for charts when looking at past day **/
-/*
+
+        /** Tests the filtering used for charts when looking at past day ---------------------------------------------------------------------------------- **/
+
         describe('Chart Filtering - Past Day', () => {
 
             let summary: SummaryListComponent;
@@ -247,22 +253,25 @@ import 'rxjs/add/operator/do';
                     getSummaries: () => Observable.of([
                         {
                             _id: '1',
+                            userID: 'userID1',
                             mood: 'happy',
-                            date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 2,
                             description: 'slept',
                         },
                         {
                             _id: '2',
+                            userID: 'userID1',
                             mood: 'sad',
-                            date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Thu Apr 05 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 4,
                             description: 'friend died',
                         },
                         {
                             _id: '3',
+                            userID: 'userID1',
                             mood: 'mad',
-                            date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sun Apr 08 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
                         },
@@ -289,26 +298,26 @@ import 'rxjs/add/operator/do';
                     summary.startDate = null;
                     summary.endDate = null;
                     summary.limitedPast = true;
-                    summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0500 (CDT)');
+                    summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0000 (UTC)');
                     // Above means nowHour becomes 20
-                    summary.nowUnix = summary.nowStamp.getTime();
-                    summary.nowHour = summary.nowStamp.getHours();
-                    summary.lastDayUnix = summary.nowUnix - 86400000;
-                    summary.lastDayDate = new Date(summary.lastDayUnix);
+                    summary.nowHour = 20;
+                    summary.lastDayStamp = new Date('Sat Apr 07 2018 20:00:00 GMT-0000 (UTC)');
                     summary.inputType = "day";
                 });
             }));
 
-            it('filterLineGraph filters correctly for inputType = day', () => {
+            it('filterDetailedGraph filters correctly for inputType = day', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterLineGraph(15, 'mad')).toBe(1);
-                expect(summary.filterLineGraph(2, 'mad')).toBe(0);
+                console.log(summary.nowStamp.toString());
+                console.log(summary.nowHour.toString());
+                expect(summary.filterDetailedGraph(15, 'mad')).toBe(1);
+                expect(summary.filterDetailedGraph(2, 'mad')).toBe(0);
             });
 
-            it('filterBarGraph filters correctly for inputType = day', () => {
+            it('filterBasicGraph filters correctly for inputType = day', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBarGraph(15)).toBe(1);
-                expect(summary.filterBarGraph(2)).toBe(0);
+                expect(summary.filterBasicGraph(15)).toBe(1);
+                expect(summary.filterBasicGraph(2)).toBe(0);
             });
 
             it('modHour works as intended', () => {
@@ -317,29 +326,29 @@ import 'rxjs/add/operator/do';
                 expect(summary.modHour(30)).toBe(3);
             });
 
-            it('filterLineGraph works correctly when using modHour', () => {
+            it('filterDetailedGraph works correctly when using modHour', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterLineGraph(summary.modHour(18), 'mad')).toBe(1);
-                expect(summary.filterLineGraph(summary.modHour(0), 'mad')).toBe(0);
+                expect(summary.filterDetailedGraph(summary.modHour(18), 'mad')).toBe(1);
+                expect(summary.filterDetailedGraph(summary.modHour(0), 'mad')).toBe(0);
             });
 
-            it('filterBarGraph works correctly when using modHour', () => {
+            it('filterBasicGraph works correctly when using modHour', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBarGraph(summary.modHour(18))).toBe(1);
-                expect(summary.filterBarGraph(summary.modHour(0))).toBe(0);
+                expect(summary.filterBasicGraph(summary.modHour(18))).toBe(1);
+                expect(summary.filterBasicGraph(summary.modHour(0))).toBe(0);
             });
 
             it('getPastHours works as intended', () => {
-                expect(summary.getPastHours(1)).toBe('10 PM');
-                expect(summary.getPastHours(13)).toBe('10 AM');
-                expect(summary.getPastHours(0)).toBe('9 PM');
-                expect(summary.getPastHours(12)).toBe('9 AM');
+                expect(summary.getPastHours(1)).toBe('5 PM');
+                expect(summary.getPastHours(13)).toBe('5 AM');
+                expect(summary.getPastHours(0)).toBe('4 PM');
+                expect(summary.getPastHours(12)).toBe('4 AM');
             });
 
         });
-*/
-        /** Tests the filtering used for charts when looking at past week **/
-/*
+
+        /** Tests the filtering used for charts when looking at past week ---------------------------------------------------------------------------------- **/
+
         describe('Chart Filtering - Past Week', () => {
 
             let summary: SummaryListComponent;
@@ -355,22 +364,25 @@ import 'rxjs/add/operator/do';
                     getSummaries: () => Observable.of([
                         {
                             _id: '1',
+                            userID: 'userID1',
                             mood: 'happy',
-                            date: 'Sat Apr 07 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 2,
                             description: 'slept',
                         },
                         {
                             _id: '2',
+                            userID: 'userID1',
                             mood: 'sad',
-                            date: 'Thu Apr 05 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Thu Apr 05 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 4,
                             description: 'friend died',
                         },
                         {
                             _id: '3',
+                            userID: 'userID1',
                             mood: 'mad',
-                            date: 'Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)',
+                            date: 'Sun Apr 08 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
                         },
@@ -397,26 +409,24 @@ import 'rxjs/add/operator/do';
                     summary.startDate = null;
                     summary.endDate = null;
                     summary.limitedPast = true;
-                    summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0500 (CDT)');
+                    summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0000 (UTC)');
                     // Above means nowDay becomes 0
-                    summary.nowUnix = summary.nowStamp.getTime();
-                    summary.nowDay = summary.nowStamp.getDay();
-                    summary.lastWeekUnix = summary.nowUnix - 604800000;
-                    summary.lastWeekDate = new Date(summary.lastWeekUnix);
+                    summary.nowDay = 0;
+                    summary.lastWeekStamp = new Date('Sun Apr 01 2018 20:00:00 GMT-0000 (UTC)');
                     summary.inputType = "week";
                 });
             }));
 
-            it('filterLineGraph filters correctly for inputType = week', () => {
+            it('filterDetailedGraph filters correctly for inputType = week', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterLineGraph(4, 'sad')).toBe(1);
-                expect(summary.filterLineGraph(2, 'sad')).toBe(0);
+                expect(summary.filterDetailedGraph(4, 'sad')).toBe(1);
+                expect(summary.filterDetailedGraph(2, 'sad')).toBe(0);
             });
 
-            it('filterBarGraph filters correctly for inputType = week', () => {
+            it('filterBasicGraph filters correctly for inputType = week', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBarGraph(4)).toBe(1);
-                expect(summary.filterBarGraph(2)).toBe(0);
+                expect(summary.filterBasicGraph(4)).toBe(1);
+                expect(summary.filterBasicGraph(2)).toBe(0);
             });
 
             it('modDay works as intended', () => {
@@ -425,16 +435,16 @@ import 'rxjs/add/operator/do';
                 expect(summary.modDay(30)).toBe(3);
             });
 
-            it('filterLineGraph works correctly when using modDay', () => {
+            it('filterDetailedGraph works correctly when using modDay', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterLineGraph(summary.modDay(10), 'sad')).toBe(1);
-                expect(summary.filterLineGraph(summary.modDay(0), 'sad')).toBe(0);
+                expect(summary.filterDetailedGraph(summary.modDay(10), 'sad')).toBe(1);
+                expect(summary.filterDetailedGraph(summary.modDay(0), 'sad')).toBe(0);
             });
 
-            it('filterBarGraph works correctly when using modDay', () => {
+            it('filterBasicGraph works correctly when using modDay', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBarGraph(summary.modDay(10))).toBe(1);
-                expect(summary.filterBarGraph(summary.modDay(0))).toBe(0);
+                expect(summary.filterBasicGraph(summary.modDay(10))).toBe(1);
+                expect(summary.filterBasicGraph(summary.modDay(0))).toBe(0);
             });
 
             it('getPastDays works as intended', () => {
@@ -444,10 +454,234 @@ import 'rxjs/add/operator/do';
             });
 
         });
-       */
 
 
-        /** -------------------------------------------------------- **/
+        /** Tests the filtering used for charts when looking at past month ---------------------------------------------------------------------------------- **/
+
+        describe('Chart Filtering - Past Month', () => {
+
+            let summary: SummaryListComponent;
+            let fixture: ComponentFixture<SummaryListComponent>;
+
+            let summaryServiceStub: {
+                getSummaries: () => Observable<Summary[]>
+            };
+
+            beforeEach(() => {
+                // stub SummaryListService for test purposes
+                summaryServiceStub = {
+                    getSummaries: () => Observable.of([
+                        {
+                            _id: '1',
+                            userID: 'userID1',
+                            mood: 'happy',
+                            date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
+                            intensity: 2,
+                            description: 'slept',
+                        },
+                        {
+                            _id: '2',
+                            userID: 'userID1',
+                            mood: 'sad',
+                            date: 'Thu Apr 05 2018 15:23:28 GMT-0000 (UTC)',
+                            intensity: 4,
+                            description: 'friend died',
+                        },
+                        {
+                            _id: '3',
+                            userID: 'userID1',
+                            mood: 'mad',
+                            date: 'Sun Apr 08 2018 15:23:28 GMT-0000 (UTC)',
+                            intensity: 5,
+                            description: 'didn\'t sleep',
+                        },
+                    ])
+                };
+
+
+                TestBed.configureTestingModule({
+                    imports: [CustomModule],
+                    declarations: [SummaryListComponent],
+                    providers: [{provide: SummaryListService, useValue: summaryServiceStub},
+                        {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
+                });
+            });
+
+            beforeEach(async(() => {
+                TestBed.compileComponents().then(() => {
+                    fixture = TestBed.createComponent(SummaryListComponent);
+                    summary = fixture.componentInstance;
+                    fixture.detectChanges();
+
+                    summary.summaryMood = "All";
+                    summary.summaryIntensity = "All";
+                    summary.startDate = null;
+                    summary.endDate = null;
+                    //summary.filterSummaries(summary.summaryMood,
+                   //     summary.summaryIntensity, summary.startDate, summary.endDate);
+                    summary.limitedPast = true;
+                    summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0000 (UTC)');
+                    // Above means nowDate becomes 8
+                    summary.nowDate = 8;
+                    summary.lastMonthStamp = new Date('Thu Mar 08 2018 20:00:00 GMT-0000 (UTC)');
+                    summary.inputType = "month";
+                });
+            }));
+
+            it('filterDetailedGraph filters correctly for inputType = month', () => {
+                expect(summary.summaries.length).toBe(3);
+                expect(summary.filterDetailedGraph(5, 'sad')).toBe(1);
+                expect(summary.filterDetailedGraph(2, 'sad')).toBe(0);
+            });
+
+            it('filterBasicGraph filters correctly for inputType = month', () => {
+                expect(summary.filteredSummaries.length).toBe(3);
+                expect(summary.filterBasicGraph(5)).toBe(1);
+                expect(summary.filterBasicGraph(2)).toBe(0);
+            });
+
+            it('modDate works as intended', () => {
+                expect(summary.modDate(6)).toBe(14);
+                expect(summary.modDate(0)).toBe(8);
+                expect(summary.modDate(30)).toBe(7);
+            });
+
+            it('filterDetailedGraph works correctly when using modDate', () => {
+                expect(summary.summaries.length).toBe(3);
+                expect(summary.filterDetailedGraph(summary.modDate(28), 'sad')).toBe(1);
+                expect(summary.filterDetailedGraph(summary.modDate(1), 'sad')).toBe(0);
+            });
+
+            it('filterBasicGraph works correctly when using modDate', () => {
+                expect(summary.filteredSummaries.length).toBe(3);
+                expect(summary.filterBasicGraph(summary.modDate(28))).toBe(1);
+                expect(summary.filterBasicGraph(summary.modDate(1))).toBe(0);
+            });
+
+            it('getPastMonths works as intended', () => {
+                expect(summary.getPastDates(0)).toBe('9');
+                expect(summary.getPastDates(6)).toBe('15');
+                expect(summary.getPastDates(3)).toBe('12');
+            });
+
+        });
+
+
+        /** Tests the filtering used for charts when looking at past year ---------------------------------------------------------------------------------- **/
+
+        describe('Chart Filtering - Past Year', () => {
+
+            let summary: SummaryListComponent;
+            let fixture: ComponentFixture<SummaryListComponent>;
+
+            let summaryServiceStub: {
+                getSummaries: () => Observable<Summary[]>
+            };
+
+            beforeEach(() => {
+                // stub SummaryListService for test purposes
+                summaryServiceStub = {
+                    getSummaries: () => Observable.of([
+                        {
+                            _id: '1',
+                            userID: 'userID1',
+                            mood: 'happy',
+                            date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
+                            intensity: 2,
+                            description: 'slept',
+                        },
+                        {
+                            _id: '2',
+                            userID: 'userID1',
+                            mood: 'sad',
+                            date: 'Thu Apr 05 2018 15:23:28 GMT-0000 (UTC)',
+                            intensity: 4,
+                            description: 'friend died',
+                        },
+                        {
+                            _id: '3',
+                            userID: 'userID1',
+                            mood: 'mad',
+                            date: 'Sun Apr 08 2018 15:23:28 GMT-0000 (UTC)',
+                            intensity: 5,
+                            description: 'didn\'t sleep',
+                        },
+                    ])
+                };
+
+
+                TestBed.configureTestingModule({
+                    imports: [CustomModule],
+                    declarations: [SummaryListComponent],
+                    providers: [{provide: SummaryListService, useValue: summaryServiceStub},
+                        {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
+                });
+            });
+
+            beforeEach(async(() => {
+                TestBed.compileComponents().then(() => {
+                    fixture = TestBed.createComponent(SummaryListComponent);
+                    summary = fixture.componentInstance;
+                    fixture.detectChanges();
+
+                    summary.summaryMood = 'All';
+                    summary.summaryIntensity = 'All';
+                    summary.startDate = null;
+                    summary.endDate = null;
+                    summary.limitedPast = true;
+                    summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0000 (UTC)');
+                    // Above means nowMonth becomes 3
+                    summary.nowMonth = 3;
+                    summary.lastYearStamp = new Date('Sun Apr 08 2017 20:00:00 GMT-0000 (UTC)');
+                    summary.inputType = "year";
+                });
+            }));
+
+            it('filterDetailedGraph filters correctly for inputType = year', () => {
+                expect(summary.summaries.length).toBe(3);
+                expect(summary.filterDetailedGraph(3, 'sad')).toBe(1);
+                expect(summary.filterDetailedGraph(0, 'sad')).toBe(0);
+            });
+
+            it('filterBasicGraph filters correctly for inputType = year', () => {
+                expect(summary.filteredSummaries.length).toBe(3);
+                expect(summary.filterBasicGraph(3)).toBe(3);
+                expect(summary.filterBasicGraph(0)).toBe(0);
+            });
+
+            it('modMonth works as intended', () => {
+                expect(summary.modMonth(6)).toBe(10);
+                expect(summary.modMonth(0)).toBe(4);
+                expect(summary.modMonth(30)).toBe(10);
+            });
+
+            it('filterDetailedGraph works correctly when using modMonth', () => {
+                expect(summary.summaries.length).toBe(3);
+                expect(summary.filterDetailedGraph(summary.modMonth(11), 'sad')).toBe(1);
+                expect(summary.filterDetailedGraph(summary.modMonth(0), 'sad')).toBe(0);
+            });
+
+            it('filterBasicGraph works correctly when using modMonth', () => {
+                expect(summary.filteredSummaries.length).toBe(3);
+                expect(summary.filterBasicGraph(summary.modMonth(11))).toBe(3);
+                expect(summary.filterBasicGraph(summary.modMonth(0))).toBe(0);
+            });
+
+            it('getPastMonths works as intended', () => {
+                expect(summary.getPastMonths(0)).toBe('May');
+                expect(summary.getPastMonths(6)).toBe('Nov');
+                expect(summary.getPastMonths(3)).toBe('Aug');
+            });
+
+        });
+
+
+
+
+
+
+
+/** -------------------------------------------------------- ---------------------------------------------------------------------------------- **/
 /*
 describe('Misbehaving Summary ', () => {
     let summary: SummaryListComponent;
