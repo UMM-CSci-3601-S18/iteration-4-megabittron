@@ -37,6 +37,7 @@ export class AppComponent implements OnInit {
         //let googleAuth = gapi.auth2.getAuthInstance();
 
 
+        this.googleAuth = gapi.auth2.getAuthInstance();
         this.googleAuth.then(() => {
             this.googleAuth.signOut();
             localStorage.setItem('isSignedIn', 'false');
