@@ -12,31 +12,10 @@ declare var gapi: any;
 })
 export class AppComponent implements OnInit {
     title = 'Friendly Panda App';
-    private highlightedEmotion = "happy";
-    public emotionDescription: string;
-    public emojiRating: number = 0;
-    public selectedEmotion = "none";
+
 
     constructor(private http: HttpClient) {
 
-    }
-
-    // from home component, for going to home page and reloading on double click
-    restart(){
-        this.resetPage();
-        window.location.reload();
-    }
-
-    resetPage(){
-        //this.resetSelections();
-        this.selectedEmotion = "none";
-        this.emojiRating = 0;
-        this.emotionDescription = "";
-    }
-
-    private resetSelections(){
-        let newClass = document.getElementById(this.highlightedEmotion);
-        newClass.classList.remove('on');
     }
 
     signIn() {
