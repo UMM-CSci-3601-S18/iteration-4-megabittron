@@ -282,7 +282,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             return (this.nowHour + 1 + hour)%24;
         }
         else {
-            return hour - this.timeZone;
+            return (hour - this.timeZone)%24;
         }
     }
 
