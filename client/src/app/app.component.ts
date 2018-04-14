@@ -12,16 +12,18 @@ declare var gapi: any;
 })
 export class AppComponent implements OnInit {
     title = 'Friendly Panda App';
-
+    googleAuth;
 
     constructor(private http: HttpClient) {
 
     }
 
-    signIn() {
-        let googleAuth = gapi.auth2.getAuthInstance();
 
-        googleAuth.grantOfflineAccess().then((resp) => {
+    signIn() {
+        //let googleAuth = gapi.auth2.getAuthInstance();
+
+        this.googleAuth = gapi.auth2.getAuthInstance();
+        this.googleAuth.grantOfflineAccess().then((resp) => {
 
             localStorage.setItem('isSignedIn', 'true');
             this.sendAuthCode(resp.code);
@@ -32,11 +34,11 @@ export class AppComponent implements OnInit {
     }
 
     signOut() {
-        let googleAuth = gapi.auth2.getAuthInstance();
+        //let googleAuth = gapi.auth2.getAuthInstance();
 
 
-        googleAuth.then(() => {
-            googleAuth.signOut();
+        this.googleAuth.then(() => {
+            this.googleAuth.signOut();
             localStorage.setItem('isSignedIn', 'false');
             localStorage.setItem("userID", "");
 
@@ -85,10 +87,12 @@ export class AppComponent implements OnInit {
             'scope': 'profile email'
         });
 
+
     }
 
     ngOnInit() {
         this.handleClientLoad();
 
+        this.googleAuth = gapi.auth2.getAuthInstance();
     }
 }
