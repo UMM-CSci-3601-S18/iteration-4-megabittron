@@ -78,6 +78,8 @@ export class HomeComponent {
     saveEmotion(): void{
         const newEmotion: Emotion = {_id: '', userID: localStorage.getItem("userID"), mood: this.selectedEmotion, intensity: this.emojiRating, description:this.emotionDescription, date: this.emotionDate};
 
+        if(localStorage.isSignedIn == "true"){
+
             console.log(newEmotion);
             this.emotionService.addNewEmotion(newEmotion).subscribe(
                 addEmotionResult => {
@@ -91,6 +93,12 @@ export class HomeComponent {
                     console.log('There was an error adding the emotion.');
                     console.log('The error was ' + JSON.stringify(err));
                 });
+        } else {
+
+            this.snackBar.open("Response Not Saved. Please Log In to Save Your Response", "CLOSE", {
+                duration: 5000,
+            });
+        }
     }
 
     /*
