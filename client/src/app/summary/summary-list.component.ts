@@ -61,13 +61,13 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     /** --------------------------------------- **/
 
     // These are public so that tests can reference them (.spec.ts)
-    public summaries: Summary[] = [];
-    public filteredSummaries: Summary[] = [];
-    public dateFilteredSummaries: Summary[] = [];
-    public pastWeekSummaries: Summary[] = [];
-    public pastDaySummaries: Summary[] = [];
-    public pastMonthSummaries: Summary[] = [];
-    public pastYearSummaries: Summary[] = [];
+    public summaries: Summary[];
+    public filteredSummaries: Summary[];
+    public dateFilteredSummaries: Summary[];
+    public pastWeekSummaries: Summary[];
+    public pastDaySummaries: Summary[];
+    public pastMonthSummaries: Summary[];
+    public pastYearSummaries: Summary[];
 
 
 
@@ -94,12 +94,6 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     public clearDateFilter(){
         this.startDate = null;
         this.endDate = null;
-    }
-
-    public testfunc(){
-       let test = new Date('Sun Apr 08 2018 15:23:28 GMT-0500 (CDT)');
-
-        return test.getUTCHours() + this.timeZone;
     }
 
     public filterDates(givenlist, searchStartDate: any, searchEndDate: any): Summary[] {
@@ -285,10 +279,10 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     public modHour(hour: number): Number {
         if(this.limitedPast){
-            return (this.nowHour + 1 + hour + this.timeZone)%24;
+            return (this.nowHour + 1 + hour)%24;
         }
         else {
-            return hour;
+            return hour - this.timeZone;
         }
     }
 
@@ -1181,9 +1175,6 @@ public pastDates = [
     }
 
     ngOnInit(): void {
-        /** ----------------------------------------------------- **/
-        //localStorage.setItem("userID", "5acd1a31fc0ccccabe562d1a");
-        /** ----------------------------------------------------- **/
         this.refreshSummaries();
         this.loadService();
     }

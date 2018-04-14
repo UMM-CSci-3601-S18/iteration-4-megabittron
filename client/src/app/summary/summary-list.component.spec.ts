@@ -321,20 +321,20 @@ import 'rxjs/add/operator/do';
             });
 
             it('modHour works as intended', () => {
-                expect(summary.modHour(23)).toBe(15);
-                expect(summary.modHour(0)).toBe(16);
-                expect(summary.modHour(30)).toBe(22);
+                expect(summary.modHour(23)).toBe(20);
+                expect(summary.modHour(0)).toBe(21);
+                expect(summary.modHour(30)).toBe(3);
             });
 
             it('filterDetailedGraph works correctly when using modHour', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(summary.modHour(23), 'mad')).toBe(1);
+                expect(summary.filterDetailedGraph(summary.modHour(18), 'mad')).toBe(1);
                 expect(summary.filterDetailedGraph(summary.modHour(0), 'mad')).toBe(0);
             });
 
             it('filterBasicGraph works correctly when using modHour', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBasicGraph(summary.modHour(23))).toBe(1);
+                expect(summary.filterBasicGraph(summary.modHour(18))).toBe(1);
                 expect(summary.filterBasicGraph(summary.modHour(0))).toBe(0);
             });
 

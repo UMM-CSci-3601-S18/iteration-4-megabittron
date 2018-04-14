@@ -3,7 +3,6 @@
         <mat-card id="filtering">
             <div class="top" id="filterCard">
 
-                {{this.testfunc()}}
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
                 <mat-divider></mat-divider>
                 <h3><i>Filtering:</i></h3>
@@ -11,56 +10,34 @@
             <div id="filterContents">
             <form>
                 <!--# The Angular feature-->
-                <label> Mood:</label>
-                <select name="dropdown" id="summaryMood" #input placeholder="Filter by Mood" (input)="summaryMood = $event.target.value">
-                    <option id ="dropdownAllMoods" selected value="All">All Moods</option>
-                    <option id ="dropdownHappy" value="Happy">Happy</option>
-                    <option id ="dropdownSad" value="Sad">Sad</option>
-                    <option id ="dropdownMeh" value="Meh">Meh</option>
-                    <option id ="dropdownMad" value="Mad">Mad</option>
-                    <option id ="dropdownAnxious" value="Anxious">Anxious</option>
-                </select>
-                <!--
-                <mat-select name="dropdown" id="summaryMood" #input placeholder="Filter by Mood" (input)="summaryMood = $event.target.value">
-                    <mat-option id ="dropdownAllMoods" selected value="All">All Moods</mat-option>
+                <label> Emotion:</label>
+
+                <mat-select name="dropdown" id="summaryMood"
+                            #input placeholder="Filter by Mood"
+                            [(ngModel)]="summaryMood">
+                    <mat-option id ="dropdownAllMoods" selected value="All">All Emotions</mat-option>
                     <mat-option id ="dropdownHappy" value="Happy">Happy</mat-option>
                     <mat-option id ="dropdownSad" value="Sad">Sad</mat-option>
                     <mat-option id ="dropdownMeh" value="Meh">Meh</mat-option>
+                    <mat-option id ="dropdownMad" value="Mad">Mad</mat-option>
                     <mat-option id ="dropdownAnxious" value="Anxious">Anxious</mat-option>
-                    <mat-option value="0">GMT (UTC+00)</mat-option>
-                    <mat-option value="0">GMT (UTC+00)</mat-option>
-                    <mat-option value="0">GMT (UTC+00)</mat-option>
-                    <mat-option value="0">GMT (UTC+00)</mat-option>
-
                 </mat-select>
-                -->
             </form>
+
                 <br>
 
                 <form>
                     <label> Intensity: </label>
-                    <select name="dropdownInt" id="summaryInt" #input placeholder="Filter by Intensity" (input)="summaryIntensity = $event.target.value">
-                        <option id="dropdownAll" selected value="All">All</option>
-                        <option id="dropdown1" value="1">1</option>
-                        <option id="dropdown2" value="2">2</option>
-                        <option id="dropdown3" value="3">3</option>
-                        <option id="dropdown4" value="4">4</option>
-                        <option id="dropdown5" value="5">5</option>
-                    </select>
-                    <!--
-                <mat-select placeholder="TimeZone">
-                    <mat-option value="0">GMT (UTC+00)</mat-option>
-                    <mat-option value="0">GMT (UTC+00)</mat-option>
-                    <mat-option value="0">GMT (UTC+00)</mat-option>
-                    <mat-option value="0">GMT (UTC+00)</mat-option>
-                    <mat-option value="0">GMT (UTC+00)</mat-option>
-                    <mat-option value="0">GMT (UTC+00)</mat-option>
-                    <mat-option value="0">GMT (UTC+00)</mat-option>
-                    <mat-option value="0">GMT (UTC+00)</mat-option>
-                    <mat-option value="0">GMT (UTC+00)</mat-option>
-
-                </mat-select>
-                -->
+                    <mat-select name="dropdownInt" id="summaryInt"
+                                #input placeholder="Filter by Intensity"
+                                [(ngModel)]="summaryIntensity">
+                        <mat-option id="dropdownAll" selected value="All">All</mat-option>
+                        <mat-option id="dropdown1" value="1">1</mat-option>
+                        <mat-option id="dropdown2" value="2">2</mat-option>
+                        <mat-option id="dropdown3" value="3">3</mat-option>
+                        <mat-option id="dropdown4" value="4">4</mat-option>
+                        <mat-option id="dropdown5" value="5">5</mat-option>
+                    </mat-select>
                 </form>
 
                 <mat-form-field class="start">
@@ -86,11 +63,8 @@
                     <mat-datepicker-toggle id = "endButton" matSuffix [for]="end"></mat-datepicker-toggle>
                     <mat-datepicker touchUi="true" #end disabled="false"></mat-datepicker>
                 </mat-form-field>
-
-                <br>
-
-
                 <button mat-raised-button id="clearDatesButton" (click)="this.clearDateFilter()">Clear Date Filters</button>
+
             </div>
             </div>
 
@@ -105,12 +79,13 @@
                         <form>
                             <!--# The Angular feature-->
                             <label>Show entries across a day or week?</label>
-                            <select name="dropdown" id="labelType" #input (input)="inputType = $event.target.value">
-                                <option id ="Day" value="day">Day</option>
-                                <option id ="Week" value="week" selected>Week</option>
-                                <option id ="Month" value="month">Month</option>
-                                <option id ="Year" value="year">Year</option>
-                            </select>
+                            <mat-select name="dropdown" id="labelType"
+                                    #input [(ngModel)]="inputType">
+                                <mat-option id ="Day" value="day">Day</mat-option>
+                                <mat-option id ="Week" value="week" selected>Week</mat-option>
+                                <mat-option id ="Month" value="month">Month</mat-option>
+                                <mat-option id ="Year" value="year">Year</mat-option>
+                            </mat-select>
                         </form>
                         <br>
                         <mat-checkbox [(ngModel)]="limitedPast">Show only entries from the past {{inputType}}</mat-checkbox>
@@ -169,9 +144,6 @@
                     </mat-card>
                 </mat-tab>
             </mat-tab-group>
-
-                {{this.nowDate}}
-
             </div>
         </mat-card>
     </div>
