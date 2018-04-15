@@ -6,9 +6,11 @@ import {Component} from '@angular/core';
     styleUrls: ['./resources.component.css'],
 })
 export class ResourcesComponent {
-    public title: string;
+    public videoTitle; linkTitle; numberTitle: string;
 
     constructor() {
-        this.title = 'Resources';
+        this.videoTitle = 'Videos';
+        this.linkTitle = 'Links';
+        this.numberTitle = 'Phone Numbers';
     }
 }

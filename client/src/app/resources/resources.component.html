@@ -1,14 +1,9 @@
-
-<div layout='row' layout-xs="column" class="best-div">
-
-    <!-- Phone Numbers Card -->
-    <div class="phone-div">
-    <mat-card class="phone-numbers">
-        <mat-card-title class="phone-numbers-title"><mat-icon id="phone-icon">phone</mat-icon>Phone Numbers</mat-card-title>
-        <mat-card-subtitle id="phone-numbers-subtitle">If you feel that you are in need of any sort of assistance,
+<div layout='row' layout-sm="column" layout-xs="column">
+    <div class="phone-div container">
+    <mat-card class="phone-numbers card">
+        <mat-card-title class="numbers title"><mat-icon id="phone-icon">phone</mat-icon>Phone Numbers</mat-card-title>
+        <mat-card-subtitle>If you feel that you are in need of any sort of assistance,
         you can refer to one of these hotlines for help.</mat-card-subtitle>
-
-            <!-- First number -->
             <mat-expansion-panel #elem class="phone-numbers-to-call">
                 <mat-expansion-panel-header>
                     <mat-panel-title class="hotline-company-name">Suicide Prevention Lifeline</mat-panel-title>
@@ -17,11 +12,8 @@
                     free and confidential support for people in distress, prevention and crisis
                     resources for you or your loved ones, and best practices
                     for professionals.</mat-panel-description>
-                <br>
                 <mat-panel-description class="actual-phone-number"><mat-icon class="little-phone-icon">phone</mat-icon> 1-800-273-8255</mat-panel-description>
             </mat-expansion-panel>
-
-        <!-- Second number -->
         <mat-expansion-panel #elem class="phone-numbers-to-call">
             <mat-expansion-panel-header>
                 <mat-panel-title class="hotline-company-name">Crisis Hotline</mat-panel-title>
@@ -31,11 +23,8 @@
                 help, support, and information. Crisis can affect anyone at any time.
                 The need for emotional support or referral assistance is something most
                 individuals encounter at some point in their lives.</mat-panel-description>
-            <br>
             <mat-panel-description class="actual-phone-number"><mat-icon class="little-phone-icon">phone</mat-icon> 775-784-8090</mat-panel-description>
         </mat-expansion-panel>
-
-        <!-- Third number -->
         <mat-expansion-panel #elem class="phone-numbers-to-call">
             <mat-expansion-panel-header>
                 <mat-panel-title class="hotline-company-name">Crisis Text Line</mat-panel-title>
@@ -45,44 +34,111 @@
                 bring texters from a hot moment to a cool calm through active listening
                 and collaborative problem solving. All of our Crisis Counselors are volunteers,
                 donating their time to helping people in crisis.</mat-panel-description>
-            <br>
             <mat-panel-description class="actual-phone-number"><mat-icon class="little-phone-icon">message</mat-icon> 741741</mat-panel-description>
         </mat-expansion-panel>
-
-
-        <br>
-
     </mat-card>
     </div>
-
-    <!-- Resources Card -->
-    <div class="main-div">
-    <mat-card class="main-card">
-        <mat-card-title id="main-thing-title">{{ this.title }}</mat-card-title>
+    <div class="main-div container">
+    <mat-card class="main-card card">
+        <mat-card-title class="videos title">{{this.videoTitle}}</mat-card-title>
+        <mat-card-subtitle>YouTube video playlists.</mat-card-subtitle>
         <mat-divider></mat-divider>
-        <mat-card-header>This is a breathing exercise for when you are feeling stressed out. Breathe in as the image is building and out as the image shrinks.</mat-card-header>
         <mat-card-content>
-            <img id="breathing" width= "100%" src="../../assets/images/ezgif.com-resize.gif">
+            <mat-list>
+                <a mat-list-item class="video link"
+                   target="_blank"
+                   href="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37AO-nqegk5cEwS1ElAoQLNr">
+                    <button mat-icon-button class="play-button">
+                        <mat-icon matTooltip="Play" class="play-icon">play_arrow</mat-icon>
+                    </button>
+                    <h4 mat-line>Funny</h4>
+                    <p mat-line>Cats, Dogs, & Babies</p>
+                </a>
+                <a mat-list-item class="video link"
+                   target="_blank"
+                   href="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37CvQMRHaqg-6yEQpLWjAdWu&index=2">
+                    <button mat-icon-button class="play-button">
+                        <mat-icon matTooltip="Play" class="play-icon">play_arrow</mat-icon>
+                    </button>
+                    <h4 mat-line>Depression</h4>
+                    <p mat-line>Rejection, Suicide, & More</p>
+                </a>
+                <a mat-list-item class="video link"
+                   target="_blank"
+                   href="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37D36KCVAns9LYvh1BV4m6YX">
+                    <button mat-icon-button class="play-button">
+                        <mat-icon matTooltip="Play" class="play-icon">play_arrow</mat-icon>
+                    </button>
+                    <h4 mat-line>Satisfying</h4>
+                    <p mat-line>Relaxing & More</p>
+                </a>
+                <a mat-list-item class="video link"
+                   target="_blank"
+                   href="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37Dx6Ohz5al_e1GljuZqvZ_M">
+                    <button mat-icon-button class="play-button">
+                        <mat-icon matTooltip="Play" class="play-icon">play_arrow</mat-icon>
+                    </button>
+                    <h4 mat-line>Anger Management</h4>
+                    <p mat-line>Techniques & Tips</p>
+                </a>
+                <a mat-list-item class="video link"
+                   target="_blank"
+                   href="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37BVBh18FtFKX-fEEroV6tQ9&index=8">
+                    <button mat-icon-button class="play-button">
+                        <mat-icon matTooltip="Play" class="play-icon">play_arrow</mat-icon>
+                    </button>
+                    <h4 mat-line>Anxiety</h4>
+                    <p mat-line>Dealing with negative thoughts</p>
+                </a>
+            </mat-list>
         </mat-card-content>
     </mat-card>
     </div>
-
-    <!-- Links Card -->
-    <div class="resources-div">
-    <mat-card class="resources-card">
-        <mat-card-title id="resources-title">Links</mat-card-title>
-        <mat-card-subtitle>These links take you to helpful pages.</mat-card-subtitle>
+    <div class="resources-div container">
+    <mat-card class="resources-card card">
+        <mat-card-title class="links title">{{this.linkTitle}}</mat-card-title>
+        <mat-card-subtitle>Visit a page for personal help.</mat-card-subtitle>
+        <mat-divider></mat-divider>
         <mat-card-content>
-            <a href="https://depression.org.nz/get-better/self-help/" target="_blank">Depression Help</a>
-            <br>
-            <a href="https://www.everydayhealth.com/news/cheap-natural-quick-anxiety-remedies/" target="_blank">Anxiety Help</a>
-            <br>
-            <a href="http://www.apa.org/helpcenter/controlling-anger.aspx" target="_blank">Anger Management Help</a>
-            <br>
-            <a href="http://enlightenmentportal.com/development/self-esteem-building-activities/" target="_blank">Self Esteem Building Activities</a>
-            <mat-divider></mat-divider>
+            <mat-list>
+                <a mat-list-item class="resource link"
+                   target="_blank"
+                   href="https://depression.org.nz/get-better/self-help/">
+                    <button mat-raised-button class="link-button">
+                        Depression Help
+                    </button></a>
+                <a mat-list-item class="resource link"
+                   target="_blank"
+                   href="https://www.helpguide.org/articles/depression/coping-with-depression.htm">
+                    <button mat-raised-button class="link-button">
+                        Coping With Depression
+                    </button></a>
+                <a mat-list-item class="resource link"
+                   target="_blank"
+                   href="https://adaa.org/tips-manage-anxiety-and-stress">
+                    <button mat-raised-button class="link-button">
+                        Mange Anxiety and Stress
+                    </button></a>
+                <a mat-list-item class="resource link"
+                   target="_blank"
+                   href="https://www.calmclinic.com/anxiety-guide/help-options">
+                    <button mat-raised-button class="link-button">
+                        Anxiety Help
+                    </button></a>
+                <a mat-list-item class="resource link"
+                   target="_blank"
+                   href="https://www.mayoclinic.org/healthy-lifestyle/adult-health/in-depth/anger-management/art-20045434">
+                    <button mat-raised-button class="link-button">
+                        Anger Management: 10 Tips
+                    </button></a>
+                <a mat-list-item class="resource link"
+                   target="_blank"
+                   href="https://www.mindtools.com/pages/article/newTCS_97.htm">
+                    <button mat-raised-button class="link-button">
+                        Anger Management
+                    </button></a>
+            </mat-list>
         </mat-card-content>
     </mat-card>
     </div>
-
 </div>
