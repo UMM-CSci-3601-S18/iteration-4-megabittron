@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 
 import {Goal} from './goal';
 import {GoalsService} from './goals.service';
+import {AppService} from "../app.service";
 
 describe('Goal list service: ', () => {
     // A small collection of test goals
@@ -49,6 +50,7 @@ describe('Goal list service: ', () => {
         goal.category.toLowerCase().indexOf('m') !== -1
     );
 
+    let appService: AppService;
     let goalListService: GoalsService;
     let currentlyImpossibleToGenerateSearchGoalUrl: string;
 
@@ -65,6 +67,7 @@ describe('Goal list service: ', () => {
         // Construct an instance of the service with the mock
         // HTTP client.
         goalListService = new GoalsService(httpClient);
+        appService = new AppService();
     });
 
     afterEach(() => {
@@ -100,6 +103,7 @@ describe('Goal list service: ', () => {
         // triggers the subscribe above, which leads to that check
         // actually being performed.
         req.flush(testGoal);
+
     });
 
     /*it('getGoals(goalCategory) adds appropriate param string to called URL', () => {

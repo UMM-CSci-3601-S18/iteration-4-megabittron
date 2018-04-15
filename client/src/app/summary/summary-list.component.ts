@@ -12,6 +12,7 @@ import {AppService} from "../app.service";
     selector: 'app-summary-list-component',
     templateUrl: 'summary-list.component.html',
     styleUrls: ['./summary-list.component.css'],
+    providers: [AppService]
 })
 
 export class SummaryListComponent implements AfterViewInit, OnInit {

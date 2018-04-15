@@ -22,6 +22,7 @@ import {JournalsService} from "./journals/journals.service";
 import {ArraySortPipe} from "./journals/array-sort.pipe";
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
+import {AppService} from "./app.service";
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {environment} from '../environments/environment';
         HttpClientModule,
         Routing,
         CustomModule,
-        ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
+        ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
+
     ],
     declarations: [
         AppComponent,
@@ -53,8 +55,9 @@ import {environment} from '../environments/environment';
         JournalsService,
         EmotionService,
         SummaryListService,
+        AppService,
         {provide: APP_BASE_HREF, useValue: '/'},
-        {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}
+        {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true},
 ],
     entryComponents: [
         AddGoalComponent,

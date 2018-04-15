@@ -12,6 +12,7 @@ import {AppService} from "../app.service";
     selector: 'app-journals-component',
     templateUrl: 'journals.component.html',
     styleUrls: ['./journals.component.scss'],
+    providers: [AppService]
 })
 
 export class JournalsComponent implements OnInit {

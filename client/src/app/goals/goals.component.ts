@@ -11,6 +11,7 @@ import {AppService} from "../app.service";
     selector: 'app-goals-component',
     templateUrl: 'goals.component.html',
     styleUrls: ['./goals.component.css'],
+    providers: [AppService]
 })
 
 export class GoalsComponent implements OnInit {
