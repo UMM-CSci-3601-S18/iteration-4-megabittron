@@ -6,6 +6,7 @@ import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as Chart from 'chart.js';
+import {AppService} from "../app.service";
 
 @Component({
     selector: 'app-summary-list-component',
@@ -83,7 +84,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     private highlightedID: {'$oid': string} = { '$oid': '' };
 
     // Inject the SummaryListService into this component.
-    constructor(public summaryListService: SummaryListService, public dialog: MatDialog) {
+    constructor(public summaryListService: SummaryListService, public dialog: MatDialog, public appService: AppService) {
 
     }
 
@@ -1175,6 +1176,9 @@ public pastDates = [
     }
 
     ngOnInit(): void {
+        //For testing
+        //toggle the value in app service to toggle testing
+        this.appService.testingToggle();
         this.refreshSummaries();
         this.loadService();
     }
