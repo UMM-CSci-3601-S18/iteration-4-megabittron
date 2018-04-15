@@ -48,9 +48,9 @@
                                 </div>
 
                             <div class="desktopGoals-card-info">
-                                <p><i>Purpose:</i> {{goal.purpose}}</p>
+                                <p *ngIf="goal.purpose !== ''"><i>Purpose:</i> {{goal.purpose}}</p>
                                 <p><i>Frequency:</i> {{goal.frequency}}</p>
-                                <p><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
+                                <p *ngIf="goal.end !== ''"><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
                             </div>
                                 <div class="dekstopGoals-buttons">
                                     <button mat-icon-button class="button delete-button"
@@ -67,7 +67,7 @@
                         </mat-card>
                     </ng-container>
                 </div>
-                <div class="pagescrollbuttons">
+                <div class="pagescrollbuttons" *ngIf="getSize('today')">
                     <button *ngIf="this.currentPage == 1" mat-icon-button class="previousPage" (click)="this.currentPage = this.currentPage - 1;
                     showGoals('today')" [disabled]="true">
                         <mat-icon>keyboard_arrow_left</mat-icon>
