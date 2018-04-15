@@ -289,6 +289,7 @@ describe('Adding a goal', () => {
 
     beforeEach(() => {
         calledGoal = null;
+        let highlightedID: { '$oid': string } = {'$oid': ''};
         // stub GoalsService for test reasons
         goalListServiceStub = {
             getGoals: () => Observable.of([]),
@@ -303,6 +304,7 @@ describe('Adding a goal', () => {
             open: () => {
                 return {
                     afterClosed: () => {
+                        highlightedID = {'$oid': newGoal._id};
                         return Observable.of(newGoal);
                     }
                 };
@@ -330,6 +332,7 @@ describe('Adding a goal', () => {
     it('calls GoalsService.addGoal', () => {
         expect(calledGoal).toBeNull();
         goalList.openDialog();
+        expect(goalList.isHighlighted(calledGoal));
         expect(calledGoal).toEqual(newGoal);
     });
 });

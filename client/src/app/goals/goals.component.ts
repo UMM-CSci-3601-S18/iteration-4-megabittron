@@ -325,10 +325,6 @@ export class GoalsComponent implements OnInit {
         }
     }
 
-    setNumGoals(){
-        this.currentScreenWidth = (window.screen.width);
-    }
-
 
     /**
      * Starts an asynchronous operation to update the goals list
