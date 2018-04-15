@@ -4,11 +4,13 @@ import {Component} from '@angular/core';
 import {EmotionService} from './home.service';
 import {Emotion} from './emotion';
 import {environment} from '../../environments/environment';
+import {AppService} from "../app.service";
 
 @Component({
     selector: 'home-component',
     templateUrl: 'home.component.html',
     styleUrls: ['./home.component.css'],
+    providers: [AppService]
 })
 export class HomeComponent {
     //public emotions: Emotion[];
@@ -35,7 +37,8 @@ export class HomeComponent {
 
     constructor(public dialog: MatDialog,
                 public snackBar: MatSnackBar,
-                public emotionService: EmotionService) {
+                public emotionService: EmotionService,
+                public appService: AppService) {
     }
 
     setEmotion(emotion){
