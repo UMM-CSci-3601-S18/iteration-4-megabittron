@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../environments/environment';
+import {AppService} from "./app.service";
 
 
 declare var gapi: any;
@@ -8,13 +9,14 @@ declare var gapi: any;
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
+    providers: [AppService]
 })
 export class AppComponent implements OnInit {
     title = 'Friendly Panda App';
     googleAuth;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, public appService: AppService) {
 
     }
 
@@ -46,16 +48,6 @@ export class AppComponent implements OnInit {
 
             window.location.reload();
         })
-    }
-
-    isSignedIn(): boolean {
-        status = localStorage.getItem('isSignedIn');
-
-        if (status == 'true') {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     sendAuthCode(code: string): void {

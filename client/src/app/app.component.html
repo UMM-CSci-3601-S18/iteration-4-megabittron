@@ -20,8 +20,8 @@
             <a class="desktop-journals computer" mat-button [routerLink]="['/journals']" routerLinkActive="nav-active" hide-xs>Journals</a>
             <a class="desktop-resources computer" mat-button [routerLink]="['/resources']" routerLinkActive="nav-active" hide-xs>Resources</a>
             <a class="desktop-stats computer" mat-button [routerLink]="['/summary']" routerLinkActive="nav-active" hide-xs>Stats</a>
-            <div *ngIf="!isSignedIn()" class="g-signin2" (click)="signIn()"></div>
-            <button *ngIf="isSignedIn()" mat-raised-button (click)="signOut()">Sign Out</button>
+            <div *ngIf="!appService.isSignedIn()" class="g-signin2" (click)="signIn()"></div>
+            <button *ngIf="appService.isSignedIn()" mat-raised-button (click)="signOut()">Sign Out</button>
         </div>
         <router-outlet></router-outlet>
     </td-layout-nav>
