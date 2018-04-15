@@ -327,6 +327,7 @@ describe('Adding a goal', () => {
             goalList = fixture.componentInstance;
             fixture.detectChanges();
         });
+        localStorage.isSignedIn = "true";
     }));
 
     it('calls GoalsService.addGoal', () => {
