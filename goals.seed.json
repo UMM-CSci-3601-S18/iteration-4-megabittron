@@ -101,7 +101,7 @@
         "_id": {
             "$oid": "5ab53a89dd3b308feb0e14c3"
         },
-        "userID": "4cb56a89541a2d783595012c",
+        "userID": "defaultUserID",
         "purpose": "To have a better environment",
         "category": "Chores",
         "name": "Wash the dishes",
@@ -115,7 +115,7 @@
         "_id": {
             "$oid": "5ab53a8944a44f6ec5e15853"
         },
-        "userID": "4cb56a89541a2d783595012c",
+        "userID": "defaultUserID",
         "purpose": "To have a better living space",
         "category": "Chores",
         "name": "Clean my room",
@@ -129,7 +129,7 @@
         "_id": {
             "$oid": "5ab53a89ea32d59c4e81d5f0"
         },
-        "userID": "4cb56a89541a2d783595012c",
+        "userID": "defaultUserID",
         "purpose": "Do what the doctor says",
         "category": "Personal Health",
         "name": "Take my meds",
@@ -144,7 +144,7 @@
         "_id": {
             "$oid": "5ab53a8938c8106c85b592a4"
         },
-        "userID": "4cb56a89541a2d783595012c",
+        "userID": "defaultUserID",
         "purpose": "To safely park my car out of the snow",
         "category": "Chores",
         "name": "Shovel driveway",
@@ -159,7 +159,7 @@
         "_id": {
             "$oid": "5ab53a898f915a49a7cc8e4c"
         },
-        "userID": "4cb56a89541a2d783595012c",
+        "userID": "defaultUserID",
         "purpose": "Keep my teeth nice",
         "category": "Personal Health",
         "name": "Brush my teeth every day",
@@ -174,7 +174,7 @@
         "_id": {
             "$oid": "5ab53a892beb1a12c3cb8cd0"
         },
-        "userID": "4cb56a89541a2d783595012c",
+        "userID": "defaultUserID",
         "purpose": "Tell her about my new job",
         "category": "Family",
         "name": "Write letter to Aunt May",
@@ -189,7 +189,7 @@
         "_id": {
             "$oid": "5ab53a8907d923f68d03e1a3"
         },
-        "userID": "4cb56a89541a2d783595012c",
+        "userID": "defaultUserID",
         "purpose": "Tell her about my awards",
         "category": "Family",
         "name": "Email Grandma",
@@ -204,7 +204,7 @@
         "_id": {
             "$oid": "5ab53a897a4e4fb3a641aa89"
         },
-        "userID": "4cb56a89541a2d783595012c",
+        "userID": "defaultUserID",
         "purpose": "Keep my clothes clean",
         "category": "Chores",
         "name": "Do laundry",
