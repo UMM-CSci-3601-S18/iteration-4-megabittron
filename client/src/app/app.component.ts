@@ -25,6 +25,8 @@ export class AppComponent implements OnInit {
         //let googleAuth = gapi.auth2.getAuthInstance();
 
         this.googleAuth = gapi.auth2.getAuthInstance();
+        console.log(this.googleAuth);
+
         this.googleAuth.grantOfflineAccess().then((resp) => {
 
             localStorage.setItem('isSignedIn', 'true');
@@ -37,9 +39,10 @@ export class AppComponent implements OnInit {
 
     signOut() {
         //let googleAuth = gapi.auth2.getAuthInstance();
-
+        this.handleClientLoad();
 
         this.googleAuth = gapi.auth2.getAuthInstance();
+
         this.googleAuth.then(() => {
             this.googleAuth.signOut();
             localStorage.setItem('isSignedIn', 'false');
@@ -85,7 +88,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.handleClientLoad();
-
+        gapi.load('client:auth2', this.initClient);
         this.googleAuth = gapi.auth2.getAuthInstance();
     }
 }
