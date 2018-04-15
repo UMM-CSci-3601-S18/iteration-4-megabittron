@@ -158,7 +158,11 @@
 </ng-template>
 
 <ng-template #showSignIn>
-    <mat-card id="signInCard">
-        <mat-card-title>Please sign in with your Google account</mat-card-title>
+    <mat-card class="signInCard">
+            <mat-card-title class="signInTextDesktop" hide-xs>Please sign in with your Google account!</mat-card-title>
+            <mat-card-title class="signInTextMobile" hide-gt-xs>Please sign in with your Google account!</mat-card-title>
+            <mat-card-content>
+                <img mat-card-image src="../../android-chrome-512x512.png" class="signInImage">
+            </mat-card-content>
     </mat-card>
 </ng-template>
