@@ -23,25 +23,20 @@
 
             <span hide-xs>
             <div class="todays-goals" *ngIf="showAllGoals == false">
-                <div class="goalTitleDiv">
-                    <mat-card class="cardGoalTitle">
+                <div class="desktopGoalTitleDiv">
+                    <mat-card class="sectionTitle">
                         Today's Goals
                     </mat-card>
                 </div>
                 <div layout="row" layout-wrap>
                     <ng-container *ngFor="let goal of this.shownGoals">
-                        <mat-card class="goals-card"
+                        <mat-card class="desktopGoals-card"
                                   #elem [id]="goal._id['$oid']">
-                           <!-- <mat-expansion-panel class="desktopGoalPanel">
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>-->
                             <mat-card-title class="cardGoalTitle">
                                         {{goal.name}}
                             </mat-card-title>
                             <mat-card-subtitle class="desktopCardSubtitle">{{returnStatus(goal.status)}}</mat-card-subtitle>
                             <mat-divider></mat-divider>
-                                    <!--</mat-panel-title>
-                                </mat-expansion-panel-header>-->
                             <mat-card-content>
                                 <div class ="goals-image">
                                     <img *ngIf="goal.category == 'Family'" src="../../assets/images/goals/family.png"
@@ -53,12 +48,9 @@
                                 </div>
 
                             <div class="desktopGoals-card-info">
-                                <!--<mat-card-content class="goal-info">
-                                    <mat-card-title id="today-goal-name">{{goal.name}}</mat-card-title>-->
                                 <p><i>Purpose:</i> {{goal.purpose}}</p>
                                 <p><i>Frequency:</i> {{goal.frequency}}</p>
                                 <p><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
-                                <!--</mat-card-content>-->
                             </div>
                                 <div class="dekstopGoals-buttons">
                                     <button mat-icon-button class="button delete-button"
@@ -71,7 +63,6 @@
                                         <mat-icon>done</mat-icon>
                                     </button>
                                 </div>
-                           <!-- </mat-expansion-panel>-->
                             </mat-card-content>
                         </mat-card>
                     </ng-container>
