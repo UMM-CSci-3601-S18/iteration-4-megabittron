@@ -214,5 +214,37 @@
         "next": "2018-04-06T18:56:24.702Z",
         "frequency": "Daily"
 
+    },
+
+    {
+        "_id": {
+            "$oid": "5ab53a897a4e4fb3a641aa90"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Keep my clothes clean",
+        "category": "Chores",
+        "name": "Do laundry",
+        "status": false,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-04-18T18:56:24.702Z",
+        "next": "2018-04-06T18:56:24.702Z",
+        "frequency": "Daily"
+
+    },
+
+    {
+        "_id": {
+            "$oid": "5ab53a8907d923f68d03e1a7"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Tell her about my awards",
+        "category": "Family",
+        "name": "Email Grandma",
+        "status": true,
+        "start": "2018-04-05T18:56:24.702Z",
+        "end": "2018-04-05T18:56:24.702Z",
+        "next": "2018-04-05T18:56:24.702Z",
+        "frequency": "Does not repeat"
+
     }
 ]
