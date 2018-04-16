@@ -6,7 +6,7 @@ import {Observable} from "rxjs/Observable";
 import {Emotion} from "./emotion";
 import {EmotionService} from "./home.service";
 
-fdescribe('Home', () => {
+describe('Home', () => {
 
     let Hcomponent: HomeComponent;
     let fixture: ComponentFixture<HomeComponent>;
