@@ -173,5 +173,4 @@ describe('Journal list service: ', () => {
         expect(req.request.method).toEqual('POST');
         req.flush(washing_id);
     });
-
 });

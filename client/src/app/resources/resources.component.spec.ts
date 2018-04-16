@@ -23,13 +23,13 @@ describe('Resources', () => {
 
         component = fixture.componentInstance; // BannerComponent test instance
 
-        // query for the title <h1> by CSS element selector
-        de = fixture.debugElement.query(By.css('#main-thing-title'));
+        // query for the links mat-card-title by CSS element selector
+        de = fixture.debugElement.query(By.css('.links'));
         el = de.nativeElement;
     });
 
     it('displays a greeting', () => {
         fixture.detectChanges();
-        expect(el.textContent).toContain(component.title);
+        expect(el.textContent).toContain(component.linkTitle);
     });
 });

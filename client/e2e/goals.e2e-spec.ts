@@ -25,19 +25,19 @@ describe('Goal list', () => {
         expect(page.getGoalManageTitle()).toEqual('Your Goals');
     });
 
-    it('Should check that goal with name: \'Do what the doctor says\' matches unique id', () => {
+    it('Should check that goal with name: \'Clean my room\' matches unique id', () => {
         page.navigateTo();
-        expect(page.getUniqueGoal('5ab53a89ea32d59c4e81d5f0')).toContain('Do what the doctor says');
+        expect(page.getUniqueGoal('5ab53a8944a44f6ec5e15853')).toContain('Clean my room');
     });
 
-    it('Total number of goals should be 5', () => {
+    it('Total number of goals should be 4', () => {
         page.navigateTo();
-        expect(page.getGoals()).toEqual(5);
+        expect(page.getGoals()).toEqual(4);
     });
 
-    it('Should check that goal with purpose: \'Text a hotline\' matches unique id', () => {
+    it('Should check that goal with purpose: \'Do laundry\' matches unique id', () => {
         page.navigateTo();
-        expect(page.getUniqueGoal('5ab53a89cc803f25455d4523')).toContain('Text a hotline');
+        expect(page.getUniqueGoal('5ab53a897a4e4fb3a641aa89')).toContain('Do laundry');
     });
 
     it('Should check that goal with status: \'Incomplete\' matches unique id', () => {
@@ -45,17 +45,6 @@ describe('Goal list', () => {
         expect(page.getUniqueGoal('5ab53a89dd3b308feb0e14c3')).toContain('Incomplete');
     });
 
-    it('Should switch between pages', () => {
-        page.navigateTo();
-        element(by.className('nextPage')).click();
-        expect(page.getGoals()).toEqual(3);
-    });
-
-    it('Should switch between pages', () => {
-        page.navigateTo();
-        element(by.className('previousPage')).click();
-        expect(page.getGoals()).toEqual(5);
-    });
 
     it('Should switch between todays goals and all goals', () =>{
         page.navigateTo();
@@ -77,8 +66,6 @@ describe('Goal list', () => {
 
  /*   // This test has timing issues. Slow down to run properly.
     it('Should actually add the goal with the information we put in the fields', () => {
-        page.navigateTo();
-        page.clickAddGoalButton();
         element(by.id('nameField')).sendKeys('Clean up computer lab');
         page.pickChoresOption();
         element(by.id('purposeField')).sendKeys('Get more people to come');
