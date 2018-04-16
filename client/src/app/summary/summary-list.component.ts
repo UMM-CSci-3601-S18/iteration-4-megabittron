@@ -90,8 +90,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     constructor(public summaryListService: SummaryListService,
                 public dialog: MatDialog,
                 public appService: AppService,
-                private router: Router,
-                private http: HttpClient) {
+                private router: Router) {
 
     }
 
@@ -1202,9 +1201,8 @@ public pastDates = [
         if (!this.appService.isSignedIn()) {
             this.router.navigate(['']);
         }
-
-        this.refreshSummaries();
         this.loadService();
+        this.refreshSummaries();
     }
 
     stringToDate(date: string): any {
