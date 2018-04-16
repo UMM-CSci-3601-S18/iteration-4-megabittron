@@ -6,11 +6,14 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 import {AddJournalComponent} from './add-journal.component';
 import {EditJournalComponent} from "./edit-journal.component";
 import {ShowJournalComponent} from "./show-journal.component";
+import {AppService} from "../app.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-journals-component',
     templateUrl: 'journals.component.html',
     styleUrls: ['./journals.component.scss'],
+    providers: [AppService]
 })
 
 export class JournalsComponent implements OnInit {
@@ -29,7 +32,9 @@ export class JournalsComponent implements OnInit {
     // Inject the JournalsService into this component.
     constructor(public journalListService: JournalsService,
                 public dialog: MatDialog,
-                public snackBar: MatSnackBar) {
+                public snackBar: MatSnackBar,
+                public appService: AppService,
+                private router: Router) {
 
     }
 
@@ -179,8 +184,18 @@ export class JournalsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.refreshJournals();
+        //For testing
+        //toggle the value in app service to toggle testing
+        this.appService.testingToggle();
+
+        // Route consumer to home page if isSignedIn status is false
+        if (!this.appService.isSignedIn()) {
+            this.router.navigate(['']);
+        }
+
         this.loadService();
+        this.refreshJournals();
+
     }
 
 }

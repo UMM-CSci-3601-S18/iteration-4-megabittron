@@ -19,28 +19,28 @@ describe('Journal list', () => {
         expect(page.buttonExists()).toBeTruthy();
     });
 
-    it('Total number of journals should be 200', () => {
+    it('Total number of journals should be 74', () => {
         page.navigateTo();
-        expect(page.getJournals()).toEqual(200);
+        expect(page.getJournals()).toEqual(74);
     });
 
     it('Should type something in filter subject box and check that it contains correct element', () => {
         page.navigateTo();
-        page.typeASubject('Suarez');
-        expect(page.getUniqueJournal('5ac808fc682d63fabf664041')).toContain('Calderon Suarez');
+        page.typeASubject('Mcintyre');
+        expect(page.getUniqueJournal('5ad12a56d70cc2aac52a0bc9')).toContain('Cathleen Mcintyre');
     });
 
     it('Should type something in filter body box and check that it contains correct element', () => {
         page.navigateTo();
-        page.typeABody('labore amet irure deserunt');
-        expect(page.getUniqueJournal('5ac808fc0546c2e5108ca165')).toContain('Bryan Pierce');
+        page.typeABody('sunt deserunt voluptate');
+        expect(page.getUniqueJournal('5ad12a56aa17a895febd4c93')).toContain('Oneill Woods');
     });
 
     it('Should filter by subject and body and check that it contains correct element', () => {
         page.navigateTo();
-        page.typeASubject('Ang')
-        page.typeABody('In cons');
-        expect(page.getUniqueJournal('5ac808fc504630e45694422e')).toContain('Angie Mckenzie');
+        page.typeASubject('St')
+        page.typeABody('id esse');
+        expect(page.getUniqueJournal('5ad12a5674d890bf086475aa')).toContain('Chapman Stanley');
     });
 
     it('Should open a dialog box when add journal button is clicked', () => {
@@ -58,35 +58,23 @@ describe('Journal list', () => {
         element(by.id('confirmAddJournalButton')).click();
     });
 
+    // This test will not work because it cannot find the edit journal button class name since it
+    // is inside of the mat-title.
     it('Should open a dialog box when edit journal button is clicked', () => {
         page.navigateTo();
-        page.typeABody('Id consectetur cupidatat Lorem elit');
+        page.typeABody('do nulla incididunt');
         expect(element(by.className('edit-journal')).isPresent()).toBeFalsy('There should not be a modal window yet');
-        element(by.className('edit-journal-button')).click();
+        page.clickEditJournalButton();
         expect(element(by.className('edit-journal')).isPresent()).toBeTruthy('There should be a modal window now');
     });
 
     it('Should actually edit the journal with the information we put in the fields', () => {
         page.navigateTo();
-        page.typeABody('Id consectetur cupidatat Lorem elit');
+        page.typeABody('sunt deserunt voluptate laboris dolore. ');
         page.clickEditJournalButton();
         element(by.id('subjectField')).sendKeys('Great day!');
         element(by.id('bodyField')).sendKeys('Today my snail won a race against a rabbit.');
         element(by.id('confirmEditJournalButton')).click();
     });
-
-/*    it('Should actually click the navigation buttons and still have 10 journals on page everytime', () => {
-        page.navigateTo();
-        page.clickFirstIndexButton();
-        expect(page.getJournals()).toEqual(10);
-        page.clickLastIndexButton();
-        expect(page.getJournals()).toEqual(10);
-        page.clickPrevIndexButton();
-        page.clickPrevIndexButton();
-        expect(page.getJournals()).toEqual(10);
-        page.clickNextIndexButton();
-        page.clickNextIndexButton();
-        expect(page.getJournals()).toEqual(10);
-    });*/
 
 });

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../environments/environment';
+import {AppService} from "./app.service";
 
 
 declare var gapi: any;
@@ -8,13 +9,14 @@ declare var gapi: any;
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
+    providers: [AppService]
 })
 export class AppComponent implements OnInit {
     title = 'Friendly Panda App';
     googleAuth;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, public appService: AppService) {
 
     }
 
@@ -23,6 +25,8 @@ export class AppComponent implements OnInit {
         //let googleAuth = gapi.auth2.getAuthInstance();
 
         this.googleAuth = gapi.auth2.getAuthInstance();
+        console.log(this.googleAuth);
+
         this.googleAuth.grantOfflineAccess().then((resp) => {
 
             localStorage.setItem('isSignedIn', 'true');
@@ -35,9 +39,10 @@ export class AppComponent implements OnInit {
 
     signOut() {
         //let googleAuth = gapi.auth2.getAuthInstance();
-
+        this.handleClientLoad();
 
         this.googleAuth = gapi.auth2.getAuthInstance();
+
         this.googleAuth.then(() => {
             this.googleAuth.signOut();
             localStorage.setItem('isSignedIn', 'false');
@@ -46,16 +51,6 @@ export class AppComponent implements OnInit {
 
             window.location.reload();
         })
-    }
-
-    isSignedIn(): boolean {
-        status = localStorage.getItem('isSignedIn');
-
-        if (status == 'true') {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     sendAuthCode(code: string): void {
@@ -93,7 +88,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.handleClientLoad();
-
+        gapi.load('client:auth2', this.initClient);
         this.googleAuth = gapi.auth2.getAuthInstance();
     }
 }

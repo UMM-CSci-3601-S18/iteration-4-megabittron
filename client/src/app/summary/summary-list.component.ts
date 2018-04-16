@@ -6,11 +6,14 @@ import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as Chart from 'chart.js';
+import {AppService} from "../app.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-summary-list-component',
     templateUrl: 'summary-list.component.html',
     styleUrls: ['./summary-list.component.css'],
+    providers: [AppService]
 })
 
 export class SummaryListComponent implements AfterViewInit, OnInit {
@@ -83,7 +86,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     private highlightedID: {'$oid': string} = { '$oid': '' };
 
     // Inject the SummaryListService into this component.
-    constructor(public summaryListService: SummaryListService, public dialog: MatDialog) {
+    constructor(public summaryListService: SummaryListService, public dialog: MatDialog, public appService: AppService, private router: Router) {
 
     }
 
@@ -1186,6 +1189,15 @@ public pastDates = [
     }
 
     ngOnInit(): void {
+        //For testing
+        //toggle the value in app service to toggle testing
+        this.appService.testingToggle();
+
+        // Route consumer to home page if isSignedIn status is false
+        if (!this.appService.isSignedIn()) {
+            this.router.navigate(['']);
+        }
+
         this.refreshSummaries();
         this.loadService();
     }

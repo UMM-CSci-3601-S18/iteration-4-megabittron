@@ -9,9 +9,10 @@ import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 import {MatDialog} from '@angular/material';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
+import {RouterTestingModule} from "@angular/router/testing";
 
 
-        /** Tests the filtering used for display of summary list ---------------------------------------------------------------------------------- **/
+/** Tests the filtering used for display of summary list ---------------------------------------------------------------------------------- **/
 
         describe('Summary', () => {
 
@@ -55,7 +56,7 @@ import 'rxjs/add/operator/do';
 
 
                 TestBed.configureTestingModule({
-                    imports: [CustomModule],
+                    imports: [CustomModule, RouterTestingModule],
                     declarations: [SummaryListComponent],
                     providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
@@ -201,7 +202,7 @@ import 'rxjs/add/operator/do';
 
 
                 TestBed.configureTestingModule({
-                    imports: [CustomModule],
+                    imports: [CustomModule, RouterTestingModule],
                     declarations: [SummaryListComponent],
                     providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
@@ -280,7 +281,7 @@ import 'rxjs/add/operator/do';
 
 
                 TestBed.configureTestingModule({
-                    imports: [CustomModule],
+                    imports: [CustomModule, RouterTestingModule],
                     declarations: [SummaryListComponent],
                     providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
@@ -396,7 +397,7 @@ import 'rxjs/add/operator/do';
 
 
                 TestBed.configureTestingModule({
-                    imports: [CustomModule],
+                    imports: [CustomModule, RouterTestingModule],
                     declarations: [SummaryListComponent],
                     providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
@@ -511,7 +512,7 @@ import 'rxjs/add/operator/do';
 
 
                 TestBed.configureTestingModule({
-                    imports: [CustomModule],
+                    imports: [CustomModule, RouterTestingModule],
                     declarations: [SummaryListComponent],
                     providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
@@ -650,7 +651,7 @@ import 'rxjs/add/operator/do';
 
 
                 TestBed.configureTestingModule({
-                    imports: [CustomModule],
+                    imports: [CustomModule, RouterTestingModule],
                     declarations: [SummaryListComponent],
                     providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
@@ -750,7 +751,7 @@ describe('Misbehaving Summary ', () => {
         };
 
         TestBed.configureTestingModule({
-            imports: [FormsModule, CustomModule],
+            imports: [FormsModule, CustomModule, RouterTestingModule],
             declarations: [SummaryListComponent],
             providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]

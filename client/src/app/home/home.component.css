@@ -1,3 +1,23 @@
+.signInCard {
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+.signInTextDesktop {
+    text-align: center;
+    font-size: 24px;
+}
+
+.signInTextMobile {
+    text-align: center;
+    font-size: 14px
+}
+
+.signInImage {
+    padding-bottom: 18px;
+}
+
 .main-top {
     height: 100px;
     color: white;

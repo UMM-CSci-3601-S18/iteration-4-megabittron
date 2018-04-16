@@ -1,153 +1,168 @@
-<div layout-gt-sm="row" class="main-bg">
-    <div flex-gt-sm="80" flex-offset-gt-sm="10">
-        <mat-card id="mainCard">
-            <mat-horizontal-stepper #stepper>
-                <mat-step editable="false">
-                    <div class="how-are-you">
-                        <p>How are you feeling today?</p>
-                    </div>
-                    <div class="emotion-selection" id="emotion">
-                        <button mat-button id="happy" class="emotion-img" matTooltip="Happy"
-                                (click)="setEmotion('happy'); selectEmotion('happy')">
-                            <img src="../../assets/images/emotions/happy.svg">
-                        </button>
-                        <button mat-button id="sad" class="emotion-img" matTooltip="Sad"
-                                (click)="setEmotion('sad'); selectEmotion('sad')">
-                            <img src="../../assets/images/emotions/sad.svg">
-                        </button>
-                        <button mat-button id="meh" class="emotion-img" matTooltip="Meh"
-                                (click)="setEmotion('meh'); selectEmotion('meh')">
-                            <img src="../../assets/images/emotions/meh.svg">
-                        </button>
-                        <button mat-button id="mad" class="emotion-img" matTooltip="Mad"
-                                (click)="setEmotion('mad'); selectEmotion('mad')">
-                            <img src="../../assets/images/emotions/mad.svg">
-                        </button>
-                        <button mat-button id="anxious" class="emotion-img" matTooltip="Anxious"
-                                (click)="setEmotion('anxious'); selectEmotion('anxious')">
-                            <img src="../../assets/images/emotions/anxious.svg">
-                        </button>
-                    </div>
+<ng-container *ngIf="appService.isSignedIn(); then showContent else showSignIn"></ng-container>
 
-                    <div class="i-feel" *ngIf="selectedEmotion != 'none'">
-                        <p>I'm feeling {{selectedEmotion}}.</p>
-                    </div>
-
-                    <div class="stepperButtons">
-                        <button mat-raised-button
-                                matStepperNext
-                                class="next-button"
-                                [disabled]="showNext1Button()">
-                            Next
-                        </button>
-                    </div>
-                </mat-step>
-                <mat-step editable="false" *ngIf="selectedEmotion != 'meh' && selectedEmotion != 'none'">
-                    <div class="emotion-intensity">
-                        <img class="selected-emoji" src="../../assets/images/emotions/{{selectedEmotion}}.svg">
-                        <p>How {{selectedEmotion}} do you feel?</p>
-                        <div class="slider-div">
-                            <mat-slider
-                                class="slider"
-                                [max]="5"
-                                [min]="1"
-                                [step]="1"
-                                [thumb-label]="thumbLabel"
-                                [(ngModel)]="emojiRating"
-                                (input)="emojiRating=$event.value">
-                            </mat-slider>
+<ng-template #showContent>
+    <div layout-gt-sm="row" class="main-bg">
+        <div flex-gt-sm="80" flex-offset-gt-sm="10">
+            <mat-card id="mainCard">
+                <mat-horizontal-stepper #stepper>
+                    <mat-step editable="false">
+                        <div class="how-are-you">
+                            <p>How are you feeling today?</p>
                         </div>
+                        <div class="emotion-selection" id="emotion">
+                            <button mat-button id="happy" class="emotion-img" matTooltip="Happy"
+                                    (click)="setEmotion('happy'); selectEmotion('happy')">
+                                <img src="../../assets/images/emotions/happy.svg">
+                            </button>
+                            <button mat-button id="sad" class="emotion-img" matTooltip="Sad"
+                                    (click)="setEmotion('sad'); selectEmotion('sad')">
+                                <img src="../../assets/images/emotions/sad.svg">
+                            </button>
+                            <button mat-button id="meh" class="emotion-img" matTooltip="Meh"
+                                    (click)="setEmotion('meh'); selectEmotion('meh')">
+                                <img src="../../assets/images/emotions/meh.svg">
+                            </button>
+                            <button mat-button id="mad" class="emotion-img" matTooltip="Mad"
+                                    (click)="setEmotion('mad'); selectEmotion('mad')">
+                                <img src="../../assets/images/emotions/mad.svg">
+                            </button>
+                            <button mat-button id="anxious" class="emotion-img" matTooltip="Anxious"
+                                    (click)="setEmotion('anxious'); selectEmotion('anxious')">
+                                <img src="../../assets/images/emotions/anxious.svg">
+                            </button>
+                        </div>
+
+                        <div class="i-feel" *ngIf="selectedEmotion != 'none'">
+                            <p>I'm feeling {{selectedEmotion}}.</p>
+                        </div>
+
                         <div class="stepperButtons">
                             <button mat-raised-button
                                     matStepperNext
                                     class="next-button"
-                                    [disabled]="showNext2Button()">
+                                    [disabled]="showNext1Button()">
                                 Next
                             </button>
                         </div>
-                    </div>
-                </mat-step>
-                <!--<mat-step editable="false" *ngIf="emojiRating > 0 || selectedEmotion == 'meh'">-->
-                <mat-step editable="false">
-                    <div class="text-info">
-                        <p class="text-description">
-                            I'm feeling this way because...
-                        </p>
-                        <mat-form-field class="text-form-field">
+                    </mat-step>
+                    <mat-step editable="false" *ngIf="selectedEmotion != 'meh' && selectedEmotion != 'none'">
+                        <div class="emotion-intensity">
+                            <img class="selected-emoji" src="../../assets/images/emotions/{{selectedEmotion}}.svg">
+                            <p>How {{selectedEmotion}} do you feel?</p>
+                            <div class="slider-div">
+                                <mat-slider
+                                    class="slider"
+                                    [max]="5"
+                                    [min]="1"
+                                    [step]="1"
+                                    [thumb-label]="thumbLabel"
+                                    [(ngModel)]="emojiRating"
+                                    (input)="emojiRating=$event.value">
+                                </mat-slider>
+                            </div>
+                            <div class="stepperButtons">
+                                <button mat-raised-button
+                                        matStepperNext
+                                        class="next-button"
+                                        [disabled]="showNext2Button()">
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+                    </mat-step>
+                    <!--<mat-step editable="false" *ngIf="emojiRating > 0 || selectedEmotion == 'meh'">-->
+                    <mat-step editable="false">
+                        <div class="text-info">
+                            <p class="text-description">
+                                I'm feeling this way because...
+                            </p>
+                            <mat-form-field class="text-form-field">
                             <textarea matInput
                                       placeholder="Text entry"
                                       rows="4"
                                       cols="70"
                                       (input)="emotionDescription=$event.target.value"></textarea>
-                        </mat-form-field>
-                    </div>
-                    <div class="stepperButtons">
-                        <button mat-raised-button
-                                matStepperNext
-                                class="next-button submit"
-                                (click)="getDate();saveEmotion()">
-                            Submit
-                        </button>
-                    </div>
-                </mat-step>
-                <!--<mat-step editable="false" *ngIf="emojiRating > 0 || selectedEmotion == 'meh'">-->
-                <mat-step editable="false">
-                    <div *ngIf="videoEmotion == 'happy'">
-                        <div class="container">
-                            <iframe id="responseHappyVideoFrame"
-                                    src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37AO-nqegk5cEwS1ElAoQLNr"
-                                    frameborder="0"
-                                    allowfullscreen
-                                    class="video"></iframe>
+                            </mat-form-field>
                         </div>
-                    </div>
-                    <div *ngIf="videoEmotion == 'sad'">
+                        <div class="stepperButtons">
+                            <button mat-raised-button
+                                    matStepperNext
+                                    class="next-button submit"
+                                    (click)="getDate();saveEmotion()">
+                                Submit
+                            </button>
+                        </div>
+                    </mat-step>
+                    <!--<mat-step editable="false" *ngIf="emojiRating > 0 || selectedEmotion == 'meh'">-->
+                    <mat-step editable="false">
+                        <div *ngIf="videoEmotion == 'happy'">
+                            <div class="container">
+                                <iframe id="responseHappyVideoFrame"
+                                        src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37AO-nqegk5cEwS1ElAoQLNr"
+                                        frameborder="0"
+                                        allowfullscreen
+                                        class="video"></iframe>
+                            </div>
+                        </div>
+                        <div *ngIf="videoEmotion == 'sad'">
 
-                        <div class="container">
-                            <iframe id="responseSadVideoFrame"
-                                    src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37CvQMRHaqg-6yEQpLWjAdWu&index=2"
-                                    frameborder="0"
-                                    allowfullscreen
-                                    class="video"></iframe>
+                            <div class="container">
+                                <iframe id="responseSadVideoFrame"
+                                        src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37CvQMRHaqg-6yEQpLWjAdWu&index=2"
+                                        frameborder="0"
+                                        allowfullscreen
+                                        class="video"></iframe>
+                            </div>
                         </div>
-                    </div>
-                    <div *ngIf="videoEmotion == 'meh'">
+                        <div *ngIf="videoEmotion == 'meh'">
 
-                        <div class="container">
-                            <iframe id="responseMehVideoFrame"
-                                    src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37D36KCVAns9LYvh1BV4m6YX"
-                                    frameborder="0"
-                                    allowfullscreen
-                                    class="video"></iframe>
+                            <div class="container">
+                                <iframe id="responseMehVideoFrame"
+                                        src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37D36KCVAns9LYvh1BV4m6YX"
+                                        frameborder="0"
+                                        allowfullscreen
+                                        class="video"></iframe>
+                            </div>
                         </div>
-                    </div>
-                    <div *ngIf="videoEmotion == 'mad'">
+                        <div *ngIf="videoEmotion == 'mad'">
 
-                        <div class="container">
-                            <iframe id="responseMadVideoFrame"
-                                    src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37Dx6Ohz5al_e1GljuZqvZ_M"
-                                    frameborder="0"
-                                    allowfullscreen
-                                    class="video"></iframe>
+                            <div class="container">
+                                <iframe id="responseMadVideoFrame"
+                                        src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37Dx6Ohz5al_e1GljuZqvZ_M"
+                                        frameborder="0"
+                                        allowfullscreen
+                                        class="video"></iframe>
+                            </div>
                         </div>
-                    </div>
-                    <div *ngIf="videoEmotion == 'anxious'">
+                        <div *ngIf="videoEmotion == 'anxious'">
 
-                        <div class="container">
-                            <iframe id="responseAnxiousVideoFrame"
-                                    src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37BVBh18FtFKX-fEEroV6tQ9&index=8"
-                                    frameborder="0"
-                                    allowfullscreen
-                                    class="video"></iframe>
+                            <div class="container">
+                                <iframe id="responseAnxiousVideoFrame"
+                                        src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37BVBh18FtFKX-fEEroV6tQ9&index=8"
+                                        frameborder="0"
+                                        allowfullscreen
+                                        class="video"></iframe>
+                            </div>
                         </div>
-                    </div>
-                </mat-step>
-            </mat-horizontal-stepper>
-            <div class="restartButton">
-            <button mat-raised-button mat-button id="restart" matTooltip="Restart" (click)="restart()">
-                Restart
-            </button>
-            </div>
-        </mat-card>
+                    </mat-step>
+                </mat-horizontal-stepper>
+                <div class="restartButton">
+                    <button mat-raised-button mat-button id="restart" matTooltip="Restart" (click)="restart()">
+                        Restart
+                    </button>
+                </div>
+            </mat-card>
+        </div>
     </div>
-</div>
+
+</ng-template>
+
+<ng-template #showSignIn>
+    <mat-card class="signInCard">
+            <mat-card-title class="signInTextDesktop" hide-xs>Please sign in with your Google account!</mat-card-title>
+            <mat-card-title class="signInTextMobile" hide-gt-xs>Please sign in with your Google account!</mat-card-title>
+            <mat-card-content>
+                <img mat-card-image src="../../android-chrome-512x512.png" class="signInImage">
+            </mat-card-content>
+    </mat-card>
+</ng-template>

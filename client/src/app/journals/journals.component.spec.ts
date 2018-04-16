@@ -10,6 +10,7 @@ import {MatDialog} from '@angular/material';
 import {ArraySortPipe} from "./array-sort.pipe";
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe( 'Journals', () => {
 
@@ -49,7 +50,7 @@ describe( 'Journals', () => {
         };
 
         TestBed.configureTestingModule({
-            imports: [CustomModule],
+            imports: [CustomModule, RouterTestingModule],
             declarations: [JournalsComponent, ArraySortPipe],
             providers: [{provide: JournalsService, useValue: journalServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
@@ -124,7 +125,7 @@ describe( 'Journals', () => {
         };
 
         TestBed.configureTestingModule({
-            imports: [FormsModule, CustomModule],
+            imports: [FormsModule, CustomModule, RouterTestingModule],
             declarations: [JournalsComponent, ArraySortPipe],
             providers: [{provide: JournalsService, useValue: journalListServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
@@ -192,7 +193,7 @@ describe('Adding a journal', () => {
         };
 
         TestBed.configureTestingModule({
-            imports: [FormsModule, CustomModule],
+            imports: [FormsModule, CustomModule, RouterTestingModule],
             declarations: [JournalsComponent, ArraySortPipe],
             providers: [
                 {provide: JournalsService, useValue: journalListServiceStub},
@@ -264,7 +265,7 @@ describe('Editing a journal', () => {
         };
 
         TestBed.configureTestingModule({
-            imports: [FormsModule, CustomModule],
+            imports: [FormsModule, CustomModule, RouterTestingModule],
             declarations: [JournalsComponent, ArraySortPipe],
             providers: [
                 {provide: JournalsService, useValue: journalListServiceStub},

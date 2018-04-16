@@ -1,16 +1,19 @@
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {MatSnackBar} from '@angular/material';
-import {Component} from '@angular/core';
 import {EmotionService} from './home.service';
 import {Emotion} from './emotion';
 import {environment} from '../../environments/environment';
+import {AppService} from "../app.service";
 
 @Component({
     selector: 'home-component',
     templateUrl: 'home.component.html',
     styleUrls: ['./home.component.css'],
+    providers: [AppService]
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
+    //public emotions: Emotion[];
 
     readonly baseUrl: string = environment.API_URL + 'emotions';
 
@@ -34,7 +37,8 @@ export class HomeComponent {
 
     constructor(public dialog: MatDialog,
                 public snackBar: MatSnackBar,
-                public emotionService: EmotionService) {
+                public emotionService: EmotionService,
+                public appService: AppService) {
     }
 
     setEmotion(emotion){
@@ -104,4 +108,11 @@ export class HomeComponent {
         let today = new Date();
         this.emotionDate = today.toString();
     }
+
+    ngOnInit(): void {
+        //For testing
+        //toggle the value in app service to toggle testing
+        this.appService.testingToggle();
+    }
+
 }
