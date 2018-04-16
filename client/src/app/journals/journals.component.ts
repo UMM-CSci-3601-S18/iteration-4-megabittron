@@ -12,13 +12,13 @@ import {AppService} from "../app.service";
     selector: 'app-journals-component',
     templateUrl: 'journals.component.html',
     styleUrls: ['./journals.component.scss'],
-    providers: [AppService]
+    providers: [AppService, JournalsService]
 })
 
 export class JournalsComponent implements OnInit {
     // These are public so that tests can reference them (.spec.ts)
-    public journals: Journal[] = [];
-    public filteredJournals: Journal[] = [];
+    public journals: Journal[];
+    public filteredJournals: Journal[];
     public journalSubject: string;
     public journalBody: string;
     public journalDate: any;
@@ -185,8 +185,9 @@ export class JournalsComponent implements OnInit {
         //For testing
         //toggle the value in app service to toggle testing
         this.appService.testingToggle();
-        this.refreshJournals();
         this.loadService();
+        this.refreshJournals();
+
     }
 
 }
