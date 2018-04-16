@@ -8,12 +8,13 @@ import { DomSanitizer } from '@angular/platform-browser';
 import * as Chart from 'chart.js';
 import {AppService} from "../app.service";
 import {Router} from "@angular/router";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
     selector: 'app-summary-list-component',
     templateUrl: 'summary-list.component.html',
     styleUrls: ['./summary-list.component.css'],
-    providers: [AppService, SummaryListService]
+    providers: [AppService, HttpClient]
 })
 
 export class SummaryListComponent implements AfterViewInit, OnInit {
@@ -86,7 +87,11 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     private highlightedID: {'$oid': string} = { '$oid': '' };
 
     // Inject the SummaryListService into this component.
-    constructor(public summaryListService: SummaryListService, public dialog: MatDialog, public appService: AppService, private router: Router) {
+    constructor(public summaryListService: SummaryListService,
+                public dialog: MatDialog,
+                public appService: AppService,
+                private router: Router,
+                private http: HttpClient) {
 
     }
 
