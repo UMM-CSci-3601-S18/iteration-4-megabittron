@@ -23,11 +23,13 @@ import {ArraySortPipe} from "./journals/array-sort.pipe";
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {AppService} from "./app.service";
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({
     exports: [
         ArraySortPipe,
+        RouterModule
     ],
     imports: [
         BrowserModule,

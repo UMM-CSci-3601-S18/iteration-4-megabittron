@@ -9,6 +9,7 @@ import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 import {MatDialog} from '@angular/material';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe( 'Goals', () => {
 
@@ -75,7 +76,7 @@ describe( 'Goals', () => {
         };
 
         TestBed.configureTestingModule({
-            imports: [CustomModule],
+            imports: [CustomModule, RouterTestingModule],
             declarations: [GoalsComponent],
             providers: [{provide: GoalsService, useValue: goalsServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
@@ -198,7 +199,7 @@ describe('Next Goals', () => {
         };
 
         TestBed.configureTestingModule({
-            imports: [CustomModule],
+            imports: [CustomModule, RouterTestingModule],
             declarations: [GoalsComponent],
             providers: [{provide: GoalsService, useValue: goalsServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
@@ -237,7 +238,7 @@ describe('Misbehaving Goal List', () => {
         };
 
         TestBed.configureTestingModule({
-            imports: [FormsModule, CustomModule],
+            imports: [FormsModule, CustomModule, RouterTestingModule],
             declarations: [GoalsComponent],
             providers: [{provide: GoalsService, useValue: goalListServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
@@ -312,7 +313,7 @@ describe('Adding a goal', () => {
         };
 
         TestBed.configureTestingModule({
-            imports: [FormsModule, CustomModule],
+            imports: [FormsModule, CustomModule, RouterTestingModule],
             declarations: [GoalsComponent],
             providers: [
                 {provide: GoalsService, useValue: goalListServiceStub},
@@ -390,7 +391,7 @@ describe('Deleting a goal', () => {
         };
 
         TestBed.configureTestingModule({
-            imports: [FormsModule, CustomModule],
+            imports: [FormsModule, CustomModule, RouterTestingModule],
             declarations: [GoalsComponent],
             providers: [
                 {provide: GoalsService, useValue: goalListServiceStub},
@@ -465,7 +466,7 @@ describe('Completing a goal', () => {
         };
 
         TestBed.configureTestingModule({
-            imports: [FormsModule, CustomModule],
+            imports: [FormsModule, CustomModule, RouterTestingModule],
             declarations: [GoalsComponent],
             providers: [
                 {provide: GoalsService, useValue: goalListServiceStub},

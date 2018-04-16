@@ -6,6 +6,7 @@ import {MatDialog} from '@angular/material';
 import {AddGoalComponent} from './add-goal.component';
 import {MatSnackBar} from '@angular/material';
 import {AppService} from "../app.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-goals-component',
@@ -41,7 +42,7 @@ export class GoalsComponent implements OnInit {
     private highlightedID: { '$oid': string } = {'$oid': ''};
 
     // Inject the GoalsService into this component.
-    constructor(public goalService: GoalsService, public dialog: MatDialog, public snackBar: MatSnackBar, public appService: AppService) {
+    constructor(public goalService: GoalsService, public dialog: MatDialog, public snackBar: MatSnackBar, public appService: AppService, private router: Router) {
     }
 
     isHighlighted(goal: Goal): boolean {
@@ -385,6 +386,10 @@ export class GoalsComponent implements OnInit {
         //For testing
         //toggle the value in app service to toggle testing
         this.appService.testingToggle();
+
+        if (!this.appService.isSignedIn()) {
+            this.router.navigate(['']);
+        }
 
         this.refreshGoals();
         this.loadService();
