@@ -17,8 +17,8 @@ import {AppService} from "../app.service";
 
 export class JournalsComponent implements OnInit {
     // These are public so that tests can reference them (.spec.ts)
-    public journals: Journal[];
-    public filteredJournals: Journal[];
+    public journals: Journal[] = [];
+    public filteredJournals: Journal[] = [];
     public journalSubject: string;
     public journalBody: string;
     public journalDate: any;
