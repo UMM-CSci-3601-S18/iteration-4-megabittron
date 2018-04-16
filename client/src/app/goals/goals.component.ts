@@ -387,6 +387,7 @@ export class GoalsComponent implements OnInit {
         //toggle the value in app service to toggle testing
         this.appService.testingToggle();
 
+        // Route consumer to home page if isSignedIn status is false
         if (!this.appService.isSignedIn()) {
             this.router.navigate(['']);
         }
