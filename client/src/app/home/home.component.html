@@ -36,7 +36,7 @@
                             <p>I'm feeling {{selectedEmotion}}.</p>
                         </div>
 
-                        <div class="stepperButtons">
+                        <div class="stepperButtons" id="stepperButton1">
                             <button mat-raised-button
                                     matStepperNext
                                     class="next-button"
@@ -49,7 +49,7 @@
                         <div class="emotion-intensity">
                             <img class="selected-emoji" src="../../assets/images/emotions/{{selectedEmotion}}.svg">
                             <p>How {{selectedEmotion}} do you feel?</p>
-                            <div class="slider-div">
+                            <div class="slider-div" id="emotionSlider">
                                 <mat-slider
                                     class="slider"
                                     [max]="5"
@@ -60,7 +60,7 @@
                                     (input)="emojiRating=$event.value">
                                 </mat-slider>
                             </div>
-                            <div class="stepperButtons">
+                            <div class="stepperButtons" id="stepperButton2">
                                 <button mat-raised-button
                                         matStepperNext
                                         class="next-button"
@@ -84,7 +84,7 @@
                                       (input)="emotionDescription=$event.target.value"></textarea>
                             </mat-form-field>
                         </div>
-                        <div class="stepperButtons">
+                        <div class="stepperButtons" id="stepperButton3">
                             <button mat-raised-button
                                     matStepperNext
                                     class="next-button submit"

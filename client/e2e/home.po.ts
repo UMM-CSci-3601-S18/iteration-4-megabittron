@@ -1,14 +1,12 @@
 import {browser, element, by, promise} from 'protractor';
 import {Key} from 'selenium-webdriver';
 
-
-
 export class HomePage {
 
     private selectedEmoji = "happy";
 
     static navigateTo(): promise.Promise<any> {
-        return browser.get('/home');
+        return browser.get('/');
     }
 
     highlightElement(byObject) {
@@ -38,6 +36,16 @@ export class HomePage {
         {document.getElementById(this.selectedEmoji).style.height = baseSize}
         {document.getElementById(this.selectedEmoji).style.width = baseSize}
 
+    };
+
+    selectRestartButton() {
+      const restartButton = element(by.id('restart'));
+      return restartButton.isPresent();
+    };
+
+    clickRestartButton() {
+        const restartButton = element(by.id('restart'));
+        return restartButton.click();
     };
 
 
