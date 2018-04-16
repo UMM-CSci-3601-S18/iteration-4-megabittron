@@ -15,12 +15,13 @@
                 <mat-select name="dropdown" id="summaryMood"
                             #input placeholder="Filter by Mood"
                             [(ngModel)]="summaryMood">
-                    <mat-option id ="dropdownAllMoods" selected value="All">All Emotions</mat-option>
-                    <mat-option id ="dropdownHappy" value="Happy">Happy</mat-option>
-                    <mat-option id ="dropdownSad" value="Sad">Sad</mat-option>
-                    <mat-option id ="dropdownMeh" value="Meh">Meh</mat-option>
-                    <mat-option id ="dropdownMad" value="Mad">Mad</mat-option>
-                    <mat-option id ="dropdownAnxious" value="Anxious">Anxious</mat-option>
+                    <mat-option id ="md-option-0" selected value="All">All Emotions</mat-option>
+                    <mat-option id ="md-option-1" value="Happy">Happy</mat-option>
+                    <mat-option id ="md-option-2" value="Sad">Sad</mat-option>
+                    <mat-option id ="md-option-3" value="Meh">Meh</mat-option>
+                    <mat-option id ="md-option-4" value="Mad">Mad</mat-option>
+                    <mat-option id ="md-option-5" value="Anxious">Anxious</mat-option>
+                    <!-- mat-option ids autoreplaced by md-option-x anyway -->
                 </mat-select>
             </form>
 
@@ -31,12 +32,12 @@
                     <mat-select name="dropdownInt" id="summaryInt"
                                 #input placeholder="Filter by Intensity"
                                 [(ngModel)]="summaryIntensity">
-                        <mat-option id="dropdownAll" selected value="All">All</mat-option>
-                        <mat-option id="dropdown1" value="1">1</mat-option>
-                        <mat-option id="dropdown2" value="2">2</mat-option>
-                        <mat-option id="dropdown3" value="3">3</mat-option>
-                        <mat-option id="dropdown4" value="4">4</mat-option>
-                        <mat-option id="dropdown5" value="5">5</mat-option>
+                        <mat-option id="md-option-6" selected value="All">All</mat-option>
+                        <mat-option id="md-option-7" value="1">1</mat-option>
+                        <mat-option id="md-option-8" value="2">2</mat-option>
+                        <mat-option id="md-option-9" value="3">3</mat-option>
+                        <mat-option id="md-option-10" value="4">4</mat-option>
+                        <mat-option id="md-option-11" value="5">5</mat-option>
                     </mat-select>
                 </form>
 
@@ -74,36 +75,36 @@
             <div id="tabs">
             <mat-tab-group #myTabGroup>
 
-                <mat-tab label="Graphs">
+                <mat-tab id="md-tab-label-0-0" label="Graphs">
                     <div id="graphFilter">
                         <form>
                             <!--# The Angular feature-->
                             <label>Show entries across a day or week?</label>
                             <mat-select name="dropdown" id="labelType"
                                     #input [(ngModel)]="inputType">
-                                <mat-option id ="Day" value="day">Day</mat-option>
-                                <mat-option id ="Week" value="week" selected>Week</mat-option>
-                                <mat-option id ="Month" value="month">Month</mat-option>
-                                <mat-option id ="Year" value="year">Year</mat-option>
+                                <mat-option id ="md-option-12" value="day">Day</mat-option>
+                                <mat-option id ="md-option-13" value="week" selected>Week</mat-option>
+                                <mat-option id ="md-option-14" value="month">Month</mat-option>
+                                <mat-option id ="md-option-15" value="year">Year</mat-option>
                             </mat-select>
                         </form>
                         <br>
-                        <mat-checkbox [(ngModel)]="limitedPast">Show only entries from the past {{inputType}}</mat-checkbox>
+                        <mat-checkbox id="pastXBox" [(ngModel)]="limitedPast">Show only entries from the past {{inputType}}</mat-checkbox>
                         <br>
                         <hr>
                         Detailed Graph Options
                         <br>
-                        <mat-checkbox [(ngModel)]="colorblindMode">Colorblind Mode</mat-checkbox>
+                        <mat-checkbox id="colorblindBox" [(ngModel)]="colorblindMode">Colorblind Mode</mat-checkbox>
                         <br>
                         <mat-radio-group [(ngModel)]="graphMode">
-                        <mat-radio-button value="line">Line Graph</mat-radio-button>
+                        <mat-radio-button id="lineradio" value="line">Line Graph</mat-radio-button>
                             |
-                        <mat-radio-button value="bar">Stacked Bar Graph</mat-radio-button>
+                        <mat-radio-button id="barradio" value="bar">Stacked Bar Graph</mat-radio-button>
                         </mat-radio-group>
                         <br>
                         <hr>
-                        <button mat-raised-button id="filterBarButton" (click)="this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate); updateBasicChart()">Summary Graph</button>
-                        <button mat-raised-button id="filterLineButton" (click)="this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate); updateDetailedChart()">Detailed Graph</button>
+                        <button mat-raised-button id="filterBasicButton" (click)="this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate); updateBasicChart()">Summary Graph</button>
+                        <button mat-raised-button id="filterDetailedButton" (click)="this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate); updateDetailedChart()">Detailed Graph</button>
                         <br>
 
 
@@ -115,7 +116,7 @@
 
                 </mat-tab>
 
-                <mat-tab label="List View">
+                <mat-tab id="md-tab-label-0-1" label="List View">
 
                     <mat-card> <mat-card-title class="your-summaries-title">Your Emotions</mat-card-title>
 

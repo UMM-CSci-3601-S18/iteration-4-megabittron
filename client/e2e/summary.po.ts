@@ -29,6 +29,16 @@ export class SummaryPage {
         return element(by.id('summaryMood')).click();
     }
 
+    selectIntensityDropdown(): promise.Promise<boolean> {
+        this.highlightElement(by.id('summaryInt'));
+        return element(by.id('summaryInt')).isPresent();
+    }
+
+    clickIntensityDropdown(): promise.Promise<void> {
+        this.highlightElement(by.id('summaryInt'));
+        return element(by.id('summaryInt')).click();
+    }
+
     selectStartDate(): promise.Promise<boolean> {
         this.highlightElement(by.id('startDate'));
         return element(by.id('startDate')).isPresent();
@@ -47,6 +57,16 @@ export class SummaryPage {
     clickEndDate(): promise.Promise<void> {
         this.highlightElement(by.id('endDate'));
         return element(by.id('endDate')).click();
+    }
+
+    selectTimeDropdown(): promise.Promise<boolean> {
+        this.highlightElement(by.id('labelType'));
+        return element(by.id('labelType')).isPresent();
+    }
+
+    clickTimeDropdown(): promise.Promise<void> {
+        this.highlightElement(by.id('labelType'));
+        return element(by.id('labelType')).click();
     }
 
 
