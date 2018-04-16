@@ -1,7 +1,7 @@
 import {HomePage} from './home.po';
 import {element, by} from 'protractor';
 
-fdescribe('Home page', () => {
+describe('Home page', () => {
     let page: HomePage;
 
     beforeEach(() => {
