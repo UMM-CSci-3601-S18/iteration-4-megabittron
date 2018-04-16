@@ -49,21 +49,30 @@ export class JournalsComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             if (result == undefined) {
                 console.log("Cancelled without adding a journal.");
-            } else {
-                this.journalListService.addNewJournal(result).subscribe(
-                    addJournalResult => {
-                        this.highlightedID = addJournalResult;
-                        this.refreshJournals();
-                    },
-                    err => {
-                        // This should probably be turned into some sort of meaningful response.
-                        console.log('There was an error adding the journal.');
-                        console.log('The error was ' + JSON.stringify(err));
+            }
+            else {
+                if(localStorage.isSignedIn == "true"){
+                    this.journalListService.addNewJournal(result).subscribe(
+                        addJournalResult => {
+                            this.highlightedID = addJournalResult;
+                            this.refreshJournals();
+                            },
+                            err => {
+                            // This should probably be turned into some sort of meaningful response.
+                                console.log('There was an error adding the journal.');
+                                console.log('The error was ' + JSON.stringify(err));
+                        });
+                    this.snackBar.open("Added Journal", "CLOSE", {
+                        duration: 2000,
                     });
-                this.snackBar.open("Added Journal", "CLOSE", {
-                    duration: 2000,
-                });
-                console.log("Journal added.");
+                    console.log("Journal added.");
+                }
+                else {
+
+                    this.snackBar.open("Journal Not Saved. Please Log In to Save Your Journal", "CLOSE", {
+                        duration: 5000,
+                    });
+                }
             }
         });
     }

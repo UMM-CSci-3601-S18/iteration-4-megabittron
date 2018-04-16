@@ -68,20 +68,30 @@ export class GoalsComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             if (result == undefined) {
                 console.log("Cancelled without adding a goal");
-            } else {
-                this.goalService.addNewGoal(result).subscribe(
-                    addGoalResult => {
-                        this.highlightedID = addGoalResult;
-                        this.refreshGoals();
-                        this.snackBar.open("Added Goal", "CLOSE", {
-                            duration: 2000,
+            }
+            else {
+                if(localStorage.isSignedIn == "true"){
+                    this.goalService.addNewGoal(result).subscribe(
+                        addGoalResult => {
+                            this.highlightedID = addGoalResult;
+                            this.refreshGoals();
+                            this.snackBar.open("Added Goal", "CLOSE", {
+                                duration: 2000,
+                            });
+                            },
+                            err => {
+                            // This should probably be turned into some sort of meaningful response.
+                                console.log('There was an error adding the goal.');
+                                console.log('The error was ' + JSON.stringify(err));
                         });
-                    },
-                    err => {
-                        // This should probably be turned into some sort of meaningful response.
-                        console.log('There was an error adding the goal.');
-                        console.log('The error was ' + JSON.stringify(err));
+                }
+                else {
+
+                    this.snackBar.open("Goal Not Saved. Please Log In to Save Your Goal", "CLOSE", {
+                        duration: 5000,
                     });
+                }
+
             }
         });
     }
@@ -92,6 +102,14 @@ export class GoalsComponent implements OnInit {
         }
 
         return "Incomplete";
+    }
+
+    getSize(type): boolean{
+        if(type == "today"){
+            return this.todayGoals.length > this.goalsPerPage;
+        }
+
+        return this.filteredGoals.length > this.goalsPerPage;
     }
     deleteGoal(_id: string) {
         this.goalService.deleteGoal(_id).subscribe(
@@ -313,10 +331,6 @@ export class GoalsComponent implements OnInit {
             }
             return false;
         }
-    }
-
-    setNumGoals(){
-        this.currentScreenWidth = (window.screen.width);
     }
 
 

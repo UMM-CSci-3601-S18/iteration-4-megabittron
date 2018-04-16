@@ -1,119 +1,47 @@
-.main-top {
-    height: 100px;
-    color: white;
-    background-color: #ee60eb;
-    width: 100%;
-    text-align: center;
-    font-size: 36px;
-    font-family: Roboto, sans-serif;
-    font-weight: normal;
-    line-height: 100px;
-    border-width: 1px;
-    border-color: black;
-    border-style: solid;
-}
-
-.example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-}
-
-.best-div {
-    padding: 25px;
-}
-
 #phone-icon {
     color: forestgreen;
     vertical-align: bottom;
     font-size: 28px
 }
 
-.phone-numbers-title {
+.title {
     font-size: 24px;
     text-align: center;
-}
-
-#phone-numbers-subtitle {
-    border-color: black;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 5px;
-    padding: 8px;
-    margin-left: 10%;
-    margin-right: 10%;
-    background-color: white;
-    color: black;
-    text-align: justify;
 }
 
 .phone-numbers-list {
     font-size: 22px;
 }
 
-.bullet-icon {
-    color: #202050;
-    vertical-align: bottom;
-}
-
-.phone-numbers-to-call {
-    margin: 10%;
-    font-style: oblique;
-}
-
-.actual-phone-number {
-    color: rgba(0, 0, 179, 0.9);
-    font-size: 24px;
-}
-
 .little-phone-icon {
     color: forestgreen;
 }
 
-.hotline-company-name {
-    margin: 10%;
+.link {
+    text-decoration: none;
 }
 
-#breathing{
-    max-width: 100%;
+.link-button:hover {
+    background-color: #E3F2FD;
 }
 
-.main-card, .resources-card, .phone-numbers{
-    background-color: #A8D0E6;
-
+.card {
+    width: 300px;
+    margin: 0 auto;
 }
 
-/*mat-card-content{
-    background-color: #c76b25;
+.container {
+    margin: 15px;
 }
 
-mat-card-title{
-    background-color: #c76b25;
-}*/
-
-.phone-div{
-    float: left;
-    width: 25%;
+.play-button:hover {
+    background-color: #FFEBEE;
 }
 
-.main-div{
-    float: left;
-    width: 50%;
+.play-icon {
+    color: #C62828;
 }
 
-.resources-div{
-    float: left;
-    width: 50%;
+.main {
+    margin: 0 auto;
 }
-
-.resources-div{
-    float: left;
-    width: 25%;
-}
-
-@media screen and (max-width: 600px) {
-    .phone-div, .main-div, .resources-div{
-        width: 100%;
-    }
-}
-
-

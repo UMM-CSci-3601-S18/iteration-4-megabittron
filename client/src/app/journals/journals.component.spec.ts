@@ -207,6 +207,7 @@ describe('Adding a journal', () => {
             journalList = fixture.componentInstance;
             fixture.detectChanges();
         });
+        localStorage.isSignedIn = "true";
     }));
 
     it('calls JournalsService.addJournal', () => {

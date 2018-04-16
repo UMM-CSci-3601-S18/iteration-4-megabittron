@@ -114,6 +114,12 @@ describe( 'Goals', () => {
         expect(goalList.goals.filter((goal: Goal) => goal.status === true).length).toBe(2);
     });
 
+    it('returnStatus should return "complete" if the status is true',()=>{
+       expect(goalList.returnStatus(true)).toBe("Complete");
+
+    });
+
+
     it('goal list shows all goals', () =>{
         expect(goalList.filteredGoals.length).toBe(4);
         goalList.showAllGoals = true;
@@ -289,6 +295,7 @@ describe('Adding a goal', () => {
 
     beforeEach(() => {
         calledGoal = null;
+        let highlightedID: { '$oid': string } = {'$oid': ''};
         // stub GoalsService for test reasons
         goalListServiceStub = {
             getGoals: () => Observable.of([]),
@@ -303,6 +310,7 @@ describe('Adding a goal', () => {
             open: () => {
                 return {
                     afterClosed: () => {
+                        highlightedID = {'$oid': newGoal._id};
                         return Observable.of(newGoal);
                     }
                 };
@@ -325,11 +333,13 @@ describe('Adding a goal', () => {
             goalList = fixture.componentInstance;
             fixture.detectChanges();
         });
+        localStorage.isSignedIn = "true";
     }));
 
     it('calls GoalsService.addGoal', () => {
         expect(calledGoal).toBeNull();
         goalList.openDialog();
+        expect(goalList.isHighlighted(calledGoal));
         expect(calledGoal).toEqual(newGoal);
     });
 });

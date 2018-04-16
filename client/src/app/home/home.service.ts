@@ -1,11 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-
 import {Observable} from 'rxjs/Observable';
-
 import {Emotion} from './emotion';
 import {environment} from '../../environments/environment';
-
 
 @Injectable()
 export class EmotionService {
@@ -15,26 +12,6 @@ export class EmotionService {
     private emptyObservable: Observable<{'$oid': string}> = Observable.of({'$oid': ""});
 
     constructor(private http: HttpClient) {
-    }
-
-    private parameterPresent(searchParam: string) {
-        return this.emotionUrl.indexOf(searchParam) !== -1;
-    }
-
-    // remove the parameter and, if present, the &
-    private removeParameter(searchParam: string) {
-        const start = this.emotionUrl.indexOf(searchParam);
-        let end = 0;
-        if (this.emotionUrl.indexOf('&') !== -1) {
-            end = this.emotionUrl.indexOf('&', start) + 1;
-        } else {
-            end = this.emotionUrl.indexOf('&', start);
-        }
-        this.emotionUrl = this.emotionUrl.substring(0, start) + this.emotionUrl.substring(end);
-    }
-
-    getEmotions(emotionMood?: string): Observable<Emotion[]> {
-        return this.http.get<Emotion[]>(this.emotionUrl);
     }
 
     addNewEmotion(newEmotion: Emotion): Observable<{'$oid': string}> {
