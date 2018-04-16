@@ -14,7 +14,7 @@ export class AppService {
 
     public testingToggle(): void {
         //Change this to stop the testing set up
-        let toggle = true;
+        var toggle = true;
 
         if(!environment.production && toggle){
             localStorage.setItem("userID", "defaultUserID");
