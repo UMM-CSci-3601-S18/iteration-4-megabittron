@@ -36,10 +36,11 @@
                             <p>I'm feeling {{selectedEmotion}}.</p>
                         </div>
 
-                        <div class="stepperButtons" id="stepperButton1">
+                        <div class="stepperButtons">
                             <button mat-raised-button
                                     matStepperNext
                                     class="next-button"
+                                    id="stepperButton1"
                                     [disabled]="showNext1Button()">
                                 Next
                             </button>
@@ -60,10 +61,11 @@
                                     (input)="emojiRating=$event.value">
                                 </mat-slider>
                             </div>
-                            <div class="stepperButtons" id="stepperButton2">
+                            <div class="stepperButtons" >
                                 <button mat-raised-button
                                         matStepperNext
                                         class="next-button"
+                                        id="stepperButton2"
                                         [disabled]="showNext2Button()">
                                     Next
                                 </button>
@@ -76,18 +78,20 @@
                             <p class="text-description">
                                 I'm feeling this way because...
                             </p>
-                            <mat-form-field class="text-form-field">
+                            <mat-form-field class="text-form-field" >
                             <textarea matInput
                                       placeholder="Text entry"
                                       rows="4"
                                       cols="70"
+                                      id="textFormFieldBox"
                                       (input)="emotionDescription=$event.target.value"></textarea>
                             </mat-form-field>
                         </div>
-                        <div class="stepperButtons" id="stepperButton3">
+                        <div class="stepperButtons" >
                             <button mat-raised-button
                                     matStepperNext
                                     class="next-button submit"
+                                    id="stepperButton3"
                                     (click)="getDate();saveEmotion()">
                                 Submit
                             </button>
