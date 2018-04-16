@@ -54,13 +54,6 @@ describe('Summary', () => {
         element(by.id('dropdownMad')).click();
     });
 
-    // makes sure it clicks on the Scared labeled emotion dropdown
-    it('Should click on Scared dropdown ', () => {
-        SummaryPage.navigateTo();
-        page.clickMoodDropdown();
-        element(by.id('dropdownScared')).click();
-    });
-
     // makes sure it clicks on the Anxious labeled emotion dropdown
     it('Should click on Anxious dropdown ', () => {
         SummaryPage.navigateTo();
@@ -69,7 +62,7 @@ describe('Summary', () => {
     });
 
     // makes sure it clicks on the Happy labeled Mood dropdown and then all emotions dropdown
-    it('Should click on Happy dropdown and then do process again with the all moods dropdown  ', () => {
+    it('Should click on Happy dropdown then click all moods dropdown', () => {
         SummaryPage.navigateTo();
         page.clickMoodDropdown();
         element(by.id('dropdownHappy')).click();
@@ -110,9 +103,9 @@ describe('Summary', () => {
     });
 
     // makes sure it clicks on the choose end date calendar button
-  /*  it('Should click on the choose an end date calendar button ', () => {
+    it('Should click on the choose an end date calendar button ', () => {
         SummaryPage.navigateTo();
         element(by.id('endButton')).click();
-    });*/
+    });
 
 });

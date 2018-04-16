@@ -324,6 +324,10 @@ import 'rxjs/add/operator/do';
                 expect(summary.modHour(23)).toBe(20);
                 expect(summary.modHour(0)).toBe(21);
                 expect(summary.modHour(30)).toBe(3);
+                summary.limitedPast = false;
+                expect(summary.modHour(23)).toBe(4);
+                expect(summary.modHour(0)).toBe(5);
+                expect(summary.modHour(30)).toBe(11);
             });
 
             it('filterDetailedGraph works correctly when using modHour', () => {
@@ -343,6 +347,7 @@ import 'rxjs/add/operator/do';
                 expect(summary.getPastHours(13)).toBe('5 AM');
                 expect(summary.getPastHours(0)).toBe('4 PM');
                 expect(summary.getPastHours(12)).toBe('4 AM');
+                expect(summary.getPastHours(8)).toBe('12 AM');
             });
 
         });
@@ -433,6 +438,8 @@ import 'rxjs/add/operator/do';
                 expect(summary.modDay(6)).toBe(0);
                 expect(summary.modDay(0)).toBe(1);
                 expect(summary.modDay(30)).toBe(3);
+                summary.limitedPast = false;
+                expect(summary.modDay(5)).toBe(5);
             });
 
             it('filterDetailedGraph works correctly when using modDay', () => {
@@ -449,8 +456,12 @@ import 'rxjs/add/operator/do';
 
             it('getPastDays works as intended', () => {
                 expect(summary.getPastDays(0)).toBe('Mon');
-                expect(summary.getPastDays(6)).toBe('Sun');
+                expect(summary.getPastDays(1)).toBe('Tues');
+                expect(summary.getPastDays(2)).toBe('Wed');
                 expect(summary.getPastDays(3)).toBe('Thurs');
+                expect(summary.getPastDays(4)).toBe('Fri');
+                expect(summary.getPastDays(5)).toBe('Sat');
+                expect(summary.getPastDays(6)).toBe('Sun');
             });
 
         });
@@ -517,8 +528,6 @@ import 'rxjs/add/operator/do';
                     summary.summaryIntensity = "All";
                     summary.startDate = null;
                     summary.endDate = null;
-                    //summary.filterSummaries(summary.summaryMood,
-                   //     summary.summaryIntensity, summary.startDate, summary.endDate);
                     summary.limitedPast = true;
                     summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0000 (UTC)');
                     // Above means nowDate becomes 8
@@ -544,6 +553,8 @@ import 'rxjs/add/operator/do';
                 expect(summary.modDate(6)).toBe(14);
                 expect(summary.modDate(0)).toBe(8);
                 expect(summary.modDate(30)).toBe(7);
+                summary.limitedPast = false;
+                expect(summary.modDate(5)).toBe(5);
             });
 
             it('filterDetailedGraph works correctly when using modDate', () => {
@@ -558,10 +569,38 @@ import 'rxjs/add/operator/do';
                 expect(summary.filterBasicGraph(summary.modDate(1))).toBe(0);
             });
 
-            it('getPastMonths works as intended', () => {
+            it('getPastDates works as intended', () => {
+                //last month has 31 days
                 expect(summary.getPastDates(0)).toBe('9');
                 expect(summary.getPastDates(6)).toBe('15');
                 expect(summary.getPastDates(3)).toBe('12');
+
+                //last month has 28 days
+                summary.nowStamp = new Date('Thu Mar 08 2018 20:00:00 GMT-0000 (UTC)');
+                summary.nowDate = 8;
+                //summary.lastMonthStamp = new Date('Mon Feb 05 2018 20:00:00 GMT-0000 (UTC)');
+                summary.lastMonth = 1;
+                expect(summary.getPastDates(0)).toBe('6');
+                expect(summary.getPastDates(6)).toBe('12');
+                expect(summary.getPastDates(3)).toBe('9');
+
+                //last month has 30 days
+                summary.nowStamp = new Date('Tue May 08 2018 20:00:00 GMT-0000 (UTC)');
+                summary.nowDate = 8;
+                //summary.lastMonthStamp = new Date('Sun Apr 07 2018 20:00:00 GMT-0000 (UTC)');
+                summary.lastMonth = 3;
+                expect(summary.getPastDates(0)).toBe('8');
+                expect(summary.getPastDates(6)).toBe('14');
+                expect(summary.getPastDates(3)).toBe('11');
+
+                //last month has 29 days (Leap Year)
+                summary.nowStamp = new Date('Sun Mar 08 2020 20:00:00 GMT-0000 (UTC)');
+                summary.nowDate = 8;
+                //summary.lastMonthStamp = new Date('Thu Apr 06 2020 20:00:00 GMT-0000 (UTC)');
+                summary.lastMonth = 1;
+                expect(summary.getPastDates(0)).toBe('7');
+                expect(summary.getPastDates(6)).toBe('13');
+                expect(summary.getPastDates(3)).toBe('10');
             });
 
         });
@@ -653,6 +692,8 @@ import 'rxjs/add/operator/do';
                 expect(summary.modMonth(6)).toBe(10);
                 expect(summary.modMonth(0)).toBe(4);
                 expect(summary.modMonth(30)).toBe(10);
+                summary.limitedPast = false;
+                expect(summary.modMonth(5)).toBe(5);
             });
 
             it('filterDetailedGraph works correctly when using modMonth', () => {
@@ -669,8 +710,17 @@ import 'rxjs/add/operator/do';
 
             it('getPastMonths works as intended', () => {
                 expect(summary.getPastMonths(0)).toBe('May');
-                expect(summary.getPastMonths(6)).toBe('Nov');
+                expect(summary.getPastMonths(1)).toBe('June');
+                expect(summary.getPastMonths(2)).toBe('July');
                 expect(summary.getPastMonths(3)).toBe('Aug');
+                expect(summary.getPastMonths(4)).toBe('Sep');
+                expect(summary.getPastMonths(5)).toBe('Oct');
+                expect(summary.getPastMonths(6)).toBe('Nov');
+                expect(summary.getPastMonths(7)).toBe('Dec');
+                expect(summary.getPastMonths(8)).toBe('Jan');
+                expect(summary.getPastMonths(9)).toBe('Feb');
+                expect(summary.getPastMonths(10)).toBe('Mar');
+                expect(summary.getPastMonths(11)).toBe('Apr');
             });
 
         });
