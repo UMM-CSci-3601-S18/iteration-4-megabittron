@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit{
         if(this.selectedEmotion != "none") {
             return false;
         } else return true;
-    };
+    }
 
     showNext2Button(){
         if(this.emojiRating != 0) {
@@ -103,26 +103,6 @@ export class HomeComponent implements OnInit{
             });
         }
     }
-
-    /*
-    refreshEmotions(): Observable<Emotion[]> {
-        // Get Emotions returns an Observable, basically a "promise" that
-        // we will get the data from the server.
-        //
-        // Subscribe waits until the data is fully downloaded, then
-        // performs an action on it (the first lambda)
-        const emotionObservable: Observable<Emotion[]> = this.emotionService.getEmotions();
-        emotionObservable.subscribe(
-            emotions => {
-                this.emotions = emotions;
-                // this.filterEmotions(this.emotionMood, this.emotionIntensity, this.emotionDescription, this.emotionDate);
-            },
-            err => {
-                console.log(err);
-            });
-        return emotionObservable;
-    }
-    */
 
     getDate(){
         let today = new Date();

@@ -106,6 +106,14 @@ export class GoalsComponent implements OnInit {
 
         return "Incomplete";
     }
+
+    getSize(type): boolean{
+        if(type == "today"){
+            return this.todayGoals.length > this.goalsPerPage;
+        }
+
+        return this.filteredGoals.length > this.goalsPerPage;
+    }
     deleteGoal(_id: string) {
         this.goalService.deleteGoal(_id).subscribe(
             goals => {

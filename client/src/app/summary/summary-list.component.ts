@@ -407,23 +407,34 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     public getPastDates(xValue: number): String {
         let thisDate = (this.nowDate + xValue)%31;
         let numDate;
-        let M31Ds = [0, 2, 4, 6, 7, 9, 11];
-        let M30Ds = [3, 5, 8, 10];
+        //cant get if to check this.lastMonth in M31Ds, so scrapped it
+        //let M31Ds:number[] = [0, 2, 4, 6, 7, 9, 11];
+        //let M30Ds:number[] = [3, 5, 8, 10];
         let thisYear = this.nowStamp.getFullYear();
         // should get past 31 days
         // if last month had less than 31 days, it should be reflected
 
-        if(this.lastMonth in M31Ds || this.nowDate == 30){
+        if(this.lastMonth == 0 ||
+            this.lastMonth == 2 ||
+            this.lastMonth == 4 ||
+            this.lastMonth == 6 ||
+            this.lastMonth == 7 ||
+            this.lastMonth == 9 ||
+            this.lastMonth == 11 ||
+            this.nowDate == 30){
             //last month had 31 days or today is 31st
             numDate = thisDate + 1;
         }
         else {
-            if(this.lastMonth in M30Ds){
+            if(this.lastMonth == 3 ||
+                this.lastMonth == 5 ||
+                this.lastMonth == 8 ||
+                this.lastMonth == 10){
                 //last month had 30 days
                 numDate = thisDate;
             }
             else {
-                if(((thisYear % 4 == 0) && (thisYear % 100) != 0) || (thisYear % 400) == 0){
+                if(((thisYear % 4 == 0) && (thisYear % 100) !== 0) || (thisYear % 400) == 0){
                     //last month has 29 days, leap year
                     numDate = thisDate - 1;
                 }

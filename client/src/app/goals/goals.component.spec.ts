@@ -115,6 +115,12 @@ describe( 'Goals', () => {
         expect(goalList.goals.filter((goal: Goal) => goal.status === true).length).toBe(2);
     });
 
+    it('returnStatus should return "complete" if the status is true',()=>{
+       expect(goalList.returnStatus(true)).toBe("Complete");
+
+    });
+
+
     it('goal list shows all goals', () =>{
         expect(goalList.filteredGoals.length).toBe(4);
         goalList.showAllGoals = true;
