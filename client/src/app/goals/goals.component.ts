@@ -5,11 +5,13 @@ import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
 import {AddGoalComponent} from './add-goal.component';
 import {MatSnackBar} from '@angular/material';
+import {AppService} from "../app.service";
 
 @Component({
     selector: 'app-goals-component',
     templateUrl: 'goals.component.html',
     styleUrls: ['./goals.component.css'],
+    providers: [AppService]
 })
 
 export class GoalsComponent implements OnInit {
@@ -39,7 +41,7 @@ export class GoalsComponent implements OnInit {
     private highlightedID: { '$oid': string } = {'$oid': ''};
 
     // Inject the GoalsService into this component.
-    constructor(public goalService: GoalsService, public dialog: MatDialog, public snackBar: MatSnackBar) {
+    constructor(public goalService: GoalsService, public dialog: MatDialog, public snackBar: MatSnackBar, public appService: AppService) {
     }
 
     isHighlighted(goal: Goal): boolean {
@@ -381,10 +383,13 @@ export class GoalsComponent implements OnInit {
 
     ngOnInit(): void {
         //For testing
-        //localStorage.setItem("userID", "4cb56a89541a2d783595012c");
+        //toggle the value in app service to toggle testing
+        this.appService.testingToggle();
+
         this.refreshGoals();
         this.loadService();
         this.getDate();
+
 
     }
 

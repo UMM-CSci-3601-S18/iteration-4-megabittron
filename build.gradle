@@ -27,7 +27,7 @@ task seedJournalsData(type: Exec) {
 }
 task seedUsersData(type: Exec) {
     executable = "mongoimport"
-    args = ["-d", "dev", "-c", "journals", "--file", "users.seed.json", "--jsonArray"]
+    args = ["-d", "dev", "-c", "users", "--file", "users.seed.json", "--jsonArray"]
 }
 
 

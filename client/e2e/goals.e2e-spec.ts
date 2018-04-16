@@ -25,9 +25,9 @@ describe('Goal list', () => {
         expect(page.getGoalManageTitle()).toEqual('Your Goals');
     });
 
-    it('Should check that goal with name: \'Visit sister\' matches unique id', () => {
+    it('Should check that goal with name: \'Do what the doctor says\' matches unique id', () => {
         page.navigateTo();
-        expect(page.getUniqueGoal('5ab53a898e1620e3d7e48796')).toContain('Visit sister');
+        expect(page.getUniqueGoal('5ab53a89ea32d59c4e81d5f0')).toContain('Do what the doctor says');
     });
 
     it('Total number of goals should be 5', () => {

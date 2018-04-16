@@ -6,11 +6,13 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 import {AddJournalComponent} from './add-journal.component';
 import {EditJournalComponent} from "./edit-journal.component";
 import {ShowJournalComponent} from "./show-journal.component";
+import {AppService} from "../app.service";
 
 @Component({
     selector: 'app-journals-component',
     templateUrl: 'journals.component.html',
     styleUrls: ['./journals.component.scss'],
+    providers: [AppService]
 })
 
 export class JournalsComponent implements OnInit {
@@ -29,7 +31,8 @@ export class JournalsComponent implements OnInit {
     // Inject the JournalsService into this component.
     constructor(public journalListService: JournalsService,
                 public dialog: MatDialog,
-                public snackBar: MatSnackBar) {
+                public snackBar: MatSnackBar,
+                public appService: AppService) {
 
     }
 
@@ -179,8 +182,12 @@ export class JournalsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.refreshJournals();
+        //For testing
+        //toggle the value in app service to toggle testing
+        this.appService.testingToggle();
         this.loadService();
+        this.refreshJournals();
+
     }
 
 }
