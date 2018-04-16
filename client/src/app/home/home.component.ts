@@ -11,7 +11,6 @@ import {environment} from '../../environments/environment';
     styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-    //public emotions: Emotion[];
 
     readonly baseUrl: string = environment.API_URL + 'emotions';
 
@@ -105,5 +104,4 @@ export class HomeComponent {
         let today = new Date();
         this.emotionDate = today.toString();
     }
-
 }
