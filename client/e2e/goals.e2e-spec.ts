@@ -13,7 +13,7 @@ browser.driver.controlFlow().execute = function () {
     return origFn.apply(browser.driver.controlFlow(), args);
  };*/
 
-fdescribe('Goal list', () => {
+describe('Goal list', () => {
     let page: GoalPage;
 
     beforeEach(() => {
