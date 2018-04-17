@@ -217,7 +217,7 @@ export class GoalsComponent implements OnInit {
                         this.updateNext(goal._id, goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)
                     }
 
-                    if (goal.status == true) {
+                    if (goal.status == true && nextGoal.getTime() == this.today.getTime()) {
                         return false;
                     }
 
@@ -259,7 +259,7 @@ export class GoalsComponent implements OnInit {
                     }
 
                     if (nextGoal.getTime() == this.today.getTime()) {
-                        this.updateNext(goal._id, goal.name, goal.purpose, goal.category, goal.status, goal.frequency, goal.start, goal.end, nextGoal.toString());
+                        this.updateNext(goal._id, goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, nextGoal.toString());
                         return true;
                     }
 
@@ -330,7 +330,7 @@ export class GoalsComponent implements OnInit {
         }
         else{
             if(this.filteredGoals !== undefined){
-                return (this.goalsPerPage * this.currentPage) < this.todayGoals.length;
+                return (this.goalsPerPage * this.currentPage) < this.filteredGoals.length;
             }
             return false;
         }
