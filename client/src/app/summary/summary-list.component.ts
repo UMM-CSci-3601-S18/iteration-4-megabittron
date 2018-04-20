@@ -22,16 +22,13 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     endDate;
     getDate;
 
-    ctxBasic: any;
-    basicCanvas: any;
-    basicChart: any;
     ctxDetail: any;
     detailedCanvas: any;
     detailedChart: any;
 
-    limitedPast: boolean;
-    colorblindMode: boolean;
-    graphMode = 'line';
+    limitedPast: boolean = true;
+    colorblindMode: boolean = false;
+    graphMode = 'bar';
     happyColor: string;
     sadColor: string;
     mehColor: string;
@@ -65,6 +62,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     /** --------------------------------------- **/
 
     // These are public so that tests can reference them (.spec.ts)
+    /** Initializing these results in them being over-written before first build, giving an empty graph on page load. **/
     public summaries: Summary[];
     public filteredSummaries: Summary[];
     public dateFilteredSummaries: Summary[];
@@ -680,6 +678,26 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             }
         }
     }
+
+
+    toggleCBMode(){
+        if(this.colorblindMode){
+            this.colorblindMode = false;
+        }
+        else{
+            this.colorblindMode = true
+        }
+    }
+
+    toggleLP(){
+        if(this.limitedPast){
+            this.limitedPast = false;
+        }
+        else{
+            this.limitedPast = true
+        }
+    }
+
     /**
      * Starts an asynchronous operation to update the emojis list
      *
@@ -770,6 +788,8 @@ public pastDates = [
     this.getPastDates(30)
 ];
 
+
+/*
     updateBasicChart(): void{
         this.CurrentGraph = 'Basic';
 
@@ -859,14 +879,12 @@ public pastDates = [
             }
         });
     }
+*/
 
     updateDetailedChart(): void{
 
         if(this.detailedChart != null){
             this.detailedChart.destroy();
-        }
-        if(this.basicChart != null){
-            this.basicChart.destroy();
         }
 
         let stackBool = false;
@@ -1009,144 +1027,8 @@ public pastDates = [
         });
     }
 
-    /*
-    buildBasicChart(): void {
-
-        this.basicCanvas = document.getElementById("Chart");
-        this.ctxBasic = this.basicCanvas;
-
-        let summaryDays;
-
-        let days;
-
-        if(this.limitedPast){
-            days = this.pastDays;
-        }
-        else {
-            days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
-        }
-
-        summaryDays = {
-            "label": "Total Number of Entries",
-            "data": this.getDailyData('all'),
-            "fill": true,
-            "backgroundColor": "blue",
-            "borderColor": "black",
-            "lineTension": 0.3
-        };
-
-        this.basicChart = new Chart(this.ctxBasic, {
-            type: 'bar',
-            data: {
-                labels: days,
-                datasets: [summaryDays]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRation: false,
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
-    }
-    */
-
-    /*
-    buildDetailedChart(): void {
-
-        this.detailedCanvas = document.getElementById("Chart");
-        this.ctxDetail= this.detailedCanvas;
-
-        if(this.colorblindMode){
-            this.happyColor = "rgb(252,141,89)";
-            this.sadColor = "rgb(69,117,180)";
-            this.mehColor = "rgb(254,224,144)";
-            this.madColor = "rgb(215,48,39)";
-            this.anxiousColor = "rgb(145,191,219)";
-        } else {
-            this.happyColor = "rgb(64, 255, 0)";
-            this.sadColor = "rgb(0, 128, 255)";
-            this.mehColor = "rgb(100, 100, 100)";
-            this.madColor = "rgb(255, 0, 0)";
-            this.anxiousColor = "rgb(255, 128, 0)";
-        }
-        let pastDays = [
-            this.getPastDays(0),
-            this.getPastDays(1),
-            this.getPastDays(2),
-            this.getPastDays(3),
-            this.getPastDays(4),
-            this.getPastDays(5),
-            this.getPastDays(6)
-        ];
-
-        let happy_time_totals = {"label":"Happy",
-            "data":this.getDailyData('happy'),
-            hidden: false,
-            "fill":false,
-            "borderColor":this.happyColor,
-            "lineTension":0.1};
-
-        let sad_time_totals = {"label":"Sad",
-            "data":this.getDailyData('sad'),
-            hidden: false,
-            "fill":false,
-            "borderColor":this.sadColor,
-            "lineTension":0.1};
-
-        let meh_time_totals = {"label":"Meh",
-            "data":this.getDailyData('meh'),
-            hidden: false,
-            "fill":false,
-            "borderColor":this.mehColor,
-            "lineTension":0.1};
-
-        let mad_time_totals = {"label":"Mad",
-            "data":this.getDailyData('mad'),
-            hidden: false,
-            "fill":false,
-            "borderColor":this.madColor,
-            "lineTension":0.1};
-
-        let anxious_time_totals = {"label":"Anxious",
-            "data":this.getDailyData('anxious'),
-            hidden: false,
-            "fill":false,
-            "borderColor":this.anxiousColor,
-            "lineTension":0.1};
-
-        this.detailedChart = new Chart(this.ctxDetail, {
-            type: 'line',
-            data: {
-                labels: pastDays,
-                datasets: [
-                    happy_time_totals,
-                    sad_time_totals,
-                    meh_time_totals,
-                    mad_time_totals,
-                    anxious_time_totals
-                ]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                        }
-                    }]
-                }
-            }
-        });
-    }
-    */
-
     ngAfterViewInit(): void {
-        this.updateBasicChart();
+        this.updateDetailedChart();
     }
 
     /*

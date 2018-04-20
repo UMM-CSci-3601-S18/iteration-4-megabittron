@@ -75,43 +75,35 @@
             <mat-tab-group #myTabGroup>
 
                 <mat-tab id="md-tab-label-0-0" label="Graphs">
+
+                    <h2 class="your-summaries-title">Your Emotions</h2>
+                        <h3 class="your-summaries-title">There are {{totalNumberMoods()}} entries represented</h3>
+                    <canvas id="Chart" height="auto"></canvas>
+
                     <div id="graphFilter">
-                        <form>
                             <!--# The Angular feature-->
                             <label>Show entries across a day or week?</label>
                             <mat-select name="dropdown" id="labelType"
-                                    #input [(ngModel)]="inputType">
+                                        #input [(ngModel)]="inputType">
                                 <mat-option id ="md-option-12" value="day">Day</mat-option>
                                 <mat-option id ="md-option-13" value="week" selected>Week</mat-option>
                                 <mat-option id ="md-option-14" value="month">Month</mat-option>
                                 <mat-option id ="md-option-15" value="year">Year</mat-option>
                             </mat-select>
-                        </form>
-                        <br>
-                        <mat-checkbox id="pastXBox" [(ngModel)]="limitedPast">Show only entries from the past {{inputType}}</mat-checkbox>
-                        <br>
-                        <hr>
-                        Detailed Graph Options
+
+                        |
+                        <mat-checkbox id="pastXBox" [(ngModel)]="limitedPast" checked="true">Show only entries from the past {{inputType}}</mat-checkbox>
                         <br>
                         <mat-checkbox id="colorblindBox" [(ngModel)]="colorblindMode">Colorblind Mode</mat-checkbox>
                         <br>
                         <mat-radio-group [(ngModel)]="graphMode">
-                        <mat-radio-button id="lineradio" value="line">Line Graph</mat-radio-button>
+                            <mat-radio-button id="lineradio" value="line" (click)="this.graphMode = 'line' ; updateDetailedChart()">Line Graph</mat-radio-button>
                             |
-                        <mat-radio-button id="barradio" value="bar">Stacked Bar Graph</mat-radio-button>
+                            <mat-radio-button id="barradio" value="bar" (click)="this.graphMode = 'bar' ;updateDetailedChart()">Stacked Bar Graph</mat-radio-button>
                         </mat-radio-group>
                         <br>
-                        <hr>
-                        <button mat-raised-button id="filterBasicButton" (click)="this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate); updateBasicChart()">Summary Graph</button>
-                        <button mat-raised-button id="filterDetailedButton" (click)="this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate); updateDetailedChart()">Detailed Graph</button>
-                        <br>
-
 
                     </div>
-                    <mat-card> <mat-card-title class="your-summaries-title">Your Emotions</mat-card-title>
-                        <mat-card-subtitle class="your-summaries-title">There are {{totalNumberMoods()}} entries represented</mat-card-subtitle>
-                    <canvas id="Chart" height="auto"></canvas>
-                    </mat-card>
 
                 </mat-tab>
 
