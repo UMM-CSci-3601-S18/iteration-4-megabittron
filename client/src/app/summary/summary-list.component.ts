@@ -65,13 +65,13 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     /** --------------------------------------- **/
 
     // These are public so that tests can reference them (.spec.ts)
-    public summaries: Summary[] = [];
-    public filteredSummaries: Summary[] = [];
-    public dateFilteredSummaries: Summary[] = [];
-    public pastWeekSummaries: Summary[] = [];
-    public pastDaySummaries: Summary[] = [];
-    public pastMonthSummaries: Summary[] = [];
-    public pastYearSummaries: Summary[] = [];
+    public summaries: Summary[];
+    public filteredSummaries: Summary[];
+    public dateFilteredSummaries: Summary[];
+    public pastWeekSummaries: Summary[];
+    public pastDaySummaries: Summary[];
+    public pastMonthSummaries: Summary[];
+    public pastYearSummaries: Summary[];
 
 
 
