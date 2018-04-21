@@ -3,7 +3,7 @@
 
 
 ## First Step:
-####Create a Google API console project and Client ID:
+#### Create a Google API console project and Client ID:
 
 Do this by going to https://developers.google.com/identity/sign-in/web/sign-in
 
