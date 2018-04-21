@@ -18,6 +18,8 @@ export class AppService {
 
         if(!environment.production && toggle){
             localStorage.setItem("userID", "defaultUserID");
+            localStorage.setItem("userFirstName", "Patrick");
+            localStorage.setItem("userLastName", "Bateman");
             localStorage.setItem("isSignedIn", "true");
         }
     }
