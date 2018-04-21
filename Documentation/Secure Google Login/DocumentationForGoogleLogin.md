@@ -1,8 +1,8 @@
 
-#Setting up Google Login for Friendly Panda:
+# Setting up Google Login for Friendly Panda:
 
 
-##First Step:
+## First Step:
 Create a Google API console project and Client ID:
 Do this by going to https://developers.google.com/identity/sign-in/web/sign-in
 Before you can integrate Google Sign-In into your website, you must create a client ID, which you need to call the sign-in API.
@@ -13,7 +13,7 @@ When you press next you will get to be here:
 
 ![image4](./images/image4.png)
 
-##Second Step:
+## Second Step:
 The next tab asks you if you want to set this up for a Chrome App, or a web browser or web server or Ios App etc. You should choose web server because you would like to set up login always on the server side. Thinking way down the road you will realize that it’s way much safer and efficient to do so. If you do client side login, you’re thinking about getting all your database from the server and then use google’s user information to do filtering on the client side to show only information that match your user details. This is risky and not safe as you don’t want to get all user databases into the client side, rather using server side login where only matching data to your server only comes through is the safer and efficient way to go.
 
 ![image7](./images/image7.png)
@@ -196,7 +196,7 @@ String familyName = (String) payload.get("family_name");
 String givenName = (String) payload.get("given_name");
 ```
 
-##Fourth Step:
+## Fourth Step:
 Then use specific ID tokens to make a new collection. For instance, we chose the getSubject which is unique to each user to link up to all our different collection.
 
 Our user collection in the database consisted of 4 different fields:
@@ -302,7 +302,7 @@ Emotions Collection:
 $oid(for that specific Emotion), mood, intensity, date and userID (from user collection)  
 
 
-#####References:
+##### References:
 https://developers.google.com/identity/sign-in/web/server-side-flow
 
 https://developers.google.com/identity/sign-in/web/backend-auth
@@ -310,5 +310,5 @@ https://developers.google.com/identity/sign-in/web/backend-auth
 https://developers.google.com/identity/sign-in/web/people
 
 
-#####For more questions contact @xaiteev, @CMenne, @ahnafy
+##### For more questions contact @xaiteev, @CMenne, @ahnafy
 
