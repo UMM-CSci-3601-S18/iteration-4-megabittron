@@ -189,12 +189,12 @@ public class Server {
                 String locale = (String) payload.get("locale");
                 String familyName = (String) payload.get("family_name");
                 String givenName = (String) payload.get("given_name");
-
-
-                System.out.println(subjectId);
-                System.out.println(email);
-                System.out.println(name);
-                System.out.println(locale);
+                
+                //Debugging code
+                //System.out.println(subjectId);
+                //System.out.println(email);
+                //System.out.println(name);
+                //System.out.println(locale);
 
                 return userController.addNewUser(subjectId, givenName, familyName);
 
