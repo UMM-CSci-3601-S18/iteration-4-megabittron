@@ -114,7 +114,12 @@ public class UserController {
             }
         } else {
             //assumes there will only be 1 user returned
-            return JSON.serialize(matchingUsers.first().get("_id"));
+            Document userInfo = new Document();
+            userInfo.append("_id", matchingUsers.first().get("_id"));
+            userInfo.append("FirstName", matchingUsers.first().get("FirstName"));
+            userInfo.append("LastName", matchingUsers.first().get("LastName"));
+
+            return JSON.serialize(userInfo);
         }
 
         //----------------------------
