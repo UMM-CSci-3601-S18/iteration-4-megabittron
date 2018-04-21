@@ -3,8 +3,10 @@
 
 
 ## First Step:
-Create a Google API console project and Client ID:
+####Create a Google API console project and Client ID:
+
 Do this by going to https://developers.google.com/identity/sign-in/web/sign-in
+
 Before you can integrate Google Sign-In into your website, you must create a client ID, which you need to call the sign-in API.
 
 ![image3](./images/image3.png)
@@ -18,15 +20,16 @@ The next tab asks you if you want to set this up for a Chrome App, or a web brow
 
 ![image7](./images/image7.png)
 
-Your authorized redirect URIs is very important and should be set to where you’re going to be running this. One might try to create two different OAuth Client, one for the localhost and one for the actual IP address. So, when you’re working on login and not deploying set your Authorized redirect URIs to be 
+Your authorized redirect URIs is very important and should be set to where you’re going to be running this. One might try to create two different OAuth Client, one for the localhost and one for the actual IP address.
+**So, when you’re working on login and not deploying set your Authorized redirect URIs to be:**
 
-http://localhost:9000/
+**http://localhost:9000/**
 
 Based on either localhost or you’re IP address, You will get your own set of Client ID and Client Secret.
 
 ![image6](./images/image6.png)
 
-You can always change things on your API Console!
+*You can always change things on your API Console!*
 
 Also, Download the JSON file cause that's what we are going to store later rather than hard coding stuff.
 
@@ -43,10 +46,10 @@ The sign-in flow for obtaining an access token for your server-side application 
 
 One-time codes have several security advantages. With codes, Google provides tokens directly to your server without any intermediaries.
 
-##### Keep your client secret secret!
+***Keep your client secret secret!***
 
 
-THE NEXT STEP IS ALL BASED ON: 
+**THE NEXT STEP IS ALL BASED ON:** 
 https://developers.google.com/identity/sign-in/web/server-side-flow
 
 ## Third Step:
@@ -66,7 +69,7 @@ Include the following scripts that demonstrate an anonymous function that insert
   </script>
   <!-- END Pre-requisites -->
 ```
-Initialize the GoogleAuth object
+### Initialize the GoogleAuth object
 Load the auth2 library and call gapi.auth2.init() to initialize the GoogleAuth object. Specify your client ID and the scopes you want to request when you call init().
 ```
 <!-- Continuing the <head> section →
@@ -83,10 +86,11 @@ Load the auth2 library and call gapi.auth2.init() to initialize the GoogleAuth o
  </script>
 </head>
 <body>  <!-- ... --></body></html>
-
-Add the sign-in button to your page
+```
+### Add the sign-in button to your page
 Add the sign-in button to your web page, and attach a click handler to call grantOfflineAccess() to start the one-time-code flow.
 
+```
 <!-- Add where you want your sign-in button to render →
 <!-- Use an image that follows the branding guidelines in a real app →
 <button id="signinButton">Sign in with Google</button>
@@ -98,12 +102,12 @@ Add the sign-in button to your web page, and attach a click handler to call gran
 </script>
 ```
 
-Send the authorization code to the server
+### Send the authorization code to the server
 The code is your one-time code that your server can exchange for its own access token and refresh token. You can only obtain a refresh token after the user has been presented an authorization dialog requesting offline access. You must store the refresh token that you retrieve for later use because subsequent exchanges will return null for the refresh token. This flow provides increased security over your standard OAuth 2.0 flow.
 
 Access tokens are always returned with the exchange of a valid authorization code.
 
-The following script defines a callback function for the sign-in button. When a sign-in is successful, the function stores the access token for client-side use and sends the one-time code to your server on the same domain.
+The following script defines a [callback](https://developers.google.com/identity/#button_attr_callback) function for the sign-in button. When a sign-in is successful, the function stores the access token for client-side use and sends the one-time code to your server on the same domain.
 
 ```
 <!-- Last part of BODY element in file index.html -->
@@ -135,7 +139,7 @@ data: authResult['code']
 </script>
 ```
 
-Exchange the authorization code for an access token
+### Exchange the authorization code for an access token
 On the server, exchange the auth code for access and refresh tokens. Use the access token to call Google APIs on behalf of the user and, optionally, store the refresh token to acquire a new access token when the access token expires.
 
 If you requested profile access, you also get an ID token that contains basic profile information for the user.
@@ -292,13 +296,16 @@ We filter through our given generated _id/UserID rather than the subjectID in al
 For instance,
 
 Journaling Collection:
+
 $oid(for that specific journal), subject, body, date and userID(from user collection)
 
 Goals Collection:
+
 $oid(for that specific goal), purpose, category, name, status, start, end, next, frequency and userID(from user collection)
 
 
 Emotions Collection:
+
 $oid(for that specific Emotion), mood, intensity, date and userID (from user collection)  
 
 
