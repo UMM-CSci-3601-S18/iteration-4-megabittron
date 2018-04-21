@@ -94,6 +94,6 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.handleClientLoad();
         gapi.load('client:auth2', this.initClient);
-        this.googleAuth = gapi.auth2.getAuthInstance();
+        //this.googleAuth = gapi.auth2.getAuthInstance();
     }
 }
