@@ -69,7 +69,7 @@ export class AppComponent implements OnInit {
                 localStorage.setItem("userID", onSuccess["_id"]["$oid"]);
                 localStorage.setItem("userFirstName", onSuccess["FirstName"]);
                 localStorage.setItem("userLastName", onSuccess["LastName"]);
-                
+
                 // window.location.reload();
             }, onFail => {
                 console.log("ERROR: Code couldn't be sent to the server");
