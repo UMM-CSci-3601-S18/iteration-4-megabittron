@@ -84,6 +84,7 @@ need to have data in the `dev` database before running the e2e tests!
 * `runServerTests` runs the server tests.
 
 ## Authors
+- **Abenezer Monjor**
 - **Travis Warling** 
 - **Xaitheng Yang** 
 - **Charles Menne** 
