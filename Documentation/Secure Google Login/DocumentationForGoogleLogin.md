@@ -317,5 +317,5 @@ https://developers.google.com/identity/sign-in/web/backend-auth
 https://developers.google.com/identity/sign-in/web/people
 
 
-##### For more questions contact @xaiteev, @CMenne, @ahnafy
+##### For more questions contact @xaivteev, @CMenne, @ahnafy
 
