@@ -29,6 +29,12 @@ Versions used for required packages:
 
 ## Setup
 
+### For a live build
+To begin, clone the repository, then run build.sh. Then the project can be run using the generated 3601.sh file. This can be connected to using any typical http connection through a web browser. 
+
+An example of a live build can be found at https://mypanda.website/ 
+
+### For a production build
 For IntelliJ users, you should be able to clone this repository inside IntelliJ 
 
 - When prompted to create a new IntelliJ project, select **yes**.
@@ -45,7 +51,7 @@ If you let IDEA do it, you'll
 have a ton of JavaScript files cluttering up your project and confusing other
 tools.
 
-## Running your project
+## Running the project
 
 - The **build** task will _build_ the entire project (but not run it)
 - The **run** Gradle task will still run your SparkJava server.
@@ -85,14 +91,13 @@ need to have data in the `dev` database before running the e2e tests!
 
 ## Authors
 - **Abenezer Monjor**
-- **Travis Warling** 
-- **Xaitheng Yang** 
-- **Charles Menne** 
-- **Ahnaf Prio** 
-- **John Hoff** 
+- **Ahnaf Prio**
+- **Charles Menne**
 - **Dustin Blake** 
 - **Francisco Montanez** 
-
+- **John Hoff** 
+- **Travis Warling**
+- **Xaitheng Yang**
 
 [angular-karma-jasmine]: https://codecraft.tv/courses/angular/unit-testing/jasmine-and-karma/
 [e2e-testing]: https://coryrylan.com/blog/introduction-to-e2e-testing-with-the-angular-cli-and-protractor
