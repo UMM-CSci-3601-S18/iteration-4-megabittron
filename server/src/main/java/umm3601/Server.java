@@ -11,8 +11,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.io.File;
-
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
@@ -20,18 +18,18 @@ import static spark.debug.DebugScreen.enableDebugScreen;
 import spark.Route;
 
 
-import umm3601.database.GoalController;
-import umm3601.database.GoalRequestHandler;
-import umm3601.database.JournalController;
-import umm3601.database.JournalRequestHandler;
-import umm3601.database.EmotionController;
-import umm3601.database.EmotionRequestHandler;
-import umm3601.database.ResourceController;
-import umm3601.database.ResourceRequestHandler;
-import umm3601.database.SummaryController;
-import umm3601.database.SummaryRequestHandler;
-import umm3601.database.UserController;
-import umm3601.database.UserRequestHandler;
+import umm3601.database.goal.GoalController;
+import umm3601.database.goal.GoalRequestHandler;
+import umm3601.database.journal.JournalController;
+import umm3601.database.journal.JournalRequestHandler;
+import umm3601.database.emotion.EmotionController;
+import umm3601.database.emotion.EmotionRequestHandler;
+import umm3601.database.resource.ResourceController;
+import umm3601.database.resource.ResourceRequestHandler;
+import umm3601.database.summary.SummaryController;
+import umm3601.database.summary.SummaryRequestHandler;
+import umm3601.database.user.UserController;
+import umm3601.database.user.UserRequestHandler;
 
 
 import com.google.api.client.googleapis.auth.oauth2.*;

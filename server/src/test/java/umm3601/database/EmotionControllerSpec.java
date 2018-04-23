@@ -13,6 +13,7 @@ import org.bson.json.JsonReader;
 import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
+import umm3601.database.emotion.EmotionController;
 
 import java.io.IOException;
 import java.util.*;
