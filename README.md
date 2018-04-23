@@ -5,6 +5,8 @@ Provides ability for consumers to quickly log data about emotion and mood, and p
 
 [![Build Status](https://travis-ci.org/UMM-CSci-3601-S18/iteration-4-megabittron.svg?branch=master)](https://travis-ci.org/UMM-CSci-3601-S18/iteration-4-megabittron)
 
+An example of a live build can be found at https://mypanda.website/ 
+
 <!-- TOC depthFrom:1 depthTo:5 withLinks:1 updateOnSave:1 orderedList:0 -->
 ## Table of Contents
 - [Prerequisites](#prerequisites)
@@ -29,12 +31,6 @@ Versions used for required packages:
 
 ## Setup
 
-### For a live build
-To begin, clone the repository, then run build.sh. Then the project can be run using the generated 3601.sh file. This can be connected to using any typical http connection through a web browser. 
-
-An example of a live build can be found at https://mypanda.website/ 
-
-### For a production build
 For IntelliJ users, you should be able to clone this repository inside IntelliJ 
 
 - When prompted to create a new IntelliJ project, select **yes**.
