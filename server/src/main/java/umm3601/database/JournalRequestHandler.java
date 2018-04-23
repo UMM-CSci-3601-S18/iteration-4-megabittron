@@ -130,4 +130,23 @@ public class JournalRequestHandler {
             return null;
         }
     }
+
+    public String deleteJournal(Request req, Response res){
+
+        System.out.println("Deleting journal with ID: " + req.params(":id"));
+
+        res.type("application/json");
+
+        try {
+            String id = req.params(":id");
+            journalController.deleteJournal(id);
+            return req.params(":id");
+        }
+        catch(RuntimeException ree)
+        {
+            ree.printStackTrace();
+            return null;
+        }
+    }
+
 }

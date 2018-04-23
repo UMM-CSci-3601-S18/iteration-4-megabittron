@@ -21,14 +21,23 @@
     word-wrap: break-word;
 }
 
-.edit-journal-button {
-    color: #00838F;
-    margin-bottom: -16px;
-    padding-bottom: 0;
+.action-button {
     float: right;
 }
 
-.edit-journal-button:hover {
+.delete-journal {
+    color: #F44336;
+}
+
+.delete-journal:hover {
+    background-color: #FFEBEE;
+}
+
+.edit-journal {
+    color: #00838F;
+}
+
+.edit-journal:hover {
     background-color: #E0F7FA;
 }
 

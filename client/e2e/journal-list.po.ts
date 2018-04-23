@@ -60,8 +60,8 @@ export class JournalPage {
     }
 
     clickEditJournalButton(): promise.Promise<void> {
-        this.highlightElement(by.className('edit-journal-button'));
-        return element(by.className('edit-journal-button')).click();
+        this.highlightElement(by.className('edit-journal'));
+        return element(by.className('edit-journal')).click();
     }
 
 }

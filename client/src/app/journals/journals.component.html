@@ -29,9 +29,13 @@
                 <mat-card-content class="journal-info">
                     <mat-card-title class="journal-name">
                         {{journal.subject}}
-                        <button mat-icon-button class="edit-journal-button"
+                        <button mat-icon-button class="edit-journal action-button"
                                 (click)="openEditJournalDialog(journal._id['$oid'], journal.subject, journal.body, journal.date)">
-                            <mat-icon matTooltip="Edit Journal">mode_edit</mat-icon>
+                            <mat-icon matTooltip="Edit">mode_edit</mat-icon>
+                        </button>
+                        <button mat-icon-button class="delete-journal action-button"
+                                (click)="deleteGoal(journal._id['$oid'])">
+                            <mat-icon matTooltip="Delete">delete</mat-icon>
                         </button>
                     </mat-card-title>
                     <mat-card-subtitle class="date-subtitle">

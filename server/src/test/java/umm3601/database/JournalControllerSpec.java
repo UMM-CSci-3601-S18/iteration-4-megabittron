@@ -25,7 +25,7 @@ import static org.junit.Assert.*;
  */
 public class JournalControllerSpec {
     private JournalController journalController;
-    private ObjectId samsId;
+    private ObjectId anID;
 
     @Before
     public void clearAndPopulateDB() throws IOException {
@@ -63,8 +63,8 @@ public class JournalControllerSpec {
             "                    date: \"Sat Aug 14 1976 06:05:06 GMT-0900 (CDT)\",\n" +
             "                }"));
 
-        samsId = new ObjectId();
-        BasicDBObject sam = new BasicDBObject("_id", samsId);
+        anID = new ObjectId();
+        BasicDBObject sam = new BasicDBObject("_id", anID);
         sam = sam.append("subject", "Food")
             .append("userID", "2cb45a89541a2d783595012b")
             .append("body", "I went taco johns")
@@ -167,9 +167,9 @@ public class JournalControllerSpec {
 
     @Test
     public void getJournalById() {
-        String jsonResult = journalController.getJournal(samsId.toHexString());
+        String jsonResult = journalController.getJournal(anID.toHexString());
         Document sam = Document.parse(jsonResult);
-        assertEquals("Name should match", samsId, sam.get("_id"));
+        assertEquals("Name should match", anID, sam.get("_id"));
         String noJsonResult = journalController.getJournal(new ObjectId().toString());
         assertNull("No Journal should match", noJsonResult);
 
@@ -196,7 +196,7 @@ public class JournalControllerSpec {
 
     @Test
     public void editJournalTest() {
-        journalController.editJournal(samsId.toHexString(), "Friday", "It's Friday");
+        journalController.editJournal(anID.toHexString(), "Friday", "It's Friday");
         Map<String, String[]> argMap = new HashMap<>();
         argMap.put("userID", new String[]{"2cb45a89541a2d783595012b"});
         argMap.put("body", new String[]{"It's Friday"});
@@ -209,6 +209,12 @@ public class JournalControllerSpec {
             .collect(Collectors.toList());
         List<String> expectedSubjects = Arrays.asList("It's Friday");
         assertEquals("Subjects should match", expectedSubjects, subjects);
+    }
+
+    @Test
+    public void deleteJournalTest(){
+        System.out.println("ID: " + anID.toHexString());
+        journalController.deleteJournal(anID.toHexString());
     }
 
 }

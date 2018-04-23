@@ -134,12 +134,12 @@ public class Server {
         //Resources for appropriate response
         get("api/resources", resourceRequestHandler::getResources);
 
-
-        //List journals, filtered using query parameters
+        //List journals
         get("api/journals", journalRequestHandler::getJournals);
         get("api/journals/:id", journalRequestHandler::getJournalJSON);
         post("api/journals/new", journalRequestHandler::addNewJournal);
         post("api/journals/edit", journalRequestHandler::editJournal);
+        post("api/journals/delete/:id", journalRequestHandler::deleteJournal);
 
         //Did not create a api route for users
 
