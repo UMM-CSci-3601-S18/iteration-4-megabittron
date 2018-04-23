@@ -159,11 +159,13 @@ export class JournalsComponent implements OnInit {
     deleteGoal(_id: string) {
         this.journalListService.deleteJournal(_id).subscribe(
             journals => {
+                console.log("first part");
                 this.refreshJournals();
                 this.loadService();
             },
             err => {
                 console.log(err);
+                console.log("hi");
                 this.refreshJournals();
                 this.loadService();
                 this.snackBar.open("Deleted Journal", "CLOSE", {

@@ -2,7 +2,7 @@ import {JournalPage} from './journal-list.po';
 import {browser, protractor, element, by} from 'protractor';
 import {Key} from 'selenium-webdriver';
 
-fdescribe('Journal list', () => {
+describe('Journal list', () => {
     let page: JournalPage;
 
     beforeEach(() => {
