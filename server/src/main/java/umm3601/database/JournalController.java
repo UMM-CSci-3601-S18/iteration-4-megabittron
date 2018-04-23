@@ -128,5 +128,20 @@ public class JournalController {
             return null;
         }
     }
+
+    public void deleteJournal(String id){
+        Document searchQuery = new Document().append("_id", new ObjectId(id));
+        System.out.println("Journal id: " + id);
+        try {
+            journalCollection.deleteOne(searchQuery);
+            ObjectId theID = searchQuery.getObjectId("_id");
+            System.out.println("Succesfully deleted journal with ID: " + theID);
+
+        } catch(MongoException me) {
+            me.printStackTrace();
+            System.out.println("error");
+        }
+    }
+
 }
 

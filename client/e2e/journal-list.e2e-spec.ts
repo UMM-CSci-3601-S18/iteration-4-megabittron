@@ -63,9 +63,9 @@ describe('Journal list', () => {
     it('Should open a dialog box when edit journal button is clicked', () => {
         page.navigateTo();
         page.typeABody('do nulla incididunt');
-        expect(element(by.className('edit-journal')).isPresent()).toBeFalsy('There should not be a modal window yet');
+        expect(element(by.className('edit-journal-page')).isPresent()).toBeFalsy('There should not be a modal window yet');
         page.clickEditJournalButton();
-        expect(element(by.className('edit-journal')).isPresent()).toBeTruthy('There should be a modal window now');
+        expect(element(by.className('edit-journal-page')).isPresent()).toBeTruthy('There should be a modal window now');
     });
 
     it('Should actually edit the journal with the information we put in the fields', () => {
