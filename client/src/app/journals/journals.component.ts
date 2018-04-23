@@ -156,6 +156,23 @@ export class JournalsComponent implements OnInit {
         return this.filteredJournals;
     }
 
+    deleteGoal(_id: string) {
+        this.journalListService.deleteJournal(_id).subscribe(
+            journals => {
+                this.refreshJournals();
+                this.loadService();
+            },
+            err => {
+                console.log(err);
+                this.refreshJournals();
+                this.loadService();
+                this.snackBar.open("Deleted Journal", "CLOSE", {
+                    duration: 2000,
+                });
+            }
+        );
+    }
+
     // Starts an asynchronous operation to update the journals list
     refreshJournals(): Observable<Journal[]> {
         const journalListObservable: Observable<Journal[]> = this.journalListService.getJournals(localStorage.getItem("userID"));
