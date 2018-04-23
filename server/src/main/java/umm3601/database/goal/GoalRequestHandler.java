@@ -1,4 +1,4 @@
-package umm3601.database;
+package umm3601.database.goal;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.util.JSON;
