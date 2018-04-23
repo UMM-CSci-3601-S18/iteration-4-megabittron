@@ -3,7 +3,7 @@ import {GoalsService} from './goals.service';
 import {Goal} from './goal';
 import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
-import {AddGoalComponent} from './add-goal.component';
+import {AddGoalComponent} from './add/add-goal.component';
 import {MatSnackBar} from '@angular/material';
 import {AppService} from "../app.service";
 import {Router} from "@angular/router";
