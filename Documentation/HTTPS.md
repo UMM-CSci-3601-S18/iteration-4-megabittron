@@ -49,8 +49,7 @@ Sign in, then go to your Dashboard. Next to your domain name, click the "Manage"
 button.
 
 Next to "NAMESERVERS", select "Custom DNS" on the dropdown menu. Copy and paste
-the two values that you saved earlier (in our case, it is _ali.ns.cloudflare.com_
-and _elliot.ns.cloudflare.com_). It could take up to 24 hours for this to take effect.
+the two values that you saved earlier. It could take up to 24 hours for this to take effect.
 
 ## Deploying your droplet
 In [these](https://gist.github.com/pluck011/d968c2280cc9dc190a294eaf149b1c6e) instructions,
