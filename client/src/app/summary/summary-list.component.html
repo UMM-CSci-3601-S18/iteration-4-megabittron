@@ -92,11 +92,14 @@
                             </mat-select>
 
                         |
-                        <mat-checkbox id="pastXBox" [(ngModel)]="limitedPast" checked="true">Show only entries from the past {{inputType}}</mat-checkbox>
-                        <br>
-                        <mat-radio-button id="pastXYes" (click)="this.limitedPast = true ; updateDetailedChart()"></mat-radio-button>
-                        <mat-radio-button id="pastXNo" (click)="this.limitedPast = false ; updateDetailedChart()"></mat-radio-button>
                         <mat-checkbox id="colorblindBox" [(ngModel)]="colorblindMode">Colorblind Mode</mat-checkbox>
+                        <br>
+                        Show entries:
+                        <mat-radio-group [(ngModel)]="limitedPast">
+                        <mat-radio-button id="pastXYes" value=true (click)="this.limitedPast = true ; updateDetailedChart()">only from the past {{inputType}}</mat-radio-button>
+                        |
+                        <mat-radio-button id="pastXNo" value=false (click)="this.limitedPast = false ; updateDetailedChart()">across all time</mat-radio-button>
+                        </mat-radio-group>
                         <br>
                         <mat-radio-group [(ngModel)]="graphMode">
                             <mat-radio-button id="lineradio" value="line" (click)="this.graphMode = 'line' ; updateDetailedChart()">Line Graph</mat-radio-button>
