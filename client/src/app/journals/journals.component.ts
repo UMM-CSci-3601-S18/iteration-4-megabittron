@@ -38,10 +38,6 @@ export class JournalsComponent implements OnInit {
 
     }
 
-    isHighlighted(journal: Journal): boolean {
-        return journal._id['$oid'] === this.highlightedID['$oid'];
-    }
-
     openAddJournalDialog(): void {
         console.log("Add journal button clicked.");
         const newJournal: Journal = {_id: '', userID: localStorage.getItem('userID'), title: '', content: '', date: ''};
@@ -63,7 +59,6 @@ export class JournalsComponent implements OnInit {
                             this.refreshJournals();
                             },
                             err => {
-                            // This should probably be turned into some sort of meaningful response.
                                 console.log('There was an error adding the journal.');
                                 console.log('The error was ' + JSON.stringify(err));
                         });
@@ -71,12 +66,6 @@ export class JournalsComponent implements OnInit {
                         duration: 2000,
                     });
                     console.log("Journal added.");
-                }
-                else {
-
-                    this.snackBar.open("Journal Not Saved. Please Log In to Save Your Journal", "CLOSE", {
-                        duration: 5000,
-                    });
                 }
             }
         });
@@ -105,7 +94,6 @@ export class JournalsComponent implements OnInit {
                         console.log("Journal edited.");
                     },
                     err => {
-                        // This should probably be turned into some sort of meaningful response.
                         console.log('There was an error editing the journal.');
                         console.log('The error was ' + JSON.stringify(err));
                     });
@@ -113,13 +101,32 @@ export class JournalsComponent implements OnInit {
         });
     }
 
-    showMoreInfo(content: string): void {
+    showMoreInfoDialog(content: string): void {
         const showJournal: Journal = {_id: null, userID: null, title: null, content: content, date: null};
         const dialogRef = this.dialog.open(ShowJournalComponent, {
             width: '500px',
             data: { journal: showJournal }
         });
         console.log("Showing more journal info.");
+    }
+
+    deleteJournal(_id: string) {
+        this.journalListService.deleteJournal(_id).subscribe(
+            journals => {
+                console.log("first part");
+                this.refreshJournals();
+                this.loadService();
+            },
+            err => {
+                console.log(err);
+                console.log("hi");
+                this.refreshJournals();
+                this.loadService();
+                this.snackBar.open("Deleted Journal", "CLOSE", {
+                    duration: 2000,
+                });
+            }
+        );
     }
 
     public filterJournals(searchTitle: string, searchContent: string, searchDate: string): Journal[] {
@@ -154,25 +161,6 @@ export class JournalsComponent implements OnInit {
         }
 
         return this.filteredJournals;
-    }
-
-    deleteGoal(_id: string) {
-        this.journalListService.deleteJournal(_id).subscribe(
-            journals => {
-                console.log("first part");
-                this.refreshJournals();
-                this.loadService();
-            },
-            err => {
-                console.log(err);
-                console.log("hi");
-                this.refreshJournals();
-                this.loadService();
-                this.snackBar.open("Deleted Journal", "CLOSE", {
-                    duration: 2000,
-                });
-            }
-        );
     }
 
     // Starts an asynchronous operation to update the journals list
@@ -215,6 +203,10 @@ export class JournalsComponent implements OnInit {
         this.loadService();
         this.refreshJournals();
 
+    }
+
+    isHighlighted(journal: Journal): boolean {
+        return journal._id['$oid'] === this.highlightedID['$oid'];
     }
 
 }

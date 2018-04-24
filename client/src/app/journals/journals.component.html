@@ -34,7 +34,7 @@
                             <mat-icon matTooltip="Edit">mode_edit</mat-icon>
                         </button>
                         <button mat-icon-button class="delete-journal action-button"
-                                (click)="deleteGoal(journal._id['$oid'])">
+                                (click)="deleteJournal(journal._id['$oid'])">
                             <mat-icon matTooltip="Delete">delete</mat-icon>
                         </button>
                     </mat-card-title>
@@ -44,7 +44,7 @@
                     <mat-divider></mat-divider>
                     <p *ngIf="journal.content.length > 100">
                         {{journal.content | slice : 0:100}}
-                        <a (click)="showMoreInfo(journal.content)">
+                        <a (click)="showMoreInfoDialog(journal.content)">
                             <button class="show-more-button">
                                 ...show more
                             </button>
