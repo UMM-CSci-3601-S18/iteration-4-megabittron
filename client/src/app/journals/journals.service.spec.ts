@@ -29,11 +29,6 @@ describe('Journal list service: ', () => {
             date: "Mon Mar 11 19:26:37 CST 2018"
         }
     ];
-    /*
-    const mJournals: Journal[] = testJournals.filter(journal =>
-        journal.title.toLowerCase().indexOf('m') !== -1
-    );
-    */
 
     let journalListService: JournalsService;
     let currentlyImpossibleToGenerateSearchJournalUrl: string;
@@ -83,18 +78,6 @@ describe('Journal list service: ', () => {
         req.flush(testJournal);
     });
 
-    /*
-    it('getJournals(journalTitle) adds appropriate param string to called URL', () => {
-        journalListService.getJournals('m').subscribe(
-            journals => expect(journals).toEqual(mJournals)
-        );
-
-        const req = httpTestingController.expectOne(journalListService.baseUrl + '?title=m&');
-        expect(req.request.method).toEqual('GET');
-        req.flush(mJournals);
-    });
-
-
     it('filterByTitle(journalTitle) deals appropriately with a URL that already had a title', () => {
         currentlyImpossibleToGenerateSearchJournalUrl = journalListService.baseUrl + '?title=f&something=k&';
         journalListService['journalUrl'] = currentlyImpossibleToGenerateSearchJournalUrl;
@@ -115,7 +98,7 @@ describe('Journal list service: ', () => {
         journalListService.filterByTitle('');
         expect(journalListService['journalUrl']).toEqual(journalListService.baseUrl + '');
     });
-    */
+
 
     it('getJournalByID() calls api/journals/id', () => {
         const targetJournal: Journal = testJournals[1];
@@ -173,4 +156,21 @@ describe('Journal list service: ', () => {
         expect(req.request.method).toEqual('POST');
         req.flush(washing_id);
     });
+
+    it('deleting a journal calls api/journals/delete', () => {
+        //const cleaning_id = { '$oid': 'cleaning_id' };
+        const cleaning_id: string = "cleaning_id";
+
+        journalListService.deleteJournal(cleaning_id).subscribe(
+            id => {
+                expect(id).toBe(cleaning_id);
+            }
+        );
+
+        const expectedUrl: string = journalListService.baseUrl + '/delete' + cleaning_id;
+        const req = httpTestingController.expectOne(expectedUrl);
+        expect(req.request.method).toEqual('POST');
+        req.flush(cleaning_id);
+    });
+
 });

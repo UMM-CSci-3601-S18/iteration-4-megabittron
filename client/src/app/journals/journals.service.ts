@@ -35,11 +35,9 @@ export class JournalsService {
         return this.http.get<Journal>(this.journalUrl + '/' + id);
     }
 
-    /*
-    filterByBody(journalTitle?: string): void {
+    filterByTitle(journalTitle?: string): void {
         if (!(journalTitle == null || journalTitle === '')) {
             if (this.parameterPresent('title=') ) {
-                // there was a previous search by company that we need to clear
                 this.removeParameter('title=');
             }
             if (this.journalUrl.indexOf('?') !== -1) {
@@ -61,7 +59,6 @@ export class JournalsService {
             }
         }
     }
-*/
 
     filterByUserID(userID: string): void {
         if (!(userID == null || userID === '')) {
@@ -133,6 +130,6 @@ export class JournalsService {
         };
 
         // Send post request to delete journal.
-        return this.http.post(this.journalUrl + '/delete/' + journalID, httpOptions);
+        return this.http.post(this.journalUrl + '/delete' + journalID, httpOptions);
     }
 }
