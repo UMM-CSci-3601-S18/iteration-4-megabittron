@@ -55,9 +55,10 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     /** --------------------------------------- **/
     timeZone: number = -5;
-    //timeZone offsets the hour from UTC.
-    //Currently everything is passed around as UTC.
-    //This changes it to CDT for display
+    // timeZone offsets the hour from UTC.
+    // Everything is passed around as UTC.
+    // This changes it to CDT for display.
+    // Can be decided by selector, if desired.
     /** --------------------------------------- **/
 
 
@@ -98,7 +99,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     }
 
     // Filters summaries by date, keeping ones between start and end date.
-    // Used by filterSummaries and pastXEmotions
+    // Used by filterSummaries() and pastXEmotions()
     public filterDates(givenlist, searchStartDate: any, searchEndDate: any): Summary[] {
         this.dateFilteredSummaries = givenlist;
 
@@ -122,7 +123,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         return this.dateFilteredSummaries;
     }
 
-    // Each pastXEmotions uses filterDates to grab summaries dated within the past X.
+    // Each pastXEmotions uses filterDates() to grab summaries dated within the past X.
     public pastWeekEmotions(givenSummaries):Summary[]{
         this.pastWeekSummaries = this.filterDates(givenSummaries, this.lastWeekStamp, this.nowStamp);
         return this.pastWeekSummaries;
@@ -144,7 +145,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     }
 
     // Filters Summaries, keeping ones that match the given mood, intensity, and time period.
-    // Uses filterDates to get summaries dated between start and end date.
+    // Uses filterDates() to get summaries dated between start and end date.
     public filterSummaries(searchMood: string, searchIntensity: string, searchStartDate: any, searchEndDate: any): Summary[] {
 
         this.filteredSummaries = this.summaries;
@@ -171,8 +172,9 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         return this.filteredSummaries;
     }
 
-    //
-    // xValue can represent hour or weekday
+    // Filters summaries by where they should appear on the chart.
+    // Uses var filteredSummaries from filterSummaries() to allow prefiltering using options at top of HTML
+    // xValue can represent hour, weekday, date, or month.
     filterGraph(xValue, Searchmood): number {
         Searchmood = Searchmood.toLocaleLowerCase();
         let filterData = this.filteredSummaries.filter(summary => {
@@ -225,7 +227,8 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         return filterData.length;
     }
 
-
+    // modX takes an X and returns an integer describing where it should
+    // be placed on the graph based on the current X, nowX.
     public modDay(day: number): Number {
         if(this.limitedPast){
             return (this.nowDay + 1 + day)%7;
@@ -262,7 +265,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         }
     }
 
-
+    // getPastXs gets labels for bottom axis of chart based on current X.
     public getPastDays(xValue: number): String {
 
         let thisDay = (this.nowDay + 1 + xValue)%7;
@@ -362,13 +365,9 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     public getPastDates(xValue: number): String {
         let thisDate = (this.nowDate + xValue)%31;
         let numDate;
-        //cant get if to check this.lastMonth in M31Ds, so scrapped it
-        //let M31Ds:number[] = [0, 2, 4, 6, 7, 9, 11];
-        //let M30Ds:number[] = [3, 5, 8, 10];
         let thisYear = this.nowStamp.getFullYear();
-        // should get past 31 days
-        // if last month had less than 31 days, it should be reflected
 
+        //last month had 31 days or today is 31st
         if(this.lastMonth == 0 ||
             this.lastMonth == 2 ||
             this.lastMonth == 4 ||
@@ -377,20 +376,19 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             this.lastMonth == 9 ||
             this.lastMonth == 11 ||
             this.nowDate == 30){
-            //last month had 31 days or today is 31st
             numDate = thisDate + 1;
         }
         else {
+            //last month had 30 days
             if(this.lastMonth == 3 ||
                 this.lastMonth == 5 ||
                 this.lastMonth == 8 ||
                 this.lastMonth == 10){
-                //last month had 30 days
                 numDate = thisDate;
             }
             else {
+                //last month has 29 days, leap year
                 if(((thisYear % 4 == 0) && (thisYear % 100) !== 0) || (thisYear % 400) == 0){
-                    //last month has 29 days, leap year
                     numDate = thisDate - 1;
                 }
                 else {
@@ -405,21 +403,21 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         return numDate.toString();
     }
 
-
-
-    public getDailyData(emotion){
-                return [
-                    this.filterGraph(this.modDay(0), emotion),
-                    this.filterGraph(this.modDay(1), emotion),
-                    this.filterGraph(this.modDay(2), emotion),
-                    this.filterGraph(this.modDay(3), emotion),
-                    this.filterGraph(this.modDay(4), emotion),
-                    this.filterGraph(this.modDay(5), emotion),
-                    this.filterGraph(this.modDay(6), emotion)
-                ]
-    }
-
-    public getHourlyData(emotion){
+    // Returns data required by updateChart().
+    public getTypeData(type, emotion) {
+        if(type == "week"){
+            return [
+                this.filterGraph(this.modDay(0), emotion),
+                this.filterGraph(this.modDay(1), emotion),
+                this.filterGraph(this.modDay(2), emotion),
+                this.filterGraph(this.modDay(3), emotion),
+                this.filterGraph(this.modDay(4), emotion),
+                this.filterGraph(this.modDay(5), emotion),
+                this.filterGraph(this.modDay(6), emotion)
+            ]
+        }
+        else {
+            if(type == "day"){
                 return [
                     this.filterGraph(this.modHour(0), emotion),
                     this.filterGraph(this.modHour(1), emotion),
@@ -446,83 +444,66 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                     this.filterGraph(this.modHour(22), emotion),
                     this.filterGraph(this.modHour(23), emotion)
                 ]
-    }
-
-    public getMonthlyData(emotion){
-                return [
-                    this.filterGraph(this.modMonth(0), emotion),
-                    this.filterGraph(this.modMonth(1), emotion),
-                    this.filterGraph(this.modMonth(2), emotion),
-                    this.filterGraph(this.modMonth(3), emotion),
-                    this.filterGraph(this.modMonth(4), emotion),
-                    this.filterGraph(this.modMonth(5), emotion),
-                    this.filterGraph(this.modMonth(6), emotion),
-                    this.filterGraph(this.modMonth(7), emotion),
-                    this.filterGraph(this.modMonth(8), emotion),
-                    this.filterGraph(this.modMonth(9), emotion),
-                    this.filterGraph(this.modMonth(10), emotion),
-                    this.filterGraph(this.modMonth(11), emotion),
-                ]
-    }
-
-    public getDatelyData(emotion){
-
-                return [
-                    this.filterGraph(this.modDate(1), emotion),
-                    this.filterGraph(this.modDate(2), emotion),
-                    this.filterGraph(this.modDate(3), emotion),
-                    this.filterGraph(this.modDate(4), emotion),
-                    this.filterGraph(this.modDate(5), emotion),
-                    this.filterGraph(this.modDate(6), emotion),
-                    this.filterGraph(this.modDate(7), emotion),
-                    this.filterGraph(this.modDate(8), emotion),
-                    this.filterGraph(this.modDate(9), emotion),
-                    this.filterGraph(this.modDate(10), emotion),
-                    this.filterGraph(this.modDate(11), emotion),
-                    this.filterGraph(this.modDate(12), emotion),
-                    this.filterGraph(this.modDate(13), emotion),
-                    this.filterGraph(this.modDate(14), emotion),
-                    this.filterGraph(this.modDate(15), emotion),
-                    this.filterGraph(this.modDate(16), emotion),
-                    this.filterGraph(this.modDate(17), emotion),
-                    this.filterGraph(this.modDate(18), emotion),
-                    this.filterGraph(this.modDate(19), emotion),
-                    this.filterGraph(this.modDate(20), emotion),
-                    this.filterGraph(this.modDate(21), emotion),
-                    this.filterGraph(this.modDate(22), emotion),
-                    this.filterGraph(this.modDate(23), emotion),
-                    this.filterGraph(this.modDate(24), emotion),
-                    this.filterGraph(this.modDate(25), emotion),
-                    this.filterGraph(this.modDate(26), emotion),
-                    this.filterGraph(this.modDate(27), emotion),
-                    this.filterGraph(this.modDate(28), emotion),
-                    this.filterGraph(this.modDate(29), emotion),
-                    this.filterGraph(this.modDate(30), emotion),
-                    this.filterGraph(this.modDate(31), emotion)
-
-                ]
-    }
-
-    public getTypeData(type, emotion) {
-        if(type == "week"){
-            return this.getDailyData(emotion);
-        }
-        else {
-            if(type == "day"){
-                return this.getHourlyData(emotion);
             }
             else {
                 if(type == "year"){
-                    return this.getMonthlyData(emotion);
+                    return [
+                        this.filterGraph(this.modMonth(0), emotion),
+                        this.filterGraph(this.modMonth(1), emotion),
+                        this.filterGraph(this.modMonth(2), emotion),
+                        this.filterGraph(this.modMonth(3), emotion),
+                        this.filterGraph(this.modMonth(4), emotion),
+                        this.filterGraph(this.modMonth(5), emotion),
+                        this.filterGraph(this.modMonth(6), emotion),
+                        this.filterGraph(this.modMonth(7), emotion),
+                        this.filterGraph(this.modMonth(8), emotion),
+                        this.filterGraph(this.modMonth(9), emotion),
+                        this.filterGraph(this.modMonth(10), emotion),
+                        this.filterGraph(this.modMonth(11), emotion),
+                    ]
                 }
                 else {
-                    return this.getDatelyData(emotion);
+                    return [
+                        this.filterGraph(this.modDate(1), emotion),
+                        this.filterGraph(this.modDate(2), emotion),
+                        this.filterGraph(this.modDate(3), emotion),
+                        this.filterGraph(this.modDate(4), emotion),
+                        this.filterGraph(this.modDate(5), emotion),
+                        this.filterGraph(this.modDate(6), emotion),
+                        this.filterGraph(this.modDate(7), emotion),
+                        this.filterGraph(this.modDate(8), emotion),
+                        this.filterGraph(this.modDate(9), emotion),
+                        this.filterGraph(this.modDate(10), emotion),
+                        this.filterGraph(this.modDate(11), emotion),
+                        this.filterGraph(this.modDate(12), emotion),
+                        this.filterGraph(this.modDate(13), emotion),
+                        this.filterGraph(this.modDate(14), emotion),
+                        this.filterGraph(this.modDate(15), emotion),
+                        this.filterGraph(this.modDate(16), emotion),
+                        this.filterGraph(this.modDate(17), emotion),
+                        this.filterGraph(this.modDate(18), emotion),
+                        this.filterGraph(this.modDate(19), emotion),
+                        this.filterGraph(this.modDate(20), emotion),
+                        this.filterGraph(this.modDate(21), emotion),
+                        this.filterGraph(this.modDate(22), emotion),
+                        this.filterGraph(this.modDate(23), emotion),
+                        this.filterGraph(this.modDate(24), emotion),
+                        this.filterGraph(this.modDate(25), emotion),
+                        this.filterGraph(this.modDate(26), emotion),
+                        this.filterGraph(this.modDate(27), emotion),
+                        this.filterGraph(this.modDate(28), emotion),
+                        this.filterGraph(this.modDate(29), emotion),
+                        this.filterGraph(this.modDate(30), emotion),
+                        this.filterGraph(this.modDate(31), emotion)
+                    ]
                 }
             }
         }
     }
 
-public pastDays = [
+
+    // vars pastX use getPastXs to assign correct labels to bottom axis of graph
+    public pastDays = [
         this.getPastDays(0),
         this.getPastDays(1),
         this.getPastDays(2),
@@ -532,82 +513,83 @@ public pastDays = [
         this.getPastDays(6)
     ];
 
-public pastHours = [
-    this.getPastHours(0),
-    this.getPastHours(1),
-    this.getPastHours(2),
-    this.getPastHours(3),
-    this.getPastHours(4),
-    this.getPastHours(5),
-    this.getPastHours(6),
-    this.getPastHours(7),
-    this.getPastHours(8),
-    this.getPastHours(9),
-    this.getPastHours(10),
-    this.getPastHours(11),
-    this.getPastHours(12),
-    this.getPastHours(13),
-    this.getPastHours(14),
-    this.getPastHours(15),
-    this.getPastHours(16),
-    this.getPastHours(17),
-    this.getPastHours(18),
-    this.getPastHours(19),
-    this.getPastHours(20),
-    this.getPastHours(21),
-    this.getPastHours(22),
-    this.getPastHours(23)
-];
+    public pastHours = [
+        this.getPastHours(0),
+        this.getPastHours(1),
+        this.getPastHours(2),
+        this.getPastHours(3),
+        this.getPastHours(4),
+        this.getPastHours(5),
+        this.getPastHours(6),
+        this.getPastHours(7),
+        this.getPastHours(8),
+        this.getPastHours(9),
+        this.getPastHours(10),
+        this.getPastHours(11),
+        this.getPastHours(12),
+        this.getPastHours(13),
+        this.getPastHours(14),
+        this.getPastHours(15),
+        this.getPastHours(16),
+        this.getPastHours(17),
+        this.getPastHours(18),
+        this.getPastHours(19),
+        this.getPastHours(20),
+        this.getPastHours(21),
+        this.getPastHours(22),
+        this.getPastHours(23)
+    ];
 
-public pastMonths = [
-    this.getPastMonths(0),
-    this.getPastMonths(1),
-    this.getPastMonths(2),
-    this.getPastMonths(3),
-    this.getPastMonths(4),
-    this.getPastMonths(5),
-    this.getPastMonths(6),
-    this.getPastMonths(7),
-    this.getPastMonths(8),
-    this.getPastMonths(9),
-    this.getPastMonths(10),
-    this.getPastMonths(11)
-];
+    public pastMonths = [
+        this.getPastMonths(0),
+        this.getPastMonths(1),
+        this.getPastMonths(2),
+        this.getPastMonths(3),
+        this.getPastMonths(4),
+        this.getPastMonths(5),
+        this.getPastMonths(6),
+        this.getPastMonths(7),
+        this.getPastMonths(8),
+        this.getPastMonths(9),
+        this.getPastMonths(10),
+        this.getPastMonths(11)
+    ];
 
-public pastDates = [
-    this.getPastDates(0),
-    this.getPastDates(1),
-    this.getPastDates(2),
-    this.getPastDates(3),
-    this.getPastDates(4),
-    this.getPastDates(5),
-    this.getPastDates(6),
-    this.getPastDates(7),
-    this.getPastDates(8),
-    this.getPastDates(9),
-    this.getPastDates(10),
-    this.getPastDates(11),
-    this.getPastDates(12),
-    this.getPastDates(13),
-    this.getPastDates(14),
-    this.getPastDates(15),
-    this.getPastDates(16),
-    this.getPastDates(17),
-    this.getPastDates(18),
-    this.getPastDates(19),
-    this.getPastDates(20),
-    this.getPastDates(21),
-    this.getPastDates(22),
-    this.getPastDates(23),
-    this.getPastDates(24),
-    this.getPastDates(25),
-    this.getPastDates(26),
-    this.getPastDates(27),
-    this.getPastDates(28),
-    this.getPastDates(29),
-    this.getPastDates(30)
-];
+    public pastDates = [
+        this.getPastDates(0),
+        this.getPastDates(1),
+        this.getPastDates(2),
+        this.getPastDates(3),
+        this.getPastDates(4),
+        this.getPastDates(5),
+        this.getPastDates(6),
+        this.getPastDates(7),
+        this.getPastDates(8),
+        this.getPastDates(9),
+        this.getPastDates(10),
+        this.getPastDates(11),
+        this.getPastDates(12),
+        this.getPastDates(13),
+        this.getPastDates(14),
+        this.getPastDates(15),
+        this.getPastDates(16),
+        this.getPastDates(17),
+        this.getPastDates(18),
+        this.getPastDates(19),
+        this.getPastDates(20),
+        this.getPastDates(21),
+        this.getPastDates(22),
+        this.getPastDates(23),
+        this.getPastDates(24),
+        this.getPastDates(25),
+        this.getPastDates(26),
+        this.getPastDates(27),
+        this.getPastDates(28),
+        this.getPastDates(29),
+        this.getPastDates(30)
+    ];
 
+    // destroys previous chart if it exists and replaces it with an updated version
     updateChart(): void{
 
         if(this.Chart != null){
@@ -752,6 +734,16 @@ public pastDates = [
         });
     }
 
+    // Used by list view in HTML
+    stringToDate(date: string): any {
+        return new Date(date);
+    }
+
+    // Used to show total number of summaries shown by chart in HTML
+    totalNumberMoods(): number{
+        return this.filteredSummaries.length;
+    }
+
     ngAfterViewInit(): void {
         this.updateChart();
     }
@@ -791,10 +783,6 @@ public pastDates = [
         );
     }
 
-    totalNumberMoods(): number{
-        return this.filteredSummaries.length;
-    }
-
     ngOnInit(): void {
         //For testing
         //toggle the value in app service to toggle testing
@@ -806,10 +794,6 @@ public pastDates = [
         }
         this.loadService();
         this.refreshSummaries();
-    }
-
-    stringToDate(date: string): any {
-        return new Date(date);
     }
 
 }
