@@ -20,9 +20,9 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     endDate;
     getDate;
 
-    ctxDetail: any;
-    detailedCanvas: any;
-    detailedChart: any;
+    ctx: any;
+    Canvas: any;
+    Chart: any;
 
     limitedPastString: string = 'true';
     limitedPast: boolean = (this.limitedPastString == 'true');
@@ -610,8 +610,8 @@ public pastDates = [
 
     updateChart(): void{
 
-        if(this.detailedChart != null){
-            this.detailedChart.destroy();
+        if(this.Chart != null){
+            this.Chart.destroy();
         }
 
         let stackBool = false;
@@ -620,8 +620,8 @@ public pastDates = [
             stackBool = true;
         }
 
-        this.detailedCanvas = document.getElementById("Chart");
-        this.ctxDetail = this.detailedCanvas;
+        this.Canvas = document.getElementById("Chart");
+        this.ctx = this.Canvas;
 
         if(this.colorblindMode){
             this.happyColor = "rgb(178,24,43)";
@@ -630,14 +630,14 @@ public pastDates = [
             //this.mehColor = "rgb(253,219,199)";
             this.madColor = "rgb(103,169,207)";
             this.anxiousColor = "rgb(33,102,172)";
-            this.ctxDetail.style.backgroundColor = "rgb(224,243,248)";
+            this.ctx.style.backgroundColor = "rgb(224,243,248)";
         } else {
             this.happyColor = "rgb(64,255,0)";
             this.sadColor = "rgb(0,128,255)";
             this.mehColor = "rgb(100,100,100)";
             this.madColor = "rgb(255,0,0)";
             this.anxiousColor = "rgb(255,128,0)";
-            this.ctxDetail.style.backgroundColor = "rgb(250,250,250)";
+            this.ctx.style.backgroundColor = "rgb(250,250,250)";
         }
 
         let xLabel;
@@ -686,7 +686,7 @@ public pastDates = [
             }
         }
 
-        this.detailedChart = new Chart(this.ctxDetail, {
+        this.Chart = new Chart(this.ctx, {
             type: this.graphMode,
             data: {
                 labels: xLabel,
