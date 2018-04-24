@@ -1,5 +1,9 @@
 <td-layout #layout>
-    <td-navigation-drawer id="navBar" class="nav-drawer" flex sidenavTitle="Menu" >
+    <td-navigation-drawer id="navBar" class="nav-drawer" flex>
+        <mat-toolbar>
+            <span _ngcontent-c0>Menu</span>
+            <div class="signInButtonMobile"><div *ngIf="!appService.isSignedIn()" class="g-signin2" (click)="signIn()"></div> </div>
+        </mat-toolbar>
         <mat-nav-list class="side-nav-things">
             <a mat-list-item [routerLink]="['/']" (click)="layout.close()" routerLinkActive="nav-active" [routerLinkActiveOptions]="{ exact: true }"><mat-icon>mood</mat-icon>Home</a>
             <a mat-list-item [routerLink]="['/goals']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon>playlist_add_check</mat-icon>Goals</a>
@@ -7,7 +11,6 @@
             <a mat-list-item [routerLink]="['/resources']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon><i class="material-icons">contact_phone</i></mat-icon>Resources</a>
             <a mat-list-item [routerLink]="['/summary']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon><i class="material-icons">assessment</i></mat-icon>Stats</a>
             <a mat-list-item *ngIf="appService.isSignedIn()" (click)="signOut()"><mat-icon><i class="material-icons">flight takeoff</i></mat-icon>Sign Out</a>
-            <div class="signInButtonMobile"><div *ngIf="!appService.isSignedIn()" class="g-signin2" (click)="signIn()"></div> </div>
             <br>
         </mat-nav-list>
     </td-navigation-drawer>
