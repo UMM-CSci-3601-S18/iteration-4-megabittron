@@ -10,28 +10,28 @@ describe('Journal list service: ', () => {
         {
             _id: 'buying_id',
             userID: 'weare1',
-            subject: 'Buying food',
+            title: 'Buying food',
             body: 'I went to the ice cream store today for a sundae.',
             date: "Sat Jan 27 13:36:47 CST 2018"
         },
         {
             _id: 'visit_id',
             userID: 'usermcuserface',
-            subject: 'Visit mom',
+            title: 'Visit mom',
             body: 'I went to my Mom\'s house to talk to her.',
             date: "Sun Feb 12 16:32:41 CST 2018"
         },
         {
             _id: 'running_id',
             userID: 'theguyoverthere',
-            subject: 'Go on amazing run',
+            title: 'Go on amazing run',
             body: 'I went on a 25 mile run today!',
             date: "Mon Mar 11 19:26:37 CST 2018"
         }
     ];
     /*
     const mJournals: Journal[] = testJournals.filter(journal =>
-        journal.subject.toLowerCase().indexOf('m') !== -1
+        journal.title.toLowerCase().indexOf('m') !== -1
     );
     */
 
@@ -64,7 +64,7 @@ describe('Journal list service: ', () => {
             {
                 _id: 'buying_id',
                 userID: 'weare1',
-                subject: 'Buying food',
+                title: 'Buying food',
                 body: 'I went to the ice cream store today for a sundae.',
                 date: "Sat Jan 27 13:36:47 CST 2018"
             }
@@ -84,33 +84,33 @@ describe('Journal list service: ', () => {
     });
 
     /*
-    it('getJournals(journalSubject) adds appropriate param string to called URL', () => {
+    it('getJournals(journalTitle) adds appropriate param string to called URL', () => {
         journalListService.getJournals('m').subscribe(
             journals => expect(journals).toEqual(mJournals)
         );
 
-        const req = httpTestingController.expectOne(journalListService.baseUrl + '?subject=m&');
+        const req = httpTestingController.expectOne(journalListService.baseUrl + '?title=m&');
         expect(req.request.method).toEqual('GET');
         req.flush(mJournals);
     });
 
 
-    it('filterBySubject(journalSubject) deals appropriately with a URL that already had a subject', () => {
-        currentlyImpossibleToGenerateSearchJournalUrl = journalListService.baseUrl + '?subject=f&something=k&';
+    it('filterBySubject(journalTitle) deals appropriately with a URL that already had a title', () => {
+        currentlyImpossibleToGenerateSearchJournalUrl = journalListService.baseUrl + '?title=f&something=k&';
         journalListService['journalUrl'] = currentlyImpossibleToGenerateSearchJournalUrl;
         journalListService.filterBySubject('m');
-        expect(journalListService['journalUrl']).toEqual(journalListService.baseUrl + '?something=k&subject=m&');
+        expect(journalListService['journalUrl']).toEqual(journalListService.baseUrl + '?something=k&title=m&');
     });
 
-    it('filterBySubject(journalSubject) deals appropriately with a URL that already had some filtering, but no subject', () => {
+    it('filterBySubject(journalTitle) deals appropriately with a URL that already had some filtering, but no title', () => {
         currentlyImpossibleToGenerateSearchJournalUrl = journalListService.baseUrl + '?something=k&';
         journalListService['journalUrl'] = currentlyImpossibleToGenerateSearchJournalUrl;
         journalListService.filterBySubject('m');
-        expect(journalListService['journalUrl']).toEqual(journalListService.baseUrl + '?something=k&subject=m&');
+        expect(journalListService['journalUrl']).toEqual(journalListService.baseUrl + '?something=k&title=m&');
     });
 
-    it('filterBySubject(journalSubject) deals appropriately with a URL has the keyword subject, but nothing after the =', () => {
-        currentlyImpossibleToGenerateSearchJournalUrl = journalListService.baseUrl + '?subject=&';
+    it('filterBySubject(journalTitle) deals appropriately with a URL has the keyword title, but nothing after the =', () => {
+        currentlyImpossibleToGenerateSearchJournalUrl = journalListService.baseUrl + '?title=&';
         journalListService['journalUrl'] = currentlyImpossibleToGenerateSearchJournalUrl;
         journalListService.filterBySubject('');
         expect(journalListService['journalUrl']).toEqual(journalListService.baseUrl + '');
@@ -135,7 +135,7 @@ describe('Journal list service: ', () => {
         const newJournal: Journal = {
             _id: 'plunging_id',
             userID: 'userID99',
-            subject: 'Bathroom duties today',
+            title: 'Bathroom duties today',
             body: 'Incidents occurred, so the toilet was plunged asap.',
             date: "Mon Mar 11 19:26:37 CST 2018"
         };
@@ -157,7 +157,7 @@ describe('Journal list service: ', () => {
         const editJournal: Journal = {
             _id: 'washing_id',
             userID: 'userID1',
-            subject: 'After cleaning today',
+            title: 'After cleaning today',
             body: 'My hands got a little dirty doing chores, so I washed them.',
             date: "Sat Feb 21 19:16:37 CST 2018"
         };

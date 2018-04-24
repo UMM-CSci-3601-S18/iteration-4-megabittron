@@ -24,7 +24,7 @@ describe('Journal list', () => {
         expect(page.getJournals()).toEqual(74);
     });
 
-    it('Should type something in filter subject box and check that it contains correct element', () => {
+    it('Should type something in filter title box and check that it contains correct element', () => {
         page.navigateTo();
         page.typeASubject('Mcintyre');
         expect(page.getUniqueJournal('5ad12a56d70cc2aac52a0bc9')).toContain('Cathleen Mcintyre');
@@ -36,7 +36,7 @@ describe('Journal list', () => {
         expect(page.getUniqueJournal('5ad12a56aa17a895febd4c93')).toContain('Oneill Woods');
     });
 
-    it('Should filter by subject and body and check that it contains correct element', () => {
+    it('Should filter by title and body and check that it contains correct element', () => {
         page.navigateTo();
         page.typeASubject('St')
         page.typeABody('id esse');

@@ -25,13 +25,13 @@ export class JournalPage {
     }
 
     typeASubject(subject: string) {
-        const input = element(by.id('journalSubject'));
+        const input = element(by.id('journalTitle'));
         input.click();
         input.sendKeys(subject);
     }
 
     typeABody(body: string) {
-        const input = element(by.id('journalBody'));
+        const input = element(by.id('journalContent'));
         input.click();
         input.sendKeys(body);
     }

@@ -11,10 +11,10 @@
                     Add a Journal</button>
             <div class="filter-fields">
             <mat-form-field id="journal-subject-field">
-                <input matInput id="journalSubject" #input placeholder="Filter by subject" (input)="journalSubject = $event.target.value">
+                <input matInput id="journalSubject" #input placeholder="Filter by subject" (input)="journalTitle = $event.target.value">
             </mat-form-field>
             <mat-form-field>
-                <input matInput id="journalBody" #input placeholder="Filter by body" (input)="journalBody = $event.target.value">
+                <input matInput id="journalBody" #input placeholder="Filter by body" (input)="journalContent = $event.target.value">
             </mat-form-field>
             </div>
         </mat-card-content>
@@ -23,7 +23,7 @@
 <div class="grid-journals-section">
     <div layout="row" layout-wrap>
         <mat-card class="journals-card"
-                  *ngFor="let journal of filterJournals(journalSubject, journalBody, journalDate) | dateSort: '-date'"
+                  *ngFor="let journal of filterJournals(journalTitle, journalContent, journalDate) | dateSort: '-date'"
                   #elem [id]="journal._id['$oid']">
             <div class="journals-card-info">
                 <mat-card-content class="journal-info">

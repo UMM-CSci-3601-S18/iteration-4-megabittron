@@ -36,23 +36,23 @@ export class JournalsService {
     }
 
     /*
-    filterBySubject(journalSubject?: string): void {
-        if (!(journalSubject == null || journalSubject === '')) {
-            if (this.parameterPresent('subject=') ) {
+    filterBySubject(journalTitle?: string): void {
+        if (!(journalTitle == null || journalTitle === '')) {
+            if (this.parameterPresent('title=') ) {
                 // there was a previous search by company that we need to clear
-                this.removeParameter('subject=');
+                this.removeParameter('title=');
             }
             if (this.journalUrl.indexOf('?') !== -1) {
                 // there was already some information passed in this url
-                this.journalUrl += 'subject=' + journalSubject + '&';
+                this.journalUrl += 'title=' + journalTitle + '&';
             } else {
                 // this was the first bit of information to pass in the url
-                this.journalUrl += '?subject=' + journalSubject + '&';
+                this.journalUrl += '?title=' + journalTitle + '&';
             }
         } else {
             // there was nothing in the box to put onto the URL... reset
-            if (this.parameterPresent('subject=')) {
-                let start = this.journalUrl.indexOf('subject=');
+            if (this.parameterPresent('title=')) {
+                let start = this.journalUrl.indexOf('title=');
                 const end = this.journalUrl.indexOf('&', start);
                 if (this.journalUrl.substring(start - 1, start) === '?') {
                     start = start - 1;

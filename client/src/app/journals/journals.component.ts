@@ -20,8 +20,8 @@ export class JournalsComponent implements OnInit {
     // These are public so that tests can reference them (.spec.ts)
     public journals: Journal[] = [];
     public filteredJournals: Journal[] = [];
-    public journalSubject: string;
-    public journalBody: string;
+    public journalTitle: string;
+    public journalContent: string;
     public journalDate: any;
     public length: number;
     public index = 0;
@@ -44,7 +44,7 @@ export class JournalsComponent implements OnInit {
 
     openAddJournalDialog(): void {
         console.log("Add journal button clicked.");
-        const newJournal: Journal = {_id: '', userID: localStorage.getItem('userID'), subject: '', body: '', date: ''};
+        const newJournal: Journal = {_id: '', userID: localStorage.getItem('userID'), title: '', body: '', date: ''};
         const dialogRef = this.dialog.open(AddJournalComponent, {
             width: '300px',
             data: { journal: newJournal }
@@ -85,7 +85,7 @@ export class JournalsComponent implements OnInit {
     openEditJournalDialog(_id: string, subject: string, body: string, date: string): void {
         console.log("Edit journal button clicked.");
         console.log(_id + ' ' + subject + body + date);
-        const newJournal: Journal = {_id: _id, userID: localStorage.getItem('userID'), subject: subject, body: body, date: date};
+        const newJournal: Journal = {_id: _id, userID: localStorage.getItem('userID'), title: subject, body: body, date: date};
         const dialogRef = this.dialog.open(EditJournalComponent, {
             width: '300px',
             data: { journal: newJournal }
@@ -114,7 +114,7 @@ export class JournalsComponent implements OnInit {
     }
 
     showMoreInfo(body: string): void {
-        const showJournal: Journal = {_id: null, userID: null, subject: null, body: body, date: null};
+        const showJournal: Journal = {_id: null, userID: null, title: null, body: body, date: null};
         const dialogRef = this.dialog.open(ShowJournalComponent, {
             width: '500px',
             data: { journal: showJournal }
@@ -126,12 +126,12 @@ export class JournalsComponent implements OnInit {
 
         this.filteredJournals = this.journals;
 
-        // Filter by subject
+        // Filter by title
         if (searchSubject != null) {
             searchSubject = searchSubject.toLocaleLowerCase();
 
             this.filteredJournals = this.filteredJournals.filter(journal => {
-                return !searchSubject || journal.subject.toLowerCase().indexOf(searchSubject) !== -1;
+                return !searchSubject || journal.title.toLowerCase().indexOf(searchSubject) !== -1;
             });
         }
 
@@ -181,7 +181,7 @@ export class JournalsComponent implements OnInit {
         journalListObservable.subscribe(
             journals => {
                 this.journals = journals;
-                this.filterJournals(this.journalSubject, this.journalBody, this.journalDate);
+                this.filterJournals(this.journalTitle, this.journalContent, this.journalDate);
                 this.length = this.journals.length;
             },
             err => {
