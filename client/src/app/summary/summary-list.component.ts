@@ -679,29 +679,6 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         }
     }
 
-
-    toggleCBMode(){
-        if(this.colorblindMode){
-            this.colorblindMode = false;
-        }
-        else{
-            this.colorblindMode = true
-        }
-    }
-
-    toggleLP(){
-        if(this.limitedPast){
-            this.limitedPast = false;
-        }
-        else{
-            this.limitedPast = true
-        }
-    }
-
-    /**
-     * Starts an asynchronous operation to update the emojis list
-     *
-     */
 public pastDays = [
         this.getPastDays(0),
         this.getPastDays(1),
@@ -787,99 +764,6 @@ public pastDates = [
     this.getPastDates(29),
     this.getPastDates(30)
 ];
-
-
-/*
-    updateBasicChart(): void{
-        this.CurrentGraph = 'Basic';
-
-        if(this.basicChart != null){
-            this.basicChart.destroy();
-        }
-        if(this.detailedChart != null){
-            this.detailedChart.destroy();
-        }
-
-        this.basicCanvas = document.getElementById("Chart");
-        this.ctxBasic = this.basicCanvas;
-
-        let xLabel;
-        let days;
-        let hours;
-        let months;
-        let dates;
-        this.ctxBasic.style.backgroundColor = "rgb(250,250,250)";
-
-        if(this.limitedPast){
-            days = this.pastDays;
-            hours = this.pastHours;
-            months = this.pastMonths;
-            dates = this.pastDates;
-        }
-        else {
-            days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
-            hours = [
-                '12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM',
-                '6 AM', '7 AM', '8AM', '9 AM', '10 AM', '11 AM',
-                '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM',
-                '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM'];
-            months = [
-                'Jan', 'Feb', 'Mar','Apr', 'May', 'June',
-                'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            dates = [
-                '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
-                '12', '13', '14', '15', '16', '17', '18', '19', '20', '21',
-                '22', '23', '24', '25', '26', '27', '28', '29', '30', '31',];
-        }
-
-        console.log(this.inputType);
-        if(this.inputType == "day"){
-            xLabel = hours;
-        }
-        else {
-            if (this.inputType == "week") {
-                xLabel = days;
-            }
-            else {
-                if (this.inputType == "year") {
-                    xLabel = months;
-                }
-                else {
-                    xLabel = dates
-                }
-            }
-        }
-
-        this.basicChart = new Chart(this.ctxBasic, {
-            type: 'bar',
-            data: {
-                labels: xLabel,
-                datasets: [
-                    {
-                    "label": "Total Number of Entries",
-                    "data": this.getTypeData(this.inputType, 'all'),
-                    "fill": true,
-                    "backgroundColor": "blue",
-                    "borderColor": "black",
-                    "lineTension": 0.1
-                }
-                ],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRation: false,
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-
-                        }
-                    }]
-                }
-            }
-        });
-    }
-*/
 
     updateDetailedChart(): void{
 
@@ -1064,10 +948,6 @@ public pastDates = [
                 console.log(err);
             }
         );
-    }
-
-    totalNumberEntries(): number{
-        return this.summaries.length;
     }
 
     totalNumberMoods(): number{
