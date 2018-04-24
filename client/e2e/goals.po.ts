@@ -32,8 +32,8 @@ export class GoalPage {
     }
 
     getUniqueGoal(anID: string) {
-        const goal = element(by.className(anID)).getText();
-        this.highlightElement(by.className(anID));
+        const goal = element(by.id(anID)).getText();
+        this.highlightElement(by.id(anID));
 
         return goal;
     }
@@ -43,8 +43,8 @@ export class GoalPage {
     }
 
     buttonExists(): promise.Promise<boolean> {
-        this.highlightElement(by.className('addNewGoal'));
-        return element(by.className('addNewGoal')).isPresent();
+        this.highlightElement(by.className('add-new-goal'));
+        return element(by.className('add-new-goal')).isPresent();
     }
 
     clickAddGoalButton(): promise.Promise<void> {
@@ -59,7 +59,7 @@ export class GoalPage {
     }
 
     actuallyAddGoal() {
-        const input = element(by.className('confirmAddGoalButton'));
+        const input = element(by.className('confirm-add-goal-button'));
         input.click();
     }
 

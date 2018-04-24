@@ -123,10 +123,10 @@ describe( 'Goals', () => {
 
 
     it('goal list shows all goals', () =>{
-        expect(goalList.filteredGoals.length).toBe(4);
+        expect(goalList.goals.length).toBe(4);
         goalList.showAllGoals = true;
         goalList.refreshGoals().subscribe(()=>{
-            expect(goalList.filteredGoals.length).toBe(4);
+            expect(goalList.goals.length).toBe(4);
         });
     });
 
@@ -139,7 +139,7 @@ describe( 'Goals', () => {
     });
 
     it('showGoals returns all goals', () =>{
-        expect(goalList.filteredGoals.length).toBe(4);
+        expect(goalList.goals.length).toBe(4);
         goalList.showGoals("all");
         expect(goalList.shownGoals.length).toBe(4);
     });
@@ -205,7 +205,7 @@ describe('Next Goals', () => {
 
         //Checks if going to the 'all' goals page skips the while loop
         it('Doesnt enter while loop', () => {
-            expect(goalList.filteredGoals.length).toBe(2);
+            expect(goalList.goals.length).toBe(2);
             goalList.showAllGoals = true;
             expect(goalList.todayGoals.length).toBe(0);
         });

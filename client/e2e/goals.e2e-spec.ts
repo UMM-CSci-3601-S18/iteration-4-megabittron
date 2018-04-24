@@ -30,14 +30,14 @@ describe('Goal list', () => {
         expect(page.getUniqueGoal('5ab53a8944a44f6ec5e15853')).toContain('Clean my room');
     });
 
-    it('Total number of goals should be 4', () => {
+    it('Total number of goals should be 3', () => {
         page.navigateTo();
-        expect(page.getGoals()).toEqual(4);
+        expect(page.getGoals()).toEqual(3);
     });
 
-    it('Should check that goal with purpose: \'Do laundry\' matches unique id', () => {
+    it('Should check that goal with purpose: \'Wash the dishes\' matches unique id', () => {
         page.navigateTo();
-        expect(page.getUniqueGoal('5ab53a897a4e4fb3a641aa89')).toContain('Do laundry');
+        expect(page.getUniqueGoal('5ab53a89dd3b308feb0e14c3')).toContain('Wash the dishes');
     });
 
     it('Should check that goal with status: \'Incomplete\' matches unique id', () => {
@@ -48,8 +48,8 @@ describe('Goal list', () => {
 
     it('Should switch between todays goals and all goals', () =>{
         page.navigateTo();
-        element(by.id('showAllGoals')).click();
-        expect(page.getGoals()).toEqual(5);
+        element(by.className('show-all-goals')).click();
+        expect(page.getGoals()).toEqual(6);
     });
 
     it('Should have an add goal button', () => {

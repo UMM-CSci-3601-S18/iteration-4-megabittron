@@ -41,7 +41,7 @@
     word-wrap: break-word;
 }
 
-.desktopCardSubtitle{
+.card-subtitle{
     text-align: center;
 }
 
@@ -61,23 +61,15 @@
     float: right;
 }
 
-.desktopGoals-buttons {
+.goals-buttons {
     float: left;
 }
 
-.mobileGoals-buttons {
-    float: left;
-}
-
-.desktopGoalPanel{
+.goal-panel{
     width: 100%;
 }
 
-.mobileGoalPanel{
-    width: 100%;
-}
-
-.cardGoalTitle{
+.card-goal-title{
     width: auto;
     text-align: center;
     font-size: 200%;
@@ -85,7 +77,7 @@
     padding: 0.5%;
 }
 
-.sectionTitle{
+.section-title{
     width: auto;
     text-align: center;
     font-size: 200%;
@@ -93,7 +85,7 @@
     padding: 0.5%;
 }
 
-.goalTitleDiv{
+.goal-title-div{
     width: 45%;
     margin-right: auto;
     margin-left: auto;
@@ -101,7 +93,7 @@
 }
 
 
-.pagescrollbuttons{
+.page-scroll-buttons{
     text-align: center;
 }
 
