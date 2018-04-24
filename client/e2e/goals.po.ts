@@ -21,8 +21,8 @@ export class GoalPage {
     }
 
     getGoalManageTitle() {
-        const title = element(by.id('desktopGoal-title')).getText();
-        this.highlightElement(by.id('desktopGoal-title'));
+        const title = element(by.className('goal-title')).getText();
+        this.highlightElement(by.className('goal-title'));
 
         return title;
     }
@@ -32,34 +32,34 @@ export class GoalPage {
     }
 
     getUniqueGoal(anID: string) {
-        const goal = element(by.id(anID)).getText();
-        this.highlightElement(by.id(anID));
+        const goal = element(by.className(anID)).getText();
+        this.highlightElement(by.className(anID));
 
         return goal;
     }
 
     getGoals() {
-        return element.all(by.className('desktopGoals-card')).count();
+        return element.all(by.className('goals-card')).count();
     }
 
     buttonExists(): promise.Promise<boolean> {
-        this.highlightElement(by.id('desktopAddNewGoal'));
-        return element(by.id('desktopAddNewGoal')).isPresent();
+        this.highlightElement(by.className('addNewGoal'));
+        return element(by.className('addNewGoal')).isPresent();
     }
 
     clickAddGoalButton(): promise.Promise<void> {
-        this.highlightElement(by.className('desktopGoal-button'));
-        return element(by.className('desktopGoal-button')).click();
+        this.highlightElement(by.className('goal-button'));
+        return element(by.className('goal-button')).click();
     }
 
     pickChoresOption(){
-        const input = element(by.id('category-list'));
+        const input = element(by.className('category-list'));
         input.click();
         this.selectEnter();
     }
 
     actuallyAddGoal() {
-        const input = element(by.id('confirmAddGoalButton'));
+        const input = element(by.className('confirmAddGoalButton'));
         input.click();
     }
 

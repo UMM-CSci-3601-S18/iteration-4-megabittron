@@ -1,21 +1,21 @@
 
     <div  layout="column" >
-        <div layout="column" id="desktopAllGoals">
+        <div layout="column" class="desktopAllGoals">
             <div class="first-sec">
                 <mat-card class="manage-goals-card">
-                    <mat-card-title id="desktopGoal-title">Your Goals</mat-card-title>
+                    <mat-card-title class="goal-title">Your Goals</mat-card-title>
                     <mat-card-subtitle class="goal-subtitle">Goals can help you stay on
                         track with daily activities in your life.
                     </mat-card-subtitle>
                     <mat-card-content class="goal-content">
-                        <li class="content-item" id="desktopAddNewGoal">
+                        <li class="content-item" class="desktopAddNewGoal">
                             <button mat-raised-button (click)="openDialog()" class="goal-button">
-                                <mat-icon id="desktpAdd-icon">add</mat-icon>
+                                <mat-icon class="add-icon">add</mat-icon>
                                 Add a Goal
                             </button>
                         </li>
                         <br>
-                        <mat-slide-toggle id="desktopShowAllGoals" (change)="showAllGoals = $event.checked; this.getNext()">Show all goals</mat-slide-toggle>
+                        <mat-slide-toggle class="showAllGoals" (change)="showAllGoals = $event.checked; this.getNext()">Show all goals</mat-slide-toggle>
                         <br>
                     </mat-card-content>
                 </mat-card>
@@ -23,19 +23,19 @@
 
             <span hide-xs>
             <div class="todays-goals" *ngIf="showAllGoals == false">
-                <div class="desktopGoalTitleDiv">
+                <div class="goalTitleDiv">
                     <mat-card class="sectionTitle">
                         Today's Goals
                     </mat-card>
                 </div>
                 <div layout="row" layout-wrap>
                     <ng-container *ngFor="let goal of this.shownGoals">
-                        <mat-card class="desktopGoals-card"
+                        <mat-card class="goals-card"
                                   #elem [id]="goal._id['$oid']">
                             <mat-card-title class="cardGoalTitle">
                                         {{goal.name}}
                             </mat-card-title>
-                            <mat-card-subtitle class="desktopCardSubtitle">{{returnStatus(goal.status)}}</mat-card-subtitle>
+                            <mat-card-subtitle class="cardSubtitle">{{returnStatus(goal.status)}}</mat-card-subtitle>
                             <mat-divider></mat-divider>
                             <mat-card-content>
                                 <div class ="goals-image">
@@ -47,18 +47,18 @@
                                          class="goal-card-image" height="75">
                                 </div>
 
-                            <div class="desktopGoals-card-info">
+                            <div class="goals-card-info">
                                 <p *ngIf="goal.purpose !== ''"><i>Purpose:</i> {{goal.purpose}}</p>
                                 <p><i>Frequency:</i> {{goal.frequency}}</p>
                                 <p *ngIf="goal.end !== ''"><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
                             </div>
-                                <div class="dekstopGoals-buttons">
+                                <div class="goals-buttons">
                                     <button mat-icon-button class="button delete-button"
                                             (click)="deleteGoal(goal._id['$oid'])">
                                         <mat-icon>delete</mat-icon>
                                     </button>
 
-                                    <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" id="todayCompleteGoal"
+                                    <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" class="todayCompleteGoal"
                                             (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next)">
                                         <mat-icon>done</mat-icon>
                                     </button>
@@ -91,14 +91,14 @@
 
 
             <span hide-gt-xs>
-            <div class="mobileTodays-goals" *ngIf="this.showAllGoals == false">
-                <div class="mobileGoalTitleDiv">
+            <div class="todays-goals" *ngIf="this.showAllGoals == false">
+                <div class="goalTitleDiv">
                     <mat-card class="sectionTitle">
                         Today's Goals
                     </mat-card>
                 </div>
                 <div layout="row" layout-wrap>
-                    <mat-card class="mobileGoals-card">
+                    <mat-card class="goals-card">
                         <mat-accordion>
                             <mat-expansion-panel class="mobileGoalPanel" *ngFor="let goal of this.shownGoals" #elem [id]="goal._id['$oid']">
                                 <mat-expansion-panel-header>
@@ -116,20 +116,20 @@
                                          class="goal-card-image" height="75">
                                 </div>
 
-                                <div class="mobileGoals-card-info">
+                                <div class="goals-card-info">
                                    <mat-card-content class="goal-info">
-                                        <mat-card-title id="today-goal-name">{{goal.name}}</mat-card-title>
+                                        <mat-card-title class="today-goal-name">{{goal.name}}</mat-card-title>
                                        <p><i>Purpose:</i> {{goal.purpose}}</p>
                                 <p><i>Frequency:</i> {{goal.frequency}}</p>
                                 <p><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
                                     </mat-card-content>
                                 </div>
-                                <div class="mobileGoals-buttons">
+                                <div class="goals-buttons">
                                     <button mat-icon-button class="button delete-button"
                                             (click)="deleteGoal(goal._id['$oid'])">
                                         <mat-icon>delete</mat-icon>
                                     </button>
-                                    <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" id="todayCompleteGoal"
+                                    <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" class="todayCompleteGoal"
                                             (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next)">
                                         <mat-icon>done</mat-icon>
                                     </button>
@@ -164,23 +164,21 @@
 
             <span hide-xs>
             <div class="desktopGrid-goals-section" *ngIf="this.showAllGoals == true">
-                <div class="desktopGoalTitleDiv">
+                <div class="goalTitleDiv">
                     <mat-card class="sectionTitle">
                         All Goals
                     </mat-card>
                 </div>
                 <div layout="row" layout-wrap>
                    <ng-container *ngFor="let goal of this.shownGoals">
-                       <mat-card class="desktopGoals-card"
+                       <mat-card class="goals-card"
                                  #elem [id]="goal._id['$oid']">
                            <mat-card-title class="cardGoalTitle">
                                        {{goal.name}}
                            </mat-card-title>
 
-                           <mat-card-subtitle class="desktopCardSubtitle">{{returnStatus(goal.status)}}</mat-card-subtitle>
+                           <mat-card-subtitle class="cardSubtitle">{{returnStatus(goal.status)}}</mat-card-subtitle>
                             <mat-divider></mat-divider>
-                           <!--</mat-panel-title>
-                       </mat-expansion-panel-header>-->
                             <mat-card-content>
                                 <div class ="goals-image">
                                     <img *ngIf="goal.category == 'Family'" src="../../assets/images/goals/family.png"
@@ -191,15 +189,12 @@
                                          class="goal-card-image" height="75">
                                 </div>
 
-                            <div class="desktopGoals-card-info">
-                                <!--<mat-card-content class="goal-info">
-                                    <mat-card-title id="today-goal-name">{{goal.name}}</mat-card-title>-->
+                            <div class="goals-card-info">
                                        <p><i>Purpose:</i> {{goal.purpose}}</p>
                                 <p><i>Frequency:</i> {{goal.frequency}}</p>
                                 <p><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
-                                <!--</mat-card-content>-->
                             </div>
-                               <div class="desktopGoals-buttons">
+                               <div class="goals-buttons">
                                    <button mat-icon-button class="button delete-button"
                                            (click)="deleteGoal(goal._id['$oid'])">
                                        <mat-icon>delete</mat-icon>
@@ -217,17 +212,6 @@
                        </mat-card>
                    </ng-container>
 
-
-                    <!-- Errors message card can be uncommented if you fix the layout issue -->
-                    <!--or>
-                        <mat-error>
-                            There was a problem loading the goals. Possibly the server is down or perhaps there are network
-                            issues.
-                        </mat-error>
-                        <mat-error>
-                            Please wait a bit and try again or start the server.
-                        </mat-error>
-                    </ng-template>-->
                 </div>
                 <div class="pagescrollbuttons">
                     <button *ngIf="this.currentPage == 1" mat-icon-button class="previousPage" (click)="this.currentPage = this.currentPage - 1;
@@ -253,16 +237,16 @@
 
             <span hide-gt-xs>
                 <div class="mobileGrid-goals-section" *ngIf="this.showAllGoals == true">
-                    <div class="mobileGoalTitleDiv">
+                    <div class="goalTitleDiv">
                         <mat-card class="sectionTitle">
                             All Goals
                         </mat-card>
                     </div>
                     <div layout="row" layout-wrap>
                         <ng-container>
-                            <mat-card class="mobileGoals-card">
+                            <mat-card class="goals-card">
                                 <mat-accordion>
-                                    <mat-expansion-panel class="mobileGoalPanel" *ngFor="let goal of this.shownGoals"
+                                    <mat-expansion-panel class="goalPanel" *ngFor="let goal of this.shownGoals"
                                                          #elem [id]="goal._id['$oid']">
                                         <mat-expansion-panel-header>
                                             <mat-panel-title>
@@ -279,15 +263,12 @@
                                                  class="goal-card-image" height="75">
                                         </div>
 
-                                        <div class="mobileGoals-card-info">
-                                            <!--<mat-card-content class="goal-info">
-                                                <mat-card-title id="today-goal-name">{{goal.name}}</mat-card-title>-->
+                                        <div class="goals-card-info">
                                                <p><i>Purpose:</i> {{goal.purpose}}</p>
                                 <p><i>Frequency:</i> {{goal.frequency}}</p>
                                 <p><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
-                                            <!--</mat-card-content>-->
                                         </div>
-                                        <div class="mobileGoals-buttons">
+                                        <div class="goals-buttons">
                                             <button mat-icon-button class="button delete-button"
                                                     (click)="deleteGoal(goal._id['$oid'])">
                                                 <mat-icon>delete</mat-icon>
@@ -306,17 +287,6 @@
                             </mat-card>
                         </ng-container>
 
-
-                        <!-- Errors message card can be uncommented if you fix the layout issue -->
-                        <!--or>
-                            <mat-error>
-                                There was a problem loading the goals. Possibly the server is down or perhaps there are network
-                                issues.
-                            </mat-error>
-                            <mat-error>
-                                Please wait a bit and try again or start the server.
-                            </mat-error>
-                        </ng-template>-->
                     </div>
                     <div class="pagescrollbuttons">
                         <button *ngIf="this.currentPage == 1" mat-icon-button class="previousPage" (click)="this.currentPage = this.currentPage - 1;

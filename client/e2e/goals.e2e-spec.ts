@@ -48,7 +48,7 @@ describe('Goal list', () => {
 
     it('Should switch between todays goals and all goals', () =>{
         page.navigateTo();
-        element(by.id('desktopShowAllGoals')).click();
+        element(by.id('showAllGoals')).click();
         expect(page.getGoals()).toEqual(5);
     });
 
@@ -63,20 +63,5 @@ describe('Goal list', () => {
         element(by.className('goal-button')).click();
         expect(element(by.className('add-goal')).isPresent()).toBeTruthy('There should be a modal window now');
     });
-
- /*   // This test has timing issues. Slow down to run properly.
-    it('Should actually add the goal with the information we put in the fields', () => {
-        element(by.id('nameField')).sendKeys('Clean up computer lab');
-        page.pickChoresOption();
-        element(by.id('purposeField')).sendKeys('Get more people to come');
-        page.actuallyAddGoal();
-    });*/
-
-   /* it('Should click check button to change goal to complete', () => {
-        page.navigateTo();
-        expect(page.getUniqueGoal('5ab53a89ea32d59c4e81d5f0')).toContain('Status: Incomplete');
-        expect(element(by.id('completeGoal')).isPresent()).toBeTruthy('There should be a \'complete goal\' green check button');
-        element(by.id('completeGoal')).click();
-    });*/
 
 });

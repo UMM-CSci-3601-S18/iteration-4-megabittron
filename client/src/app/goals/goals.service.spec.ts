@@ -75,6 +75,7 @@ describe('Goal list service: ', () => {
         httpTestingController.verify();
     });
 
+    // Checks if the correct goals are returned
     it('getGoals() calls api/goals', () => {
 
         const testGoal: Goal[] = [
@@ -106,52 +107,7 @@ describe('Goal list service: ', () => {
 
     });
 
-    /*it('getGoals(goalCategory) adds appropriate param string to called URL', () => {
-        goalListService.getGoals('m').subscribe(
-            users => expect(users).toEqual(mGoals)
-        );
-
-        const req = httpTestingController.expectOne(goalListService.baseUrl + '?category=m&');
-        expect(req.request.method).toEqual('GET');
-        req.flush(mGoals);
-    });
-
-    it('filterByCategory(goalCategory) deals appropriately with a URL that already had a category', () => {
-        currentlyImpossibleToGenerateSearchGoalUrl = goalListService.baseUrl + '?category=f&something=k&';
-        goalListService['goalUrl'] = currentlyImpossibleToGenerateSearchGoalUrl;
-        goalListService.filterByCategory('m');
-        expect(goalListService['goalUrl']).toEqual(goalListService.baseUrl + '?something=k&category=m&');
-    });
-
-    it('filterByCategory(goalCategory) deals appropriately with a URL that already had some filtering, but no category', () => {
-        currentlyImpossibleToGenerateSearchGoalUrl = goalListService.baseUrl + '?something=k&';
-        goalListService['goalUrl'] = currentlyImpossibleToGenerateSearchGoalUrl;
-        goalListService.filterByCategory('m');
-        expect(goalListService['goalUrl']).toEqual(goalListService.baseUrl + '?something=k&category=m&');
-    });
-
-
-    it('filterByCategory(goalCategory) deals appropriately with a URL has the keyword category, but nothing after the =', () => {
-        currentlyImpossibleToGenerateSearchGoalUrl = goalListService.baseUrl + '?category=&';
-        goalListService['goalUrl'] = currentlyImpossibleToGenerateSearchGoalUrl;
-        goalListService.filterByCategory('');
-        expect(goalListService['goalUrl']).toEqual(goalListService.baseUrl + '');
-    });
-    */
-
-    it('getGoalByID() calls api/goals/id', () => {
-        const targetGoal: Goal = testGoals[1];
-        const targetId: string = targetGoal._id;
-        goalListService.getGoalByID(targetId).subscribe(
-            user => expect(user).toBe(targetGoal)
-        );
-
-        const expectedUrl: string = goalListService.baseUrl + '/' + targetId;
-        const req = httpTestingController.expectOne(expectedUrl);
-        expect(req.request.method).toEqual('GET');
-        req.flush(targetGoal);
-    });
-
+    //Checks if adding a new goal works
     it('adding a goal calls api/goals/new', () => {
         const chores_id = { '$oid': 'chores_id' };
         const newGoal: Goal = {
@@ -179,6 +135,7 @@ describe('Goal list service: ', () => {
         req.flush(chores_id);
     });
 
+    //Checks if completing a goal works
     it('completing a goal calls api/goals/edit', () => {
         const family_id = { '$oid': 'family_id' };
         const completeGoal: Goal = {
