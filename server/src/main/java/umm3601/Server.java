@@ -24,8 +24,6 @@ import umm3601.database.journal.JournalController;
 import umm3601.database.journal.JournalRequestHandler;
 import umm3601.database.emotion.EmotionController;
 import umm3601.database.emotion.EmotionRequestHandler;
-import umm3601.database.resource.ResourceController;
-import umm3601.database.resource.ResourceRequestHandler;
 import umm3601.database.summary.SummaryController;
 import umm3601.database.summary.SummaryRequestHandler;
 import umm3601.database.user.UserController;
@@ -56,9 +54,6 @@ public class Server {
 
         SummaryController summaryController = new SummaryController(database);
         SummaryRequestHandler summaryRequestHandler = new SummaryRequestHandler(summaryController);
-
-        ResourceController resourceController = new ResourceController(database);
-        ResourceRequestHandler resourceRequestHandler = new ResourceRequestHandler(resourceController);
 
         JournalController journalController = new JournalController(database);
         JournalRequestHandler journalRequestHandler = new JournalRequestHandler(journalController);
@@ -129,8 +124,7 @@ public class Server {
         //List summary page
         get("api/summaries", summaryRequestHandler::getSummaries);
 
-        //Resources for appropriate response
-        get("api/resources", resourceRequestHandler::getResources);
+
 
         //List journals
         get("api/journals", journalRequestHandler::getJournals);
