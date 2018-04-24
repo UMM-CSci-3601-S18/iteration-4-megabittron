@@ -20,23 +20,13 @@ export class GoalsComponent implements OnInit {
     public goals: Goal[] = [];
     public todayGoals: Goal[] = [];
     public shownGoals: Goal[] = [];
-    public filteredGoals: Goal[] = [];
 
-    // These are the target values used in searching.
-    public goalPurpose: string;
-    public goalCategory: string;
-    public goalName: string;
-    public goalStatus: string;
     public goalStart;
-    public goalEnd;
     public goalNext;
-    public goalFrequency;
     public today;
     public showAllGoals = false;
     public goalsPerPage = 5;
     public currentPage = 1;
-
-    public currentScreenWidth: number;
 
     // The ID of the goal
     private highlightedID: { '$oid': string } = {'$oid': ''};
@@ -49,7 +39,7 @@ export class GoalsComponent implements OnInit {
         return goal._id['$oid'] === this.highlightedID['$oid'];
     }
 
-
+    // Opens a dialog for a new goal entry and adds the goal upon closing
     openDialog(): void {
         const newGoal: Goal = {
             _id: '',
@@ -99,21 +89,7 @@ export class GoalsComponent implements OnInit {
         });
     }
 
-    returnStatus(status): string{
-        if(status == true){
-            return "Complete";
-        }
-
-        return "Incomplete";
-    }
-
-    getSize(type): boolean{
-        if(type == "today"){
-            return this.todayGoals.length > this.goalsPerPage;
-        }
-
-        return this.filteredGoals.length > this.goalsPerPage;
-    }
+    //deletes goal from the page
     deleteGoal(_id: string) {
         this.goalService.deleteGoal(_id).subscribe(
             goals => {
@@ -131,6 +107,7 @@ export class GoalsComponent implements OnInit {
         );
     }
 
+    //edits the specified goal
     editGoal(_id, name, purpose, category, status, frequency, start, end, next) {
         const updatedGoal: Goal = {
             _id: _id,
@@ -158,47 +135,14 @@ export class GoalsComponent implements OnInit {
             });
     }
 
-    updateNext(_id, name, purpose, category, status, frequency, start, end, next): void {
-        const updatedGoal: Goal = {
-            _id: _id,
-            userID: localStorage.getItem("userID"),
-            purpose: purpose,
-            category: category,
-            name: name,
-            status: status,
-            frequency: frequency,
-            start: start,
-            end: end,
-            next: next
-        };
-        this.goalService.editGoal(updatedGoal).subscribe(
-            editGoalResult => {
-                this.highlightedID = editGoalResult;
-            },
-            err => {
-                console.log('There was an error completing the goal.');
-                console.log('The error was ' + JSON.stringify(err));
-            });
-    }
-
-   public filterGoals(searchPurpose: string, searchCategory: string,
-                       searchName: string, searchStatus: string,
-                       searchFrequency: string): Goal[] {
-
-        this.filteredGoals = this.goals;
-
-
-
-        this.showGoals("all")
-        return this.filteredGoals;
-    }
-
+    //Checks if the next field is <, = or > than today's date and updates the next field as needed. Returns
+    //true if the goal is supposed to be shown in the today's goal section
     getNext(){
         this.currentPage = 1;
 
         if(this.showAllGoals == false) {
             if(this.today !== undefined) {
-                this.todayGoals = this.filteredGoals.filter(goal => {
+                this.todayGoals = this.goals.filter(goal => {
 
 
                     var nextGoal = new Date(goal.next);
@@ -210,7 +154,7 @@ export class GoalsComponent implements OnInit {
                     var day = nextGoal.getDate();
                     var month = nextGoal.getMonth();
 
-                    if (nextGoal.getTime() <= this.today.getTime()
+                    if (nextGoal.getTime() < this.today.getTime()
                         && goal.frequency != "Does not repeat"
                         && goal.status == true
                         && endGoal.getTime() >= this.today.getTime()) {
@@ -276,13 +220,11 @@ export class GoalsComponent implements OnInit {
 
         else{
             this.showGoals("all");
-            return this.filteredGoals;
+            return this.goals;
         }
-
-
-
     }
 
+    //Shows today's goals or all goals based on the the given type
     showGoals(type){
         var count = this.currentPage * this.goalsPerPage;
 
@@ -305,7 +247,7 @@ export class GoalsComponent implements OnInit {
         }
 
         else{
-            this.shownGoals = this.filteredGoals.filter(goal => {
+            this.shownGoals = this.goals.filter(goal => {
                 if (count > this.goalsPerPage) {
                     count--;
                     return false;
@@ -319,23 +261,6 @@ export class GoalsComponent implements OnInit {
             });
         }
     }
-
-    maxNumPages(type): boolean{
-        if(type == "today") {
-
-            if(this.todayGoals !== undefined){
-                return (this.goalsPerPage * this.currentPage) < this.todayGoals.length;
-            }
-            return false;
-        }
-        else{
-            if(this.filteredGoals !== undefined){
-                return (this.goalsPerPage * this.currentPage) < this.filteredGoals.length;
-            }
-            return false;
-        }
-    }
-
 
     /**
      * Starts an asynchronous operation to update the goals list
@@ -362,7 +287,6 @@ export class GoalsComponent implements OnInit {
                 console.log(goals);
                 if(goals != null){
                     this.goals = goals;
-                    this.filterGoals(this.goalPurpose, this.goalCategory, this.goalName, this.goalStatus, this.goalFrequency);
                     this.getNext();
                 }
             },
@@ -377,10 +301,10 @@ export class GoalsComponent implements OnInit {
 
     loadService(): void {
         console.log(localStorage.getItem("userID"));
-        this.goalService.getGoals(localStorage.getItem("userID"),this.goalCategory).subscribe(
+        this.goalService.getGoals(localStorage.getItem("userID")).subscribe(
             goals => {
                 this.goals = goals;
-                this.filteredGoals = this.goals;
+                this.goals = this.goals;
             },
             err => {
                 console.log(err);
@@ -407,13 +331,72 @@ export class GoalsComponent implements OnInit {
 
     }
 
+    //Helper Functions//
+
+    //get's today's date, and sets this.goalStart and this.goalNext to today's date
     getDate() {
         this.today = new Date();
         this.today.setHours(0, 0, 0, 0);
         this.goalStart = this.today;
         this.goalNext = this.today;
+    }
 
+    //returns the maximum number of pages there could possibly be based on the number of goals per page
+    maxNumPages(type): boolean{
+        if(type == "today") {
 
+            if(this.todayGoals !== undefined){
+                return (this.goalsPerPage * this.currentPage) < this.todayGoals.length;
+            }
+            return false;
+        }
+        else{
+            if(this.goals !== undefined){
+                return (this.goalsPerPage * this.currentPage) < this.goals.length;
+            }
+            return false;
+        }
+    }
 
+    //updates the next field of the specified goal. Only is used when the page is loaded
+    updateNext(_id, name, purpose, category, status, frequency, start, end, next): void {
+        const updatedGoal: Goal = {
+            _id: _id,
+            userID: localStorage.getItem("userID"),
+            purpose: purpose,
+            category: category,
+            name: name,
+            status: status,
+            frequency: frequency,
+            start: start,
+            end: end,
+            next: next
+        };
+        this.goalService.editGoal(updatedGoal).subscribe(
+            editGoalResult => {
+                this.highlightedID = editGoalResult;
+            },
+            err => {
+                console.log('There was an error completing the goal.');
+                console.log('The error was ' + JSON.stringify(err));
+            });
+    }
+
+    // Returns "Complete" or "Incomplete" based on the given status
+    returnStatus(status): string{
+        if(status == true){
+            return "Complete";
+        }
+
+        return "Incomplete";
+    }
+
+    // Returns the size of the array of the given type
+    getSize(type): boolean{
+        if(type == "today"){
+            return this.todayGoals.length > this.goalsPerPage;
+        }
+
+        return this.goals.length > this.goalsPerPage;
     }
 }

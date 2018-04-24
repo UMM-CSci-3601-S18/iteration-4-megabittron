@@ -91,6 +91,7 @@ describe( 'Goals', () => {
         });
     }));
 
+    //General Tests
     it('contains all the goals', () => {
         expect(goalList.goals.length).toBe(4);
     });
@@ -122,21 +123,12 @@ describe( 'Goals', () => {
 
 
     it('goal list shows all goals', () =>{
-        expect(goalList.filteredGoals.length).toBe(4);
+        expect(goalList.goals.length).toBe(4);
         goalList.showAllGoals = true;
         goalList.refreshGoals().subscribe(()=>{
-            expect(goalList.filteredGoals.length).toBe(4);
+            expect(goalList.goals.length).toBe(4);
         });
     });
-
-   /* it('goal list shows todays goals', () =>{
-        expect(goalList.filteredGoals.length).toBe(4);
-        goalList.showAllGoals = false;
-        goalList.refreshGoals().subscribe(()=>{
-            expect(goalList.todayGoals.length).toBe(4);
-        });
-    });*/
-
 
     it('returnStatus returns "complete"', () =>{
         expect(goalList.returnStatus(true) === "Complete");
@@ -147,14 +139,14 @@ describe( 'Goals', () => {
     });
 
     it('showGoals returns all goals', () =>{
-        expect(goalList.filteredGoals.length).toBe(4);
+        expect(goalList.goals.length).toBe(4);
         goalList.showGoals("all");
         expect(goalList.shownGoals.length).toBe(4);
     });
 });
 
 describe('Next Goals', () => {
-    let goalList; GoalsComponent;
+    let goalList: GoalsComponent;
     let fixture: ComponentFixture<GoalsComponent>;
 
     let goalsServiceStub: {
@@ -211,8 +203,9 @@ describe('Next Goals', () => {
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
 
+        //Checks if going to the 'all' goals page skips the while loop
         it('Doesnt enter while loop', () => {
-            expect(goalList.filteredGoals.length).toBe(2);
+            expect(goalList.goals.length).toBe(2);
             goalList.showAllGoals = true;
             expect(goalList.todayGoals.length).toBe(0);
         });
@@ -227,43 +220,6 @@ describe('Next Goals', () => {
     }));
 });
 
-describe('Misbehaving Goal List', () => {
-    let goalList: GoalsComponent;
-    let fixture: ComponentFixture<GoalsComponent>;
-
-    let goalListServiceStub: {
-        getGoals: () => Observable<Goal[]>
-    };
-
-    beforeEach(() => {
-        // stub GoalService for test reasons
-        goalListServiceStub = {
-            getGoals: () => Observable.create(observer => {
-                observer.error('Error-prone observable');
-            })
-        };
-
-        TestBed.configureTestingModule({
-            imports: [FormsModule, CustomModule, RouterTestingModule],
-            declarations: [GoalsComponent],
-            providers: [{provide: GoalsService, useValue: goalListServiceStub},
-                {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
-        });
-    });
-
-    beforeEach(async(() => {
-        TestBed.compileComponents().then(() => {
-            fixture = TestBed.createComponent(GoalsComponent);
-            goalList = fixture.componentInstance;
-            fixture.detectChanges();
-        });
-    }));
-
-   /*it('generates an error if we don\'t set up a GoalsService', () => {
-        // Since the observer throws an error, we don't expect goals to be defined.
-        expect(goalList.goals).toBeUndefined();
-    });*/
-});
 
 describe('Adding a goal', () => {
     let goalList: GoalsComponent;
@@ -337,6 +293,7 @@ describe('Adding a goal', () => {
         localStorage.isSignedIn = "true";
     }));
 
+    //Checks if a goal is added correctly
     it('calls GoalsService.addGoal', () => {
         expect(calledGoal).toBeNull();
         goalList.openDialog();
@@ -414,85 +371,10 @@ describe('Deleting a goal', () => {
         });
     }));
 
+    //Checks if deleting a goal works
     it('calls GoalsService.deleteGoal', () => {
         expect(calledGoal).toBeNull();
         goalList.deleteGoal(this._id);
     });
 });
 
-describe('Completing a goal', () => {
-    let goalList: GoalsComponent;
-    let fixture: ComponentFixture<GoalsComponent>;
-    const completeGoal: Goal =   {
-        _id: '',
-        userID: 'userID1',
-        purpose: 'To break everything and make people mad',
-        category: 'Chores',
-        name: 'Destroy all monitors in the lab',
-        status: true,
-        start: "2018-04-05T18:56:24.702Z",
-        end: "2018-05-05T18:56:24.702Z",
-        next: "2018-05-05T18:56:24.702Z",
-        frequency: "Daily"
-    };
-    const newId = 'monitor_id';
-
-    let calledGoal: Goal;
-
-    let goalListServiceStub: {
-        getGoals: () => Observable<Goal[]>,
-        completeGoal: (newGoal: Goal) => Observable<{'$oid': string}>
-    };
-    let mockMatDialog: {
-        open: (GoalsComponent, any) => {
-            afterClosed: () => Observable<Goal>
-        };
-    };
-
-    beforeEach(() => {
-        calledGoal = null;
-        // stub GoalsService for test reasons
-        goalListServiceStub = {
-            getGoals: () => Observable.of([]),
-            completeGoal: (goalToComplete: Goal) => {
-                calledGoal = goalToComplete;
-                return Observable.of({
-                    '$oid': newId
-                });
-            }
-        };
-        mockMatDialog = {
-            open: () => {
-                return {
-                    afterClosed: () => {
-                        return Observable.of(completeGoal);
-                    }
-                };
-            }
-        };
-
-        TestBed.configureTestingModule({
-            imports: [FormsModule, CustomModule, RouterTestingModule],
-            declarations: [GoalsComponent],
-            providers: [
-                {provide: GoalsService, useValue: goalListServiceStub},
-                {provide: MatDialog, useValue: mockMatDialog},
-                {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
-        });
-    });
-
-    beforeEach(async(() => {
-        TestBed.compileComponents().then(() => {
-            fixture = TestBed.createComponent(GoalsComponent);
-            goalList = fixture.componentInstance;
-            fixture.detectChanges();
-        });
-    }));
-
-    /*it('calls GoalsService.completeGoal', () => {
-        expect(calledGoal).toBeNull();
-        // I don't think this is correct, but it passes. It should probably take in this._id, this.purpose, etc.
-        goalList.goalSatisfied('', 'To break everything and make people mad', 'Chores', 'Destroy all monitors in the lab')
-        expect(calledGoal).toEqual(completeGoal);
-    });*/
-});
