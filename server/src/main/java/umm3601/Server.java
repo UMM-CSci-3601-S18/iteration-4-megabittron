@@ -11,8 +11,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.io.File;
-
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
@@ -20,18 +18,18 @@ import static spark.debug.DebugScreen.enableDebugScreen;
 import spark.Route;
 
 
-import umm3601.database.GoalController;
-import umm3601.database.GoalRequestHandler;
-import umm3601.database.JournalController;
-import umm3601.database.JournalRequestHandler;
-import umm3601.database.EmotionController;
-import umm3601.database.EmotionRequestHandler;
-import umm3601.database.ResourceController;
-import umm3601.database.ResourceRequestHandler;
-import umm3601.database.SummaryController;
-import umm3601.database.SummaryRequestHandler;
-import umm3601.database.UserController;
-import umm3601.database.UserRequestHandler;
+import umm3601.database.goal.GoalController;
+import umm3601.database.goal.GoalRequestHandler;
+import umm3601.database.journal.JournalController;
+import umm3601.database.journal.JournalRequestHandler;
+import umm3601.database.emotion.EmotionController;
+import umm3601.database.emotion.EmotionRequestHandler;
+import umm3601.database.resource.ResourceController;
+import umm3601.database.resource.ResourceRequestHandler;
+import umm3601.database.summary.SummaryController;
+import umm3601.database.summary.SummaryRequestHandler;
+import umm3601.database.user.UserController;
+import umm3601.database.user.UserRequestHandler;
 
 
 import com.google.api.client.googleapis.auth.oauth2.*;
@@ -134,12 +132,12 @@ public class Server {
         //Resources for appropriate response
         get("api/resources", resourceRequestHandler::getResources);
 
-
-        //List journals, filtered using query parameters
+        //List journals
         get("api/journals", journalRequestHandler::getJournals);
         get("api/journals/:id", journalRequestHandler::getJournalJSON);
         post("api/journals/new", journalRequestHandler::addNewJournal);
         post("api/journals/edit", journalRequestHandler::editJournal);
+        post("api/journals/delete/:id", journalRequestHandler::deleteJournal);
 
         //Did not create a api route for users
 
@@ -190,11 +188,11 @@ public class Server {
                 String familyName = (String) payload.get("family_name");
                 String givenName = (String) payload.get("given_name");
 
-
-                System.out.println(subjectId);
-                System.out.println(email);
-                System.out.println(name);
-                System.out.println(locale);
+                //Debugging code
+                //System.out.println(subjectId);
+                //System.out.println(email);
+                //System.out.println(name);
+                //System.out.println(locale);
 
                 return userController.addNewUser(subjectId, givenName, familyName);
 

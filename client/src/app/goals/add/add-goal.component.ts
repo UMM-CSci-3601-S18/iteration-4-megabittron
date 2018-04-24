@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import {Goal} from './goal';
+import {Goal} from '../goal';
 
 @Component({
     selector: 'app-add-goal.component',

@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import {Journal} from './journal';
+import {Journal} from '../journal';
 
 @Component({
     selector: 'app-show-journal.component',

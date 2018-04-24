@@ -1,11 +1,9 @@
-package umm3601.database;
+package umm3601.database.journal;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.util.JSON;
-import org.bson.types.ObjectId;
 import spark.Request;
 import spark.Response;
-import java.util.Date;
 
 public class JournalRequestHandler {
 
@@ -130,4 +128,23 @@ public class JournalRequestHandler {
             return null;
         }
     }
+
+    public String deleteJournal(Request req, Response res){
+
+        System.out.println("Deleting journal with ID: " + req.params(":id"));
+
+        res.type("application/json");
+
+        try {
+            String id = req.params(":id");
+            journalController.deleteJournal(id);
+            return req.params(":id");
+        }
+        catch(RuntimeException ree)
+        {
+            ree.printStackTrace();
+            return null;
+        }
+    }
+
 }

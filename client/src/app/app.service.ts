@@ -13,11 +13,13 @@ export class AppService {
     }
 
     public testingToggle(): void {
-        //Change this to stop the testing set up
-        var toggle = true;
+        //Change this to false to stop the testing set up
+        var toggle = false;
 
         if(!environment.production && toggle){
             localStorage.setItem("userID", "defaultUserID");
+            localStorage.setItem("userFirstName", "Patrick");
+            localStorage.setItem("userLastName", "Bateman");
             localStorage.setItem("isSignedIn", "true");
         }
     }

@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {MatDialogRef, MAT_DIALOG_DATA, MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 import {ShowJournalComponent} from './show-journal.component';
-import {CustomModule} from '../custom.module';
+import {CustomModule} from '../../custom.module';
 
 describe('Show journal component', () => {
 

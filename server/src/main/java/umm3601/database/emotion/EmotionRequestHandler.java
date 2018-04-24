@@ -1,11 +1,9 @@
-package umm3601.database;
+package umm3601.database.emotion;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.util.JSON;
 import spark.Request;
 import spark.Response;
-
-import java.util.Date;
 
 public class EmotionRequestHandler {
     private final EmotionController emotionController;

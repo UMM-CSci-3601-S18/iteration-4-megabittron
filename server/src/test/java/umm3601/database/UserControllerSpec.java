@@ -12,6 +12,7 @@ package umm3601.database;
     import org.bson.types.ObjectId;
     import org.junit.Before;
     import org.junit.Test;
+    import umm3601.database.user.UserController;
 
     import java.util.*;
     import java.util.stream.Collectors;

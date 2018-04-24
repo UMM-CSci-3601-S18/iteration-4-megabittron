@@ -3,9 +3,9 @@ import {JournalsService} from './journals.service';
 import {Journal} from './journal';
 import {Observable} from 'rxjs/Observable';
 import {MatDialog, MatSnackBar} from '@angular/material';
-import {AddJournalComponent} from './add-journal.component';
-import {EditJournalComponent} from "./edit-journal.component";
-import {ShowJournalComponent} from "./show-journal.component";
+import {AddJournalComponent} from './add/add-journal.component';
+import {EditJournalComponent} from "./edit/edit-journal.component";
+import {ShowJournalComponent} from "./show/show-journal.component";
 import {AppService} from "../app.service";
 import {Router} from "@angular/router";
 
@@ -154,6 +154,25 @@ export class JournalsComponent implements OnInit {
         }
 
         return this.filteredJournals;
+    }
+
+    deleteGoal(_id: string) {
+        this.journalListService.deleteJournal(_id).subscribe(
+            journals => {
+                console.log("first part");
+                this.refreshJournals();
+                this.loadService();
+            },
+            err => {
+                console.log(err);
+                console.log("hi");
+                this.refreshJournals();
+                this.loadService();
+                this.snackBar.open("Deleted Journal", "CLOSE", {
+                    duration: 2000,
+                });
+            }
+        );
     }
 
     // Starts an asynchronous operation to update the journals list

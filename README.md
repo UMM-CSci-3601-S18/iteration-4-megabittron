@@ -5,6 +5,8 @@ Provides ability for consumers to quickly log data about emotion and mood, and p
 
 [![Build Status](https://travis-ci.org/UMM-CSci-3601-S18/iteration-4-megabittron.svg?branch=master)](https://travis-ci.org/UMM-CSci-3601-S18/iteration-4-megabittron)
 
+An example of a live build can be found at https://mypanda.website/ 
+
 <!-- TOC depthFrom:1 depthTo:5 withLinks:1 updateOnSave:1 orderedList:0 -->
 ## Table of Contents
 - [Prerequisites](#prerequisites)
@@ -45,7 +47,7 @@ If you let IDEA do it, you'll
 have a ton of JavaScript files cluttering up your project and confusing other
 tools.
 
-## Running your project
+## Running the project
 
 - The **build** task will _build_ the entire project (but not run it)
 - The **run** Gradle task will still run your SparkJava server.
@@ -84,14 +86,14 @@ need to have data in the `dev` database before running the e2e tests!
 * `runServerTests` runs the server tests.
 
 ## Authors
-- **Travis Warling** 
-- **Xaitheng Yang** 
-- **Charles Menne** 
-- **Ahnaf Prio** 
-- **John Hoff** 
+- **Abenezer Monjor**
+- **Ahnaf Prio**
+- **Charles Menne**
 - **Dustin Blake** 
 - **Francisco Montanez** 
-
+- **John Hoff** 
+- **Travis Warling**
+- **Xaitheng Yang**
 
 [angular-karma-jasmine]: https://codecraft.tv/courses/angular/unit-testing/jasmine-and-karma/
 [e2e-testing]: https://coryrylan.com/blog/introduction-to-e2e-testing-with-the-angular-cli-and-protractor

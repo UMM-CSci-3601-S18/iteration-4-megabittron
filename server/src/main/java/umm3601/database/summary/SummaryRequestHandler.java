@@ -1,4 +1,4 @@
-package umm3601.database;
+package umm3601.database.summary;
 
 import spark.Request;
 import spark.Response;

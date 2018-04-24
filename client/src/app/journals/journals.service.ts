@@ -120,7 +120,19 @@ export class JournalsService {
         };
 
         console.log(id);
-        // Send post request to add a new journal with the journal data as the body with specified headers.
+        // Send post request to edit journal.
         return this.http.post<{'$oid': string}>(this.journalUrl + '/edit', id, httpOptions);
+    }
+
+    deleteJournal(journalID: String) {
+        this.journalUrl = this.baseUrl;
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            }),
+        };
+
+        // Send post request to delete journal.
+        return this.http.post(this.journalUrl + '/delete/' + journalID, httpOptions);
     }
 }

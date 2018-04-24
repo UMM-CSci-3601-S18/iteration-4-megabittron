@@ -7,12 +7,12 @@
                 <br>
                 <mat-form-field hintLabel="Max 45 characters">
                     <input matInput #input maxlength="45"
-                           required id="nameField" placeholder="What is your goal?"
+                           required class="nameField" placeholder="What is your goal?"
                            [(ngModel)]="data.goal.name"
                            name="data.name.category">
                 </mat-form-field>
                 <br>
-                <mat-select matInput required id="category-list"
+                <mat-select matInput required class="category-list"
                             #input [(ngModel)]="data.goal.category"
                             placeholder="Category" [style.width]="'100%'"
                             name="data.goal.category">
@@ -23,7 +23,7 @@
                 <br>
                 <br>
                 <mat-form-field>
-                    <input matInput #input id="purposeField"
+                    <input matInput #input class="purposeField"
                            hintLable="Max 100 characters"
                            maxlength="100"
                            placeholder="What is the purpose?"
@@ -34,16 +34,16 @@
                 <mat-form-field class="end">
                     <input
                         #input
-                        id = "endDate"
+                        class="endDate"
                         matInput [matDatepicker]="end"
                         placeholder="Choose an End Date"
                         [(ngModel)]="data.goal.end"
                         name="data.goal.end">
-                    <mat-datepicker-toggle id = "endButton" matSuffix [for]="end"></mat-datepicker-toggle>
+                    <mat-datepicker-toggle class="endButton" matSuffix [for]="end"></mat-datepicker-toggle>
                     <mat-datepicker touchUi="true" #end></mat-datepicker>
                 </mat-form-field>
 
-                <mat-select id="frequency-list" matInput #input required  hintLabel="Max 100 characters"
+                <mat-select class="frequency-list" matInput #input required  hintLabel="Max 100 characters"
                             [(ngModel)]="data.goal.frequency" placeholder="Frequency"
                             maxlength="100" [style.width]="'100%'"
                             name="data.goal.frequency">
@@ -53,9 +53,9 @@
                     <mat-option value="Monthly">Monthly</mat-option>
                 </mat-select>
             </mat-card-content>
-        <button mat-raised-button id="confirmAddGoalButton"
+        <button mat-raised-button class="confirmAddGoalButton"
                 [mat-dialog-close]="data.goal" [disabled]="!newGoalForm.form.valid">Submit</button>
-        <button mat-raised-button id="exitWithoutAddingButton" (click)="onNoClick()">Cancel</button>
+        <button mat-raised-button class="exitWithoutAddingButton" (click)="onNoClick()">Cancel</button>
     </div>
 </div>
 </form>

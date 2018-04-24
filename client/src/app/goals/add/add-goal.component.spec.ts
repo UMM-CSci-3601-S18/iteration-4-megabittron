@@ -1,21 +1,23 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+
 import {MatDialogRef, MAT_DIALOG_DATA, MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
-import {AddJournalComponent} from './add-journal.component';
-import {CustomModule} from '../custom.module';
 
-describe('Add journal component', () => {
+import {AddGoalComponent} from './add-goal.component';
+import {CustomModule} from '../../custom.module';
 
-    let addJournalComponent: AddJournalComponent;
+describe('Add goal component', () => {
+
+    let addGoalComponent: AddGoalComponent;
     let calledClose: boolean;
     const mockMatDialogRef = {
         close() { calledClose = true; }
     };
-    let fixture: ComponentFixture<AddJournalComponent>;
+    let fixture: ComponentFixture<AddGoalComponent>;
 
     beforeEach(async( () => {
         TestBed.configureTestingModule({
             imports: [CustomModule],
-            declarations: [AddJournalComponent],
+            declarations: [AddGoalComponent],
             providers: [
                 { provide: MatDialogRef, useValue: mockMatDialogRef },
                 { provide: MAT_DIALOG_DATA, useValue: null },
@@ -27,12 +29,12 @@ describe('Add journal component', () => {
 
     beforeEach(() => {
         calledClose = false;
-        fixture = TestBed.createComponent(AddJournalComponent);
-        addJournalComponent = fixture.componentInstance;
+        fixture = TestBed.createComponent(AddGoalComponent);
+        addGoalComponent = fixture.componentInstance;
     });
 
     it('closes properly', () => {
-        addJournalComponent.onNoClick();
+        addGoalComponent.onNoClick();
         expect(calledClose).toBe(true);
     });
 });

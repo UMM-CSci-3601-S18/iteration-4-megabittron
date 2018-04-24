@@ -63,8 +63,13 @@ export class AppComponent implements OnInit {
         this.http.post(environment.API_URL + "login", {code: code}, httpOptions)
             .subscribe(onSuccess => {
                 console.log("Code sent to server");
-                console.log(onSuccess["$oid"]);
-                localStorage.setItem("userID", onSuccess["$oid"]);
+                console.log(onSuccess["_id"]["$oid"]);
+                console.log(onSuccess["FirstName"]);
+                console.log(onSuccess["LastName"]);
+                localStorage.setItem("userID", onSuccess["_id"]["$oid"]);
+                localStorage.setItem("userFirstName", onSuccess["FirstName"]);
+                localStorage.setItem("userLastName", onSuccess["LastName"]);
+
                 // window.location.reload();
             }, onFail => {
                 console.log("ERROR: Code couldn't be sent to the server");
@@ -89,6 +94,6 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.handleClientLoad();
         gapi.load('client:auth2', this.initClient);
-        this.googleAuth = gapi.auth2.getAuthInstance();
+        //this.googleAuth = gapi.auth2.getAuthInstance();
     }
 }
