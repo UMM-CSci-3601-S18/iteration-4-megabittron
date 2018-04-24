@@ -26,7 +26,8 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     detailedCanvas: any;
     detailedChart: any;
 
-    limitedPast: boolean = true;
+    limitedPastString: string = 'true';
+    limitedPast: boolean = (this.limitedPastString == 'true');
     colorblindMode: boolean = false;
     graphMode = 'bar';
     happyColor: string;

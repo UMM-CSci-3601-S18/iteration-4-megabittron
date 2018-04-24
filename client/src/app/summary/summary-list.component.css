@@ -3,20 +3,24 @@
     text-align: center;
 }
 
+mat-card.filtering.mat-card {
+    text-align: center;
+}
+
 .top {
     padding:0.5%;
     text-align: center;
 }
 
-#filtering{
+.filtering{
     width: 99%;
 }
 
-#graphFilter{
+.graphFilter{
     padding: 1%;
 }
 
-#filterButton{
+.filterButton{
     text-align: center;
     background-color: lightblue;
 }

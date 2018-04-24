@@ -48,19 +48,19 @@
                         [(ngModel)]="startDate"
                         (input)="startDate = $event.target.value"
                         disabled>
-                    <mat-datepicker-toggle id = "startButton" matSuffix [for]="start" enabled></mat-datepicker-toggle>
+                    <mat-datepicker-toggle class= "startButton" matSuffix [for]="start" enabled></mat-datepicker-toggle>
                     <mat-datepicker touchUi="true" #start disabled="false"></mat-datepicker>
                 </mat-form-field> &nbsp;
 
                 <mat-form-field class="end">
                     <input
-                        id = "endDate"
+                        class= "endDate"
                         matInput [matDatepicker]="end"
                         placeholder="Choose an End Date"
                         [(ngModel)]="endDate"
                         (input)="endDate = $event.target.value"
                         disabled>
-                    <mat-datepicker-toggle id = "endButton" matSuffix [for]="end"></mat-datepicker-toggle>
+                    <mat-datepicker-toggle class= "endButton" matSuffix [for]="end"></mat-datepicker-toggle>
                     <mat-datepicker touchUi="true" #end disabled="false"></mat-datepicker>
                 </mat-form-field>
                 <button mat-raised-button class="clearDatesButton" (click)="this.clearDateFilter()">Clear Date Filters</button>
@@ -78,33 +78,36 @@
 
                     <h3 class="your-summaries-title">Your Emotions</h3>
                         <h6 class="your-summaries-title">There are {{totalNumberMoods()}} entries represented</h6>
-                    <canvas class="Chart" height="auto"></canvas>
+                    <canvas id="Chart" height="auto"></canvas>
 
                     <div class="graphFilter">
                             <!--# The Angular feature-->
-                            <label>Show entries across a day or week?</label>
+                            <label>Show entries across a day, week, month, or year?</label>
                             <mat-select name="dropdown" class="labelType"
                                         #input [(ngModel)]="inputType">
-                                <mat-option id ="md-option-12" value="day">Day</mat-option>
-                                <mat-option id ="md-option-13" value="week" selected>Week</mat-option>
-                                <mat-option id ="md-option-14" value="month">Month</mat-option>
-                                <mat-option id ="md-option-15" value="year">Year</mat-option>
+                                <mat-option class="md-option-12" value="day">Day</mat-option>
+                                <mat-option class="md-option-13" value="week" selected>Week</mat-option>
+                                <mat-option class="md-option-14" value="month">Month</mat-option>
+                                <mat-option class="md-option-15" value="year">Year</mat-option>
                             </mat-select>
 
                         |
                         <mat-checkbox class="colorblindBox" [(ngModel)]="colorblindMode">Colorblind Mode</mat-checkbox>
                         <br>
-                        Show entries:
-                        <mat-radio-group [(ngModel)]="limitedPast">
-                        <mat-radio-button class="pastXYes" value=true (click)="this.limitedPast = true ; updateDetailedChart()">only from the past {{inputType}}</mat-radio-button>
+                        Show Entries:
+                        <mat-radio-group [(ngModel)]="limitedPastString">
+                        <mat-radio-button class="pastXYes" value="true" (click)="this.limitedPast = true ; updateDetailedChart()">
+                            Only from the past {{inputType}}</mat-radio-button>
                         |
-                        <mat-radio-button class="pastXNo" value=false (click)="this.limitedPast = false ; updateDetailedChart()">across all time</mat-radio-button>
+                        <mat-radio-button class="pastXNo" value="false" (click)="this.limitedPast = false ; updateDetailedChart()">
+                            Across all time</mat-radio-button>
                         </mat-radio-group>
                         <br>
                         <mat-radio-group [(ngModel)]="graphMode">
-                            <mat-radio-button class="lineradio" value="line" (click)="this.graphMode = 'line' ; updateDetailedChart()">Line Graph</mat-radio-button>
-                            |
+                            Graph Type:
                             <mat-radio-button class="barradio" value="bar" (click)="this.graphMode = 'bar' ; updateDetailedChart()">Stacked Bar Graph</mat-radio-button>
+                            |
+                            <mat-radio-button class="lineradio" value="line" (click)="this.graphMode = 'line' ; updateDetailedChart()">Line Graph</mat-radio-button>
                         </mat-radio-group>
                         <br>
 
