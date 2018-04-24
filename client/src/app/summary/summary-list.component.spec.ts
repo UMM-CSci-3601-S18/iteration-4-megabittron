@@ -223,10 +223,10 @@ import {RouterTestingModule} from "@angular/router/testing";
                 });
             }));
 
-            it('filterDetailedGraph filters correctly for all time', () => {
+            it('filterGraph filters correctly for all time', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(0, 'mad')).toBe(1);
-                expect(summary.filterDetailedGraph(2, 'mad')).toBe(0);
+                expect(summary.filterGraph(0, 'mad')).toBe(1);
+                expect(summary.filterGraph(2, 'mad')).toBe(0);
             });
 
         });
@@ -301,12 +301,12 @@ import {RouterTestingModule} from "@angular/router/testing";
                 });
             }));
 
-            it('filterDetailedGraph filters correctly for inputType = day', () => {
+            it('filterGraph filters correctly for inputType = day', () => {
                 expect(summary.summaries.length).toBe(3);
                 console.log(summary.nowStamp.toString());
                 console.log(summary.nowHour.toString());
-                expect(summary.filterDetailedGraph(15, 'mad')).toBe(1);
-                expect(summary.filterDetailedGraph(2, 'mad')).toBe(0);
+                expect(summary.filterGraph(15, 'mad')).toBe(1);
+                expect(summary.filterGraph(2, 'mad')).toBe(0);
             });
 
             it('modHour works as intended', () => {
@@ -319,10 +319,10 @@ import {RouterTestingModule} from "@angular/router/testing";
                 expect(summary.modHour(30)).toBe(11);
             });
 
-            it('filterDetailedGraph works correctly when using modHour', () => {
+            it('filterGraph works correctly when using modHour', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(summary.modHour(18), 'mad')).toBe(1);
-                expect(summary.filterDetailedGraph(summary.modHour(0), 'mad')).toBe(0);
+                expect(summary.filterGraph(summary.modHour(18), 'mad')).toBe(1);
+                expect(summary.filterGraph(summary.modHour(0), 'mad')).toBe(0);
             });
 
             it('getPastHours works as intended', () => {
@@ -405,10 +405,10 @@ import {RouterTestingModule} from "@angular/router/testing";
                 });
             }));
 
-            it('filterDetailedGraph filters correctly for inputType = week', () => {
+            it('filterGraph filters correctly for inputType = week', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(4, 'sad')).toBe(1);
-                expect(summary.filterDetailedGraph(2, 'sad')).toBe(0);
+                expect(summary.filterGraph(4, 'sad')).toBe(1);
+                expect(summary.filterGraph(2, 'sad')).toBe(0);
             });
 
             it('modDay works as intended', () => {
@@ -419,10 +419,10 @@ import {RouterTestingModule} from "@angular/router/testing";
                 expect(summary.modDay(5)).toBe(5);
             });
 
-            it('filterDetailedGraph works correctly when using modDay', () => {
+            it('filterGraph works correctly when using modDay', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(summary.modDay(10), 'sad')).toBe(1);
-                expect(summary.filterDetailedGraph(summary.modDay(0), 'sad')).toBe(0);
+                expect(summary.filterGraph(summary.modDay(10), 'sad')).toBe(1);
+                expect(summary.filterGraph(summary.modDay(0), 'sad')).toBe(0);
             });
 
             it('getPastDays works as intended', () => {
@@ -508,10 +508,10 @@ import {RouterTestingModule} from "@angular/router/testing";
                 });
             }));
 
-            it('filterDetailedGraph filters correctly for inputType = month', () => {
+            it('filterGraph filters correctly for inputType = month', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(5, 'sad')).toBe(1);
-                expect(summary.filterDetailedGraph(2, 'sad')).toBe(0);
+                expect(summary.filterGraph(5, 'sad')).toBe(1);
+                expect(summary.filterGraph(2, 'sad')).toBe(0);
             });
 
             it('modDate works as intended', () => {
@@ -522,10 +522,10 @@ import {RouterTestingModule} from "@angular/router/testing";
                 expect(summary.modDate(5)).toBe(5);
             });
 
-            it('filterDetailedGraph works correctly when using modDate', () => {
+            it('filterGraph works correctly when using modDate', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(summary.modDate(28), 'sad')).toBe(1);
-                expect(summary.filterDetailedGraph(summary.modDate(1), 'sad')).toBe(0);
+                expect(summary.filterGraph(summary.modDate(28), 'sad')).toBe(1);
+                expect(summary.filterGraph(summary.modDate(1), 'sad')).toBe(0);
             });
 
             it('getPastDates works as intended', () => {
@@ -635,10 +635,10 @@ import {RouterTestingModule} from "@angular/router/testing";
                 });
             }));
 
-            it('filterDetailedGraph filters correctly for inputType = year', () => {
+            it('filterGraph filters correctly for inputType = year', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(3, 'sad')).toBe(1);
-                expect(summary.filterDetailedGraph(0, 'sad')).toBe(0);
+                expect(summary.filterGraph(3, 'sad')).toBe(1);
+                expect(summary.filterGraph(0, 'sad')).toBe(0);
             });
 
             it('modMonth works as intended', () => {
@@ -649,10 +649,10 @@ import {RouterTestingModule} from "@angular/router/testing";
                 expect(summary.modMonth(5)).toBe(5);
             });
 
-            it('filterDetailedGraph works correctly when using modMonth', () => {
+            it('filterGraph works correctly when using modMonth', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(summary.modMonth(11), 'sad')).toBe(1);
-                expect(summary.filterDetailedGraph(summary.modMonth(0), 'sad')).toBe(0);
+                expect(summary.filterGraph(summary.modMonth(11), 'sad')).toBe(1);
+                expect(summary.filterGraph(summary.modMonth(0), 'sad')).toBe(0);
             });
 
             it('getPastMonths works as intended', () => {

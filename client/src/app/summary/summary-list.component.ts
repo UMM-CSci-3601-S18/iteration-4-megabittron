@@ -173,18 +173,17 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     //
     // xValue can represent hour or weekday
-
-    filterDetailedGraph(xValue, Searchmood): number {
+    filterGraph(xValue, Searchmood): number {
         Searchmood = Searchmood.toLocaleLowerCase();
-        let filterDetailedData = this.filteredSummaries.filter(summary => {
+        let filterData = this.filteredSummaries.filter(summary => {
             return !Searchmood || summary.mood.toLowerCase().indexOf(Searchmood) !== -1;
         });
 
         if(this.inputType == "week") {
             if(this.limitedPast) {
-                filterDetailedData = this.pastWeekEmotions(filterDetailedData);
+                filterData = this.pastWeekEmotions(filterData);
             }
-            filterDetailedData = filterDetailedData.filter(summary => {
+            filterData = filterData.filter(summary => {
                 this.getDate = new Date(summary.date);
                 return this.getDate.getDay() == xValue;
             });
@@ -192,9 +191,9 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         else {
             if (this.inputType == "day") {
                 if(this.limitedPast) {
-                    filterDetailedData = this.pastDayEmotions(filterDetailedData);
+                    filterData = this.pastDayEmotions(filterData);
                 }
-                filterDetailedData = filterDetailedData.filter(summary => {
+                filterData = filterData.filter(summary => {
                     this.getDate = new Date(summary.date);
                     return this.getDate.getUTCHours() == xValue;
                 });
@@ -202,9 +201,9 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             else {
                 if(this.inputType == "year"){
                     if(this.limitedPast) {
-                        filterDetailedData = this.pastYearEmotions(filterDetailedData);
+                        filterData = this.pastYearEmotions(filterData);
                     }
-                    filterDetailedData = filterDetailedData.filter(summary => {
+                    filterData = filterData.filter(summary => {
                         this.getDate = new Date(summary.date);
                         return this.getDate.getMonth() == xValue;
                     });
@@ -212,9 +211,9 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                 else {
                     if(this.inputType == "month"){
                         if(this.limitedPast) {
-                            filterDetailedData = this.pastMonthEmotions(filterDetailedData);
+                            filterData = this.pastMonthEmotions(filterData);
                         }
-                        filterDetailedData = filterDetailedData.filter(summary => {
+                        filterData = filterData.filter(summary => {
                             this.getDate = new Date(summary.date);
                             return this.getDate.getDate() == xValue;
                         });
@@ -223,7 +222,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             }
         }
 
-        return filterDetailedData.length;
+        return filterData.length;
     }
 
 
@@ -410,96 +409,96 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     public getDailyData(emotion){
                 return [
-                    this.filterDetailedGraph(this.modDay(0), emotion),
-                    this.filterDetailedGraph(this.modDay(1), emotion),
-                    this.filterDetailedGraph(this.modDay(2), emotion),
-                    this.filterDetailedGraph(this.modDay(3), emotion),
-                    this.filterDetailedGraph(this.modDay(4), emotion),
-                    this.filterDetailedGraph(this.modDay(5), emotion),
-                    this.filterDetailedGraph(this.modDay(6), emotion)
+                    this.filterGraph(this.modDay(0), emotion),
+                    this.filterGraph(this.modDay(1), emotion),
+                    this.filterGraph(this.modDay(2), emotion),
+                    this.filterGraph(this.modDay(3), emotion),
+                    this.filterGraph(this.modDay(4), emotion),
+                    this.filterGraph(this.modDay(5), emotion),
+                    this.filterGraph(this.modDay(6), emotion)
                 ]
     }
 
     public getHourlyData(emotion){
                 return [
-                    this.filterDetailedGraph(this.modHour(0), emotion),
-                    this.filterDetailedGraph(this.modHour(1), emotion),
-                    this.filterDetailedGraph(this.modHour(2), emotion),
-                    this.filterDetailedGraph(this.modHour(3), emotion),
-                    this.filterDetailedGraph(this.modHour(4), emotion),
-                    this.filterDetailedGraph(this.modHour(5), emotion),
-                    this.filterDetailedGraph(this.modHour(6), emotion),
-                    this.filterDetailedGraph(this.modHour(7), emotion),
-                    this.filterDetailedGraph(this.modHour(8), emotion),
-                    this.filterDetailedGraph(this.modHour(9), emotion),
-                    this.filterDetailedGraph(this.modHour(10), emotion),
-                    this.filterDetailedGraph(this.modHour(11), emotion),
-                    this.filterDetailedGraph(this.modHour(12), emotion),
-                    this.filterDetailedGraph(this.modHour(13), emotion),
-                    this.filterDetailedGraph(this.modHour(14), emotion),
-                    this.filterDetailedGraph(this.modHour(15), emotion),
-                    this.filterDetailedGraph(this.modHour(16), emotion),
-                    this.filterDetailedGraph(this.modHour(17), emotion),
-                    this.filterDetailedGraph(this.modHour(18), emotion),
-                    this.filterDetailedGraph(this.modHour(19), emotion),
-                    this.filterDetailedGraph(this.modHour(20), emotion),
-                    this.filterDetailedGraph(this.modHour(21), emotion),
-                    this.filterDetailedGraph(this.modHour(22), emotion),
-                    this.filterDetailedGraph(this.modHour(23), emotion)
+                    this.filterGraph(this.modHour(0), emotion),
+                    this.filterGraph(this.modHour(1), emotion),
+                    this.filterGraph(this.modHour(2), emotion),
+                    this.filterGraph(this.modHour(3), emotion),
+                    this.filterGraph(this.modHour(4), emotion),
+                    this.filterGraph(this.modHour(5), emotion),
+                    this.filterGraph(this.modHour(6), emotion),
+                    this.filterGraph(this.modHour(7), emotion),
+                    this.filterGraph(this.modHour(8), emotion),
+                    this.filterGraph(this.modHour(9), emotion),
+                    this.filterGraph(this.modHour(10), emotion),
+                    this.filterGraph(this.modHour(11), emotion),
+                    this.filterGraph(this.modHour(12), emotion),
+                    this.filterGraph(this.modHour(13), emotion),
+                    this.filterGraph(this.modHour(14), emotion),
+                    this.filterGraph(this.modHour(15), emotion),
+                    this.filterGraph(this.modHour(16), emotion),
+                    this.filterGraph(this.modHour(17), emotion),
+                    this.filterGraph(this.modHour(18), emotion),
+                    this.filterGraph(this.modHour(19), emotion),
+                    this.filterGraph(this.modHour(20), emotion),
+                    this.filterGraph(this.modHour(21), emotion),
+                    this.filterGraph(this.modHour(22), emotion),
+                    this.filterGraph(this.modHour(23), emotion)
                 ]
     }
 
     public getMonthlyData(emotion){
                 return [
-                    this.filterDetailedGraph(this.modMonth(0), emotion),
-                    this.filterDetailedGraph(this.modMonth(1), emotion),
-                    this.filterDetailedGraph(this.modMonth(2), emotion),
-                    this.filterDetailedGraph(this.modMonth(3), emotion),
-                    this.filterDetailedGraph(this.modMonth(4), emotion),
-                    this.filterDetailedGraph(this.modMonth(5), emotion),
-                    this.filterDetailedGraph(this.modMonth(6), emotion),
-                    this.filterDetailedGraph(this.modMonth(7), emotion),
-                    this.filterDetailedGraph(this.modMonth(8), emotion),
-                    this.filterDetailedGraph(this.modMonth(9), emotion),
-                    this.filterDetailedGraph(this.modMonth(10), emotion),
-                    this.filterDetailedGraph(this.modMonth(11), emotion),
+                    this.filterGraph(this.modMonth(0), emotion),
+                    this.filterGraph(this.modMonth(1), emotion),
+                    this.filterGraph(this.modMonth(2), emotion),
+                    this.filterGraph(this.modMonth(3), emotion),
+                    this.filterGraph(this.modMonth(4), emotion),
+                    this.filterGraph(this.modMonth(5), emotion),
+                    this.filterGraph(this.modMonth(6), emotion),
+                    this.filterGraph(this.modMonth(7), emotion),
+                    this.filterGraph(this.modMonth(8), emotion),
+                    this.filterGraph(this.modMonth(9), emotion),
+                    this.filterGraph(this.modMonth(10), emotion),
+                    this.filterGraph(this.modMonth(11), emotion),
                 ]
     }
 
     public getDatelyData(emotion){
 
                 return [
-                    this.filterDetailedGraph(this.modDate(1), emotion),
-                    this.filterDetailedGraph(this.modDate(2), emotion),
-                    this.filterDetailedGraph(this.modDate(3), emotion),
-                    this.filterDetailedGraph(this.modDate(4), emotion),
-                    this.filterDetailedGraph(this.modDate(5), emotion),
-                    this.filterDetailedGraph(this.modDate(6), emotion),
-                    this.filterDetailedGraph(this.modDate(7), emotion),
-                    this.filterDetailedGraph(this.modDate(8), emotion),
-                    this.filterDetailedGraph(this.modDate(9), emotion),
-                    this.filterDetailedGraph(this.modDate(10), emotion),
-                    this.filterDetailedGraph(this.modDate(11), emotion),
-                    this.filterDetailedGraph(this.modDate(12), emotion),
-                    this.filterDetailedGraph(this.modDate(13), emotion),
-                    this.filterDetailedGraph(this.modDate(14), emotion),
-                    this.filterDetailedGraph(this.modDate(15), emotion),
-                    this.filterDetailedGraph(this.modDate(16), emotion),
-                    this.filterDetailedGraph(this.modDate(17), emotion),
-                    this.filterDetailedGraph(this.modDate(18), emotion),
-                    this.filterDetailedGraph(this.modDate(19), emotion),
-                    this.filterDetailedGraph(this.modDate(20), emotion),
-                    this.filterDetailedGraph(this.modDate(21), emotion),
-                    this.filterDetailedGraph(this.modDate(22), emotion),
-                    this.filterDetailedGraph(this.modDate(23), emotion),
-                    this.filterDetailedGraph(this.modDate(24), emotion),
-                    this.filterDetailedGraph(this.modDate(25), emotion),
-                    this.filterDetailedGraph(this.modDate(26), emotion),
-                    this.filterDetailedGraph(this.modDate(27), emotion),
-                    this.filterDetailedGraph(this.modDate(28), emotion),
-                    this.filterDetailedGraph(this.modDate(29), emotion),
-                    this.filterDetailedGraph(this.modDate(30), emotion),
-                    this.filterDetailedGraph(this.modDate(31), emotion)
+                    this.filterGraph(this.modDate(1), emotion),
+                    this.filterGraph(this.modDate(2), emotion),
+                    this.filterGraph(this.modDate(3), emotion),
+                    this.filterGraph(this.modDate(4), emotion),
+                    this.filterGraph(this.modDate(5), emotion),
+                    this.filterGraph(this.modDate(6), emotion),
+                    this.filterGraph(this.modDate(7), emotion),
+                    this.filterGraph(this.modDate(8), emotion),
+                    this.filterGraph(this.modDate(9), emotion),
+                    this.filterGraph(this.modDate(10), emotion),
+                    this.filterGraph(this.modDate(11), emotion),
+                    this.filterGraph(this.modDate(12), emotion),
+                    this.filterGraph(this.modDate(13), emotion),
+                    this.filterGraph(this.modDate(14), emotion),
+                    this.filterGraph(this.modDate(15), emotion),
+                    this.filterGraph(this.modDate(16), emotion),
+                    this.filterGraph(this.modDate(17), emotion),
+                    this.filterGraph(this.modDate(18), emotion),
+                    this.filterGraph(this.modDate(19), emotion),
+                    this.filterGraph(this.modDate(20), emotion),
+                    this.filterGraph(this.modDate(21), emotion),
+                    this.filterGraph(this.modDate(22), emotion),
+                    this.filterGraph(this.modDate(23), emotion),
+                    this.filterGraph(this.modDate(24), emotion),
+                    this.filterGraph(this.modDate(25), emotion),
+                    this.filterGraph(this.modDate(26), emotion),
+                    this.filterGraph(this.modDate(27), emotion),
+                    this.filterGraph(this.modDate(28), emotion),
+                    this.filterGraph(this.modDate(29), emotion),
+                    this.filterGraph(this.modDate(30), emotion),
+                    this.filterGraph(this.modDate(31), emotion)
 
                 ]
     }
@@ -609,7 +608,7 @@ public pastDates = [
     this.getPastDates(30)
 ];
 
-    updateDetailedChart(): void{
+    updateChart(): void{
 
         if(this.detailedChart != null){
             this.detailedChart.destroy();
@@ -754,7 +753,7 @@ public pastDates = [
     }
 
     ngAfterViewInit(): void {
-        this.updateDetailedChart();
+        this.updateChart();
     }
 
     /*
