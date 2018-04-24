@@ -298,7 +298,7 @@ For instance,
 
 Journaling Collection:
 
-$oid(for that specific journal), subject, body, date and userID(from user collection)
+$oid(for that specific journal), title, body, date and userID(from user collection)
 
 Goals Collection:
 

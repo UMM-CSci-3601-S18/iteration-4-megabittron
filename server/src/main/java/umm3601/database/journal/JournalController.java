@@ -64,19 +64,19 @@ public class JournalController {
             return JSON.serialize("[ ]");
         }
 
-        if (queryParams.containsKey("subject")) {
-            String targetContent = (queryParams.get("subject")[0]);
+        if (queryParams.containsKey("title")) {
+            String targetContent = (queryParams.get("title")[0]);
             Document contentRegQuery = new Document();
             contentRegQuery.append("$regex", targetContent);
             contentRegQuery.append("$options", "i");
-            filterDoc = filterDoc.append("subject", contentRegQuery);        }
+            filterDoc = filterDoc.append("title", contentRegQuery);        }
 
-        if (queryParams.containsKey("body")) {
-            String targetContent = (queryParams.get("body")[0]);
+        if (queryParams.containsKey("content")) {
+            String targetContent = (queryParams.get("content")[0]);
             Document contentRegQuery = new Document();
             contentRegQuery.append("$regex", targetContent);
             contentRegQuery.append("$options", "i");
-            filterDoc = filterDoc.append("body", contentRegQuery);
+            filterDoc = filterDoc.append("content", contentRegQuery);
         }
 
         //FindIterable comes from mongo, Document comes from Gson
@@ -85,11 +85,11 @@ public class JournalController {
         return JSON.serialize(matchingJournals);
     }
 
-    public String addNewJournal(String userID, String subject, String body) {
+    public String addNewJournal(String userID, String title, String content) {
         Document newJournal = new Document();
         newJournal.append("userID", userID);
-        newJournal.append("subject",subject);
-        newJournal.append("body",body);
+        newJournal.append("title",title);
+        newJournal.append("content",content);
 
         Date now = new Date();
         newJournal.append("date", now.toString());
@@ -97,7 +97,7 @@ public class JournalController {
         try {
             journalCollection.insertOne(newJournal);
             ObjectId id = newJournal.getObjectId("_id");
-            System.err.println("Successfully added new journal [_id=" + id + ", subject=" + subject + ", body=" + body + ", date=" + now + ']');
+            System.err.println("Successfully added new journal [_id=" + id + ", title=" + title + ", content=" + content + ", date=" + now + ']');
             return JSON.serialize(id);
         } catch(MongoException me) {
             me.printStackTrace();
@@ -105,11 +105,11 @@ public class JournalController {
         }
     }
 
-    public String editJournal(String id, String subject, String body){
+    public String editJournal(String id, String title, String content){
 
         Document newJournal = new Document();
-        newJournal.append("subject", subject);
-        newJournal.append("body", body);
+        newJournal.append("title", title);
+        newJournal.append("content", content);
         Document setQuery = new Document();
         setQuery.append("$set", newJournal);
         Document searchQuery = new Document().append("_id", new ObjectId(id));
@@ -121,7 +121,7 @@ public class JournalController {
             journalCollection.updateOne(searchQuery, setQuery);
             System.out.println(journalCollection.find());
             ObjectId id1 = searchQuery.getObjectId("_id");
-            System.err.println("Successfully updated journal [_id=" + id1 + ", subject=" + subject + ", body=" + body + ']');
+            System.err.println("Successfully updated journal [_id=" + id1 + ", title=" + title + ", content=" + content + ']');
             return JSON.serialize(id1);
         } catch(MongoException me) {
             me.printStackTrace();
