@@ -20,9 +20,9 @@ public class ContactsController {
     private final MongoCollection<Document> contactsCollection;
 
     /**
-     * Construct a controller for resources.
+     * Construct a controller for contacts.
      *
-     * @param database the database containing resources data
+     * @param database the database containing contacts data
      */
     public ContactsController(MongoDatabase database) {
         gson = new Gson();

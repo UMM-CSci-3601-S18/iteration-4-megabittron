@@ -26,6 +26,8 @@ import umm3601.database.emotion.EmotionController;
 import umm3601.database.emotion.EmotionRequestHandler;
 import umm3601.database.summary.SummaryController;
 import umm3601.database.summary.SummaryRequestHandler;
+import umm3601.database.resource.ContactsController;
+import umm3601.database.resource.ContactsRequestHandler;
 import umm3601.database.user.UserController;
 import umm3601.database.user.UserRequestHandler;
 
@@ -60,6 +62,9 @@ public class Server {
 
         UserController userController = new UserController(database);
         UserRequestHandler userRequestHandler = new UserRequestHandler(userController);
+
+        ContactsController contactsController = new ContactsController(database);
+        ContactsRequestHandler contactsRequestHandler = new ContactsRequestHandler(contactsController);
 
 
         //Configure Spark
@@ -123,6 +128,12 @@ public class Server {
 
         //List summary page
         get("api/summaries", summaryRequestHandler::getSummaries);
+
+        //List Resources page
+        get("api/contacts/:id", contactsRequestHandler::getContactsJSON);
+        get("api/contacts", contactsRequestHandler::getContacts);
+        post("api/contacts/new", contactsRequestHandler::addNewContacts);
+
 
 
 
