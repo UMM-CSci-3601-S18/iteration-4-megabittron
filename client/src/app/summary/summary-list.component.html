@@ -74,7 +74,8 @@
             <div class="tabs">
             <mat-tab-group #myTabGroup>
 
-                <mat-tab class="md-tab-label-0-0" label="Graphs">
+                <!-- class for mat-tab is overwritten on build -->
+                <mat-tab label="Graphs">
 
                     <h3 class="your-summaries-title">Your Emotions</h3>
                         <h6 class="your-summaries-title">There are {{totalNumberMoods()}} entries represented</h6>
@@ -115,7 +116,7 @@
 
                 </mat-tab>
 
-                <mat-tab class="md-tab-label-0-1" label="List View">
+                <mat-tab label="List View">
 
                     <mat-card> <mat-card-title class="your-summaries-title">Your Emotions</mat-card-title>
 
