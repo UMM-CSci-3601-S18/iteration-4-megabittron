@@ -24,16 +24,16 @@ export class JournalPage {
         return element.all(by.className('journals-card')).count();
     }
 
-    typeASubject(subject: string) {
+    typeATitle(title: string) {
         const input = element(by.id('journalTitle'));
         input.click();
-        input.sendKeys(subject);
+        input.sendKeys(title);
     }
 
-    typeABody(body: string) {
+    typeAContent(content: string) {
         const input = element(by.id('journalContent'));
         input.click();
-        input.sendKeys(body);
+        input.sendKeys(content);
     }
 
     getJournalManageTitle() {

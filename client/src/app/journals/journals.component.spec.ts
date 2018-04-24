@@ -29,21 +29,21 @@ describe( 'Journals', () => {
                     _id: 'buying_id',
                     userID: 'userID1',
                     title: 'Buying food',
-                    body: 'I went to the ice cream store today for a sundae.',
+                    content: 'I went to the ice cream store today for a sundae.',
                     date: "Sat Jan 27 13:36:47 CST 2018"
                 },
                 {
                     _id: 'visit_id',
                     userID: 'userID2',
                     title: 'Visit mom',
-                    body: 'I went to my Mom\'s house to talk to her.',
+                    content: 'I went to my Mom\'s house to talk to her.',
                     date: "Sun Feb 12 16:32:41 CST 2018"
                 },
                 {
                     _id: 'running_id',
                     userID: 'userID3',
                     title: 'Go on run',
-                    body: 'I went on a 25 mile run today!',
+                    content: 'I went on a 25 mile run today!',
                     date: "Mon Mar 11 19:26:37 CST 2018"
                 }
             ])
@@ -77,8 +77,8 @@ describe( 'Journals', () => {
         expect(journalList.journals.some((journal: Journal) => journal.title === 'Visit mom')).toBe(true);
     });
 
-    it('contains a body called \'I went on a 25 mile run today!\'', () => {
-        expect(journalList.journals.some((journal: Journal) => journal.body === 'I went on a 25 mile run today!')).toBe(true);
+    it('contains a content called \'I went on a 25 mile run today!\'', () => {
+        expect(journalList.journals.some((journal: Journal) => journal.content === 'I went on a 25 mile run today!')).toBe(true);
     });
 
     it('doesn\'t contain a title called \'Meet with Santa\'', () => {
@@ -97,7 +97,7 @@ describe( 'Journals', () => {
         });
     });
 
-    it('journal list filters by body', () => {
+    it('journal list filters by content', () => {
         expect(journalList.filteredJournals.length).toBe(3);
         journalList.journalContent = 'h';
         journalList.refreshJournals().subscribe(() => {
@@ -152,7 +152,7 @@ describe('Adding a journal', () => {
     const newJournal: Journal =   {
         _id: '',
         userID: 'userID4',
-        body: 'To stay awake writing tests',
+        content: 'To stay awake writing tests',
         title: 'Drink coffee',
         date: "Sun Feb 16 17:12:43 CST 2018"
     };
@@ -224,7 +224,7 @@ describe('Editing a journal', () => {
     const editJournal: Journal =   {
         _id: '',
         userID: 'userID5',
-        body: 'I fell asleep in class today',
+        content: 'I fell asleep in class today',
         title: 'Classes',
         date: "Sun Feb 16 17:12:43 CST 2018"
     };
@@ -284,7 +284,7 @@ describe('Editing a journal', () => {
 
     it('calls JournalsService.editJournal', () => {
         expect(calledJournal).toBeNull();
-        journalList.openEditJournalDialog(this._id, this.title, this.body, this.date);
+        journalList.openEditJournalDialog(this._id, this.title, this.content, this.date);
         expect(calledJournal).toEqual(editJournal);
     });
 });

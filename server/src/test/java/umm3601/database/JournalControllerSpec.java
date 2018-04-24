@@ -39,28 +39,28 @@ public class JournalControllerSpec {
             "                    _id: \"5ab88ab16148ec7b0f6b6fa4\",\n" +
             "                    userID: \"4cb56a89541a2d783595012c\",\n " +
             "                    title: \"Tuesday\",\n" +
-            "                    body: \"Tuesday it rain a lot\",\n" +
+            "                    content: \"Tuesday it rain a lot\",\n" +
             "                    date: \"Sat Aug 21 1976 06:05:06 GMT-0500 (CDT)\",\n" +
             "                }"));
         testJournals.add(Document.parse("{\n" +
             "                    _id: \"5ab88ab17205545c679992e4\",\n" +
             "                    userID: \"4cb56a89541a2d783595012c\",\n " +
             "                    title: \"Bad day\",\n" +
-            "                    body: \"My dog died\",\n" +
+            "                    content: \"My dog died\",\n" +
             "                    date: \"Tues Aug 17 1980 06:05:06 GMT-0500 (CDT)\",\n" +
             "                }"));
         testJournals.add(Document.parse("{\n" +
             "                    _id: \"5ab88ab1543afe51da42359e\",\n" +
             "                    userID: \"4cb56a89541a2d783595012c\",\n " +
             "                    title: \"Fun Day\",\n" +
-            "                    body: \"I went to the park\",\n" +
+            "                    content: \"I went to the park\",\n" +
             "                    date: \"Wed Aug 27 1976 06:05:06 GMT-0600 (CDT)\",\n" +
             "                }"));
         testJournals.add(Document.parse("{\n" +
             "                    _id: \"5ab88ab1a5b4ebf66df44c40\",\n" +
             "                    userID: \"4cb56a89541a2d783595012c\",\n " +
             "                    title: \"Birthday\",\n" +
-            "                    body: \"I spent the day alone\",\n" +
+            "                    content: \"I spent the day alone\",\n" +
             "                    date: \"Sat Aug 14 1976 06:05:06 GMT-0900 (CDT)\",\n" +
             "                }"));
 
@@ -68,7 +68,7 @@ public class JournalControllerSpec {
         BasicDBObject sam = new BasicDBObject("_id", anID);
         sam = sam.append("title", "Food")
             .append("userID", "2cb45a89541a2d783595012b")
-            .append("body", "I went taco johns")
+            .append("content", "I went taco johns")
             .append("date", "Tue Jan 14 2014 18:35:56 GMT-0600");
 
 
@@ -95,14 +95,14 @@ public class JournalControllerSpec {
         return arrayReader.decode(reader, DecoderContext.builder().build());
     }
 
-    private static String getSubject(BsonValue val) {
+    private static String getTitle(BsonValue val) {
         BsonDocument doc = val.asDocument();
         return ((BsonString) doc.get("title")).getValue();
     }
 
-    private static String getBody(BsonValue val) {
+    private static String getContent(BsonValue val) {
         BsonDocument doc = val.asDocument();
-        return ((BsonString) doc.get("body")).getValue();
+        return ((BsonString) doc.get("content")).getValue();
     }
 
     @Test
@@ -123,7 +123,7 @@ public class JournalControllerSpec {
         assertEquals("Should be 4 journals", 4, docs.size());
         List<String> titles = docs
             .stream()
-            .map(JournalControllerSpec::getSubject)
+            .map(JournalControllerSpec::getTitle)
             .sorted()
             .collect(Collectors.toList());
         List<String> expectedTitles = Arrays.asList("Bad day", "Birthday", "Fun Day", "Tuesday");
@@ -141,7 +141,7 @@ public class JournalControllerSpec {
         assertEquals("Should be 1 journal", 1, docs.size());
         List<String> titles = docs
             .stream()
-            .map(JournalControllerSpec::getSubject)
+            .map(JournalControllerSpec::getTitle)
             .sorted()
             .collect(Collectors.toList());
         List<String> expectedTitles = Arrays.asList("Tuesday");
@@ -149,17 +149,17 @@ public class JournalControllerSpec {
     }
 
     @Test
-    public void getJournalByBody() {
+    public void getJournalByContent() {
         Map<String, String[]> argMap = new HashMap<>();
         argMap.put("userID", new String[]{"4cb56a89541a2d783595012c"});
-        argMap.put("body", new String[]{"I went to the park"});
+        argMap.put("content", new String[]{"I went to the park"});
         String jsonResult = journalController.getJournals(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
         assertEquals("Should be 1 journal", 1, docs.size());
         List<String> titles = docs
             .stream()
-            .map(JournalControllerSpec::getBody)
+            .map(JournalControllerSpec::getContent)
             .sorted()
             .collect(Collectors.toList());
         List<String> expectedTitles = Arrays.asList("I went to the park");
@@ -188,7 +188,7 @@ public class JournalControllerSpec {
 
         List<String> journals = docs
             .stream()
-            .map(JournalControllerSpec::getBody)
+            .map(JournalControllerSpec::getContent)
             .sorted()
             .collect(Collectors.toList());
         System.out.println(journals);
@@ -200,12 +200,12 @@ public class JournalControllerSpec {
         journalController.editJournal(anID.toHexString(), "Friday", "It's Friday");
         Map<String, String[]> argMap = new HashMap<>();
         argMap.put("userID", new String[]{"2cb45a89541a2d783595012b"});
-        argMap.put("body", new String[]{"It's Friday"});
+        argMap.put("content", new String[]{"It's Friday"});
         String jsonResult = journalController.getJournals(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
         List<String> titles = docs
             .stream()
-            .map(JournalControllerSpec::getBody)
+            .map(JournalControllerSpec::getContent)
             .sorted()
             .collect(Collectors.toList());
         List<String> expectedTitles = Arrays.asList("It's Friday");

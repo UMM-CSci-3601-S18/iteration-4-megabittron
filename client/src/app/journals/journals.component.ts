@@ -44,7 +44,7 @@ export class JournalsComponent implements OnInit {
 
     openAddJournalDialog(): void {
         console.log("Add journal button clicked.");
-        const newJournal: Journal = {_id: '', userID: localStorage.getItem('userID'), title: '', body: '', date: ''};
+        const newJournal: Journal = {_id: '', userID: localStorage.getItem('userID'), title: '', content: '', date: ''};
         const dialogRef = this.dialog.open(AddJournalComponent, {
             width: '300px',
             data: { journal: newJournal }
@@ -82,10 +82,10 @@ export class JournalsComponent implements OnInit {
         });
     }
 
-    openEditJournalDialog(_id: string, subject: string, body: string, date: string): void {
+    openEditJournalDialog(_id: string, title: string, content: string, date: string): void {
         console.log("Edit journal button clicked.");
-        console.log(_id + ' ' + subject + body + date);
-        const newJournal: Journal = {_id: _id, userID: localStorage.getItem('userID'), title: subject, body: body, date: date};
+        console.log(_id + ' ' + title + content + date);
+        const newJournal: Journal = {_id: _id, userID: localStorage.getItem('userID'), title: title, content: content, date: date};
         const dialogRef = this.dialog.open(EditJournalComponent, {
             width: '300px',
             data: { journal: newJournal }
@@ -113,8 +113,8 @@ export class JournalsComponent implements OnInit {
         });
     }
 
-    showMoreInfo(body: string): void {
-        const showJournal: Journal = {_id: null, userID: null, title: null, body: body, date: null};
+    showMoreInfo(content: string): void {
+        const showJournal: Journal = {_id: null, userID: null, title: null, content: content, date: null};
         const dialogRef = this.dialog.open(ShowJournalComponent, {
             width: '500px',
             data: { journal: showJournal }
@@ -122,25 +122,25 @@ export class JournalsComponent implements OnInit {
         console.log("Showing more journal info.");
     }
 
-    public filterJournals(searchSubject: string, searchBody: string, searchDate: string): Journal[] {
+    public filterJournals(searchTitle: string, searchContent: string, searchDate: string): Journal[] {
 
         this.filteredJournals = this.journals;
 
         // Filter by title
-        if (searchSubject != null) {
-            searchSubject = searchSubject.toLocaleLowerCase();
+        if (searchTitle != null) {
+            searchTitle = searchTitle.toLocaleLowerCase();
 
             this.filteredJournals = this.filteredJournals.filter(journal => {
-                return !searchSubject || journal.title.toLowerCase().indexOf(searchSubject) !== -1;
+                return !searchTitle || journal.title.toLowerCase().indexOf(searchTitle) !== -1;
             });
         }
 
-        // Filter by body
-        if (searchBody != null) {
-            searchBody = searchBody.toLocaleLowerCase();
+        // Filter by content
+        if (searchContent != null) {
+            searchContent = searchContent.toLocaleLowerCase();
 
             this.filteredJournals = this.filteredJournals.filter(journal => {
-                return !searchBody || journal.body.toLowerCase().indexOf(searchBody) !== -1;
+                return !searchContent || journal.content.toLowerCase().indexOf(searchContent) !== -1;
             });
         }
 

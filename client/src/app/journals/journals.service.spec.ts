@@ -11,21 +11,21 @@ describe('Journal list service: ', () => {
             _id: 'buying_id',
             userID: 'weare1',
             title: 'Buying food',
-            body: 'I went to the ice cream store today for a sundae.',
+            content: 'I went to the ice cream store today for a sundae.',
             date: "Sat Jan 27 13:36:47 CST 2018"
         },
         {
             _id: 'visit_id',
             userID: 'usermcuserface',
             title: 'Visit mom',
-            body: 'I went to my Mom\'s house to talk to her.',
+            content: 'I went to my Mom\'s house to talk to her.',
             date: "Sun Feb 12 16:32:41 CST 2018"
         },
         {
             _id: 'running_id',
             userID: 'theguyoverthere',
             title: 'Go on amazing run',
-            body: 'I went on a 25 mile run today!',
+            content: 'I went on a 25 mile run today!',
             date: "Mon Mar 11 19:26:37 CST 2018"
         }
     ];
@@ -65,7 +65,7 @@ describe('Journal list service: ', () => {
                 _id: 'buying_id',
                 userID: 'weare1',
                 title: 'Buying food',
-                body: 'I went to the ice cream store today for a sundae.',
+                content: 'I went to the ice cream store today for a sundae.',
                 date: "Sat Jan 27 13:36:47 CST 2018"
             }
         ];
@@ -95,24 +95,24 @@ describe('Journal list service: ', () => {
     });
 
 
-    it('filterBySubject(journalTitle) deals appropriately with a URL that already had a title', () => {
+    it('filterByTitle(journalTitle) deals appropriately with a URL that already had a title', () => {
         currentlyImpossibleToGenerateSearchJournalUrl = journalListService.baseUrl + '?title=f&something=k&';
         journalListService['journalUrl'] = currentlyImpossibleToGenerateSearchJournalUrl;
-        journalListService.filterBySubject('m');
+        journalListService.filterByTitle('m');
         expect(journalListService['journalUrl']).toEqual(journalListService.baseUrl + '?something=k&title=m&');
     });
 
-    it('filterBySubject(journalTitle) deals appropriately with a URL that already had some filtering, but no title', () => {
+    it('filterByTitle(journalTitle) deals appropriately with a URL that already had some filtering, but no title', () => {
         currentlyImpossibleToGenerateSearchJournalUrl = journalListService.baseUrl + '?something=k&';
         journalListService['journalUrl'] = currentlyImpossibleToGenerateSearchJournalUrl;
-        journalListService.filterBySubject('m');
+        journalListService.filterByTitle('m');
         expect(journalListService['journalUrl']).toEqual(journalListService.baseUrl + '?something=k&title=m&');
     });
 
-    it('filterBySubject(journalTitle) deals appropriately with a URL has the keyword title, but nothing after the =', () => {
+    it('filterByTitle(journalTitle) deals appropriately with a URL has the keyword title, but nothing after the =', () => {
         currentlyImpossibleToGenerateSearchJournalUrl = journalListService.baseUrl + '?title=&';
         journalListService['journalUrl'] = currentlyImpossibleToGenerateSearchJournalUrl;
-        journalListService.filterBySubject('');
+        journalListService.filterByTitle('');
         expect(journalListService['journalUrl']).toEqual(journalListService.baseUrl + '');
     });
     */
@@ -136,7 +136,7 @@ describe('Journal list service: ', () => {
             _id: 'plunging_id',
             userID: 'userID99',
             title: 'Bathroom duties today',
-            body: 'Incidents occurred, so the toilet was plunged asap.',
+            content: 'Incidents occurred, so the toilet was plunged asap.',
             date: "Mon Mar 11 19:26:37 CST 2018"
         };
 
@@ -158,7 +158,7 @@ describe('Journal list service: ', () => {
             _id: 'washing_id',
             userID: 'userID1',
             title: 'After cleaning today',
-            body: 'My hands got a little dirty doing chores, so I washed them.',
+            content: 'My hands got a little dirty doing chores, so I washed them.',
             date: "Sat Feb 21 19:16:37 CST 2018"
         };
 

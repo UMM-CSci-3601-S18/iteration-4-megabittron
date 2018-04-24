@@ -15,7 +15,7 @@ export class JournalsService {
     constructor(private http: HttpClient) {
     }
 
-    getJournals(userID: string, journalSubject?: string): Observable<Journal[]> {
+    getJournals(userID: string, journalBody?: string): Observable<Journal[]> {
         this.journalUrl = this.baseUrl;
         this.noID = false;
 
@@ -36,7 +36,7 @@ export class JournalsService {
     }
 
     /*
-    filterBySubject(journalTitle?: string): void {
+    filterByBody(journalTitle?: string): void {
         if (!(journalTitle == null || journalTitle === '')) {
             if (this.parameterPresent('title=') ) {
                 // there was a previous search by company that we need to clear
@@ -107,7 +107,7 @@ export class JournalsService {
         };
 
         console.log(newJournal);
-        // Send post request to add a new journal with the journal data as the body with specified headers.
+        // Send post request to add a new journal with the journal data as the content with specified headers.
         return this.http.post<{'$oid': string}>(this.journalUrl + '/new', newJournal, httpOptions);
     }
 

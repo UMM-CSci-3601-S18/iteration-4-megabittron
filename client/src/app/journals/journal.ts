@@ -2,6 +2,6 @@ export interface Journal {
     _id: string;
     userID: string;
     title: string;
-    body: string;
+    content: string;
     date: any;
 }
