@@ -91,9 +91,10 @@ Load the auth2 library and call gapi.auth2.init() to initialize the GoogleAuth o
 Add the sign-in button to your web page, and attach a click handler to call grantOfflineAccess() to start the one-time-code flow.
 
 ```
-<!-- Add where you want your sign-in button to render →
-<!-- Use an image that follows the branding guidelines in a real app →
-<button id="signinButton">Sign in with Google</button>
+<div *ngIf="!appService.isSignedIn()" class="g-signin2" (click)="signIn()"></div>
+```
+Use a script like this to handle sending code to the server
+```
 <script>
   $('#signinButton').click(function() {
    // signInCallback defined in step 6.
