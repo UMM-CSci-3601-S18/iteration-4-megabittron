@@ -6,6 +6,9 @@
             <a mat-list-item [routerLink]="['/journals']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon><i class="material-icons">import_contacts</i></mat-icon>Journals</a>
             <a mat-list-item [routerLink]="['/resources']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon><i class="material-icons">contact_phone</i></mat-icon>Resources</a>
             <a mat-list-item [routerLink]="['/summary']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon><i class="material-icons">assessment</i></mat-icon>Stats</a>
+            <a mat-list-item *ngIf="appService.isSignedIn()" (click)="signOut()"><mat-icon><i class="material-icons">flight takeoff</i></mat-icon>Sign Out</a>
+            <div class="signInButtonMobile"><div *ngIf="!appService.isSignedIn()" class="g-signin2" (click)="signIn()"></div> </div>
+            <br>
         </mat-nav-list>
     </td-navigation-drawer>
     <td-layout-nav class="nav-bar">
@@ -20,8 +23,8 @@
             <a class="desktop-journals computer" mat-button [routerLink]="['/journals']" routerLinkActive="nav-active" hide-xs>Journals</a>
             <a class="desktop-resources computer" mat-button [routerLink]="['/resources']" routerLinkActive="nav-active" hide-xs>Resources</a>
             <a class="desktop-stats computer" mat-button [routerLink]="['/summary']" routerLinkActive="nav-active" hide-xs>Stats</a>
-            <div *ngIf="!appService.isSignedIn()" class="g-signin2" (click)="signIn()"></div>
-            <button *ngIf="appService.isSignedIn()" mat-raised-button (click)="signOut()">Sign Out</button>
+            <a class="computer" hide-xs><div *ngIf="!appService.isSignedIn()" class="g-signin2" (click)="signIn()"></div>
+            <button *ngIf="appService.isSignedIn()" mat-raised-button (click)="signOut()">Sign Out</button></a>
         </div>
         <router-outlet></router-outlet>
     </td-layout-nav>
