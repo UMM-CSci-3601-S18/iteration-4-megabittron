@@ -13,7 +13,6 @@ import {AppService} from "../app.service";
     providers: [AppService]
 })
 export class HomeComponent implements OnInit{
-    //public emotions: Emotion[];
 
     readonly baseUrl: string = environment.API_URL + 'emotions';
 
@@ -59,7 +58,6 @@ export class HomeComponent implements OnInit{
     }
 
     resetPage(){
-        this.resetSelections();
         this.selectedEmotion = "none";
         this.emojiRating = 0;
         this.emotionDescription = "";
