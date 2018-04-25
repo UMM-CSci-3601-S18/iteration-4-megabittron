@@ -1,4 +1,4 @@
-<div class="sidenav">
+<div class="sidenav" hide-xs>
     <h2 class="nav-journals-title">Journals</h2>
     <hr class="nav-title-divider">
     <button mat-raised-button (click)="openAddJournalDialog()" class="add-journal-button" id="addNewJournal">
@@ -40,7 +40,7 @@
         </mat-card-content>
     </mat-card>-->
 </div>
-<div class="grid-journals-section">
+<div class="grid-journals-section" hide-xs>
     <div layout="row" layout-wrap>
         <mat-card class="journals-card"
                   *ngFor="let journal of filterJournals(journalTitle, journalContent, journalDate) | dateSort: '-date'"
@@ -79,5 +79,27 @@
             </mat-card-actions>
         </mat-card>
     </div>
+</div>
+
+<div class="list-journals-section" hide-gt-xs>
+    <mat-form-field class="journals-mobile-search">
+        <input matInput placeholder="Search" [(ngModel)]="journalTitle"/>
+        <button mat-button *ngIf="journalTitle" matSuffix mat-icon-button aria-label="Clear" (click)="journalTitle=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+    <mat-list class="journals-list">
+        <div class="journals-list-info" *ngFor="let journal of filterJournals(journalTitle, journalContent, journalDate) | dateSort: '-date'"
+             #elem [id]="journal._id['$oid']">
+            <mat-list-item >
+                <h3 matLine><strong>{{journal.title}}</strong></h3>
+                <h5>{{journal.date | date : "MM/dd/yy"}}</h5>
+                <h6 matLine>{{journal.content}}</h6>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+        </div>
+    </mat-list>
+
+    <button class="add-journal-fab-button" (click)="openAddJournalDialog()" mat-fab color="primary"><mat-icon>add</mat-icon></button>
 </div>
 
