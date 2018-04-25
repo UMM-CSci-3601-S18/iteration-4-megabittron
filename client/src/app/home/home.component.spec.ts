@@ -61,17 +61,8 @@ describe('Home', () => {
 
             Hcomponent.selectedEmotion = 'happy';
             Hcomponent.emojiRating = 3;
-            Hcomponent.videoEmotion = 'happy';
         });
     }));
-
-    // this test is commented out because it causes test with coverage to loop forever.
-    // it could be because restart() reloads the page.
-   /* it('should reset emotion', () => {
-        Hcomponent.selectedEmotion = 'happy';
-        Hcomponent.restart();
-        expect(Hcomponent.selectedEmotion).toBe('none');
-    });*/
 
     it('should reset emotion', () => {
         Hcomponent.emojiRating = 1;
@@ -81,51 +72,49 @@ describe('Home', () => {
 
     it('should set emotion to sad', () => {
         Hcomponent.selectedEmotion = 'happy';
-        Hcomponent.setEmotion('sad');
+        Hcomponent.selectEmotion('sad');
         expect(Hcomponent.selectedEmotion).toBe('sad');
-        expect(Hcomponent.videoEmotion).toBe('sad');
     });
 
     it('should set emotion to meh', () => {
         Hcomponent.selectedEmotion = 'happy';
-        Hcomponent.setEmotion('meh');
-        expect(Hcomponent.videoEmotion).toBe('meh');
+        Hcomponent.selectEmotion('meh');
         expect(Hcomponent.selectedEmotion).toBe('meh');
     });
 
     it('should return false', () => {
         Hcomponent.selectedEmotion = 'anxious';
-        let tempBoolean: boolean = Hcomponent.showNext1Button();
+        let tempBoolean: boolean = Hcomponent.showNextButton();
         expect(tempBoolean == false).toBeTruthy();
     });
 
-    it('should return true', () => {
+    it('should return false', () => {
         Hcomponent.selectedEmotion = 'none';
-        let tempBoolean: boolean = Hcomponent.showNext1Button();
-        expect(tempBoolean == true).toBeTruthy();
+        let tempBoolean: boolean = Hcomponent.showNextButton();
+        expect(tempBoolean == false).toBeTruthy();
     });
 
     it('should return false', () => {
         Hcomponent.emojiRating = 4;
-        let tempBoolean: boolean = Hcomponent.showNext2Button();
+        let tempBoolean: boolean = Hcomponent.showNextButton();
         expect(tempBoolean == false).toBeTruthy();
     });
 
-    it('should return true', () => {
+    it('should return false', () => {
         Hcomponent.emojiRating = 0;
-        let tempBoolean: boolean = Hcomponent.showNext2Button();
-        expect(tempBoolean == true).toBeTruthy();
+        let tempBoolean: boolean = Hcomponent.showNextButton();
+        expect(tempBoolean == false).toBeTruthy();
     });
 
-    it('should return true', () => {
+    it('should return false', () => {
         Hcomponent.emojiRating = 0;
-        let tempBoolean: boolean = Hcomponent.showNext2Button();
-        expect(tempBoolean).toBe(true);
+        let tempBoolean: boolean = Hcomponent.showNextButton();
+        expect(tempBoolean).toBe(false);
     });
 
     it('should return false', () => {
         Hcomponent.emojiRating = 2;
-        let tempBoolean: boolean = Hcomponent.showNext2Button();
+        let tempBoolean: boolean = Hcomponent.showNextButton();
         expect(tempBoolean).toBe(false);
     });
 });
