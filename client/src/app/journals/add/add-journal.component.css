@@ -1,3 +1,11 @@
 #confirmAddJournalButton {
     background-color: #E8F5E9;
 }
+
+.new-journal-title {
+    text-align: center;
+}
+
+.button-options {
+    text-align: center;
+}

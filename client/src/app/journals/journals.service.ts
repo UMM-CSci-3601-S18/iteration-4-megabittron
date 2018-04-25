@@ -130,6 +130,6 @@ export class JournalsService {
         };
 
         // Send post request to delete journal.
-        return this.http.post(this.journalUrl + '/delete' + journalID, httpOptions);
+        return this.http.post(this.journalUrl + '/delete/' + journalID, httpOptions);
     }
 }
