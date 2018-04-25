@@ -24,8 +24,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     Canvas: any;
     Chart: any;
 
-    limitedPastString: string = 'true';
-    limitedPast: boolean = (this.limitedPastString == 'true');
+    limitedPast: boolean = true;
     colorblindMode: boolean = false;
     graphMode = 'bar';
     happyColor: string;
@@ -96,6 +95,15 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     public clearDateFilter(){
         this.startDate = null;
         this.endDate = null;
+    }
+
+    public toggleCB(){
+        if(this.colorblindMode){
+            this.colorblindMode = false;
+        }
+        else {
+            this.colorblindMode = true;
+        }
     }
 
     // Filters summaries by date, keeping ones between start and end date.
@@ -601,6 +609,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         if(this.graphMode == 'bar'){
             stackBool = true;
         }
+
 
         this.Canvas = document.getElementById("Chart");
         this.ctx = this.Canvas;

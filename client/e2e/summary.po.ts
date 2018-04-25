@@ -69,5 +69,9 @@ export class SummaryPage {
         return element(by.className('labelType')).click();
     }
 
+    delay(ms: number) {
+        return new Promise( resolve => setTimeout(resolve, ms) );
+    }
+
 
 }
