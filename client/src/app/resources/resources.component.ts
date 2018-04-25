@@ -1,20 +1,32 @@
-import {Component} from '@angular/core';
+import {environment} from '../../environments/environment';
+import {AppService} from "../app.service";
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
+import {Contact} from './contact';
+import {Link} from './link';
+import {ResourcesService} from "./resources.service";
 
 @Component({
     selector: 'resources-component',
     templateUrl: 'resources.component.html',
     styleUrls: ['./resources.component.css'],
+    providers: [AppService]
 })
-export class ResourcesComponent {
+export class ResourcesComponent implements OnInit{
     videoTitle; linkTitle; numberTitle: string;
 
-    constructor() {
+    links: Link[] = [];
+    contacts: Contact[] = [];
+
+
+    constructor(public appService: AppService, public resourcesService: ResourcesService) {
         this.videoTitle = 'Videos';
         this.linkTitle = 'Links';
         this.numberTitle = 'Phone Numbers';
     }
 
-    videos = [
+    defaultVideos = [
         {
             name: 'Funny',
             subname: 'Cats, Dogs, & Babies',
@@ -39,7 +51,7 @@ export class ResourcesComponent {
         },
     ]
 
-    links = [
+    defaultLinks = [
         {
             name: 'Depression Help',
             url: 'https://depression.org.nz/get-better/self-help/'
@@ -61,7 +73,7 @@ export class ResourcesComponent {
         },
     ]
 
-    callNumbers = [
+    defaultCallNumbers = [
         {
             name: 'Suicide Prevention Lifeline',
             description: 'We can all help prevent suicide. The Lifeline provides 24/7, free and confidential support for people in distress, prevention and crisis resources for you or your loved ones, and best practices for professionals.',
@@ -77,7 +89,7 @@ export class ResourcesComponent {
         },
     ]
 
-    textNumbers = [
+    defaultTextNumbers = [
         {
             name: 'HopeLine',
             description: 'HopeLine’s mission is to support people and save lives during times of crisis through caring, confidential conversations.',
@@ -88,4 +100,36 @@ export class ResourcesComponent {
             number: '741741',
         },
     ]
+
+    loadService(): void {
+        console.log(localStorage.getItem("userID"));
+        this.resourcesService.getLinks(localStorage.getItem("userID")).subscribe(
+            links => {
+                this.links = links;
+            },
+            err => {
+                console.log(err);
+            }
+        );
+
+        this.resourcesService.getContacts(localStorage.getItem("userID")).subscribe(
+            links => {
+                this.contacts = links;
+            },
+            err => {
+                console.log(err);
+            }
+        );
+
+
+    }
+
+    ngOnInit(): void {
+        //For testing
+        //toggle the value in app service to toggle testing
+        this.appService.testingToggle();
+        this.loadService();
+
+    }
+
 }
