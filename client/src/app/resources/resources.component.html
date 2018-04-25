@@ -7,7 +7,7 @@
         <mat-list>
             <h3 mat-subheader>Calling</h3>
             <mat-divider></mat-divider>
-            <mat-list-item *ngFor="let callNumber of defaultCallNumbers">
+            <mat-list-item *ngFor="let callNumber of defaultContacts">
                 <h4 mat-line>{{callNumber.name}}</h4>
                 <a href="tel:{{callNumber.number}}" mat-line>{{callNumber.number}}</a>
             </mat-list-item>
