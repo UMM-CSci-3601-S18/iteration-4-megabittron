@@ -1,14 +1,12 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {Inject} from '@angular/core';
 import {SummaryListService} from './summary-list.service';
 import {Summary} from './summary';
 import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
-import { DomSanitizer } from '@angular/platform-browser';
 import * as Chart from 'chart.js';
 import {AppService} from "../app.service";
 import {Router} from "@angular/router";
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
     selector: 'app-summary-list-component',
@@ -1147,6 +1145,7 @@ public pastDates = [
 
     ngAfterViewInit(): void {
         this.updateBasicChart();
+
     }
 
     /*
@@ -1208,6 +1207,8 @@ public pastDates = [
     stringToDate(date: string): any {
         return new Date(date);
     }
+
+    public displayedColumns = ["emotion", "intensity", "date", "description"];
 
 }
 

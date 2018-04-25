@@ -24,7 +24,8 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {AppService} from "./app.service";
 import {RouterModule} from "@angular/router";
-
+import {MatTableModule} from "@angular/material/table";
+import {ShowSummaryListComponent} from "./summary/show/show-summary-list.component";
 
 @NgModule({
     exports: [
@@ -37,7 +38,7 @@ import {RouterModule} from "@angular/router";
         Routing,
         CustomModule,
         ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
-
+        MatTableModule,
     ],
     declarations: [
         AppComponent,
@@ -51,6 +52,7 @@ import {RouterModule} from "@angular/router";
         ShowJournalComponent,
         SummaryListComponent,
         ArraySortPipe,
+        ShowSummaryListComponent,
     ],
     providers: [
         GoalsService,

@@ -69,15 +69,80 @@
             </div>
 
         </mat-card>
-        <mat-card id="graphCard">
+
+        <mat-table class="lessons-table mat-elevation-z8" *ngFor="let summary of this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate)">
+
+            <ng-container matColumnDef="emotion">
+                <mat-header-cell *matHeaderCellDef><img class="selected-emotion" src="../../assets/images/emotions/{{summary.mood}}.svg" matTooltip="{{summary.mood}}"></mat-header-cell>
+                <mat-cell *matCellDef="let summary"></mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="intensity">
+                <mat-header-cell *matHeaderCellDef>{{summary.intensity}}</mat-header-cell>
+                <mat-cell class="description-cell"
+                          *matCellDef="let summary"></mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="date">
+                <mat-header-cell *matHeaderCellDef>{{stringToDate(summary.date).toLocaleDateString() + " at " + stringToDate(summary.date).toLocaleTimeString() }}</mat-header-cell>
+                <mat-cell class="duration-cell"
+                          *matCellDef="let summary"></mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+                <mat-header-cell *matHeaderCellDef >{{summary.description}}</mat-header-cell>
+                <mat-cell class="duration-cell"
+                          *matCellDef="let summary"></mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+        </mat-table>
+
+
+        <!--<mat-card id="graphCard">
 
             <div id="tabs">
             <mat-tab-group #myTabGroup>
+                <mat-tab id="md-tab-label-0-1" label="List View">
+
+
+
+                    &lt;!&ndash;<mat-card> <mat-card-title class="your-summaries-title">Your Emotions</mat-card-title>
+
+                        <mat-card-subtitle class="your-summaries-title">You have {{totalNumberMoods()}} emotions to view</mat-card-subtitle>
+                        <mat-accordion *ngIf="summaries && myTabGroup.selectedIndex == 1; else summariesError">
+                            <mat-expansion-panel #elem class="summaries" [id]="summary._id" [expanded]="this.isHighlighted(summary)" *ngFor="let summary of this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate)">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title id="name">
+                                        <img class="selected-emotion" src="../../assets/images/emotions/{{summary.mood}}.svg">
+                                        You felt {{summary.mood}} on
+                                        {{stringToDate(summary.date).toLocaleDateString()}} at
+                                        {{stringToDate(summary.date).toLocaleTimeString()}}</mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <mat-panel-description>Journal entry: {{summary.description}}</mat-panel-description>
+                                <mat-panel-description>Intensity: {{summary.intensity}}</mat-panel-description>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+
+                        <ng-template #summariesError>
+                            <mat-error>
+                                There was a problem loading the goals. Possibly the server is down or perhaps there are network
+                                issues.
+                            </mat-error>
+                            <mat-error>
+                                Please wait a bit and try again or start the server.
+                            </mat-error>
+                        </ng-template>
+                    </mat-card>&ndash;&gt;
+                </mat-tab>
 
                 <mat-tab id="md-tab-label-0-0" label="Graphs">
                     <div id="graphFilter">
                         <form>
-                            <!--# The Angular feature-->
+                            &lt;!&ndash;# The Angular feature&ndash;&gt;
                             <label>Show entries across a day or week?</label>
                             <mat-select name="dropdown" id="labelType"
                                     #input [(ngModel)]="inputType">
@@ -115,36 +180,9 @@
 
                 </mat-tab>
 
-                <mat-tab id="md-tab-label-0-1" label="List View">
 
-                    <mat-card> <mat-card-title class="your-summaries-title">Your Emotions</mat-card-title>
-
-                        <mat-card-subtitle class="your-summaries-title">You have {{totalNumberMoods()}} emotions to view</mat-card-subtitle>
-                        <mat-accordion *ngIf="summaries && myTabGroup.selectedIndex == 1; else summariesError">
-                            <mat-expansion-panel #elem class="summaries" [id]="summary._id" [expanded]="this.isHighlighted(summary)" *ngFor="let summary of this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate)">
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title id="name">You felt {{summary.mood}} on
-                                        {{stringToDate(summary.date).toLocaleDateString()}} at
-                                        {{stringToDate(summary.date).toLocaleTimeString()}}</mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <mat-panel-description>Journal entry: {{summary.description}}</mat-panel-description>
-                                <mat-panel-description>Intensity: {{summary.intensity}}</mat-panel-description>
-                            </mat-expansion-panel>
-                        </mat-accordion>
-
-                        <ng-template #summariesError>
-                            <mat-error>
-                                There was a problem loading the goals. Possibly the server is down or perhaps there are network
-                                issues.
-                            </mat-error>
-                            <mat-error>
-                                Please wait a bit and try again or start the server.
-                            </mat-error>
-                        </ng-template>
-                    </mat-card>
-                </mat-tab>
             </mat-tab-group>
             </div>
-        </mat-card>
+        </mat-card>-->
     </div>
 </div>
