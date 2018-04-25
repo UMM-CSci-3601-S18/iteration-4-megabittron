@@ -65,10 +65,11 @@ public class LinksController {
     }
 
 
-    public String addNewLinks(String id, String name, String subname, String url) {
+    public String addNewLinks(String id, String userID, String name, String subname, String url) {
 
         Document newLinks = new Document();
         newLinks.append("name", name);
+        newLinks.append("userID", userID);
         newLinks.append("subname", subname);
         newLinks.append("url", url);
 
@@ -79,7 +80,7 @@ public class LinksController {
             linksCollection.insertOne(newLinks);
 
             ObjectId Id = newLinks.getObjectId("_id");
-            System.err.println("Successfully added new link [_id=" + id + ", name=" + name + ", subname=" + subname + " url=" + url + ']');
+            System.err.println("Successfully added new link for" + userID + "[_id=" + id + ", name=" + name + ", subname=" + subname + " url=" + url + ']');
 
             return JSON.serialize(Id);
         } catch (MongoException me) {
