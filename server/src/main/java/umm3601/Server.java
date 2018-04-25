@@ -30,6 +30,8 @@ import umm3601.database.resource.ContactsController;
 import umm3601.database.resource.ContactsRequestHandler;
 import umm3601.database.user.UserController;
 import umm3601.database.user.UserRequestHandler;
+import umm3601.database.resource.LinksController;
+import umm3601.database.resource.LinksRequestHandler;
 
 
 import com.google.api.client.googleapis.auth.oauth2.*;
@@ -66,6 +68,8 @@ public class Server {
         ContactsController contactsController = new ContactsController(database);
         ContactsRequestHandler contactsRequestHandler = new ContactsRequestHandler(contactsController);
 
+        LinksController linksController = new LinksController(database);
+        LinksRequestHandler linksRequestHandler = new LinksRequestHandler(linksController);
 
         //Configure Spark
         port(serverPort);
@@ -133,6 +137,10 @@ public class Server {
         get("api/contacts/:id", contactsRequestHandler::getContactsJSON);
         get("api/contacts", contactsRequestHandler::getContacts);
         post("api/contacts/new", contactsRequestHandler::addNewContacts);
+
+        get("api/links/:id", linksRequestHandler::getLinksJSON);
+        get("api/links", linksRequestHandler::getLinks);
+        post("api/links/new", linksRequestHandler::addNewLinks);
 
 
 
