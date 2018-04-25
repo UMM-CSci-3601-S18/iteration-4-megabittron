@@ -1,14 +1,15 @@
+/*
 function newPrompts() {
     var randomNumber = Math.floor(Math.random() * 8) + 1;
     document.getElementById('Prompts').innerHTML = prompts[randomNumber];
 
 }
 
-/*function newPrompts() {
+/!*function newPrompts() {
     var randomNumber = Math.floor(Math.random() * (prompts.length));
     document.getElementById('display-a-prompts').innerHTML = prompts[randomNumber];
 
-}*/
+}*!/
 
 
 
@@ -73,3 +74,4 @@ var prompts = [
 ]
 
 
+*/

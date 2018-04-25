@@ -61,11 +61,11 @@ export class JournalsComponent implements OnInit {
                         addJournalResult => {
                             this.highlightedID = addJournalResult;
                             this.refreshJournals();
-                            },
-                            err => {
+                        },
+                        err => {
                             // This should probably be turned into some sort of meaningful response.
-                                console.log('There was an error adding the journal.');
-                                console.log('The error was ' + JSON.stringify(err));
+                            console.log('There was an error adding the journal.');
+                            console.log('The error was ' + JSON.stringify(err));
                         });
                     this.snackBar.open("Added Journal", "CLOSE", {
                         duration: 2000,
