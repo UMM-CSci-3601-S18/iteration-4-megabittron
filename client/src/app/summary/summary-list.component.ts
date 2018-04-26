@@ -7,6 +7,7 @@ import * as Chart from 'chart.js';
 import {AppService} from "../app.service";
 import {Router} from "@angular/router";
 import {HttpClient} from '@angular/common/http';
+import {ShowSummaryListComponent} from "./show/show-summary-list.component";
 
 @Component({
     selector: 'app-summary-list-component',
@@ -1210,5 +1211,13 @@ public pastDates = [
 
     public displayedColumns = ["emotion", "intensity", "date", "description"];
 
+    showAllDescription(description: string): void {
+        const showSummary: Summary = {_id: null, userID: null, mood: null, intensity: null, date: null, description: description};
+        const dialogRef = this.dialog.open(ShowSummaryListComponent, {
+            width: '500px',
+            data: { summary: showSummary }
+        });
+        console.log("Showing summary description.");
+    }
 }
 

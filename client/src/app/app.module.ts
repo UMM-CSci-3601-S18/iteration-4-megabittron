@@ -68,6 +68,7 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         AddJournalComponent,
         EditJournalComponent,
         ShowJournalComponent,
+        ShowSummaryListComponent,
     ],
     bootstrap: [
         AppComponent

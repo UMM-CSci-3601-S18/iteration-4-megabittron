@@ -70,37 +70,37 @@
 
         </mat-card>
 
-        <mat-table class="lessons-table mat-elevation-z8" *ngFor="let summary of this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate)">
+        <div class="table-div">
+        <mat-table class="summary-table" *ngFor="let summary of this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate)">
 
             <ng-container matColumnDef="emotion">
                 <mat-header-cell *matHeaderCellDef><img class="selected-emotion" src="../../assets/images/emotions/{{summary.mood}}.svg" matTooltip="{{summary.mood}}"></mat-header-cell>
-                <mat-cell *matCellDef="let summary"></mat-cell>
+                <mat-cell class="duration-cell"></mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="intensity">
                 <mat-header-cell *matHeaderCellDef>{{summary.intensity}}</mat-header-cell>
-                <mat-cell class="description-cell"
-                          *matCellDef="let summary"></mat-cell>
+                <mat-cell class="description-cell"></mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="date">
                 <mat-header-cell *matHeaderCellDef>{{stringToDate(summary.date).toLocaleDateString() + " at " + stringToDate(summary.date).toLocaleTimeString() }}</mat-header-cell>
-                <mat-cell class="duration-cell"
-                          *matCellDef="let summary"></mat-cell>
+                <mat-cell class="duration-cell"></mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="description">
-                <mat-header-cell *matHeaderCellDef >{{summary.description}}</mat-header-cell>
-                <mat-cell class="duration-cell"
-                          *matCellDef="let summary"></mat-cell>
+                <mat-header-cell *matHeaderCellDef>{{summary.description | slice:0:11}}
+                    <a (click)="showAllDescription(summary.description)">
+                    <button class="show-more-button">Show more</button></a>
+                </mat-header-cell>
+                <mat-cell class="duration-cell"></mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 
-            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-
         </mat-table>
 
+        </div>
 
         <!--<mat-card id="graphCard">
 
