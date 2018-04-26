@@ -89,9 +89,9 @@
             </ng-container>
 
             <ng-container matColumnDef="description">
-                <mat-header-cell *matHeaderCellDef>{{summary.description | slice:0:11}}
+                <mat-header-cell *matHeaderCellDef>
                     <a (click)="showAllDescription(summary.description)">
-                    <button class="show-more-button">Show more</button></a>
+                    <button class="show-more-button" *ngIf="summary.description != null">Show more</button></a>
                 </mat-header-cell>
                 <mat-cell class="duration-cell"></mat-cell>
             </ng-container>

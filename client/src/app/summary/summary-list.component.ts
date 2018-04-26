@@ -1219,5 +1219,6 @@ public pastDates = [
         });
         console.log("Showing summary description.");
     }
+
 }
 
