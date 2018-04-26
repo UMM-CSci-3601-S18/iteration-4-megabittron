@@ -1,4 +1,4 @@
-<div class="sidenav">
+<div class="sidenav" hide-xs>
     <h2 class="nav-journals-title">Journals</h2>
     <hr class="nav-title-divider">
     <button mat-raised-button (click)="openAddJournalDialog()" class="add-journal-button" id="addNewJournal">
@@ -18,44 +18,18 @@
             </button>
         </mat-form-field>
     </mat-card>
+    <mat-card class="prompt-card">
+        <mat-card-content>
+            <p> Click on the “refresh” button below to get a new journal prompt!</p>
+            <button mat-raised-button id="newPrompt" (click)="RandomPrompt()" type="button">Refresh </button>
 
-<!--    <mat-card class="manage-journals-card">
-        <mat-card-title id="journal-title">Your Journals</mat-card-title>
-        <mat-card-subtitle class="journal-subtitle">Journals can help you
-            track daily activities in your life.
-        </mat-card-subtitle>
-        <mat-divider></mat-divider>
-        <mat-card-content class="journal-content">
-                <button mat-raised-button (click)="openAddJournalDialog()" class="add-journal-button" id="addNewJournal">
-                    <mat-icon id="add-icon">add</mat-icon>
-                    Add a Journal</button>
-            <div class="filter-fields">
-            <mat-form-field id="journal-title-field">
-                <input matInput id="journalTitle" #input placeholder="Filter by title" (input)="journalTitle = $event.target.value">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput id="journalContent" #input placeholder="Filter by content" (input)="journalContent = $event.target.value">
-            </mat-form-field>
-            </div>
         </mat-card-content>
-    </mat-card>-->
-<mat-card>
-    <mat-card-content>
-        <p> Click on the “refresh” button below to get a new journal prompt!</p>
-    </mat-card-content>
-    <div class="PromptsBox">
-        <p>{{prompt}}</p>
-    </div>
-</mat-card>
-    <button mat-raised-button id="newPrompt" (click)="RandomPrompt()" type="button">Refresh </button>
-
-
-
-
-
-
+        <div class="PromptsBox">
+            <p>{{prompt}}</p>
+        </div>
+    </mat-card>
 </div>
-<div class="grid-journals-section">
+<div class="grid-journals-section" hide-xs>
     <div layout="row" layout-wrap>
         <mat-card class="journals-card"
                   *ngFor="let journal of filterJournals(journalTitle, journalContent, journalDate) | dateSort: '-date'"
@@ -71,6 +45,9 @@
                         <button mat-icon-button class="delete-journal action-button"
                                 (click)="deleteJournal(journal._id['$oid'])">
                             <mat-icon matTooltip="Delete">delete</mat-icon>
+                        </button>
+                        <button mat-raised-button routerLink="/journals/{{journal._id['$oid']}}" >
+                            Open Page
                         </button>
                     </mat-card-title>
                     <mat-card-subtitle class="date-subtitle">
@@ -94,5 +71,27 @@
             </mat-card-actions>
         </mat-card>
     </div>
+</div>
+
+<div class="list-journals-section" hide-gt-xs>
+    <mat-form-field class="journals-mobile-search">
+        <input matInput placeholder="Search" [(ngModel)]="journalTitle"/>
+        <button mat-button *ngIf="journalTitle" matSuffix mat-icon-button aria-label="Clear" (click)="journalTitle=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+    <mat-list class="journals-list">
+        <div class="journals-list-info" *ngFor="let journal of filterJournals(journalTitle, journalContent, journalDate) | dateSort: '-date'"
+             #elem [id]="journal._id['$oid']">
+            <mat-list-item >
+                <h3 matLine><strong>{{journal.title}}</strong></h3>
+                <h5>{{journal.date | date : "MM/dd/yy"}}</h5>
+                <h6 matLine>{{journal.content}}</h6>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+        </div>
+    </mat-list>
+
+    <button class="add-journal-fab-button" (click)="openAddJournalDialog()" mat-fab color="primary"><mat-icon>add</mat-icon></button>
 </div>
 

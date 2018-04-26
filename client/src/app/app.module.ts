@@ -19,15 +19,13 @@ import {JournalsComponent} from "./journals/journals.component";
 import {AddJournalComponent} from "./journals/add/add-journal.component";
 import {EditJournalComponent} from "./journals/edit/edit-journal.component";
 import {ShowJournalComponent} from "./journals/show/show-journal.component";
+import {ViewJournalComponent} from "./journals/view/view-journal.component";
 import {JournalsService} from "./journals/journals.service";
 import {ArraySortPipe} from "./journals/array-sort.pipe";
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {AppService} from "./app.service";
 import {RouterModule} from "@angular/router";
-/*
-import {JournalComponentPrompts} from "./journals/journal-Prompts.component";
-*/
 
 
 @NgModule({
@@ -53,9 +51,9 @@ import {JournalComponentPrompts} from "./journals/journal-Prompts.component";
         AddJournalComponent,
         EditJournalComponent,
         ShowJournalComponent,
+        ViewJournalComponent,
         SummaryListComponent,
         ArraySortPipe,
-        /*JournalComponentPrompts,*/
     ],
     providers: [
         GoalsService,
@@ -72,7 +70,7 @@ import {JournalComponentPrompts} from "./journals/journal-Prompts.component";
         AddJournalComponent,
         EditJournalComponent,
         ShowJournalComponent,
-        /*JournalComponentPrompts,*/
+        ViewJournalComponent,
     ],
     bootstrap: [
         AppComponent
