@@ -76,6 +76,12 @@
                                             (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next)">
                                         <mat-icon>done</mat-icon>
                                     </button>
+
+                                    <button mat-icon-button class="edit-goal action-button"
+                                            (click)="openEditGoalDialog(goal._id['$oid'], goal.purpose, goal.category, goal.name, goal.status,
+                                            goal.frequency, goal.start, goal.end, goal,next)">
+                            <mat-icon matTooltip="Edit">mode_edit</mat-icon>
+                        </button>
                                 </div>
                             </mat-card-content>
                         </mat-card>
@@ -147,6 +153,11 @@
                                             (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next)">
                                         <mat-icon>done</mat-icon>
                                     </button>
+                                    <button mat-icon-button class="edit-goal action-button"
+                                            (click)="openEditGoalDialog(goal._id['$oid'], goal.purpose, goal.category, goal.name, goal.status,
+                                            goal.frequency, goal.start, goal.end, goal,next)">
+                            <mat-icon matTooltip="Edit">mode_edit</mat-icon>
+                        </button>
                                 </div>
                             </mat-expansion-panel>
                         </mat-accordion>
@@ -221,6 +232,11 @@
                                            (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)">
                                        <mat-icon>add</mat-icon>
                                    </button>
+                                   <button mat-icon-button class="edit-goal action-button"
+                                           (click)="openEditGoalDialog(goal._id['$oid'], goal.purpose, goal.category, goal.name, goal.status,
+                                            goal.frequency, goal.start, goal.end, goal,next)">
+                            <mat-icon matTooltip="Edit">mode_edit</mat-icon>
+                        </button>
                                </div>
                             </mat-card-content>
                        </mat-card>
@@ -295,6 +311,11 @@
                                                     (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)">
                                                 <mat-icon>add</mat-icon>
                                             </button>
+                                            <button mat-icon-button class="edit-goal action-button"
+                                                    (click)="openEditGoalDialog(goal._id['$oid'], goal.purpose, goal.category, goal.name, goal.status,
+                                            goal.frequency, goal.start, goal.end, goal,next)">
+                            <mat-icon matTooltip="Edit">mode_edit</mat-icon>
+                        </button>
                                         </div>
                                     </mat-expansion-panel>
                                 </mat-accordion>

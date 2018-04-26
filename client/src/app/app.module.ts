@@ -12,6 +12,7 @@ import {EmotionService} from "./home/home.service";
 import {GoalsComponent} from "./goals/goals.component";
 import {GoalsService} from "./goals/goals.service";
 import {AddGoalComponent} from "./goals/add/add-goal.component";
+import {EditGoalComponent} from "./goals/edit/edit-goal.component";
 import {SummaryListComponent} from "./summary/summary-list.component";
 import {SummaryListService} from "./summary/summary-list.service";
 import {JournalsComponent} from "./journals/journals.component";
@@ -45,6 +46,7 @@ import {RouterModule} from "@angular/router";
         ResourcesComponent,
         GoalsComponent,
         AddGoalComponent,
+        EditGoalComponent,
         JournalsComponent,
         AddJournalComponent,
         EditJournalComponent,
@@ -63,6 +65,7 @@ import {RouterModule} from "@angular/router";
 ],
     entryComponents: [
         AddGoalComponent,
+        EditGoalComponent,
         AddJournalComponent,
         EditJournalComponent,
         ShowJournalComponent,

@@ -4,6 +4,7 @@ import {Goal} from './goal';
 import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
 import {AddGoalComponent} from './add/add-goal.component';
+import {EditGoalComponent} from "./edit/edit-goal.component";
 import {MatSnackBar} from '@angular/material';
 import {AppService} from "../app.service";
 import {Router} from "@angular/router";
@@ -85,6 +86,38 @@ export class GoalsComponent implements OnInit {
                     });
                 }
 
+            }
+        });
+    }
+
+    openEditGoalDialog(_id: string, purpose: string, category: string, name: string, status: boolean, frequency: string,
+                       start: string, end: string, next: string): void {
+        console.log("Edit goal button clicked.");
+        console.log(_id + ' ' + name + purpose + end);
+        const newGoal: Goal = {_id: _id, userID: localStorage.getItem('userID'), purpose: purpose, category: category, name: name, status: status,
+        frequency: frequency, start: start, end: end, next: next};
+        const dialogRef = this.dialog.open(EditGoalComponent, {
+            width: '300px',
+            data: { goal: newGoal }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result == undefined) {
+                console.log("Cancelled without editing the goal.");
+            } else {
+                this.goalService.editGoal(result).subscribe(
+                    editGoalResult => {
+                        this.highlightedID = editGoalResult;
+                        this.refreshGoals();
+                        this.snackBar.open("Edited Goal", "CLOSE", {
+                            duration: 2000,
+                        });
+                        console.log("Goal edited.");
+                    },
+                    err => {
+                        console.log('There was an error editing the goal.');
+                        console.log('The error was ' + JSON.stringify(err));
+                    });
             }
         });
     }
