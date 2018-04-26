@@ -1,9 +1,9 @@
-/*
 package umm3601.database;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.util.JSON;
 import org.bson.*;
 import org.bson.codecs.*;
 import org.bson.codecs.configuration.CodecRegistries;
@@ -12,6 +12,7 @@ import org.bson.json.JsonReader;
 import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
+import umm3601.database.goal.GoalController;
 
 import java.io.IOException;
 import java.util.*;
@@ -92,16 +93,8 @@ public class GoalControllerSpec {
     public void getNoGoals() {
         Map<String, String[]> emptyMap = new HashMap<>();
         String jsonResult = goalController.getGoals(emptyMap);
-        BsonArray docs = parseJsonArray(jsonResult);
 
-        assertEquals("Should be 0 goals", 0, docs.size());
-        List<String> goals = docs
-            .stream()
-            .map(GoalControllerSpec::getPurpose)
-            .sorted()
-            .collect(Collectors.toList());
-        List<String> expectedNames = Arrays.asList();
-        assertEquals("Goals should match", expectedNames, goals);
+        assertEquals("Should be 0 goals", jsonResult, JSON.serialize("[ ]"));
     }
 
     @Test
@@ -157,6 +150,8 @@ public class GoalControllerSpec {
 
         assertNotNull("Add new goal should return true when goal is added,", newId);
         Map<String, String[]> argMap = new HashMap<>();
+        argMap.put("userID", new String[] { "4cb56a89541a2d783595012c" });
+
         String jsonResult = goalController.getGoals(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
@@ -170,11 +165,13 @@ public class GoalControllerSpec {
 
     @Test
     public void editGoalTest() {
-        String newId = goalController.completeGoal("5ab53a8907d923f68d03e1a3", "To have a better environment", "Family", "Hug KK", true,
+        String newId = goalController.editGoal(anID.toString(), "AAAAAA To have a better environment", "Family", "Hug KK", true,
             "Daily", "2018-04-05T18:56:24.702Z", "2018-04-05T18:56:24.702Z", "2018-04-05T18:56:24.702Z");
 
         assertNotNull("Edit goal should return true when goal is edited,", newId);
         Map<String, String[]> argMap = new HashMap<>();
+        argMap.put("userID", new String[] { "2cb45a89541a2d783595012b" });
+
         String jsonResult = goalController.getGoals(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
         List<String> purpose = docs
@@ -182,7 +179,7 @@ public class GoalControllerSpec {
             .map(GoalControllerSpec::getPurpose)
             .sorted()
             .collect(Collectors.toList());
-        assertEquals("Should return purpose of edited goal", "To have a better environment", purpose.get(3));
+        assertEquals("Should return purpose of edited goal", "AAAAAA To have a better environment", purpose.get(0));
     }
 
     @Test
@@ -190,10 +187,12 @@ public class GoalControllerSpec {
         System.out.println("anID " + anID.toHexString());
         goalController.deleteGoal(anID.toHexString());
         Map<String, String[]> argMap = new HashMap<>();
+        argMap.put("userID", new String[] { "4cb56a89541a2d783595012c" });
+
         String jsonResult = goalController.getGoals(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
         assertEquals("Should be 3 goals", 3, docs.size());
 
     }
 }
-*/
+
