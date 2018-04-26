@@ -82,14 +82,15 @@ lls addNewResources helper method
                 try {
                     BasicDBObject dbO = (BasicDBObject) o;
                     String id = dbO.getString("_id");
+                    String userID = dbO.getString("userID");
                     String name = dbO.getString("name");
                     String email = dbO.getString("email");
                     String phone = dbO.getString("phone");
 
 
 //
-//                    System.err.println("Adding new contact [id=" + id + ", name=" + name + " phonenumber=" + phonenumber + "email" + email  + ']');
-                    return contactsController.addNewContacts( id, name, email, phone).toString();
+//                    System.err.println("Adding new contact [id=" + id + ", userID=" + userID + name=" + name + " phonenumber=" + phonenumber + "email" + email  + ']');
+                    return contactsController.addNewContacts( id, userID, name, email, phone).toString();
                 }
                 catch(NullPointerException e)
                 {

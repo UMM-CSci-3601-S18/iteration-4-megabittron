@@ -8,6 +8,7 @@ import {Routing} from './app.routes';
 import {APP_BASE_HREF} from '@angular/common';
 import {CustomModule} from './custom.module';
 import {ResourcesComponent} from "./resources/resources.component";
+import {ResourcesService} from "./resources/resources.service";
 import {EmotionService} from "./home/home.service";
 import {GoalsComponent} from "./goals/goals.component";
 import {GoalsService} from "./goals/goals.service";
@@ -62,6 +63,7 @@ import {JournalComponentPrompts} from "./journals/journal-Prompts.component";
         EmotionService,
         SummaryListService,
         AppService,
+        ResourcesService,
         {provide: APP_BASE_HREF, useValue: '/'},
         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true},
 ],

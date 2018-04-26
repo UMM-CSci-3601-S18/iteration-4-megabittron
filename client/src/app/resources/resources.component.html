@@ -7,14 +7,18 @@
         <mat-list>
             <h3 mat-subheader>Calling</h3>
             <mat-divider></mat-divider>
-            <mat-list-item *ngFor="let callNumber of callNumbers">
+            <mat-list-item *ngFor="let callNumber of defaultContacts">
                 <h4 mat-line>{{callNumber.name}}</h4>
-                <a href="tel:{{callNumber.number}}" mat-line>{{callNumber.number}}</a>
+                <a href="tel:{{callNumber.phone}}" mat-line>{{callNumber.phone}}</a>
+            </mat-list-item>
+            <mat-list-item *ngFor="let callNumber of contacts">
+                <h4 mat-line>{{callNumber.name}}</h4>
+                <a href="tel:{{callNumber.phone}}" mat-line>{{callNumber.phone}}</a>
             </mat-list-item>
             <mat-divider></mat-divider>
             <h3 mat-subheader>Texting</h3>
             <mat-divider></mat-divider>
-            <mat-list-item *ngFor="let textNumber of textNumbers">
+            <mat-list-item *ngFor="let textNumber of defaultTextNumbers">
                 <h4 mat-line>{{textNumber.name}}</h4>
                 <a href="tel:{{textNumber.number}}" mat-line>{{textNumber.number}}</a>
             </mat-list-item>
@@ -28,7 +32,7 @@
         <mat-divider></mat-divider>
         <mat-card-content>
             <mat-list>
-                <a mat-list-item *ngFor="let video of videos"
+                <a mat-list-item *ngFor="let video of defaultVideos"
                    class="video link"
                    target="_blank"
                    href={{video.url}}>
@@ -49,7 +53,7 @@
         <mat-divider></mat-divider>
         <mat-card-content>
             <mat-list>
-                <a mat-list-item *ngFor="let link of links"
+                <a mat-list-item *ngFor="let link of defaultLinks"
                    class="resource link"
                    target="_blank"
                    href={{link.url}}>

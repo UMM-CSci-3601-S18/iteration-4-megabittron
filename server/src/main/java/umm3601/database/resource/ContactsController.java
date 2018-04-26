@@ -65,10 +65,11 @@ public class ContactsController {
     }
 
 
-    public String addNewContacts(String id, String name, String email, String phone) {
+    public String addNewContacts(String id, String userID, String name, String email, String phone) {
 
         Document newContacts = new Document();
         newContacts.append("name", name);
+        newContacts.append("userID", userID);
         newContacts.append("email", email);
         newContacts.append("phone", phone);
 
@@ -79,7 +80,7 @@ public class ContactsController {
             contactsCollection.insertOne(newContacts);
 
             ObjectId Id = newContacts.getObjectId("_id");
-            System.err.println("Successfully added new contact [_id=" + id + ", name=" + name + ", email=" + email + " phone=" + phone + ']');
+            System.err.println("Successfully added new contact [_id=" + id + ",userID=" + userID + " name=" + name + ", email=" + email + " phone=" + phone + ']');
 
             return JSON.serialize(Id);
         } catch (MongoException me) {
