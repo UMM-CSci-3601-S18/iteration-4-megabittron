@@ -19,7 +19,6 @@ export class ResourcesComponent implements OnInit{
     links: Link[] = [];
     contacts: Contact[] = [];
 
-
     constructor(public appService: AppService, public resourcesService: ResourcesService) {
         this.videoTitle = 'Videos';
         this.linkTitle = 'Links';
@@ -162,14 +161,7 @@ export class ResourcesComponent implements OnInit{
             }
         );
 
-        var i;
-        for(i=0; i < this.defaultLinks.length - 1; i++){
-            this.links.push(this.defaultLinks[i]);
-        }
 
-        for(i=0; i < this.defaultContacts.length - 1; i++){
-            this.contacts.push(this.defaultContacts[i]);
-        }
 
     }
 
@@ -178,7 +170,6 @@ export class ResourcesComponent implements OnInit{
         //toggle the value in app service to toggle testing
         this.appService.testingToggle();
         this.loadService();
-
     }
 
 }

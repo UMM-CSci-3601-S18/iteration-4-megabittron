@@ -9,7 +9,11 @@
             <mat-divider></mat-divider>
             <mat-list-item *ngFor="let callNumber of defaultContacts">
                 <h4 mat-line>{{callNumber.name}}</h4>
-                <a href="tel:{{callNumber.number}}" mat-line>{{callNumber.number}}</a>
+                <a href="tel:{{callNumber.phone}}" mat-line>{{callNumber.phone}}</a>
+            </mat-list-item>
+            <mat-list-item *ngFor="let callNumber of contacts">
+                <h4 mat-line>{{callNumber.name}}</h4>
+                <a href="tel:{{callNumber.phone}}" mat-line>{{callNumber.phone}}</a>
             </mat-list-item>
             <mat-divider></mat-divider>
             <h3 mat-subheader>Texting</h3>

@@ -11,8 +11,8 @@ import {environment} from '../../environments/environment';
 
 @Injectable()
 export class ResourcesService {
-    readonly baseLinkUrl: string = environment.API_URL + 'resources';
-    readonly baseContactUrl: string = environment.API_URL + 'resources';
+    readonly baseLinkUrl: string = environment.API_URL + 'links';
+    readonly baseContactUrl: string = environment.API_URL + 'contacts';
     private requestUrl: string;
     private noID: boolean = false;
     private emptyLinkObservable: Observable<Link[]> = Observable.of([]);
