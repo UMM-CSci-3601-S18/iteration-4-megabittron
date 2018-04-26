@@ -17,9 +17,9 @@ import {Router} from "@angular/router";
 
 export class GoalsComponent implements OnInit {
     // These are public so that tests can reference them (.spec.ts)
-    public goals: Goal[] = [];
-    public todayGoals: Goal[] = [];
-    public shownGoals: Goal[] = [];
+    public goals: Goal[] = []; //full list of goals
+    public todayGoals: Goal[] = []; //goals that haven't been completed with accordance to their frequency
+    public shownGoals: Goal[] = []; //goals that are being shown
 
     public goalStart;
     public goalNext;
@@ -293,7 +293,7 @@ export class GoalsComponent implements OnInit {
         return goalObservable;
     }
 
-
+    //loads the list of goals for the page
     loadService(): void {
         console.log(localStorage.getItem("userID"));
         this.goalService.getGoals(localStorage.getItem("userID")).subscribe(
@@ -307,6 +307,7 @@ export class GoalsComponent implements OnInit {
         );
     }
 
+    //Runs when the page is initialized
     ngOnInit(): void {
         //For testing
         //toggle the value in app service to toggle testing
@@ -321,7 +322,9 @@ export class GoalsComponent implements OnInit {
         this.getDate();
     }
 
+    ////////////////////
     //Helper Functions//
+    ////////////////////
 
     //get's today's date, and sets this.goalStart and this.goalNext to today's date
     getDate() {

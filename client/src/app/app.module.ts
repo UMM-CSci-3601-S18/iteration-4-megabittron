@@ -8,6 +8,7 @@ import {Routing} from './app.routes';
 import {APP_BASE_HREF} from '@angular/common';
 import {CustomModule} from './custom.module';
 import {ResourcesComponent} from "./resources/resources.component";
+import {ResourcesService} from "./resources/resources.service";
 import {EmotionService} from "./home/home.service";
 import {GoalsComponent} from "./goals/goals.component";
 import {GoalsService} from "./goals/goals.service";
@@ -24,6 +25,9 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {AppService} from "./app.service";
 import {RouterModule} from "@angular/router";
+/*
+import {JournalComponentPrompts} from "./journals/journal-Prompts.component";
+*/
 
 
 @NgModule({
@@ -51,6 +55,7 @@ import {RouterModule} from "@angular/router";
         ShowJournalComponent,
         SummaryListComponent,
         ArraySortPipe,
+        /*JournalComponentPrompts,*/
     ],
     providers: [
         GoalsService,
@@ -58,6 +63,7 @@ import {RouterModule} from "@angular/router";
         EmotionService,
         SummaryListService,
         AppService,
+        ResourcesService,
         {provide: APP_BASE_HREF, useValue: '/'},
         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true},
 ],
@@ -66,6 +72,7 @@ import {RouterModule} from "@angular/router";
         AddJournalComponent,
         EditJournalComponent,
         ShowJournalComponent,
+        /*JournalComponentPrompts,*/
     ],
     bootstrap: [
         AppComponent

@@ -14,32 +14,32 @@ import java.util.Map;
 
 import static com.mongodb.client.model.Filters.eq;
 
-public class ContactsController {
+public class LinksController {
     private final Gson gson;
     private MongoDatabase database;
-    private final MongoCollection<Document> contactsCollection;
+    private final MongoCollection<Document> linksCollection;
 
     /**
-     * Construct a controller for contacts.
+     * Construct a controller for links.
      *
-     * @param database the database containing contacts data
+     * @param database the database containing links data
      */
-    public ContactsController(MongoDatabase database) {
+    public LinksController(MongoDatabase database) {
         gson = new Gson();
         this.database = database;
-        contactsCollection = database.getCollection("contacts");
+        linksCollection = database.getCollection("links");
     }
 
-    public String getContacts(String id) {
+    public String getLinks(String id) {
 
         FindIterable<Document> jsonContacts
-            = contactsCollection
+            = linksCollection
             .find(eq("_id", new ObjectId(id)));
 
         Iterator<Document> iterator = jsonContacts.iterator();
         if (iterator.hasNext()) {
-            Document contact = iterator.next();
-            return contact.toJson();
+            Document link = iterator.next();
+            return link.toJson();
         } else {
             // We didn't find the desired Contact
             return null;
@@ -47,7 +47,7 @@ public class ContactsController {
     }
 
 
-    public String getContacts(Map<String, String[]> queryParams) {
+    public String getLinks(Map<String, String[]> queryParams) {
         Document filterDoc = new Document();
 
         if (queryParams.containsKey("name")) {
@@ -58,29 +58,29 @@ public class ContactsController {
             filterDoc = filterDoc.append("name", targetName);
         }
 
-        FindIterable<Document> matchingContacts = contactsCollection.find(filterDoc);
+        FindIterable<Document> matchingLinks = linksCollection.find(filterDoc);
 
 
-        return JSON.serialize(matchingContacts);
+        return JSON.serialize(matchingLinks);
     }
 
 
-    public String addNewContacts(String id, String userID, String name, String email, String phone) {
+    public String addNewLinks(String id, String userID, String name, String subname, String url) {
 
-        Document newContacts = new Document();
-        newContacts.append("name", name);
-        newContacts.append("userID", userID);
-        newContacts.append("email", email);
-        newContacts.append("phone", phone);
+        Document newLinks = new Document();
+        newLinks.append("name", name);
+        newLinks.append("userID", userID);
+        newLinks.append("subname", subname);
+        newLinks.append("url", url);
 
 
 
 
         try {
-            contactsCollection.insertOne(newContacts);
+            linksCollection.insertOne(newLinks);
 
-            ObjectId Id = newContacts.getObjectId("_id");
-            System.err.println("Successfully added new contact [_id=" + id + ",userID=" + userID + " name=" + name + ", email=" + email + " phone=" + phone + ']');
+            ObjectId Id = newLinks.getObjectId("_id");
+            System.err.println("Successfully added new link for" + userID + "[_id=" + id + ", name=" + name + ", subname=" + subname + " url=" + url + ']');
 
             return JSON.serialize(Id);
         } catch (MongoException me) {

@@ -167,9 +167,9 @@ describe('Journal list service: ', () => {
             }
         );
 
-        const expectedUrl: string = journalListService.baseUrl + '/delete' + cleaning_id;
+        const expectedUrl: string = journalListService.baseUrl + '/delete/' + cleaning_id;
         const req = httpTestingController.expectOne(expectedUrl);
-        expect(req.request.method).toEqual('POST');
+        expect(req.request.method).toEqual('DELETE');
         req.flush(cleaning_id);
     });
 
