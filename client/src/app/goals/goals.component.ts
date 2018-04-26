@@ -157,7 +157,7 @@ export class GoalsComponent implements OnInit {
         this.goalService.editGoal(updatedGoal).subscribe(
             completeGoalResult => {
                 this.highlightedID = completeGoalResult;
-                this.snackBar.open("Completed Goal", "CLOSE", {
+                this.snackBar.open("Status Changed", "CLOSE", {
                     duration: 2000,
                 });
                 this.refreshGoals();

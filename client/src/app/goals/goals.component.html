@@ -79,7 +79,7 @@
 
                                     <button mat-icon-button class="edit-goal action-button"
                                             (click)="openEditGoalDialog(goal._id['$oid'], goal.purpose, goal.category, goal.name, goal.status,
-                                            goal.frequency, goal.start, goal.end, goal,next)">
+                                            goal.frequency, goal.start, goal.end, goal.next)">
                             <mat-icon matTooltip="Edit">mode_edit</mat-icon>
                         </button>
                                 </div>
@@ -153,9 +153,9 @@
                                 <div class="goals-card-info">
                                    <mat-card-content class="goal-info">
                                         <mat-card-title class="today-goal-name">{{goal.name}}</mat-card-title>
-                                       <p><i>Purpose:</i> {{goal.purpose}}</p>
+                                       <p *ngIf="goal.purpose !== ''"><i>Purpose:</i> {{goal.purpose}}</p>
                                 <p><i>Frequency:</i> {{goal.frequency}}</p>
-                                <p><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
+                                <p *ngIf="goal.end !== ''"><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
                                     </mat-card-content>
                                 </div>
                                 <div class="goals-buttons">
@@ -169,7 +169,7 @@
                                     </button>
                                     <button mat-icon-button class="edit-goal action-button"
                                             (click)="openEditGoalDialog(goal._id['$oid'], goal.purpose, goal.category, goal.name, goal.status,
-                                            goal.frequency, goal.start, goal.end, goal,next)">
+                                            goal.frequency, goal.start, goal.end, goal.next)">
                             <mat-icon matTooltip="Edit">mode_edit</mat-icon>
                         </button>
                                 </div>
@@ -177,7 +177,7 @@
                         </mat-accordion>
                     </mat-card>
                 </div>
-                <div class="pagescrollbuttons">
+                <div class="pagescrollbuttons" *ngIf="getSize('today')">
                     <button *ngIf="currentPage == 1" mat-icon-button class="previous-page" (click)="currentPage = currentPage - 1;
                     showGoals('today')" [disabled]="true">
                         <mat-icon>keyboard_arrow_left</mat-icon>
@@ -243,9 +243,9 @@
                                 </div>
 
                             <div class="goals-card-info">
-                                       <p><i>Purpose:</i> {{goal.purpose}}</p>
+                                       <p *ngIf="goal.purpose !== ''"><i>Purpose:</i> {{goal.purpose}}</p>
                                 <p><i>Frequency:</i> {{goal.frequency}}</p>
-                                <p><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
+                                <p *ngIf="goal.end !== ''"><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
                             </div>
                                <div class="goals-buttons">
                                    <button mat-icon-button class="button delete-button"
@@ -262,7 +262,7 @@
                                    </button>
                                    <button mat-icon-button class="edit-goal action-button"
                                            (click)="openEditGoalDialog(goal._id['$oid'], goal.purpose, goal.category, goal.name, goal.status,
-                                            goal.frequency, goal.start, goal.end, goal,next)">
+                                            goal.frequency, goal.start, goal.end, goal.next)">
                             <mat-icon matTooltip="Edit">mode_edit</mat-icon>
                         </button>
                                </div>
@@ -271,7 +271,7 @@
                    </ng-container>
 
                 </div>
-                <div class="page-scroll-buttons">
+                <div class="page-scroll-buttons" *ngIf="getSize('today')">
                     <button *ngIf="currentPage == 1" mat-icon-button class="previous-page" (click)="currentPage = currentPage - 1;
                     showGoals('all')" [disabled]="true">
                         <mat-icon>keyboard_arrow_left</mat-icon>
@@ -336,9 +336,9 @@
                                 </div>
 
                                         <div class="goals-card-info">
-                                               <p><i>Purpose:</i> {{goal.purpose}}</p>
+                                               <p *ngIf="goal.purpose !== ''"><i>Purpose:</i> {{goal.purpose}}</p>
                                 <p><i>Frequency:</i> {{goal.frequency}}</p>
-                                <p><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
+                                <p *ngIf="goal.end !== ''"><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
                                         </div>
                                         <div class="goals-buttons">
                                             <button mat-icon-button class="button delete-button"
@@ -355,7 +355,7 @@
                                             </button>
                                             <button mat-icon-button class="edit-goal action-button"
                                                     (click)="openEditGoalDialog(goal._id['$oid'], goal.purpose, goal.category, goal.name, goal.status,
-                                            goal.frequency, goal.start, goal.end, goal,next)">
+                                            goal.frequency, goal.start, goal.end, goal.next)">
                             <mat-icon matTooltip="Edit">mode_edit</mat-icon>
                         </button>
                                         </div>
@@ -365,7 +365,7 @@
                         </ng-container>
 
                     </div>
-                    <div class="page-scroll-buttons">
+                    <div class="page-scroll-buttons" *ngIf="getSize('today')">
                         <button *ngIf="currentPage == 1" mat-icon-button class="previous-page" (click)="currentPage = currentPage - 1;
                     showGoals('all')" [disabled]="true">
                             <mat-icon>keyboard_arrow_left</mat-icon>
