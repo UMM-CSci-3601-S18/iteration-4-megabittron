@@ -1,10 +1,9 @@
-import {Component, Inject, OnInit, Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AppService} from "../../app.service";
 import {Journal} from '../journal';
 import {JournalsService} from "../journals.service";
-import {Router} from "@angular/router";
 import {Observable} from "rxjs/Observable";
-import {ActivatedRoute, ActivatedRouteSnapshot} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-view-journal.component',
@@ -15,46 +14,36 @@ import {ActivatedRoute, ActivatedRouteSnapshot} from "@angular/router";
 
 export class ViewJournalComponent implements OnInit{
     constructor(public appService: AppService,
-                public journalListService: JournalsService,) {
-
+                public journalListService: JournalsService,
+                private route: ActivatedRoute) {
+        this.route.params.subscribe(params => {
+            this.id = params['_id'];
+        });
     }
-    public journals: Journal[] = [];
-    public filteredJournals: Journal[] = [];
-    public journalTitle: string;
-    public journalContent: string;
-    public length: number;
-    public index = 0;
-    public pathName = window.location.pathname.toString();
 
-    refreshJournals(): Observable<Journal[]> {
-        const journalListObservable: Observable<Journal[]> = this.journalListService.getJournals(localStorage.getItem("userID"));
-        journalListObservable.subscribe(
-            journals => {
-                this.journals = journals;
-                this.length = this.journals.length;
+    public id: string;
+    public journal: Journal = {
+        _id: '',
+        userID: '',
+        title: '',
+        content: '',
+        date: ''
+    };
+
+    refreshJournal(): Observable<Journal> {
+        const journalObservable: Observable<Journal> = this.journalListService.getJournalById(this.id);
+        journalObservable.subscribe(
+            data => {
+                this.journal = data;
             },
             err => {
                 console.log(err);
             });
-        return journalListObservable;
-    }
-
-    loadService(): void {
-        this.journalListService.getJournals(localStorage.getItem("userID")).subscribe(
-            journals => {
-                this.journals = journals;
-                this.filteredJournals = this.journals;
-            },
-            err => {
-                console.log(err);
-            }
-        );
+        return journalObservable;
     }
 
     ngOnInit(): void {
-        this.loadService();
-        this.refreshJournals();
-        console.log(window.location.pathname);
+        this.refreshJournal();
     }
 
 }
