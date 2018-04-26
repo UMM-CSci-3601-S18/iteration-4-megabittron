@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {Link} from './link';
 import {Contact} from './contact';
 import {environment} from '../../environments/environment';
+import 'rxjs/add/observable/of';
 
 
 @Injectable()
