@@ -1,8 +1,7 @@
 <form #newJournalForm="ngForm">
     <div class="add-journal" layout-gt-sm="row">
         <div flex-gt-sm="80" flex-offset-gt-sm="10">
-                <mat-card-title>New Journal</mat-card-title>
-                <mat-divider></mat-divider>
+                <mat-card-title class="new-journal-title">New Journal</mat-card-title>
                 <mat-card-content>
                        <!--  <p>Journal Prompts</p>
 
@@ -12,7 +11,7 @@
                     </button>
                     <button mat-raised-button color="warn">Warn</button>-->
                     <mat-card-content>
-                    <p style="-ms-text-size-adjust: 1 px"> Click on the “refresh” button below to get a new journal prompt!</p>
+                    <p> Click on the “refresh” button below to get a new journal prompt!</p>
                     </mat-card-content>
                       <div class="PromptsBox">
                       <p>{{prompt}}</p>
@@ -23,31 +22,32 @@
                     <mat-form-field hintLabel="Max 40 characters">
                         <input matInput #input required
                                maxlength="40"
-                               id="subjectField" placeholder="Subject"
-                               [(ngModel)]="data.journal.subject"
-                               name="data.journal.subject">
+                               id="titleField" placeholder="Title"
+                               [(ngModel)]="data.journal.title"
+                               name="data.journal.title">
                     </mat-form-field>
                     <mat-form-field>
                         <textarea matInput #input required
-                               id="bodyField"
-                               placeholder="Body"
-                               [(ngModel)]="data.journal.body"
+                               id="contentField"
+                               placeholder="Content"
+                               [(ngModel)]="data.journal.content"
                                matTextareaAutosize matAutosizeMinRows="3"
                                matAutosizeMaxRows="7"
-                               name="data.journal.body">
-                        </textarea>
+                                  name="data.journal.content"></textarea>
                     </mat-form-field>
                 </mat-card-content>
-            <button mat-raised-button
-                    id="confirmAddJournalButton"
-                    [mat-dialog-close]="data.journal"
-                    [disabled]="!newJournalForm.form.valid"
-                    type="button">Submit
-            </button>
-            <button mat-raised-button
-                    id="exitWithoutAddingButton"
-                    (click)="onNoClick()">Cancel
-            </button>
+            <div class="button-options">
+                <button mat-raised-button
+                        id="confirmAddJournalButton"
+                        [mat-dialog-close]="data.journal"
+                        [disabled]="!newJournalForm.form.valid"
+                        type="button">Submit
+                </button>
+                <button mat-raised-button
+                        id="exitWithoutAddingButton"
+                        (click)="onNoClick()">Cancel
+                </button>
+            </div>
         </div>
     </div>
 </form>

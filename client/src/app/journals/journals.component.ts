@@ -20,8 +20,8 @@ export class JournalsComponent implements OnInit {
     // These are public so that tests can reference them (.spec.ts)
     public journals: Journal[] = [];
     public filteredJournals: Journal[] = [];
-    public journalSubject: string;
-    public journalBody: string;
+    public journalTitle: string;
+    public journalContent: string;
     public journalDate: any;
     public length: number;
     public index = 0;
@@ -38,13 +38,9 @@ export class JournalsComponent implements OnInit {
 
     }
 
-    isHighlighted(journal: Journal): boolean {
-        return journal._id['$oid'] === this.highlightedID['$oid'];
-    }
-
     openAddJournalDialog(): void {
         console.log("Add journal button clicked.");
-        const newJournal: Journal = {_id: '', userID: localStorage.getItem('userID'), subject: '', body: '', date: ''};
+        const newJournal: Journal = {_id: '', userID: localStorage.getItem('userID'), title: '', content: '', date: ''};
         const dialogRef = this.dialog.open(AddJournalComponent, {
             width: '300px',
             data: { journal: newJournal }
@@ -61,31 +57,24 @@ export class JournalsComponent implements OnInit {
                         addJournalResult => {
                             this.highlightedID = addJournalResult;
                             this.refreshJournals();
-                        },
-                        err => {
-                            // This should probably be turned into some sort of meaningful response.
-                            console.log('There was an error adding the journal.');
-                            console.log('The error was ' + JSON.stringify(err));
+                            },
+                            err => {
+                                console.log('There was an error adding the journal.');
+                                console.log('The error was ' + JSON.stringify(err));
                         });
                     this.snackBar.open("Added Journal", "CLOSE", {
                         duration: 2000,
                     });
                     console.log("Journal added.");
                 }
-                else {
-
-                    this.snackBar.open("Journal Not Saved. Please Log In to Save Your Journal", "CLOSE", {
-                        duration: 5000,
-                    });
-                }
             }
         });
     }
 
-    openEditJournalDialog(_id: string, subject: string, body: string, date: string): void {
+    openEditJournalDialog(_id: string, title: string, content: string, date: string): void {
         console.log("Edit journal button clicked.");
-        console.log(_id + ' ' + subject + body + date);
-        const newJournal: Journal = {_id: _id, userID: localStorage.getItem('userID'), subject: subject, body: body, date: date};
+        console.log(_id + ' ' + title + content + date);
+        const newJournal: Journal = {_id: _id, userID: localStorage.getItem('userID'), title: title, content: content, date: date};
         const dialogRef = this.dialog.open(EditJournalComponent, {
             width: '300px',
             data: { journal: newJournal }
@@ -113,8 +102,8 @@ export class JournalsComponent implements OnInit {
         });
     }
 
-    showMoreInfo(body: string): void {
-        const showJournal: Journal = {_id: null, userID: null, subject: null, body: body, date: null};
+    showMoreInfoDialog(content: string): void {
+        const showJournal: Journal = {_id: null, userID: null, title: null, content: content, date: null};
         const dialogRef = this.dialog.open(ShowJournalComponent, {
             width: '500px',
             data: { journal: showJournal }
@@ -122,41 +111,7 @@ export class JournalsComponent implements OnInit {
         console.log("Showing more journal info.");
     }
 
-    public filterJournals(searchSubject: string, searchBody: string, searchDate: string): Journal[] {
-
-        this.filteredJournals = this.journals;
-
-        // Filter by subject
-        if (searchSubject != null) {
-            searchSubject = searchSubject.toLocaleLowerCase();
-
-            this.filteredJournals = this.filteredJournals.filter(journal => {
-                return !searchSubject || journal.subject.toLowerCase().indexOf(searchSubject) !== -1;
-            });
-        }
-
-        // Filter by body
-        if (searchBody != null) {
-            searchBody = searchBody.toLocaleLowerCase();
-
-            this.filteredJournals = this.filteredJournals.filter(journal => {
-                return !searchBody || journal.body.toLowerCase().indexOf(searchBody) !== -1;
-            });
-        }
-
-        // Filter by date
-        if (searchDate != null) {
-            searchDate = searchDate.toLocaleLowerCase();
-
-            this.filteredJournals = this.filteredJournals.filter(journal => {
-                return !searchDate || journal.date.toLowerCase().indexOf(searchDate) !== -1;
-            });
-        }
-
-        return this.filteredJournals;
-    }
-
-    deleteGoal(_id: string) {
+    deleteJournal(_id: string) {
         this.journalListService.deleteJournal(_id).subscribe(
             journals => {
                 console.log("first part");
@@ -175,13 +130,47 @@ export class JournalsComponent implements OnInit {
         );
     }
 
+    public filterJournals(searchTitle: string, searchContent: string, searchDate: string): Journal[] {
+
+        this.filteredJournals = this.journals;
+
+        // Filter by title
+        if (searchTitle != null) {
+            searchTitle = searchTitle.toLocaleLowerCase();
+
+            this.filteredJournals = this.filteredJournals.filter(journal => {
+                return !searchTitle || journal.title.toLowerCase().indexOf(searchTitle) !== -1;
+            });
+        }
+
+        // Filter by content
+        if (searchContent != null) {
+            searchContent = searchContent.toLocaleLowerCase();
+
+            this.filteredJournals = this.filteredJournals.filter(journal => {
+                return !searchContent || journal.content.toLowerCase().indexOf(searchContent) !== -1;
+            });
+        }
+
+        // Filter by date
+        if (searchDate != null) {
+            searchDate = searchDate.toLocaleLowerCase();
+
+            this.filteredJournals = this.filteredJournals.filter(journal => {
+                return !searchDate || journal.date.toLowerCase().indexOf(searchDate) !== -1;
+            });
+        }
+
+        return this.filteredJournals;
+    }
+
     // Starts an asynchronous operation to update the journals list
     refreshJournals(): Observable<Journal[]> {
         const journalListObservable: Observable<Journal[]> = this.journalListService.getJournals(localStorage.getItem("userID"));
         journalListObservable.subscribe(
             journals => {
                 this.journals = journals;
-                this.filterJournals(this.journalSubject, this.journalBody, this.journalDate);
+                this.filterJournals(this.journalTitle, this.journalContent, this.journalDate);
                 this.length = this.journals.length;
             },
             err => {
@@ -215,6 +204,10 @@ export class JournalsComponent implements OnInit {
         this.loadService();
         this.refreshJournals();
 
+    }
+
+    isHighlighted(journal: Journal): boolean {
+        return journal._id['$oid'] === this.highlightedID['$oid'];
     }
 
 }

@@ -24,10 +24,10 @@ import umm3601.database.journal.JournalController;
 import umm3601.database.journal.JournalRequestHandler;
 import umm3601.database.emotion.EmotionController;
 import umm3601.database.emotion.EmotionRequestHandler;
-import umm3601.database.resource.ResourceController;
-import umm3601.database.resource.ResourceRequestHandler;
 import umm3601.database.summary.SummaryController;
 import umm3601.database.summary.SummaryRequestHandler;
+import umm3601.database.resource.ContactsController;
+import umm3601.database.resource.ContactsRequestHandler;
 import umm3601.database.user.UserController;
 import umm3601.database.user.UserRequestHandler;
 
@@ -57,14 +57,14 @@ public class Server {
         SummaryController summaryController = new SummaryController(database);
         SummaryRequestHandler summaryRequestHandler = new SummaryRequestHandler(summaryController);
 
-        ResourceController resourceController = new ResourceController(database);
-        ResourceRequestHandler resourceRequestHandler = new ResourceRequestHandler(resourceController);
-
         JournalController journalController = new JournalController(database);
         JournalRequestHandler journalRequestHandler = new JournalRequestHandler(journalController);
 
         UserController userController = new UserController(database);
         UserRequestHandler userRequestHandler = new UserRequestHandler(userController);
+
+        ContactsController contactsController = new ContactsController(database);
+        ContactsRequestHandler contactsRequestHandler = new ContactsRequestHandler(contactsController);
 
 
         //Configure Spark
@@ -129,15 +129,20 @@ public class Server {
         //List summary page
         get("api/summaries", summaryRequestHandler::getSummaries);
 
-        //Resources for appropriate response
-        get("api/resources", resourceRequestHandler::getResources);
+        //List Resources page
+        get("api/contacts/:id", contactsRequestHandler::getContactsJSON);
+        get("api/contacts", contactsRequestHandler::getContacts);
+        post("api/contacts/new", contactsRequestHandler::addNewContacts);
+
+
+
 
         //List journals
         get("api/journals", journalRequestHandler::getJournals);
         get("api/journals/:id", journalRequestHandler::getJournalJSON);
         post("api/journals/new", journalRequestHandler::addNewJournal);
         post("api/journals/edit", journalRequestHandler::editJournal);
-        post("api/journals/delete/:id", journalRequestHandler::deleteJournal);
+        delete("api/journals/delete/:id", journalRequestHandler::deleteJournal);
 
         //Did not create a api route for users
 
