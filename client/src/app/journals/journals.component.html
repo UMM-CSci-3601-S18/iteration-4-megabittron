@@ -18,42 +18,16 @@
             </button>
         </mat-form-field>
     </mat-card>
+    <mat-card class="prompt-card">
+        <mat-card-content>
+            <p> Click on the “refresh” button below to get a new journal prompt!</p>
+            <button mat-raised-button id="newPrompt" (click)="RandomPrompt()" type="button">Refresh </button>
 
-<!--    <mat-card class="manage-journals-card">
-        <mat-card-title id="journal-title">Your Journals</mat-card-title>
-        <mat-card-subtitle class="journal-subtitle">Journals can help you
-            track daily activities in your life.
-        </mat-card-subtitle>
-        <mat-divider></mat-divider>
-        <mat-card-content class="journal-content">
-                <button mat-raised-button (click)="openAddJournalDialog()" class="add-journal-button" id="addNewJournal">
-                    <mat-icon id="add-icon">add</mat-icon>
-                    Add a Journal</button>
-            <div class="filter-fields">
-            <mat-form-field id="journal-title-field">
-                <input matInput id="journalTitle" #input placeholder="Filter by title" (input)="journalTitle = $event.target.value">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput id="journalContent" #input placeholder="Filter by content" (input)="journalContent = $event.target.value">
-            </mat-form-field>
-            </div>
         </mat-card-content>
-    </mat-card>-->
-<mat-card>
-    <mat-card-content>
-        <p> Click on the “refresh” button below to get a new journal prompt!</p>
-    </mat-card-content>
-    <div class="PromptsBox">
-        <p>{{prompt}}</p>
-    </div>
-</mat-card>
-    <button mat-raised-button id="newPrompt" (click)="RandomPrompt()" type="button">Refresh </button>
-
-
-
-
-
-
+        <div class="PromptsBox">
+            <p>{{prompt}}</p>
+        </div>
+    </mat-card>
 </div>
 <div class="grid-journals-section" hide-xs>
     <div layout="row" layout-wrap>
