@@ -150,7 +150,7 @@ public class Server {
         get("api/journals/:id", journalRequestHandler::getJournalJSON);
         post("api/journals/new", journalRequestHandler::addNewJournal);
         post("api/journals/edit", journalRequestHandler::editJournal);
-        post("api/journals/delete/:id", journalRequestHandler::deleteJournal);
+        delete("api/journals/delete/:id", journalRequestHandler::deleteJournal);
 
         //Did not create a api route for users
 
