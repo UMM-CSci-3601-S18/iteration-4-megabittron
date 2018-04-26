@@ -257,6 +257,11 @@ export class JournalsComponent implements OnInit {
         );
     }
 
+
+    isHighlighted(journal: Journal): boolean {
+        return journal._id['$oid'] === this.highlightedID['$oid'];
+    }
+
     ngOnInit(): void {
         //For testing
         //toggle the value in app service to toggle testing
@@ -270,10 +275,6 @@ export class JournalsComponent implements OnInit {
         this.loadService();
         this.refreshJournals();
 
-    }
-
-    isHighlighted(journal: Journal): boolean {
-        return journal._id['$oid'] === this.highlightedID['$oid'];
     }
 
 }

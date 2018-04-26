@@ -307,21 +307,6 @@ export class GoalsComponent implements OnInit {
         );
     }
 
-    //Runs when the page is initialized
-    ngOnInit(): void {
-        //For testing
-        //toggle the value in app service to toggle testing
-        this.appService.testingToggle();
-
-        // Route consumer to home page if isSignedIn status is false
-        if (!this.appService.isSignedIn()) {
-            this.router.navigate(['']);
-        }
-        this.refreshGoals();
-        this.loadService();
-        this.getDate();
-    }
-
     ////////////////////
     //Helper Functions//
     ////////////////////
@@ -390,4 +375,20 @@ export class GoalsComponent implements OnInit {
         }
         return this.goals.length > this.goalsPerPage;
     }
+
+    //Runs when the page is initialized
+    ngOnInit(): void {
+        //For testing
+        //toggle the value in app service to toggle testing
+        this.appService.testingToggle();
+
+        // Route consumer to home page if isSignedIn status is false
+        if (!this.appService.isSignedIn()) {
+            this.router.navigate(['']);
+        }
+        this.refreshGoals();
+        this.loadService();
+        this.getDate();
+    }
+
 }
