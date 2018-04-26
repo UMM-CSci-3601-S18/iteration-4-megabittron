@@ -57,6 +57,9 @@
                                 (click)="deleteJournal(journal._id['$oid'])">
                             <mat-icon matTooltip="Delete">delete</mat-icon>
                         </button>
+                        <button mat-raised-button routerLink="/journals/{{journal._id['$oid']}}" >
+                            Open Page
+                        </button>
                     </mat-card-title>
                     <mat-card-subtitle class="date-subtitle">
                         {{journal.date | date : "MMM d, yyyy 'at' h:mm a"}}

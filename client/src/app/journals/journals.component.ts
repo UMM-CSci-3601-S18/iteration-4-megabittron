@@ -8,6 +8,7 @@ import {EditJournalComponent} from "./edit/edit-journal.component";
 import {ShowJournalComponent} from "./show/show-journal.component";
 import {AppService} from "../app.service";
 import {Router} from "@angular/router";
+import {ViewJournalComponent} from "./view/view-journal.component";
 
 @Component({
     selector: 'app-journals-component',
@@ -109,6 +110,16 @@ export class JournalsComponent implements OnInit {
         });
         console.log("Showing more journal info.");
     }
+
+/*    viewJournal(title: string): void {
+        const showJournal: Journal = {_id: null, userID: null, title: null, content: title, date: null};
+        const dialogRef = this.dialog.open(ViewJournalComponent, {
+            width: '500px',
+            data: { journal: showJournal }
+        });
+        const test =
+        console.log("Showing more journal info.");
+    }*/
 
     deleteJournal(_id: string) {
         this.journalListService.deleteJournal(_id).subscribe(
