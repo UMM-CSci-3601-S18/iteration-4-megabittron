@@ -1,5 +1,25 @@
-<div class="first-sec">
-    <mat-card class="manage-journals-card">
+<div class="sidenav">
+    <h2 class="nav-journals-title">Journals</h2>
+    <hr class="nav-title-divider">
+    <button mat-raised-button (click)="openAddJournalDialog()" class="add-journal-button" id="addNewJournal">
+        New Journal
+    </button>
+    <mat-card class="filter-fields">
+        <mat-form-field class="example-form-field">
+            <input matInput placeholder="Search titles" [(ngModel)]="journalTitle"/>
+            <button mat-button *ngIf="journalTitle" matSuffix mat-icon-button aria-label="Clear" (click)="journalTitle=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field class="example-form-field">
+            <input matInput placeholder="Search content" [(ngModel)]="journalContent"/>
+            <button mat-button *ngIf="journalContent" matSuffix mat-icon-button aria-label="Clear" (click)="journalContent=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </mat-card>
+
+<!--    <mat-card class="manage-journals-card">
         <mat-card-title id="journal-title">Your Journals</mat-card-title>
         <mat-card-subtitle class="journal-subtitle">Journals can help you
             track daily activities in your life.
@@ -18,7 +38,22 @@
             </mat-form-field>
             </div>
         </mat-card-content>
-    </mat-card>
+    </mat-card>-->
+<mat-card>
+    <mat-card-content>
+        <p> Click on the “refresh” button below to get a new journal prompt!</p>
+    </mat-card-content>
+    <div class="PromptsBox">
+        <p>{{prompt}}</p>
+    </div>
+</mat-card>
+    <button mat-raised-button id="newPrompt" (click)="RandomPrompt()" type="button">Refresh </button>
+
+
+
+
+
+
 </div>
 <div class="grid-journals-section">
     <div layout="row" layout-wrap>

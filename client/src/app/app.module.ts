@@ -24,6 +24,9 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {AppService} from "./app.service";
 import {RouterModule} from "@angular/router";
+/*
+import {JournalComponentPrompts} from "./journals/journal-Prompts.component";
+*/
 
 
 @NgModule({
@@ -51,6 +54,7 @@ import {RouterModule} from "@angular/router";
         ShowJournalComponent,
         SummaryListComponent,
         ArraySortPipe,
+        /*JournalComponentPrompts,*/
     ],
     providers: [
         GoalsService,
@@ -66,6 +70,7 @@ import {RouterModule} from "@angular/router";
         AddJournalComponent,
         EditJournalComponent,
         ShowJournalComponent,
+        /*JournalComponentPrompts,*/
     ],
     bootstrap: [
         AppComponent
