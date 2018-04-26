@@ -25,9 +25,7 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {AppService} from "./app.service";
 import {RouterModule} from "@angular/router";
-/*
-import {JournalComponentPrompts} from "./journals/journal-Prompts.component";
-*/
+import {AddContactComponent} from "./resources/add/contacts/add-contact.component";
 
 
 @NgModule({
@@ -54,8 +52,9 @@ import {JournalComponentPrompts} from "./journals/journal-Prompts.component";
         EditJournalComponent,
         ShowJournalComponent,
         SummaryListComponent,
+        AddContactComponent,
         ArraySortPipe,
-        /*JournalComponentPrompts,*/
+
     ],
     providers: [
         GoalsService,
@@ -72,7 +71,8 @@ import {JournalComponentPrompts} from "./journals/journal-Prompts.component";
         AddJournalComponent,
         EditJournalComponent,
         ShowJournalComponent,
-        /*JournalComponentPrompts,*/
+        AddContactComponent
+
     ],
     bootstrap: [
         AppComponent
