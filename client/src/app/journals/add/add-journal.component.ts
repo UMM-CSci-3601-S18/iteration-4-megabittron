@@ -9,7 +9,7 @@ import {Journal} from '../journal';
 })
 
 export class AddJournalComponent {
-    public prompts: String[] = [
+    /*public prompts: String[] = [
 
         "What scares you?",
         "Do you have a plan? Do you need a plan? Have you had a plan fall spectacularly to pieces?",
@@ -62,9 +62,9 @@ export class AddJournalComponent {
         "What was your favorite cartoon?",
         "What is your most vivid memory of the kitchen in your childhood?",
         "As a child, who was your favorite relative?",
-]
+];*/
 
-        public prompt: String;
+        /*public prompt: String;*/
 
 
     constructor(
@@ -76,11 +76,11 @@ export class AddJournalComponent {
         this.dialogRef.close();
     }
 
-    RandomPrompt(): void {
+    /*RandomPrompt(): void {
         this.prompt = this.prompts[Math.floor(Math.random() * this.prompts.length)];
-    }
+    }*/
 
-    ngOnInit (): void {
+    /*ngOnInit (): void {
         this.RandomPrompt();
-    }
+    }*/
 }
