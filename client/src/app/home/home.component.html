@@ -11,23 +11,23 @@
                         </div>
                         <div class="emotion-selection" id="emotion">
                             <button mat-button id="happy" class="emotion-img" matTooltip="Happy"
-                                    (click)="setEmotion('happy'); selectEmotion('happy')">
+                                    (click)="selectEmotion('happy')">
                                 <img src="../../assets/images/emotions/happy.svg">
                             </button>
                             <button mat-button id="sad" class="emotion-img" matTooltip="Sad"
-                                    (click)="setEmotion('sad'); selectEmotion('sad')">
+                                    (click)="selectEmotion('sad')">
                                 <img src="../../assets/images/emotions/sad.svg">
                             </button>
                             <button mat-button id="meh" class="emotion-img" matTooltip="Meh"
-                                    (click)="setEmotion('meh'); selectEmotion('meh')">
+                                    (click)="selectEmotion('meh')">
                                 <img src="../../assets/images/emotions/meh.svg">
                             </button>
                             <button mat-button id="mad" class="emotion-img" matTooltip="Mad"
-                                    (click)="setEmotion('mad'); selectEmotion('mad')">
+                                    (click)="selectEmotion('mad')">
                                 <img src="../../assets/images/emotions/mad.svg">
                             </button>
                             <button mat-button id="anxious" class="emotion-img" matTooltip="Anxious"
-                                    (click)="setEmotion('anxious'); selectEmotion('anxious')">
+                                    (click)="selectEmotion('anxious')">
                                 <img src="../../assets/images/emotions/anxious.svg">
                             </button>
                         </div>
@@ -41,7 +41,7 @@
                                     matStepperNext
                                     class="next-button"
                                     id="stepperButton1"
-                                    [disabled]="showNext1Button()">
+                                    [disabled]="showNextButton()">
                                 Next
                             </button>
                         </div>
@@ -66,13 +66,12 @@
                                         matStepperNext
                                         class="next-button"
                                         id="stepperButton2"
-                                        [disabled]="showNext2Button()">
+                                        [disabled]="showNextButton()">
                                     Next
                                 </button>
                             </div>
                         </div>
                     </mat-step>
-                    <!--<mat-step editable="false" *ngIf="emojiRating > 0 || selectedEmotion == 'meh'">-->
                     <mat-step editable="false">
                         <div class="text-info">
                             <p class="text-description">
@@ -97,9 +96,8 @@
                             </button>
                         </div>
                     </mat-step>
-                    <!--<mat-step editable="false" *ngIf="emojiRating > 0 || selectedEmotion == 'meh'">-->
                     <mat-step editable="false">
-                        <div *ngIf="videoEmotion == 'happy'">
+                        <div *ngIf="selectedEmotion == 'happy'">
                             <div class="container">
                                 <iframe id="responseHappyVideoFrame"
                                         src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37AO-nqegk5cEwS1ElAoQLNr"
@@ -108,7 +106,7 @@
                                         class="video"></iframe>
                             </div>
                         </div>
-                        <div *ngIf="videoEmotion == 'sad'">
+                        <div *ngIf="selectedEmotion == 'sad'">
 
                             <div class="container">
                                 <iframe id="responseSadVideoFrame"
@@ -118,7 +116,7 @@
                                         class="video"></iframe>
                             </div>
                         </div>
-                        <div *ngIf="videoEmotion == 'meh'">
+                        <div *ngIf="selectedEmotion == 'meh'">
 
                             <div class="container">
                                 <iframe id="responseMehVideoFrame"
@@ -128,7 +126,7 @@
                                         class="video"></iframe>
                             </div>
                         </div>
-                        <div *ngIf="videoEmotion == 'mad'">
+                        <div *ngIf="selectedEmotion == 'mad'">
 
                             <div class="container">
                                 <iframe id="responseMadVideoFrame"
@@ -138,7 +136,7 @@
                                         class="video"></iframe>
                             </div>
                         </div>
-                        <div *ngIf="videoEmotion == 'anxious'">
+                        <div *ngIf="selectedEmotion == 'anxious'">
 
                             <div class="container">
                                 <iframe id="responseAnxiousVideoFrame"

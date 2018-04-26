@@ -13,7 +13,6 @@ import {AppService} from "../app.service";
     providers: [AppService]
 })
 export class HomeComponent implements OnInit{
-    //public emotions: Emotion[];
 
     readonly baseUrl: string = environment.API_URL + 'emotions';
 
@@ -21,17 +20,16 @@ export class HomeComponent implements OnInit{
 
     public title: string;
     public selectedEmotion = "none";
-    private highlightedEmotion = "happy";
-    public videoEmotion = "none";
     public emotionDescription: string;
     public emotionDate: string;
 
+    //Reloads the window and resets the page when the user clicks the reset button
     restart(){
         this.resetPage();
         window.location.reload();
     }
 
-    //used for slider
+    // Adds slider functionality
     thumbLabel = true;
     public emojiRating: number = 0;
 
@@ -41,43 +39,23 @@ export class HomeComponent implements OnInit{
                 public appService: AppService) {
     }
 
-    setEmotion(emotion){
-        this.selectedEmotion = emotion;
-        this.videoEmotion = emotion;
-    }
-
+    //Sets the selected emotion and calls the CSS that adds the border around the image
     selectEmotion(ID){
-        this.resetSelections();
-        this.highlightedEmotion = ID;
+        if(this.selectedEmotion != 'none'){
+            this.resetSelections()
+        }
+        this.selectedEmotion = ID;
         let newClass = document.getElementById(ID);
         newClass.classList.add('on');
     }
 
+    //Removes the border from the current selected emotion
     private resetSelections(){
-        let newClass = document.getElementById(this.highlightedEmotion);
+        let newClass = document.getElementById(this.selectedEmotion);
         newClass.classList.remove('on');
     }
 
-    resetPage(){
-        this.resetSelections();
-        this.selectedEmotion = "none";
-        this.emojiRating = 0;
-        this.emotionDescription = "";
-    }
-
-    showNext1Button() {
-        if(this.selectedEmotion != "none") {
-            return false;
-        } else return true;
-    }
-
-    showNext2Button(){
-        if(this.emojiRating != 0) {
-            return false;
-        }
-        else return true;
-    }
-
+    //Saves the emotion to the server
     saveEmotion(): void{
         const newEmotion: Emotion = {_id: '', userID: localStorage.getItem("userID"), mood: this.selectedEmotion, intensity: this.emojiRating, description:this.emotionDescription, date: this.emotionDate};
 
@@ -104,15 +82,39 @@ export class HomeComponent implements OnInit{
         }
     }
 
+    ngOnInit(): void {
+        //For testing
+        //toggle the value in app service to toggle testing
+        this.appService.testingToggle();
+    }
+
+    //Helper Functions//
+
+    //Gets today's date and sets this.emotionDate to today's date
     getDate(){
         let today = new Date();
         this.emotionDate = today.toString();
     }
 
-    ngOnInit(): void {
-        //For testing
-        //toggle the value in app service to toggle testing
-        this.appService.testingToggle();
+    //Completely resets the page
+    resetPage(){
+        this.resetSelections();
+        this.selectedEmotion = "none";
+        this.emojiRating = 0;
+        this.emotionDescription = "";
+    }
+
+    //Enables the next button when the user selects an emotion and an intensity
+    showNextButton() {
+        if(this.selectedEmotion != "none") {
+            return false;
+        }
+
+        if(this.emojiRating != 0) {
+            return false;
+        }
+
+        else return true;
     }
 
 }
