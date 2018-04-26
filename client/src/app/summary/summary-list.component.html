@@ -1,188 +1,194 @@
 <div layout-gt-sm="row">
     <div flex-gt-sm="80" flex-offset-gt-sm="10">
-        <mat-card id="filtering">
-            <div class="top" id="filterCard">
+        <mat-card id="graphCard">
+            <div id="tabs">
+                <mat-tab-group #myTabGroup>
+                    <mat-tab id="md-tab-label-0-0" label="Graphs">
+                        <div id="graphFilter">
+                            <form>
+                                <!--# The Angular feature-->
+                                <label>Show entries across a day or week?</label>
+                                <mat-select name="dropdown" id="labelType"
+                                            #input [(ngModel)]="inputType">
+                                    <mat-option id="md-option-12" value="day">Day</mat-option>
+                                    <mat-option id="md-option-13" value="week" selected>Week</mat-option>
+                                    <mat-option id="md-option-14" value="month">Month</mat-option>
+                                    <mat-option id="md-option-15" value="year">Year</mat-option>
+                                </mat-select>
+                            </form>
+                            <br>
+                            <mat-checkbox id="pastXBox" [(ngModel)]="limitedPast">Show only entries from the past
+                                {{inputType}}
+                            </mat-checkbox>
+                            <br>
+                            <hr>
+                            Detailed Graph Options
+                            <br>
+                            <mat-checkbox id="colorblindBox" [(ngModel)]="colorblindMode">Colorblind Mode</mat-checkbox>
+                            <br>
+                            <mat-radio-group [(ngModel)]="graphMode">
+                                <mat-radio-button id="lineradio" value="line">Line Graph</mat-radio-button>
 
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-                <h3><i>Filtering:</i></h3>
+                                <mat-radio-button id="barradio" value="bar">Stacked Bar Graph</mat-radio-button>
+                            </mat-radio-group>
+                            <br>
+                            <hr>
+                            <button mat-raised-button id="filterBasicButton"
+                                    (click)="this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate); updateBasicChart()">
+                                Summary Graph
+                            </button>
+                            <button mat-raised-button id="filterDetailedButton"
+                                    (click)="this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate); updateDetailedChart()">
+                                Detailed Graph
+                            </button>
+                            <br>
+                        </div>
+                        <mat-card>
+                            <mat-card-title class="your-summaries-title">Your Emotions</mat-card-title>
+                            <mat-card-subtitle class="your-summaries-title">There are {{totalNumberMoods()}} entries
+                                represented
+                            </mat-card-subtitle>
+                            <canvas id="Chart" height="auto"></canvas>
+                        </mat-card>
+                    </mat-tab>
 
-            <div id="filterContents">
-            <form>
-                <!--# The Angular feature-->
-                <label> Emotion:</label>
+                    <mat-tab id="md-tab-label-0-1" label="List View">
+                        <mat-card>
+                            <mat-card-title class="your-summaries-title">Your Emotions</mat-card-title>
+                            <mat-card-subtitle class="your-summaries-title">You have {{totalNumberMoods()}} emotions to
+                                view
+                            </mat-card-subtitle>
+                            <mat-accordion *ngIf="summaries && myTabGroup.selectedIndex == 1; else summariesError">
+                                <div class="table-header-div">
+                                    <mat-table #table class="summary-table" [dataSource]>
+                                        <ng-container matColumnDef="emotion">
+                                            <mat-header-cell *matHeaderCellDef>Emotion</mat-header-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="intensity">
+                                            <mat-header-cell *matHeaderCellDef>Intensity</mat-header-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="date">
+                                            <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="description">
+                                            <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+                                        </ng-container>
+                                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                    </mat-table>
+                                </div>
+                                <div class="table-div">
+                                    <mat-table #table class="summary-table"
+                                               *ngFor="let summary of this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate)">
+                                        <ng-container matColumnDef="emotion">
+                                            <mat-header-cell *matHeaderCellDef><img class="selected-emotion"
+                                                                                    src="../../assets/images/emotions/{{summary.mood}}.svg"
+                                                                                    matTooltip="{{summary.mood}}">
+                                            </mat-header-cell>
+                                            <mat-cell class="duration-cell"></mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="intensity">
+                                            <mat-header-cell *matHeaderCellDef>{{summary.intensity}}</mat-header-cell>
+                                            <mat-cell class="description-cell"></mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="date">
+                                            <mat-header-cell *matHeaderCellDef>
+                                                {{stringToDate(summary.date).toLocaleDateString() + " at " +
+                                                stringToDate(summary.date).toLocaleTimeString() }}
+                                            </mat-header-cell>
+                                            <mat-cell class="duration-cell"></mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="description">
+                                            <mat-header-cell *matHeaderCellDef>
+                                                <a (click)="showAllDescription(summary.description)">
+                                                    <button class="show-more-button"
+                                                            *ngIf="summary.description != null">Show more
+                                                    </button>
+                                                </a>
+                                            </mat-header-cell>
+                                            <mat-cell class="duration-cell"></mat-cell>
+                                        </ng-container>
 
-                <mat-select name="dropdown" id="summaryMood"
-                            #input placeholder="Filter by Mood"
-                            [(ngModel)]="summaryMood">
-                    <mat-option id ="md-option-0" selected value="All">All Emotions</mat-option>
-                    <mat-option id ="md-option-1" value="Happy">Happy</mat-option>
-                    <mat-option id ="md-option-2" value="Sad">Sad</mat-option>
-                    <mat-option id ="md-option-3" value="Meh">Meh</mat-option>
-                    <mat-option id ="md-option-4" value="Mad">Mad</mat-option>
-                    <mat-option id ="md-option-5" value="Anxious">Anxious</mat-option>
-                    <!-- mat-option ids autoreplaced by md-option-x anyway -->
-                </mat-select>
-            </form>
-
-                <br>
-
-                <form>
-                    <label> Intensity: </label>
-                    <mat-select name="dropdownInt" id="summaryInt"
-                                #input placeholder="Filter by Intensity"
-                                [(ngModel)]="summaryIntensity">
-                        <mat-option id="md-option-6" selected value="All">All</mat-option>
-                        <mat-option id="md-option-7" value="1">1</mat-option>
-                        <mat-option id="md-option-8" value="2">2</mat-option>
-                        <mat-option id="md-option-9" value="3">3</mat-option>
-                        <mat-option id="md-option-10" value="4">4</mat-option>
-                        <mat-option id="md-option-11" value="5">5</mat-option>
-                    </mat-select>
-                </form>
-
-                <mat-form-field class="start">
-                    <input
-                        id = "startDate"
-                        matInput [matDatepicker]="start"
-                        placeholder="Choose a Start Date"
-                        [(ngModel)]="startDate"
-                        (input)="startDate = $event.target.value"
-                        disabled>
-                    <mat-datepicker-toggle id = "startButton" matSuffix [for]="start" enabled></mat-datepicker-toggle>
-                    <mat-datepicker touchUi="true" #start disabled="false"></mat-datepicker>
-                </mat-form-field> &nbsp;
-
-                <mat-form-field class="end">
-                    <input
-                        id = "endDate"
-                        matInput [matDatepicker]="end"
-                        placeholder="Choose an End Date"
-                        [(ngModel)]="endDate"
-                        (input)="endDate = $event.target.value"
-                        disabled>
-                    <mat-datepicker-toggle id = "endButton" matSuffix [for]="end"></mat-datepicker-toggle>
-                    <mat-datepicker touchUi="true" #end disabled="false"></mat-datepicker>
-                </mat-form-field>
-                <button mat-raised-button id="clearDatesButton" (click)="this.clearDateFilter()">Clear Date Filters</button>
-
+                                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                    </mat-table>
+                                </div>
+                            </mat-accordion>
+                            <ng-template #summariesError>
+                                <mat-error>
+                                    There was a problem loading the goals. Possibly the server is down or perhaps there
+                                    are network
+                                    issues.
+                                </mat-error>
+                                <mat-error>
+                                    Please wait a bit and try again or start the server.
+                                </mat-error>
+                            </ng-template>
+                        </mat-card>
+                    </mat-tab>
+                </mat-tab-group>
             </div>
-            </div>
-
         </mat-card>
 
-        <div class="table-div">
-        <mat-table class="summary-table" *ngFor="let summary of this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate)">
-
-            <ng-container matColumnDef="emotion">
-                <mat-header-cell *matHeaderCellDef><img class="selected-emotion" src="../../assets/images/emotions/{{summary.mood}}.svg" matTooltip="{{summary.mood}}"></mat-header-cell>
-                <mat-cell class="duration-cell"></mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="intensity">
-                <mat-header-cell *matHeaderCellDef>{{summary.intensity}}</mat-header-cell>
-                <mat-cell class="description-cell"></mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="date">
-                <mat-header-cell *matHeaderCellDef>{{stringToDate(summary.date).toLocaleDateString() + " at " + stringToDate(summary.date).toLocaleTimeString() }}</mat-header-cell>
-                <mat-cell class="duration-cell"></mat-cell>
-            </ng-container>
-
-            <ng-container matColumnDef="description">
-                <mat-header-cell *matHeaderCellDef>
-                    <a (click)="showAllDescription(summary.description)">
-                    <button class="show-more-button" *ngIf="summary.description != null">Show more</button></a>
-                </mat-header-cell>
-                <mat-cell class="duration-cell"></mat-cell>
-            </ng-container>
-
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-
-        </mat-table>
-
-        </div>
-
-        <!--<mat-card id="graphCard">
-
-            <div id="tabs">
-            <mat-tab-group #myTabGroup>
-                <mat-tab id="md-tab-label-0-1" label="List View">
-
-
-
-                    &lt;!&ndash;<mat-card> <mat-card-title class="your-summaries-title">Your Emotions</mat-card-title>
-
-                        <mat-card-subtitle class="your-summaries-title">You have {{totalNumberMoods()}} emotions to view</mat-card-subtitle>
-                        <mat-accordion *ngIf="summaries && myTabGroup.selectedIndex == 1; else summariesError">
-                            <mat-expansion-panel #elem class="summaries" [id]="summary._id" [expanded]="this.isHighlighted(summary)" *ngFor="let summary of this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate)">
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title id="name">
-                                        <img class="selected-emotion" src="../../assets/images/emotions/{{summary.mood}}.svg">
-                                        You felt {{summary.mood}} on
-                                        {{stringToDate(summary.date).toLocaleDateString()}} at
-                                        {{stringToDate(summary.date).toLocaleTimeString()}}</mat-panel-title>
-                                </mat-expansion-panel-header>
-                                <mat-panel-description>Journal entry: {{summary.description}}</mat-panel-description>
-                                <mat-panel-description>Intensity: {{summary.intensity}}</mat-panel-description>
-                            </mat-expansion-panel>
-                        </mat-accordion>
-
-                        <ng-template #summariesError>
-                            <mat-error>
-                                There was a problem loading the goals. Possibly the server is down or perhaps there are network
-                                issues.
-                            </mat-error>
-                            <mat-error>
-                                Please wait a bit and try again or start the server.
-                            </mat-error>
-                        </ng-template>
-                    </mat-card>&ndash;&gt;
-                </mat-tab>
-
-                <mat-tab id="md-tab-label-0-0" label="Graphs">
-                    <div id="graphFilter">
-                        <form>
-                            &lt;!&ndash;# The Angular feature&ndash;&gt;
-                            <label>Show entries across a day or week?</label>
-                            <mat-select name="dropdown" id="labelType"
-                                    #input [(ngModel)]="inputType">
-                                <mat-option id ="md-option-12" value="day">Day</mat-option>
-                                <mat-option id ="md-option-13" value="week" selected>Week</mat-option>
-                                <mat-option id ="md-option-14" value="month">Month</mat-option>
-                                <mat-option id ="md-option-15" value="year">Year</mat-option>
-                            </mat-select>
-                        </form>
-                        <br>
-                        <mat-checkbox id="pastXBox" [(ngModel)]="limitedPast">Show only entries from the past {{inputType}}</mat-checkbox>
-                        <br>
-                        <hr>
-                        Detailed Graph Options
-                        <br>
-                        <mat-checkbox id="colorblindBox" [(ngModel)]="colorblindMode">Colorblind Mode</mat-checkbox>
-                        <br>
-                        <mat-radio-group [(ngModel)]="graphMode">
-                        <mat-radio-button id="lineradio" value="line">Line Graph</mat-radio-button>
-                            |
-                        <mat-radio-button id="barradio" value="bar">Stacked Bar Graph</mat-radio-button>
-                        </mat-radio-group>
-                        <br>
-                        <hr>
-                        <button mat-raised-button id="filterBasicButton" (click)="this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate); updateBasicChart()">Summary Graph</button>
-                        <button mat-raised-button id="filterDetailedButton" (click)="this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate); updateDetailedChart()">Detailed Graph</button>
-                        <br>
-
-
-                    </div>
-                    <mat-card> <mat-card-title class="your-summaries-title">Your Emotions</mat-card-title>
-                        <mat-card-subtitle class="your-summaries-title">There are {{totalNumberMoods()}} entries represented</mat-card-subtitle>
-                    <canvas id="Chart" height="auto"></canvas>
-                    </mat-card>
-
-                </mat-tab>
-
-
-            </mat-tab-group>
+        <mat-card id="filtering">
+            <div class="top" id="filterCard">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+                <h3><i>Filtering:</i></h3>
+                <div id="filterContents">
+                    <form>
+                        <!--# The Angular feature-->
+                        <label> Emotion:</label>
+                        <mat-select name="dropdown" id="summaryMood"
+                                    #input placeholder="Filter by Mood"
+                                    [(ngModel)]="summaryMood">
+                            <mat-option id="md-option-0" selected value="All">All Emotions</mat-option>
+                            <mat-option id="md-option-1" value="Happy">Happy</mat-option>
+                            <mat-option id="md-option-2" value="Sad">Sad</mat-option>
+                            <mat-option id="md-option-3" value="Meh">Meh</mat-option>
+                            <mat-option id="md-option-4" value="Mad">Mad</mat-option>
+                            <mat-option id="md-option-5" value="Anxious">Anxious</mat-option>
+                            <!-- mat-option ids autoreplaced by md-option-x anyway -->
+                        </mat-select>
+                    </form>
+                    <br>
+                    <form>
+                        <label> Intensity: </label>
+                        <mat-select name="dropdownInt" id="summaryInt"
+                                    #input placeholder="Filter by Intensity"
+                                    [(ngModel)]="summaryIntensity">
+                            <mat-option id="md-option-6" selected value="All">All</mat-option>
+                            <mat-option id="md-option-7" value="1">1</mat-option>
+                            <mat-option id="md-option-8" value="2">2</mat-option>
+                            <mat-option id="md-option-9" value="3">3</mat-option>
+                            <mat-option id="md-option-10" value="4">4</mat-option>
+                            <mat-option id="md-option-11" value="5">5</mat-option>
+                        </mat-select>
+                    </form>
+                    <mat-form-field class="start">
+                        <input
+                            id="startDate"
+                            matInput [matDatepicker]="start"
+                            placeholder="Choose a Start Date"
+                            [(ngModel)]="startDate"
+                            (input)="startDate = $event.target.value"
+                            disabled>
+                        <mat-datepicker-toggle id="startButton" matSuffix [for]="start" enabled></mat-datepicker-toggle>
+                        <mat-datepicker touchUi="true" #start disabled="false"></mat-datepicker>
+                    </mat-form-field> &nbsp;
+                    <mat-form-field class="end">
+                        <input
+                            id="endDate"
+                            matInput [matDatepicker]="end"
+                            placeholder="Choose an End Date"
+                            [(ngModel)]="endDate"
+                            (input)="endDate = $event.target.value"
+                            disabled>
+                        <mat-datepicker-toggle id="endButton" matSuffix [for]="end"></mat-datepicker-toggle>
+                        <mat-datepicker touchUi="true" #end disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                    <button mat-raised-button id="clearDatesButton" (click)="this.clearDateFilter()">Clear Date
+                        Filters
+                    </button>
+                </div>
             </div>
-        </mat-card>-->
+        </mat-card>
     </div>
 </div>
