@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
@@ -66,7 +66,7 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         ResourcesService,
         {provide: APP_BASE_HREF, useValue: '/'},
         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true},
-],
+    ],
     entryComponents: [
         AddGoalComponent,
         AddJournalComponent,
