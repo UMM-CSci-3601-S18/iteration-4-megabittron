@@ -7,7 +7,7 @@
                         <div id="graphFilter">
                             <form>
                                 <!--# The Angular feature-->
-                                <label>Show entries across a day or week?</label>
+                                <label>Show entries across a day, week, month, or year?</label>
                                 <mat-select name="dropdown" id="labelType"
                                             #input [(ngModel)]="inputType">
                                     <mat-option id="md-option-12" value="day">Day</mat-option>
@@ -52,7 +52,7 @@
                         </mat-card>
                     </mat-tab>
 
-                    <mat-tab id="md-tab-label-0-1" label="List View">
+                    <mat-tab id="md-tab-label-0-1" label="Table View">
                         <mat-card>
                             <mat-card-title class="your-summaries-title">Your Emotions</mat-card-title>
                             <mat-card-subtitle class="your-summaries-title">You have {{totalNumberMoods()}} emotions to
@@ -100,7 +100,8 @@
                                         <ng-container matColumnDef="description">
                                             <mat-header-cell *matHeaderCellDef>
                                                 <a (click)="showAllDescription(summary.description)">
-                                                    <button class="show-more-button"
+                                                    <button mat-raised-button
+                                                            class="show-more-button"
                                                             *ngIf="summary.description != null">Show more
                                                     </button>
                                                 </a>
@@ -137,7 +138,7 @@
                         <!--# The Angular feature-->
                         <label> Emotion:</label>
                         <mat-select name="dropdown" id="summaryMood"
-                                    #input placeholder="Filter by Mood"
+                                    #input placeholder="Filter by Emotion"
                                     [(ngModel)]="summaryMood">
                             <mat-option id="md-option-0" selected value="All">All Emotions</mat-option>
                             <mat-option id="md-option-1" value="Happy">Happy</mat-option>

@@ -29,3 +29,7 @@
     width: 25px;
     padding-right: 2%;
 }
+
+.show-more-button {
+    color: rgba(0,0,0,0.76);
+}

@@ -19,7 +19,7 @@
 
 .iframe-container {
     position:relative;
-    padding-bottom: 44%; /*responsible for video size*/
+    padding-bottom: 44%;
     height:0;
     overflow:hidden;
 }
