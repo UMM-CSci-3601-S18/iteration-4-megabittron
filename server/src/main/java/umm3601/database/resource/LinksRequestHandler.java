@@ -82,6 +82,7 @@ public class LinksRequestHandler {
                 try {
                     BasicDBObject dbO = (BasicDBObject) o;
                     String id = dbO.getString("_id");
+                    String userID = dbO.getString("userID");
                     String name = dbO.getString("name");
                     String email = dbO.getString("subname");
                     String phone = dbO.getString("url");
@@ -89,7 +90,7 @@ public class LinksRequestHandler {
 
 //
 //                    System.err.println("Adding new contact [id=" + id + ", name=" + name + " subname=" + subname + "url" + url  + ']');
-                    return linksController.addNewLinks( id, name, email, phone).toString();
+                    return linksController.addNewLinks( id, userID, name, email, phone).toString();
                 }
                 catch(NullPointerException e)
                 {

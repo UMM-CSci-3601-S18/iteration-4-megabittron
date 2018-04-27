@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Journal} from './journal';
 import {environment} from '../../environments/environment';
+import 'rxjs/add/observable/of';
 
 
 @Injectable()
@@ -130,6 +131,6 @@ export class JournalsService {
         };
 
         // Send post request to delete journal.
-        return this.http.post(this.journalUrl + '/delete' + journalID, httpOptions);
+        return this.http.delete(this.journalUrl + '/delete/' + journalID, httpOptions);
     }
 }
