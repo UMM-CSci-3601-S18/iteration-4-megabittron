@@ -26,6 +26,7 @@ import {
     MatFormFieldModule,
     MatSlideToggleModule,
     MatStepperModule,
+    MatTableModule,
 } from '@angular/material';
 
 import { FlexLayoutModule, } from '@angular/flex-layout';
@@ -66,6 +67,7 @@ const MATERIAL_MODULES: any[] = [
     MatFormFieldModule,
     MatSlideToggleModule,
     MatStepperModule,
+    MatTableModule,
 ];
 
 const COVALENT_MODULES: any[] = [

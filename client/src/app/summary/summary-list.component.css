@@ -25,5 +25,7 @@
     background-color: #ffffff;
 }
 
-
-
+.selected-emotion {
+    width: 25px;
+    padding-right: 2%;
+}

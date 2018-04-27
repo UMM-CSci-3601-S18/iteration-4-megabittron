@@ -61,6 +61,7 @@ describe('Home', () => {
 
             Hcomponent.selectedEmotion = 'happy';
             Hcomponent.emojiRating = 3;
+            Hcomponent.videoEmotion = 'happy';
         });
     }));
 
@@ -74,6 +75,7 @@ describe('Home', () => {
         Hcomponent.selectedEmotion = 'happy';
         Hcomponent.selectEmotion('sad');
         expect(Hcomponent.selectedEmotion).toBe('sad');
+        expect(Hcomponent.videoEmotion).toBe('sad');
     });
 
     it('should set emotion to meh', () => {
