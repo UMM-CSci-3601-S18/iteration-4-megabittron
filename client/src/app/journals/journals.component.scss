@@ -3,17 +3,17 @@
     margin: 0 auto;
 }
 
-.journal-name {
+.journal-title {
     text-align: left;
     font-size: 18px;
 }
 
-.add-journal-button {
+.add {
     width: 90%;
     margin-bottom: 15px;
 }
 
-.add-journal-button:hover {
+.add:hover {
     background-color: #C8E6C9;
 }
 
@@ -32,32 +32,12 @@
     word-wrap: break-word;
 }
 
-.action-button {
-    float: right;
-}
-
-.delete-journal {
-    color: #F44336;
-}
-
-.delete-journal:hover {
-    background-color: #FFEBEE;
-}
-
-.edit-journal {
-    color: #00838F;
-}
-
-.edit-journal:hover {
-    background-color: #E0F7FA;
-}
-
 .journals-section {
     margin: 0 auto;
     max-width: 500px;
 }
 
-.journals-card {
+.journal-card {
     margin: 15px;
     width: 325px;
     height: 200px;
@@ -76,7 +56,7 @@
 
 .sidenav {
     height: 100%;
-    width: 250px;
+    width: 275px;
     position: fixed;
     z-index: 1;
     overflow-x: hidden;
@@ -84,8 +64,8 @@
     background-color: #546E7A;
 }
 
-.grid-journals-section {
-    margin-left: 250px;
+.grid-list {
+    margin-left: 275px;
 }
 
 .nav-journals-title {
@@ -105,8 +85,13 @@
     margin-bottom: -20px;
 }
 
-.prompt-card {
+.prompts {
     width: 90%;
     margin: 0 auto;
     margin-top: 15px;
+}
+
+.journal-card-open {
+    text-decoration: none;
+    color: black;
 }

@@ -130,37 +130,6 @@ export class JournalsComponent implements OnInit {
         });
     }
 
-    openEditJournalDialog(_id: string, title: string, content: string, date: string): void {
-        console.log("Edit journal button clicked.");
-        console.log(_id + ' ' + title + content + date);
-        const newJournal: Journal = {_id: _id, userID: localStorage.getItem('userID'), title: title, content: content, date: date};
-        const dialogRef = this.dialog.open(EditJournalComponent, {
-            width: '300px',
-            data: { journal: newJournal }
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-            if (result == undefined) {
-                console.log("Cancelled without editing the journal.");
-            } else {
-                this.journalListService.editJournal(result).subscribe(
-                    editJournalResult => {
-                        this.highlightedID = editJournalResult;
-                        this.refreshJournals();
-                        this.snackBar.open("Edited Journal", "CLOSE", {
-                            duration: 2000,
-                        });
-                        console.log("Journal edited.");
-                    },
-                    err => {
-                        // This should probably be turned into some sort of meaningful response.
-                        console.log('There was an error editing the journal.');
-                        console.log('The error was ' + JSON.stringify(err));
-                    });
-            }
-        });
-    }
-
     showMoreInfoDialog(content: string): void {
         const showJournal: Journal = {_id: null, userID: null, title: null, content: content, date: null};
         const dialogRef = this.dialog.open(ShowJournalComponent, {
