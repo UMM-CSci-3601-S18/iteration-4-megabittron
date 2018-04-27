@@ -72,7 +72,7 @@
                                         <mat-icon>delete</mat-icon>
                                     </button>
 
-                                    <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" class="today-complete-goal"
+                                    <button mat-icon-button class="button complete-button"
                                             (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next)">
                                         <mat-icon>done</mat-icon>
                                     </button>
@@ -163,7 +163,7 @@
                                             (click)="deleteGoal(goal._id['$oid'])">
                                         <mat-icon>delete</mat-icon>
                                     </button>
-                                    <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" class="today-complete-goal"
+                                    <button *ngIf="goal.status == false" mat-icon-button class="button complete-button"
                                             (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next)">
                                         <mat-icon>done</mat-icon>
                                     </button>
@@ -252,11 +252,11 @@
                                            (click)="deleteGoal(goal._id['$oid'])">
                                        <mat-icon>delete</mat-icon>
                                    </button>
-                                   <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" id="desktop-all-complete-goal"
+                                   <button *ngIf="goal.status == false" mat-icon-button class="button complete-button"
                                            (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next)">
                                        <mat-icon>done</mat-icon>
                                    </button>
-                                   <button *ngIf="goal.status == true" mat-icon-button class="button complete-button" id="desktop-uncomplete-goal"
+                                   <button *ngIf="goal.status == true" mat-icon-button class="button complete-button"
                                            (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)">
                                        <mat-icon>add</mat-icon>
                                    </button>
@@ -345,11 +345,11 @@
                                                     (click)="deleteGoal(goal._id['$oid'])">
                                                 <mat-icon>delete</mat-icon>
                                             </button>
-                                            <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" id="all-complete-goal"
+                                            <button *ngIf="goal.status == false" mat-icon-button class="button complete-button"
                                                     (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next)">
                                                 <mat-icon>done</mat-icon>
                                             </button>
-                                            <button *ngIf="goal.status == true" mat-icon-button class="button complete-button" id="uncomplete-goal"
+                                            <button *ngIf="goal.status == true" mat-icon-button class="button complete-button"
                                                     (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)">
                                                 <mat-icon>add</mat-icon>
                                             </button>

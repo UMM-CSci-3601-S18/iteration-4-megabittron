@@ -94,6 +94,7 @@ export class GoalsComponent implements OnInit {
                        start: string, end: string, next: string): void {
         console.log("Edit goal button clicked.");
         console.log(_id + ' ' + name + purpose + end);
+        console.log("this is next " + next);
         const newGoal: Goal = {_id: _id, userID: localStorage.getItem('userID'), purpose: purpose, category: category, name: name, status: status,
         frequency: frequency, start: start, end: end, next: next};
         const dialogRef = this.dialog.open(EditGoalComponent, {
@@ -176,7 +177,6 @@ export class GoalsComponent implements OnInit {
         if(this.showAllGoals == false) {
             if(this.today !== undefined) {
                 this.todayGoals = this.goals.filter(goal => {
-
 
                     var nextGoal = new Date(goal.next);
                     nextGoal.setHours(0, 0, 0, 0);
