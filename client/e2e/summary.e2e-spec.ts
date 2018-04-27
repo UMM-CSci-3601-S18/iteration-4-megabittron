@@ -3,7 +3,7 @@ import {browser, protractor, element, by} from 'protractor';
 import {Key} from 'selenium-webdriver';
 
 
-fdescribe('Summary', () => {
+describe('Summary', () => {
     let page: SummaryPage;
 
     beforeEach(() => {
