@@ -9,7 +9,7 @@
 }
 
 .add {
-    width: 90%;
+    width: 50%;
     margin-bottom: 15px;
 }
 
@@ -28,7 +28,7 @@
     color: white;
 }
 
-.journal-info {
+.break-word {
     word-wrap: break-word;
 }
 
@@ -87,6 +87,7 @@
 
 .prompts {
     width: 90%;
+    height: 175px;
     margin: 0 auto;
     margin-top: 15px;
 }
@@ -95,3 +96,4 @@
     text-decoration: none;
     color: black;
 }
+

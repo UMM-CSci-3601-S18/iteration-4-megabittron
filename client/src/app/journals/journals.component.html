@@ -1,7 +1,7 @@
 <div class="sidenav" hide-xs>
     <h2 class="nav-journals-title">Journals</h2>
     <hr class="nav-title-divider">
-    <button mat-raised-button (click)="openAddJournalDialog()" class="add" id="addNewJournal">
+    <button mat-raised-button (click)="openAddJournalDialog()" class="add action-button" id="addNewJournal">
         New Journal
     </button>
     <mat-card class="filter-fields">
@@ -19,44 +19,36 @@
         </mat-form-field>
     </mat-card>
     <mat-card class="prompts">
+        <mat-card-title>
+            <button mat-raised-button (click)="RandomPrompt()" class="refresh action-button">
+                Journal Prompt
+            </button>
+        </mat-card-title>
         <mat-card-content>
-            <p> Click on the “refresh” button below to get a new journal prompt!</p>
-            <button mat-raised-button id="newPrompt" (click)="RandomPrompt()" type="button">Refresh </button>
-
+            {{prompt}}
         </mat-card-content>
-        <div class="prompt-show">
-            <p>{{prompt}}</p>
-        </div>
     </mat-card>
 </div>
 <div class="grid-list" hide-xs>
     <div layout="row" layout-wrap>
-
         <mat-card class="journal-card"
                   *ngFor="let journal of filterJournals(journalTitle, journalContent, journalDate) | dateSort: '-date'"
                   #elem [id]="journal._id['$oid']">
             <a routerLink="/journals/{{journal._id['$oid']}}" class="journal-card-open">
-
-            <div class="journal-details">
-                <mat-card-content class="journal-info">
-                    <mat-card-title class="journal-title">
-                        {{journal.title}}
-                    </mat-card-title>
+                <div class="journal-details">
+                    <mat-card-title class="journal-title break-word">{{journal.title}}</mat-card-title>
                     <mat-card-subtitle class="date-subtitle">
                         {{journal.date | date : "MMM d, yyyy 'at' h:mm a"}}
                     </mat-card-subtitle>
                     <mat-divider></mat-divider>
-                    <p>{{journal.content | slice : 0:100}}
-                        <a>...</a></p>
-                    <p *ngIf="journal.content.length <100">
-                        {{journal.content}}</p>
-                </mat-card-content>
-            </div>
+                    <mat-card-content class="journal-info break-word">
+                        {{journal.content | slice : 0:150}}<a *ngIf="journal.content.length > 150">...</a>
+                    </mat-card-content>
+                </div>
             </a>
         </mat-card>
     </div>
 </div>
-
 <div class="list-journals-section" hide-gt-xs>
     <mat-form-field class="journals-mobile-search">
         <input matInput placeholder="Search" [(ngModel)]="journalTitle"/>
