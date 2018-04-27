@@ -185,7 +185,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     // xValue can represent hour, weekday, date, or month.
     filterGraph(xValue, Searchmood): number {
         Searchmood = Searchmood.toLocaleLowerCase();
-        let filterData = this.filteredSummaries.filter(summary => {
+        let filterData = this.summaries.filter(summary => {
             return !Searchmood || summary.mood.toLowerCase().indexOf(Searchmood) !== -1;
         });
 
@@ -749,8 +749,29 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     }
 
     // Used to show total number of summaries shown by chart in HTML
+    numberMoods(): number{
+        if(this.limitedPast){
+            if(this.inputType == 'day'){
+                return this.pastDayEmotions(this.summaries).length
+            }else{
+                if(this.inputType == 'week'){
+                    return this.pastWeekEmotions(this.summaries).length
+                }else{
+                    if(this.inputType == 'month'){
+                        return this.pastMonthEmotions(this.summaries).length
+                    }else{
+                        return this.pastYearEmotions(this.summaries).length
+                    }
+                }
+            }
+        }
+        else {
+        return this.summaries.length;
+        }
+    }
+
     totalNumberMoods(): number{
-        return this.filteredSummaries.length;
+        return this.filteredSummaries.length
     }
 
     ngAfterViewInit(): void {
