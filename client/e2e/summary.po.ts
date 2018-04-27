@@ -20,53 +20,57 @@ export class SummaryPage {
     }
 
     selectMoodDropdown(): promise.Promise<boolean> {
-        this.highlightElement(by.id('summaryMood'));
-        return element(by.id('summaryMood')).isPresent();
+        this.highlightElement(by.className('summaryMood'));
+        return element(by.className('summaryMood')).isPresent();
     }
 
     clickMoodDropdown(): promise.Promise<void> {
-        this.highlightElement(by.id('summaryMood'));
-        return element(by.id('summaryMood')).click();
+        this.highlightElement(by.className('summaryMood'));
+        return element(by.className('summaryMood')).click();
     }
 
     selectIntensityDropdown(): promise.Promise<boolean> {
-        this.highlightElement(by.id('summaryInt'));
-        return element(by.id('summaryInt')).isPresent();
+        this.highlightElement(by.className('summaryInt'));
+        return element(by.className('summaryInt')).isPresent();
     }
 
     clickIntensityDropdown(): promise.Promise<void> {
-        this.highlightElement(by.id('summaryInt'));
-        return element(by.id('summaryInt')).click();
+        this.highlightElement(by.className('summaryInt'));
+        return element(by.className('summaryInt')).click();
     }
 
     selectStartDate(): promise.Promise<boolean> {
-        this.highlightElement(by.id('startDate'));
-        return element(by.id('startDate')).isPresent();
+        this.highlightElement(by.className('startDate'));
+        return element(by.className('startDate')).isPresent();
     }
 
     clickStartDate(): promise.Promise<void> {
-        this.highlightElement(by.id('startDate'));
-        return element(by.id('startDate')).click();
+        this.highlightElement(by.className('startDate'));
+        return element(by.className('startDate')).click();
     }
 
     selectEndDate(): promise.Promise<boolean> {
-        this.highlightElement(by.id('endDate'));
-        return element(by.id('endDate')).isPresent();
+        this.highlightElement(by.className('endDate'));
+        return element(by.className('endDate')).isPresent();
     }
 
     clickEndDate(): promise.Promise<void> {
-        this.highlightElement(by.id('endDate'));
-        return element(by.id('endDate')).click();
+        this.highlightElement(by.className('endDate'));
+        return element(by.className('endDate')).click();
     }
 
     selectTimeDropdown(): promise.Promise<boolean> {
-        this.highlightElement(by.id('labelType'));
-        return element(by.id('labelType')).isPresent();
+        this.highlightElement(by.className('labelType'));
+        return element(by.className('labelType')).isPresent();
     }
 
     clickTimeDropdown(): promise.Promise<void> {
-        this.highlightElement(by.id('labelType'));
-        return element(by.id('labelType')).click();
+        this.highlightElement(by.className('labelType'));
+        return element(by.className('labelType')).click();
+    }
+
+    delay(ms: number) {
+        return new Promise( resolve => setTimeout(resolve, ms) );
     }
 
 

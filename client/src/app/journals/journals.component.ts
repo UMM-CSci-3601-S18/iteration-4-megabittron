@@ -27,18 +27,7 @@ export class JournalsComponent implements OnInit {
     public index = 0;
     public prompt: String;
 
-
-
-    RandomPrompt(): void {
-        this.prompt = this.prompts[Math.floor(Math.random() * this.prompts.length)];
-    }
-
-    /*ngOnInit (): void {
-        this.RandomPrompt();
-    }*/
-
     public prompts: String[] = [
-
         "What scares you?",
         "Do you have a plan? Do you need a plan? Have you had a plan fall spectacularly to pieces?",
         "What is your take on soul mates?",
@@ -102,6 +91,10 @@ export class JournalsComponent implements OnInit {
                 public appService: AppService,
                 private router: Router) {
 
+    }
+
+    RandomPrompt(): void {
+        this.prompt = this.prompts[Math.floor(Math.random() * this.prompts.length)];
     }
 
     openAddJournalDialog(): void {
@@ -257,6 +250,11 @@ export class JournalsComponent implements OnInit {
         );
     }
 
+
+    isHighlighted(journal: Journal): boolean {
+        return journal._id['$oid'] === this.highlightedID['$oid'];
+    }
+
     ngOnInit(): void {
         //For testing
         //toggle the value in app service to toggle testing
@@ -270,10 +268,6 @@ export class JournalsComponent implements OnInit {
         this.loadService();
         this.refreshJournals();
 
-    }
-
-    isHighlighted(journal: Journal): boolean {
-        return journal._id['$oid'] === this.highlightedID['$oid'];
     }
 
 }

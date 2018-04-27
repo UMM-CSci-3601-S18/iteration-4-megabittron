@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Emotion} from './emotion';
 import {environment} from '../../environments/environment';
+import 'rxjs/add/observable/of';
+
 
 @Injectable()
 export class EmotionService {

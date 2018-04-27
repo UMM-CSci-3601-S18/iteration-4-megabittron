@@ -1,8 +1,5 @@
-import {environment} from '../../environments/environment';
 import {AppService} from "../app.service";
 import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material';
-import {MatSnackBar} from '@angular/material';
 import {Contact} from './contact';
 import {Link} from './link';
 import {ResourcesService} from "./resources.service";
@@ -160,9 +157,6 @@ export class ResourcesComponent implements OnInit{
                 console.log(err);
             }
         );
-
-
-
     }
 
     ngOnInit(): void {

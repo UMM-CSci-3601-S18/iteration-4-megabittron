@@ -1,12 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-
 import {Link} from './link';
 import {Contact} from './contact';
 import {environment} from '../../environments/environment';
+import 'rxjs/add/observable/of';
 
 
 @Injectable()
