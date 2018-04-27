@@ -67,12 +67,14 @@
     <mat-list class="journals-list">
         <div class="journals-list-info" *ngFor="let journal of filterJournals(journalTitle, journalContent, journalDate) | dateSort: '-date'"
              #elem [id]="journal._id['$oid']">
-            <mat-list-item >
-                <h3 matLine><strong>{{journal.title}}</strong></h3>
+            <a routerLink="/journals/{{journal._id['$oid']}}" class="journal-card-open">
+            <mat-list-item>
+                <h3 matLine>{{journal.title}}</h3>
                 <h5>{{journal.date | date : "MM/dd/yy"}}</h5>
                 <h6 matLine>{{journal.content}}</h6>
             </mat-list-item>
             <mat-divider></mat-divider>
+            </a>
         </div>
     </mat-list>
 

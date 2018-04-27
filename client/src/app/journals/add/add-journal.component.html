@@ -19,9 +19,9 @@
 
                     <button mat-raised-button id="newPrompt" (click)="RandomPrompt()" type="button">Refresh </button>
 -->
-                    <mat-form-field hintLabel="Max 40 characters">
+                    <mat-form-field hintLabel="Max 30 characters">
                         <input matInput #input required
-                               maxlength="40"
+                               maxlength="30"
                                id="titleField" placeholder="Title"
                                [(ngModel)]="data.journal.title"
                                name="data.journal.title">
