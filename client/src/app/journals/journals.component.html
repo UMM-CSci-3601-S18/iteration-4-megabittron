@@ -41,25 +41,15 @@
                 <mat-card-content class="journal-info">
                     <mat-card-title class="journal-title">
                         {{journal.title}}
-<!--                        <button mat-raised-button routerLink="/journals/{{journal._id['$oid']}}" >
-                            Open Page
-                        </button>-->
                     </mat-card-title>
                     <mat-card-subtitle class="date-subtitle">
                         {{journal.date | date : "MMM d, yyyy 'at' h:mm a"}}
                     </mat-card-subtitle>
                     <mat-divider></mat-divider>
-                    <p *ngIf="journal.content.length > 100">
-                        {{journal.content | slice : 0:100}}
-                        <a (click)="showMoreInfoDialog(journal.content)">
-                            <button class="show-more-button">
-                                ...show more
-                            </button>
-                        </a>
-                    </p>
+                    <p>{{journal.content | slice : 0:100}}
+                        <a>...</a></p>
                     <p *ngIf="journal.content.length <100">
-                        {{journal.content}}
-                    </p>
+                        {{journal.content}}</p>
                 </mat-card-content>
             </div>
             </a>

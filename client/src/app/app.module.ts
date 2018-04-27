@@ -18,7 +18,6 @@ import {SummaryListService} from "./summary/summary-list.service";
 import {JournalsComponent} from "./journals/journals.component";
 import {AddJournalComponent} from "./journals/add/add-journal.component";
 import {EditJournalComponent} from "./journals/edit/edit-journal.component";
-import {ShowJournalComponent} from "./journals/show/show-journal.component";
 import {ViewJournalComponent} from "./journals/view/view-journal.component";
 import {JournalsService} from "./journals/journals.service";
 import {ArraySortPipe} from "./journals/array-sort.pipe";
@@ -50,7 +49,6 @@ import {RouterModule} from "@angular/router";
         JournalsComponent,
         AddJournalComponent,
         EditJournalComponent,
-        ShowJournalComponent,
         ViewJournalComponent,
         SummaryListComponent,
         ArraySortPipe,
@@ -69,7 +67,6 @@ import {RouterModule} from "@angular/router";
         AddGoalComponent,
         AddJournalComponent,
         EditJournalComponent,
-        ShowJournalComponent,
         ViewJournalComponent,
     ],
     bootstrap: [

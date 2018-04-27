@@ -4,8 +4,6 @@ import {Journal} from './journal';
 import {Observable} from 'rxjs/Observable';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {AddJournalComponent} from './add/add-journal.component';
-import {EditJournalComponent} from "./edit/edit-journal.component";
-import {ShowJournalComponent} from "./show/show-journal.component";
 import {AppService} from "../app.service";
 import {Router} from "@angular/router";
 
@@ -26,7 +24,6 @@ export class JournalsComponent implements OnInit {
     public length: number;
     public index = 0;
     public prompt: String;
-
     public prompts: String[] = [
         "What scares you?",
         "Do you have a plan? Do you need a plan? Have you had a plan fall spectacularly to pieces?",
@@ -128,15 +125,6 @@ export class JournalsComponent implements OnInit {
                 }
             }
         });
-    }
-
-    showMoreInfoDialog(content: string): void {
-        const showJournal: Journal = {_id: null, userID: null, title: null, content: content, date: null};
-        const dialogRef = this.dialog.open(ShowJournalComponent, {
-            width: '500px',
-            data: { journal: showJournal }
-        });
-        console.log("Showing more journal info.");
     }
 
     deleteJournal(_id: string) {

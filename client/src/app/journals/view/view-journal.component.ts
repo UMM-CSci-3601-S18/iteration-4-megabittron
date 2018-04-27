@@ -28,6 +28,9 @@ export class ViewJournalComponent implements OnInit {
         });
     }
 
+    public journals: Journal[] = [];
+    public length: number;
+    public index = 0;
     private highlightedID: {'$oid': string} = { '$oid': '' };
     public id: string;
     public journal: Journal = {
@@ -105,12 +108,25 @@ export class ViewJournalComponent implements OnInit {
         return journalObservable;
     }
 
+    loadService(): void {
+        this.journalListService.getJournalById(this.id).subscribe(
+            data => {
+                this.journal = data;
+            },
+            err => {
+                console.log(err);
+            }
+        );
+    }
+
     isHighlighted(journal: Journal): boolean {
         return journal._id['$oid'] === this.highlightedID['$oid'];
     }
 
     ngOnInit(): void {
+        this.appService.testingToggle();
         this.refreshJournal();
+        this.loadService();
     }
 
 }
