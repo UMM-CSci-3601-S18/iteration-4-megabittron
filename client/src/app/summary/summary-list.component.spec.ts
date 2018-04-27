@@ -58,7 +58,7 @@ describe('Summary', () => {
 
         TestBed.configureTestingModule({
             imports: [CustomModule, RouterTestingModule],
-            declarations: [SummaryListComponent, MatTableModule],
+            declarations: [SummaryListComponent],
             providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
@@ -204,7 +204,7 @@ describe('Chart Filtering - no limit', () => {
 
         TestBed.configureTestingModule({
             imports: [CustomModule, RouterTestingModule],
-            declarations: [SummaryListComponent, MatTableModule],
+            declarations: [SummaryListComponent],
             providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
@@ -283,7 +283,7 @@ describe('Chart Filtering - Past Day', () => {
 
         TestBed.configureTestingModule({
             imports: [CustomModule, RouterTestingModule],
-            declarations: [SummaryListComponent, MatTableModule],
+            declarations: [SummaryListComponent],
             providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
@@ -399,7 +399,7 @@ describe('Chart Filtering - Past Week', () => {
 
         TestBed.configureTestingModule({
             imports: [CustomModule, RouterTestingModule],
-            declarations: [SummaryListComponent, MatTableModule],
+            declarations: [SummaryListComponent],
             providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
@@ -514,7 +514,7 @@ describe('Chart Filtering - Past Month', () => {
 
         TestBed.configureTestingModule({
             imports: [CustomModule, RouterTestingModule],
-            declarations: [SummaryListComponent, MatTableModule],
+            declarations: [SummaryListComponent],
             providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
@@ -653,7 +653,7 @@ describe('Chart Filtering - Past Year', () => {
 
         TestBed.configureTestingModule({
             imports: [CustomModule, RouterTestingModule],
-            declarations: [SummaryListComponent, MatTableModule],
+            declarations: [SummaryListComponent],
             providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
