@@ -1,7 +1,7 @@
 export interface Journal {
     _id: string;
     userID: string;
-    subject: string;
-    body: string;
+    title: string;
+    content: string;
     date: any;
 }

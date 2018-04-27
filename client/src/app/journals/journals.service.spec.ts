@@ -10,30 +10,25 @@ describe('Journal list service: ', () => {
         {
             _id: 'buying_id',
             userID: 'weare1',
-            subject: 'Buying food',
-            body: 'I went to the ice cream store today for a sundae.',
+            title: 'Buying food',
+            content: 'I went to the ice cream store today for a sundae.',
             date: "Sat Jan 27 13:36:47 CST 2018"
         },
         {
             _id: 'visit_id',
             userID: 'usermcuserface',
-            subject: 'Visit mom',
-            body: 'I went to my Mom\'s house to talk to her.',
+            title: 'Visit mom',
+            content: 'I went to my Mom\'s house to talk to her.',
             date: "Sun Feb 12 16:32:41 CST 2018"
         },
         {
             _id: 'running_id',
             userID: 'theguyoverthere',
-            subject: 'Go on amazing run',
-            body: 'I went on a 25 mile run today!',
+            title: 'Go on amazing run',
+            content: 'I went on a 25 mile run today!',
             date: "Mon Mar 11 19:26:37 CST 2018"
         }
     ];
-    /*
-    const mJournals: Journal[] = testJournals.filter(journal =>
-        journal.subject.toLowerCase().indexOf('m') !== -1
-    );
-    */
 
     let journalListService: JournalsService;
     let currentlyImpossibleToGenerateSearchJournalUrl: string;
@@ -64,8 +59,8 @@ describe('Journal list service: ', () => {
             {
                 _id: 'buying_id',
                 userID: 'weare1',
-                subject: 'Buying food',
-                body: 'I went to the ice cream store today for a sundae.',
+                title: 'Buying food',
+                content: 'I went to the ice cream store today for a sundae.',
                 date: "Sat Jan 27 13:36:47 CST 2018"
             }
         ];
@@ -83,39 +78,27 @@ describe('Journal list service: ', () => {
         req.flush(testJournal);
     });
 
-    /*
-    it('getJournals(journalSubject) adds appropriate param string to called URL', () => {
-        journalListService.getJournals('m').subscribe(
-            journals => expect(journals).toEqual(mJournals)
-        );
-
-        const req = httpTestingController.expectOne(journalListService.baseUrl + '?subject=m&');
-        expect(req.request.method).toEqual('GET');
-        req.flush(mJournals);
-    });
-
-
-    it('filterBySubject(journalSubject) deals appropriately with a URL that already had a subject', () => {
-        currentlyImpossibleToGenerateSearchJournalUrl = journalListService.baseUrl + '?subject=f&something=k&';
+    it('filterByTitle(journalTitle) deals appropriately with a URL that already had a title', () => {
+        currentlyImpossibleToGenerateSearchJournalUrl = journalListService.baseUrl + '?title=f&something=k&';
         journalListService['journalUrl'] = currentlyImpossibleToGenerateSearchJournalUrl;
-        journalListService.filterBySubject('m');
-        expect(journalListService['journalUrl']).toEqual(journalListService.baseUrl + '?something=k&subject=m&');
+        journalListService.filterByTitle('m');
+        expect(journalListService['journalUrl']).toEqual(journalListService.baseUrl + '?something=k&title=m&');
     });
 
-    it('filterBySubject(journalSubject) deals appropriately with a URL that already had some filtering, but no subject', () => {
+    it('filterByTitle(journalTitle) deals appropriately with a URL that already had some filtering, but no title', () => {
         currentlyImpossibleToGenerateSearchJournalUrl = journalListService.baseUrl + '?something=k&';
         journalListService['journalUrl'] = currentlyImpossibleToGenerateSearchJournalUrl;
-        journalListService.filterBySubject('m');
-        expect(journalListService['journalUrl']).toEqual(journalListService.baseUrl + '?something=k&subject=m&');
+        journalListService.filterByTitle('m');
+        expect(journalListService['journalUrl']).toEqual(journalListService.baseUrl + '?something=k&title=m&');
     });
 
-    it('filterBySubject(journalSubject) deals appropriately with a URL has the keyword subject, but nothing after the =', () => {
-        currentlyImpossibleToGenerateSearchJournalUrl = journalListService.baseUrl + '?subject=&';
+    it('filterByTitle(journalTitle) deals appropriately with a URL has the keyword title, but nothing after the =', () => {
+        currentlyImpossibleToGenerateSearchJournalUrl = journalListService.baseUrl + '?title=&';
         journalListService['journalUrl'] = currentlyImpossibleToGenerateSearchJournalUrl;
-        journalListService.filterBySubject('');
+        journalListService.filterByTitle('');
         expect(journalListService['journalUrl']).toEqual(journalListService.baseUrl + '');
     });
-    */
+
 
     it('getJournalByID() calls api/journals/id', () => {
         const targetJournal: Journal = testJournals[1];
@@ -135,8 +118,8 @@ describe('Journal list service: ', () => {
         const newJournal: Journal = {
             _id: 'plunging_id',
             userID: 'userID99',
-            subject: 'Bathroom duties today',
-            body: 'Incidents occurred, so the toilet was plunged asap.',
+            title: 'Bathroom duties today',
+            content: 'Incidents occurred, so the toilet was plunged asap.',
             date: "Mon Mar 11 19:26:37 CST 2018"
         };
 
@@ -157,8 +140,8 @@ describe('Journal list service: ', () => {
         const editJournal: Journal = {
             _id: 'washing_id',
             userID: 'userID1',
-            subject: 'After cleaning today',
-            body: 'My hands got a little dirty doing chores, so I washed them.',
+            title: 'After cleaning today',
+            content: 'My hands got a little dirty doing chores, so I washed them.',
             date: "Sat Feb 21 19:16:37 CST 2018"
         };
 
@@ -173,4 +156,21 @@ describe('Journal list service: ', () => {
         expect(req.request.method).toEqual('POST');
         req.flush(washing_id);
     });
+
+    it('deleting a journal calls api/journals/delete', () => {
+        //const cleaning_id = { '$oid': 'cleaning_id' };
+        const cleaning_id: string = "cleaning_id";
+
+        journalListService.deleteJournal(cleaning_id).subscribe(
+            id => {
+                expect(id).toBe(cleaning_id);
+            }
+        );
+
+        const expectedUrl: string = journalListService.baseUrl + '/delete/' + cleaning_id;
+        const req = httpTestingController.expectOne(expectedUrl);
+        expect(req.request.method).toEqual('DELETE');
+        req.flush(cleaning_id);
+    });
+
 });

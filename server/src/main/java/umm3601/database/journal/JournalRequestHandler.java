@@ -60,14 +60,14 @@ public class JournalRequestHandler {
                     BasicDBObject dbO = (BasicDBObject) o;
 
                     String userID = dbO.getString("userID");
-                    String subject = dbO.getString("subject");
-                    String body = dbO.getString("body");
+                    String title = dbO.getString("title");
+                    String content = dbO.getString("content");
 
 
                     //Date date = dbO.getDate("date");
 
-                    System.err.println("Adding new journal for user " + userID + " [subject=" + subject + ", body=" + body + ']');
-                    return journalController.addNewJournal(userID, subject, body).toString();
+                    System.err.println("Adding new journal for user " + userID + " [title=" + title + ", content=" + content + ']');
+                    return journalController.addNewJournal(userID, title, content).toString();
                 }
                 catch(NullPointerException e)
                 {
@@ -101,13 +101,13 @@ public class JournalRequestHandler {
                     BasicDBObject dbO = (BasicDBObject) o;
 
                     String id = dbO.getString("_id");
-                    String subject = dbO.getString("subject");
-                    String body = dbO.getString("body");
+                    String title = dbO.getString("title");
+                    String content = dbO.getString("content");
 
 
 
-                    System.err.println("Editing journal [ id=" + id + ", subject=" + subject + ", body=" + body + ']');
-                    return journalController.editJournal(id, subject, body).toString();
+                    System.err.println("Editing journal [ id=" + id + ", title=" + title + ", content=" + content + ']');
+                    return journalController.editJournal(id, title, content).toString();
                 }
                 catch(NullPointerException e)
                 {

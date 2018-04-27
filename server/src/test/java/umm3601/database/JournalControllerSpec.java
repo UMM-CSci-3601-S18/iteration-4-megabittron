@@ -38,37 +38,37 @@ public class JournalControllerSpec {
         testJournals.add(Document.parse("{\n" +
             "                    _id: \"5ab88ab16148ec7b0f6b6fa4\",\n" +
             "                    userID: \"4cb56a89541a2d783595012c\",\n " +
-            "                    subject: \"Tuesday\",\n" +
-            "                    body: \"Tuesday it rain a lot\",\n" +
+            "                    title: \"Tuesday\",\n" +
+            "                    content: \"Tuesday it rain a lot\",\n" +
             "                    date: \"Sat Aug 21 1976 06:05:06 GMT-0500 (CDT)\",\n" +
             "                }"));
         testJournals.add(Document.parse("{\n" +
             "                    _id: \"5ab88ab17205545c679992e4\",\n" +
             "                    userID: \"4cb56a89541a2d783595012c\",\n " +
-            "                    subject: \"Bad day\",\n" +
-            "                    body: \"My dog died\",\n" +
+            "                    title: \"Bad day\",\n" +
+            "                    content: \"My dog died\",\n" +
             "                    date: \"Tues Aug 17 1980 06:05:06 GMT-0500 (CDT)\",\n" +
             "                }"));
         testJournals.add(Document.parse("{\n" +
             "                    _id: \"5ab88ab1543afe51da42359e\",\n" +
             "                    userID: \"4cb56a89541a2d783595012c\",\n " +
-            "                    subject: \"Fun Day\",\n" +
-            "                    body: \"I went to the park\",\n" +
+            "                    title: \"Fun Day\",\n" +
+            "                    content: \"I went to the park\",\n" +
             "                    date: \"Wed Aug 27 1976 06:05:06 GMT-0600 (CDT)\",\n" +
             "                }"));
         testJournals.add(Document.parse("{\n" +
             "                    _id: \"5ab88ab1a5b4ebf66df44c40\",\n" +
             "                    userID: \"4cb56a89541a2d783595012c\",\n " +
-            "                    subject: \"Birthday\",\n" +
-            "                    body: \"I spent the day alone\",\n" +
+            "                    title: \"Birthday\",\n" +
+            "                    content: \"I spent the day alone\",\n" +
             "                    date: \"Sat Aug 14 1976 06:05:06 GMT-0900 (CDT)\",\n" +
             "                }"));
 
         anID = new ObjectId();
         BasicDBObject sam = new BasicDBObject("_id", anID);
-        sam = sam.append("subject", "Food")
+        sam = sam.append("title", "Food")
             .append("userID", "2cb45a89541a2d783595012b")
-            .append("body", "I went taco johns")
+            .append("content", "I went taco johns")
             .append("date", "Tue Jan 14 2014 18:35:56 GMT-0600");
 
 
@@ -95,14 +95,14 @@ public class JournalControllerSpec {
         return arrayReader.decode(reader, DecoderContext.builder().build());
     }
 
-    private static String getSubject(BsonValue val) {
+    private static String getTitle(BsonValue val) {
         BsonDocument doc = val.asDocument();
-        return ((BsonString) doc.get("subject")).getValue();
+        return ((BsonString) doc.get("title")).getValue();
     }
 
-    private static String getBody(BsonValue val) {
+    private static String getContent(BsonValue val) {
         BsonDocument doc = val.asDocument();
-        return ((BsonString) doc.get("body")).getValue();
+        return ((BsonString) doc.get("content")).getValue();
     }
 
     @Test
@@ -121,49 +121,49 @@ public class JournalControllerSpec {
         BsonArray docs = parseJsonArray(jsonResult);
 
         assertEquals("Should be 4 journals", 4, docs.size());
-        List<String> subjects = docs
+        List<String> titles = docs
             .stream()
-            .map(JournalControllerSpec::getSubject)
+            .map(JournalControllerSpec::getTitle)
             .sorted()
             .collect(Collectors.toList());
-        List<String> expectedSubjects = Arrays.asList("Bad day", "Birthday", "Fun Day", "Tuesday");
-        assertEquals("Subjects should match", expectedSubjects, subjects);
+        List<String> expectedTitles = Arrays.asList("Bad day", "Birthday", "Fun Day", "Tuesday");
+        assertEquals("Titles should match", expectedTitles, titles);
     }
 
     @Test
     public void getJournalsOnBadDay() {
         Map<String, String[]> argMap = new HashMap<>();
         argMap.put("userID", new String[]{"4cb56a89541a2d783595012c"});
-        argMap.put("subject", new String[]{"Tuesday"});
+        argMap.put("title", new String[]{"Tuesday"});
         String jsonResult = journalController.getJournals(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
         assertEquals("Should be 1 journal", 1, docs.size());
-        List<String> subjects = docs
+        List<String> titles = docs
             .stream()
-            .map(JournalControllerSpec::getSubject)
+            .map(JournalControllerSpec::getTitle)
             .sorted()
             .collect(Collectors.toList());
-        List<String> expectedSubjects = Arrays.asList("Tuesday");
-        assertEquals("Subjects should match", expectedSubjects, subjects);
+        List<String> expectedTitles = Arrays.asList("Tuesday");
+        assertEquals("Titles should match", expectedTitles, titles);
     }
 
     @Test
-    public void getJournalByBody() {
+    public void getJournalByContent() {
         Map<String, String[]> argMap = new HashMap<>();
         argMap.put("userID", new String[]{"4cb56a89541a2d783595012c"});
-        argMap.put("body", new String[]{"I went to the park"});
+        argMap.put("content", new String[]{"I went to the park"});
         String jsonResult = journalController.getJournals(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
         assertEquals("Should be 1 journal", 1, docs.size());
-        List<String> subjects = docs
+        List<String> titles = docs
             .stream()
-            .map(JournalControllerSpec::getBody)
+            .map(JournalControllerSpec::getContent)
             .sorted()
             .collect(Collectors.toList());
-        List<String> expectedSubjects = Arrays.asList("I went to the park");
-        assertEquals("Subjects should match", expectedSubjects, subjects);
+        List<String> expectedTitles = Arrays.asList("I went to the park");
+        assertEquals("Titles should match", expectedTitles, titles);
     }
 
     @Test
@@ -188,11 +188,11 @@ public class JournalControllerSpec {
 
         List<String> journals = docs
             .stream()
-            .map(JournalControllerSpec::getBody)
+            .map(JournalControllerSpec::getContent)
             .sorted()
             .collect(Collectors.toList());
         System.out.println(journals);
-        assertEquals("Should return subject of new journal", "I ate all my food", journals.get(0));
+        assertEquals("Should return title of new journal", "I ate all my food", journals.get(0));
     }
 
     @Test
@@ -200,16 +200,16 @@ public class JournalControllerSpec {
         journalController.editJournal(anID.toHexString(), "Friday", "It's Friday");
         Map<String, String[]> argMap = new HashMap<>();
         argMap.put("userID", new String[]{"2cb45a89541a2d783595012b"});
-        argMap.put("body", new String[]{"It's Friday"});
+        argMap.put("content", new String[]{"It's Friday"});
         String jsonResult = journalController.getJournals(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
-        List<String> subjects = docs
+        List<String> titles = docs
             .stream()
-            .map(JournalControllerSpec::getBody)
+            .map(JournalControllerSpec::getContent)
             .sorted()
             .collect(Collectors.toList());
-        List<String> expectedSubjects = Arrays.asList("It's Friday");
-        assertEquals("Subjects should match", expectedSubjects, subjects);
+        List<String> expectedTitles = Arrays.asList("It's Friday");
+        assertEquals("Titles should match", expectedTitles, titles);
     }
 
     @Test

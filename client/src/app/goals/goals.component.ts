@@ -17,9 +17,9 @@ import {Router} from "@angular/router";
 
 export class GoalsComponent implements OnInit {
     // These are public so that tests can reference them (.spec.ts)
-    public goals: Goal[] = [];
-    public todayGoals: Goal[] = [];
-    public shownGoals: Goal[] = [];
+    public goals: Goal[] = []; //full list of goals
+    public todayGoals: Goal[] = []; //goals that haven't been completed with accordance to their frequency
+    public shownGoals: Goal[] = []; //goals that are being shown
 
     public goalStart;
     public goalNext;
@@ -32,7 +32,11 @@ export class GoalsComponent implements OnInit {
     private highlightedID: { '$oid': string } = {'$oid': ''};
 
     // Inject the GoalsService into this component.
-    constructor(public goalService: GoalsService, public dialog: MatDialog, public snackBar: MatSnackBar, public appService: AppService, private router: Router) {
+    constructor(public goalService: GoalsService,
+                public dialog: MatDialog,
+                public snackBar: MatSnackBar,
+                public appService: AppService,
+                private router: Router) {
     }
 
     isHighlighted(goal: Goal): boolean {
@@ -78,13 +82,6 @@ export class GoalsComponent implements OnInit {
                                 console.log('The error was ' + JSON.stringify(err));
                         });
                 }
-                else {
-
-                    this.snackBar.open("Goal Not Saved. Please Log In to Save Your Goal", "CLOSE", {
-                        duration: 5000,
-                    });
-                }
-
             }
         });
     }
@@ -218,7 +215,7 @@ export class GoalsComponent implements OnInit {
             return this.todayGoals;
         }
 
-        else{
+        else {
             this.showGoals("all");
             return this.goals;
         }
@@ -246,7 +243,7 @@ export class GoalsComponent implements OnInit {
             }
         }
 
-        else{
+        else {
             this.shownGoals = this.goals.filter(goal => {
                 if (count > this.goalsPerPage) {
                     count--;
@@ -293,12 +290,10 @@ export class GoalsComponent implements OnInit {
             err => {
                 console.log(err);
             });
-
-
         return goalObservable;
     }
 
-
+    //loads the list of goals for the page
     loadService(): void {
         console.log(localStorage.getItem("userID"));
         this.goalService.getGoals(localStorage.getItem("userID")).subscribe(
@@ -310,28 +305,11 @@ export class GoalsComponent implements OnInit {
                 console.log(err);
             }
         );
-
-
     }
 
-    ngOnInit(): void {
-        //For testing
-        //toggle the value in app service to toggle testing
-        this.appService.testingToggle();
-
-        // Route consumer to home page if isSignedIn status is false
-        if (!this.appService.isSignedIn()) {
-            this.router.navigate(['']);
-        }
-
-        this.refreshGoals();
-        this.loadService();
-        this.getDate();
-
-
-    }
-
+    ////////////////////
     //Helper Functions//
+    ////////////////////
 
     //get's today's date, and sets this.goalStart and this.goalNext to today's date
     getDate() {
@@ -387,7 +365,6 @@ export class GoalsComponent implements OnInit {
         if(status == true){
             return "Complete";
         }
-
         return "Incomplete";
     }
 
@@ -396,7 +373,22 @@ export class GoalsComponent implements OnInit {
         if(type == "today"){
             return this.todayGoals.length > this.goalsPerPage;
         }
-
         return this.goals.length > this.goalsPerPage;
     }
+
+    //Runs when the page is initialized
+    ngOnInit(): void {
+        //For testing
+        //toggle the value in app service to toggle testing
+        this.appService.testingToggle();
+
+        // Route consumer to home page if isSignedIn status is false
+        if (!this.appService.isSignedIn()) {
+            this.router.navigate(['']);
+        }
+        this.refreshGoals();
+        this.loadService();
+        this.getDate();
+    }
+
 }

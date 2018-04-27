@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Journal} from './journal';
 import {environment} from '../../environments/environment';
+import 'rxjs/add/observable/of';
 
 
 @Injectable()
@@ -15,7 +16,7 @@ export class JournalsService {
     constructor(private http: HttpClient) {
     }
 
-    getJournals(userID: string, journalSubject?: string): Observable<Journal[]> {
+    getJournals(userID: string, journalBody?: string): Observable<Journal[]> {
         this.journalUrl = this.baseUrl;
         this.noID = false;
 
@@ -35,24 +36,22 @@ export class JournalsService {
         return this.http.get<Journal>(this.journalUrl + '/' + id);
     }
 
-    /*
-    filterBySubject(journalSubject?: string): void {
-        if (!(journalSubject == null || journalSubject === '')) {
-            if (this.parameterPresent('subject=') ) {
-                // there was a previous search by company that we need to clear
-                this.removeParameter('subject=');
+    filterByTitle(journalTitle?: string): void {
+        if (!(journalTitle == null || journalTitle === '')) {
+            if (this.parameterPresent('title=') ) {
+                this.removeParameter('title=');
             }
             if (this.journalUrl.indexOf('?') !== -1) {
                 // there was already some information passed in this url
-                this.journalUrl += 'subject=' + journalSubject + '&';
+                this.journalUrl += 'title=' + journalTitle + '&';
             } else {
                 // this was the first bit of information to pass in the url
-                this.journalUrl += '?subject=' + journalSubject + '&';
+                this.journalUrl += '?title=' + journalTitle + '&';
             }
         } else {
             // there was nothing in the box to put onto the URL... reset
-            if (this.parameterPresent('subject=')) {
-                let start = this.journalUrl.indexOf('subject=');
+            if (this.parameterPresent('title=')) {
+                let start = this.journalUrl.indexOf('title=');
                 const end = this.journalUrl.indexOf('&', start);
                 if (this.journalUrl.substring(start - 1, start) === '?') {
                     start = start - 1;
@@ -61,7 +60,6 @@ export class JournalsService {
             }
         }
     }
-*/
 
     filterByUserID(userID: string): void {
         if (!(userID == null || userID === '')) {
@@ -107,7 +105,7 @@ export class JournalsService {
         };
 
         console.log(newJournal);
-        // Send post request to add a new journal with the journal data as the body with specified headers.
+        // Send post request to add a new journal with the journal data as the content with specified headers.
         return this.http.post<{'$oid': string}>(this.journalUrl + '/new', newJournal, httpOptions);
     }
 
@@ -133,6 +131,6 @@ export class JournalsService {
         };
 
         // Send post request to delete journal.
-        return this.http.post(this.journalUrl + '/delete/' + journalID, httpOptions);
+        return this.http.delete(this.journalUrl + '/delete/' + journalID, httpOptions);
     }
 }

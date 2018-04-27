@@ -8,15 +8,16 @@ task clearMongoDB(type: Exec) {
     args = ["dev", "--eval", "printjson(db.dropDatabase())"]
 }
 
+task seedContactsData(type: Exec) {
+    executable = "mongoimport"
+    args = ["-d", "dev", "-c", "contacts", "--file", "contacts.seed.json", "--jsonArray"]
+}
+
 task seedGoalsData(type: Exec) {
     executable = "mongoimport"
     args = ["-d", "dev", "-c", "goals", "--file", "goals.seed.json", "--jsonArray"]
 }
 
-task seedResourcesData(type: Exec) {
-    executable = "mongoimport"
-    args = ["-d", "dev", "-c", "resources", "--file", "resources.seed.json", "--jsonArray"]
-}
 task seedEmotionsData(type: Exec) {
     executable = "mongoimport"
     args = ["-d", "dev", "-c", "emotions", "--file", "emotions.seed.json", "--jsonArray"]
@@ -29,7 +30,10 @@ task seedUsersData(type: Exec) {
     executable = "mongoimport"
     args = ["-d", "dev", "-c", "users", "--file", "users.seed.json", "--jsonArray"]
 }
-
+task seedLinksData(type: Exec) {
+    executable = "mongoimport"
+    args = ["-d", "dev", "-c", "links", "--file", "links.seed.json", "--jsonArray"]
+}
 
 task seedMongoDB {
     group = "application"
@@ -37,6 +41,7 @@ task seedMongoDB {
 seedMongoDB.dependsOn(clearMongoDB)
 seedMongoDB.dependsOn(seedGoalsData)
 seedMongoDB.dependsOn(seedEmotionsData)
-seedMongoDB.dependsOn(seedResourcesData)
 seedMongoDB.dependsOn(seedJournalsData)
 seedMongoDB.dependsOn(seedUsersData)
+seedMongoDB.dependsOn(seedContactsData)
+seedMongoDB.dependsOn(seedLinksData)

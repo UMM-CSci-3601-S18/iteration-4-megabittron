@@ -24,22 +24,22 @@ describe('Journal list', () => {
         expect(page.getJournals()).toEqual(74);
     });
 
-    it('Should type something in filter subject box and check that it contains correct element', () => {
+    it('Should type something in filter title box and check that it contains correct element', () => {
         page.navigateTo();
-        page.typeASubject('Mcintyre');
+        page.typeATitle('Mcintyre');
         expect(page.getUniqueJournal('5ad12a56d70cc2aac52a0bc9')).toContain('Cathleen Mcintyre');
     });
 
-    it('Should type something in filter body box and check that it contains correct element', () => {
+    it('Should type something in filter content box and check that it contains correct element', () => {
         page.navigateTo();
-        page.typeABody('sunt deserunt voluptate');
+        page.typeAContent('sunt deserunt voluptate');
         expect(page.getUniqueJournal('5ad12a56aa17a895febd4c93')).toContain('Oneill Woods');
     });
 
-    it('Should filter by subject and body and check that it contains correct element', () => {
+    it('Should filter by title and content and check that it contains correct element', () => {
         page.navigateTo();
-        page.typeASubject('St')
-        page.typeABody('id esse');
+        page.typeATitle('St')
+        page.typeAContent('id esse');
         expect(page.getUniqueJournal('5ad12a5674d890bf086475aa')).toContain('Chapman Stanley');
     });
 
@@ -53,8 +53,8 @@ describe('Journal list', () => {
     it('Should actually add the journal with the information we put in the fields', () => {
         page.navigateTo();
         page.clickAddJournalButton();
-        element(by.id('subjectField')).sendKeys('Sad day');
-        element(by.id('bodyField')).sendKeys('Today was sad because my pet rock got hit by a car.');
+        element(by.id('titleField')).sendKeys('Sad day');
+        element(by.id('contentField')).sendKeys('Today was sad because my pet rock got hit by a car.');
         element(by.id('confirmAddJournalButton')).click();
     });
 
@@ -62,7 +62,7 @@ describe('Journal list', () => {
     // is inside of the mat-title.
     it('Should open a dialog box when edit journal button is clicked', () => {
         page.navigateTo();
-        page.typeABody('do nulla incididunt');
+        page.typeAContent('do nulla incididunt');
         expect(element(by.className('edit-journal-page')).isPresent()).toBeFalsy('There should not be a modal window yet');
         page.clickEditJournalButton();
         expect(element(by.className('edit-journal-page')).isPresent()).toBeTruthy('There should be a modal window now');
@@ -70,10 +70,10 @@ describe('Journal list', () => {
 
     it('Should actually edit the journal with the information we put in the fields', () => {
         page.navigateTo();
-        page.typeABody('sunt deserunt voluptate laboris dolore. ');
+        page.typeAContent('sunt deserunt voluptate laboris dolore. ');
         page.clickEditJournalButton();
-        element(by.id('subjectField')).sendKeys('Great day!');
-        element(by.id('bodyField')).sendKeys('Today my snail won a race against a rabbit.');
+        element(by.id('titleField')).sendKeys('Great day!');
+        element(by.id('contentField')).sendKeys('Today my snail won a race against a rabbit.');
         element(by.id('confirmEditJournalButton')).click();
     });
 
