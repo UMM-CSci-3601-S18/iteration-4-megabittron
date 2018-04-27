@@ -6,7 +6,10 @@ import {MatDialog} from '@angular/material';
 import * as Chart from 'chart.js';
 import {AppService} from "../app.service";
 import {Router} from "@angular/router";
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import {ShowSummaryListComponent} from "./show/show-summary-list.component";
+import {MatTableModule} from '@angular/material'
+
 
 @Component({
     selector: 'app-summary-list-component',
@@ -92,7 +95,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         return summary._id['$oid'] === this.highlightedID['$oid'];
     }
 
-    public clearDateFilter(){
+    public clearDateFilter() {
         this.startDate = null;
         this.endDate = null;
     }
@@ -803,6 +806,24 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         }
         this.loadService();
         this.refreshSummaries();
+    }
+
+    public displayedColumns = ["emotion", "intensity", "date", "description"];
+
+    showAllDescription(description: string): void {
+        const showSummary: Summary = {
+            _id: null,
+            userID: null,
+            mood: null,
+            intensity: null,
+            date: null,
+            description: description
+        };
+        const dialogRef = this.dialog.open(ShowSummaryListComponent, {
+            width: '500px',
+            data: {summary: showSummary}
+        });
+        console.log("Showing summary description.");
     }
 
 }
