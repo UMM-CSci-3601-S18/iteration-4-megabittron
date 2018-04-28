@@ -24,6 +24,9 @@
                 Journal Prompt
             </button>
         </mat-card-title>
+        <mat-card-content *ngIf="prompt == undefined">
+            Click for a prompt
+        </mat-card-content>
         <mat-card-content>
             {{prompt}}
         </mat-card-content>
@@ -33,7 +36,7 @@
     <div layout="row" layout-wrap>
         <mat-card class="journal-card"
                   *ngFor="let journal of filterJournals(journalTitle, journalContent, journalDate) | dateSort: '-date'"
-                  #elem [id]="journal._id['$oid']">
+                  #elem [id]="journal._id['$oid']" >
             <a routerLink="/journals/{{journal._id['$oid']}}" class="journal-card-open">
                 <div class="journal-details">
                     <mat-card-title class="journal-title break-word">{{journal.title}}</mat-card-title>
@@ -67,7 +70,6 @@
             <mat-divider></mat-divider>
         </div>
     </mat-list>
-
     <button class="add-journal-fab-button" (click)="openAddJournalDialog()" mat-fab color="primary"><mat-icon>add</mat-icon></button>
 </div>
 
