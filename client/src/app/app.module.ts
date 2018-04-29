@@ -27,6 +27,7 @@ import {environment} from '../environments/environment';
 import {AppService} from "./app.service";
 import {RouterModule} from "@angular/router";
 import {AddContactComponent} from "./resources/add/contacts/add-contact.component";
+import {AddLinkComponent} from "./resources/add/links/add-link.component";
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import {AddContactComponent} from "./resources/add/contacts/add-contact.componen
         ViewJournalComponent,
         SummaryListComponent,
         AddContactComponent,
+        AddLinkComponent,
         ArraySortPipe,
 
     ],
@@ -74,7 +76,8 @@ import {AddContactComponent} from "./resources/add/contacts/add-contact.componen
         EditJournalComponent,
         ShowJournalComponent,
         ViewJournalComponent,
-        AddContactComponent
+        AddContactComponent,
+        AddLinkComponent
 
     ],
     bootstrap: [
