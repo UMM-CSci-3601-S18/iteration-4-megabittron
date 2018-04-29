@@ -29,6 +29,9 @@ export class GoalsComponent implements OnInit {
     public goalsPerPage = 5;
     public currentPage = 1;
 
+    // Used for testing to set a static date so the same goals show up in today's goals regardless of actual date
+    public testing = true;
+
     // The ID of the goal
     private highlightedID: { '$oid': string } = {'$oid': ''};
 
@@ -346,8 +349,16 @@ export class GoalsComponent implements OnInit {
 
     //get's today's date, and sets this.goalStart and this.goalNext to today's date
     getDate() {
-        this.today = new Date();
+
+        if(this.testing == true){
+            this.today = new Date("2018-04-29T05:00:00.000Z");
+        }
+
+        else {
+            this.today = new Date();
+        }
         this.today.setHours(0, 0, 0, 0);
+
         this.goalStart = this.today;
         this.goalNext = this.today;
     }

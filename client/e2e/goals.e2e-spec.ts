@@ -13,7 +13,7 @@ browser.driver.controlFlow().execute = function () {
     return origFn.apply(browser.driver.controlFlow(), args);
  };*/
 
-describe('Goal list', () => {
+fdescribe('Goal list', () => {
     let page: GoalPage;
 
     beforeEach(() => {
@@ -63,5 +63,17 @@ describe('Goal list', () => {
         element(by.className('goal-button')).click();
         expect(element(by.className('add-goal')).isPresent()).toBeTruthy('There should be a modal window now');
     });
+
+    it('Should have an edit goal button', () =>{
+        page.navigateTo();
+        expect(page.buttonExists()).toBeTruthy();
+    });
+
+    it('Should open a dialog box when edit goal button is clicked', () =>{
+        page.navigateTo();
+        expect(element(by.className('edit-goal')).isPresent()).toBeFalsy('There should not be a modal window yet');
+        element(by.className('edit-goal-button')).click();
+        expect(element(by.className('edit-goal')).isPresent()).toBeTruthy('There should be a modal window now');
+    })
 
 });
