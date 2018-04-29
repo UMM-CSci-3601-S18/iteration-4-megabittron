@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
@@ -19,7 +19,6 @@ import {SummaryListService} from "./summary/summary-list.service";
 import {JournalsComponent} from "./journals/journals.component";
 import {AddJournalComponent} from "./journals/add/add-journal.component";
 import {EditJournalComponent} from "./journals/edit/edit-journal.component";
-import {ShowJournalComponent} from "./journals/show/show-journal.component";
 import {ViewJournalComponent} from "./journals/view/view-journal.component";
 import {JournalsService} from "./journals/journals.service";
 import {ArraySortPipe} from "./journals/array-sort.pipe";
@@ -27,7 +26,8 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {AppService} from "./app.service";
 import {RouterModule} from "@angular/router";
-
+import {MatTableModule} from "@angular/material/table";
+import {ShowSummaryListComponent} from "./summary/show/show-summary-list.component";
 
 @NgModule({
     exports: [
@@ -40,7 +40,7 @@ import {RouterModule} from "@angular/router";
         Routing,
         CustomModule,
         ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
-
+        MatTableModule,
     ],
     declarations: [
         AppComponent,
@@ -52,10 +52,10 @@ import {RouterModule} from "@angular/router";
         JournalsComponent,
         AddJournalComponent,
         EditJournalComponent,
-        ShowJournalComponent,
         ViewJournalComponent,
         SummaryListComponent,
         ArraySortPipe,
+        ShowSummaryListComponent,
     ],
     providers: [
         GoalsService,
@@ -66,14 +66,14 @@ import {RouterModule} from "@angular/router";
         ResourcesService,
         {provide: APP_BASE_HREF, useValue: '/'},
         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true},
-],
+    ],
     entryComponents: [
         AddGoalComponent,
         EditGoalComponent,
         AddJournalComponent,
         EditJournalComponent,
-        ShowJournalComponent,
         ViewJournalComponent,
+        ShowSummaryListComponent,
     ],
     bootstrap: [
         AppComponent

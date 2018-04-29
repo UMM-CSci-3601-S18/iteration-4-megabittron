@@ -6,7 +6,8 @@ import {MatDialog} from '@angular/material';
 import * as Chart from 'chart.js';
 import {AppService} from "../app.service";
 import {Router} from "@angular/router";
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import {ShowSummaryListComponent} from "./show/show-summary-list.component";
 
 @Component({
     selector: 'app-summary-list-component',
@@ -77,8 +78,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     public inputType = "week";
 
 
-
-    private highlightedID: {'$oid': string} = { '$oid': '' };
+    private highlightedID: { '$oid': string } = {'$oid': ''};
 
     // Inject the SummaryListService into this component.
     constructor(public summaryListService: SummaryListService,
@@ -92,13 +92,13 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         return summary._id['$oid'] === this.highlightedID['$oid'];
     }
 
-    public clearDateFilter(){
+    public clearDateFilter() {
         this.startDate = null;
         this.endDate = null;
     }
 
-    public toggleCB(){
-        if(this.colorblindMode){
+    public toggleCB() {
+        if (this.colorblindMode) {
             this.colorblindMode = false;
         }
         else {
@@ -132,22 +132,22 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     }
 
     // Each pastXEmotions uses filterDates() to grab summaries dated within the past X.
-    public pastWeekEmotions(givenSummaries):Summary[]{
+    public pastWeekEmotions(givenSummaries): Summary[] {
         this.pastWeekSummaries = this.filterDates(givenSummaries, this.lastWeekStamp, this.nowStamp);
         return this.pastWeekSummaries;
     }
 
-    public pastDayEmotions(givenSummaries):Summary[]{
+    public pastDayEmotions(givenSummaries): Summary[] {
         this.pastDaySummaries = this.filterDates(givenSummaries, this.lastDayStamp, this.nowStamp);
         return this.pastDaySummaries;
     }
 
-    public pastYearEmotions(givenSummaries):Summary[]{
+    public pastYearEmotions(givenSummaries): Summary[] {
         this.pastYearSummaries = this.filterDates(givenSummaries, this.lastYearStamp, this.nowStamp);
         return this.pastYearSummaries;
     }
 
-    public pastMonthEmotions(givenSummaries):Summary[]{
+    public pastMonthEmotions(givenSummaries): Summary[] {
         this.pastMonthSummaries = this.filterDates(givenSummaries, this.lastMonthStamp, this.nowStamp);
         return this.pastMonthSummaries;
     }
@@ -189,8 +189,8 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             return !Searchmood || summary.mood.toLowerCase().indexOf(Searchmood) !== -1;
         });
 
-        if(this.inputType == "week") {
-            if(this.limitedPast) {
+        if (this.inputType == "week") {
+            if (this.limitedPast) {
                 filterData = this.pastWeekEmotions(filterData);
             }
             filterData = filterData.filter(summary => {
@@ -200,7 +200,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         }
         else {
             if (this.inputType == "day") {
-                if(this.limitedPast) {
+                if (this.limitedPast) {
                     filterData = this.pastDayEmotions(filterData);
                 }
                 filterData = filterData.filter(summary => {
@@ -209,8 +209,8 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                 });
             }
             else {
-                if(this.inputType == "year"){
-                    if(this.limitedPast) {
+                if (this.inputType == "year") {
+                    if (this.limitedPast) {
                         filterData = this.pastYearEmotions(filterData);
                     }
                     filterData = filterData.filter(summary => {
@@ -219,8 +219,8 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                     });
                 }
                 else {
-                    if(this.inputType == "month"){
-                        if(this.limitedPast) {
+                    if (this.inputType == "month") {
+                        if (this.limitedPast) {
                             filterData = this.pastMonthEmotions(filterData);
                         }
                         filterData = filterData.filter(summary => {
@@ -238,8 +238,8 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     // modX takes an X and returns an integer describing where it should
     // be placed on the graph based on the current X, nowX.
     public modDay(day: number): Number {
-        if(this.limitedPast){
-            return (this.nowDay + 1 + day)%7;
+        if (this.limitedPast) {
+            return (this.nowDay + 1 + day) % 7;
         }
         else {
             return day;
@@ -247,17 +247,17 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     }
 
     public modHour(hour: number): Number {
-        if(this.limitedPast){
-            return (this.nowHour + 1 + hour)%24;
+        if (this.limitedPast) {
+            return (this.nowHour + 1 + hour) % 24;
         }
         else {
-            return (hour - this.timeZone)%24;
+            return (hour - this.timeZone) % 24;
         }
     }
 
     public modDate(date: number): Number {
-        if(this.limitedPast){
-            return (this.nowDate + date - 1)%31 + 1;
+        if (this.limitedPast) {
+            return (this.nowDate + date - 1) % 31 + 1;
         }
         else {
             return date;
@@ -265,8 +265,8 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     }
 
     public modMonth(month: number): Number {
-        if(this.limitedPast){
-            return (this.nowMonth + 1 + month)%12;
+        if (this.limitedPast) {
+            return (this.nowMonth + 1 + month) % 12;
         }
         else {
             return month;
@@ -276,29 +276,29 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     // getPastXs gets labels for bottom axis of chart based on current X.
     public getPastDays(xValue: number): String {
 
-        let thisDay = (this.nowDay + 1 + xValue)%7;
+        let thisDay = (this.nowDay + 1 + xValue) % 7;
 
         let strDay = '';
 
-        if(thisDay == 0){
+        if (thisDay == 0) {
             strDay = 'Sun';
         }
-        if(thisDay == 1){
+        if (thisDay == 1) {
             strDay = 'Mon';
         }
-        if(thisDay == 2){
+        if (thisDay == 2) {
             strDay = 'Tues';
         }
-        if(thisDay == 3){
+        if (thisDay == 3) {
             strDay = 'Wed';
         }
-        if(thisDay == 4){
+        if (thisDay == 4) {
             strDay = 'Thurs';
         }
-        if(thisDay == 5){
+        if (thisDay == 5) {
             strDay = 'Fri';
         }
-        if(thisDay == 6){
+        if (thisDay == 6) {
             strDay = 'Sat';
         }
         return strDay;
@@ -306,19 +306,19 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     public getPastHours(xValue: number): String {
 
-        let thisHour = (this.nowHour + 1 + xValue + this.timeZone)%24;
+        let thisHour = (this.nowHour + 1 + xValue + this.timeZone) % 24;
 
         let strHour = '';
         let timeSuffix = '';
 
-        if(thisHour < 12){
+        if (thisHour < 12) {
             strHour = thisHour.toString();
             timeSuffix = ' AM';
         } else {
-            strHour = (thisHour %12).toString();
+            strHour = (thisHour % 12).toString();
             timeSuffix = ' PM';
         }
-        if(strHour == '0'){
+        if (strHour == '0') {
             strHour = '12';
         }
 
@@ -326,44 +326,44 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     }
 
     public getPastMonths(xValue: number): String {
-        let thisMonth = (this.nowMonth + 1 + xValue)%12;
+        let thisMonth = (this.nowMonth + 1 + xValue) % 12;
 
         let strMonth = '';
 
-        if(thisMonth == 0){
+        if (thisMonth == 0) {
             strMonth = 'Jan';
         }
-        if(thisMonth == 1){
+        if (thisMonth == 1) {
             strMonth = 'Feb';
         }
-        if(thisMonth == 2){
+        if (thisMonth == 2) {
             strMonth = 'Mar';
         }
-        if(thisMonth == 3){
+        if (thisMonth == 3) {
             strMonth = 'Apr';
         }
-        if(thisMonth == 4){
+        if (thisMonth == 4) {
             strMonth = 'May';
         }
-        if(thisMonth == 5){
+        if (thisMonth == 5) {
             strMonth = 'June';
         }
-        if(thisMonth == 6){
+        if (thisMonth == 6) {
             strMonth = 'July';
         }
-        if(thisMonth == 7){
+        if (thisMonth == 7) {
             strMonth = 'Aug';
         }
-        if(thisMonth == 8){
+        if (thisMonth == 8) {
             strMonth = 'Sep';
         }
-        if(thisMonth == 9){
+        if (thisMonth == 9) {
             strMonth = 'Oct';
         }
-        if(thisMonth == 10){
+        if (thisMonth == 10) {
             strMonth = 'Nov';
         }
-        if(thisMonth == 11){
+        if (thisMonth == 11) {
             strMonth = 'Dec';
         }
         return strMonth;
@@ -371,32 +371,32 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
 
     public getPastDates(xValue: number): String {
-        let thisDate = (this.nowDate + xValue)%31;
+        let thisDate = (this.nowDate + xValue) % 31;
         let numDate;
         let thisYear = this.nowStamp.getFullYear();
 
         //last month had 31 days or today is 31st
-        if(this.lastMonth == 0 ||
+        if (this.lastMonth == 0 ||
             this.lastMonth == 2 ||
             this.lastMonth == 4 ||
             this.lastMonth == 6 ||
             this.lastMonth == 7 ||
             this.lastMonth == 9 ||
             this.lastMonth == 11 ||
-            this.nowDate == 30){
+            this.nowDate == 30) {
             numDate = thisDate + 1;
         }
         else {
             //last month had 30 days
-            if(this.lastMonth == 3 ||
+            if (this.lastMonth == 3 ||
                 this.lastMonth == 5 ||
                 this.lastMonth == 8 ||
-                this.lastMonth == 10){
+                this.lastMonth == 10) {
                 numDate = thisDate;
             }
             else {
                 //last month has 29 days, leap year
-                if(((thisYear % 4 == 0) && (thisYear % 100) !== 0) || (thisYear % 400) == 0){
+                if (((thisYear % 4 == 0) && (thisYear % 100) !== 0) || (thisYear % 400) == 0) {
                     numDate = thisDate - 1;
                 }
                 else {
@@ -405,7 +405,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                 }
             }
         }
-        if(numDate <= 0){
+        if (numDate <= 0) {
             numDate = numDate + 31;
         }
         return numDate.toString();
@@ -413,7 +413,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     // Returns data required by updateChart().
     public getTypeData(type, emotion) {
-        if(type == "week"){
+        if (type == "week") {
             return [
                 this.filterGraph(this.modDay(0), emotion),
                 this.filterGraph(this.modDay(1), emotion),
@@ -425,7 +425,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             ]
         }
         else {
-            if(type == "day"){
+            if (type == "day") {
                 return [
                     this.filterGraph(this.modHour(0), emotion),
                     this.filterGraph(this.modHour(1), emotion),
@@ -454,7 +454,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                 ]
             }
             else {
-                if(type == "year"){
+                if (type == "year") {
                     return [
                         this.filterGraph(this.modMonth(0), emotion),
                         this.filterGraph(this.modMonth(1), emotion),
@@ -598,15 +598,15 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     ];
 
     // destroys previous chart if it exists and replaces it with an updated version
-    updateChart(): void{
+    updateChart(): void {
 
-        if(this.Chart != null){
+        if (this.Chart != null) {
             this.Chart.destroy();
         }
 
         let stackBool = false;
 
-        if(this.graphMode == 'bar'){
+        if (this.graphMode == 'bar') {
             stackBool = true;
         }
 
@@ -614,7 +614,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         this.Canvas = document.getElementById("Chart");
         this.ctx = this.Canvas;
 
-        if(this.colorblindMode){
+        if (this.colorblindMode) {
             this.happyColor = "rgb(178,24,43)";
             this.sadColor = "rgb(239,138,98)";
             this.mehColor = "rgb(254,224,144)";
@@ -637,7 +637,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         let months;
         let dates;
 
-        if(this.limitedPast){
+        if (this.limitedPast) {
             days = this.pastDays;
             hours = this.pastHours;
             months = this.pastMonths;
@@ -651,7 +651,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
                 '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM',
                 '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM'];
             months = [
-                'Jan', 'Feb', 'Mar','Apr', 'May', 'June',
+                'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June',
                 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             dates = [
                 '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
@@ -660,7 +660,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         }
 
         console.log(this.inputType);
-        if(this.inputType == "day"){
+        if (this.inputType == "day") {
             xLabel = hours;
         }
         else {
@@ -731,11 +731,11 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             },
             options: {
                 scales: {
-                    xAxes: [{ stacked: stackBool }],
+                    xAxes: [{stacked: stackBool}],
                     yAxes: [{
                         stacked: stackBool,
                         ticks: {
-                            beginAtZero:true
+                            beginAtZero: true
                         }
                     }]
                 }
@@ -749,7 +749,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     }
 
     // Used to show total number of summaries shown by chart in HTML
-    totalNumberMoods(): number{
+    totalNumberMoods(): number {
         return this.filteredSummaries.length;
     }
 
@@ -781,7 +781,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
 
     loadService(): void {
-        this.summaryListService.getSummaries(localStorage.getItem("userID"),this.summaryMood).subscribe(
+        this.summaryListService.getSummaries(localStorage.getItem("userID"), this.summaryMood).subscribe(
             summaries => {
                 this.summaries = summaries;
                 this.filteredSummaries = this.summaries;
@@ -803,6 +803,24 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         }
         this.loadService();
         this.refreshSummaries();
+    }
+
+    public displayedColumns = ["emotion", "intensity", "date", "description"];
+
+    showAllDescription(description: string): void {
+        const showSummary: Summary = {
+            _id: null,
+            userID: null,
+            mood: null,
+            intensity: null,
+            date: null,
+            description: description
+        };
+        const dialogRef = this.dialog.open(ShowSummaryListComponent, {
+            width: '500px',
+            data: {summary: showSummary}
+        });
+        console.log("Showing summary description.");
     }
 
 }
