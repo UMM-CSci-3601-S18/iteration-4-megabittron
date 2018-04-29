@@ -378,7 +378,7 @@ describe('Deleting a goal', () => {
     });
 });
 
-fdescribe('Editing a goal', () => {
+describe('Editing a goal', () => {
     let goalList: GoalsComponent;
     let fixture: ComponentFixture<GoalsComponent>;
     const newGoal: Goal =   {
