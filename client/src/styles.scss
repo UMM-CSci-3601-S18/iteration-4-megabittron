@@ -38,3 +38,24 @@
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
 }
+
+.submit {
+    background-color: #E8F5E9;
+}
+
+.new-object-title {
+    text-align: center;
+}
+
+.new-object-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.new-object-form > * {
+    width: 100%;
+}
+
+.button-options {
+    text-align: center;
+}

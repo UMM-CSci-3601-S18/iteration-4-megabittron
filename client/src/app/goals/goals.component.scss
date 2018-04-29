@@ -1,0 +1,18 @@
+.sidenav {
+    height: 100%;
+    width: 275px;
+    position: fixed;
+    z-index: 1;
+    overflow-x: hidden;
+    text-align: center;
+    background-color: #546E7A;
+}
+
+.add {
+    width: 50%;
+    margin-bottom: 15px;
+}
+
+.add:hover {
+    background-color: #C8E6C9;
+}

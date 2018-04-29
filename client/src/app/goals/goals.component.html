@@ -1,4 +1,4 @@
-
+<!--
     <div  layout="column" >
         <div layout="column" class="desktop-all-goals">
             <div class="first-sec">
@@ -87,25 +87,6 @@
                         </mat-card>
                     </ng-container>
                 </div>
-                <div class="page-scroll-buttons" *ngIf="getSize('today')">
-                    <button *ngIf="currentPage == 1" mat-icon-button class="previous-page" (click)="currentPage = currentPage - 1;
-                    showGoals('today')" [disabled]="true">
-                        <mat-icon>keyboard_arrow_left</mat-icon>
-                    </button>
-                    <button *ngIf="currentPage != 1" mat-icon-button class="previous-page" (click)="currentPage = currentPage - 1;
-                    showGoals('today')" [disabled]="false">
-                        <mat-icon>keyboard_arrow_left</mat-icon>
-                    </button>
-                    {{currentPage}}
-                    <button *ngIf="maxNumPages('today') == false" mat-icon-button class="next-page" (click)="currentPage = currentPage + 1;
-                    showGoals('today')" [disabled]="true">
-                        <mat-icon>keyboard_arrow_right</mat-icon>
-                    </button>
-                    <button *ngIf="maxNumPages('today') == true " mat-icon-button class="next-page" (click)="currentPage = currentPage + 1;
-                    showGoals('today')" [disabled]="false">
-                        <mat-icon>keyboard_arrow_right</mat-icon>
-                    </button>
-                </div>
             </div>
            </span>
 
@@ -176,25 +157,6 @@
                             </mat-expansion-panel>
                         </mat-accordion>
                     </mat-card>
-                </div>
-                <div class="pagescrollbuttons" *ngIf="getSize('today')">
-                    <button *ngIf="currentPage == 1" mat-icon-button class="previous-page" (click)="currentPage = currentPage - 1;
-                    showGoals('today')" [disabled]="true">
-                        <mat-icon>keyboard_arrow_left</mat-icon>
-                    </button>
-                    <button *ngIf="currentPage != 1" mat-icon-button class="previous-page" (click)="currentPage = currentPage - 1;
-                    showGoals('today')" [disabled]="false">
-                        <mat-icon>keyboard_arrow_left</mat-icon>
-                    </button>
-                    {{currentPage}}
-                    <button *ngIf="maxNumPages('today') == false" mat-icon-button class="next-page" (click)="currentPage = currentPage + 1;
-                    showGoals('today')" [disabled]="true">
-                        <mat-icon>keyboard_arrow_right</mat-icon>
-                    </button>
-                    <button *ngIf="maxNumPages('today') == true " mat-icon-button class="next-page" (click)="currentPage = currentPage + 1;
-                    showGoals('today')" [disabled]="false">
-                        <mat-icon>keyboard_arrow_right</mat-icon>
-                    </button>
                 </div>
             </div>
             </span>
@@ -271,25 +233,6 @@
                    </ng-container>
 
                 </div>
-                <div class="page-scroll-buttons" *ngIf="getSize('today')">
-                    <button *ngIf="currentPage == 1" mat-icon-button class="previous-page" (click)="currentPage = currentPage - 1;
-                    showGoals('all')" [disabled]="true">
-                        <mat-icon>keyboard_arrow_left</mat-icon>
-                    </button>
-                    <button *ngIf="currentPage != 1" mat-icon-button class="previous-page" (click)="currentPage = currentPage - 1;
-                    showGoals('all')" [disabled]="false">
-                        <mat-icon>keyboard_arrow_left</mat-icon>
-                    </button>
-                    {{currentPage}}
-                    <button *ngIf="maxNumPages('all') == false" mat-icon-button class="next-page" (click)="currentPage = currentPage + 1;
-                    showGoals('all')" [disabled]="true">
-                        <mat-icon>keyboard_arrow_right</mat-icon>
-                    </button>
-                    <button *ngIf="maxNumPages('all') == true " mat-icon-button class="next-page" (click)="currentPage = currentPage + 1;
-                    showGoals('all')" [disabled]="false">
-                        <mat-icon>keyboard_arrow_right</mat-icon>
-                    </button>
-                </div>
             </div>
             </span>
 
@@ -365,27 +308,16 @@
                         </ng-container>
 
                     </div>
-                    <div class="page-scroll-buttons" *ngIf="getSize('today')">
-                        <button *ngIf="currentPage == 1" mat-icon-button class="previous-page" (click)="currentPage = currentPage - 1;
-                    showGoals('all')" [disabled]="true">
-                            <mat-icon>keyboard_arrow_left</mat-icon>
-                        </button>
-                        <button *ngIf="currentPage != 1" mat-icon-button class="previous-page" (click)="currentPage = currentPage - 1;
-                    showGoals('all')" [disabled]="false">
-                            <mat-icon>keyboard_arrow_left</mat-icon>
-                        </button>
-                        {{currentPage}}
-                        <button *ngIf="maxNumPages('all') == false" mat-icon-button class="next-page" (click)="currentPage = currentPage + 1;
-                    showGoals('all')" [disabled]="true">
-                            <mat-icon>keyboard_arrow_right</mat-icon>
-                        </button>
-                        <button *ngIf="maxNumPages('all') == true " mat-icon-button class="next-page" (click)="currentPage = currentPage + 1;
-                    showGoals('all')" [disabled]="false">
-                        <mat-icon>keyboard_arrow_right</mat-icon>
-                    </button>
-                </div>
+
             </div>
             </span>
         </div>
-    </div>
+    </div>-->
 
+<div class="sidenav" hide-xs>
+    <h2 class="nav-goals-title">Journals</h2>
+    <hr class="nav-title-divider">
+    <button mat-raised-button (click)="openDialog()" class="add action-button" id="addNewGoal">
+        New Goal
+    </button>
+</div>
