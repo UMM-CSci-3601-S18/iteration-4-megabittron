@@ -18,7 +18,6 @@ import {SummaryListService} from "./summary/summary-list.service";
 import {JournalsComponent} from "./journals/journals.component";
 import {AddJournalComponent} from "./journals/add/add-journal.component";
 import {EditJournalComponent} from "./journals/edit/edit-journal.component";
-import {ShowJournalComponent} from "./journals/show/show-journal.component";
 import {ViewJournalComponent} from "./journals/view/view-journal.component";
 import {JournalsService} from "./journals/journals.service";
 import {ArraySortPipe} from "./journals/array-sort.pipe";
@@ -51,7 +50,6 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         JournalsComponent,
         AddJournalComponent,
         EditJournalComponent,
-        ShowJournalComponent,
         ViewJournalComponent,
         SummaryListComponent,
         ArraySortPipe,
@@ -71,9 +69,8 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         AddGoalComponent,
         AddJournalComponent,
         EditJournalComponent,
-        ShowJournalComponent,
-        ShowSummaryListComponent,
         ViewJournalComponent,
+        ShowSummaryListComponent,
     ],
     bootstrap: [
         AppComponent

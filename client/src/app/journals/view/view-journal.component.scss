@@ -1,0 +1,41 @@
+.sidenav {
+    height: 100%;
+    width: 275px;
+    position: fixed;
+    z-index: 1;
+    overflow-x: hidden;
+    text-align: center;
+    background-color: #546E7A;
+}
+
+.journal {
+    margin-left: 275px;
+    max-width: 500px;
+}
+
+.journal-card {
+    margin: 15px;
+}
+
+.nav-journals-title {
+    margin: 15px;
+    color: white;
+    font-size: 34px;
+}
+
+.edit:hover {
+    background-color: #E0F7FA;
+}
+
+.delete:hover {
+    background-color: #FFEBEE;
+}
+
+.action-button {
+    width: 50%;
+    margin-bottom: 15px;
+}
+
+.break-word {
+    word-wrap: break-word;
+}
