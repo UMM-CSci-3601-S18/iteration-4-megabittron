@@ -13,6 +13,7 @@ import {EmotionService} from "./home/home.service";
 import {GoalsComponent} from "./goals/goals.component";
 import {GoalsService} from "./goals/goals.service";
 import {AddGoalComponent} from "./goals/add/add-goal.component";
+import {EditGoalComponent} from "./goals/edit/edit-goal.component";
 import {SummaryListComponent} from "./summary/summary-list.component";
 import {SummaryListService} from "./summary/summary-list.service";
 import {JournalsComponent} from "./journals/journals.component";
@@ -47,6 +48,7 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         ResourcesComponent,
         GoalsComponent,
         AddGoalComponent,
+        EditGoalComponent,
         JournalsComponent,
         AddJournalComponent,
         EditJournalComponent,
@@ -67,6 +69,7 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
     ],
     entryComponents: [
         AddGoalComponent,
+        EditGoalComponent,
         AddJournalComponent,
         EditJournalComponent,
         ViewJournalComponent,

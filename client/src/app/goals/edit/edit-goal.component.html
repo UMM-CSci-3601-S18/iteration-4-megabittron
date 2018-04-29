@@ -1,7 +1,7 @@
-<form #newGoalForm="ngForm">
-<div class="add-goal" layout-gt-sm="row">
-    <div flex-gt-sm="80" flex-offset-gt-sm="10">
-            <mat-card-title>New Goal</mat-card-title>
+<form #editGoalForm="ngForm">
+    <div class="edit-goal" layout-gt-sm="row">
+        <div flex-gt-sm="80" flex-offset-gt-sm="10">
+            <mat-card-title>Edit Goal</mat-card-title>
             <mat-divider></mat-divider>
             <mat-card-content>
                 <br>
@@ -61,11 +61,15 @@
                     <mat-option value="Monthly">Monthly</mat-option>
                 </mat-select>
             </mat-card-content>
-        <button mat-raised-button class="confirm-add-goal-button"
-                [mat-dialog-close]="data.goal" [disabled]="!newGoalForm.form.valid">Submit</button>
-        <button mat-raised-button class="exitWithoutAddingButton" (click)="onNoClick()">Cancel</button>
+            <button mat-raised-button class="confirm-edit-goal-button"
+                    [mat-dialog-close]="data.goal"
+                    [disabled]="!editGoalForm.form.valid">Submit
+            </button>
+            <button mat-raised-button class="exitWithoutAddingButton"
+                    (click)="onNoClick()">Cancel
+            </button>
+        </div>
     </div>
-</div>
 </form>
 
 

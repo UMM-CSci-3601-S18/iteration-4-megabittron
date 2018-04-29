@@ -25,7 +25,7 @@ describe('Summary', () => {
         element(by.id('md-tab-label-0-1')).click();
         page.delay(500000);
         expect(page.selectMoodDropdown()).toBeTruthy();
-    });
+    });z
 
     // make sure it clicks emotion dropdown
     it('Should click the Mood dropdown ', () => {

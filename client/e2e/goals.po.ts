@@ -47,6 +47,11 @@ export class GoalPage {
         return element(by.className('add-new-goal')).isPresent();
     }
 
+    editButtonExists(): promise.Promise<boolean>{
+        this.highlightElement(by.className('edit-goal'));
+        return element(by.className('edit-goal-button')).isPresent();
+    }
+
     clickAddGoalButton(): promise.Promise<void> {
         this.highlightElement(by.className('goal-button'));
         return element(by.className('goal-button')).click();
