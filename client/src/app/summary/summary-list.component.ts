@@ -73,7 +73,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     public pastYearSummaries: Summary[];
 
 
-    public summaryMood: string;
+    public summaryEmotion: string;
     public summaryIntensity: string;
     public inputType = "week";
 
@@ -152,17 +152,17 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         return this.pastMonthSummaries;
     }
 
-    // Filters Summaries, keeping ones that match the given mood, intensity, and time period.
+    // Filters Summaries, keeping ones that match the given emotion, intensity, and time period.
     // Uses filterDates() to get summaries dated between start and end date.
-    public filterSummaries(searchMood: string, searchIntensity: string, searchStartDate: any, searchEndDate: any): Summary[] {
+    public filterSummaries(searchEmotion: string, searchIntensity: string, searchStartDate: any, searchEndDate: any): Summary[] {
 
         this.filteredSummaries = this.summaries;
 
-        // Filter by Mood
-        if (searchMood != null && searchMood !== "All") {
-            searchMood = searchMood.toLocaleLowerCase();
+        // Filter by Emotion
+        if (searchEmotion != null && searchEmotion !== "All") {
+            searchEmotion = searchEmotion.toLocaleLowerCase();
             this.filteredSummaries = this.filteredSummaries.filter(summary => {
-                return !searchMood || summary.mood.toLowerCase().indexOf(searchMood) !== -1;
+                return !searchEmotion || summary.emotion.toLowerCase().indexOf(searchEmotion) !== -1;
             });
         }
 
@@ -183,10 +183,10 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     // Filters summaries by where they should appear on the chart.
     // Uses var filteredSummaries from filterSummaries() to allow prefiltering using options at top of HTML
     // xValue can represent hour, weekday, date, or month.
-    filterGraph(xValue, Searchmood): number {
-        Searchmood = Searchmood.toLocaleLowerCase();
+    filterGraph(xValue, Searchemotion): number {
+        Searchemotion = Searchemotion.toLocaleLowerCase();
         let filterData = this.filteredSummaries.filter(summary => {
-            return !Searchmood || summary.mood.toLowerCase().indexOf(Searchmood) !== -1;
+            return !Searchemotion || summary.emotion.toLowerCase().indexOf(Searchemotion) !== -1;
         });
 
         if (this.inputType == "week") {
@@ -749,7 +749,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     }
 
     // Used to show total number of summaries shown by chart in HTML
-    totalNumberMoods(): number {
+    totalNumberEmotions(): number {
         return this.filteredSummaries.length;
     }
 
@@ -771,7 +771,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         summaryListObservable.subscribe(
             summaries => {
                 this.summaries = summaries;
-                this.filterSummaries(this.summaryMood, this.summaryIntensity, this.startDate, this.endDate);
+                this.filterSummaries(this.summaryEmotion, this.summaryIntensity, this.startDate, this.endDate);
             },
             err => {
                 console.log(err);
@@ -781,7 +781,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
 
     loadService(): void {
-        this.summaryListService.getSummaries(localStorage.getItem("userID"), this.summaryMood).subscribe(
+        this.summaryListService.getSummaries(localStorage.getItem("userID"), this.summaryEmotion).subscribe(
             summaries => {
                 this.summaries = summaries;
                 this.filteredSummaries = this.summaries;
@@ -811,7 +811,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         const showSummary: Summary = {
             _id: null,
             userID: null,
-            mood: null,
+            emotion: null,
             intensity: null,
             date: null,
             description: description

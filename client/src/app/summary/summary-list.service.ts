@@ -15,12 +15,12 @@ export class SummaryListService {
     constructor(private http: HttpClient) {
     }
 
-    getSummaries(userID: string, summaryMood?: string,): Observable<Summary[]> {
+    getSummaries(userID: string, summaryEmotion?: string,): Observable<Summary[]> {
         this.summaryUrl = this.baseUrl;
         this.noID = false;
 
         this.filterByUserID(userID);
-        this.filterByMood(summaryMood);
+        this.filterByEmotion(summaryEmotion);
 
         if(this.noID) {
             return this.emptyObservable;
@@ -59,23 +59,23 @@ export class SummaryListService {
         }
     }
 
-    filterByMood(summaryMood?: string): void {
-        if (!(summaryMood == null || summaryMood === '')) {
-            if (this.parameterPresent('mood=') ) {
+    filterByEmotion(summaryEmotion?: string): void {
+        if (!(summaryEmotion == null || summaryEmotion === '')) {
+            if (this.parameterPresent('emotion=') ) {
                 // there was a previous search by company that we need to clear
-                this.removeParameter('mood=');
+                this.removeParameter('emotion=');
             }
             if (this.summaryUrl.indexOf('?') !== -1) {
                 // there was already some information passed in this url
-                this.summaryUrl += 'mood=' + summaryMood + '&';
+                this.summaryUrl += 'emotion=' + summaryEmotion + '&';
             } else {
                 // this was the first bit of information to pass in the url
-                this.summaryUrl += '?mood=' + summaryMood + '&';
+                this.summaryUrl += '?emotion=' + summaryEmotion + '&';
             }
         } else {
             // there was nothing in the box to put onto the URL... reset
-            if (this.parameterPresent('mood=')) {
-                let start = this.summaryUrl.indexOf('mood=');
+            if (this.parameterPresent('emotion=')) {
+                let start = this.summaryUrl.indexOf('emotion=');
                 const end = this.summaryUrl.indexOf('&', start);
                 if (this.summaryUrl.substring(start - 1, start) === '?') {
                     start = start - 1;
