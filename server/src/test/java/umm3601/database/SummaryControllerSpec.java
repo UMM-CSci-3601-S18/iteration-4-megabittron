@@ -116,7 +116,7 @@ public class SummaryControllerSpec {
         assertEquals("Emotions should match", expectedNames, emotions);
     }
 
-    @Test
+   /* @Test
     public void getSummariesByEmotion(){
         Map<String, String[]> argMap = new HashMap<>();
         // Mongo in summaryController is doing a regex search so can just take a Java Reg. Expression
@@ -134,5 +134,5 @@ public class SummaryControllerSpec {
             .collect(Collectors.toList());
         List<String> expectedDesc = Arrays.asList("I'm feeling fantastic","I'm feeling good");
         assertEquals("Descriptions should match", expectedDesc, desc);
-    }
+    }*/
 }
