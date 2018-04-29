@@ -10,7 +10,7 @@
                     <mat-tab label="Graphs">
 
                         <h3 class="your-summaries-title">Your Emotions</h3>
-                        <h6 class="your-summaries-title">There are {{totalNumberMoods()}} entries represented</h6>
+                        <h6 class="your-summaries-title">There are {{totalNumberEmotions()}} entries represented</h6>
                         <canvas id="Chart" height="auto"></canvas>
                         <br>
 
@@ -87,9 +87,9 @@
                                     <!--# The Angular feature-->
                                     <label> Emotion:</label>
 
-                                    <mat-select name="dropdown" class="summaryMood"
+                                    <mat-select name="dropdown" class="summaryEmotion"
                                                 #input placeholder="Filter by Emotion"
-                                                [(ngModel)]="summaryMood">
+                                                [(ngModel)]="summaryEmotion">
                                         <mat-option class="md-option-0" selected value="All">All Emotions
                                         </mat-option>
                                         <mat-option class="md-option-1" value="Happy">Happy</mat-option>
@@ -154,7 +154,7 @@
                         <!--<mat-card>-->
                         <mat-card-title class="your-summaries-title">Your Emotions</mat-card-title>
 
-                        <mat-card-subtitle class="your-summaries-title">You have {{totalNumberMoods()}} emotions to
+                        <mat-card-subtitle class="your-summaries-title">You have {{totalNumberEmotions()}} emotions to
                             view
                         </mat-card-subtitle>
                         <mat-accordion *ngIf="summaries && myTabGroup.selectedIndex == 1; else summariesError">
@@ -178,11 +178,11 @@
                                 </div>
                                 <div class="table-div">
                                     <mat-table #table class="summary-table"
-                                               *ngFor="let summary of this.filterSummaries(summaryMood, summaryIntensity, startDate, endDate)">
+                                               *ngFor="let summary of this.filterSummaries(summaryEmotion, summaryIntensity, startDate, endDate)">
                                         <ng-container matColumnDef="emotion">
                                             <mat-header-cell *matHeaderCellDef><img class="selected-emotion"
-                                                                                    src="../../assets/images/emotions/{{summary.mood}}.svg"
-                                                                                    matTooltip="{{summary.mood}}">
+                                                                                    src="../../assets/images/emotions/{{summary.emotion}}.svg"
+                                                                                    matTooltip="{{summary.emotion}}">
                                             </mat-header-cell>
                                             <mat-cell class="duration-cell"></mat-cell>
                                         </ng-container>

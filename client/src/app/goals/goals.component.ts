@@ -30,7 +30,7 @@ export class GoalsComponent implements OnInit {
     public currentPage = 1;
 
     // Used for testing to set a static date so the same goals show up in today's goals regardless of actual date
-    public testing = true;
+    public testing = false;
 
     // The ID of the goal
     private highlightedID: { '$oid': string } = {'$oid': ''};

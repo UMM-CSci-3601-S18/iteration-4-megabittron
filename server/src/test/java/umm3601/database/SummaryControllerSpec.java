@@ -34,19 +34,19 @@ public class SummaryControllerSpec {
 
         List<Document> testEmotions = new ArrayList<>();
         testEmotions.add(Document.parse("{" +
-            "mood: \"happy\" " +
+            "emotion: \"happy\" " +
             "userID: \"4cb56a89541a2d783595012c\" " +
             "date: \"Wed Mar 1 2018 7:35:02 GMT-0500\" " +
             "intensity: \"2\" " +
             "description: \"I'm feeling good\"}"));
         testEmotions.add(Document.parse("{" +
-            "mood: \"sad\" " +
+            "emotion: \"sad\" " +
             "userID: \"4cb56a89541a2d783595012c\" " +
             "date: \"Wed Mar 3 2018 12:02:21 GMT-0500\" " +
             "intensity: \"4\" " +
             "description: \"I'm not feeling good\"}"));
         testEmotions.add(Document.parse("{" +
-            "mood: \"happy\" " +
+            "emotion: \"happy\" " +
             "userID: \"4cb56a89541a2d783595012c\" " +
             "date: \"Wed Mar 1 2018 10:14:41 GMT-0500\" " +
             "intensity: \"4\" " +
@@ -54,7 +54,7 @@ public class SummaryControllerSpec {
 
         testID = new ObjectId();
         BasicDBObject tester = new BasicDBObject("_id", testID);
-        tester = tester.append("mood", "mad")
+        tester = tester.append("emotion", "mad")
             .append("userID", "2cb45a89541a2d783595012b")
             .append("date", "Wed Mar 8 2018 10:17:41 GMT-0500")
             .append("intensity", "5")
@@ -81,7 +81,7 @@ public class SummaryControllerSpec {
 
     private static String getEmotion(BsonValue val) {
         BsonDocument doc = val.asDocument();
-        return ((BsonString) doc.get("mood")).getValue();
+        return ((BsonString) doc.get("emotion")).getValue();
     }
 
     private static String getDescription(BsonValue val) {
@@ -117,11 +117,11 @@ public class SummaryControllerSpec {
     }
 
     @Test
-    public void getSummariesByMood(){
+    public void getSummariesByEmotion(){
         Map<String, String[]> argMap = new HashMap<>();
         // Mongo in summaryController is doing a regex search so can just take a Java Reg. Expression
         // This will search the category for letters 'f' and 'c'.
-        argMap.put("mood", new String[] { "happy" });
+        argMap.put("emotion", new String[] { "happy" });
         argMap.put("userID", new String[] { "4cb56a89541a2d783595012c" });
 
         String jsonResult = summaryController.getSummaries(argMap);
