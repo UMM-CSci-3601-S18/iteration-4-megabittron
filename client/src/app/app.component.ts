@@ -3,8 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {AppService} from "./app.service";
 import {Router, ActivationStart} from "@angular/router";
-
-
+import {Location} from "@angular/common";
 
 
 declare var gapi: any;
@@ -21,13 +20,19 @@ export class AppComponent implements OnInit {
 
     constructor(private http: HttpClient,
                 public appService: AppService,
-                private router: Router) {
+                private router: Router,
+                private _location: Location) {
 
         this.router.events.subscribe((e) => {
             if (e instanceof ActivationStart) {
                 this.currentPath = e.snapshot.routeConfig.path;
             }
         })
+    }
+
+    backClicked() {
+        this._location.back();
+
     }
 
     isJournalView(): boolean {
