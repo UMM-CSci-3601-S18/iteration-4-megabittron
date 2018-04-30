@@ -680,7 +680,9 @@
             </mat-card-header>
             <mat-divider></mat-divider>
             <mat-card-content class="goal-info break-word">
-                {{goal.purpose}}
+                <p *ngIf="goal.frequency != 'Does not repeat'">This is a {{goal.frequency | lowercase}} goal</p>
+                <p *ngIf="goal.frequency == 'Does not repeat'">This goal does not repeat</p>
+                <p>{{goal.purpose}}</p>
             </mat-card-content>
         </mat-card>
     </div>
