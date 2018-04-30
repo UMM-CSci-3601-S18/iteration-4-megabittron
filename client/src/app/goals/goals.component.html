@@ -72,10 +72,16 @@
                                         <mat-icon>delete</mat-icon>
                                     </button>
 
-                                    <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" class="today-complete-goal"
+                                    <button mat-icon-button class="button complete-button"
                                             (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next)">
                                         <mat-icon>done</mat-icon>
                                     </button>
+
+                                    <button mat-icon-button class="edit-goal-button action-button"
+                                            (click)="openEditGoalDialog(goal._id['$oid'], goal.purpose, goal.category, goal.name, goal.status,
+                                            goal.frequency, goal.start, goal.end, goal.next)">
+                            <mat-icon matTooltip="Edit">mode_edit</mat-icon>
+                        </button>
                                 </div>
                             </mat-card-content>
                         </mat-card>
@@ -121,21 +127,35 @@
                                     </mat-panel-title>
                                 </mat-expansion-panel-header>
 
-                                <div class ="goals-image">
+                                 <div class ="goals-image">
+                                    <img *ngIf="goal.category == 'Business/Career'" src="../../assets/images/goals/business-career.png"
+                                         class="goal-card-image" height="75">
                                     <img *ngIf="goal.category == 'Family'" src="../../assets/images/goals/family.png"
                                          class="goal-card-image" height="75">
-                                    <img *ngIf="goal.category == 'Chores'" src="../../assets/images/goals/chores.png"
+                                    <img *ngIf="goal.category == 'Finances'" src="../../assets/images/goals/finance.png"
                                          class="goal-card-image" height="75">
-                                    <img *ngIf="goal.category == 'Personal Health'" src="../../assets/images/goals/health.png"
+                                    <img *ngIf="goal.category == 'Fun and Recreation'" src="../../assets/images/goals/fun-recreation.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Health'" src="../../assets/images/goals/health.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Personal Development'" src="../../assets/images/goals/personal-development.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Romance'" src="../../assets/images/goals/romance.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Spiritual'" src="../../assets/images/goals/spiritual.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Social'" src="../../assets/images/goals/social.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Other'" src="../../assets/images/goals/other.png"
                                          class="goal-card-image" height="75">
                                 </div>
 
                                 <div class="goals-card-info">
                                    <mat-card-content class="goal-info">
                                         <mat-card-title class="today-goal-name">{{goal.name}}</mat-card-title>
-                                       <p><i>Purpose:</i> {{goal.purpose}}</p>
+                                       <p *ngIf="goal.purpose !== ''"><i>Purpose:</i> {{goal.purpose}}</p>
                                 <p><i>Frequency:</i> {{goal.frequency}}</p>
-                                <p><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
+                                <p *ngIf="goal.end !== ''"><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
                                     </mat-card-content>
                                 </div>
                                 <div class="goals-buttons">
@@ -143,16 +163,21 @@
                                             (click)="deleteGoal(goal._id['$oid'])">
                                         <mat-icon>delete</mat-icon>
                                     </button>
-                                    <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" class="today-complete-goal"
+                                    <button *ngIf="goal.status == false" mat-icon-button class="button complete-button"
                                             (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next)">
                                         <mat-icon>done</mat-icon>
                                     </button>
+                                    <button mat-icon-button class="edit-goal-button action-button"
+                                            (click)="openEditGoalDialog(goal._id['$oid'], goal.purpose, goal.category, goal.name, goal.status,
+                                            goal.frequency, goal.start, goal.end, goal.next)">
+                            <mat-icon matTooltip="Edit">mode_edit</mat-icon>
+                        </button>
                                 </div>
                             </mat-expansion-panel>
                         </mat-accordion>
                     </mat-card>
                 </div>
-                <div class="pagescrollbuttons">
+                <div class="pagescrollbuttons" *ngIf="getSize('today')">
                     <button *ngIf="currentPage == 1" mat-icon-button class="previous-page" (click)="currentPage = currentPage - 1;
                     showGoals('today')" [disabled]="true">
                         <mat-icon>keyboard_arrow_left</mat-icon>
@@ -195,39 +220,58 @@
                             <mat-divider></mat-divider>
                             <mat-card-content>
                                 <div class ="goals-image">
+                                    <img *ngIf="goal.category == 'Business/Career'" src="../../assets/images/goals/business-career.png"
+                                         class="goal-card-image" height="75">
                                     <img *ngIf="goal.category == 'Family'" src="../../assets/images/goals/family.png"
                                          class="goal-card-image" height="75">
-                                    <img *ngIf="goal.category == 'Chores'" src="../../assets/images/goals/chores.png"
+                                    <img *ngIf="goal.category == 'Finances'" src="../../assets/images/goals/finance.png"
                                          class="goal-card-image" height="75">
-                                    <img *ngIf="goal.category == 'Personal Health'" src="../../assets/images/goals/health.png"
+                                    <img *ngIf="goal.category == 'Fun and Recreation'" src="../../assets/images/goals/fun-recreation.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Health'" src="../../assets/images/goals/health.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Personal Development'" src="../../assets/images/goals/personal-development.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Romance'" src="../../assets/images/goals/romance.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Spiritual'" src="../../assets/images/goals/spiritual.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Social'" src="../../assets/images/goals/social.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Other'" src="../../assets/images/goals/other.png"
                                          class="goal-card-image" height="75">
                                 </div>
 
                             <div class="goals-card-info">
-                                       <p><i>Purpose:</i> {{goal.purpose}}</p>
+                                       <p *ngIf="goal.purpose !== ''"><i>Purpose:</i> {{goal.purpose}}</p>
                                 <p><i>Frequency:</i> {{goal.frequency}}</p>
-                                <p><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
+                                <p *ngIf="goal.end !== ''"><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
                             </div>
                                <div class="goals-buttons">
                                    <button mat-icon-button class="button delete-button"
                                            (click)="deleteGoal(goal._id['$oid'])">
                                        <mat-icon>delete</mat-icon>
                                    </button>
-                                   <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" id="desktop-all-complete-goal"
+                                   <button *ngIf="goal.status == false" mat-icon-button class="button complete-button"
                                            (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next)">
                                        <mat-icon>done</mat-icon>
                                    </button>
-                                   <button *ngIf="goal.status == true" mat-icon-button class="button complete-button" id="desktop-uncomplete-goal"
+                                   <button *ngIf="goal.status == true" mat-icon-button class="button complete-button"
                                            (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)">
                                        <mat-icon>add</mat-icon>
                                    </button>
+                                   <button mat-icon-button class="edit-goal-button action-button"
+                                           (click)="openEditGoalDialog(goal._id['$oid'], goal.purpose, goal.category, goal.name, goal.status,
+                                            goal.frequency, goal.start, goal.end, goal.next)">
+                            <mat-icon matTooltip="Edit">mode_edit</mat-icon>
+                        </button>
                                </div>
                             </mat-card-content>
                        </mat-card>
                    </ng-container>
 
                 </div>
-                <div class="page-scroll-buttons">
+                <div class="page-scroll-buttons" *ngIf="getSize('today')">
                     <button *ngIf="currentPage == 1" mat-icon-button class="previous-page" (click)="currentPage = currentPage - 1;
                     showGoals('all')" [disabled]="true">
                         <mat-icon>keyboard_arrow_left</mat-icon>
@@ -269,32 +313,51 @@
                                         </mat-expansion-panel-header>
 
                                         <div class ="goals-image">
-                                            <img *ngIf="goal.category == 'Family'" src="../../assets/images/goals/family.png"
-                                                 class="goal-card-image" height="75">
-                                            <img *ngIf="goal.category == 'Chores'" src="../../assets/images/goals/chores.png"
-                                                 class="goal-card-image" height="75">
-                                            <img *ngIf="goal.category == 'Personal Health'" src="../../assets/images/goals/health.png"
-                                                 class="goal-card-image" height="75">
-                                        </div>
+                                    <img *ngIf="goal.category == 'Business/Career'" src="../../assets/images/goals/business-career.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Family'" src="../../assets/images/goals/family.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Finances'" src="../../assets/images/goals/finance.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Fun and Recreation'" src="../../assets/images/goals/fun-recreation.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Health'" src="../../assets/images/goals/health.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Personal Development'" src="../../assets/images/goals/personal-development.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Romance'" src="../../assets/images/goals/romance.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Spiritual'" src="../../assets/images/goals/spiritual.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Social'" src="../../assets/images/goals/social.png"
+                                         class="goal-card-image" height="75">
+                                    <img *ngIf="goal.category == 'Other'" src="../../assets/images/goals/other.png"
+                                         class="goal-card-image" height="75">
+                                </div>
 
                                         <div class="goals-card-info">
-                                               <p><i>Purpose:</i> {{goal.purpose}}</p>
+                                               <p *ngIf="goal.purpose !== ''"><i>Purpose:</i> {{goal.purpose}}</p>
                                 <p><i>Frequency:</i> {{goal.frequency}}</p>
-                                <p><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
+                                <p *ngIf="goal.end !== ''"><i>End Date:</i> {{goal.end | date : "MMM d, yyyy"}}</p>
                                         </div>
                                         <div class="goals-buttons">
                                             <button mat-icon-button class="button delete-button"
                                                     (click)="deleteGoal(goal._id['$oid'])">
                                                 <mat-icon>delete</mat-icon>
                                             </button>
-                                            <button *ngIf="goal.status == false" mat-icon-button class="button complete-button" id="all-complete-goal"
+                                            <button *ngIf="goal.status == false" mat-icon-button class="button complete-button"
                                                     (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next)">
                                                 <mat-icon>done</mat-icon>
                                             </button>
-                                            <button *ngIf="goal.status == true" mat-icon-button class="button complete-button" id="uncomplete-goal"
+                                            <button *ngIf="goal.status == true" mat-icon-button class="button complete-button"
                                                     (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)">
                                                 <mat-icon>add</mat-icon>
                                             </button>
+                                            <button mat-icon-button class="edit-goal-button action-button"
+                                                    (click)="openEditGoalDialog(goal._id['$oid'], goal.purpose, goal.category, goal.name, goal.status,
+                                            goal.frequency, goal.start, goal.end, goal.next)">
+                            <mat-icon matTooltip="Edit">mode_edit</mat-icon>
+                        </button>
                                         </div>
                                     </mat-expansion-panel>
                                 </mat-accordion>
@@ -302,7 +365,7 @@
                         </ng-container>
 
                     </div>
-                    <div class="page-scroll-buttons">
+                    <div class="page-scroll-buttons" *ngIf="getSize('today')">
                         <button *ngIf="currentPage == 1" mat-icon-button class="previous-page" (click)="currentPage = currentPage - 1;
                     showGoals('all')" [disabled]="true">
                             <mat-icon>keyboard_arrow_left</mat-icon>

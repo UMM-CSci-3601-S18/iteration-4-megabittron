@@ -10,6 +10,11 @@
 
 .journal {
     margin-left: 275px;
+    max-width: 500px;
+}
+
+.journal-card {
+    margin: 15px;
 }
 
 .nav-journals-title {
@@ -18,22 +23,21 @@
     font-size: 34px;
 }
 
-.edit-journal {
-    width: 90%;
-    margin-bottom: 15px;
-}
-
-.edit-journal:hover {
+.edit:hover {
     background-color: #E0F7FA;
 }
 
-.delete-journal {
-    width: 90%;
+.delete:hover {
+    background-color: #FFEBEE;
+}
+
+.action-button {
+    width: 50%;
     margin-bottom: 15px;
 }
 
-.delete-journal:hover {
-    background-color: #FFEBEE;
+.break-word {
+    word-wrap: break-word;
 }
 
 .mobile-date{

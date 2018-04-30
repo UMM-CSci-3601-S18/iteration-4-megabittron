@@ -13,7 +13,7 @@ describe('Summary: ', () => {
         {
             _id: '1',
             userID: 'userID1',
-            mood: 'happy',
+            emotion: 'happy',
             date: '03/13/2018',
             intensity: 2,
             description: 'slept',
@@ -21,7 +21,7 @@ describe('Summary: ', () => {
         {
             _id: '2',
             userID: 'userID1',
-            mood: 'sad',
+            emotion: 'sad',
             date: '03/14/2018',
             intensity: 4,
             description: 'friend died',
@@ -29,14 +29,14 @@ describe('Summary: ', () => {
         {
             _id: '3',
             userID: 'userID1',
-            mood: 'mad',
+            emotion: 'mad',
             date: '03/15/2018',
             intensity: 5,
             description: 'didnt sleep',
         },
     ];
     const mSummaries: Summary[] = testSummaries.filter(summary =>
-        summary.mood.toLowerCase().indexOf('a') !== 3
+        summary.emotion.toLowerCase().indexOf('a') !== 3
     );
 
     // We will need some url information from the summaryService to meaningfully test category filtering;
@@ -73,7 +73,7 @@ describe('Summary: ', () => {
             {
                 _id: '1',
                 userID: 'userID1',
-                mood: 'happy',
+                emotion: 'happy',
                 date: '03/13/2018',
                 intensity: 2,
                 description: 'slept',
@@ -99,29 +99,29 @@ describe('Summary: ', () => {
             summaries => expect(summaries).toEqual(mSummaries)
         );
 
-        const req = httpTestingController.expectOne(summaryService.baseUrl + '?userID=userID1&' + 'mood=a&');
+        const req = httpTestingController.expectOne(summaryService.baseUrl + '?userID=userID1&' + 'emotion=a&');
         expect(req.request.method).toEqual('GET');
         req.flush(mSummaries);
     });
 
-    it('filterByMood(summaryMood) deals appropriately with a URL that already had a mood', () => {
-        currentlyImpossibleToGenerateSearchSummaryUrl = summaryService.baseUrl + '?mood=m&something=k&';
+    it('filterByEmotion(summaryEmotion) deals appropriately with a URL that already had a emotion', () => {
+        currentlyImpossibleToGenerateSearchSummaryUrl = summaryService.baseUrl + '?emotion=m&something=k&';
         summaryService['summaryUrl'] = currentlyImpossibleToGenerateSearchSummaryUrl;
-        summaryService.filterByMood('a');
-        expect(summaryService['summaryUrl']).toEqual(summaryService.baseUrl + '?something=k&mood=a&');
+        summaryService.filterByEmotion('a');
+        expect(summaryService['summaryUrl']).toEqual(summaryService.baseUrl + '?something=k&emotion=a&');
     });
 
-    it('filterByMood()terByMood()) deals appropriately with a URL that already had some filtering, but no mood', () => {
+    it('filterByEmotion()terByEmotion()) deals appropriately with a URL that already had some filtering, but no emotion', () => {
         currentlyImpossibleToGenerateSearchSummaryUrl = summaryService.baseUrl + '?something=k&';
         summaryService['summaryUrl'] = currentlyImpossibleToGenerateSearchSummaryUrl;
-        summaryService.filterByMood('m');
-        expect(summaryService['summaryUrl']).toEqual(summaryService.baseUrl + '?something=k&mood=m&');
+        summaryService.filterByEmotion('m');
+        expect(summaryService['summaryUrl']).toEqual(summaryService.baseUrl + '?something=k&emotion=m&');
     });
 
-    it('filterByMood()terByMood()) deals appropriately with a URL has the keyword Mood, but nothing after the =', () => {
-        currentlyImpossibleToGenerateSearchSummaryUrl = summaryService.baseUrl + '?mood=&';
+    it('filterByEmotion()terByEmotion()) deals appropriately with a URL has the keyword Emotion, but nothing after the =', () => {
+        currentlyImpossibleToGenerateSearchSummaryUrl = summaryService.baseUrl + '?emotion=&';
         summaryService['summaryUrl'] = currentlyImpossibleToGenerateSearchSummaryUrl;
-        summaryService.filterByMood('');
+        summaryService.filterByEmotion('');
         expect(summaryService['summaryUrl']).toEqual(summaryService.baseUrl + '');
     });
 });

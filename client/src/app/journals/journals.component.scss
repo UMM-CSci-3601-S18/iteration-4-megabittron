@@ -1,15 +1,15 @@
-.first-sec {
-    width: 320px;
-    margin: 0 auto;
-}
-
-.journal-title {
-    text-align: left;
-    font-size: 18px;
+.sidenav {
+    height: 100%;
+    width: 275px;
+    position: fixed;
+    z-index: 1;
+    overflow-x: hidden;
+    text-align: center;
+    background-color: #546E7A;
 }
 
 .add {
-    width: 90%;
+    width: 50%;
     margin-bottom: 15px;
 }
 
@@ -24,12 +24,15 @@
     margin: 0 auto;
 }
 
-#journalTitle {
-    color: white;
+.prompts {
+    width: 90%;
+    height: 175px;
+    margin: 0 auto;
+    margin-top: 15px;
 }
 
-.journal-info {
-    word-wrap: break-word;
+.grid-list {
+    margin-left: 275px;
 }
 
 .journals-section {
@@ -43,29 +46,17 @@
     height: 200px;
 }
 
-.show-more-button {
-    padding: 0;
-    border: none;
-    background: none;
-    color: #0D47A1;
+.journal-card:hover {
+    transform: scale(1.05);
 }
 
-.show-more-button:hover {
-    background-color: #BBDEFB;
+.journal-title {
+    text-align: left;
+    font-size: 18px;
 }
 
-.sidenav {
-    height: 100%;
-    width: 275px;
-    position: fixed;
-    z-index: 1;
-    overflow-x: hidden;
-    text-align: center;
-    background-color: #546E7A;
-}
-
-.grid-list {
-    margin-left: 275px;
+.break-word {
+    word-wrap: break-word;
 }
 
 .nav-journals-title {
@@ -85,13 +76,10 @@
     margin-bottom: -20px;
 }
 
-.prompts {
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 15px;
-}
+
 
 .journal-card-open {
     text-decoration: none;
     color: black;
 }
+

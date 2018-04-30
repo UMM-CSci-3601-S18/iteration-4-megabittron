@@ -1,20 +1,25 @@
 <div class="sidenav" hide-xs>
-    <h2 class="nav-journals-title">{{journal.title}}</h2>
+    <h2 class="nav-journals-title break-word">{{journal.title}}</h2>
     <hr class="nav-title-divider">
-    <button mat-raised-button class="edit-journal action-button"
+    <button mat-raised-button class="back action-button"
+            (click)="backClicked()">
+        Back
+    </button>
+    <button mat-raised-button class="edit action-button"
             (click)="openEditJournalDialog(journal._id['$oid'], journal.title, journal.content, journal.date)">
         Edit Journal
     </button>
-    <button mat-raised-button class="delete-journal action-button"
+    <button mat-raised-button class="delete action-button"
             (click)="deleteJournal(journal._id['$oid']); backClicked()">
         Delete Journal
     </button>
 </div>
-<div class="journal" hide-xs>
-    <button (click)="backClicked()">Go back</button>
+<div class="journal">
     <mat-card class="journal-card">
-        {{journal.title}}
-        {{journal.content}}
+        <mat-card-title class="journal-title break-word">{{journal.title}}</mat-card-title>
+        <mat-card-subtitle>{{journal.date | date : "MMM d, yyyy 'at' h:mm a"}}</mat-card-subtitle>
+        <mat-divider></mat-divider>
+        <mat-card-content class="journal-content break-word">{{journal.content}}</mat-card-content>
     </mat-card>
 </div>
 
