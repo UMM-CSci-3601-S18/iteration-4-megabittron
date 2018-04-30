@@ -4,6 +4,7 @@ import {environment} from '../environments/environment';
 import {AppService} from "./app.service";
 import {Router, ActivationStart} from "@angular/router";
 import {Location} from "@angular/common";
+import {HostListener} from "@angular/core";
 
 
 declare var gapi: any;
@@ -17,6 +18,7 @@ declare var gapi: any;
 export class AppComponent implements OnInit {
     googleAuth;
     public currentPath;
+    public currentWidth;
 
     constructor(private http: HttpClient,
                 public appService: AppService,
@@ -28,6 +30,13 @@ export class AppComponent implements OnInit {
                 this.currentPath = e.snapshot.routeConfig.path;
             }
         })
+
+        this.onResize();
+    }
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event?) {
+        this.currentWidth = window.innerWidth;
     }
 
     backClicked() {
@@ -36,7 +45,7 @@ export class AppComponent implements OnInit {
     }
 
     isJournalView(): boolean {
-        if (this.currentPath == 'journals/:_id') {
+        if (this.currentPath == 'journals/:_id' && this.currentWidth < 600) {
             return true;
         } else {
             return false;
