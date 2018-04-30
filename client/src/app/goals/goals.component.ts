@@ -12,28 +12,11 @@ import {Router} from "@angular/router";
 @Component({
     selector: 'app-goals-component',
     templateUrl: 'goals.component.html',
-    styleUrls: ['./goals.component.css'],
+    styleUrls: ['./goals.component.scss'],
     providers: [AppService]
 })
 
 export class GoalsComponent implements OnInit {
-    // These are public so that tests can reference them (.spec.ts)
-    public goals: Goal[] = []; //full list of goals
-    public todayGoals: Goal[] = []; //goals that haven't been completed with accordance to their frequency
-    public shownGoals: Goal[] = []; //goals that are being shown
-
-    public goalStart;
-    public goalNext;
-    public today;
-    public showAllGoals = false;
-    public goalsPerPage = 5;
-    public currentPage = 1;
-
-    // Used for testing to set a static date so the same goals show up in today's goals regardless of actual date
-    public testing = true;
-
-    // The ID of the goal
-    private highlightedID: { '$oid': string } = {'$oid': ''};
 
     // Inject the GoalsService into this component.
     constructor(public goalService: GoalsService,
@@ -43,12 +26,29 @@ export class GoalsComponent implements OnInit {
                 private router: Router) {
     }
 
+    // These are public so that tests can reference them (.spec.ts)
+    public goals: Goal[] = []; //full list of goals
+    public todayGoals: Goal[] = []; //goals that haven't been completed with accordance to their frequency
+    public shownGoals: Goal[] = []; //goals that are being shown
+
+    public goalStatus: string = 'all';
+    public goalStart;
+    public goalNext;
+    public today;
+    public showAllGoals = false;
+
+    // Used for testing to set a static date so the same goals show up in today's goals regardless of actual date
+    public testing = true;
+
+    // The ID of the goal
+    private highlightedID: { '$oid': string } = {'$oid': ''};
+
     isHighlighted(goal: Goal): boolean {
         return goal._id['$oid'] === this.highlightedID['$oid'];
     }
 
     // Opens a dialog for a new goal entry and adds the goal upon closing
-    openDialog(): void {
+    newGoalDialog(): void {
         const newGoal: Goal = {
             _id: '',
             userID: localStorage.getItem("userID"),
@@ -172,7 +172,7 @@ export class GoalsComponent implements OnInit {
     //Checks if the next field is <, = or > than today's date and updates the next field as needed. Returns
     //true if the goal is supposed to be shown in the today's goal section
     getNext(){
-        this.currentPage = 1;
+
 
         if(this.showAllGoals == false) {
             if(this.today !== undefined) {
@@ -259,38 +259,20 @@ export class GoalsComponent implements OnInit {
 
     //Shows today's goals or all goals based on the the given type
     showGoals(type){
-        var count = this.currentPage * this.goalsPerPage;
 
         if(type == "today") {
 
             if(this.todayGoals !== undefined) {
                 this.shownGoals = this.todayGoals.filter(goal => {
-                    if (count > this.goalsPerPage) {
-                        count--;
-                        return false;
-                    }
 
-                    if (count <= this.goalsPerPage && count != 0) {
-                        count--;
                         return true;
-                    }
-
                 });
             }
         }
 
         else {
             this.shownGoals = this.goals.filter(goal => {
-                if (count > this.goalsPerPage) {
-                    count--;
-                    return false;
-                }
-
-                if (count <= this.goalsPerPage && count != 0) {
-                    count--;
                     return true;
-                }
-
             });
         }
     }
@@ -313,7 +295,7 @@ export class GoalsComponent implements OnInit {
         if(userID == null){
             userID = "";
         }
-        const goalObservable: Observable<Goal[]> = this.goalService.getGoals(userID);
+        const goalObservable: Observable<Goal[]> = this.goalService.getGoals(userID, this.goalStatus);
         console.log(goalObservable);
         goalObservable.subscribe(
             goals => {
@@ -332,7 +314,7 @@ export class GoalsComponent implements OnInit {
     //loads the list of goals for the page
     loadService(): void {
         console.log(localStorage.getItem("userID"));
-        this.goalService.getGoals(localStorage.getItem("userID")).subscribe(
+        this.goalService.getGoals(localStorage.getItem("userID"), this.goalStatus).subscribe(
             goals => {
                 this.goals = goals;
                 this.goals = this.goals;
@@ -364,21 +346,6 @@ export class GoalsComponent implements OnInit {
     }
 
     //returns the maximum number of pages there could possibly be based on the number of goals per page
-    maxNumPages(type): boolean{
-        if(type == "today") {
-
-            if(this.todayGoals !== undefined){
-                return (this.goalsPerPage * this.currentPage) < this.todayGoals.length;
-            }
-            return false;
-        }
-        else{
-            if(this.goals !== undefined){
-                return (this.goalsPerPage * this.currentPage) < this.goals.length;
-            }
-            return false;
-        }
-    }
 
     //updates the next field of the specified goal. Only is used when the page is loaded
     updateNext(_id, name, purpose, category, status, frequency, start, end, next): void {
@@ -412,13 +379,6 @@ export class GoalsComponent implements OnInit {
         return "Incomplete";
     }
 
-    // Returns the size of the array of the given type
-    getSize(type): boolean{
-        if(type == "today"){
-            return this.todayGoals.length > this.goalsPerPage;
-        }
-        return this.goals.length > this.goalsPerPage;
-    }
 
     //Runs when the page is initialized
     ngOnInit(): void {

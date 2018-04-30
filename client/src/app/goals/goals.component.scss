@@ -1,0 +1,85 @@
+@import "../../theme";
+@import "../../styles";
+
+.goal-card {
+    margin: 15px;
+    width: 325px;
+    height: 200px;
+}
+
+.goal-title {
+    text-align: left;
+    font-size: 18px;
+}
+
+.all-today-toggle-card {
+    width: 90%;
+    margin: 0 auto 15px;
+}
+
+.status-radio-group {
+    display: inline-flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.option-selector-card {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.action-button {
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 275px;
+}
+
+.uncheck {
+    color: #4CAF50;
+}
+
+.category-img {
+    background-size: cover;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.business {
+    background-image: url('../../assets/images/goals/business-career.png');
+}
+
+.finances {
+    background-image: url('../../assets/images/goals/finance.png');
+}
+
+.family {
+    background-image: url('../../assets/images/goals/family.png');
+}
+
+.fun-recreation {
+    background-image: url('../../assets/images/goals/fun-recreation.png');
+}
+
+.health {
+    background-image: url('../../assets/images/goals/health.png');
+}
+
+.personal-development {
+    background-image: url('../../assets/images/goals/personal-development.png');
+}
+
+.romance {
+    background-image: url('../../assets/images/goals/romance.png');
+}
+
+.spiritual {
+    background-image: url('../../assets/images/goals/spiritual.png');
+}
+
+.social {
+    background-image: url('../../assets/images/goals/social.png');
+}
+
+.other {
+    background-image: url('../../assets/images/goals/other.png');
+}
