@@ -26,7 +26,7 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {AppService} from "./app.service";
 import {RouterModule} from "@angular/router";
-import {AboutComponent} from "./about/about.component";
+import {SettingsComponent} from "./settings/settings.component";
 
 @NgModule({
     exports: [
@@ -54,7 +54,7 @@ import {AboutComponent} from "./about/about.component";
         ViewJournalComponent,
         SummaryListComponent,
         ArraySortPipe,
-        AboutComponent,
+        SettingsComponent,
     ],
     providers: [
         GoalsService,

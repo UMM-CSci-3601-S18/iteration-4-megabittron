@@ -10,7 +10,7 @@
             <a mat-list-item [routerLink]="['/journals']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon><i class="material-icons">import_contacts</i></mat-icon>Journals</a>
             <a mat-list-item [routerLink]="['/resources']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon><i class="material-icons">contact_phone</i></mat-icon>Resources</a>
             <a mat-list-item [routerLink]="['/summary']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon><i class="material-icons">assessment</i></mat-icon>Stats</a>
-            <a mat-list-item [routerLink]="['/about']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon><i class="material-icons">settings</i></mat-icon>About</a>
+            <a mat-list-item [routerLink]="['/settings']" (click)="layout.close()" routerLinkActive="nav-active"><mat-icon><i class="material-icons">settings</i></mat-icon>Settings</a>
             <a mat-list-item *ngIf="appService.isSignedIn()" (click)="signOut()"><mat-icon><i class="material-icons">flight takeoff</i></mat-icon>Sign Out</a>
             <br>
         </mat-nav-list>
@@ -27,7 +27,7 @@
             <a class="desktop-journals computer" mat-button [routerLink]="['/journals']" routerLinkActive="nav-active" hide-xs>Journals</a>
             <a class="desktop-resources computer" mat-button [routerLink]="['/resources']" routerLinkActive="nav-active" hide-xs>Resources</a>
             <a class="desktop-stats computer" mat-button [routerLink]="['/summary']" routerLinkActive="nav-active" hide-xs>Stats</a>
-            <a class="desktop-about computer" mat-button [routerLink]="['/about']" routerLinkActive="nav-active" hide-xs>About</a>
+            <a class="desktop-settings computer" mat-button [routerLink]="['/settings']" routerLinkActive="nav-active" hide-xs>Settings</a>
             <a class="computer" hide-xs><div *ngIf="!appService.isSignedIn()" class="g-signin2" (click)="signIn()"></div>
             <button *ngIf="appService.isSignedIn()" mat-raised-button (click)="signOut()">Sign Out</button></a>
         </div>

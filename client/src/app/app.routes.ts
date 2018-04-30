@@ -6,7 +6,7 @@ import {GoalsComponent} from "./goals/goals.component";
 import {JournalsComponent} from "./journals/journals.component";
 import {ViewJournalComponent} from "./journals/view/view-journal.component";
 import {SummaryListComponent} from "./summary/summary-list.component";
-import {AboutComponent} from "./about/about.component";
+import {SettingsComponent} from "./settings/settings.component";
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -15,7 +15,7 @@ export const routes: Routes = [
     {path: 'journals', component: JournalsComponent},
     {path: 'journals/:_id', component: ViewJournalComponent},
     {path: 'summary', component: SummaryListComponent},
-    {path: 'about', component: AboutComponent},
+    {path: 'settings', component: SettingsComponent},
 
 ];
 

@@ -6,13 +6,13 @@ import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
-    selector: 'aboutcomponent',
-    templateUrl: 'about.component.html',
-    styleUrls: ['./about.component.scss'],
+    selector: 'settingscomponent',
+    templateUrl: 'settings.component.html',
+    styleUrls: ['./settings.component.scss'],
     providers: [AppService, HttpClient]
 })
 
-export class AboutComponent implements OnInit {
+export class SettingsComponent implements OnInit {
 
 
     ngOnInit(): void {
