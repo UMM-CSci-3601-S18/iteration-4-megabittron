@@ -1,24 +1,24 @@
 import {Component, OnInit} from '@angular/core';
-import {AppService} from "../../app.service";
-import {Journal} from '../journal';
-import {JournalsService} from "../journals.service";
-import {EditJournalComponent} from "../edit/edit-journal.component";
+import {AppService} from "../../../app.service";
+import {Contact} from '../../contact';
+import {ResourcesService} from "../../resources.service";
+import {EditContactComponent} from "../../edit/contacts/edit-contacts.component";
 import {Observable} from "rxjs/Observable";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from '@angular/common';
 import {MatDialog, MatSnackBar} from '@angular/material';
 
 @Component({
-    selector: 'app-view-journal.component',
-    templateUrl: 'view-journal.component.html',
-    styleUrls: ['./view-journal.component.scss'],
+    selector: 'app-view-contact.component',
+    templateUrl: 'view-contact.component.html',
+    styleUrls: ['./view-contact.component.scss'],
     providers: [AppService]
 })
 
-export class ViewJournalComponent implements OnInit {
+export class ViewContactComponent implements OnInit {
 
     constructor(public appService: AppService,
-                public journalListService: JournalsService,
+                public contactListService: ResourcesService,
                 private route: ActivatedRoute,
                 private _location: Location,
                 public dialog: MatDialog,
@@ -28,17 +28,17 @@ export class ViewJournalComponent implements OnInit {
         });
     }
 
-    public journals: Journal[] = [];
+    public contacts: Contact[] = [];
     public length: number;
     public index = 0;
     private highlightedID: {'$oid': string} = { '$oid': '' };
     public id: string;
-    public journal: Journal = {
+    public contact: Contact = {
         _id: '',
         userID: '',
-        title: '',
-        content: '',
-        date: ''
+        name: '',
+        phone: '',
+        email: ''
     };
 
     backClicked() {
@@ -46,72 +46,72 @@ export class ViewJournalComponent implements OnInit {
 
     }
 
-    openEditJournalDialog(_id: string, title: string, content: string, date: string): void {
-        console.log("Edit journal button clicked.");
-        console.log(_id + ' ' + title + content + date);
-        const newJournal: Journal = {_id: _id, userID: localStorage.getItem('userID'), title: title, content: content, date: date};
-        const dialogRef = this.dialog.open(EditJournalComponent, {
+    openEditContactDialog(_id: string, name: string, phone: string, email: string): void {
+        console.log("Edit contact button clicked.");
+        console.log(_id + ' ' + name + phone + email);
+        const newContact: Contact = {_id: _id, userID: localStorage.getItem('userID'), name: name, phone: phone, email: email};
+        const dialogRef = this.dialog.open(EditContactComponent, {
             width: '300px',
-            data: { journal: newJournal }
+            data: { contact: newContact }
         });
 
         dialogRef.afterClosed().subscribe(result => {
             if (result == undefined) {
-                console.log("Cancelled without editing the journal.");
+                console.log("Cancelled without editing the contact.");
             } else {
-                this.journalListService.editJournal(result).subscribe(
-                    editJournalResult => {
-                        this.highlightedID = editJournalResult;
-                        this.refreshJournal();
-                        this.snackBar.open("Edited Journal", "CLOSE", {
+                this.contactListService.editContact(result).subscribe(
+                    editContactResult => {
+                        this.highlightedID = editContactResult;
+                        this.refreshContact();
+                        this.snackBar.open("Edited Contact", "CLOSE", {
                             duration: 2000,
                         });
-                        console.log("Journal edited.");
+                        console.log("Contact edited.");
                     },
                     err => {
                         // This should probably be turned into some sort of meaningful response.
-                        console.log('There was an error editing the journal.');
+                        console.log('There was an error editing the contact.');
                         console.log('The error was ' + JSON.stringify(err));
                     });
             }
         });
     }
 
-    deleteJournal(_id: string) {
-        this.journalListService.deleteJournal(_id).subscribe(
-            journals => {
+    deleteContact(_id: string) {
+        this.contactListService.deleteContact(_id).subscribe(
+            contacts => {
                 console.log("first part");
-                this.refreshJournal();
+                this.refreshContact();
                 //this.loadService();
             },
             err => {
                 console.log(err);
                 console.log("hi");
-                this.refreshJournal();
+                this.refreshContact();
                 //this.loadService();
-                this.snackBar.open("Deleted Journal", "CLOSE", {
+                this.snackBar.open("Deleted Contact", "CLOSE", {
                     duration: 2000,
                 });
             }
         );
     }
 
-    refreshJournal(): Observable<Journal> {
-        const journalObservable: Observable<Journal> = this.journalListService.getJournalById(this.id);
-        journalObservable.subscribe(
+    refreshContact(): Observable<Contact> {
+        const contactObservable: Observable<Contact> = this.contactListService.getContactById(this.id);
+        contactObservable.subscribe(
             data => {
-                this.journal = data;
+                this.contact = data;
             },
             err => {
                 console.log(err);
             });
-        return journalObservable;
+        return contactObservable;
     }
 
     loadService(): void {
-        this.journalListService.getJournalById(this.id).subscribe(
+        this.contactListService.getContactById(this.id).subscribe(
             data => {
-                this.journal = data;
+                this.contact = data;
             },
             err => {
                 console.log(err);
@@ -119,13 +119,13 @@ export class ViewJournalComponent implements OnInit {
         );
     }
 
-    isHighlighted(journal: Journal): boolean {
-        return journal._id['$oid'] === this.highlightedID['$oid'];
+    isHighlighted(contact: Contact): boolean {
+        return contact._id['$oid'] === this.highlightedID['$oid'];
     }
 
     ngOnInit(): void {
         this.appService.testingToggle();
-        this.refreshJournal();
+        this.refreshContact();
         this.loadService();
     }
 
