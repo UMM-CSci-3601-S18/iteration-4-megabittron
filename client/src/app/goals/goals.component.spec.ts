@@ -5,6 +5,7 @@ import {GoalsService} from './goals.service';
 import {Observable} from 'rxjs/Observable';
 import {FormsModule} from '@angular/forms';
 import {CustomModule} from '../custom.module';
+import {ArraySortPipe} from "../journals/array-sort.pipe";
 import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 import {MatDialog} from '@angular/material';
 import 'rxjs/add/observable/of';
@@ -77,7 +78,7 @@ describe( 'Goals', () => {
 
         TestBed.configureTestingModule({
             imports: [CustomModule, RouterTestingModule],
-            declarations: [GoalsComponent],
+            declarations: [GoalsComponent, ArraySortPipe],
             providers: [{provide: GoalsService, useValue: goalsServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
@@ -198,7 +199,7 @@ describe('Next Goals', () => {
 
         TestBed.configureTestingModule({
             imports: [CustomModule, RouterTestingModule],
-            declarations: [GoalsComponent],
+            declarations: [GoalsComponent, ArraySortPipe],
             providers: [{provide: GoalsService, useValue: goalsServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
@@ -276,7 +277,7 @@ describe('Adding a goal', () => {
 
         TestBed.configureTestingModule({
             imports: [FormsModule, CustomModule, RouterTestingModule],
-            declarations: [GoalsComponent],
+            declarations: [GoalsComponent, ArraySortPipe],
             providers: [
                 {provide: GoalsService, useValue: goalListServiceStub},
                 {provide: MatDialog, useValue: mockMatDialog},
@@ -355,7 +356,7 @@ describe('Deleting a goal', () => {
 
         TestBed.configureTestingModule({
             imports: [FormsModule, CustomModule, RouterTestingModule],
-            declarations: [GoalsComponent],
+            declarations: [GoalsComponent, ArraySortPipe],
             providers: [
                 {provide: GoalsService, useValue: goalListServiceStub},
                 {provide: MatDialog, useValue: mockMatDialog},
@@ -433,7 +434,7 @@ describe('Editing a goal', () => {
 
         TestBed.configureTestingModule({
             imports: [FormsModule, CustomModule, RouterTestingModule],
-            declarations: [GoalsComponent],
+            declarations: [GoalsComponent, ArraySortPipe],
             providers: [
                 {provide: GoalsService, useValue: goalListServiceStub},
                 {provide: MatDialog, useValue: mockMatDialog},
