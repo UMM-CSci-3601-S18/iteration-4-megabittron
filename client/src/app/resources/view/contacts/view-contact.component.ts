@@ -1,4 +1,4 @@
-/*
+
 import {Component, OnInit} from '@angular/core';
 import {AppService} from "../../../app.service";
 import {Contact} from '../../contact';
@@ -97,11 +97,11 @@ export class ViewContactComponent implements OnInit {
         );
     }
 
-    refreshContact(): Observable<Contact> {
-        const contactObservable: Observable<Contact> = this.contactListService.getContacts(this.id);
+    refreshContact(): Observable<Contact[]> {
+        const contactObservable: Observable<Contact[]> = this.contactListService.getContacts(this.id);
         contactObservable.subscribe(
             data => {
-                this.contact = data;
+                this.contact = data[0];
             },
             err => {
                 console.log(err);
@@ -112,7 +112,7 @@ export class ViewContactComponent implements OnInit {
     loadService(): void {
         this.contactListService.getContacts(this.id).subscribe(
             data => {
-                this.contact = data;
+                this.contact = data[0];
             },
             err => {
                 console.log(err);
@@ -131,4 +131,4 @@ export class ViewContactComponent implements OnInit {
     }
 
 }
-*/
+

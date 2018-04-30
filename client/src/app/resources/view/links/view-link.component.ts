@@ -1,4 +1,4 @@
-/*
+
 import {Component, OnInit} from '@angular/core';
 import {AppService} from "../../../app.service";
 import {Link} from '../../link';
@@ -131,4 +131,4 @@ export class ViewLinkComponent implements OnInit {
     }
 
 }
-*/
+
