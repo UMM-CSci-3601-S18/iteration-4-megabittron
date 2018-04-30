@@ -27,6 +27,7 @@ import {AppService} from "./app.service";
 import {RouterModule} from "@angular/router";
 import {MatTableModule} from "@angular/material/table";
 import {ShowSummaryListComponent} from "./summary/show/show-summary-list.component";
+import {RandomPrompt} from "./journals/Prompts/open-prompts.component";
 
 @NgModule({
     exports: [
@@ -54,6 +55,7 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         SummaryListComponent,
         ArraySortPipe,
         ShowSummaryListComponent,
+        RandomPrompt,
     ],
     providers: [
         GoalsService,
@@ -71,6 +73,8 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         EditJournalComponent,
         ViewJournalComponent,
         ShowSummaryListComponent,
+        RandomPrompt,
+
     ],
     bootstrap: [
         AppComponent

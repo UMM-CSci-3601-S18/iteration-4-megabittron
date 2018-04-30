@@ -3,14 +3,14 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {Journal} from '../journal';
 
 @Component({
-    selector: 'app-add-journal.component',
-    templateUrl: 'add-journal.component.html',
-    styleUrls: ['./add-journal.component.css'],
+    selector: 'app-open-prompts.component',
+    templateUrl: 'open-prompts.component.html',
+    // styleUrls: ['./add-journal.component.css'],
 })
 
-export class AddJournalComponent {
+export class RandomPrompt {
     constructor(
-        public dialogRef: MatDialogRef<AddJournalComponent>,
+        public dialogRef: MatDialogRef<RandomPrompt>,
         @Inject(MAT_DIALOG_DATA) public data: {journal: Journal}) {
     }
 
