@@ -97,11 +97,11 @@ export class ViewLinkComponent implements OnInit {
         );
     }
 
-    refreshLink(): Observable<Link> {
-        const linkObservable: Observable<Link> = this.linkListService.getLinks(this.id);
+    refreshLink(): Observable<Link []> {
+        const linkObservable: Observable<Link[]> = this.linkListService.getLinks(this.id);
         linkObservable.subscribe(
             data => {
-                this.link = data;
+                this.link = data[0];
             },
             err => {
                 console.log(err);
@@ -112,7 +112,7 @@ export class ViewLinkComponent implements OnInit {
     loadService(): void {
         this.linkListService.getLinks(this.id).subscribe(
             data => {
-                this.link = data;
+                this.link = data[0];
             },
             err => {
                 console.log(err);
