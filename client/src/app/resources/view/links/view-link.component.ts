@@ -1,25 +1,25 @@
 /*
 import {Component, OnInit} from '@angular/core';
 import {AppService} from "../../../app.service";
-import {Link} from '../../contact';
+import {Link} from '../../link';
 import {ResourcesService} from "../../resources.service";
-import {EditLinkComponent} from "../../edit/contacts/edit-contacts.component";
+import {EditLinkComponent} from "../../edit/links/edit-links.component";
 import {Observable} from "rxjs/Observable";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from '@angular/common';
 import {MatDialog, MatSnackBar} from '@angular/material';
 
 @Component({
-    selector: 'app-view-contact.component',
-    templateUrl: 'view-contact.component.html',
-    styleUrls: ['./view-contact.component.scss'],
+    selector: 'app-view-link.component',
+    templateUrl: 'view-link.component.html',
+    styleUrls: ['./view-link.component.scss'],
     providers: [AppService]
 })
 
 export class ViewLinkComponent implements OnInit {
 
     constructor(public appService: AppService,
-                public contactListService: ResourcesService,
+                public linkListService: ResourcesService,
                 private route: ActivatedRoute,
                 private _location: Location,
                 public dialog: MatDialog,
@@ -29,17 +29,17 @@ export class ViewLinkComponent implements OnInit {
         });
     }
 
-    public contacts: Link[] = [];
+    public links: Link[] = [];
     public length: number;
     public index = 0;
     private highlightedID: {'$oid': string} = { '$oid': '' };
     public id: string;
-    public contact: Link = {
+    public link: Link = {
         _id: '',
         userID: '',
         name: '',
-        phone: '',
-        email: ''
+        subname: '',
+        url: ''
     };
 
     backClicked() {
@@ -47,20 +47,20 @@ export class ViewLinkComponent implements OnInit {
 
     }
 
-    openEditLinkDialog(_id: string, name: string, phone: string, email: string): void {
-        console.log("Edit contact button clicked.");
-        console.log(_id + ' ' + name + phone + email);
-        const newLink: Link = {_id: _id, userID: localStorage.getItem('userID'), name: name, phone: phone, email: email};
+    openEditLinkDialog(_id: string, name: string, subname: string, url: string): void {
+        console.log("Edit link button clicked.");
+        console.log(_id + ' ' + name + subname + url);
+        const newLink: Link = {_id: _id, userID: localStorage.getItem('userID'), name: name, subname: subname, url: url};
         const dialogRef = this.dialog.open(EditLinkComponent, {
             width: '300px',
-            data: { contact: newLink }
+            data: { link: newLink }
         });
 
         dialogRef.afterClosed().subscribe(result => {
             if (result == undefined) {
-                console.log("Cancelled without editing the contact.");
+                console.log("Cancelled without editing the link.");
             } else {
-                this.contactListService.editLink(result).subscribe(
+                this.linkListService.editLink(result).subscribe(
                     editLinkResult => {
                         this.highlightedID = editLinkResult;
                         this.refreshLink();
@@ -71,7 +71,7 @@ export class ViewLinkComponent implements OnInit {
                     },
                     err => {
                         // This should probably be turned into some sort of meaningful response.
-                        console.log('There was an error editing the contact.');
+                        console.log('There was an error editing the link.');
                         console.log('The error was ' + JSON.stringify(err));
                     });
             }
@@ -79,8 +79,8 @@ export class ViewLinkComponent implements OnInit {
     }
 
     deleteLink(_id: string) {
-        this.contactListService.deleteLink(_id).subscribe(
-            contacts => {
+        this.linkListService.deleteLink(_id).subscribe(
+            links => {
                 console.log("first part");
                 this.refreshLink();
                 //this.loadService();
@@ -98,21 +98,21 @@ export class ViewLinkComponent implements OnInit {
     }
 
     refreshLink(): Observable<Link> {
-        const contactObservable: Observable<Link> = this.contactListService.getLinks(this.id);
-        contactObservable.subscribe(
+        const linkObservable: Observable<Link> = this.linkListService.getLinks(this.id);
+        linkObservable.subscribe(
             data => {
-                this.contact = data;
+                this.link = data;
             },
             err => {
                 console.log(err);
             });
-        return contactObservable;
+        return linkObservable;
     }
 
     loadService(): void {
-        this.contactListService.getLinks(this.id).subscribe(
+        this.linkListService.getLinks(this.id).subscribe(
             data => {
-                this.contact = data;
+                this.link = data;
             },
             err => {
                 console.log(err);
@@ -120,8 +120,8 @@ export class ViewLinkComponent implements OnInit {
         );
     }
 
-    isHighlighted(contact: Link): boolean {
-        return contact._id['$oid'] === this.highlightedID['$oid'];
+    isHighlighted(link: Link): boolean {
+        return link._id['$oid'] === this.highlightedID['$oid'];
     }
 
     ngOnInit(): void {
