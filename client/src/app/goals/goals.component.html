@@ -645,7 +645,7 @@
         <mat-card-title>Status</mat-card-title>
         <mat-divider></mat-divider>
         <mat-card-content>
-          <mat-radio-group matInput #input [(ngModel)]="goalStatus" (change)="loadService()">
+          <mat-radio-group matInput #input [(ngModel)]="goalStatus" (change)="loadService()" class="status-radio-group">
               <mat-radio-button id="allStatus" value="all">All</mat-radio-button>
               <mat-radio-button id="complete" value="true">Complete</mat-radio-button>
               <mat-radio-button id="incomplete" value="false">Incomplete</mat-radio-button>
