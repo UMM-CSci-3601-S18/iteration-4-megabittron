@@ -1,250 +1,1402 @@
 [
     {
         "_id": {
-            "$oid": "5ab53a89551a3d783599082c"
+            "$oid": "5ae66c3b1f09483c3a842915"
         },
-        "userID": "5ab53a89541a2d783599082c",
-        "purpose": "Improve relationship",
-        "category": "Family",
-        "name": "Call my mom",
+        "userID": "defaultUserID",
+        "purpose": "Writing a list of random sentences is harder than I initially thought it would be",
+        "category": "health",
+        "name": "Ingrid Buchanan",
         "status": true,
-        "start": "2018-04-05T18:56:24.702Z",
-        "end": "2018-05-05T18:56:24.702Z",
-        "next": "2018-04-12T18:56:24.702Z",
-        "frequency": "Weekly"
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
     },
     {
         "_id": {
-            "$oid": "5ab53a890c2c77662aaf3801"
+            "$oid": "5ae66c3b4f801155a38ecf3c"
         },
-        "userID": "5ab53a89541a2d783599082c",
-        "purpose": "To feel closer to him",
-        "category": "Family",
-        "name": "Write letter to Grandpa",
-        "status": false,
-        "start": "2018-04-05T18:56:24.702Z",
-        "end": "2019-04-05T18:56:24.702Z",
-        "next": "2018-04-05T18:56:24.702Z",
-        "frequency": "Daily"
-    },
-    {
-        "_id": {
-            "$oid": "5ab53a8944c7c6b223090477"
-        },
-        "userID": "5ab53a89541a2d783599082c",
-        "purpose": "To get more sleep",
-        "category": "Personal Health",
-        "name": "Go to bed early",
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "family",
+        "name": "Mcpherson Lee",
         "status": true,
-        "start": "2018-04-05T18:56:24.702Z",
-        "end": "2018-07-05T18:56:24.702Z",
-        "next": "2018-05-05T18:56:24.702Z",
-        "frequency": "Monthly"
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
     },
     {
         "_id": {
-            "$oid": "5ab53a898e1620e3d7e48796"
+            "$oid": "5ae66c3b6c8c007fdd335af1"
         },
-        "userID": "5ab53a89541a2d783595011c",
-        "purpose": "To give her a piece of my mind",
-        "category": "Family",
-        "name": "Visit sister",
-        "status": false,
-        "start": "2018-04-05T18:56:24.702Z",
-        "end": "2018-06-05T18:56:24.702Z",
-        "next": "2018-04-06T18:56:24.702Z",
-        "frequency": "Daily"
-    },
-    {
-        "_id": {
-            "$oid": "5ab53a89cc803f25455d4523"
-        },
-        "userID": "5ab53a89541a2d783595011c",
-        "purpose": "To relieve my anxiety",
-        "category": "Personal Health",
-        "name": "Text a hotline",
-        "status": false,
-        "start": "2018-04-05T18:56:24.702Z",
-        "end": "2019-04-05T18:56:24.702Z",
-        "next": "2018-04-12T18:56:24.702Z",
-        "frequency": "Weekly"
-    },
-    {
-        "_id": {
-            "$oid": "5ab53a89d3902ecd0e105c32"
-        },
-        "userID": "5ab53a89541a2d783595011c",
-        "purpose": "To be nice to him",
-        "category": "Family",
-        "name": "Say hello to my son",
+        "userID": "defaultUserID",
+        "purpose": "Writing a list of random sentences is harder than I initially thought it would be",
+        "category": "health",
+        "name": "Josefa Pierce",
         "status": true,
-        "start": "2018-04-05T18:56:24.702Z",
-        "end": "2018-04-05T18:56:24.702Z",
-        "next": "2020-04-12T18:56:24.702Z",
-        "frequency": "Weekly"
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
     },
     {
         "_id": {
-            "$oid": "5ab53a894b28008631e64eb6"
+            "$oid": "5ae66c3b3beabf2e40c54b83"
         },
-        "userID": "5ab53a89541a2d783595011c",
-        "purpose": "To surprise Bobby",
-        "category": "Family",
-        "name": "Wave at my cousin",
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "health",
+        "name": "Luann Byrd",
         "status": true,
-        "start": "2018-03-07T18:56:24.702Z",
-        "end": "2018-07-07T18:56:24.702Z",
-        "next": "2018-04-07T18:56:24.702Z",
-        "frequency": "Monthly"
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
     },
     {
         "_id": {
-            "$oid": "5ab53a89dd3b308feb0e14c3"
+            "$oid": "5ae66c3b4958afc6efda6f0a"
         },
         "userID": "defaultUserID",
-        "purpose": "To have a better environment",
-        "category": "Chores",
-        "name": "Wash the dishes",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "romance",
+        "name": "Stanton Sosa",
         "status": false,
-        "start": "2018-04-05T18:56:24.702Z",
-        "end": "2018-08-05T18:56:24.702Z",
-        "next": "2018-04-06T18:56:24.702Z",
-        "frequency": "Daily"
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
     },
     {
         "_id": {
-            "$oid": "5ab53a8944a44f6ec5e15853"
+            "$oid": "5ae66c3bc0fceb8f7036836b"
         },
         "userID": "defaultUserID",
-        "purpose": "To have a better living space",
-        "category": "Chores",
-        "name": "Clean my room",
-        "status": false,
-        "start": "2018-01-15T18:56:24.702Z",
-        "end": "2018-10-00T18:56:24.702Z",
-        "next": "2018-04-07T18:56:24.702Z",
-        "frequency": "Daily"
-    },
-    {
-        "_id": {
-            "$oid": "5ab53a89ea32d59c4e81d5f0"
-        },
-        "userID": "defaultUserID",
-        "purpose": "Do what the doctor says",
-        "category": "Personal Health",
-        "name": "Take my meds",
-        "status": false,
-        "start": "2018-04-05T18:56:24.702Z",
-        "end": "2018-07-05T18:56:24.702Z",
-        "next": "2018-04-12T18:56:24.702Z",
-        "frequency": "Weekly"
-
-    },
-    {
-        "_id": {
-            "$oid": "5ab53a8938c8106c85b592a4"
-        },
-        "userID": "defaultUserID",
-        "purpose": "To safely park my car out of the snow",
-        "category": "Chores",
-        "name": "Shovel driveway",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "fun-recreation",
+        "name": "Marsha Glover",
         "status": true,
-        "start": "2017-11-01T18:56:24.702Z",
-        "end": "2018-05-20T18:56:24.702Z",
-        "next": "2018-04-15T18:56:24.702Z",
-        "frequency": "Monthly"
-
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
     },
     {
         "_id": {
-            "$oid": "5ab53a898f915a49a7cc8e4c"
+            "$oid": "5ae66c3be203a82addb4a0d8"
         },
         "userID": "defaultUserID",
-        "purpose": "Keep my teeth nice",
-        "category": "Personal Health",
-        "name": "Brush my teeth every day",
-        "status": false,
-        "start": "2018-04-05T18:56:24.702Z",
-        "end": "2018-08-05T18:56:24.702Z",
-        "next": "2018-05-05T18:56:24.702Z",
-        "frequency": "Monthly"
-
-    },
-    {
-        "_id": {
-            "$oid": "5ab53a892beb1a12c3cb8cd0"
-        },
-        "userID": "defaultUserID",
-        "purpose": "Tell her about my new job",
-        "category": "Family",
-        "name": "Write letter to Aunt May",
-        "status": false,
-        "start": "2018-04-05T18:56:24.702Z",
-        "end": "2018-04-05T18:56:24.702Z",
-        "next": "2018-04-05T18:56:24.702Z",
-        "frequency": "Does not repeat"
-
-    },
-    {
-        "_id": {
-            "$oid": "5ab53a8907d923f68d03e1a3"
-        },
-        "userID": "defaultUserID",
-        "purpose": "Tell her about my awards",
-        "category": "Family",
-        "name": "Email Grandma",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "family",
+        "name": "Latonya Thompson",
         "status": true,
-        "start": "2018-04-05T18:56:24.702Z",
-        "end": "2018-04-05T18:56:24.702Z",
-        "next": "2018-04-05T18:56:24.702Z",
-        "frequency": "Does not repeat"
-
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
     },
     {
         "_id": {
-            "$oid": "5ab53a897a4e4fb3a641aa89"
+            "$oid": "5ae66c3bc08bdd30639e393a"
         },
         "userID": "defaultUserID",
-        "purpose": "Keep my clothes clean",
-        "category": "Chores",
-        "name": "Do laundry",
-        "status": false,
-        "start": "2018-04-05T18:56:24.702Z",
-        "end": "2018-04-18T18:56:24.702Z",
-        "next": "2018-04-06T18:56:24.702Z",
-        "frequency": "Daily"
-
-    },
-
-    {
-        "_id": {
-            "$oid": "5ab53a897a4e4fb3a641aa90"
-        },
-        "userID": "defaultUserID",
-        "purpose": "Keep my clothes clean",
-        "category": "Chores",
-        "name": "Do laundry",
-        "status": false,
-        "start": "2018-04-05T18:56:24.702Z",
-        "end": "2018-04-18T18:56:24.702Z",
-        "next": "2018-04-06T18:56:24.702Z",
-        "frequency": "Daily"
-
-    },
-
-    {
-        "_id": {
-            "$oid": "5ab53a8907d923f68d03e1a7"
-        },
-        "userID": "defaultUserID",
-        "purpose": "Tell her about my awards",
-        "category": "Family",
-        "name": "Email Grandma",
+        "purpose": "Last Friday in three weeks time I saw a spotted striped blue worm shake hands with a legless lizard",
+        "category": "fun-recreation",
+        "name": "Traci Puckett",
         "status": true,
-        "start": "2018-04-05T18:56:24.702Z",
-        "end": "2018-04-05T18:56:24.702Z",
-        "next": "2018-04-05T18:56:24.702Z",
-        "frequency": "Does not repeat"
-
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b0f71e6ec20d8d97c"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "finances",
+        "name": "Alford Richard",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3be03f8465f3902f1c"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Last Friday in three weeks time I saw a spotted striped blue worm shake hands with a legless lizard",
+        "category": "business-career",
+        "name": "Katheryn Schneider",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b8518ac1c83525854"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Writing a list of random sentences is harder than I initially thought it would be",
+        "category": "business-career",
+        "name": "Thornton Hartman",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b4d7955c8a0a99a41"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "personal-development",
+        "name": "Polly Nguyen",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b651f8b01d2fe6c2f"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "fun-recreation",
+        "name": "Katie Whitney",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b706b95d3efde8465"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "business-career",
+        "name": "Julianne Huber",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b05f831cce6f0ab02"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "health",
+        "name": "West Jones",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b33b0f96857b9a0ef"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Writing a list of random sentences is harder than I initially thought it would be",
+        "category": "business-career",
+        "name": "Freda Henry",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b10d00405eb986997"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Last Friday in three weeks time I saw a spotted striped blue worm shake hands with a legless lizard",
+        "category": "health",
+        "name": "Lott Holland",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b23aafa81ea36bf8b"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "finances",
+        "name": "Wheeler Alford",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bb3ded234ec447d28"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "business-career",
+        "name": "Welch Gray",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b37b952862915d393"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Writing a list of random sentences is harder than I initially thought it would be",
+        "category": "spiritual",
+        "name": "Lisa Ferguson",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b24ac6dfad446fa99"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "romance",
+        "name": "Lacey Manning",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b65e22098ed355fda"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "other",
+        "name": "William Koch",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b0b680fc2ff54ee8a"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "spiritual",
+        "name": "Gilmore King",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b82fcb1523b39d6a1"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "fun-recreation",
+        "name": "Peggy Dillard",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b395d36bfcf003490"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "romance",
+        "name": "Patton Ayala",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3be19e377d2172cf29"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "finances",
+        "name": "Vicki Jacobson",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b5caa26b9bc9a0fc5"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Last Friday in three weeks time I saw a spotted striped blue worm shake hands with a legless lizard",
+        "category": "health",
+        "name": "Frederick Ashley",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b9545b9ac3c4b811c"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "personal-development",
+        "name": "Browning Dawson",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b033d1f29a2a33120"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "business-career",
+        "name": "Mckee Bernard",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b456c2c61d83b9fcd"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "personal-development",
+        "name": "Flowers Espinoza",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bc2183651710f8fdd"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "health",
+        "name": "Kathy Nixon",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bac61e90d44fe6308"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "romance",
+        "name": "Claudia Ballard",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bf7d629a389a4c6fb"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "fun-recreation",
+        "name": "Mckay Chaney",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3be43e7544138b0719"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "business-career",
+        "name": "Castillo Berg",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b06498f37ac6e5f69"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "finances",
+        "name": "Lina Lott",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b63b07039af6a6a12"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Writing a list of random sentences is harder than I initially thought it would be",
+        "category": "social",
+        "name": "Silva Davidson",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3ba6804c3d4e4d82b5"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "finances",
+        "name": "Imelda Dillon",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bb2bb80057af1e8e5"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "social",
+        "name": "Misty Meyer",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bc089cce80e6d5ba5"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Writing a list of random sentences is harder than I initially thought it would be",
+        "category": "other",
+        "name": "Stephenson Hays",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b753b933762131bd7"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "finances",
+        "name": "Abigail Lamb",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b0c0d498507a1825a"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "health",
+        "name": "Tania Britt",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3ba6486b8f4d556b99"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "personal-development",
+        "name": "Elisa Floyd",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b3a494ac19bda0777"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "social",
+        "name": "Gates Ball",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bfa86d1fd046f815f"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "business-career",
+        "name": "Leonor Bowman",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b227123fc6c2d60bd"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Last Friday in three weeks time I saw a spotted striped blue worm shake hands with a legless lizard",
+        "category": "social",
+        "name": "Reba Valenzuela",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b2b796f3d6f6b0a46"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "health",
+        "name": "Maude Roth",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bd30012364407b425"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Last Friday in three weeks time I saw a spotted striped blue worm shake hands with a legless lizard",
+        "category": "finances",
+        "name": "Warren Gibbs",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bc34b3418f7724d8f"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "business-career",
+        "name": "Terry Mckinney",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b134e4d3642d1f34b"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "other",
+        "name": "Curtis Peters",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b830da2211b30510f"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Writing a list of random sentences is harder than I initially thought it would be",
+        "category": "social",
+        "name": "Howe Winters",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bbcbf377cdf9783c0"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "health",
+        "name": "Justine Gillespie",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3be88b6979188be835"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Writing a list of random sentences is harder than I initially thought it would be",
+        "category": "fun-recreation",
+        "name": "Stuart Humphrey",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3baa9923e984fd73b5"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "spiritual",
+        "name": "Conway Durham",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b20f1691aa41731ef"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "business-career",
+        "name": "Sargent Harrison",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b9815a89647ab40de"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Last Friday in three weeks time I saw a spotted striped blue worm shake hands with a legless lizard",
+        "category": "spiritual",
+        "name": "Tamika Brock",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bcf2fe84418e12825"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Writing a list of random sentences is harder than I initially thought it would be",
+        "category": "personal-development",
+        "name": "Angelita Owens",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b3d033ba187353ae1"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "personal-development",
+        "name": "Cross Velez",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b6b9176b0dcc97a7c"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "other",
+        "name": "Dyer Graves",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b733901437feb0924"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "other",
+        "name": "Olivia Shepard",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b41e23edd8cbc9a72"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "business-career",
+        "name": "Mckinney Herman",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b29bc392acb5397fa"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "finances",
+        "name": "Vang Reeves",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b8655b8a8a98d2a45"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "family",
+        "name": "Tracie Cameron",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b05fcb8e5a211804e"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "spiritual",
+        "name": "Deena Kane",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b9d913c70ab773f5f"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "spiritual",
+        "name": "Melendez Howell",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b0d435565754a9664"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Last Friday in three weeks time I saw a spotted striped blue worm shake hands with a legless lizard",
+        "category": "business-career",
+        "name": "Edna Ortega",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b8199281a0e0dcf76"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "health",
+        "name": "Myrna Higgins",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b7ecf19f16dff1ba5"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Last Friday in three weeks time I saw a spotted striped blue worm shake hands with a legless lizard",
+        "category": "finances",
+        "name": "Haley Swanson",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b6ca56a7570ef402b"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "health",
+        "name": "Lang Baxter",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b2f8514533efcb33b"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "spiritual",
+        "name": "Melissa Huffman",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b69059cd10414f8ff"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "business-career",
+        "name": "Rita Deleon",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b710b76e00a259f52"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Writing a list of random sentences is harder than I initially thought it would be",
+        "category": "fun-recreation",
+        "name": "Latisha Parsons",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bd41b7807c42247d8"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Writing a list of random sentences is harder than I initially thought it would be",
+        "category": "romance",
+        "name": "Casey Reed",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bf52fe9f1b0630244"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "other",
+        "name": "Sophia Farmer",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b576cd7d6751276a0"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Writing a list of random sentences is harder than I initially thought it would be",
+        "category": "other",
+        "name": "Blevins Austin",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bb2b98b8fd4171425"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "other",
+        "name": "Cherie Carr",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b8027ee89e2156302"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "other",
+        "name": "Lawrence Cardenas",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b41c3c0762592cafb"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "social",
+        "name": "Boyd Frederick",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bb3e10dd9f2c92938"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Writing a list of random sentences is harder than I initially thought it would be",
+        "category": "family",
+        "name": "Randi Odonnell",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b0b5b27c3cad0ec47"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "personal-development",
+        "name": "Dodson Stewart",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b2bc803664908efcf"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Last Friday in three weeks time I saw a spotted striped blue worm shake hands with a legless lizard",
+        "category": "health",
+        "name": "Mona Phillips",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b3c685756b21674db"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Writing a list of random sentences is harder than I initially thought it would be",
+        "category": "personal-development",
+        "name": "Osborn Benjamin",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b1f3d1a2fa633c8d3"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "personal-development",
+        "name": "Cote Logan",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b47069d367eef8074"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "romance",
+        "name": "Myra Blanchard",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b42c332ae80213957"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "family",
+        "name": "Hollie Erickson",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b71a9c8ceece1a72a"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "romance",
+        "name": "Matthews Whitley",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bc28914339aa3e329"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "romance",
+        "name": "Patsy Lawrence",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b7d9c6fab15c9b2c9"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Last Friday in three weeks time I saw a spotted striped blue worm shake hands with a legless lizard",
+        "category": "health",
+        "name": "Eve Carter",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b07ab9a97ab4adaec"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Last Friday in three weeks time I saw a spotted striped blue worm shake hands with a legless lizard",
+        "category": "finances",
+        "name": "Oconnor Terry",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bb86eb9ce6ebcf313"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "spiritual",
+        "name": "Justice Goff",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b31fff6f7fcb598ce"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "personal-development",
+        "name": "Ortega Haynes",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bfc21761809bae5f2"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "fun-recreation",
+        "name": "Higgins Dorsey",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bbe2e0d7995b5b47c"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "finances",
+        "name": "Abby Reese",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b4147041042332950"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Writing a list of random sentences is harder than I initially thought it would be",
+        "category": "spiritual",
+        "name": "Chavez Fields",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b509a9f55847eb4e8"
+        },
+        "userID": "defaultUserID",
+        "purpose": "Writing a list of random sentences is harder than I initially thought it would be",
+        "category": "health",
+        "name": "Beck Burke",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b13ec3c2c69951418"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "social",
+        "name": "Eugenia Steele",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-07-09T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b812f3d6611250e05"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "business-career",
+        "name": "Riggs Snider",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b50cebcaf8d76a5d0"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "business-career",
+        "name": "Zelma Salinas",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-06-13T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b2a3f4d8a550f885c"
+        },
+        "userID": "defaultUserID",
+        "purpose": "",
+        "category": "social",
+        "name": "Hahn Mclaughlin",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-08-27T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3bd749f3c97f0d2b49"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I love eating toasted cheese and tuna sandwiches",
+        "category": "health",
+        "name": "Bradshaw Fowler",
+        "status": false,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
+    },
+    {
+        "_id": {
+            "$oid": "5ae66c3b37338253968b03eb"
+        },
+        "userID": "defaultUserID",
+        "purpose": "I want to buy a onesie… but know it won’t suit me",
+        "category": "finances",
+        "name": "Kenya Gould",
+        "status": true,
+        "frequency": "Daily",
+        "start": "2018-04-29T05:00:00.000Z",
+        "end": "2018-09-04T05:00:00.000Z",
+        "next": "Sun Apr 29 2018 00:00:00 GMT-0500 (CDT)"
     }
 ]

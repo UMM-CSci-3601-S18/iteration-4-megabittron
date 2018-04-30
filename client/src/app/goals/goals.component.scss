@@ -12,8 +12,47 @@
     font-size: 18px;
 }
 
-.example-header-image {
+.category-img {
     background-size: cover;
     margin-top: 10px;
     margin-left: 10px;
+}
+.business {
+    background-image: url('../../assets/images/goals/business-career.png');
+}
+
+.finances {
+    background-image: url('../../assets/images/goals/finance.png');
+}
+
+.family {
+    background-image: url('../../assets/images/goals/family.png');
+}
+
+.fun-recreation {
+    background-image: url('../../assets/images/goals/fun-recreation.png');
+}
+
+.health {
+    background-image: url('../../assets/images/goals/health.png');
+}
+
+.personal-development {
+    background-image: url('../../assets/images/goals/personal-development.png');
+}
+
+.romance {
+    background-image: url('../../assets/images/goals/romance.png');
+}
+
+.spiritual {
+    background-image: url('../../assets/images/goals/spiritual.png');
+}
+
+.social {
+    background-image: url('../../assets/images/goals/social.png');
+}
+
+.other {
+    background-image: url('../../assets/images/goals/other.png');
 }
