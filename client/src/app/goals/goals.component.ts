@@ -31,6 +31,7 @@ export class GoalsComponent implements OnInit {
     public todayGoals: Goal[] = []; //goals that haven't been completed with accordance to their frequency
     public shownGoals: Goal[] = []; //goals that are being shown
 
+    public goalStatus: string = 'all';
     public goalStart;
     public goalNext;
     public today;
@@ -294,7 +295,7 @@ export class GoalsComponent implements OnInit {
         if(userID == null){
             userID = "";
         }
-        const goalObservable: Observable<Goal[]> = this.goalService.getGoals(userID);
+        const goalObservable: Observable<Goal[]> = this.goalService.getGoals(userID, this.goalStatus);
         console.log(goalObservable);
         goalObservable.subscribe(
             goals => {
@@ -313,7 +314,7 @@ export class GoalsComponent implements OnInit {
     //loads the list of goals for the page
     loadService(): void {
         console.log(localStorage.getItem("userID"));
-        this.goalService.getGoals(localStorage.getItem("userID")).subscribe(
+        this.goalService.getGoals(localStorage.getItem("userID"), this.goalStatus).subscribe(
             goals => {
                 this.goals = goals;
                 this.goals = this.goals;

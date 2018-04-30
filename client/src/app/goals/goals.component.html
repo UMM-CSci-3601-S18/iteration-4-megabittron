@@ -637,20 +637,21 @@
         New Goal
     </button>
     <mat-card class="option-selector-card">
-        <mat-card-title>Select an option</mat-card-title>
+        <mat-card-title>Status</mat-card-title>
         <mat-divider></mat-divider>
         <mat-card-content>
-            <mat-radio-group>
-                <mat-radio-button value="1">Option 1</mat-radio-button>
-                <mat-radio-button value="2">Option 2</mat-radio-button>
-            </mat-radio-group>
+          <mat-radio-group matInput #input [(ngModel)]="goalStatus" (change)="loadService()">
+              <mat-radio-button id="allStatus" value="all">All</mat-radio-button>
+              <mat-radio-button id="complete" value="true">Complete</mat-radio-button>
+              <mat-radio-button id="incomplete" value="false">Incomplete</mat-radio-button>
+          </mat-radio-group>
         </mat-card-content>
     </mat-card>
 </div>
 <div class="grid-list" hide-xs>
     <div layout="row" layout-wrap>
         <mat-card class="goal-card"
-                  *ngFor="let goal of goals"
+                  *ngFor="let goal of goals | dateSort: 'start'"
                   #elem [id]="goal._id['$oid']">
             <mat-card-header>
                 <div mat-card-avatar class="category-img business" *ngIf="goal.category == 'business-career'"></div>
