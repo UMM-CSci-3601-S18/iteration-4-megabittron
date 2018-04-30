@@ -14,8 +14,19 @@ declare var gapi: any;
 export class AppComponent implements OnInit {
     googleAuth;
 
-    constructor(private http: HttpClient, public appService: AppService) {
+    constructor(private http: HttpClient,
+                public appService: AppService,
+    ) {
 
+    }
+
+    public username: string;
+
+    getUsername () {
+        this.username = localStorage.getItem("userFirstName") + " " + localStorage.getItem("userLastName");
+        if (this.username.length > 18) {
+            this.username = this.username.slice(0, 17) + "...";
+        }
     }
 
     signIn() {
@@ -77,5 +88,6 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.handleClientLoad();
         gapi.load('client:auth2', this.initClient);
+        this.getUsername();
     }
 }
