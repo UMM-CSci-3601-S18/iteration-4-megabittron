@@ -3,13 +3,14 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {Goal} from '../goal';
 
 @Component({
-    selector: 'app-add-goal.component',
-    templateUrl: 'add-goal.component.html',
-    styleUrls: ['./add-goal.component.scss'],
+    selector: 'app-edit-goal.component',
+    templateUrl: 'edit-goal.component.html',
+    styleUrls: ['./edit-goal.component.css'],
 })
-export class AddGoalComponent {
+
+export class EditGoalComponent {
     constructor(
-        public dialogRef: MatDialogRef<AddGoalComponent>,
+        public dialogRef: MatDialogRef<EditGoalComponent>,
         @Inject(MAT_DIALOG_DATA) public data: {goal: Goal}) {
     }
 

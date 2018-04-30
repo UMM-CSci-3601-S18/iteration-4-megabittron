@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit{
     //Saves the emotion to the server
     saveEmotion(): void{
         const newEmotion: Emotion = {_id: '', userID: localStorage.getItem("userID"),
-            mood: this.selectedEmotion, intensity: this.emojiRating, description:this.emotionDescription, date: this.emotionDate};
+            emotion: this.selectedEmotion, intensity: this.emojiRating, description:this.emotionDescription, date: this.emotionDate};
 
         if(localStorage.isSignedIn == "true"){
 

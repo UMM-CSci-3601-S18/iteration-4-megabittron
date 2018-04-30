@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule } from '@angular/platform-browser';
 import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
@@ -13,6 +13,7 @@ import {EmotionService} from "./home/home.service";
 import {GoalsComponent} from "./goals/goals.component";
 import {GoalsService} from "./goals/goals.service";
 import {AddGoalComponent} from "./goals/add/add-goal.component";
+import {EditGoalComponent} from "./goals/edit/edit-goal.component";
 import {SummaryListComponent} from "./summary/summary-list.component";
 import {SummaryListService} from "./summary/summary-list.service";
 import {JournalsComponent} from "./journals/journals.component";
@@ -25,9 +26,9 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {AppService} from "./app.service";
 import {RouterModule} from "@angular/router";
-import {MatTableModule} from "@angular/material/table";
 import {ShowSummaryListComponent} from "./summary/show/show-summary-list.component";
 import {RandomPrompt} from "./journals/Prompts/open-prompts.component";
+
 
 @NgModule({
     exports: [
@@ -40,7 +41,7 @@ import {RandomPrompt} from "./journals/Prompts/open-prompts.component";
         Routing,
         CustomModule,
         ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
-        MatTableModule,
+
     ],
     declarations: [
         AppComponent,
@@ -48,6 +49,7 @@ import {RandomPrompt} from "./journals/Prompts/open-prompts.component";
         ResourcesComponent,
         GoalsComponent,
         AddGoalComponent,
+        EditGoalComponent,
         JournalsComponent,
         AddJournalComponent,
         EditJournalComponent,
@@ -66,9 +68,10 @@ import {RandomPrompt} from "./journals/Prompts/open-prompts.component";
         ResourcesService,
         {provide: APP_BASE_HREF, useValue: '/'},
         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true},
-    ],
+],
     entryComponents: [
         AddGoalComponent,
+        EditGoalComponent,
         AddJournalComponent,
         EditJournalComponent,
         ViewJournalComponent,

@@ -1,7 +1,7 @@
 <div class="sidenav" hide-xs>
-    <h2 class="nav-journals-title">Journals</h2>
+    <h2 class="page-title">Journals</h2>
     <hr class="nav-title-divider">
-    <button mat-raised-button (click)="openAddJournalDialog()" class="add action-button" id="addNewJournal">
+    <button mat-raised-button (click)="openAddJournalDialog()" class="new-object-button" id="addNewJournal">
         New Journal
     </button>
     <mat-card class="filter-fields">
@@ -41,7 +41,7 @@
                 <div class="journal-details">
                     <mat-card-title class="journal-title break-word">{{journal.title}}</mat-card-title>
                     <mat-card-subtitle class="date-subtitle">
-                        {{journal.date | date : "MMM d, yyyy 'at' h:mm a"}}
+                        Created on {{journal.date | date : "MMM d, yyyy 'at' h:mm a"}}
                     </mat-card-subtitle>
                     <mat-divider></mat-divider>
                     <mat-card-content class="journal-info break-word">
@@ -62,12 +62,14 @@
     <mat-list class="journals-list">
         <div class="journals-list-info" *ngFor="let journal of filterJournals(journalTitle, journalContent, journalDate) | dateSort: '-date'"
              #elem [id]="journal._id['$oid']">
-            <mat-list-item >
-                <h3 matLine><strong>{{journal.title}}</strong></h3>
+            <a routerLink="/journals/{{journal._id['$oid']}}" class="journal-card-open">
+            <mat-list-item>
+                <h3 matLine>{{journal.title}}</h3>
                 <h5>{{journal.date | date : "MM/dd/yy"}}</h5>
                 <h6 matLine>{{journal.content}}</h6>
             </mat-list-item>
             <mat-divider></mat-divider>
+            </a>
         </div>
     </mat-list>
     <button class="add-journal-fab-button" (click)="openAddJournalDialog()" mat-fab color="primary"><mat-icon>add</mat-icon></button>
