@@ -34,7 +34,7 @@ export class ResourcesService {
         return this.http.get<Link[]>(this.requestUrl);
     }
 
-    //Get links from the server
+    //Get contacts from the server
     getContacts(userID: string): Observable<Contact[]> {
         this.requestUrl = this.baseContactUrl;
         this.noID = false;
@@ -74,7 +74,7 @@ export class ResourcesService {
                 'Content-Type': 'application/json'
             }),
         };
-        // Send post request to add a new goal with the user data as the body with specified headers.
+        // Send post request to add a new resource with the user data as the body with specified headers.
         return this.http.post<{'$oid': string}>(this.requestUrl + '/new', newLink, httpOptions);
     }
 
@@ -86,7 +86,7 @@ export class ResourcesService {
                 'Content-Type': 'application/json'
             }),
         };
-        // Send post request to add a new goal with the user data as the body with specified headers.
+        // Send post request to add a new resource with the user data as the body with specified headers.
         return this.http.post<{'$oid': string}>(this.requestUrl + '/new', newContact, httpOptions);
     }
 
@@ -144,8 +144,8 @@ export class ResourcesService {
 
     //Helper Functions//
 
-    //Checks if the goal has a userId, and sets this.noID to true if there isn't an
-    //ID associated with the goal
+    //Checks if the resource has a userId, and sets this.noID to true if there isn't an
+    //ID associated with the resource
     filterByUserID(userID: string): void {
         if (!(userID == null || userID === '')) {
             if (this.parameterPresent('userID=') ) {

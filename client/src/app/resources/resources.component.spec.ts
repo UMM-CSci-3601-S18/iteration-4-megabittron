@@ -28,8 +28,4 @@ describe('Resources', () => {
         el = de.nativeElement;
     });
 
-   /* it('displays a greeting', () => {
-        fixture.detectChanges();
-        expect(el.textContent).toContain(component.linkTitle);
-    });*/
 });
