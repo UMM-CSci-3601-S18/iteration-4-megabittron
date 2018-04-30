@@ -17,11 +17,22 @@
     margin: 0 auto;
 }
 
+.action-button {
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 275px;
+}
+
+.uncheck {
+    color: #4CAF50;
+}
+
 .category-img {
     background-size: cover;
     margin-top: 10px;
     margin-left: 10px;
 }
+
 .business {
     background-image: url('../../assets/images/goals/business-career.png');
 }

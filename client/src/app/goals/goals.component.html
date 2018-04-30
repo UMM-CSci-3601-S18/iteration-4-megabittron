@@ -665,18 +665,23 @@
                 <div mat-card-avatar class="category-img social" *ngIf="goal.category == 'social'"></div>
                 <div mat-card-avatar class="category-img other" *ngIf="goal.category == 'other'"></div>
                 <mat-card-title class="goal-title break-word">{{goal.name}}</mat-card-title>
+                <button mat-icon-button class="check action-button"
+                        *ngIf="goal.status == false"
+                        (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next)">
+                    <mat-icon>check_box_outline_blank</mat-icon>
+                </button>
+                <button mat-icon-button class="uncheck action-button"
+                        *ngIf="goal.status == true"
+                        (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)">
+                    <mat-icon>check_box</mat-icon>
+                </button>
                 <mat-card-subtitle class="date-subtitle" *ngIf="goal.end == ''">No end date</mat-card-subtitle>
                 <mat-card-subtitle class="date-subtitle" *ngIf="goal.end != ''">Ends on {{goal.end | date : "MMM d, yyyy"}}</mat-card-subtitle>
             </mat-card-header>
             <mat-divider></mat-divider>
             <mat-card-content class="goal-info break-word">
                 {{goal.purpose}}
-                <br>
-                Status: {{goal.status}}
-                <br>
-                Frequency: {{goal.frequency}}
             </mat-card-content>
-
         </mat-card>
     </div>
 </div>
