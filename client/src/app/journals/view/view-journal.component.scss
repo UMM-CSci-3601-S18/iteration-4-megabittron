@@ -17,6 +17,25 @@
     margin: 15px;
 }
 
+.action-button {
+    position: absolute;
+    margin-top: 15px;
+}
+
+.back {
+    width: 50%;
+}
+
+.edit {
+    margin-left: 350px;
+    color: #1976D2;
+}
+
+.delete {
+    margin-left: 400px;
+    color: #F44336;
+}
+
 .page-title {
     margin: 15px;
     color: white;
@@ -29,11 +48,6 @@
 
 .delete:hover {
     background-color: #FFEBEE;
-}
-
-.action-button {
-    width: 50%;
-    margin-bottom: 15px;
 }
 
 .break-word {
