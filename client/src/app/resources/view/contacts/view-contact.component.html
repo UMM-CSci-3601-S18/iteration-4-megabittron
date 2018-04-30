@@ -1,0 +1,23 @@
+<div class="sidenav" hide-xs>
+    <h2 class="nav-contacts-title break-word">{{contacts.name}}</h2>
+    <hr class="nav-title-divider">
+    <button mat-raised-button class="back action-button"
+            (click)="backClicked()">
+        Back
+    </button>
+    <button mat-raised-button class="edit action-button"
+            (click)="openEditContactDialog(contacts._id['$oid'], contacts.name, contact.phone, contact.email)">
+        Edit Contact
+    </button>
+    <button mat-raised-button class="delete action-button"
+            (click)="deleteContact(contact._id['$oid']); backClicked()">
+        Delete Contact
+    </button>
+</div>
+<div class="contact">
+    <mat-card class="contact-card">
+        <mat-card-title class="contact-title break-word">{{contact.name}}</mat-card-title>
+        <mat-divider></mat-divider>
+        <mat-card-content class="contact-content break-word">{{contact.phone}}</mat-card-content>
+    </mat-card>
+</div>
