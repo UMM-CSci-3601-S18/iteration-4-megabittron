@@ -296,7 +296,7 @@ describe('Adding a goal', () => {
     //Checks if a goal is added correctly
     it('calls GoalsService.addGoal', () => {
         expect(calledGoal).toBeNull();
-        goalList.openDialog();
+        goalList.newGoalDialog();
         expect(goalList.isHighlighted(calledGoal));
         expect(calledGoal).toEqual(newGoal);
     });

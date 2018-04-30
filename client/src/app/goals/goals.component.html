@@ -9,7 +9,7 @@
                     </mat-card-subtitle>
                     <mat-card-content class="goal-content">
                         <li class="content-item" class="add-new-goal">
-                            <button mat-raised-button (click)="openDialog()" class="goal-button">
+                            <button mat-raised-button (click)="newGoalDialog()" class="goal-button">
                                 <mat-icon class="add-icon">add</mat-icon>
                                 Add a Goal
                             </button>
@@ -315,9 +315,28 @@
     </div>-->
 
 <div class="sidenav" hide-xs>
-    <h2 class="nav-goals-title">Journals</h2>
+    <h2 class="page-title">Goals</h2>
     <hr class="nav-title-divider">
-    <button mat-raised-button (click)="openDialog()" class="add action-button" id="addNewGoal">
+    <button mat-raised-button (click)="newGoalDialog()" class="new-object-button" id="addNewGoal">
         New Goal
     </button>
+</div>
+<div class="grid-list" hide-xs>
+    <div layout="row" layout-wrap>
+        <mat-card class="goal-card"
+                  *ngFor="let goal of shownGoals"
+                  #elem [id]="goal._id['$oid']">
+            <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title class="goal-title break-word">{{goal.name}}</mat-card-title>
+            <mat-card-subtitle class="date-subtitle" *ngIf="goal.end == ''">No end date</mat-card-subtitle>
+            <mat-card-subtitle class="date-subtitle" *ngIf="goal.end != ''">Ends on {{goal.end | date : "MMM d, yyyy"}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-divider></mat-divider>
+            <mat-card-content class="goal-info break-word">
+                {{goal.purpose}}
+            </mat-card-content>
+
+        </mat-card>
+    </div>
 </div>

@@ -42,16 +42,12 @@ export class GoalsComponent implements OnInit {
     // The ID of the goal
     private highlightedID: { '$oid': string } = {'$oid': ''};
 
-    goalCategories = [
-        "Business & Career", "Family"
-    ]
-
     isHighlighted(goal: Goal): boolean {
         return goal._id['$oid'] === this.highlightedID['$oid'];
     }
 
     // Opens a dialog for a new goal entry and adds the goal upon closing
-    openDialog(): void {
+    newGoalDialog(): void {
         const newGoal: Goal = {
             _id: '',
             userID: localStorage.getItem("userID"),

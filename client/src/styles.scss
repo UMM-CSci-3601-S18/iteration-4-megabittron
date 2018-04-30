@@ -39,10 +39,12 @@
     -webkit-font-smoothing: antialiased;
 }
 
+//every submit button green background color
 .submit {
     background-color: #E8F5E9;
 }
 
+//for new object dialogs
 .new-object-title {
     text-align: center;
 }
@@ -59,3 +61,39 @@
 .button-options {
     text-align: center;
 }
+
+//for journals & goals sidenavs
+.sidenav {
+    height: 100%;
+    width: 275px;
+    position: fixed;
+    z-index: 1;
+    overflow-x: hidden;
+    text-align: center;
+    background-color: #546E7A;
+}
+
+.new-object-button {
+    width: 50%;
+    margin-bottom: 15px;
+}
+
+.new-object-button:hover {
+    background-color: #C8E6C9;
+}
+
+.page-title {
+    margin: 15px;
+    color: white;
+    font-size: 34px;
+}
+
+//for journals & goals page content and cards
+.grid-list {
+    margin-left: 275px;
+}
+
+.break-word {
+    word-wrap: break-word;
+}
+

@@ -1,18 +1,19 @@
-.sidenav {
-    height: 100%;
-    width: 275px;
-    position: fixed;
-    z-index: 1;
-    overflow-x: hidden;
-    text-align: center;
-    background-color: #546E7A;
+@import "../../theme";
+@import "../../styles";
+
+.goal-card {
+    margin: 15px;
+    width: 325px;
+    height: 200px;
 }
 
-.add {
-    width: 50%;
-    margin-bottom: 15px;
+.goal-title {
+    text-align: left;
+    font-size: 18px;
 }
 
-.add:hover {
-    background-color: #C8E6C9;
+.example-header-image {
+    background-size: cover;
+    margin-top: 10px;
+    margin-left: 10px;
 }
