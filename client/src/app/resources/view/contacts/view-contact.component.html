@@ -1,12 +1,12 @@
 <div class="sidenav" hide-xs>
-    <h2 class="nav-contacts-title break-word">{{contacts.name}}</h2>
+    <h2 class="nav-contacts-title break-word">{{contact.name}}</h2>
     <hr class="nav-title-divider">
     <button mat-raised-button class="back action-button"
             (click)="backClicked()">
         Back
     </button>
     <button mat-raised-button class="edit action-button"
-            (click)="openEditContactDialog(contacts._id['$oid'], contacts.name, contact.phone, contact.email)">
+            (click)="openEditContactDialog(contact._id['$oid'], contact.name, contact.phone, contact.email)">
         Edit Contact
     </button>
     <button mat-raised-button class="delete action-button"
