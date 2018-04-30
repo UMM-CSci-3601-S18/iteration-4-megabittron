@@ -3,9 +3,9 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {Link} from "../../link";
 
 @Component({
-    selector: 'app-edit-link.component',
-    templateUrl: 'edit-link.component.html',
-    styleUrls: ['./edit-link.component.scss'],
+    selector: 'app-edit-links.component',
+    templateUrl: 'edit-links.component.html',
+    styleUrls: ['./edit-links.component.scss'],
 })
 
 export class EditLinkComponent {

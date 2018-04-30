@@ -3,9 +3,9 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {Contact} from "../../contact";
 
 @Component({
-    selector: 'app-edit-contact.component',
-    templateUrl: 'edit-contact.component.html',
-    styleUrls: ['./edit-contact.component.scss'],
+    selector: 'edit-contacts.component',
+    templateUrl: 'edit-contacts.component.html',
+    styleUrls: ['./edit-contacts.component.scss'],
 })
 
 export class EditContactComponent {
