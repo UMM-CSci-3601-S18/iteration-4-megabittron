@@ -152,7 +152,9 @@ public class Server {
         post("api/journals/edit", journalRequestHandler::editJournal);
         delete("api/journals/delete/:id", journalRequestHandler::deleteJournal);
 
-        //Did not create a api route for users
+        //api routes for settings
+        post("api/user/style/edit", userRequestHandler::editUserStyleSetting);
+        post("api/user/font/edit", userRequestHandler::editUserFontSetting);
 
 
         post("api/login", (req, res) -> {

@@ -67,4 +67,12 @@ public class UserRequestHandler {
         res.type("application/json");
         return userController.editUserStyleSetting(req.queryMap().toMap());
     }
+
+    /*
+        changes a user's font settings
+     */
+    public String editUserFontSetting(Request req, Response res){
+        res.type("application/json");
+        return userController.editUserFontSetting(req.queryMap().toMap());
+    }
 }

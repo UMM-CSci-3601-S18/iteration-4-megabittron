@@ -103,6 +103,7 @@ public class UserController {
             newUser.append("FirstName", FirstName);
             newUser.append("LastName", LastName);
             newUser.append("StyleSetting", "default-style");
+            newUser.append("FontSetting", "default-font");
 
             try {
                 userCollection.insertOne(newUser);
@@ -113,6 +114,7 @@ public class UserController {
                 userInfo.append("FirstName", matchingUsers.first().get("FirstName"));
                 userInfo.append("LastName", matchingUsers.first().get("LastName"));
                 userInfo.append("StyleSetting", matchingUsers.first().get("StyleSetting"));
+                userInfo.append("FontSetting", matchingUsers.first().get("FontSetting"));
 
                 return JSON.serialize(userInfo);
             } catch(MongoException me) {
@@ -126,6 +128,7 @@ public class UserController {
             userInfo.append("FirstName", matchingUsers.first().get("FirstName"));
             userInfo.append("LastName", matchingUsers.first().get("LastName"));
             userInfo.append("StyleSetting", matchingUsers.first().get("StyleSetting"));
+            userInfo.append("FontSetting", matchingUsers.first().get("FontSetting"));
 
             return JSON.serialize(userInfo);
         }
@@ -147,9 +150,6 @@ public class UserController {
             return JSON.serialize("[ ]");
         }
 
-        //FindIterable comes from mongo, Document comes from Gson
-        FindIterable<Document> matchingUsers = userCollection.find(filterDoc);
-
         String newSetting = (queryParams.get("StyleSetting")[0]);
 
         Document newStyleSetting = new Document();
@@ -157,6 +157,38 @@ public class UserController {
 
         Document setQuery = new Document();
         setQuery.append("$set", newStyleSetting);
+
+        //Document searchQuery = new Document().append("_id", new ObjectId(id));
+        Document searchQuery = new Document().append("_id", id);
+
+        try {
+            userCollection.updateOne(searchQuery, setQuery);
+            ObjectId theID = searchQuery.getObjectId("_id");
+            return JSON.serialize(theID);
+        } catch(MongoException me) {
+            me.printStackTrace();
+            return null;
+        }
+    }
+
+    public String editUserFontSetting(Map<String, String[]> queryParams) {
+
+        Document filterDoc = new Document();
+        String id;
+
+        if (queryParams.containsKey("userID")) {
+            id = (queryParams.get("userID")[0]);
+        } else {
+            return JSON.serialize("[ ]");
+        }
+
+        String newSetting = (queryParams.get("FontSetting")[0]);
+
+        Document newFontSetting = new Document();
+        newFontSetting.append("FontSetting", newSetting);
+
+        Document setQuery = new Document();
+        setQuery.append("$set", newFontSetting);
 
         //Document searchQuery = new Document().append("_id", new ObjectId(id));
         Document searchQuery = new Document().append("_id", id);
