@@ -1,0 +1,16 @@
+#confirmAddContactButton {
+    background-color: #E8F5E9;
+}
+.PromptsBox{
+    background-color: #d64161;
+    border: 2px;
+    color: white;
+}
+
+.new-contact-title {
+    text-align: center;
+}
+
+.button-options {
+    text-align: center;
+}
