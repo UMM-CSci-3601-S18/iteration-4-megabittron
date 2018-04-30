@@ -636,6 +636,11 @@
     <button mat-raised-button (click)="newGoalDialog()" class="new-object-button" id="addNewGoal">
         New Goal
     </button>
+    <mat-card class="all-today-toggle-card">
+        <mat-card-content>
+            <mat-checkbox class="show-all-goals" (change)="showAllGoals = $event.checked; getNext()">Show today's goals</mat-checkbox>
+        </mat-card-content>
+    </mat-card>
     <mat-card class="option-selector-card">
         <mat-card-title>Status</mat-card-title>
         <mat-divider></mat-divider>
@@ -649,7 +654,7 @@
     </mat-card>
 </div>
 <div class="grid-list" hide-xs>
-    <div layout="row" layout-wrap>
+    <div layout="row" layout-wrap *ngIf="showAllGoals == false">
         <mat-card class="goal-card"
                   *ngFor="let goal of goals | dateSort: 'start'"
                   #elem [id]="goal._id['$oid']">
