@@ -1,3 +1,4 @@
+/*
 import {Component, OnInit} from '@angular/core';
 import {AppService} from "../../../app.service";
 import {Contact} from '../../contact';
@@ -97,7 +98,7 @@ export class ViewContactComponent implements OnInit {
     }
 
     refreshContact(): Observable<Contact> {
-        const contactObservable: Observable<Contact> = this.contactListService.getContactById(this.id);
+        const contactObservable: Observable<Contact> = this.contactListService.getContacts(this.id);
         contactObservable.subscribe(
             data => {
                 this.contact = data;
@@ -109,7 +110,7 @@ export class ViewContactComponent implements OnInit {
     }
 
     loadService(): void {
-        this.contactListService.getContactById(this.id).subscribe(
+        this.contactListService.getContacts(this.id).subscribe(
             data => {
                 this.contact = data;
             },
@@ -130,3 +131,4 @@ export class ViewContactComponent implements OnInit {
     }
 
 }
+*/

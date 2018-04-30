@@ -34,7 +34,7 @@ export class ResourcesService {
         return this.http.get<Link[]>(this.requestUrl);
     }
 
-    //Get links from the server
+    //Get contacts from the server
     getContacts(userID: string): Observable<Contact[]> {
         this.requestUrl = this.baseContactUrl;
         this.noID = false;
