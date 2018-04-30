@@ -42,7 +42,7 @@
         {{journal.content}}
     </div>
 
-    <button class="mobile-edit" (click)="openEditJournalDialog()" mat-fab color="primary"><mat-icon>edit</mat-icon></button>
+    <button class="mobile-edit" (click)="openEditJournalDialog(journal._id, journal.title, journal.content, journal.date)" mat-fab color="primary"><mat-icon>edit</mat-icon></button>
 
 
 </div>
