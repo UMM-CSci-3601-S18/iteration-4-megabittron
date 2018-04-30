@@ -124,13 +124,6 @@ export class JournalsService {
 
 }
 
-
-
-
-
-
-
-
     editJournal(id : Journal): Observable<{'$oid': string}> {
         this.journalUrl = this.baseUrl;
         const httpOptions = {
