@@ -26,6 +26,13 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {AppService} from "./app.service";
 import {RouterModule} from "@angular/router";
+import {AddContactComponent} from "./resources/add/contacts/add-contact.component";
+import {AddLinkComponent} from "./resources/add/links/add-link.component";
+import {EditLinkComponent} from "./resources/edit/links/edit-links.component";
+import {EditContactComponent} from "./resources/edit/contacts/edit-contacts.component";
+import {ViewContactComponent} from "./resources/view/contacts/view-contact.component";
+import {ViewLinkComponent} from "./resources/view/links/view-link.component";
+
 import {MatTableModule} from "@angular/material/table";
 import {ShowSummaryListComponent} from "./summary/show/show-summary-list.component";
 
@@ -54,8 +61,16 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         EditJournalComponent,
         ViewJournalComponent,
         SummaryListComponent,
+        AddContactComponent,
+        AddLinkComponent,
+        ViewContactComponent,
+        ViewLinkComponent,
+        EditContactComponent,
+        EditLinkComponent,
         ArraySortPipe,
         ShowSummaryListComponent,
+
+
     ],
     providers: [
         GoalsService,
@@ -73,7 +88,10 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         AddJournalComponent,
         EditJournalComponent,
         ViewJournalComponent,
-        ShowSummaryListComponent,
+        AddContactComponent,
+        AddLinkComponent,
+
+        ShowSummaryListComponent
     ],
     bootstrap: [
         AppComponent
