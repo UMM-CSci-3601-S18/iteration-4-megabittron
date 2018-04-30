@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {AppService} from "./app.service";
+import {Router, ActivationStart} from "@angular/router";
+
+
+
 
 declare var gapi: any;
 
@@ -13,8 +17,26 @@ declare var gapi: any;
 })
 export class AppComponent implements OnInit {
     googleAuth;
+    public currentPath;
 
-    constructor(private http: HttpClient, public appService: AppService) {
+    constructor(private http: HttpClient,
+                public appService: AppService,
+                private router: Router) {
+
+        this.router.events.subscribe((e) => {
+            if (e instanceof ActivationStart) {
+                this.currentPath = e.snapshot.routeConfig.path;
+            }
+        })
+    }
+
+    isJournalView(): boolean {
+        if (this.currentPath == 'journals/:_id') {
+            return true;
+        } else {
+            return false;
+        }
+
 
     }
 
@@ -77,5 +99,6 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.handleClientLoad();
         gapi.load('client:auth2', this.initClient);
+
     }
 }
