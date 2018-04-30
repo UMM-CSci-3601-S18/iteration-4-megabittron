@@ -5,7 +5,7 @@ import {Journal} from '../journal';
 @Component({
     selector: 'app-edit-journal.component',
     templateUrl: 'edit-journal.component.html',
-    styleUrls: ['./edit-journal.component.css'],
+    styleUrls: ['./edit-journal.component.scss'],
 })
 
 export class EditJournalComponent {

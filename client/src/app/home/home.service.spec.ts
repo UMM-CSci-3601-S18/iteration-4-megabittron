@@ -9,7 +9,7 @@ describe('Home list service: ', () => {
         {
             _id: 'test1',
             userID: 'tester1',
-            mood: 'happy',
+            emotion: 'happy',
             date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
             intensity: 3,
             description: 'im happy',
@@ -17,7 +17,7 @@ describe('Home list service: ', () => {
         {
             _id: 'test2',
             userID: 'tester2',
-            mood: 'anxious',
+            emotion: 'anxious',
             date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
             intensity: 5,
             description: 'im super anxious',
@@ -25,7 +25,7 @@ describe('Home list service: ', () => {
         {
             _id: 'test3',
             userID: 'tester3',
-            mood: 'meh',
+            emotion: 'meh',
             date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
             intensity: 1,
             description: 'im meh',

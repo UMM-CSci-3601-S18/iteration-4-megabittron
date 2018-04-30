@@ -19,14 +19,14 @@ export class SummaryPage {
         return browser.executeScript(setStyle, element(byObject).getWebElement(), 'color: red; background-color: yellow;');
     }
 
-    selectMoodDropdown(): promise.Promise<boolean> {
-        this.highlightElement(by.className('summaryMood'));
-        return element(by.className('summaryMood')).isPresent();
+    selectEmotionDropdown(): promise.Promise<boolean> {
+        this.highlightElement(by.className('summaryEmotion'));
+        return element(by.className('summaryEmotion')).isPresent();
     }
 
-    clickMoodDropdown(): promise.Promise<void> {
-        this.highlightElement(by.className('summaryMood'));
-        return element(by.className('summaryMood')).click();
+    clickEmotionDropdown(): promise.Promise<void> {
+        this.highlightElement(by.className('summaryEmotion'));
+        return element(by.className('summaryEmotion')).click();
     }
 
     selectIntensityDropdown(): promise.Promise<boolean> {

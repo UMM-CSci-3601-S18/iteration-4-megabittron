@@ -4,6 +4,7 @@ import {Goal} from './goal';
 import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
 import {AddGoalComponent} from './add/add-goal.component';
+import {EditGoalComponent} from "./edit/edit-goal.component";
 import {MatSnackBar} from '@angular/material';
 import {AppService} from "../app.service";
 import {Router} from "@angular/router";
@@ -27,6 +28,9 @@ export class GoalsComponent implements OnInit {
     public showAllGoals = false;
     public goalsPerPage = 5;
     public currentPage = 1;
+
+    // Used for testing to set a static date so the same goals show up in today's goals regardless of actual date
+    public testing = true;
 
     // The ID of the goal
     private highlightedID: { '$oid': string } = {'$oid': ''};
@@ -86,6 +90,39 @@ export class GoalsComponent implements OnInit {
         });
     }
 
+    openEditGoalDialog(_id: string, purpose: string, category: string, name: string, status: boolean, frequency: string,
+                       start: string, end: string, next: string): void {
+        console.log("Edit goal button clicked.");
+        console.log(_id + ' ' + name + purpose + end);
+        console.log("this is next " + next);
+        const newGoal: Goal = {_id: _id, userID: localStorage.getItem('userID'), purpose: purpose, category: category, name: name, status: status,
+        frequency: frequency, start: start, end: end, next: next};
+        const dialogRef = this.dialog.open(EditGoalComponent, {
+            width: '300px',
+            data: { goal: newGoal }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result == undefined) {
+                console.log("Cancelled without editing the goal.");
+            } else {
+                this.goalService.editGoal(result).subscribe(
+                    editGoalResult => {
+                        this.highlightedID = editGoalResult;
+                        this.refreshGoals();
+                        this.snackBar.open("Edited Goal", "CLOSE", {
+                            duration: 2000,
+                        });
+                        console.log("Goal edited.");
+                    },
+                    err => {
+                        console.log('There was an error editing the goal.');
+                        console.log('The error was ' + JSON.stringify(err));
+                    });
+            }
+        });
+    }
+
     //deletes goal from the page
     deleteGoal(_id: string) {
         this.goalService.deleteGoal(_id).subscribe(
@@ -121,7 +158,7 @@ export class GoalsComponent implements OnInit {
         this.goalService.editGoal(updatedGoal).subscribe(
             completeGoalResult => {
                 this.highlightedID = completeGoalResult;
-                this.snackBar.open("Completed Goal", "CLOSE", {
+                this.snackBar.open("Status Changed", "CLOSE", {
                     duration: 2000,
                 });
                 this.refreshGoals();
@@ -140,7 +177,6 @@ export class GoalsComponent implements OnInit {
         if(this.showAllGoals == false) {
             if(this.today !== undefined) {
                 this.todayGoals = this.goals.filter(goal => {
-
 
                     var nextGoal = new Date(goal.next);
                     nextGoal.setHours(0, 0, 0, 0);
@@ -313,8 +349,16 @@ export class GoalsComponent implements OnInit {
 
     //get's today's date, and sets this.goalStart and this.goalNext to today's date
     getDate() {
-        this.today = new Date();
+
+        if(this.testing == true){
+            this.today = new Date("2018-04-29T05:00:00.000Z");
+        }
+
+        else {
+            this.today = new Date();
+        }
         this.today.setHours(0, 0, 0, 0);
+
         this.goalStart = this.today;
         this.goalNext = this.today;
     }

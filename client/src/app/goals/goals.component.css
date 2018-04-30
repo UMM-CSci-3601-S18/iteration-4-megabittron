@@ -24,6 +24,14 @@
     color: forestgreen;
 }
 
+.edit-goal {
+    color: #00838F;
+}
+
+.edit-goal:hover {
+    background-color: #E0F7FA;
+}
+
 .goal-complete {
     color: green;
 }

@@ -4,8 +4,6 @@ import {Journal} from './journal';
 import {Observable} from 'rxjs/Observable';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {AddJournalComponent} from './add/add-journal.component';
-import {EditJournalComponent} from "./edit/edit-journal.component";
-import {ShowJournalComponent} from "./show/show-journal.component";
 import {AppService} from "../app.service";
 import {Router} from "@angular/router";
 
@@ -26,33 +24,32 @@ export class JournalsComponent implements OnInit {
     public length: number;
     public index = 0;
     public prompt: String;
-
     public prompts: String[] = [
         "What scares you?",
         "Do you have a plan? Do you need a plan? Have you had a plan fall spectacularly to pieces?",
         "What is your take on soul mates?",
         "Are you a worrier? Is there a particular worry that you can’t shake? How do you cope with worry?",
-        "Dear Past Me . . .",
-        "Dear Future Me . . .",
+        "Dear past me",
+        "Dear future me",
         "Places you’ve enjoyed visiting.",
         "Things you’ve done that you previously thought you could never do.",
-        "The people you most admire.",
-        "Your favorite books.",
-        "Your favorite movies.",
-        "Your favorite songs.",
-        "Your top five short term goals.",
-        "Your top five long term goals",
-        "Nobody knows that I . . .",
+        "The people you most admire",
+        "Your favorite books",
+        "Your favorite movies",
+        "Your favorite songs",
+        "Your top five short term goals",
+        "Your top five long term goals are",
+        "Nobody knows that I",
         "What’s the most outrageous thing you’ve ever done?",
         "What’s your secret desire?",
         "What’s the worst thing you’ve ever done?",
-        "The most terrifying moment of my life was . . .",
-        "The most fun I’ve ever had . . .",
-        "The most surprised I’ve ever been . . .",
-        "The most disappointed I’ve ever been . . .",
+        "The most terrifying moment of my life was",
+        "The most fun I’ve ever had",
+        "The most surprised I’ve ever been",
+        "The most disappointed I’ve ever been",
         "What are you looking forward to the most?",
         "Three celebrity crushes.",
-        "who made you feel good this week?",
+        "Who made you feel good this week?",
         "Did you ever run away from home?",
         "Who was your best friend in elementary school?",
         "Did you ever get lost?",
@@ -61,15 +58,15 @@ export class JournalsComponent implements OnInit {
         "If you could change one thing about your present life, what would it be?",
         "If you could meet any fictional character, who would it be?",
         "If you could have dinner with anyone currently alive, who would it be?",
-        "Things I always did with my mom when I was little . . .",
-        "Things I always did with my dad when I was small . . .",
-        "The Holiday traditions I most look forward to . . .",
-        "My favorite Sunday ritual . . .",
+        "Things I always did with my mom when I was little",
+        "Things I always did with my dad when I was small",
+        "The Holiday traditions I most look forward to",
+        "My favorite Sunday ritual",
         "How easy is it for you to forgive those who have caused you pain?",
         "What is the dominant emotion in your life right now?",
         "How do you deal with anger?",
-        "Some of the things that make me happy are . . .",
-        "My saddest memory is  . . .",
+        "Some of the things that make me happy are",
+        "My saddest memory is",
         "Three pet peeves",
         "Three favorite things to wear.",
         "What book did you read over and over again as a child?",
@@ -128,46 +125,6 @@ export class JournalsComponent implements OnInit {
                 }
             }
         });
-    }
-
-    openEditJournalDialog(_id: string, title: string, content: string, date: string): void {
-        console.log("Edit journal button clicked.");
-        console.log(_id + ' ' + title + content + date);
-        const newJournal: Journal = {_id: _id, userID: localStorage.getItem('userID'), title: title, content: content, date: date};
-        const dialogRef = this.dialog.open(EditJournalComponent, {
-            width: '300px',
-            data: { journal: newJournal }
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-            if (result == undefined) {
-                console.log("Cancelled without editing the journal.");
-            } else {
-                this.journalListService.editJournal(result).subscribe(
-                    editJournalResult => {
-                        this.highlightedID = editJournalResult;
-                        this.refreshJournals();
-                        this.snackBar.open("Edited Journal", "CLOSE", {
-                            duration: 2000,
-                        });
-                        console.log("Journal edited.");
-                    },
-                    err => {
-                        // This should probably be turned into some sort of meaningful response.
-                        console.log('There was an error editing the journal.');
-                        console.log('The error was ' + JSON.stringify(err));
-                    });
-            }
-        });
-    }
-
-    showMoreInfoDialog(content: string): void {
-        const showJournal: Journal = {_id: null, userID: null, title: null, content: content, date: null};
-        const dialogRef = this.dialog.open(ShowJournalComponent, {
-            width: '500px',
-            data: { journal: showJournal }
-        });
-        console.log("Showing more journal info.");
     }
 
     deleteJournal(_id: string) {
@@ -267,7 +224,6 @@ export class JournalsComponent implements OnInit {
 
         this.loadService();
         this.refreshJournals();
-
     }
 
 }
