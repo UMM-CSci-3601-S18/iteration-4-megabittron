@@ -20,19 +20,19 @@ describe('Summary', () => {
 
     /**
     // make sure there is an emotions dropdown button
-    it('Should have an Mood dropdown ', () => {
+    it('Should have an Emotion dropdown ', () => {
         SummaryPage.navigateTo();
         element(by.id('md-tab-label-0-1')).click();
         page.delay(500000);
-        expect(page.selectMoodDropdown()).toBeTruthy();
-    });
+        expect(page.selectEmotionDropdown()).toBeTruthy();
+    });z
 
     // make sure it clicks emotion dropdown
-    it('Should click the Mood dropdown ', () => {
+    it('Should click the Emotion dropdown ', () => {
         SummaryPage.navigateTo();
         element(by.id('md-tab-label-0-1')).click();
         page.delay(500000);
-        page.clickMoodDropdown();
+        page.clickEmotionDropdown();
     });
 
     // makes sure it clicks on the Happy labeled emotion dropdown
@@ -40,7 +40,7 @@ describe('Summary', () => {
         SummaryPage.navigateTo();
         element(by.id('md-tab-label-0-1')).click();
         page.delay(500000);
-        page.clickMoodDropdown();
+        page.clickEmotionDropdown();
         element(by.className('md-option-1')).click();
     });
 
@@ -49,7 +49,7 @@ describe('Summary', () => {
         SummaryPage.navigateTo();
         element(by.id('md-tab-label-0-1')).click();
         page.delay(500000);
-        page.clickMoodDropdown();
+        page.clickEmotionDropdown();
         element(by.className('md-option-2')).click();
     });
 
@@ -58,7 +58,7 @@ describe('Summary', () => {
         SummaryPage.navigateTo();
         element(by.id('md-tab-label-0-1')).click();
         page.delay(500000);
-        page.clickMoodDropdown();
+        page.clickEmotionDropdown();
         element(by.className('md-option-3')).click();
     });
 
@@ -67,7 +67,7 @@ describe('Summary', () => {
         SummaryPage.navigateTo();
         element(by.id('md-tab-label-0-1')).click();
         page.delay(500000);
-        page.clickMoodDropdown();
+        page.clickEmotionDropdown();
         element(by.className('md-option-4')).click();
     });
 
@@ -76,18 +76,18 @@ describe('Summary', () => {
         SummaryPage.navigateTo();
         element(by.id('md-tab-label-0-1')).click();
         page.delay(500000);
-        page.clickMoodDropdown();
+        page.clickEmotionDropdown();
         element(by.className('md-option-5')).click();
     });
 
-    // makes sure it clicks on the Happy labeled Mood dropdown and then all emotions dropdown
-    it('Should click on Happy dropdown and then do process again with the all moods dropdown  ', () => {
+    // makes sure it clicks on the Happy labeled Emotion dropdown and then all emotions dropdown
+    it('Should click on Happy dropdown and then do process again with the all emotions dropdown  ', () => {
         SummaryPage.navigateTo();
         element(by.id('md-tab-label-0-1')).click();
         page.delay(500000);
-        page.clickMoodDropdown();
+        page.clickEmotionDropdown();
         element(by.className('md-option-1')).click();
-        page.clickMoodDropdown();
+        page.clickEmotionDropdown();
         element(by.className('md-option-0')).click();
     });
 
