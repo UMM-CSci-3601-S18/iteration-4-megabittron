@@ -1,7 +1,7 @@
-import { NgModule, } from '@angular/core';
-import { CommonModule, } from '@angular/common';
+import {NgModule,} from '@angular/core';
+import {CommonModule,} from '@angular/common';
 
-import { CovalentLayoutModule, CovalentStepsModule, CovalentCommonModule /*, any other modules */ } from '@covalent/core';
+import {CovalentLayoutModule, CovalentStepsModule, CovalentCommonModule /*, any other modules */} from '@covalent/core';
 
 import {
     MatListModule,
@@ -26,11 +26,12 @@ import {
     MatFormFieldModule,
     MatSlideToggleModule,
     MatStepperModule,
+    MatTableModule,
 } from '@angular/material';
 
-import { FlexLayoutModule, } from '@angular/flex-layout';
+import {FlexLayoutModule,} from '@angular/flex-layout';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 const FLEX_LAYOUT_MODULES: any[] = [
@@ -66,6 +67,7 @@ const MATERIAL_MODULES: any[] = [
     MatFormFieldModule,
     MatSlideToggleModule,
     MatStepperModule,
+    MatTableModule,
 ];
 
 const COVALENT_MODULES: any[] = [
@@ -82,9 +84,7 @@ const COVALENT_MODULES: any[] = [
         COVALENT_MODULES,
         FLEX_LAYOUT_MODULES,
     ],
-    declarations: [
-
-    ],
+    declarations: [],
     exports: [
         ANGULAR_MODULES,
         MATERIAL_MODULES,
