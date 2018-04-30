@@ -30,7 +30,6 @@ export class GoalsComponent implements OnInit {
     public goals: Goal[] = []; //full list of goals
     public todayGoals: Goal[] = []; //goals that haven't been completed with accordance to their frequency
     public shownGoals: Goal[] = []; //goals that are being shown
-
     public goalStatus: string = 'all';
     public goalStart;
     public goalNext;
@@ -172,9 +171,10 @@ export class GoalsComponent implements OnInit {
     //Checks if the next field is <, = or > than today's date and updates the next field as needed. Returns
     //true if the goal is supposed to be shown in the today's goal section
     getNext(){
-
+        console.log(this.showAllGoals);
 
         if(this.showAllGoals == false) {
+            console.log("here");
             if(this.today !== undefined) {
                 this.todayGoals = this.goals.filter(goal => {
 
@@ -317,7 +317,10 @@ export class GoalsComponent implements OnInit {
         this.goalService.getGoals(localStorage.getItem("userID"), this.goalStatus).subscribe(
             goals => {
                 this.goals = goals;
-                this.goals = this.goals;
+
+                if(this.showAllGoals == true) {
+                    this.shownGoals = this.goals;
+                }
             },
             err => {
                 console.log(err);
