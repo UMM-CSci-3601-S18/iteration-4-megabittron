@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
@@ -14,6 +14,7 @@ import {GoalsComponent} from "./goals/goals.component";
 import {GoalsService} from "./goals/goals.service";
 import {AddGoalComponent} from "./goals/add/add-goal.component";
 import {EditGoalComponent} from "./goals/edit/edit-goal.component";
+import {ViewGoalComponent} from "./goals/view/view-goal.component";
 import {SummaryListComponent} from "./summary/summary-list.component";
 import {SummaryListService} from "./summary/summary-list.service";
 import {JournalsComponent} from "./journals/journals.component";
@@ -26,6 +27,14 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {AppService} from "./app.service";
 import {RouterModule} from "@angular/router";
+import {AddContactComponent} from "./resources/add/contacts/add-contact.component";
+import {AddLinkComponent} from "./resources/add/links/add-link.component";
+import {EditLinkComponent} from "./resources/edit/links/edit-links.component";
+import {EditContactComponent} from "./resources/edit/contacts/edit-contacts.component";
+import {ViewContactComponent} from "./resources/view/contacts/view-contact.component";
+import {ViewLinkComponent} from "./resources/view/links/view-link.component";
+
+import {MatTableModule} from "@angular/material/table";
 import {ShowSummaryListComponent} from "./summary/show/show-summary-list.component";
 import {RandomPrompt} from "./journals/Prompts/open-prompts.component";
 
@@ -41,7 +50,7 @@ import {RandomPrompt} from "./journals/Prompts/open-prompts.component";
         Routing,
         CustomModule,
         ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
-
+        MatTableModule,
     ],
     declarations: [
         AppComponent,
@@ -50,11 +59,18 @@ import {RandomPrompt} from "./journals/Prompts/open-prompts.component";
         GoalsComponent,
         AddGoalComponent,
         EditGoalComponent,
+        ViewGoalComponent,
         JournalsComponent,
         AddJournalComponent,
         EditJournalComponent,
         ViewJournalComponent,
         SummaryListComponent,
+        AddContactComponent,
+        AddLinkComponent,
+        ViewContactComponent,
+        ViewLinkComponent,
+        EditContactComponent,
+        EditLinkComponent,
         ArraySortPipe,
         ShowSummaryListComponent,
         RandomPrompt,
@@ -68,7 +84,7 @@ import {RandomPrompt} from "./journals/Prompts/open-prompts.component";
         ResourcesService,
         {provide: APP_BASE_HREF, useValue: '/'},
         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true},
-],
+    ],
     entryComponents: [
         AddGoalComponent,
         EditGoalComponent,
@@ -78,6 +94,10 @@ import {RandomPrompt} from "./journals/Prompts/open-prompts.component";
         ShowSummaryListComponent,
         RandomPrompt,
 
+        AddContactComponent,
+        AddLinkComponent,
+
+        ShowSummaryListComponent
     ],
     bootstrap: [
         AppComponent

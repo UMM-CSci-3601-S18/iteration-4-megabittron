@@ -4,7 +4,6 @@
 .goal-card {
     margin: 15px;
     width: 325px;
-    height: 200px;
 }
 
 .goal-title {
@@ -12,9 +11,51 @@
     font-size: 18px;
 }
 
+.all-today-toggle-card {
+    width: 90%;
+    margin: 0 auto 15px;
+}
+
+.status-radio-group {
+    display: inline-flex;
+    flex-direction: column;
+    text-align: left;
+}
+
 .option-selector-card {
     width: 90%;
+    height: 160px;
     margin: 0 auto;
+}
+
+.action-button {
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 270px;
+}
+
+.uncheck {
+    color: #4CAF50;
+}
+
+.edit {
+    color: #1976D2;
+}
+
+.delete {
+    color: #F44336;
+}
+
+.edit:hover {
+    background-color: #E0F7FA;
+}
+
+.delete:hover {
+    background-color: #FFEBEE;
+}
+
+.journal-action-buttons {
+    float: right;
 }
 
 .category-img {
@@ -22,6 +63,7 @@
     margin-top: 10px;
     margin-left: 10px;
 }
+
 .business {
     background-image: url('../../assets/images/goals/business-career.png');
 }

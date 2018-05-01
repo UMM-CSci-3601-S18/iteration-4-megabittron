@@ -30,7 +30,7 @@ export class GoalsComponent implements OnInit {
     public goals: Goal[] = []; //full list of goals
     public todayGoals: Goal[] = []; //goals that haven't been completed with accordance to their frequency
     public shownGoals: Goal[] = []; //goals that are being shown
-
+    public goalStatus: string = 'all';
     public goalStart;
     public goalNext;
     public today;
@@ -75,8 +75,8 @@ export class GoalsComponent implements OnInit {
                         addGoalResult => {
                             this.highlightedID = addGoalResult;
                             this.refreshGoals();
-                            this.snackBar.open("Added Goal", "CLOSE", {
-                                duration: 2000,
+                            this.snackBar.open("Goal Created", "CLOSE", {
+                                duration: 3000,
                             });
                             },
                             err => {
@@ -109,8 +109,8 @@ export class GoalsComponent implements OnInit {
                     editGoalResult => {
                         this.highlightedID = editGoalResult;
                         this.refreshGoals();
-                        this.snackBar.open("Edited Goal", "CLOSE", {
-                            duration: 2000,
+                        this.snackBar.open("Goal Edited", "CLOSE", {
+                            duration: 3000,
                         });
                         console.log("Goal edited.");
                     },
@@ -133,8 +133,8 @@ export class GoalsComponent implements OnInit {
                 console.log(err);
                 this.refreshGoals();
                 this.loadService();
-                this.snackBar.open("Deleted Goal", "CLOSE", {
-                    duration: 2000,
+                this.snackBar.open("Goal Deleted", "CLOSE", {
+                    duration: 3000,
                 });
             }
         );
@@ -157,9 +157,15 @@ export class GoalsComponent implements OnInit {
         this.goalService.editGoal(updatedGoal).subscribe(
             completeGoalResult => {
                 this.highlightedID = completeGoalResult;
-                this.snackBar.open("Status Changed", "CLOSE", {
-                    duration: 2000,
-                });
+                if (status == true) {
+                    this.snackBar.open("Goal Completed", "CLOSE", {
+                        duration: 3000,
+                    });
+                } else {
+                    this.snackBar.open("Goal Unchecked", "CLOSE", {
+                        duration: 3000,
+                    });
+                }
                 this.refreshGoals();
             },
             err => {
@@ -171,9 +177,10 @@ export class GoalsComponent implements OnInit {
     //Checks if the next field is <, = or > than today's date and updates the next field as needed. Returns
     //true if the goal is supposed to be shown in the today's goal section
     getNext(){
-
+        console.log(this.showAllGoals);
 
         if(this.showAllGoals == false) {
+            console.log("here");
             if(this.today !== undefined) {
                 this.todayGoals = this.goals.filter(goal => {
 
@@ -294,7 +301,7 @@ export class GoalsComponent implements OnInit {
         if(userID == null){
             userID = "";
         }
-        const goalObservable: Observable<Goal[]> = this.goalService.getGoals(userID);
+        const goalObservable: Observable<Goal[]> = this.goalService.getGoals(userID, this.goalStatus);
         console.log(goalObservable);
         goalObservable.subscribe(
             goals => {
@@ -313,10 +320,13 @@ export class GoalsComponent implements OnInit {
     //loads the list of goals for the page
     loadService(): void {
         console.log(localStorage.getItem("userID"));
-        this.goalService.getGoals(localStorage.getItem("userID")).subscribe(
+        this.goalService.getGoals(localStorage.getItem("userID"), this.goalStatus).subscribe(
             goals => {
                 this.goals = goals;
-                this.goals = this.goals;
+
+                if(this.showAllGoals == true) {
+                    this.shownGoals = this.goals;
+                }
             },
             err => {
                 console.log(err);

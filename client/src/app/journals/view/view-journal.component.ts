@@ -4,7 +4,7 @@ import {Journal} from '../journal';
 import {JournalsService} from "../journals.service";
 import {EditJournalComponent} from "../edit/edit-journal.component";
 import {Observable} from "rxjs/Observable";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Location} from '@angular/common';
 import {MatDialog, MatSnackBar} from '@angular/material';
 
@@ -22,7 +22,8 @@ export class ViewJournalComponent implements OnInit {
                 private route: ActivatedRoute,
                 private _location: Location,
                 public dialog: MatDialog,
-                private snackBar: MatSnackBar) {
+                private snackBar: MatSnackBar,
+                private router: Router) {
         this.route.params.subscribe(params => {
             this.id = params['_id'];
         });
@@ -63,7 +64,7 @@ export class ViewJournalComponent implements OnInit {
                     editJournalResult => {
                         this.highlightedID = editJournalResult;
                         this.refreshJournal();
-                        this.snackBar.open("Edited Journal", "CLOSE", {
+                        this.snackBar.open("Journal Edited", "CLOSE", {
                             duration: 2000,
                         });
                         console.log("Journal edited.");
@@ -89,7 +90,7 @@ export class ViewJournalComponent implements OnInit {
                 console.log("hi");
                 this.refreshJournal();
                 //this.loadService();
-                this.snackBar.open("Deleted Journal", "CLOSE", {
+                this.snackBar.open("Journal Deleted", "CLOSE", {
                     duration: 2000,
                 });
             }
@@ -125,6 +126,12 @@ export class ViewJournalComponent implements OnInit {
 
     ngOnInit(): void {
         this.appService.testingToggle();
+
+        // Route consumer to home page if isSignedIn status is false
+        if (!this.appService.isSignedIn()) {
+            this.router.navigate(['']);
+        }
+
         this.refreshJournal();
         this.loadService();
     }

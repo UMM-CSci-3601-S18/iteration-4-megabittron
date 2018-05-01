@@ -19,6 +19,7 @@ export class JournalsComponent implements OnInit {
     // These are public so that tests can reference them (.spec.ts)
     public journals: Journal[] = [];
     public filteredJournals: Journal[] = [];
+    public search: string;
     public journalTitle: string;
     public journalContent: string;
     public journalDate: any;
@@ -150,8 +151,8 @@ export class JournalsComponent implements OnInit {
                                 console.log('There was an error adding the journal.');
                                 console.log('The error was ' + JSON.stringify(err));
                         });
-                    this.snackBar.open("Added Journal", "CLOSE", {
-                        duration: 2000,
+                    this.snackBar.open("Journal Created", "CLOSE", {
+                        duration: 3000,
                     });
                     console.log("Journal added.");
                 }
@@ -177,41 +178,25 @@ export class JournalsComponent implements OnInit {
                 console.log("hi");
                 this.refreshJournals();
                 this.loadService();
-                this.snackBar.open("Deleted Journal", "CLOSE", {
-                    duration: 2000,
+                this.snackBar.open("Journal Deleted", "CLOSE", {
+                    duration: 3000,
                 });
             }
         );
     }
 
-    public filterJournals(searchTitle: string, searchContent: string, searchDate: string): Journal[] {
+    public filterJournals(search: string): Journal[] {
 
         this.filteredJournals = this.journals;
 
         // Filter by title
-        if (searchTitle != null) {
-            searchTitle = searchTitle.toLocaleLowerCase();
+        if (search != null) {
+            search = search.toLocaleLowerCase();
 
             this.filteredJournals = this.filteredJournals.filter(journal => {
-                return !searchTitle || journal.title.toLowerCase().indexOf(searchTitle) !== -1;
-            });
-        }
-
-        // Filter by content
-        if (searchContent != null) {
-            searchContent = searchContent.toLocaleLowerCase();
-
-            this.filteredJournals = this.filteredJournals.filter(journal => {
-                return !searchContent || journal.content.toLowerCase().indexOf(searchContent) !== -1;
-            });
-        }
-
-        // Filter by date
-        if (searchDate != null) {
-            searchDate = searchDate.toLocaleLowerCase();
-
-            this.filteredJournals = this.filteredJournals.filter(journal => {
-                return !searchDate || journal.date.toLowerCase().indexOf(searchDate) !== -1;
+                return !search || journal.title.toLowerCase().indexOf(search) !== -1
+                               || journal.content.toLowerCase().indexOf(search) !== -1
+                               || journal.date.toLowerCase().indexOf(search) !== -1;
             });
         }
 
@@ -224,7 +209,7 @@ export class JournalsComponent implements OnInit {
         journalListObservable.subscribe(
             journals => {
                 this.journals = journals;
-                this.filterJournals(this.journalTitle, this.journalContent, this.journalDate);
+                this.filterJournals(this.search);
                 this.length = this.journals.length;
             },
             err => {
