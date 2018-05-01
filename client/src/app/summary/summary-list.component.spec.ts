@@ -10,6 +10,7 @@ import {MatDialog} from '@angular/material';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import {RouterTestingModule} from "@angular/router/testing";
+import {ArraySortPipe} from "../journals/array-sort.pipe";
 
 
 /** Tests the filtering used for display of summary list ---------------------------------------------------------------------------------- **/
@@ -57,7 +58,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 
                 TestBed.configureTestingModule({
                     imports: [CustomModule, RouterTestingModule],
-                    declarations: [SummaryListComponent],
+                    declarations: [SummaryListComponent, ArraySortPipe],
                     providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
                 });
@@ -203,7 +204,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 
                 TestBed.configureTestingModule({
                     imports: [CustomModule, RouterTestingModule],
-                    declarations: [SummaryListComponent],
+                    declarations: [SummaryListComponent, ArraySortPipe],
                     providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
                 });
@@ -276,7 +277,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 
                 TestBed.configureTestingModule({
                     imports: [CustomModule, RouterTestingModule],
-                    declarations: [SummaryListComponent],
+                    declarations: [SummaryListComponent, ArraySortPipe],
                     providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
                 });
@@ -380,7 +381,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 
                 TestBed.configureTestingModule({
                     imports: [CustomModule, RouterTestingModule],
-                    declarations: [SummaryListComponent],
+                    declarations: [SummaryListComponent, ArraySortPipe],
                     providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
                 });
@@ -483,7 +484,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 
                 TestBed.configureTestingModule({
                     imports: [CustomModule, RouterTestingModule],
-                    declarations: [SummaryListComponent],
+                    declarations: [SummaryListComponent, ArraySortPipe],
                     providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
                 });
@@ -532,6 +533,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                 //last month has 31 days
                 summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0000 (UTC)');
                 summary.nowDate = 8;
+                //summary.lastMonthStamp = new Date('Mon Feb 05 2018 20:00:00 GMT-0000 (UTC)');
                 summary.lastMonth = 2;
                 expect(summary.getPastDates(0)).toBe('9');
                 expect(summary.getPastDates(6)).toBe('15');
@@ -613,7 +615,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 
                 TestBed.configureTestingModule({
                     imports: [CustomModule, RouterTestingModule],
-                    declarations: [SummaryListComponent],
+                    declarations: [SummaryListComponent, ArraySortPipe],
                     providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
                 });
