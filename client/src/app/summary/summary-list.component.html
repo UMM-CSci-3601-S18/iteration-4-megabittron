@@ -74,7 +74,7 @@
 
                     </mat-tab>
 
-                    <mat-tab label="Table View">
+                    <mat-tab label="Table">
                         <!--<mat-card class="filtering">-->
                         <div class="top" class="filterCard">
 
@@ -129,8 +129,8 @@
                                     <mat-datepicker-toggle class="startButton" matSuffix [for]="start"
                                                            enabled></mat-datepicker-toggle>
                                     <mat-datepicker touchUi="true" #start disabled="false"></mat-datepicker>
-                                </mat-form-field> &nbsp;
-
+                                </mat-form-field>
+                                :
                                 <mat-form-field class="end">
                                     <input
                                         class="endDate"
@@ -155,9 +155,36 @@
                         <!--<mat-card>-->
                         <mat-card-title class="your-summaries-title">Your Emotions</mat-card-title>
 
-                        <mat-card-subtitle class="your-summaries-title">You have {{totalNumberEmotions()}} emotions to
-                            view
+                        <mat-card-subtitle class="your-summaries-title">You have a total of {{totalEntries()}}
+                            emotions to view
                         </mat-card-subtitle>
+                        <div class="page-scroll-buttons">
+                            <button *ngIf="this.currentPage != 1" mat-icon-button class="first-page" (click)="goFirstPage();
+                    showSummaries()" [disabled]="false" matTooltip="First Page">
+                                <mat-icon>keyboard_arrow_left</mat-icon>
+                            </button>
+                            <button *ngIf="this.currentPage == 1" mat-icon-button class="previous-page" (click)="this.currentPage = this.currentPage - 1;
+                    showSummaries()" [disabled]="true">
+                                <mat-icon>keyboard_arrow_left</mat-icon>
+                            </button>
+                            <button *ngIf="this.currentPage != 1" mat-icon-button class="previous-page" (click)="this.currentPage = this.currentPage - 1;
+                    showSummaries()" [disabled]="false" matTooltip="Previous Page">
+                                <mat-icon>keyboard_arrow_left</mat-icon>
+                            </button>
+                            {{this.currentPage}}
+                            <button *ngIf="maxNumPages() == false" mat-icon-button class="next-page" (click)="this.currentPage = this.currentPage + 1;
+                    showSummaries()" [disabled]="true">
+                                <mat-icon>keyboard_arrow_right</mat-icon>
+                            </button>
+                            <button *ngIf="maxNumPages() == true " mat-icon-button class="next-page" (click)="this.currentPage = this.currentPage + 1;
+                    showSummaries()" [disabled]="false" matTooltip="Next Page">
+                                <mat-icon>keyboard_arrow_right</mat-icon>
+                            </button>
+                            <button *ngIf="maxNumPages() == true " mat-icon-button class="last-page" (click)="goLastPage();
+                    showSummaries()" [disabled]="false" matTooltip="Last Page">
+                                <mat-icon>keyboard_arrow_right</mat-icon>
+                            </button>
+                        </div>
                         <mat-accordion *ngIf="summaries && myTabGroup.selectedIndex == 1; else summariesError">
                             <div class="entire-table">
                                 <div class="table-header-div">
@@ -179,7 +206,7 @@
                                 </div>
                                 <div class="table-div">
                                     <mat-table #table class="summary-table"
-                                               *ngFor="let summary of this.filterSummaries(summaryEmotion, summaryIntensity, startDate, endDate)">
+                                               *ngFor="let summary of this.filterSummaries(summaryEmotion, summaryIntensity, startDate, endDate) | dateSort: 'date'">
                                         <ng-container matColumnDef="emotion">
                                             <mat-header-cell *matHeaderCellDef><img class="selected-emotion"
                                                                                     src="../../assets/images/emotions/{{summary.emotion}}.svg"
@@ -193,29 +220,30 @@
                                         </ng-container>
                                         <ng-container matColumnDef="date">
                                             <mat-header-cell *matHeaderCellDef>
-                                                {{stringToDate(summary.date).toLocaleDateString() + " at " +
-                                                stringToDate(summary.date).toLocaleTimeString() }}
+                                                {{summary.date | date : "MMM d, yyyy 'at' h:mm a"}}
                                             </mat-header-cell>
                                             <mat-cell class="duration-cell"></mat-cell>
                                         </ng-container>
                                         <ng-container matColumnDef="description">
                                             <mat-header-cell *matHeaderCellDef>
                                                 <a (click)="showAllDescription(summary.description)">
-                                                    <button mat-raised-button
+                                                    <button mat-icon-button
                                                             class="show-more-button"
-                                                            *ngIf="summary.description != null">Show more
+                                                            *ngIf="summary.description != ''"
+                                                            matTooltip="View Description">
+                                                        <img src="../../assets/images/eye.svg">
                                                     </button>
                                                 </a>
                                             </mat-header-cell>
                                             <mat-cell class="duration-cell"></mat-cell>
                                         </ng-container>
-
                                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                                     </mat-table>
                                 </div>
                             </div>
+                            <br>
+                            <br>
                         </mat-accordion>
-
                         <ng-template #summariesError>
                             <mat-error>
                                 There was a problem loading the goals.
