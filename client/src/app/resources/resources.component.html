@@ -8,7 +8,7 @@
         New Contact
     </button>
 </div>
-<div class="grid-list" hide-xs layout="column" layout-wrap>
+<div class="grid-list" hide-xs layout="row" layout-wrap>
     <mat-card class="link-card"
               *ngFor="let link of links"
               #elem [id]="link._id['$oid']" >
@@ -25,19 +25,19 @@
             </div>
     </mat-card>
 </div>
-<div class="grid-list" hide-xs layout="column" layout-wrap>
-    <mat-card class="link-card"
-              *ngFor="let link of links"
-              #elem [id]="link._id['$oid']" >
+<div class="grid-list" hide-xs layout="row" layout-wrap>
+    <mat-card class="contact-card"
+              *ngFor="let contact of contacts"
+              #elem [id]="contact._id['$oid']" >
         <div class="journal-details">
-            <mat-card-title class="journal-title break-word">{{link.name}}</mat-card-title>
+            <mat-card-title class="journal-title break-word">{{contact.name}}</mat-card-title>
             <mat-card-subtitle class="date-subtitle">
             </mat-card-subtitle>
             <mat-divider></mat-divider>
             <mat-card-content class="journal-info break-word">
-                Link: {{link.url}}
+                Email: {{contact.email}}
                 <br>
-                Details: {{link.subname}}
+                Phone: {{contact.phone}}
             </mat-card-content>
         </div>
     </mat-card>
