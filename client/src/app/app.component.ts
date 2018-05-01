@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
     public currentPath;
     public currentWidth;
     public currentId;
+    public username: string;
 
     constructor(private http: HttpClient,
                 public appService: AppService,
@@ -76,8 +77,6 @@ export class AppComponent implements OnInit {
 
 
     }
-
-    public username: string;
 
     getUsername () {
         this.username = localStorage.getItem("userFirstName") + " " + localStorage.getItem("userLastName");
