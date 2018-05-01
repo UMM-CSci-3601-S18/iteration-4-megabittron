@@ -9,11 +9,25 @@
 .panda {
     height: 100vh;
     background-color: #e3f2fd;
+    .content{
+        background-color: #e3f2fd;
+    }
+
+    .mat-toolbar{
+        background-color: #1976D2;
+    }
 }
 
 .windows95 {
     height: 100vh;
     background-color: #008080;
+    .content{
+        background-color: #008080;
+    }
+
+    .mat-toolbar{
+        background-color: #808080;
+    }
     form{
         background-color: #E0E0E0;
     }
@@ -28,6 +42,13 @@
 .christmas2018 {
     height: 100vh;
     background-color: #4CAF50;
+    .content{
+        background-color: #4CAF50;
+    }
+
+    .mat-toolbar{
+        background-color: #25700e;
+    }
     form{
         background-color: #F44336;
     }
@@ -42,6 +63,13 @@
 .aesthetic {
     height: 100vh;
     background-color: #FFC3DA;
+    .content{
+        background-color: #FFC3DA;
+    }
+
+    .mat-toolbar{
+        background-color: #ccfdff;
+    }
     form{
         background-color: #84F3D6;
     }
