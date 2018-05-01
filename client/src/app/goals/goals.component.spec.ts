@@ -5,6 +5,7 @@ import {GoalsService} from './goals.service';
 import {Observable} from 'rxjs/Observable';
 import {FormsModule} from '@angular/forms';
 import {CustomModule} from '../custom.module';
+import {ArraySortPipe} from "../journals/array-sort.pipe";
 import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 import {MatDialog} from '@angular/material';
 import 'rxjs/add/observable/of';
@@ -77,7 +78,7 @@ describe( 'Goals', () => {
 
         TestBed.configureTestingModule({
             imports: [CustomModule, RouterTestingModule],
-            declarations: [GoalsComponent],
+            declarations: [GoalsComponent, ArraySortPipe],
             providers: [{provide: GoalsService, useValue: goalsServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
@@ -198,7 +199,7 @@ describe('Next Goals', () => {
 
         TestBed.configureTestingModule({
             imports: [CustomModule, RouterTestingModule],
-            declarations: [GoalsComponent],
+            declarations: [GoalsComponent, ArraySortPipe],
             providers: [{provide: GoalsService, useValue: goalsServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
@@ -276,7 +277,7 @@ describe('Adding a goal', () => {
 
         TestBed.configureTestingModule({
             imports: [FormsModule, CustomModule, RouterTestingModule],
-            declarations: [GoalsComponent],
+            declarations: [GoalsComponent, ArraySortPipe],
             providers: [
                 {provide: GoalsService, useValue: goalListServiceStub},
                 {provide: MatDialog, useValue: mockMatDialog},
@@ -296,7 +297,7 @@ describe('Adding a goal', () => {
     //Checks if a goal is added correctly
     it('calls GoalsService.addGoal', () => {
         expect(calledGoal).toBeNull();
-        goalList.openDialog();
+        goalList.newGoalDialog();
         expect(goalList.isHighlighted(calledGoal));
         expect(calledGoal).toEqual(newGoal);
     });
@@ -355,7 +356,7 @@ describe('Deleting a goal', () => {
 
         TestBed.configureTestingModule({
             imports: [FormsModule, CustomModule, RouterTestingModule],
-            declarations: [GoalsComponent],
+            declarations: [GoalsComponent, ArraySortPipe],
             providers: [
                 {provide: GoalsService, useValue: goalListServiceStub},
                 {provide: MatDialog, useValue: mockMatDialog},
@@ -375,6 +376,88 @@ describe('Deleting a goal', () => {
     it('calls GoalsService.deleteGoal', () => {
         expect(calledGoal).toBeNull();
         goalList.deleteGoal(this._id);
+    });
+});
+
+describe('Editing a goal', () => {
+    let goalList: GoalsComponent;
+    let fixture: ComponentFixture<GoalsComponent>;
+    const newGoal: Goal =   {
+        _id: '',
+        userID: 'userID1',
+        purpose: 'To stay awake writing tests',
+        category: 'Personal Health',
+        name: 'Drink coffee',
+        status: false,
+        start: "2018-04-05T18:56:24.702Z",
+        end: "2018-05-05T18:56:24.702Z",
+        next: "2018-05-05T18:56:24.702Z",
+        frequency: "Daily"
+    };
+    const newId = 'health_id';
+
+    let calledGoal: Goal;
+
+    let goalListServiceStub: {
+        getGoals: () => Observable<Goal[]>,
+        editGoal: (newGoal: Goal) => Observable<{'$oid': string}>
+    };
+    let mockMatDialog: {
+        open: (GoalsComponent, any) => {
+            afterClosed: () => Observable<Goal>
+        };
+    };
+
+    beforeEach(() => {
+        calledGoal = null;
+        let highlightedID: { '$oid': string } = {'$oid': ''};
+        // stub GoalsService for test reasons
+        goalListServiceStub = {
+            getGoals: () => Observable.of([]),
+            editGoal: (goalToEdit: Goal) => {
+                calledGoal = goalToEdit;
+                return Observable.of({
+                    '$oid': newId
+                });
+            }
+        };
+        mockMatDialog = {
+            open: () => {
+                return {
+                    afterClosed: () => {
+                        highlightedID = {'$oid': newGoal._id};
+                        return Observable.of(newGoal);
+                    }
+                };
+            }
+        };
+
+        TestBed.configureTestingModule({
+            imports: [FormsModule, CustomModule, RouterTestingModule],
+            declarations: [GoalsComponent, ArraySortPipe],
+            providers: [
+                {provide: GoalsService, useValue: goalListServiceStub},
+                {provide: MatDialog, useValue: mockMatDialog},
+                {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
+        });
+    });
+
+    beforeEach(async(() => {
+        TestBed.compileComponents().then(() => {
+            fixture = TestBed.createComponent(GoalsComponent);
+            goalList = fixture.componentInstance;
+            fixture.detectChanges();
+        });
+        localStorage.isSignedIn = "true";
+    }));
+
+    //Checks if a goal is added correctly
+    it('calls GoalsService.editGoal', () => {
+        expect(calledGoal).toBeNull();
+        goalList.openEditGoalDialog(this._id, this.purpose, this.category, this.name, this.status,
+            this.frequency, this.start, this.end, this.next);
+        expect(goalList.isHighlighted(calledGoal));
+        expect(calledGoal).toEqual(newGoal);
     });
 });
 

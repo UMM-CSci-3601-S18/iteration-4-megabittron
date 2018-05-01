@@ -18,10 +18,10 @@ export class HomeComponent implements OnInit{
 
     private highlightedID: {'$oid': string} = { '$oid': '' };
 
-    public title: string;
     public selectedEmotion = "none";
     public emotionDescription: string;
     public emotionDate: string;
+    public emojiRating: number = 0;
 
     //Reloads the window and resets the page when the user clicks the reset button
     restart(){
@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit{
 
     // Adds slider functionality
     thumbLabel = true;
-    public emojiRating: number = 0;
 
     constructor(public dialog: MatDialog,
                 public snackBar: MatSnackBar,
@@ -57,7 +56,8 @@ export class HomeComponent implements OnInit{
 
     //Saves the emotion to the server
     saveEmotion(): void{
-        const newEmotion: Emotion = {_id: '', userID: localStorage.getItem("userID"), mood: this.selectedEmotion, intensity: this.emojiRating, description:this.emotionDescription, date: this.emotionDate};
+        const newEmotion: Emotion = {_id: '', userID: localStorage.getItem("userID"),
+            emotion: this.selectedEmotion, intensity: this.emojiRating, description:this.emotionDescription, date: this.emotionDate};
 
         if(localStorage.isSignedIn == "true"){
 
@@ -75,17 +75,10 @@ export class HomeComponent implements OnInit{
                     console.log('The error was ' + JSON.stringify(err));
                 });
         } else {
-
             this.snackBar.open("Response Not Saved. Please Log In to Save Your Response", "CLOSE", {
                 duration: 5000,
             });
         }
-    }
-
-    ngOnInit(): void {
-        //For testing
-        //toggle the value in app service to toggle testing
-        this.appService.testingToggle();
     }
 
     //Helper Functions//
@@ -114,7 +107,15 @@ export class HomeComponent implements OnInit{
             return false;
         }
 
-        else return true;
+        else {
+            return true;
+        }
+    }
+
+    ngOnInit(): void {
+        //For testing
+        //toggle the value in app service to toggle testing
+        this.appService.testingToggle();
     }
 
 }

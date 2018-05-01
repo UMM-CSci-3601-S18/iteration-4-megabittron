@@ -1,21 +1,21 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {MatDialogRef, MAT_DIALOG_DATA, MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
-import {ShowJournalComponent} from './show-journal.component';
-import {CustomModule} from '../../custom.module';
+import {AddLinkComponent} from './add-link.component';
+import {CustomModule} from "../../../custom.module";
 
-describe('Show journal component', () => {
+describe ('Add youtube link component', () => {
 
-    let showJournalComponent: ShowJournalComponent;
+    let addContactComponent: AddLinkComponent;
     let calledClose: boolean;
     const mockMatDialogRef = {
         close() { calledClose = true; }
     };
-    let fixture: ComponentFixture<ShowJournalComponent>;
+    let fixture: ComponentFixture<AddLinkComponent>;
 
     beforeEach(async( () => {
         TestBed.configureTestingModule({
             imports: [CustomModule],
-            declarations: [ShowJournalComponent],
+            declarations: [AddLinkComponent],
             providers: [
                 { provide: MatDialogRef, useValue: mockMatDialogRef },
                 { provide: MAT_DIALOG_DATA, useValue: null },
@@ -27,12 +27,12 @@ describe('Show journal component', () => {
 
     beforeEach(() => {
         calledClose = false;
-        fixture = TestBed.createComponent(ShowJournalComponent);
-        showJournalComponent = fixture.componentInstance;
+        fixture = TestBed.createComponent(AddLinkComponent);
+        addContactComponent = fixture.componentInstance;
     });
 
     it('closes properly', () => {
-        showJournalComponent.onNoClick();
+        addContactComponent.onNoClick();
         expect(calledClose).toBe(true);
     });
 });

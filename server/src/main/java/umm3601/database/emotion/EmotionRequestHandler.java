@@ -82,14 +82,14 @@ public class EmotionRequestHandler {
                     BasicDBObject dbO = (BasicDBObject) o;
 
                     String userID = dbO.getString("userID");
-                    String mood = dbO.getString("mood");
+                    String emotion = dbO.getString("emotion");
                     Integer intensity = dbO.getInt("intensity");
                     String description = dbO.getString("description");
                     String date = dbO.getString("date");
 
-                    System.err.println("Adding new emotion for user "+ userID + " [mood=" + mood + ", intensity="
+                    System.err.println("Adding new emotion for user "+ userID + " [emotion=" + emotion + ", intensity="
                         + intensity + ", description=" + description + ", date=" + date + ']');
-                    return emotionController.addNewEmotion(userID, mood, intensity, description, date).toString();
+                    return emotionController.addNewEmotion(userID, emotion, intensity, description, date).toString();
                 }
                 catch(NullPointerException e)
                 {

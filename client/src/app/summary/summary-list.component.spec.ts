@@ -30,7 +30,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '1',
                             userID: 'userID1',
-                            mood: 'happy',
+                            emotion: 'happy',
                             date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 2,
                             description: 'slept',
@@ -38,7 +38,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '2',
                             userID: 'userID1',
-                            mood: 'sad',
+                            emotion: 'sad',
                             date: 'Thu Apr 05 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 4,
                             description: 'friend died',
@@ -46,7 +46,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '3',
                             userID: 'userID1',
-                            mood: 'mad',
+                            emotion: 'mad',
                             date: 'Sun Apr 08 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
@@ -69,7 +69,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                     summary = fixture.componentInstance;
                     fixture.detectChanges();
 
-                    summary.summaryMood = 'All';
+                    summary.summaryEmotion = 'All';
                     summary.summaryIntensity = 'All';
                     summary.startDate = null;
                     summary.endDate = null;
@@ -80,8 +80,8 @@ import {RouterTestingModule} from "@angular/router/testing";
         expect(summary.summaries.length).toBe(3);
             });
 
-            it('contains a summary mood \'happy\'', () => {
-        expect(summary.summaries.some((summary: Summary) => summary.mood === 'happy')).toBe(true);
+            it('contains a summary emotion \'happy\'', () => {
+        expect(summary.summaries.some((summary: Summary) => summary.emotion === 'happy')).toBe(true);
             });
 
             it('contain a summary id \'2\'', () => {
@@ -92,9 +92,9 @@ import {RouterTestingModule} from "@angular/router/testing";
         expect(summary.summaries.some((summary: Summary) => summary._id === '4')).toBe(false);
             });
 
-            it('summary filters by mood', () => {
+            it('summary filters by emotion', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                summary.summaryMood = 'sad';
+                summary.summaryEmotion = 'sad';
                 summary.refreshSummaries().subscribe(() => {
                     expect(summary.filteredSummaries.length).toBe(1);
                 });
@@ -108,9 +108,9 @@ import {RouterTestingModule} from "@angular/router/testing";
                 });
             });
 
-            it('summary filters by mood and intensity', () => {
+            it('summary filters by emotion and intensity', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                summary.summaryMood = 'sad';
+                summary.summaryEmotion = 'sad';
                 summary.summaryIntensity = '4';
                 summary.refreshSummaries().subscribe(() => {
                     expect(summary.filteredSummaries.length).toBe(1);
@@ -133,9 +133,9 @@ import {RouterTestingModule} from "@angular/router/testing";
                 });
             });
 
-            it('summary filters by mood, intensity, start and end date', () => {
+            it('summary filters by emotion, intensity, start and end date', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                summary.summaryMood = 'happy';
+                summary.summaryEmotion = 'happy';
                 summary.summaryIntensity = '2';
                 summary.startDate = new Date('Fri Apr 06 2018 15:23:28 GMT-0000 (UTC)');
                 summary.endDate = new Date('Sat Apr 07 2018 20:00:00 GMT-0000 (UTC)');
@@ -176,7 +176,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '1',
                             userID: 'userID1',
-                            mood: 'happy',
+                            emotion: 'happy',
                             date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 2,
                             description: 'slept',
@@ -184,7 +184,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '2',
                             userID: 'userID1',
-                            mood: 'sad',
+                            emotion: 'sad',
                             date: 'Thu Apr 05 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 4,
                             description: 'friend died',
@@ -192,7 +192,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '3',
                             userID: 'userID1',
-                            mood: 'mad',
+                            emotion: 'mad',
                             date: 'Sun Apr 08 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
@@ -215,7 +215,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                     summary = fixture.componentInstance;
                     fixture.detectChanges();
 
-                    summary.summaryMood = 'All';
+                    summary.summaryEmotion = 'All';
                     summary.summaryIntensity = 'All';
                     summary.startDate = null;
                     summary.endDate = null;
@@ -223,16 +223,10 @@ import {RouterTestingModule} from "@angular/router/testing";
                 });
             }));
 
-            it('filterDetailedGraph filters correctly for all time', () => {
+            it('filterGraph filters correctly for all time', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(0, 'mad')).toBe(1);
-                expect(summary.filterDetailedGraph(2, 'mad')).toBe(0);
-            });
-
-            it('filterBasicGraph filters correctly for all time', () => {
-                expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBasicGraph(0)).toBe(1);
-                expect(summary.filterBasicGraph(2)).toBe(0);
+                expect(summary.filterGraph(0, 'mad')).toBe(1);
+                expect(summary.filterGraph(2, 'mad')).toBe(0);
             });
 
         });
@@ -255,7 +249,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '1',
                             userID: 'userID1',
-                            mood: 'happy',
+                            emotion: 'happy',
                             date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 2,
                             description: 'slept',
@@ -263,7 +257,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '2',
                             userID: 'userID1',
-                            mood: 'sad',
+                            emotion: 'sad',
                             date: 'Thu Apr 05 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 4,
                             description: 'friend died',
@@ -271,7 +265,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '3',
                             userID: 'userID1',
-                            mood: 'mad',
+                            emotion: 'mad',
                             date: 'Sun Apr 08 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
@@ -294,7 +288,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                     summary = fixture.componentInstance;
                     fixture.detectChanges();
 
-                    summary.summaryMood = 'All';
+                    summary.summaryEmotion = 'All';
                     summary.summaryIntensity = 'All';
                     summary.startDate = null;
                     summary.endDate = null;
@@ -307,18 +301,12 @@ import {RouterTestingModule} from "@angular/router/testing";
                 });
             }));
 
-            it('filterDetailedGraph filters correctly for inputType = day', () => {
+            it('filterGraph filters correctly for inputType = day', () => {
                 expect(summary.summaries.length).toBe(3);
                 console.log(summary.nowStamp.toString());
                 console.log(summary.nowHour.toString());
-                expect(summary.filterDetailedGraph(15, 'mad')).toBe(1);
-                expect(summary.filterDetailedGraph(2, 'mad')).toBe(0);
-            });
-
-            it('filterBasicGraph filters correctly for inputType = day', () => {
-                expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBasicGraph(15)).toBe(1);
-                expect(summary.filterBasicGraph(2)).toBe(0);
+                expect(summary.filterGraph(15, 'mad')).toBe(1);
+                expect(summary.filterGraph(2, 'mad')).toBe(0);
             });
 
             it('modHour works as intended', () => {
@@ -331,16 +319,10 @@ import {RouterTestingModule} from "@angular/router/testing";
                 expect(summary.modHour(30)).toBe(11);
             });
 
-            it('filterDetailedGraph works correctly when using modHour', () => {
+            it('filterGraph works correctly when using modHour', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(summary.modHour(18), 'mad')).toBe(1);
-                expect(summary.filterDetailedGraph(summary.modHour(0), 'mad')).toBe(0);
-            });
-
-            it('filterBasicGraph works correctly when using modHour', () => {
-                expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBasicGraph(summary.modHour(18))).toBe(1);
-                expect(summary.filterBasicGraph(summary.modHour(0))).toBe(0);
+                expect(summary.filterGraph(summary.modHour(18), 'mad')).toBe(1);
+                expect(summary.filterGraph(summary.modHour(0), 'mad')).toBe(0);
             });
 
             it('getPastHours works as intended', () => {
@@ -371,7 +353,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '1',
                             userID: 'userID1',
-                            mood: 'happy',
+                            emotion: 'happy',
                             date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 2,
                             description: 'slept',
@@ -379,7 +361,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '2',
                             userID: 'userID1',
-                            mood: 'sad',
+                            emotion: 'sad',
                             date: 'Thu Apr 05 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 4,
                             description: 'friend died',
@@ -387,7 +369,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '3',
                             userID: 'userID1',
-                            mood: 'mad',
+                            emotion: 'mad',
                             date: 'Sun Apr 08 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
@@ -410,7 +392,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                     summary = fixture.componentInstance;
                     fixture.detectChanges();
 
-                    summary.summaryMood = 'All';
+                    summary.summaryEmotion = 'All';
                     summary.summaryIntensity = 'All';
                     summary.startDate = null;
                     summary.endDate = null;
@@ -423,16 +405,10 @@ import {RouterTestingModule} from "@angular/router/testing";
                 });
             }));
 
-            it('filterDetailedGraph filters correctly for inputType = week', () => {
+            it('filterGraph filters correctly for inputType = week', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(4, 'sad')).toBe(1);
-                expect(summary.filterDetailedGraph(2, 'sad')).toBe(0);
-            });
-
-            it('filterBasicGraph filters correctly for inputType = week', () => {
-                expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBasicGraph(4)).toBe(1);
-                expect(summary.filterBasicGraph(2)).toBe(0);
+                expect(summary.filterGraph(4, 'sad')).toBe(1);
+                expect(summary.filterGraph(2, 'sad')).toBe(0);
             });
 
             it('modDay works as intended', () => {
@@ -443,16 +419,10 @@ import {RouterTestingModule} from "@angular/router/testing";
                 expect(summary.modDay(5)).toBe(5);
             });
 
-            it('filterDetailedGraph works correctly when using modDay', () => {
+            it('filterGraph works correctly when using modDay', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(summary.modDay(10), 'sad')).toBe(1);
-                expect(summary.filterDetailedGraph(summary.modDay(0), 'sad')).toBe(0);
-            });
-
-            it('filterBasicGraph works correctly when using modDay', () => {
-                expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBasicGraph(summary.modDay(10))).toBe(1);
-                expect(summary.filterBasicGraph(summary.modDay(0))).toBe(0);
+                expect(summary.filterGraph(summary.modDay(10), 'sad')).toBe(1);
+                expect(summary.filterGraph(summary.modDay(0), 'sad')).toBe(0);
             });
 
             it('getPastDays works as intended', () => {
@@ -486,7 +456,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '1',
                             userID: 'userID1',
-                            mood: 'happy',
+                            emotion: 'happy',
                             date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 2,
                             description: 'slept',
@@ -494,7 +464,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '2',
                             userID: 'userID1',
-                            mood: 'sad',
+                            emotion: 'sad',
                             date: 'Thu Apr 05 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 4,
                             description: 'friend died',
@@ -502,7 +472,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '3',
                             userID: 'userID1',
-                            mood: 'mad',
+                            emotion: 'mad',
                             date: 'Sun Apr 08 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
@@ -525,7 +495,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                     summary = fixture.componentInstance;
                     fixture.detectChanges();
 
-                    summary.summaryMood = "All";
+                    summary.summaryEmotion = "All";
                     summary.summaryIntensity = "All";
                     summary.startDate = null;
                     summary.endDate = null;
@@ -538,16 +508,10 @@ import {RouterTestingModule} from "@angular/router/testing";
                 });
             }));
 
-            it('filterDetailedGraph filters correctly for inputType = month', () => {
+            it('filterGraph filters correctly for inputType = month', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(5, 'sad')).toBe(1);
-                expect(summary.filterDetailedGraph(2, 'sad')).toBe(0);
-            });
-
-            it('filterBasicGraph filters correctly for inputType = month', () => {
-                expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBasicGraph(5)).toBe(1);
-                expect(summary.filterBasicGraph(2)).toBe(0);
+                expect(summary.filterGraph(5, 'sad')).toBe(1);
+                expect(summary.filterGraph(2, 'sad')).toBe(0);
             });
 
             it('modDate works as intended', () => {
@@ -558,20 +522,18 @@ import {RouterTestingModule} from "@angular/router/testing";
                 expect(summary.modDate(5)).toBe(5);
             });
 
-            it('filterDetailedGraph works correctly when using modDate', () => {
+            it('filterGraph works correctly when using modDate', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(summary.modDate(28), 'sad')).toBe(1);
-                expect(summary.filterDetailedGraph(summary.modDate(1), 'sad')).toBe(0);
-            });
-
-            it('filterBasicGraph works correctly when using modDate', () => {
-                expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBasicGraph(summary.modDate(28))).toBe(1);
-                expect(summary.filterBasicGraph(summary.modDate(1))).toBe(0);
+                expect(summary.filterGraph(summary.modDate(28), 'sad')).toBe(1);
+                expect(summary.filterGraph(summary.modDate(1), 'sad')).toBe(0);
             });
 
             it('getPastDates works as intended', () => {
                 //last month has 31 days
+                summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0000 (UTC)');
+                summary.nowDate = 8;
+                //summary.lastMonthStamp = new Date('Mon Feb 05 2018 20:00:00 GMT-0000 (UTC)');
+                summary.lastMonth = 2;
                 expect(summary.getPastDates(0)).toBe('9');
                 expect(summary.getPastDates(6)).toBe('15');
                 expect(summary.getPastDates(3)).toBe('12');
@@ -625,7 +587,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '1',
                             userID: 'userID1',
-                            mood: 'happy',
+                            emotion: 'happy',
                             date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 2,
                             description: 'slept',
@@ -633,7 +595,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '2',
                             userID: 'userID1',
-                            mood: 'sad',
+                            emotion: 'sad',
                             date: 'Thu Apr 05 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 4,
                             description: 'friend died',
@@ -641,7 +603,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '3',
                             userID: 'userID1',
-                            mood: 'mad',
+                            emotion: 'mad',
                             date: 'Sun Apr 08 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
@@ -664,7 +626,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                     summary = fixture.componentInstance;
                     fixture.detectChanges();
 
-                    summary.summaryMood = 'All';
+                    summary.summaryEmotion = 'All';
                     summary.summaryIntensity = 'All';
                     summary.startDate = null;
                     summary.endDate = null;
@@ -677,16 +639,10 @@ import {RouterTestingModule} from "@angular/router/testing";
                 });
             }));
 
-            it('filterDetailedGraph filters correctly for inputType = year', () => {
+            it('filterGraph filters correctly for inputType = year', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(3, 'sad')).toBe(1);
-                expect(summary.filterDetailedGraph(0, 'sad')).toBe(0);
-            });
-
-            it('filterBasicGraph filters correctly for inputType = year', () => {
-                expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBasicGraph(3)).toBe(3);
-                expect(summary.filterBasicGraph(0)).toBe(0);
+                expect(summary.filterGraph(3, 'sad')).toBe(1);
+                expect(summary.filterGraph(0, 'sad')).toBe(0);
             });
 
             it('modMonth works as intended', () => {
@@ -697,16 +653,10 @@ import {RouterTestingModule} from "@angular/router/testing";
                 expect(summary.modMonth(5)).toBe(5);
             });
 
-            it('filterDetailedGraph works correctly when using modMonth', () => {
+            it('filterGraph works correctly when using modMonth', () => {
                 expect(summary.summaries.length).toBe(3);
-                expect(summary.filterDetailedGraph(summary.modMonth(11), 'sad')).toBe(1);
-                expect(summary.filterDetailedGraph(summary.modMonth(0), 'sad')).toBe(0);
-            });
-
-            it('filterBasicGraph works correctly when using modMonth', () => {
-                expect(summary.filteredSummaries.length).toBe(3);
-                expect(summary.filterBasicGraph(summary.modMonth(11))).toBe(3);
-                expect(summary.filterBasicGraph(summary.modMonth(0))).toBe(0);
+                expect(summary.filterGraph(summary.modMonth(11), 'sad')).toBe(1);
+                expect(summary.filterGraph(summary.modMonth(0), 'sad')).toBe(0);
             });
 
             it('getPastMonths works as intended', () => {
