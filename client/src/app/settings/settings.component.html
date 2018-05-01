@@ -22,28 +22,30 @@
                     <label class="theme-radio">
                     <input type="radio"
                            (click)="this.theme = 'panda'; saveSettings()">
+                        <span class="radio-border"></span>
                         <span class="panda-main"></span>
                         <span class="panda-accent"></span>
                     </label>
                     <label class="theme-radio">
                         <input type="radio"
                            (click)="this.theme = 'windows95'; saveSettings()">
+                        <span class="radio-border"></span>
                         <span class="win-main"></span>
                         <span class="win-accent"></span>
-                        <span class="radio-border"></span>
                     </label>
                     <label class="theme-radio">
                     <input type="radio"
                            (click)="this.theme = 'christmas2018'; saveSettings()">
-                    <span class="chr-main"></span>
-                    <span class="chr-accent"></span>
+                        <span class="radio-border"></span>
+                        <span class="chr-main"></span>
+                        <span class="chr-accent"></span>
                     </label>
                     <label class="theme-radio">
                         <input type="radio"
                                (click)="this.theme = 'aesthetic'; saveSettings()">
+                        <span class="radio-border"></span>
                         <span class="aesth-main"></span>
                         <span class="aesth-accent"></span>
-                        <span class="radio-border"></span>
                     </label>
                     <br>
                     <button (click)="saveSettings()">Save</button>

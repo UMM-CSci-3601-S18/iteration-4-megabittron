@@ -15,6 +15,15 @@
     cursor: pointer;
 }
 
+.radio-border{
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    height: 26px;
+    width: 26px;
+    background-color: #000000;
+}
+
 .panda-main{
     position: absolute;
     top: 0;
