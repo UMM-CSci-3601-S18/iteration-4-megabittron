@@ -54,6 +54,8 @@
     </div>
 </div>
 <div class="list-journals-section" hide-gt-xs>
+
+<div class="search-amd -prompts">
     <div class="random-prompts-mob">
         <button class="random-prompts-mob-button" (click)="openRandomPrompt()" mat-raised-button color="accent">Prompts</button>
     </div>
@@ -62,12 +64,18 @@
         <mat-form-field class="journals-mobile-search">
 
             <input matInput placeholder="Search" [(ngModel)]="journalTitle"/>
+
             <button mat-button *ngIf="journalTitle" matSuffix mat-icon-button aria-label="Clear" (click)="journalTitle=''">
                 <mat-icon>close</mat-icon>
             </button>
+
         </mat-form-field>
+
     </div>
-    <br>
+</div>
+
+  s
+
     <div class="journals-list-mob">
         <mat-list class="journals-list">
             <div class="journals-list-info" *ngFor="let journal of filterJournals(journalTitle, journalContent, journalDate) | dateSort: '-date'"
