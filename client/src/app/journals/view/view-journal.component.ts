@@ -63,8 +63,10 @@ export class ViewJournalComponent implements OnInit {
                 this.journalListService.editJournal(result).subscribe(
                     editJournalResult => {
                         this.highlightedID = editJournalResult;
+
                         this.refreshJournal();
                         this.snackBar.open("Journal Edited", "CLOSE", {
+
                             duration: 2000,
                         });
                         console.log("Journal edited.");
