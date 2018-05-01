@@ -17,7 +17,7 @@ export class GoalsService {
     }
 
     //Get goals from the server
-    getGoals(userID: string): Observable<Goal[]> {
+    getGoals(userID: string, status?: string): Observable<Goal[]> {
         this.goalUrl = this.baseUrl;
         this.noID = false;
 
@@ -27,8 +27,19 @@ export class GoalsService {
         if(this.noID){
             return this.emptyObservable;
         }
+
+        //add status filter
+        if (status != null && status != "all") {
+            this.goalUrl += 'status=' + status + '&';
+        }
+
         console.log(this.goalUrl);
         return this.http.get<Goal[]>(this.goalUrl);
+    }
+
+    getGoalById(id: string): Observable<Goal> {
+        this.goalUrl = this.baseUrl;
+        return this.http.get<Goal>(this.goalUrl + '/' + id);
     }
 
     // sets the goalUrl to the serachParam

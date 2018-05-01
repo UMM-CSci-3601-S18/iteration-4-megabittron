@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
@@ -13,12 +13,13 @@ import {EmotionService} from "./home/home.service";
 import {GoalsComponent} from "./goals/goals.component";
 import {GoalsService} from "./goals/goals.service";
 import {AddGoalComponent} from "./goals/add/add-goal.component";
+import {EditGoalComponent} from "./goals/edit/edit-goal.component";
+import {ViewGoalComponent} from "./goals/view/view-goal.component";
 import {SummaryListComponent} from "./summary/summary-list.component";
 import {SummaryListService} from "./summary/summary-list.service";
 import {JournalsComponent} from "./journals/journals.component";
 import {AddJournalComponent} from "./journals/add/add-journal.component";
 import {EditJournalComponent} from "./journals/edit/edit-journal.component";
-import {ShowJournalComponent} from "./journals/show/show-journal.component";
 import {ViewJournalComponent} from "./journals/view/view-journal.component";
 import {JournalsService} from "./journals/journals.service";
 import {ArraySortPipe} from "./journals/array-sort.pipe";
@@ -27,6 +28,15 @@ import {environment} from '../environments/environment';
 import {AppService} from "./app.service";
 import {RouterModule} from "@angular/router";
 import {SettingsComponent} from "./settings/settings.component";
+import {AddContactComponent} from "./resources/add/contacts/add-contact.component";
+import {AddLinkComponent} from "./resources/add/links/add-link.component";
+import {EditLinkComponent} from "./resources/edit/links/edit-links.component";
+import {EditContactComponent} from "./resources/edit/contacts/edit-contacts.component";
+import {ViewContactComponent} from "./resources/view/contacts/view-contact.component";
+import {ViewLinkComponent} from "./resources/view/links/view-link.component";
+
+import {MatTableModule} from "@angular/material/table";
+import {ShowSummaryListComponent} from "./summary/show/show-summary-list.component";
 
 @NgModule({
     exports: [
@@ -39,7 +49,7 @@ import {SettingsComponent} from "./settings/settings.component";
         Routing,
         CustomModule,
         ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
-
+        MatTableModule,
     ],
     declarations: [
         AppComponent,
@@ -47,14 +57,22 @@ import {SettingsComponent} from "./settings/settings.component";
         ResourcesComponent,
         GoalsComponent,
         AddGoalComponent,
+        EditGoalComponent,
+        ViewGoalComponent,
         JournalsComponent,
         AddJournalComponent,
         EditJournalComponent,
-        ShowJournalComponent,
         ViewJournalComponent,
         SummaryListComponent,
+        AddContactComponent,
+        AddLinkComponent,
+        ViewContactComponent,
+        ViewLinkComponent,
+        EditContactComponent,
+        EditLinkComponent,
         ArraySortPipe,
         SettingsComponent,
+        ShowSummaryListComponent,
     ],
     providers: [
         GoalsService,
@@ -65,13 +83,17 @@ import {SettingsComponent} from "./settings/settings.component";
         ResourcesService,
         {provide: APP_BASE_HREF, useValue: '/'},
         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true},
-],
+    ],
     entryComponents: [
         AddGoalComponent,
+        EditGoalComponent,
         AddJournalComponent,
         EditJournalComponent,
-        ShowJournalComponent,
         ViewJournalComponent,
+        AddContactComponent,
+        AddLinkComponent,
+
+        ShowSummaryListComponent
     ],
     bootstrap: [
         AppComponent

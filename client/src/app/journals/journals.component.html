@@ -1,97 +1,71 @@
 <div class="sidenav" hide-xs>
-    <h2 class="nav-journals-title">Journals</h2>
+    <h2 class="page-title">Journals</h2>
     <hr class="nav-title-divider">
-    <button mat-raised-button (click)="openAddJournalDialog()" class="add-journal-button" id="addNewJournal">
+    <button mat-raised-button (click)="openAddJournalDialog()" class="new-object-button" id="addNewJournal">
         New Journal
     </button>
     <mat-card class="filter-fields">
-        <mat-form-field class="example-form-field">
-            <input matInput placeholder="Search titles" [(ngModel)]="journalTitle"/>
+        <mat-form-field class="form-field">
+            <input matInput placeholder="Search" [(ngModel)]="search"/>
             <button mat-button *ngIf="journalTitle" matSuffix mat-icon-button aria-label="Clear" (click)="journalTitle=''">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field>
-        <mat-form-field class="example-form-field">
-            <input matInput placeholder="Search content" [(ngModel)]="journalContent"/>
-            <button mat-button *ngIf="journalContent" matSuffix mat-icon-button aria-label="Clear" (click)="journalContent=''">
-                <mat-icon>close</mat-icon>
-            </button>
-        </mat-form-field>
     </mat-card>
-    <mat-card class="prompt-card">
-        <mat-card-content>
-            <p> Click on the “refresh” button below to get a new journal prompt!</p>
-            <button mat-raised-button id="newPrompt" (click)="RandomPrompt()" type="button">Refresh </button>
-
+    <mat-card class="prompts">
+        <mat-card-title>
+            <button mat-raised-button (click)="RandomPrompt()" class="refresh action-button">
+                Journal Prompt
+            </button>
+        </mat-card-title>
+        <mat-card-content *ngIf="prompt == undefined">
+            Click for a prompt
         </mat-card-content>
-        <div class="PromptsBox">
-            <p>{{prompt}}</p>
-        </div>
+        <mat-card-content>
+            {{prompt}}
+        </mat-card-content>
     </mat-card>
 </div>
-<div class="grid-journals-section" hide-xs>
+<div class="grid-list" hide-xs>
     <div layout="row" layout-wrap>
-        <mat-card class="journals-card"
-                  *ngFor="let journal of filterJournals(journalTitle, journalContent, journalDate) | dateSort: '-date'"
-                  #elem [id]="journal._id['$oid']">
-            <div class="journals-card-info">
-                <mat-card-content class="journal-info">
-                    <mat-card-title class="journal-name">
-                        {{journal.title}}
-                        <button mat-icon-button class="edit-journal action-button"
-                                (click)="openEditJournalDialog(journal._id['$oid'], journal.title, journal.content, journal.date)">
-                            <mat-icon matTooltip="Edit">mode_edit</mat-icon>
-                        </button>
-                        <button mat-icon-button class="delete-journal action-button"
-                                (click)="deleteJournal(journal._id['$oid'])">
-                            <mat-icon matTooltip="Delete">delete</mat-icon>
-                        </button>
-                        <button mat-raised-button routerLink="/journals/{{journal._id['$oid']}}" >
-                            Open Page
-                        </button>
-                    </mat-card-title>
+        <mat-card class="journal-card"
+                  *ngFor="let journal of filterJournals(search) | dateSort: '-date'"
+                  #elem [id]="journal._id['$oid']" >
+            <a routerLink="/journals/{{journal._id['$oid']}}" class="journal-card-open">
+                <div class="journal-details">
+                    <mat-card-title class="journal-title break-word">{{journal.title}}</mat-card-title>
                     <mat-card-subtitle class="date-subtitle">
-                        {{journal.date | date : "MMM d, yyyy 'at' h:mm a"}}
+                        Created on {{journal.date | date : "MMM d, yyyy 'at' h:mm a"}}
                     </mat-card-subtitle>
                     <mat-divider></mat-divider>
-                    <p *ngIf="journal.content.length > 100">
-                        {{journal.content | slice : 0:100}}
-                        <a (click)="showMoreInfoDialog(journal.content)">
-                            <button class="show-more-button">
-                                ...show more
-                            </button>
-                        </a>
-                    </p>
-                    <p *ngIf="journal.content.length <100">
-                        {{journal.content}}
-                    </p>
-                </mat-card-content>
-            </div>
-            <mat-card-actions>
-            </mat-card-actions>
+                    <mat-card-content class="journal-info break-word">
+                        {{journal.content | slice : 0:150}}<a *ngIf="journal.content.length > 150">...</a>
+                    </mat-card-content>
+                </div>
+            </a>
         </mat-card>
     </div>
 </div>
-
 <div class="list-journals-section" hide-gt-xs>
     <mat-form-field class="journals-mobile-search">
-        <input matInput placeholder="Search" [(ngModel)]="journalTitle"/>
+        <input matInput placeholder="Search" [(ngModel)]="search"/>
         <button mat-button *ngIf="journalTitle" matSuffix mat-icon-button aria-label="Clear" (click)="journalTitle=''">
             <mat-icon>close</mat-icon>
         </button>
     </mat-form-field>
     <mat-list class="journals-list">
-        <div class="journals-list-info" *ngFor="let journal of filterJournals(journalTitle, journalContent, journalDate) | dateSort: '-date'"
+        <div class="journals-list-info" *ngFor="let journal of filterJournals(search) | dateSort: '-date'"
              #elem [id]="journal._id['$oid']">
-            <mat-list-item >
-                <h3 matLine><strong>{{journal.title}}</strong></h3>
-                <h5>{{journal.date | date : "MM/dd/yy"}}</h5>
+            <a routerLink="/journals/{{journal._id['$oid']}}" class="journal-card-open">
+            <mat-list-item>
+                <h3 matLine>{{journal.title}}</h3>
+                <p class="mobile-date">{{journal.date | date : "MM/dd/yy"}}</p>
                 <h6 matLine>{{journal.content}}</h6>
             </mat-list-item>
             <mat-divider></mat-divider>
+            </a>
         </div>
     </mat-list>
-
     <button class="add-journal-fab-button" (click)="openAddJournalDialog()" mat-fab color="primary"><mat-icon>add</mat-icon></button>
 </div>
 

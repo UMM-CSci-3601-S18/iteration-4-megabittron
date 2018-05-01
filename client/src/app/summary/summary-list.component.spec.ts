@@ -30,7 +30,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '1',
                             userID: 'userID1',
-                            mood: 'happy',
+                            emotion: 'happy',
                             date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 2,
                             description: 'slept',
@@ -38,7 +38,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '2',
                             userID: 'userID1',
-                            mood: 'sad',
+                            emotion: 'sad',
                             date: 'Thu Apr 05 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 4,
                             description: 'friend died',
@@ -46,7 +46,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '3',
                             userID: 'userID1',
-                            mood: 'mad',
+                            emotion: 'mad',
                             date: 'Sun Apr 08 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
@@ -69,7 +69,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                     summary = fixture.componentInstance;
                     fixture.detectChanges();
 
-                    summary.summaryMood = 'All';
+                    summary.summaryEmotion = 'All';
                     summary.summaryIntensity = 'All';
                     summary.startDate = null;
                     summary.endDate = null;
@@ -80,8 +80,8 @@ import {RouterTestingModule} from "@angular/router/testing";
         expect(summary.summaries.length).toBe(3);
             });
 
-            it('contains a summary mood \'happy\'', () => {
-        expect(summary.summaries.some((summary: Summary) => summary.mood === 'happy')).toBe(true);
+            it('contains a summary emotion \'happy\'', () => {
+        expect(summary.summaries.some((summary: Summary) => summary.emotion === 'happy')).toBe(true);
             });
 
             it('contain a summary id \'2\'', () => {
@@ -92,9 +92,9 @@ import {RouterTestingModule} from "@angular/router/testing";
         expect(summary.summaries.some((summary: Summary) => summary._id === '4')).toBe(false);
             });
 
-            it('summary filters by mood', () => {
+            it('summary filters by emotion', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                summary.summaryMood = 'sad';
+                summary.summaryEmotion = 'sad';
                 summary.refreshSummaries().subscribe(() => {
                     expect(summary.filteredSummaries.length).toBe(1);
                 });
@@ -108,9 +108,9 @@ import {RouterTestingModule} from "@angular/router/testing";
                 });
             });
 
-            it('summary filters by mood and intensity', () => {
+            it('summary filters by emotion and intensity', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                summary.summaryMood = 'sad';
+                summary.summaryEmotion = 'sad';
                 summary.summaryIntensity = '4';
                 summary.refreshSummaries().subscribe(() => {
                     expect(summary.filteredSummaries.length).toBe(1);
@@ -133,9 +133,9 @@ import {RouterTestingModule} from "@angular/router/testing";
                 });
             });
 
-            it('summary filters by mood, intensity, start and end date', () => {
+            it('summary filters by emotion, intensity, start and end date', () => {
                 expect(summary.filteredSummaries.length).toBe(3);
-                summary.summaryMood = 'happy';
+                summary.summaryEmotion = 'happy';
                 summary.summaryIntensity = '2';
                 summary.startDate = new Date('Fri Apr 06 2018 15:23:28 GMT-0000 (UTC)');
                 summary.endDate = new Date('Sat Apr 07 2018 20:00:00 GMT-0000 (UTC)');
@@ -176,7 +176,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '1',
                             userID: 'userID1',
-                            mood: 'happy',
+                            emotion: 'happy',
                             date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 2,
                             description: 'slept',
@@ -184,7 +184,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '2',
                             userID: 'userID1',
-                            mood: 'sad',
+                            emotion: 'sad',
                             date: 'Thu Apr 05 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 4,
                             description: 'friend died',
@@ -192,7 +192,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '3',
                             userID: 'userID1',
-                            mood: 'mad',
+                            emotion: 'mad',
                             date: 'Sun Apr 08 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
@@ -215,7 +215,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                     summary = fixture.componentInstance;
                     fixture.detectChanges();
 
-                    summary.summaryMood = 'All';
+                    summary.summaryEmotion = 'All';
                     summary.summaryIntensity = 'All';
                     summary.startDate = null;
                     summary.endDate = null;
@@ -249,7 +249,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '1',
                             userID: 'userID1',
-                            mood: 'happy',
+                            emotion: 'happy',
                             date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 2,
                             description: 'slept',
@@ -257,7 +257,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '2',
                             userID: 'userID1',
-                            mood: 'sad',
+                            emotion: 'sad',
                             date: 'Thu Apr 05 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 4,
                             description: 'friend died',
@@ -265,7 +265,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '3',
                             userID: 'userID1',
-                            mood: 'mad',
+                            emotion: 'mad',
                             date: 'Sun Apr 08 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
@@ -288,7 +288,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                     summary = fixture.componentInstance;
                     fixture.detectChanges();
 
-                    summary.summaryMood = 'All';
+                    summary.summaryEmotion = 'All';
                     summary.summaryIntensity = 'All';
                     summary.startDate = null;
                     summary.endDate = null;
@@ -353,7 +353,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '1',
                             userID: 'userID1',
-                            mood: 'happy',
+                            emotion: 'happy',
                             date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 2,
                             description: 'slept',
@@ -361,7 +361,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '2',
                             userID: 'userID1',
-                            mood: 'sad',
+                            emotion: 'sad',
                             date: 'Thu Apr 05 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 4,
                             description: 'friend died',
@@ -369,7 +369,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '3',
                             userID: 'userID1',
-                            mood: 'mad',
+                            emotion: 'mad',
                             date: 'Sun Apr 08 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
@@ -392,7 +392,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                     summary = fixture.componentInstance;
                     fixture.detectChanges();
 
-                    summary.summaryMood = 'All';
+                    summary.summaryEmotion = 'All';
                     summary.summaryIntensity = 'All';
                     summary.startDate = null;
                     summary.endDate = null;
@@ -456,7 +456,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '1',
                             userID: 'userID1',
-                            mood: 'happy',
+                            emotion: 'happy',
                             date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 2,
                             description: 'slept',
@@ -464,7 +464,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '2',
                             userID: 'userID1',
-                            mood: 'sad',
+                            emotion: 'sad',
                             date: 'Thu Apr 05 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 4,
                             description: 'friend died',
@@ -472,7 +472,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '3',
                             userID: 'userID1',
-                            mood: 'mad',
+                            emotion: 'mad',
                             date: 'Sun Apr 08 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
@@ -495,7 +495,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                     summary = fixture.componentInstance;
                     fixture.detectChanges();
 
-                    summary.summaryMood = "All";
+                    summary.summaryEmotion = "All";
                     summary.summaryIntensity = "All";
                     summary.startDate = null;
                     summary.endDate = null;
@@ -530,6 +530,10 @@ import {RouterTestingModule} from "@angular/router/testing";
 
             it('getPastDates works as intended', () => {
                 //last month has 31 days
+                summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0000 (UTC)');
+                summary.nowDate = 8;
+                //summary.lastMonthStamp = new Date('Mon Feb 05 2018 20:00:00 GMT-0000 (UTC)');
+                summary.lastMonth = 2;
                 expect(summary.getPastDates(0)).toBe('9');
                 expect(summary.getPastDates(6)).toBe('15');
                 expect(summary.getPastDates(3)).toBe('12');
@@ -583,7 +587,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '1',
                             userID: 'userID1',
-                            mood: 'happy',
+                            emotion: 'happy',
                             date: 'Sat Apr 07 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 2,
                             description: 'slept',
@@ -591,7 +595,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '2',
                             userID: 'userID1',
-                            mood: 'sad',
+                            emotion: 'sad',
                             date: 'Thu Apr 05 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 4,
                             description: 'friend died',
@@ -599,7 +603,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                         {
                             _id: '3',
                             userID: 'userID1',
-                            mood: 'mad',
+                            emotion: 'mad',
                             date: 'Sun Apr 08 2018 15:23:28 GMT-0000 (UTC)',
                             intensity: 5,
                             description: 'didn\'t sleep',
@@ -622,7 +626,7 @@ import {RouterTestingModule} from "@angular/router/testing";
                     summary = fixture.componentInstance;
                     fixture.detectChanges();
 
-                    summary.summaryMood = 'All';
+                    summary.summaryEmotion = 'All';
                     summary.summaryIntensity = 'All';
                     summary.startDate = null;
                     summary.endDate = null;

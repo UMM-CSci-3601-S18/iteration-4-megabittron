@@ -4,8 +4,6 @@ import {Journal} from './journal';
 import {Observable} from 'rxjs/Observable';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {AddJournalComponent} from './add/add-journal.component';
-import {EditJournalComponent} from "./edit/edit-journal.component";
-import {ShowJournalComponent} from "./show/show-journal.component";
 import {AppService} from "../app.service";
 import {Router} from "@angular/router";
 
@@ -20,39 +18,39 @@ export class JournalsComponent implements OnInit {
     // These are public so that tests can reference them (.spec.ts)
     public journals: Journal[] = [];
     public filteredJournals: Journal[] = [];
+    public search: string;
     public journalTitle: string;
     public journalContent: string;
     public journalDate: any;
     public length: number;
     public index = 0;
     public prompt: String;
-
     public prompts: String[] = [
         "What scares you?",
         "Do you have a plan? Do you need a plan? Have you had a plan fall spectacularly to pieces?",
         "What is your take on soul mates?",
         "Are you a worrier? Is there a particular worry that you can’t shake? How do you cope with worry?",
-        "Dear Past Me . . .",
-        "Dear Future Me . . .",
+        "Dear past me",
+        "Dear future me",
         "Places you’ve enjoyed visiting.",
         "Things you’ve done that you previously thought you could never do.",
-        "The people you most admire.",
-        "Your favorite books.",
-        "Your favorite movies.",
-        "Your favorite songs.",
-        "Your top five short term goals.",
-        "Your top five long term goals",
-        "Nobody knows that I . . .",
+        "The people you most admire",
+        "Your favorite books",
+        "Your favorite movies",
+        "Your favorite songs",
+        "Your top five short term goals",
+        "Your top five long term goals are",
+        "Nobody knows that I",
         "What’s the most outrageous thing you’ve ever done?",
         "What’s your secret desire?",
         "What’s the worst thing you’ve ever done?",
-        "The most terrifying moment of my life was . . .",
-        "The most fun I’ve ever had . . .",
-        "The most surprised I’ve ever been . . .",
-        "The most disappointed I’ve ever been . . .",
+        "The most terrifying moment of my life was",
+        "The most fun I’ve ever had",
+        "The most surprised I’ve ever been",
+        "The most disappointed I’ve ever been",
         "What are you looking forward to the most?",
         "Three celebrity crushes.",
-        "who made you feel good this week?",
+        "Who made you feel good this week?",
         "Did you ever run away from home?",
         "Who was your best friend in elementary school?",
         "Did you ever get lost?",
@@ -61,15 +59,15 @@ export class JournalsComponent implements OnInit {
         "If you could change one thing about your present life, what would it be?",
         "If you could meet any fictional character, who would it be?",
         "If you could have dinner with anyone currently alive, who would it be?",
-        "Things I always did with my mom when I was little . . .",
-        "Things I always did with my dad when I was small . . .",
-        "The Holiday traditions I most look forward to . . .",
-        "My favorite Sunday ritual . . .",
+        "Things I always did with my mom when I was little",
+        "Things I always did with my dad when I was small",
+        "The Holiday traditions I most look forward to",
+        "My favorite Sunday ritual",
         "How easy is it for you to forgive those who have caused you pain?",
         "What is the dominant emotion in your life right now?",
         "How do you deal with anger?",
-        "Some of the things that make me happy are . . .",
-        "My saddest memory is  . . .",
+        "Some of the things that make me happy are",
+        "My saddest memory is",
         "Three pet peeves",
         "Three favorite things to wear.",
         "What book did you read over and over again as a child?",
@@ -121,53 +119,13 @@ export class JournalsComponent implements OnInit {
                                 console.log('There was an error adding the journal.');
                                 console.log('The error was ' + JSON.stringify(err));
                         });
-                    this.snackBar.open("Added Journal", "CLOSE", {
-                        duration: 2000,
+                    this.snackBar.open("Journal Created", "CLOSE", {
+                        duration: 3000,
                     });
                     console.log("Journal added.");
                 }
             }
         });
-    }
-
-    openEditJournalDialog(_id: string, title: string, content: string, date: string): void {
-        console.log("Edit journal button clicked.");
-        console.log(_id + ' ' + title + content + date);
-        const newJournal: Journal = {_id: _id, userID: localStorage.getItem('userID'), title: title, content: content, date: date};
-        const dialogRef = this.dialog.open(EditJournalComponent, {
-            width: '300px',
-            data: { journal: newJournal }
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-            if (result == undefined) {
-                console.log("Cancelled without editing the journal.");
-            } else {
-                this.journalListService.editJournal(result).subscribe(
-                    editJournalResult => {
-                        this.highlightedID = editJournalResult;
-                        this.refreshJournals();
-                        this.snackBar.open("Edited Journal", "CLOSE", {
-                            duration: 2000,
-                        });
-                        console.log("Journal edited.");
-                    },
-                    err => {
-                        // This should probably be turned into some sort of meaningful response.
-                        console.log('There was an error editing the journal.');
-                        console.log('The error was ' + JSON.stringify(err));
-                    });
-            }
-        });
-    }
-
-    showMoreInfoDialog(content: string): void {
-        const showJournal: Journal = {_id: null, userID: null, title: null, content: content, date: null};
-        const dialogRef = this.dialog.open(ShowJournalComponent, {
-            width: '500px',
-            data: { journal: showJournal }
-        });
-        console.log("Showing more journal info.");
     }
 
     deleteJournal(_id: string) {
@@ -182,41 +140,25 @@ export class JournalsComponent implements OnInit {
                 console.log("hi");
                 this.refreshJournals();
                 this.loadService();
-                this.snackBar.open("Deleted Journal", "CLOSE", {
-                    duration: 2000,
+                this.snackBar.open("Journal Deleted", "CLOSE", {
+                    duration: 3000,
                 });
             }
         );
     }
 
-    public filterJournals(searchTitle: string, searchContent: string, searchDate: string): Journal[] {
+    public filterJournals(search: string): Journal[] {
 
         this.filteredJournals = this.journals;
 
         // Filter by title
-        if (searchTitle != null) {
-            searchTitle = searchTitle.toLocaleLowerCase();
+        if (search != null) {
+            search = search.toLocaleLowerCase();
 
             this.filteredJournals = this.filteredJournals.filter(journal => {
-                return !searchTitle || journal.title.toLowerCase().indexOf(searchTitle) !== -1;
-            });
-        }
-
-        // Filter by content
-        if (searchContent != null) {
-            searchContent = searchContent.toLocaleLowerCase();
-
-            this.filteredJournals = this.filteredJournals.filter(journal => {
-                return !searchContent || journal.content.toLowerCase().indexOf(searchContent) !== -1;
-            });
-        }
-
-        // Filter by date
-        if (searchDate != null) {
-            searchDate = searchDate.toLocaleLowerCase();
-
-            this.filteredJournals = this.filteredJournals.filter(journal => {
-                return !searchDate || journal.date.toLowerCase().indexOf(searchDate) !== -1;
+                return !search || journal.title.toLowerCase().indexOf(search) !== -1
+                               || journal.content.toLowerCase().indexOf(search) !== -1
+                               || journal.date.toLowerCase().indexOf(search) !== -1;
             });
         }
 
@@ -229,7 +171,7 @@ export class JournalsComponent implements OnInit {
         journalListObservable.subscribe(
             journals => {
                 this.journals = journals;
-                this.filterJournals(this.journalTitle, this.journalContent, this.journalDate);
+                this.filterJournals(this.search);
                 this.length = this.journals.length;
             },
             err => {
@@ -267,7 +209,6 @@ export class JournalsComponent implements OnInit {
 
         this.loadService();
         this.refreshJournals();
-
     }
 
 }
