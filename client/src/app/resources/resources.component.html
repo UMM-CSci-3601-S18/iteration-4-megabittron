@@ -1,13 +1,48 @@
 <div class="sidenav" hide-xs>
-    <h2 class="page-title">Journals</h2>
+    <h2 class="page-title">Resources</h2>
     <hr class="nav-title-divider">
     <button mat-raised-button (click)="newLinkDialog()" class="new-object-button" id="addNewLink">
-        New YouTube Playlist
+        Add YouTube Playlist
     </button>
     <button mat-raised-button (click)="newContactDialog()" class="new-object-button" id="addNewContact">
         New Contact
     </button>
 </div>
+<div class="grid-list" hide-xs layout="column" layout-wrap>
+    <mat-card class="link-card"
+              *ngFor="let link of links"
+              #elem [id]="link._id['$oid']" >
+            <div class="journal-details">
+                <mat-card-title class="journal-title break-word">{{link.name}}</mat-card-title>
+                <mat-card-subtitle class="date-subtitle">
+                </mat-card-subtitle>
+                <mat-divider></mat-divider>
+                <mat-card-content class="journal-info break-word">
+                    Link: {{link.url}}
+                    <br>
+                    Details: {{link.subname}}
+                </mat-card-content>
+            </div>
+    </mat-card>
+</div>
+<div class="grid-list" hide-xs layout="column" layout-wrap>
+    <mat-card class="link-card"
+              *ngFor="let link of links"
+              #elem [id]="link._id['$oid']" >
+        <div class="journal-details">
+            <mat-card-title class="journal-title break-word">{{link.name}}</mat-card-title>
+            <mat-card-subtitle class="date-subtitle">
+            </mat-card-subtitle>
+            <mat-divider></mat-divider>
+            <mat-card-content class="journal-info break-word">
+                Link: {{link.url}}
+                <br>
+                Details: {{link.subname}}
+            </mat-card-content>
+        </div>
+    </mat-card>
+</div>
+<!--
 <div layout='row' layout-sm="column" layout-xs="column">
     <div class="phone-div container">
     <mat-card class="phone-numbers card">
@@ -75,3 +110,4 @@
     </mat-card>
     </div>
 </div>
+-->

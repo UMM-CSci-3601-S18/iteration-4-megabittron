@@ -2,43 +2,43 @@
     {
         "_id": "5ae0b8060f8e0de6cd2c9a38",
         "userID": "defaultuserID",
-        "Name": "Rush",
-        "Subname": "Robertson",
+        "name": "Rush",
+        "subname": "Robertson",
         "url": "Graves.com"
     },
     {
         "_id": "5ae0b806548bbbdb03569c68",
         "userID": "defaultuserID",
-        "Name": "Patty",
-        "Subname": "Beck",
+        "name": "Patty",
+        "subname": "Beck",
         "url": "Jenkins.com"
     },
     {
         "_id": "5ae0b80644a3187c8b485021",
         "userID": "defaultuserID",
-        "Name": "Bertha",
-        "Subname": "Ellis",
+        "name": "Bertha",
+        "subname": "Ellis",
         "url": "Valdez.com"
     },
     {
         "_id": "5ae0b80601b0323a3e3f5478",
         "userID": "defaultuserID",
-        "Name": "Rowena",
-        "Subname": "Snow",
+        "name": "Rowena",
+        "subname": "Snow",
         "url": "Baird.com"
     },
     {
         "_id": "5ae0b8065f0e4fb287eea39a",
         "userID": "defaultuserID",
-        "Name": "Kim",
-        "Subname": "Burnett",
+        "name": "Kim",
+        "subname": "Burnett",
         "url": "Duran.com"
     },
     {
         "_id": "5ae0b806ef09fb0cef763029",
         "userID": "defaultuserID",
-        "Name": "Santiago",
-        "Subname": "Beach",
+        "name": "Santiago",
+        "subname": "Beach",
         "url": "Hood.com"
     },
 
@@ -46,78 +46,78 @@
     {
         "_id": "5ae0b826fda133975be342e8",
         "userID": "5ae0b82601f6cd3fe4cad2d9",
-        "Name": "Stephenson",
-        "Subname": "Massey",
+        "name": "Stephenson",
+        "subname": "Massey",
         "url": "Leon.com"
     },
     {
         "_id": "5ae0b826a98f2fe5feb806f4",
         "userID": "5ae0b826131851a9b2c035d0",
-        "Name": "Torres",
-        "Subname": "Cohen",
+        "name": "Torres",
+        "subname": "Cohen",
         "url": "Miller.com"
     },
     {
         "_id": "5ae0b82647bcf6c712fd7375",
         "userID": "5ae0b826ee7944cb66fff2d0",
-        "Name": "Underwood",
-        "Subname": "Terry",
+        "name": "Underwood",
+        "subname": "Terry",
         "url": "Whitney.com"
     },
     {
         "_id": "5ae0b8264741259d7da6356d",
         "userID": "5ae0b826606d462a6beacbbb",
-        "Name": "Melody",
-        "Subname": "Watson",
+        "name": "Melody",
+        "subname": "Watson",
         "url": "Blake.com"
     },
     {
         "_id": "5ae0b8266c16aebb9707b146",
         "userID": "5ae0b8261317d7007e6cea82",
-        "Name": "Vonda",
-        "Subname": "Zamora",
+        "name": "Vonda",
+        "subname": "Zamora",
         "url": "Ratliff.com"
     },
     {
         "_id": "5ae0b826b0d661fab8ab2d0d",
         "userID": "5ae0b82602ab6ad7c99c4adb",
-        "Name": "Sharlene",
-        "Subname": "Bender",
+        "name": "Sharlene",
+        "subname": "Bender",
         "url": "Chapman.com"
     },
     {
         "_id": "5ae0b8264419ab12375c8082",
         "userID": "5ae0b8261a8f48a4a8f05603",
-        "Name": "Taylor",
-        "Subname": "Collins",
+        "name": "Taylor",
+        "subname": "Collins",
         "url": "Dyer.com"
     },
     {
         "_id": "5ae0b8263171e530c6de8462",
         "userID": "5ae0b8261f7aa67fa65f2635",
-        "Name": "Susie",
-        "Subname": "Neal",
+        "name": "Susie",
+        "subname": "Neal",
         "url": "Hughes.com"
     },
     {
         "_id": "5ae0b82610931fe47ea886b5",
         "userID": "5ae0b826c1be4f2350aff76f",
-        "Name": "Rhea",
-        "Subname": "Bishop",
+        "name": "Rhea",
+        "subname": "Bishop",
         "url": "Irwin.com"
     },
     {
         "_id": "5ae0b826fb9bf871a839f906",
         "userID": "5ae0b82609f22c87167d985d",
-        "Name": "Bertie",
-        "Subname": "Reilly",
+        "name": "Bertie",
+        "subname": "Reilly",
         "url": "Mcknight.com"
     },
     {
         "_id": "5ae0b82669a2b0088732c863",
         "userID": "5ae0b826e1283f95b05d2da5",
-        "Name": "Wendi",
-        "Subname": "Boyle",
+        "name": "Wendi",
+        "subname": "Boyle",
         "url": "Hart.com"
     }
 ]
