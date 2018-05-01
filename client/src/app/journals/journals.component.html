@@ -18,10 +18,10 @@
                 Journal Prompt
             </button>
         </mat-card-title>
-        <mat-card-content *ngIf="prompt == undefined">
+        <mat-card-content class="no-click" *ngIf="prompt == undefined">
             Click for a prompt
         </mat-card-content>
-        <mat-card-content>
+        <mat-card-content class="prompt-content">
             {{prompt}}
         </mat-card-content>
     </mat-card>

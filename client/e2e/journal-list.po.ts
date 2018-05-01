@@ -36,6 +36,18 @@ export class JournalPage {
         return title;
     }
 
+    getJournalPromptNoClick() {
+        const prompt = element(by.className('no-click')).getText();
+        this.highlightElement(by.className('no-click'));
+        return prompt;
+    }
+
+    getJournalPrompt() {
+        const prompt = element(by.className('prompt-content')).getText();
+        this.highlightElement(by.className('prompt-content'));
+        return prompt;
+    }
+
     getUniqueJournal(anID: string) {
         const journal = element(by.id(anID)).getText();
         this.highlightElement(by.id(anID));
@@ -48,9 +60,26 @@ export class JournalPage {
         return element(by.id('addNewJournal')).isPresent();
     }
 
+    promptButtonExists(): promise.Promise<boolean> {
+        this.highlightElement(by.className('refresh'));
+        return element(by.className('refresh')).isPresent();
+    }
+
+    clickJournalPromptButton(): promise.Promise<void> {
+        this.highlightElement(by.className('refresh'));
+        return element(by.className('refresh')).click();
+    }
+
     clickAddJournalButton(): promise.Promise<void> {
         this.highlightElement(by.id('addNewJournal'));
         return element(by.id('addNewJournal')).click();
+    }
+
+    clickJournalCard(): promise.Promise<void> {
+        const journal = by.className('journal-card');
+        this.highlightElement(journal);
+        return element(journal).click();
+
     }
 
     clickEditJournalButton(): promise.Promise<void> {

@@ -19,6 +19,22 @@ fdescribe('Journal list', () => {
         expect(page.addButtonExists()).toBeTruthy();
     });
 
+    it('Should have a Journal Prompt button', () => {
+        page.navigateTo();
+        expect(page.promptButtonExists()).toBeTruthy();
+    });
+
+    it('Should click Journal Prompt button', () => {
+        page.navigateTo();
+        expect(page.promptButtonExists()).toBeTruthy();
+        expect(page.getJournalPromptNoClick()).toEqual('Click for a prompt');
+        expect(page.getJournalPromptNoClick()).toBeTruthy();
+        expect(page.getJournalPrompt()).toEqual('');
+        page.clickJournalPromptButton();
+        expect(page.getJournalPrompt()).not.toEqual('');
+
+    });
+
     it('Total number of journals should be 74', () => {
         page.navigateTo();
         expect(page.getJournals()).toEqual(74);
@@ -56,6 +72,14 @@ fdescribe('Journal list', () => {
         element(by.id('titleField')).sendKeys('Sad day');
         element(by.id('contentField')).sendKeys('Today was sad because my pet rock got hit by a car.');
         element(by.id('confirmAddJournalButton')).click();
+    });
+
+    it('Should click the first journal card', () => {
+        page.navigateTo();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/journals');
+        page.clickJournalCard();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/journals/5ad12a560b59379e56931423');
+
     });
 
 
