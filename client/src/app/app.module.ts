@@ -38,6 +38,7 @@ import {RandomPrompt} from "./journals/Prompts/open-prompts.component";
 import {MatTableModule} from "@angular/material/table";
 import {ShowSummaryListComponent} from "./summary/show/show-summary-list.component";
 
+
 @NgModule({
     exports: [
         ArraySortPipe,
@@ -90,11 +91,14 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         AddJournalComponent,
         EditJournalComponent,
         ViewJournalComponent,
+        ShowSummaryListComponent,
+        RandomPrompt,
+
         AddContactComponent,
         AddLinkComponent,
         RandomPrompt,
 
-        ShowSummaryListComponent
+
     ],
     bootstrap: [
         AppComponent
