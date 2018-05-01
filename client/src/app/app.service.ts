@@ -22,9 +22,9 @@ export class AppService {
             localStorage.setItem("userFirstName", "Patrick");
             localStorage.setItem("userLastName", "Bateman");
             localStorage.setItem("isSignedIn", "true");
-            localStorage.setItem("styleSelected", "default-style");
+            //localStorage.setItem("styleSelected", "default-style");
             //localStorage.setItem("styleSelected", "dark-style");
-            //localStorage.setItem("styleSelected", "light-style");
+            localStorage.setItem("styleSelected", "light-style");
         }
     }
 

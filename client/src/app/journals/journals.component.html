@@ -1,3 +1,4 @@
+<div [ngClass]="appService.styleClassSelector()">
 <div class="sidenav" hide-xs>
     <h2 class="page-title">Journals</h2>
     <hr class="nav-title-divider">
@@ -19,7 +20,7 @@
             </button>
         </mat-card-title>
         <mat-card-content *ngIf="prompt == undefined">
-            Click for a prompt
+            Click the button above for a prompt
         </mat-card-content>
         <mat-card-content>
             {{prompt}}
@@ -69,3 +70,4 @@
     <button class="add-journal-fab-button" (click)="openAddJournalDialog()" mat-fab color="primary"><mat-icon>add</mat-icon></button>
 </div>
 
+</div>
