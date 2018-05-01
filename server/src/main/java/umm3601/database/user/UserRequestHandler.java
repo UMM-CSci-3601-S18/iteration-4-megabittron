@@ -60,27 +60,19 @@ public class UserRequestHandler {
     }
 
 
-    /**Method called from Server when the 'api/users/new'endpoint is recieved.
-     * Gets specified user info from request and calls addNewUser helper method
-     * to append that info to a document
-     *
-     * @return a boolean as whether the user was added successfully or not
+    /*
+        changes a user's style settings
      */
-    public String addNewUser(String subjectID, String firstName, String lastName)
-    {
+    public String editUserStyleSetting(Request req, Response res){
+        res.type("application/json");
+        return userController.editUserStyleSetting(req.queryMap().toMap());
+    }
 
-
-                try {
-
-                    System.err.println("Adding new user [" + "SubjectID=" + subjectID + " FirstName=" + firstName + " LastName=" + lastName + ']');
-                    return userController.addNewUser(subjectID, firstName, lastName).toString();
-                }
-                catch(NullPointerException e)
-                {
-                    System.err.println("A value was malformed or omitted, new user request failed.");
-                    return null;
-                }
-
-
+    /*
+        changes a user's font settings
+     */
+    public String editUserFontSetting(Request req, Response res){
+        res.type("application/json");
+        return userController.editUserFontSetting(req.queryMap().toMap());
     }
 }

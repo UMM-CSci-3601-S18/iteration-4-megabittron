@@ -1,3 +1,4 @@
+<div [ngClass]="appService.styleClassSelector()">
 <td-layout #layout>
     <td-navigation-drawer id="navBar" class="nav-drawer" flex *ngIf="!isJournalView()">
         <mat-toolbar>
@@ -70,4 +71,4 @@
         <router-outlet></router-outlet>
     </td-layout-nav>
 </td-layout>
-
+</div>
