@@ -774,6 +774,10 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         return this.filteredSummaries.length
     }
 
+    pastXButtonDisplay(): string{
+        return 'Past ' + this.inputType.substring(0, 1).toUpperCase() + this.inputType.substring(1);
+    }
+
     ngAfterViewInit(): void {
         this.updateChart();
     }
