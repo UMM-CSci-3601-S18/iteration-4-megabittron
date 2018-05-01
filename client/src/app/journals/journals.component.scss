@@ -1,21 +1,5 @@
-.sidenav {
-    height: 100%;
-    width: 275px;
-    position: fixed;
-    z-index: 1;
-    overflow-x: hidden;
-    text-align: center;
-    background-color: #546E7A;
-}
-
-.add {
-    width: 50%;
-    margin-bottom: 15px;
-}
-
-.add:hover {
-    background-color: #C8E6C9;
-}
+@import "../../theme";
+@import "../../styles";
 
 .filter-fields {
     font-size: 14px;
@@ -31,10 +15,6 @@
     margin-top: 15px;
 }
 
-.grid-list {
-    margin-left: 275px;
-}
-
 .journals-section {
     margin: 0 auto;
     max-width: 500px;
@@ -43,7 +23,6 @@
 .journal-card {
     margin: 15px;
     width: 325px;
-    height: 200px;
 }
 
 .journal-card:hover {
@@ -53,16 +32,6 @@
 .journal-title {
     text-align: left;
     font-size: 18px;
-}
-
-.break-word {
-    word-wrap: break-word;
-}
-
-.nav-journals-title {
-    margin: 15px;
-    color: white;
-    font-size: 34px;
 }
 
 .add-journal-fab-button {
@@ -76,10 +45,11 @@
     margin-bottom: -20px;
 }
 
-
-
 .journal-card-open {
     text-decoration: none;
     color: black;
 }
 
+.mobile-date {
+    font-size: 16px;
+}

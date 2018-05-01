@@ -185,7 +185,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     // xValue can represent hour, weekday, date, or month.
     filterGraph(xValue, Searchemotion): number {
         Searchemotion = Searchemotion.toLocaleLowerCase();
-        let filterData = this.filteredSummaries.filter(summary => {
+        let filterData = this.summaries.filter(summary => {
             return !Searchemotion || summary.emotion.toLowerCase().indexOf(Searchemotion) !== -1;
         });
 
@@ -239,7 +239,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     // be placed on the graph based on the current X, nowX.
     public modDay(day: number): Number {
         if (this.limitedPast) {
-            return (this.nowDay + 1 + day) % 7;
+            return (this.nowDay + 1 + day)%7;
         }
         else {
             return day;
@@ -248,16 +248,16 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     public modHour(hour: number): Number {
         if (this.limitedPast) {
-            return (this.nowHour + 1 + hour) % 24;
+            return (this.nowHour + 1 + hour)%24;
         }
         else {
-            return (hour - this.timeZone) % 24;
+            return (hour - this.timeZone)%24;
         }
     }
 
     public modDate(date: number): Number {
         if (this.limitedPast) {
-            return (this.nowDate + date - 1) % 31 + 1;
+            return (this.nowDate + date - 1)%31 + 1;
         }
         else {
             return date;
@@ -266,7 +266,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     public modMonth(month: number): Number {
         if (this.limitedPast) {
-            return (this.nowMonth + 1 + month) % 12;
+            return (this.nowMonth + 1 + month)%12;
         }
         else {
             return month;
@@ -276,7 +276,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     // getPastXs gets labels for bottom axis of chart based on current X.
     public getPastDays(xValue: number): String {
 
-        let thisDay = (this.nowDay + 1 + xValue) % 7;
+        let thisDay = (this.nowDay + 1 + xValue)%7;
 
         let strDay = '';
 
@@ -306,7 +306,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     public getPastHours(xValue: number): String {
 
-        let thisHour = (this.nowHour + 1 + xValue + this.timeZone) % 24;
+        let thisHour = (this.nowHour + 1 + xValue + this.timeZone)%24;
 
         let strHour = '';
         let timeSuffix = '';
@@ -315,7 +315,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
             strHour = thisHour.toString();
             timeSuffix = ' AM';
         } else {
-            strHour = (thisHour % 12).toString();
+            strHour = (thisHour %12).toString();
             timeSuffix = ' PM';
         }
         if (strHour == '0') {
@@ -326,7 +326,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     }
 
     public getPastMonths(xValue: number): String {
-        let thisMonth = (this.nowMonth + 1 + xValue) % 12;
+        let thisMonth = (this.nowMonth + 1 + xValue)%12;
 
         let strMonth = '';
 
@@ -371,7 +371,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
 
     public getPastDates(xValue: number): String {
-        let thisDate = (this.nowDate + xValue) % 31;
+        let thisDate = (this.nowDate + xValue)%31;
         let numDate;
         let thisYear = this.nowStamp.getFullYear();
 
@@ -749,8 +749,33 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
     }
 
     // Used to show total number of summaries shown by chart in HTML
-    totalNumberEmotions(): number {
-        return this.filteredSummaries.length;
+    numberEmotions(): number{
+        if(this.limitedPast){
+            if(this.inputType == 'day'){
+                return this.pastDayEmotions(this.summaries).length
+            }else{
+                if(this.inputType == 'week'){
+                    return this.pastWeekEmotions(this.summaries).length
+                }else{
+                    if(this.inputType == 'month'){
+                        return this.pastMonthEmotions(this.summaries).length
+                    }else{
+                        return this.pastYearEmotions(this.summaries).length
+                    }
+                }
+            }
+        }
+        else {
+        return this.summaries.length;
+        }
+    }
+
+    totalNumberEmotions(): number{
+        return this.filteredSummaries.length
+    }
+
+    pastXButtonDisplay(): string{
+        return 'Past ' + this.inputType.substring(0, 1).toUpperCase() + this.inputType.substring(1);
     }
 
     ngAfterViewInit(): void {
