@@ -15,7 +15,7 @@ import {ArraySortPipe} from "../journals/array-sort.pipe";
 
 /** Tests the filtering used for display of summary list ---------------------------------------------------------------------------------- **/
 
-        fdescribe('Summary', () => {
+        describe('Summary', () => {
 
             let summary: SummaryListComponent;
             let fixture: ComponentFixture<SummaryListComponent>;
@@ -161,7 +161,7 @@ import {ArraySortPipe} from "../journals/array-sort.pipe";
 
         /** Tests the filtering used for charts when looking at all time ---------------------------------------------------------------------------------- **/
 
-        fdescribe('Chart Filtering - no limit', () => {
+        describe('Chart Filtering - no limit', () => {
 
             let summary: SummaryListComponent;
             let fixture: ComponentFixture<SummaryListComponent>;
@@ -234,7 +234,7 @@ import {ArraySortPipe} from "../journals/array-sort.pipe";
 
         /** Tests the filtering used for charts when looking at past day ---------------------------------------------------------------------------------- **/
 
-        fdescribe('Chart Filtering - Past Day', () => {
+        describe('Chart Filtering - Past Day', () => {
 
             let summary: SummaryListComponent;
             let fixture: ComponentFixture<SummaryListComponent>;
@@ -338,7 +338,7 @@ import {ArraySortPipe} from "../journals/array-sort.pipe";
 
         /** Tests the filtering used for charts when looking at past week ---------------------------------------------------------------------------------- **/
 
-        fdescribe('Chart Filtering - Past Week', () => {
+        describe('Chart Filtering - Past Week', () => {
 
             let summary: SummaryListComponent;
             let fixture: ComponentFixture<SummaryListComponent>;
@@ -441,7 +441,7 @@ import {ArraySortPipe} from "../journals/array-sort.pipe";
 
         /** Tests the filtering used for charts when looking at past month ---------------------------------------------------------------------------------- **/
 
-        fdescribe('Chart Filtering - Past Month', () => {
+        describe('Chart Filtering - Past Month', () => {
 
             let summary: SummaryListComponent;
             let fixture: ComponentFixture<SummaryListComponent>;
@@ -572,7 +572,7 @@ import {ArraySortPipe} from "../journals/array-sort.pipe";
 
         /** Tests the filtering used for charts when looking at past year ---------------------------------------------------------------------------------- **/
 
-        fdescribe('Chart Filtering - Past Year', () => {
+        describe('Chart Filtering - Past Year', () => {
 
             let summary: SummaryListComponent;
             let fixture: ComponentFixture<SummaryListComponent>;

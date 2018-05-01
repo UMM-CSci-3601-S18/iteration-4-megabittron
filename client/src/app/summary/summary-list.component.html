@@ -130,8 +130,7 @@
                                                            enabled></mat-datepicker-toggle>
                                     <mat-datepicker touchUi="true" #start disabled="false"></mat-datepicker>
                                 </mat-form-field>
-                                ;
-
+                                :
                                 <mat-form-field class="end">
                                     <input
                                         class="endDate"
@@ -156,7 +155,7 @@
                         <!--<mat-card>-->
                         <mat-card-title class="your-summaries-title">Your Emotions</mat-card-title>
 
-                        <mat-card-subtitle class="your-summaries-title">You have a total of {{totalNumberEmotions()}}
+                        <mat-card-subtitle class="your-summaries-title">You have a total of {{totalEntries()}}
                             emotions to view
                         </mat-card-subtitle>
                         <div class="page-scroll-buttons">
