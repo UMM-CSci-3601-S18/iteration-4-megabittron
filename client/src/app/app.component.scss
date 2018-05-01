@@ -7,6 +7,55 @@
 
 }
 
+
+.panda {
+    height: 100vh;
+    background-color: #e3f2fd;
+}
+
+.windows95 {
+    height: 100vh;
+    background-color: #008080;
+    form{
+        background-color: #E0E0E0;
+    }
+    .mat-card{
+        background-color: #E0E0E0;
+    }
+    .mat-stepper-horizontal{
+        background-color: #E0E0E0;
+    }
+}
+
+.christmas2018 {
+    height: 100vh;
+    background-color: #4CAF50;
+    form{
+        background-color: #F44336;
+    }
+    .mat-card{
+        background-color: #F44336;
+    }
+    .mat-stepper-horizontal{
+        background-color: #F44336;
+    }
+}
+
+.aesthetic {
+    height: 100vh;
+    background-color: #FFC3DA;
+    form{
+        background-color: #84F3D6;
+    }
+    .mat-card{
+        background-color: #84F3D6;
+    }
+    .mat-stepper-horizontal{
+        background-color: #84F3D6;
+    }
+}
+
+
 .default-style{
     .nav-drawer {
         .nav-active {

@@ -18,6 +18,7 @@ export class SettingsComponent implements OnInit{
     constructor(public appService: AppService) {}
 
     public theme: string;
+    public font: string;
 
 
     saveSettings(){

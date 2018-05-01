@@ -1,4 +1,5 @@
-<form #newJournalForm="ngForm" class="new-object-form" [ngClass]="appService.styleClassSelector()">
+<div [ngClass]="appService.styleClassSelector()">
+<form #newJournalForm="ngForm" class="new-object-form">
     <mat-card-title class="new-object-title">New Journal</mat-card-title>
     <mat-form-field hintLabel="Max 40 characters">
         <input matInput #input required
@@ -30,3 +31,4 @@
         </button>
     </div>
 </form>
+</div>

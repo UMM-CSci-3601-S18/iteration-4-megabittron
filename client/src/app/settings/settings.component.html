@@ -6,9 +6,9 @@
                 <mat-card-subtitle>Customization</mat-card-subtitle>
                 <form>
                     <label> Font: </label>
-                    <mat-select name="dropdownInt" class="summaryInt"
+                    <mat-select name="dropdownFont" class=""
                                 #input placeholder=""
-                                [(ngModel)]="theme">
+                                [(ngModel)]="font">
                         <mat-option class="md-option-6" value="0">Arial (default)</mat-option>
                         <mat-option class="md-option-7" value="1">Verdana</mat-option>
                         <mat-option class="md-option-8" value="2">Times New Roman</mat-option>
@@ -18,16 +18,33 @@
                     </mat-select>
                     <br>
                     <label> BG Theme: </label>
-                    <mat-select name="dropdownInt" class="summaryInt"
-                                #input placeholder=""
-                                [(ngModel)]="theme">
-                        <mat-option class="md-option-6" value="panda">Panda Blue (default)</mat-option>
-                        <mat-option class="md-option-7" value="windows95">Windows95</mat-option>
-                        <mat-option class="md-option-8" value="2">Toastier</mat-option>
-                        <mat-option class="md-option-9" value="3">Christmas 2018</mat-option>
-                        <mat-option class="md-option-10" value="4">Ford Model T</mat-option>
-                        <mat-option class="md-option-11" value="5">A E S T H E T I C</mat-option>
-                    </mat-select>
+
+                    <label class="theme-radio">
+                    <input type="radio"
+                           (click)="this.theme = 'panda'; saveSettings()">
+                        <span class="panda-main"></span>
+                        <span class="panda-accent"></span>
+                    </label>
+                    <label class="theme-radio">
+                        <input type="radio"
+                           (click)="this.theme = 'windows95'; saveSettings()">
+                        <span class="win-main"></span>
+                        <span class="win-accent"></span>
+                        <span class="radio-border"></span>
+                    </label>
+                    <label class="theme-radio">
+                    <input type="radio"
+                           (click)="this.theme = 'christmas2018'; saveSettings()">
+                    <span class="chr-main"></span>
+                    <span class="chr-accent"></span>
+                    </label>
+                    <label class="theme-radio">
+                        <input type="radio"
+                               (click)="this.theme = 'aesthetic'; saveSettings()">
+                        <span class="aesth-main"></span>
+                        <span class="aesth-accent"></span>
+                        <span class="radio-border"></span>
+                    </label>
                     <br>
                     <button (click)="saveSettings()">Save</button>
                 </form>

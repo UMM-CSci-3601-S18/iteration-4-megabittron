@@ -1,0 +1,81 @@
+
+.theme-radio{
+    display: inline-block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+}
+
+.theme-radio input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.panda-main{
+    position: absolute;
+    top: 0;
+    left: 0px;
+    height: 16px;
+    width: 24px;
+    background-color: #e3f2fd;
+}
+.panda-accent{
+    position: absolute;
+    top: 16px;
+    left: 0px;
+    height: 8px;
+    width: 24px;
+    background-color: #FFFFFF;
+}
+
+.win-main{
+    position: absolute;
+    top: 0;
+    left: 0px;
+    height: 16px;
+    width: 24px;
+    background-color: #008080;
+}
+.win-accent{
+    position: absolute;
+    top: 16px;
+    left: 0px;
+    height: 8px;
+    width: 24px;
+    background-color: #e0e0e0;
+}
+
+.chr-main{
+    position: absolute;
+    top: 0;
+    left: 0px;
+    height: 16px;
+    width: 24px;
+    background-color: #4CAF50;
+}
+.chr-accent{
+    position: absolute;
+    top: 16px;
+    left: 0px;
+    height: 8px;
+    width: 24px;
+    background-color: #F44336;
+}
+
+.aesth-main{
+    position: absolute;
+    top: 0;
+    left: 0px;
+    height: 16px;
+    width: 24px;
+    background-color: #FFC3DA;
+}
+.aesth-accent{
+    position: absolute;
+    top: 16px;
+    left: 0px;
+    height: 8px;
+    width: 24px;
+    background-color: #84F3D6;
+}
