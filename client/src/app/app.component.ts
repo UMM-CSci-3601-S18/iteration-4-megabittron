@@ -6,6 +6,7 @@ import {Router, ActivationStart} from "@angular/router";
 import {Location} from "@angular/common";
 import {HostListener} from "@angular/core";
 import {JournalsService} from "./journals/journals.service";
+import {MatSnackBar} from "@angular/material";
 
 
 declare var gapi: any;
@@ -27,7 +28,8 @@ export class AppComponent implements OnInit {
                 public appService: AppService,
                 private router: Router,
                 private _location: Location,
-                public journalListService: JournalsService) {
+                public journalListService: JournalsService,
+                public snackBar: MatSnackBar) {
 
         this.router.events.subscribe((e) => {
             if (e instanceof ActivationStart) {
@@ -51,9 +53,9 @@ export class AppComponent implements OnInit {
                 console.log("hi");
                 //this.refreshJournal();
                 //this.loadService();
-                /*this.snackBar.open("Deleted Journal", "CLOSE", {
+                this.snackBar.open("Deleted Journal", "CLOSE", {
                     duration: 2000,
-                });*/
+                });
             }
         );
     }
