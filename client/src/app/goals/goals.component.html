@@ -1,4 +1,4 @@
-<div class="sidenav" hide-xs>
+<div class="sidenav" [ngClass]="appService.styleClassSelector()" hide-xs>
     <h2 class="page-title" *ngIf="this.showAllGoals == false"> Today's Goals</h2>
     <h2 class="page-title" *ngIf="this.showAllGoals == true"> All Goals</h2>
     <hr class="nav-title-divider">

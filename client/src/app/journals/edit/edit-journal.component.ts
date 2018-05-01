@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {Journal} from '../journal';
+import {AppService} from "../../app.service";
 
 @Component({
     selector: 'app-edit-journal.component',
@@ -10,6 +11,7 @@ import {Journal} from '../journal';
 
 export class EditJournalComponent {
     constructor(
+        public appService: AppService,
         public dialogRef: MatDialogRef<EditJournalComponent>,
         @Inject(MAT_DIALOG_DATA) public data: {journal: Journal}) {
     }

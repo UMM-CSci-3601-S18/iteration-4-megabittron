@@ -1,4 +1,4 @@
-<ng-container *ngIf="appService.isSignedIn(); then showContent else showSignIn"></ng-container>
+<ng-container *ngIf="appService.isSignedIn(); then showContent else showSignIn" [ngClass]="appService.styleClassSelector()"></ng-container>
 
 <ng-template #showContent>
     <div [ngClass]="appService.styleClassSelector()">

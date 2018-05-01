@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {Summary} from '../summary';
+import {AppService} from "../../app.service";
 
 @Component({
     selector: 'app-show-summary-list.component',
@@ -10,6 +11,7 @@ import {Summary} from '../summary';
 
 export class ShowSummaryListComponent {
     constructor(
+        public appService: AppService,
         public dialogRef: MatDialogRef<ShowSummaryListComponent>,
         @Inject(MAT_DIALOG_DATA) public data: {summary: Summary}) {
     }

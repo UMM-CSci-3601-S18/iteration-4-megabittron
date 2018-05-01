@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {Contact} from "../../contact";
+import {AppService} from "../../../app.service";
 
 @Component({
     selector: 'app-add-contact.component',
@@ -12,6 +13,7 @@ export class AddContactComponent {
 
 
     constructor(
+        public appService: AppService,
         public dialogRef: MatDialogRef<AddContactComponent>,
         @Inject(MAT_DIALOG_DATA) public data: {contact: Contact}) {
     }

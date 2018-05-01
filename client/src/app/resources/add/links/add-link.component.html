@@ -1,4 +1,4 @@
---<form #newLinkForm="ngForm">
+--<form #newLinkForm="ngForm" [ngClass]="appService.styleClassSelector()">
     <div class="add-link" layout-gt-sm="row">
         <div flex-gt-sm="80" flex-offset-gt-sm="10">
             <mat-card-title class="new-link-title">New Link</mat-card-title>

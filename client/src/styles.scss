@@ -6,8 +6,18 @@
     margin: auto;
 }
 
-.mat-drawer-container {
+.panda {
+    height: 100vh;
     background-color: #e3f2fd;
+}
+
+.windows95 {
+    height: 100vh;
+    background-color: #008080;
+    .mat-card{
+        background-color: #E0E0E0;
+
+    }
 }
 
 /*prevents clicking forward on mat stepper steps*/

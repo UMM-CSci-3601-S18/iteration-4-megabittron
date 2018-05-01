@@ -1,4 +1,4 @@
-<form #editLinkForm="ngForm">
+<form #editLinkForm="ngForm" [ngClass]="appService.styleClassSelector()">
     <div class="edit-link-page" layout-gt-sm="row">
         <div flex-gt-sm="80" flex-offset-gt-sm="10">
             <mat-card-title>Edit Link</mat-card-title>

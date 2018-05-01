@@ -1,6 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {Goal} from '../goal';
+import {AppService} from "../../app.service";
 
 @Component({
     selector: 'app-edit-goal.component',
@@ -10,6 +11,7 @@ import {Goal} from '../goal';
 
 export class EditGoalComponent {
     constructor(
+        public appService: AppService,
         public dialogRef: MatDialogRef<EditGoalComponent>,
         @Inject(MAT_DIALOG_DATA) public data: {goal: Goal}) {
     }

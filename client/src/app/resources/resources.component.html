@@ -1,4 +1,4 @@
-<div layout='row' layout-sm="column" layout-xs="column">
+<div layout='row' layout-sm="column" layout-xs="column" [ngClass]="appService.styleClassSelector()">
     <div class="phone-div container">
     <mat-card class="phone-numbers card">
         <mat-card-title class="numbers title">{{this.numberTitle}}</mat-card-title>
