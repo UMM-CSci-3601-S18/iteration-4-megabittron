@@ -111,4 +111,22 @@ lls addNewResources helper method
             return null;
         }
     }
+
+    public String deleteContact(Request req, Response res){
+
+        System.out.println("Deleting contact with ID: " + req.params(":id"));
+
+        res.type("application/json");
+
+        try {
+            String id = req.params(":id");
+            contactsController.deleteContact(id);
+            return req.params(":id");
+        }
+        catch(RuntimeException ree)
+        {
+            ree.printStackTrace();
+            return null;
+        }
+    }
 }

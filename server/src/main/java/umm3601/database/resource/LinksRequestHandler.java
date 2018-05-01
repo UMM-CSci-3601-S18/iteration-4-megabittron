@@ -111,4 +111,23 @@ public class LinksRequestHandler {
             return null;
         }
     }
+
+    public String deleteLink(Request req, Response res){
+
+        System.out.println("Deleting link with ID: " + req.params(":id"));
+
+        res.type("application/json");
+
+        try {
+            String id = req.params(":id");
+            linksController.deleteLink(id);
+            return req.params(":id");
+        }
+        catch(RuntimeException ree)
+        {
+            ree.printStackTrace();
+            return null;
+        }
+    }
+
 }
