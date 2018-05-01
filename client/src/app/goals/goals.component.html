@@ -10,11 +10,12 @@
             <mat-checkbox class="show-all-goals" (change)="showAllGoals = $event.checked; getNext()">Show all goals</mat-checkbox>
         </mat-card-content>
     </mat-card>
-    <mat-card class="option-selector-card" *ngIf="showAllGoals">
+    <mat-card class="option-selector-card">
         <mat-card-title>Status</mat-card-title>
         <mat-divider></mat-divider>
         <mat-card-content>
-          <mat-radio-group matInput #input [(ngModel)]="goalStatus" (change)="loadService()" class="status-radio-group">
+            <a *ngIf="!showAllGoals">You cannot filter statuses of today's goals.</a>
+          <mat-radio-group matInput #input *ngIf="showAllGoals" [(ngModel)]="goalStatus" (change)="loadService()" class="status-radio-group">
               <mat-radio-button id="allStatus" value="all">All</mat-radio-button>
               <mat-radio-button id="complete" value="true">Complete</mat-radio-button>
               <mat-radio-button id="incomplete" value="false">Incomplete</mat-radio-button>
@@ -54,6 +55,16 @@
             </mat-card-header>
             <mat-divider></mat-divider>
             <mat-card-content class="goal-info break-word">
+                <div class="journal-action-buttons">
+                    <button mat-icon-button class="edit"
+                            (click)="openEditGoalDialog(goal._id['$oid'], goal.purpose, goal.category, goal.name, goal.status, goal.frequency)">
+                        <mat-icon>create</mat-icon>
+                    </button>
+                    <button mat-icon-button class="delete"
+                            (click)="deleteGoal(goal._id['$oid'])">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
                 <p *ngIf="goal.frequency != 'Does not repeat'">This is a {{goal.frequency | lowercase}} goal</p>
                 <p *ngIf="goal.frequency == 'Does not repeat'">This goal does not repeat</p>
                 <p>{{goal.purpose}}</p>

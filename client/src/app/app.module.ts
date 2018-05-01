@@ -14,6 +14,7 @@ import {GoalsComponent} from "./goals/goals.component";
 import {GoalsService} from "./goals/goals.service";
 import {AddGoalComponent} from "./goals/add/add-goal.component";
 import {EditGoalComponent} from "./goals/edit/edit-goal.component";
+import {ViewGoalComponent} from "./goals/view/view-goal.component";
 import {SummaryListComponent} from "./summary/summary-list.component";
 import {SummaryListService} from "./summary/summary-list.service";
 import {JournalsComponent} from "./journals/journals.component";
@@ -56,6 +57,7 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         GoalsComponent,
         AddGoalComponent,
         EditGoalComponent,
+        ViewGoalComponent,
         JournalsComponent,
         AddJournalComponent,
         EditJournalComponent,
@@ -69,8 +71,6 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         EditLinkComponent,
         ArraySortPipe,
         ShowSummaryListComponent,
-
-
     ],
     providers: [
         GoalsService,

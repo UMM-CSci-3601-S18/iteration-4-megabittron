@@ -1,5 +1,5 @@
 <td-layout #layout>
-    <td-navigation-drawer id="navBar" class="nav-drawer" flex>
+    <td-navigation-drawer id="navBar" class="nav-drawer" flex *ngIf="!isJournalView()">
         <mat-toolbar>
             <span *ngIf="appService.isSignedIn()"></span>
             <span *ngIf="!appService.isSignedIn()" class="g-signin2" (click)="signIn()"></span>
@@ -36,12 +36,12 @@
         </mat-nav-list>
     </td-navigation-drawer>
     <td-layout-nav class="nav-bar">
-        <div td-toolbar-content layout="row" layout-align="start center" flex>
+        <div td-toolbar-content layout="row" layout-align="start center" flex *ngIf="!isJournalView()">
             <button mat-icon-button td-menu-button tdLayoutToggle hide-gt-xs>
                 <mat-icon>menu</mat-icon>
             </button>
             <span hide-xs class="desktop-title"><button mat-button class="computer"
-                                                        [routerLink]="['/']">My Panda</button></span>
+                                                        [routerLink]="['/']"><img class="home-img" src="../android-chrome-192x192.png"></button></span>
             <span hide-gt-xs>My Panda</span>
             <span flex></span>
             <a class="desktop-goals computer" mat-button [routerLink]="['/goals']" routerLinkActive="nav-active"
@@ -54,8 +54,13 @@
                hide-xs>Stats</a>
             <a class="computer" hide-xs>
                 <div *ngIf="!appService.isSignedIn()" class="g-signin2" (click)="signIn()"></div>
-                <button *ngIf="appService.isSignedIn()" mat-raised-button (click)="signOut()">Sign Out</button>
+                <button *ngIf="appService.isSignedIn()" mat-raised-button (click)="signOut()">Logout</button>
             </a>
+        </div>
+        <div td-toolbar-content layout="row" layout-align="start center" flex *ngIf="isJournalView()">
+            <button class="mobile-back" mat-icon-button (click)="backClicked()"><mat-icon>arrow_back</mat-icon></button>
+            <span class="spacer"></span>
+            <button class="mobile-back" mat-icon-button (click)="deleteJournal(currentId); backClicked()"><mat-icon>delete_forever</mat-icon></button>
         </div>
         <router-outlet></router-outlet>
     </td-layout-nav>
