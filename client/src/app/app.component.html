@@ -1,5 +1,5 @@
 <td-layout #layout>
-    <td-navigation-drawer id="navBar" class="nav-drawer" flex *ngIf="!isJournalView()">
+    <td-navigation-drawer id="navBar" class="nav-drawer" flex>
         <mat-toolbar>
             <span *ngIf="appService.isSignedIn()"></span>
             <span *ngIf="!appService.isSignedIn()" class="g-signin2" (click)="signIn()"></span>
@@ -41,7 +41,7 @@
                 <mat-icon>menu</mat-icon>
             </button>
             <span hide-xs class="desktop-title"><button mat-button class="computer"
-                                                        [routerLink]="['/']">My Panda</button></span>
+                                                        [routerLink]="['/']"><img class="home-img" src="../android-chrome-192x192.png"></button></span>
             <span hide-gt-xs>My Panda</span>
             <span flex></span>
             <a class="desktop-goals computer" mat-button [routerLink]="['/goals']" routerLinkActive="nav-active"
@@ -54,7 +54,7 @@
                hide-xs>Stats</a>
             <a class="computer" hide-xs>
                 <div *ngIf="!appService.isSignedIn()" class="g-signin2" (click)="signIn()"></div>
-                <button *ngIf="appService.isSignedIn()" mat-raised-button (click)="signOut()">Sign Out</button>
+                <button *ngIf="appService.isSignedIn()" mat-raised-button (click)="signOut()">Logout</button>
             </a>
         </div>
         <div td-toolbar-content layout="row" layout-align="start center" flex *ngIf="isJournalView()">

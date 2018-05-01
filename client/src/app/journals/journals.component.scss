@@ -23,6 +23,7 @@
 .journal-card {
     margin: 15px;
     width: 325px;
+    height: 200px;
 }
 
 .journal-card:hover {
@@ -41,6 +42,7 @@
 }
 
 .journals-mobile-search {
+    left: 20px;
     width: 100%;
     margin-bottom: -20px;
 }
@@ -50,6 +52,18 @@
     color: black;
 }
 
+.journals-mobile-search{
+    margin-bottom: -20px;
+    width: 75%;
+    float: left;
+
+}
+
+.random-prompts-mob{
+    margin-bottom: -20px;
+    width: 25%;
+    float: right;
+}
 .mobile-date {
     font-size: 16px;
 }
