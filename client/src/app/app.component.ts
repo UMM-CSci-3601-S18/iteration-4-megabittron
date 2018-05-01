@@ -5,6 +5,7 @@ import {AppService} from "./app.service";
 import {Router, ActivationStart} from "@angular/router";
 import {Location} from "@angular/common";
 import {HostListener} from "@angular/core";
+import {JournalsService} from "./journals/journals.service";
 
 
 declare var gapi: any;
@@ -13,25 +14,47 @@ declare var gapi: any;
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    providers: [AppService]
+    providers: [AppService, JournalsService]
 })
 export class AppComponent implements OnInit {
     googleAuth;
     public currentPath;
     public currentWidth;
+    public currentId;
 
     constructor(private http: HttpClient,
                 public appService: AppService,
                 private router: Router,
-                private _location: Location) {
+                private _location: Location,
+                public journalListService: JournalsService) {
 
         this.router.events.subscribe((e) => {
             if (e instanceof ActivationStart) {
                 this.currentPath = e.snapshot.routeConfig.path;
+                this.currentId = e.snapshot.params['_id'];
             }
         })
 
         this.onResize();
+    }
+
+    deleteJournal(_id: string) {
+        this.journalListService.deleteJournal(_id).subscribe(
+            journals => {
+                console.log("first part");
+                //this.refreshJournal();
+                //this.loadService();
+            },
+            err => {
+                console.log(err);
+                console.log("hi");
+                //this.refreshJournal();
+                //this.loadService();
+                /*this.snackBar.open("Deleted Journal", "CLOSE", {
+                    duration: 2000,
+                });*/
+            }
+        );
     }
 
     @HostListener('window:resize', ['$event'])
