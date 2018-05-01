@@ -206,7 +206,7 @@
                                 </div>
                                 <div class="table-div">
                                     <mat-table #table class="summary-table"
-                                               *ngFor="let summary of this.filterSummaries(summaryEmotion, summaryIntensity, startDate, endDate)">
+                                               *ngFor="let summary of this.filterSummaries(summaryEmotion, summaryIntensity, startDate, endDate) | dateSort: 'date'">
                                         <ng-container matColumnDef="emotion">
                                             <mat-header-cell *matHeaderCellDef><img class="selected-emotion"
                                                                                     src="../../assets/images/emotions/{{summary.emotion}}.svg"

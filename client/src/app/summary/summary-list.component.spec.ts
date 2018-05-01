@@ -10,6 +10,7 @@ import {MatDialog} from '@angular/material';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import {RouterTestingModule} from "@angular/router/testing";
+import {ArraySortPipe} from "../journals/array-sort.pipe";
 
 
 /** Tests the filtering used for display of summary list ---------------------------------------------------------------------------------- **/
@@ -57,7 +58,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 
                 TestBed.configureTestingModule({
                     imports: [CustomModule, RouterTestingModule],
-                    declarations: [SummaryListComponent],
+                    declarations: [SummaryListComponent, ArraySortPipe],
                     providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
                 });
@@ -203,7 +204,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 
                 TestBed.configureTestingModule({
                     imports: [CustomModule, RouterTestingModule],
-                    declarations: [SummaryListComponent],
+                    declarations: [SummaryListComponent, ArraySortPipe],
                     providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
                 });
@@ -276,7 +277,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 
                 TestBed.configureTestingModule({
                     imports: [CustomModule, RouterTestingModule],
-                    declarations: [SummaryListComponent],
+                    declarations: [SummaryListComponent, ArraySortPipe],
                     providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
                 });
@@ -380,7 +381,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 
                 TestBed.configureTestingModule({
                     imports: [CustomModule, RouterTestingModule],
-                    declarations: [SummaryListComponent],
+                    declarations: [SummaryListComponent, ArraySortPipe],
                     providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
                 });
@@ -483,7 +484,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 
                 TestBed.configureTestingModule({
                     imports: [CustomModule, RouterTestingModule],
-                    declarations: [SummaryListComponent],
+                    declarations: [SummaryListComponent, ArraySortPipe],
                     providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
                 });
@@ -610,7 +611,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 
                 TestBed.configureTestingModule({
                     imports: [CustomModule, RouterTestingModule],
-                    declarations: [SummaryListComponent],
+                    declarations: [SummaryListComponent, ArraySortPipe],
                     providers: [{provide: SummaryListService, useValue: summaryServiceStub},
                         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
                 });
