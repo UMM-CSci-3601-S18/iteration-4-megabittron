@@ -14,6 +14,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 export class SettingsComponent implements OnInit {
 
+    public theme: string;
 
     ngOnInit(): void {
 
