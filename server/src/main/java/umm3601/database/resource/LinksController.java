@@ -30,7 +30,7 @@ public class LinksController {
         linksCollection = database.getCollection("links");
     }
 
-    public String getLinks(String id) {
+    public String getLink(String id) {
 
         FindIterable<Document> jsonContacts
             = linksCollection

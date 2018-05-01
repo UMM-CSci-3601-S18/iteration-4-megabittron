@@ -4,7 +4,6 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.util.JSON;
 import spark.Request;
 import spark.Response;
-import umm3601.database.resource.ContactsController;
 
 
 public class ContactsRequestHandler {
@@ -24,7 +23,7 @@ public class ContactsRequestHandler {
         String id = req.params("id");
         String contacts;
         try {
-            contacts = contactsController.getContacts(id);
+            contacts = contactsController.getContact(id);
         } catch (IllegalArgumentException e) {
             // This is thrown if the ID doesn't have the appropriate
             // form for a Mongo Object ID.

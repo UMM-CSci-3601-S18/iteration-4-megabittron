@@ -4,7 +4,6 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.util.JSON;
 import spark.Request;
 import spark.Response;
-import umm3601.database.resource.LinksController;
 
 
 public class LinksRequestHandler {
@@ -24,7 +23,7 @@ public class LinksRequestHandler {
         String id = req.params("id");
         String links;
         try {
-            links = linksController.getLinks(id);
+            links = linksController.getLink(id);
         } catch (IllegalArgumentException e) {
             // This is thrown if the ID doesn't have the appropriate
             // form for a Mongo Object ID.

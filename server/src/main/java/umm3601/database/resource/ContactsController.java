@@ -30,7 +30,7 @@ public class ContactsController {
         contactsCollection = database.getCollection("contacts");
     }
 
-    public String getContacts(String id) {
+    public String getContact(String id) {
 
         FindIterable<Document> jsonContacts
             = contactsCollection
@@ -68,8 +68,8 @@ public class ContactsController {
     public String addNewContacts(String id, String userID, String name, String email, String phone) {
 
         Document newContacts = new Document();
-        newContacts.append("name", name);
         newContacts.append("userID", userID);
+        newContacts.append("name", name);
         newContacts.append("email", email);
         newContacts.append("phone", phone);
 
