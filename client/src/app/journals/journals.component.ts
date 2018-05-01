@@ -6,6 +6,7 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 import {AddJournalComponent} from './add/add-journal.component';
 import {AppService} from "../app.service";
 import {Router} from "@angular/router";
+import {RandomPrompt} from "./Prompts/open-prompts.component";
 
 @Component({
     selector: 'app-journals-component',
@@ -95,6 +96,37 @@ export class JournalsComponent implements OnInit {
         this.prompt = this.prompts[Math.floor(Math.random() * this.prompts.length)];
     }
 
+    openRandomPrompt(): void{
+
+        this.prompt = this.prompts[Math.floor(Math.random() * this.prompts.length)];
+        //this one is for mobile view
+        console.log("Mobile-vied prompts icon clicked.");
+         const dialogRef = this.dialog.open(RandomPrompt, {
+             width: '300px',
+
+         });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result == undefined) {
+                console.log("Cancelled without generating a prompt");
+            }
+            else {
+                if(localStorage.isSignedIn == "true"){
+                    this.journalListService.RandomPromptsComponent(result).subscribe(
+                        RandomPromptsComponentResult => {
+                            this.highlightedID = RandomPromptsComponentResult;
+                            this.refreshJournals();
+                        },
+                        err => {
+                            console.log('There was an error adding the journal.');
+                            console.log('The error was ' + JSON.stringify(err));
+                        });
+                }
+            }
+        });
+        }
+
+
     openAddJournalDialog(): void {
         console.log("Add journal button clicked.");
         const newJournal: Journal = {_id: '', userID: localStorage.getItem('userID'), title: '', content: '', date: ''};
@@ -127,6 +159,12 @@ export class JournalsComponent implements OnInit {
             }
         });
     }
+
+
+
+
+
+
 
     deleteJournal(_id: string) {
         this.journalListService.deleteJournal(_id).subscribe(

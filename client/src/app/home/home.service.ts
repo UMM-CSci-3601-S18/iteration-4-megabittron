@@ -24,6 +24,10 @@ export class EmotionService {
             this.noID = true;
         }
 
+        if(newEmotion.description == null) {
+            newEmotion.description = '';
+        }
+
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
