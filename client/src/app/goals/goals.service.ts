@@ -37,6 +37,11 @@ export class GoalsService {
         return this.http.get<Goal[]>(this.goalUrl);
     }
 
+    getGoalById(id: string): Observable<Goal> {
+        this.goalUrl = this.baseUrl;
+        return this.http.get<Goal>(this.goalUrl + '/' + id);
+    }
+
     // sets the goalUrl to the serachParam
     private parameterPresent(searchParam: string) {
         return this.goalUrl.indexOf(searchParam) !== -1;

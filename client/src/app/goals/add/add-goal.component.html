@@ -32,9 +32,8 @@
         <mat-option value="Weekly">Weekly</mat-option>
         <mat-option value="Monthly">Monthly</mat-option>
     </mat-select>
-    <mat-form-field>
+    <mat-form-field hintLabel="Max 100 characters">
         <input matInput #input class="purposeField"
-               hintLable="Max 100 characters"
                maxlength="100"
                placeholder="What is the purpose?"
                [(ngModel)]="data.goal.purpose"

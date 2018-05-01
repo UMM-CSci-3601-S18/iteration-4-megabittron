@@ -118,8 +118,8 @@ export class JournalsComponent implements OnInit {
                                 console.log('There was an error adding the journal.');
                                 console.log('The error was ' + JSON.stringify(err));
                         });
-                    this.snackBar.open("Added Journal", "CLOSE", {
-                        duration: 2000,
+                    this.snackBar.open("Journal Created", "CLOSE", {
+                        duration: 3000,
                     });
                     console.log("Journal added.");
                 }
@@ -139,8 +139,8 @@ export class JournalsComponent implements OnInit {
                 console.log("hi");
                 this.refreshJournals();
                 this.loadService();
-                this.snackBar.open("Deleted Journal", "CLOSE", {
-                    duration: 2000,
+                this.snackBar.open("Journal Deleted", "CLOSE", {
+                    duration: 3000,
                 });
             }
         );
