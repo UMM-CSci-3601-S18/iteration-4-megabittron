@@ -1,5 +1,5 @@
 <td-layout #layout>
-    <td-navigation-drawer id="navBar" class="nav-drawer" flex>
+    <td-navigation-drawer id="navBar" class="nav-drawer" flex *ngIf="!isJournalView()">
         <mat-toolbar>
             <span *ngIf="appService.isSignedIn()"></span>
             <span *ngIf="!appService.isSignedIn()" class="g-signin2" (click)="signIn()"></span>
@@ -36,7 +36,7 @@
         </mat-nav-list>
     </td-navigation-drawer>
     <td-layout-nav class="nav-bar">
-        <div td-toolbar-content layout="row" layout-align="start center" flex>
+        <div td-toolbar-content layout="row" layout-align="start center" flex *ngIf="!isJournalView()">
             <button mat-icon-button td-menu-button tdLayoutToggle hide-gt-xs>
                 <mat-icon>menu</mat-icon>
             </button>
@@ -56,6 +56,11 @@
                 <div *ngIf="!appService.isSignedIn()" class="g-signin2" (click)="signIn()"></div>
                 <button *ngIf="appService.isSignedIn()" mat-raised-button (click)="signOut()">Sign Out</button>
             </a>
+        </div>
+        <div td-toolbar-content layout="row" layout-align="start center" flex *ngIf="isJournalView()">
+            <button class="mobile-back" mat-icon-button (click)="backClicked()"><mat-icon>arrow_back</mat-icon></button>
+            <span class="spacer"></span>
+            <button class="mobile-back" mat-icon-button (click)="deleteJournal(currentId); backClicked()"><mat-icon>delete_forever</mat-icon></button>
         </div>
         <router-outlet></router-outlet>
     </td-layout-nav>

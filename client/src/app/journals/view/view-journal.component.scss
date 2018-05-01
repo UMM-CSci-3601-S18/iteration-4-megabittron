@@ -53,3 +53,25 @@
 .break-word {
     word-wrap: break-word;
 }
+
+.mobile-date{
+    text-align: center;
+}
+
+.mobile-title {
+    text-align: center;
+    float: inherit;
+    word-wrap: break-word;
+}
+
+.mobile-content {
+    margin-left: 10px;
+    white-space: pre-line;
+    padding-bottom: 62px;
+}
+
+.mobile-edit {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+}

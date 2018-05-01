@@ -6,7 +6,7 @@
         Back
     </button>
 </div>
-<div class="journal">
+<div class="journal" hide-xs>
     <mat-card class="journal-card">
         <mat-card-header>
         <mat-card-title class="journal-title break-word">{{journal.title}}</mat-card-title>
@@ -23,4 +23,22 @@
         <mat-divider></mat-divider>
         <mat-card-content class="journal-content break-word">{{journal.content}}</mat-card-content>
     </mat-card>
+</div>
+
+<div class="journal-mobile" hide-gt-xs>
+
+    <div class="mobile-title">
+        <h2>{{journal.title}}</h2>
+    </div>
+
+    <p class="mobile-date">{{journal.date | date : "MMM d, yyyy 'at' h:mm a"}}</p>
+    <mat-divider></mat-divider>
+
+    <div class="mobile-content">
+        {{journal.content}}
+    </div>
+
+    <button class="mobile-edit" (click)="openEditJournalDialog(journal._id, journal.title, journal.content, journal.date)" mat-mini-fab color="primary"><mat-icon>edit</mat-icon></button>
+
+
 </div>

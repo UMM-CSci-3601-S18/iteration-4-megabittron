@@ -69,8 +69,6 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         EditLinkComponent,
         ArraySortPipe,
         ShowSummaryListComponent,
-
-
     ],
     providers: [
         GoalsService,
