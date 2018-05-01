@@ -7,6 +7,7 @@ import {AppService} from "../../../app.service";
     selector: 'app-add-contact.component',
     templateUrl: 'add-contact.component.html',
     styleUrls: ['./add-contact.component.css'],
+    providers: [AppService],
 })
 
 export class AddContactComponent {

@@ -7,6 +7,7 @@ import {AppService} from "../../app.service";
     selector: 'app-show-summary-list.component',
     templateUrl: 'show-summary-list.component.html',
     styleUrls: ['./show-summary-list.component.scss'],
+    providers: [AppService],
 })
 
 export class ShowSummaryListComponent {

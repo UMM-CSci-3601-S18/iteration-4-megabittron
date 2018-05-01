@@ -7,6 +7,7 @@ import {AppService} from "../../../app.service";
     selector: 'app-edit-links.component',
     templateUrl: 'edit-links.component.html',
     styleUrls: ['./edit-links.component.scss'],
+    providers: [AppService],
 })
 
 export class EditLinkComponent {

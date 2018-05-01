@@ -7,6 +7,7 @@ import {AppService} from "../../../app.service";
     selector: 'edit-contacts.component',
     templateUrl: 'edit-contacts.component.html',
     styleUrls: ['./edit-contacts.component.scss'],
+    providers: [AppService],
 })
 
 export class EditContactComponent {

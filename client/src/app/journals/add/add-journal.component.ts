@@ -7,6 +7,7 @@ import {AppService} from "../../app.service";
     selector: 'app-add-journal.component',
     templateUrl: 'add-journal.component.html',
     styleUrls: ['./add-journal.component.scss'],
+    providers: [AppService],
 })
 
 export class AddJournalComponent {

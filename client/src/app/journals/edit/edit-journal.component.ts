@@ -7,6 +7,7 @@ import {AppService} from "../../app.service";
     selector: 'app-edit-journal.component',
     templateUrl: 'edit-journal.component.html',
     styleUrls: ['./edit-journal.component.scss'],
+    providers: [AppService],
 })
 
 export class EditJournalComponent {

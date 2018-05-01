@@ -7,6 +7,7 @@ import {AppService} from "../../app.service";
     selector: 'app-add-goal.component',
     templateUrl: 'add-goal.component.html',
     styleUrls: ['./add-goal.component.scss'],
+    providers: [AppService]
 })
 export class AddGoalComponent {
     constructor(

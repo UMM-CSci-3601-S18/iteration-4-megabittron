@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {Goal} from './goal';
 import {environment} from '../../environments/environment';
 import 'rxjs/add/observable/of';
-import {AppService} from "../app.service";
+
 
 
 @Injectable()
@@ -15,7 +15,6 @@ export class GoalsService {
     private emptyObservable: Observable<Goal[]> = Observable.of([]);
 
     constructor(
-        public appService:AppService,
         private http: HttpClient) {
     }
 

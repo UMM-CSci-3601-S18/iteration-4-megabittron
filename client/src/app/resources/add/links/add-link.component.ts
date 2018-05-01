@@ -7,6 +7,7 @@ import {AppService} from "../../../app.service";
     selector: 'app-add-link.component',
     templateUrl: 'add-link.component.html',
     styleUrls: ['./add-link.component.css'],
+    providers: [AppService],
 })
 
 export class AddLinkComponent {
