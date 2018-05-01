@@ -3,6 +3,10 @@ import {Component, OnInit} from '@angular/core';
 import {Contact} from './contact';
 import {Link} from './link';
 import {ResourcesService} from "./resources.service";
+import {AddLinkComponent} from "./add/links/add-link.component";
+import {MatDialog} from '@angular/material';
+import {Observable} from 'rxjs/Observable';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
     selector: 'resources-component',
@@ -16,10 +20,19 @@ export class ResourcesComponent implements OnInit{
     links: Link[] = [];
     contacts: Contact[] = [];
 
-    constructor(public appService: AppService, public resourcesService: ResourcesService) {
+    constructor(public appService: AppService,
+                public resourcesService: ResourcesService,
+                public dialog: MatDialog,
+                public snackBar: MatSnackBar) {
         this.videoTitle = 'Videos';
         this.linkTitle = 'Links';
         this.numberTitle = 'Phone Numbers';
+    }
+
+    private highlightedID: { '$oid': string } = {'$oid': ''};
+
+    isHighlighted(link: Link): boolean {
+        return link._id['$oid'] === this.highlightedID['$oid'];
     }
 
     defaultVideos = [
@@ -138,6 +151,63 @@ export class ResourcesComponent implements OnInit{
         },
     ]
 
+    newLinkDialog(): void {
+        const newLink: Link = {
+            _id: '',
+            userID: localStorage.getItem("userID"),
+            name: '',
+            subname: '',
+            url: '',
+        };
+        const dialogRef = this.dialog.open(AddLinkComponent, {
+            width: '300px',
+            data: {link: newLink}
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result == undefined) {
+                console.log("Cancelled without adding a link");
+            }
+            else {
+                if(localStorage.isSignedIn == "true"){
+                    this.resourcesService.addNewLink(result).subscribe(
+                        addLinkResult => {
+                            this.highlightedID = addLinkResult;
+                            this.refreshLinks();
+                            this.snackBar.open("Link Created", "CLOSE", {
+                                duration: 3000,
+                            });
+                        },
+                        err => {
+                            // This should probably be turned into some sort of meaningful response.
+                            console.log('There was an error adding the link.');
+                            console.log('The error was ' + JSON.stringify(err));
+                        });
+                }
+            }
+        });
+    }
+
+    refreshLinks(): Observable<Link[]> {
+        var userID = localStorage.getItem("userID");
+        if(userID == null){
+            userID = "";
+        }
+        const linkObservable: Observable<Link[]> = this.resourcesService.getLinks(userID);
+        console.log(linkObservable);
+        linkObservable.subscribe(
+            links => {
+                console.log(links);
+                if(links != null){
+                    this.links = links;
+                }
+            },
+            err => {
+                console.log(err);
+            });
+        return linkObservable;
+    }
+
     loadService(): void {
         console.log(localStorage.getItem("userID"));
         this.resourcesService.getLinks(localStorage.getItem("userID")).subscribe(
@@ -163,6 +233,7 @@ export class ResourcesComponent implements OnInit{
         //For testing
         //toggle the value in app service to toggle testing
         this.appService.testingToggle();
+        this.refreshLinks();
         this.loadService();
     }
 
