@@ -50,14 +50,25 @@ mat-card.filtering.mat-card {
 }
 
 .table-header-div {
-    border: black solid 1.5px;
+    border-right: black solid 2px;
+    border-left: black solid 2px;
+    border-top: black solid 2px;
 }
 
 .table-div {
-    border: black solid 1px;
+    border: black solid 2px;
+
 }
 
 .entire-table {
-    padding-right: 20%;
-    padding-left: 20%;
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+.mat-header-cell {
+    color: rgba(0, 0, 0, 0.76);
+}
+
+.page-scroll-buttons {
+    text-align: center;
 }

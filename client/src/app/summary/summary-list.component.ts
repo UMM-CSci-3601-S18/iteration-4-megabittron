@@ -17,6 +17,15 @@ import {ShowSummaryListComponent} from "./show/show-summary-list.component";
 })
 
 export class SummaryListComponent implements AfterViewInit, OnInit {
+
+    public displayedColumns = ["emotion", "intensity", "date", "description"];
+
+    public summariesPerPage = 10;
+    public currentPage = 1;
+    public lastPage = 0;
+    public firstPage = 1;
+
+
     startDate;
     endDate;
     getDate;
@@ -177,6 +186,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
         this.filteredSummaries = this.filterDates(this.filteredSummaries, searchStartDate, searchEndDate);
 
+        this.showSummaries();
         return this.filteredSummaries;
     }
 
@@ -750,7 +760,7 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
 
     // Used to show total number of summaries shown by chart in HTML
     totalNumberEmotions(): number {
-        return this.filteredSummaries.length;
+        return this.summaries.length;
     }
 
     ngAfterViewInit(): void {
@@ -805,8 +815,6 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         this.refreshSummaries();
     }
 
-    public displayedColumns = ["emotion", "intensity", "date", "description"];
-
     showAllDescription(description: string): void {
         const showSummary: Summary = {
             _id: null,
@@ -823,5 +831,35 @@ export class SummaryListComponent implements AfterViewInit, OnInit {
         console.log("Showing summary description.");
     }
 
+    showSummaries() {
+        let count = this.currentPage * this.summariesPerPage;
+        this.filteredSummaries = this.filteredSummaries.filter(summary => {
+            if (count > this.summariesPerPage) {
+                count--;
+                return false;
+            }
+            if (count <= this.summariesPerPage && count != 0) {
+                count--;
+                return true;
+            }
+        });
+    }
+
+    maxNumPages(): boolean {
+        if (this.filteredSummaries !== undefined) {
+            return (this.summariesPerPage * this.currentPage) < this.summaries.length;
+        }
+        return false;
+    }
+
+    goLastPage() {
+        let test = this.summaries.length / this.summariesPerPage;
+        this.lastPage = Math.ceil(test);
+        this.currentPage = this.lastPage;
+    }
+
+    goFirstPage() {
+        this.currentPage = this.firstPage;
+    }
 }
 

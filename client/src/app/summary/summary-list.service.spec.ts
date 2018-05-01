@@ -6,7 +6,7 @@ import {Summary} from "./summary";
 import {SummaryListService} from "./summary-list.service";
 import {SummaryListComponent} from "./summary-list.component";
 
-describe('Summary: ', () => {
+fdescribe('Summary: ', () => {
     // A small collection of test summaries
 
     const testSummaries: Summary[] = [

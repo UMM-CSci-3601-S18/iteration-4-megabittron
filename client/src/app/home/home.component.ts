@@ -98,18 +98,16 @@ export class HomeComponent implements OnInit{
     }
 
     //Enables the next button when the user selects an emotion and an intensity
-    showNextButton() {
-        if(this.selectedEmotion != "none") {
+    showNextButtonEmotion() {
+        if (this.selectedEmotion != "none") {
             return false;
-        }
+        } else return true;
+    }
 
-        if(this.emojiRating != 0) {
+    showNextButtonIntensity() {
+        if (this.emojiRating != 0) {
             return false;
-        }
-
-        else {
-            return true;
-        }
+        } else return true;
     }
 
     ngOnInit(): void {

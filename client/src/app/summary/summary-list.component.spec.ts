@@ -14,7 +14,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 
 /** Tests the filtering used for display of summary list ---------------------------------------------------------------------------------- **/
 
-        describe('Summary', () => {
+        fdescribe('Summary', () => {
 
             let summary: SummaryListComponent;
             let fixture: ComponentFixture<SummaryListComponent>;
@@ -160,7 +160,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 
         /** Tests the filtering used for charts when looking at all time ---------------------------------------------------------------------------------- **/
 
-        describe('Chart Filtering - no limit', () => {
+        fdescribe('Chart Filtering - no limit', () => {
 
             let summary: SummaryListComponent;
             let fixture: ComponentFixture<SummaryListComponent>;
@@ -233,7 +233,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 
         /** Tests the filtering used for charts when looking at past day ---------------------------------------------------------------------------------- **/
 
-        describe('Chart Filtering - Past Day', () => {
+        fdescribe('Chart Filtering - Past Day', () => {
 
             let summary: SummaryListComponent;
             let fixture: ComponentFixture<SummaryListComponent>;
@@ -337,7 +337,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 
         /** Tests the filtering used for charts when looking at past week ---------------------------------------------------------------------------------- **/
 
-        describe('Chart Filtering - Past Week', () => {
+        fdescribe('Chart Filtering - Past Week', () => {
 
             let summary: SummaryListComponent;
             let fixture: ComponentFixture<SummaryListComponent>;
@@ -440,7 +440,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 
         /** Tests the filtering used for charts when looking at past month ---------------------------------------------------------------------------------- **/
 
-        describe('Chart Filtering - Past Month', () => {
+        fdescribe('Chart Filtering - Past Month', () => {
 
             let summary: SummaryListComponent;
             let fixture: ComponentFixture<SummaryListComponent>;
@@ -567,7 +567,7 @@ import {RouterTestingModule} from "@angular/router/testing";
 
         /** Tests the filtering used for charts when looking at past year ---------------------------------------------------------------------------------- **/
 
-        describe('Chart Filtering - Past Year', () => {
+        fdescribe('Chart Filtering - Past Year', () => {
 
             let summary: SummaryListComponent;
             let fixture: ComponentFixture<SummaryListComponent>;

@@ -5,6 +5,7 @@ import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 import {Observable} from "rxjs/Observable";
 import {Emotion} from "./emotion";
 import {EmotionService} from "./home.service";
+import {ArraySortPipe} from "../journals/array-sort.pipe";
 
 describe('Home', () => {
 
@@ -47,7 +48,7 @@ describe('Home', () => {
 
         TestBed.configureTestingModule({
             imports: [CustomModule],
-            declarations: [HomeComponent], // declare the test component
+            declarations: [HomeComponent, ArraySortPipe], // declare the test component
             providers: [{provide: EmotionService, useValue: homeServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
@@ -84,37 +85,37 @@ describe('Home', () => {
 
     it('should return false', () => {
         Hcomponent.selectedEmotion = 'anxious';
-        let tempBoolean: boolean = Hcomponent.showNextButton();
+        let tempBoolean: boolean = Hcomponent.showNextButtonEmotion();
         expect(tempBoolean == false).toBeTruthy();
     });
 
     it('should return false', () => {
         Hcomponent.selectedEmotion = 'none';
-        let tempBoolean: boolean = Hcomponent.showNextButton();
+        let tempBoolean: boolean = Hcomponent.showNextButtonEmotion();
         expect(tempBoolean == false).toBeTruthy();
     });
 
     it('should return false', () => {
         Hcomponent.emojiRating = 4;
-        let tempBoolean: boolean = Hcomponent.showNextButton();
+        let tempBoolean: boolean = Hcomponent.showNextButtonIntensity();
         expect(tempBoolean == false).toBeTruthy();
     });
 
     it('should return false', () => {
         Hcomponent.emojiRating = 0;
-        let tempBoolean: boolean = Hcomponent.showNextButton();
+        let tempBoolean: boolean = Hcomponent.showNextButtonIntensity();
         expect(tempBoolean == false).toBeTruthy();
     });
 
     it('should return false', () => {
         Hcomponent.emojiRating = 0;
-        let tempBoolean: boolean = Hcomponent.showNextButton();
+        let tempBoolean: boolean = Hcomponent.showNextButtonIntensity();
         expect(tempBoolean).toBe(false);
     });
 
     it('should return false', () => {
         Hcomponent.emojiRating = 2;
-        let tempBoolean: boolean = Hcomponent.showNextButton();
+        let tempBoolean: boolean = Hcomponent.showNextButtonIntensity();
         expect(tempBoolean).toBe(false);
     });
 });
