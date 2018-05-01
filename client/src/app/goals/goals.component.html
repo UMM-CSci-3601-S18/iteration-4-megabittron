@@ -72,3 +72,32 @@
         </mat-card>
     </div>
 </div>
+
+
+
+
+<mat-radio-group matInput #input *ngIf="showAllGoals" [(ngModel)]="goalStatus" (change)="loadService()" class="status-radio-group">
+    <mat-radio-button id="allStatusMob" value="all">All</mat-radio-button>
+    <mat-radio-button id="completeMob" value="true">Complete</mat-radio-button>
+    <mat-radio-button id="incompleteMob" value="false">Incomplete</mat-radio-button>
+</mat-radio-group>
+
+<div class="list-journals-section" hide-gt-xs>
+
+
+
+    <mat-list class="journals-list">
+        <div class="journals-list-info" *ngFor="let goal of shownGoals | dateSort: 'start'"
+             #elem [id]="goal._id['$oid']">
+            <a routerLink="/goals/{{goal._id['$oid']}}" class="journal-card-open">
+                <mat-list-item>
+                    <h3 matLine>{{goal.name}}</h3>
+                    <p class="mobile-date">{{goal.start | date : "MM/dd/yy"}}</p>
+                    <h6 matLine>{{goal.frequency}}</h6>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+            </a>
+        </div>
+    </mat-list>
+    <button class="add-journal-fab-button" (click)="newGoalDialog()" mat-fab color="primary"><mat-icon>add</mat-icon></button>
+</div>
