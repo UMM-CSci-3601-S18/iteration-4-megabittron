@@ -21,24 +21,18 @@ export class JournalPage {
     }
 
     getJournals() {
-        return element.all(by.className('journals-card')).count();
+        return element.all(by.className('journal-card')).count();
     }
 
-    typeATitle(title: string) {
-        const input = element(by.id('journalTitle'));
+    typeASearch(title: string) {
+        const input = element(by.className('search'));
         input.click();
         input.sendKeys(title);
     }
 
-    typeAContent(content: string) {
-        const input = element(by.id('journalContent'));
-        input.click();
-        input.sendKeys(content);
-    }
-
-    getJournalManageTitle() {
-        const title = element(by.id('journal-title')).getText();
-        this.highlightElement(by.id('journal-title'));
+    getJournalsTitle() {
+        const title = element(by.className('page-title')).getText();
+        this.highlightElement(by.className('page-title'));
         return title;
     }
 
@@ -49,7 +43,7 @@ export class JournalPage {
         return journal;
     }
 
-    buttonExists(): promise.Promise<boolean> {
+    addButtonExists(): promise.Promise<boolean> {
         this.highlightElement(by.id('addNewJournal'));
         return element(by.id('addNewJournal')).isPresent();
     }

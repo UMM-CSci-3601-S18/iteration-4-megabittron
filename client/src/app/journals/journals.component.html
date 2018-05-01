@@ -6,7 +6,7 @@
     </button>
     <mat-card class="filter-fields">
         <mat-form-field class="form-field">
-            <input matInput placeholder="Search" [(ngModel)]="search"/>
+            <input class="search" matInput placeholder="Search" [(ngModel)]="search"/>
             <button mat-button *ngIf="journalTitle" matSuffix mat-icon-button aria-label="Clear" (click)="journalTitle=''">
                 <mat-icon>close</mat-icon>
             </button>
