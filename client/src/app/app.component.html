@@ -59,7 +59,7 @@
         </div>
         <div td-toolbar-content layout="row" layout-align="start center" flex *ngIf="isJournalView()">
             <button class="mobile-back" mat-icon-button (click)="backClicked()"><mat-icon>arrow_back</mat-icon></button>
-            <span class="divider"></span>
+            <span class="spacer"></span>
             <button class="mobile-back" mat-icon-button (click)="deleteJournal(currentId); backClicked()"><mat-icon>delete_forever</mat-icon></button>
         </div>
         <router-outlet></router-outlet>
