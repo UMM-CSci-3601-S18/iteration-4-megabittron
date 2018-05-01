@@ -12,11 +12,11 @@ import {AppService} from "../app.service";
     styleUrls: ['./home.component.css'],
     providers: [AppService]
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
 
     readonly baseUrl: string = environment.API_URL + 'emotions';
 
-    private highlightedID: {'$oid': string} = { '$oid': '' };
+    private highlightedID: { '$oid': string } = {'$oid': ''};
 
     public selectedEmotion = "none";
     public emotionDescription: string;
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit{
     public emojiRating: number = 0;
 
     //Reloads the window and resets the page when the user clicks the reset button
-    restart(){
+    restart() {
         this.resetPage();
         window.location.reload();
     }
@@ -39,27 +39,37 @@ export class HomeComponent implements OnInit{
     }
 
     //Sets the selected emotion and calls the CSS that adds the border around the image
-    selectEmotion(ID){
-        if(this.selectedEmotion != 'none'){
+    selectEmotion(ID) {
+        if (this.selectedEmotion != 'none') {
             this.resetSelections()
         }
         this.selectedEmotion = ID;
         let newClass = document.getElementById(ID);
-        newClass.classList.add('on');
+        if (newClass != null) {
+            newClass.classList.add('on');
+        }
     }
 
     //Removes the border from the current selected emotion
-    private resetSelections(){
+    private resetSelections() {
         let newClass = document.getElementById(this.selectedEmotion);
-        newClass.classList.remove('on');
+        if (newClass != null) {
+            newClass.classList.remove('on');
+        }
     }
 
     //Saves the emotion to the server
-    saveEmotion(): void{
-        const newEmotion: Emotion = {_id: '', userID: localStorage.getItem("userID"),
-            emotion: this.selectedEmotion, intensity: this.emojiRating, description:this.emotionDescription, date: this.emotionDate};
+    saveEmotion(): void {
+        const newEmotion: Emotion = {
+            _id: '',
+            userID: localStorage.getItem("userID"),
+            emotion: this.selectedEmotion,
+            intensity: this.emojiRating,
+            description: this.emotionDescription,
+            date: this.emotionDate
+        };
 
-        if(localStorage.isSignedIn == "true"){
+        if (localStorage.isSignedIn == "true") {
 
             console.log(newEmotion);
             this.emotionService.addNewEmotion(newEmotion).subscribe(
@@ -84,13 +94,13 @@ export class HomeComponent implements OnInit{
     //Helper Functions//
 
     //Gets today's date and sets this.emotionDate to today's date
-    getDate(){
+    getDate() {
         let today = new Date();
         this.emotionDate = today.toString();
     }
 
     //Completely resets the page
-    resetPage(){
+    resetPage() {
         this.resetSelections();
         this.selectedEmotion = "none";
         this.emojiRating = 0;
@@ -101,13 +111,17 @@ export class HomeComponent implements OnInit{
     showNextButtonEmotion() {
         if (this.selectedEmotion != "none") {
             return false;
-        } else return true;
+        } else {
+            return true;
+        }
     }
 
     showNextButtonIntensity() {
         if (this.emojiRating != 0) {
             return false;
-        } else return true;
+        } else {
+            return true;
+        }
     }
 
     ngOnInit(): void {

@@ -89,10 +89,10 @@ describe('Home', () => {
         expect(tempBoolean == false).toBeTruthy();
     });
 
-    it('should return false', () => {
+    it('should return true', () => {
         Hcomponent.selectedEmotion = 'none';
         let tempBoolean: boolean = Hcomponent.showNextButtonEmotion();
-        expect(tempBoolean == false).toBeTruthy();
+        expect(tempBoolean == true).toBeTruthy();
     });
 
     it('should return false', () => {
@@ -101,16 +101,16 @@ describe('Home', () => {
         expect(tempBoolean == false).toBeTruthy();
     });
 
-    it('should return false', () => {
+    it('should return true', () => {
         Hcomponent.emojiRating = 0;
         let tempBoolean: boolean = Hcomponent.showNextButtonIntensity();
-        expect(tempBoolean == false).toBeTruthy();
+        expect(tempBoolean == true).toBeTruthy();
     });
 
-    it('should return false', () => {
+    it('should return true', () => {
         Hcomponent.emojiRating = 0;
         let tempBoolean: boolean = Hcomponent.showNextButtonIntensity();
-        expect(tempBoolean).toBe(false);
+        expect(tempBoolean).toBe(true);
     });
 
     it('should return false', () => {
