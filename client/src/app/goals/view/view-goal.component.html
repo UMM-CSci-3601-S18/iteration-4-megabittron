@@ -35,7 +35,17 @@
     <mat-divider></mat-divider>
 
     <div class="mobile-content">
-        {{goal.purpose}}
+        <h3>Purpose: {{goal.purpose}}</h3>
+    </div>
+    <div class="category-view-mob">
+        <h3>Category: {{goal.category}}</h3>
+    </div>
+    <div class="start-date-mob">
+        <h3>Start time: {{goal.start | date : "MMM d, yyyy 'at' h:mm a"}}</h3>
+        <h3>End time: {{goal.end| date : "MMM d, yyyy 'at' h:mm a"}}</h3>
+        <h3>Frequency: {{goal.frequency}}</h3>
+
+
     </div>
 
     <button class="mobile-edit" (click)="openEditGoalDialog(goal._id, goal.name, goal.purpose, goal.end)" mat-mini-fab color="primary"><mat-icon>edit</mat-icon></button>
