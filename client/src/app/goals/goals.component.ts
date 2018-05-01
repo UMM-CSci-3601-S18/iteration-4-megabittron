@@ -75,8 +75,8 @@ export class GoalsComponent implements OnInit {
                         addGoalResult => {
                             this.highlightedID = addGoalResult;
                             this.refreshGoals();
-                            this.snackBar.open("Added Goal", "CLOSE", {
-                                duration: 2000,
+                            this.snackBar.open("Goal Created", "CLOSE", {
+                                duration: 3000,
                             });
                             },
                             err => {
@@ -109,8 +109,8 @@ export class GoalsComponent implements OnInit {
                     editGoalResult => {
                         this.highlightedID = editGoalResult;
                         this.refreshGoals();
-                        this.snackBar.open("Edited Goal", "CLOSE", {
-                            duration: 2000,
+                        this.snackBar.open("Goal Edited", "CLOSE", {
+                            duration: 3000,
                         });
                         console.log("Goal edited.");
                     },
@@ -133,8 +133,8 @@ export class GoalsComponent implements OnInit {
                 console.log(err);
                 this.refreshGoals();
                 this.loadService();
-                this.snackBar.open("Deleted Goal", "CLOSE", {
-                    duration: 2000,
+                this.snackBar.open("Goal Deleted", "CLOSE", {
+                    duration: 3000,
                 });
             }
         );
@@ -157,9 +157,15 @@ export class GoalsComponent implements OnInit {
         this.goalService.editGoal(updatedGoal).subscribe(
             completeGoalResult => {
                 this.highlightedID = completeGoalResult;
-                this.snackBar.open("Status Changed", "CLOSE", {
-                    duration: 2000,
-                });
+                if (status == true) {
+                    this.snackBar.open("Goal Completed", "CLOSE", {
+                        duration: 3000,
+                    });
+                } else {
+                    this.snackBar.open("Goal Unchecked", "CLOSE", {
+                        duration: 3000,
+                    });
+                }
                 this.refreshGoals();
             },
             err => {

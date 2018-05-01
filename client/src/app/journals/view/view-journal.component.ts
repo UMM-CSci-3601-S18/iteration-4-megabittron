@@ -64,7 +64,7 @@ export class ViewJournalComponent implements OnInit {
                     editJournalResult => {
                         this.highlightedID = editJournalResult;
                         this.refreshJournal();
-                        this.snackBar.open("Edited Journal", "CLOSE", {
+                        this.snackBar.open("Journal Edited", "CLOSE", {
                             duration: 2000,
                         });
                         console.log("Journal edited.");
@@ -90,7 +90,7 @@ export class ViewJournalComponent implements OnInit {
                 console.log("hi");
                 this.refreshJournal();
                 //this.loadService();
-                this.snackBar.open("Deleted Journal", "CLOSE", {
+                this.snackBar.open("Journal Deleted", "CLOSE", {
                     duration: 2000,
                 });
             }

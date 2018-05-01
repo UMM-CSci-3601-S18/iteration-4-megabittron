@@ -4,7 +4,6 @@
 .goal-card {
     margin: 15px;
     width: 325px;
-    height: 200px;
 }
 
 .goal-title {
@@ -25,17 +24,38 @@
 
 .option-selector-card {
     width: 90%;
+    height: 160px;
     margin: 0 auto;
 }
 
 .action-button {
     position: absolute;
-    margin-top: 15px;
-    margin-left: 275px;
+    margin-top: 20px;
+    margin-left: 270px;
 }
 
 .uncheck {
     color: #4CAF50;
+}
+
+.edit {
+    color: #1976D2;
+}
+
+.delete {
+    color: #F44336;
+}
+
+.edit:hover {
+    background-color: #E0F7FA;
+}
+
+.delete:hover {
+    background-color: #FFEBEE;
+}
+
+.journal-action-buttons {
+    float: right;
 }
 
 .category-img {
