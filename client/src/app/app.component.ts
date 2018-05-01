@@ -77,6 +77,15 @@ export class AppComponent implements OnInit {
 
     }
 
+    public username: string;
+
+    getUsername () {
+        this.username = localStorage.getItem("userFirstName") + " " + localStorage.getItem("userLastName");
+        if (this.username.length > 18) {
+            this.username = this.username.slice(0, 17) + "...";
+        }
+    }
+
     signIn() {
         //let googleAuth = gapi.auth2.getAuthInstance();
         this.googleAuth = gapi.auth2.getAuthInstance();
@@ -136,6 +145,6 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.handleClientLoad();
         gapi.load('client:auth2', this.initClient);
-
+        this.getUsername();
     }
 }
