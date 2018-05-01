@@ -531,6 +531,10 @@ import {ArraySortPipe} from "../journals/array-sort.pipe";
 
             it('getPastDates works as intended', () => {
                 //last month has 31 days
+                summary.nowStamp = new Date('Sun Apr 08 2018 20:00:00 GMT-0000 (UTC)');
+                summary.nowDate = 8;
+                //summary.lastMonthStamp = new Date('Mon Feb 05 2018 20:00:00 GMT-0000 (UTC)');
+                summary.lastMonth = 2;
                 expect(summary.getPastDates(0)).toBe('9');
                 expect(summary.getPastDates(6)).toBe('15');
                 expect(summary.getPastDates(3)).toBe('12');
