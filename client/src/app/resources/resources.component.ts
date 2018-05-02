@@ -23,6 +23,7 @@ export class ResourcesComponent implements OnInit{
 
     links: Link[] = [];
     contacts: Contact[] = [];
+    typeOfResource = 'contacts';
 
     constructor(public appService: AppService,
                 public resourcesService: ResourcesService,
