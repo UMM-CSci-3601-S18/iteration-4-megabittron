@@ -34,7 +34,7 @@ public class UserControllerSpec {
         testUsers.add(Document.parse("{\n" +
             "                    SubjectID: \"121212\",\n" +
             "                    FirstName: \"Ahnaf\",\n" +
-            "                    LastName: \"Prio\",\n" +
+            "                    LastName: \"Prrio\",\n" +
             "                }"));
         testUsers.add(Document.parse("{\n" +
             "                    SubjectID: \"131313\",\n" +
