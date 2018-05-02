@@ -32,10 +32,28 @@ export class ResourcePage {
         return title;
     }
 
-    getLinksTitle() {
-        const title = element(by.className('links')).getText();
-        this.highlightElement(by.className('links'));
-        return title;
+    addLinkButtonExists(): promise.Promise<boolean> {
+        this.highlightElement(by.id('addNewLink'));
+        return element(by.id('addNewLink')).isPresent();
+    }
+
+    addContactButtonExists(): promise.Promise<boolean> {
+        this.highlightElement(by.id('addNewContact'));
+        return element(by.id('addNewContact')).isPresent();
+    }
+
+    getUniqueLink(anID: string) {
+        const link = element(by.id(anID)).getText();
+        this.highlightElement(by.id(anID));
+
+        return link;
+    }
+
+    getUniqueContact(anID: string) {
+        const contact = element(by.id(anID)).getText();
+        this.highlightElement(by.id(anID));
+
+        return contact;
     }
 
 }

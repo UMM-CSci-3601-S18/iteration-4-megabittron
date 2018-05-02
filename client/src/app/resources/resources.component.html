@@ -14,11 +14,11 @@
 
 <div layout="row">
     <mat-card class="numbers-list">
-        <mat-card-title>{{this.numberTitle}}</mat-card-title>
+        <mat-card-title class="numbers">{{this.numberTitle}}</mat-card-title>
 
         <mat-divider></mat-divider>
         <mat-list>
-            <mat-list-item *ngFor="let contact of contacts">
+            <mat-list-item *ngFor="let contact of contacts" #elem [id]="contact._id['$oid']">
                 <button mat-icon-button class="delete-button">
                     <mat-icon matTooltip="Delete" class="delete"
                               (click)="deleteContact(contact._id['$oid'])">delete</mat-icon>
@@ -29,10 +29,10 @@
         </mat-list>
     </mat-card>
     <mat-card class="videos-list">
-        <mat-card-title>{{this.videoTitle}}</mat-card-title>
+        <mat-card-title class="videos">{{this.videoTitle}}</mat-card-title>
         <mat-divider></mat-divider>
         <mat-list>
-            <mat-list-item *ngFor="let link of links">
+            <mat-list-item *ngFor="let link of links" #elem [id]="link._id['$oid']">
                 <a href="{{link.url}}" target="_blank">
                 <button mat-icon-button class="play-button">
                         <mat-icon matTooltip="Play" class="play-icon">play_arrow</mat-icon>
