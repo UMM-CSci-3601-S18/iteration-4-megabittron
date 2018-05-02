@@ -160,12 +160,6 @@ export class JournalsComponent implements OnInit {
         });
     }
 
-
-
-
-
-
-
     deleteJournal(_id: string) {
         this.journalListService.deleteJournal(_id).subscribe(
             journals => {

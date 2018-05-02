@@ -3,22 +3,19 @@
     <mat-form-field hintLabel="Max 30 characters">
         <input matInput #input required
                maxlength="30"
-               id="titleField" placeholder="Title"
+
+               id="titleField" placeholder="Name"
                [(ngModel)]="data.contact.name"
                name="data.journal.title">
     </mat-form-field>
     <mat-form-field>
         <input matInput #input required
-               maxlength="30"
-               id="detailsField" placeholder="Details"
-               [(ngModel)]="data.contact.email"
-               name="data.link.subname">
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput #input required
-               id="urlField" placeholder="URL"
+
+               maxlength="10"
+               id="detailsField" placeholder="Phone number"
                [(ngModel)]="data.contact.phone"
-               name="data.link.url">
+               name="data.link.phone">
+
     </mat-form-field>
     <div class="button-options">
         <button mat-raised-button

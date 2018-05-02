@@ -2,112 +2,47 @@
     <h2 class="page-title">Resources</h2>
     <hr class="nav-title-divider">
     <button mat-raised-button (click)="newLinkDialog()" class="new-object-button" id="addNewLink">
-        Add YouTube Playlist
+
+        Add YouTube Video
+
     </button>
     <button mat-raised-button (click)="newContactDialog()" class="new-object-button" id="addNewContact">
         New Contact
     </button>
 </div>
-<div class="grid-list" hide-xs layout="row" layout-wrap>
-    <mat-card class="link-card"
-              *ngFor="let link of links"
-              #elem [id]="link._id['$oid']" >
-            <div class="journal-details">
-                <mat-card-title class="journal-title break-word">{{link.name}}</mat-card-title>
-                <mat-card-subtitle class="date-subtitle">
-                </mat-card-subtitle>
-                <mat-divider></mat-divider>
-                <mat-card-content class="journal-info break-word">
-                    Link: {{link.url}}
-                    <br>
-                    Details: {{link.subname}}
-                </mat-card-content>
-            </div>
-    </mat-card>
-</div>
-<div class="grid-list" hide-xs layout="row" layout-wrap>
-    <mat-card class="contact-card"
-              *ngFor="let contact of contacts"
-              #elem [id]="contact._id['$oid']" >
-        <div class="journal-details">
-            <mat-card-title class="journal-title break-word">{{contact.name}}</mat-card-title>
-            <mat-card-subtitle class="date-subtitle">
-            </mat-card-subtitle>
-            <mat-divider></mat-divider>
-            <mat-card-content class="journal-info break-word">
-                Email: {{contact.email}}
-                <br>
-                Phone: {{contact.phone}}
-            </mat-card-content>
-        </div>
-    </mat-card>
-</div>
-<!--
-<div layout='row' layout-sm="column" layout-xs="column">
-    <div class="phone-div container">
-    <mat-card class="phone-numbers card">
-        <mat-card-title class="numbers title">{{this.numberTitle}}</mat-card-title>
-        <mat-card-subtitle>Hotlines for calling and texting.</mat-card-subtitle>
+
+<div layout="row">
+    <mat-card class="numbers-list">
+        <mat-card-title>{{this.numberTitle}}</mat-card-title>
+
         <mat-divider></mat-divider>
         <mat-list>
-            <h3 mat-subheader>Calling</h3>
-            <mat-divider></mat-divider>
-            <mat-list-item *ngFor="let callNumber of defaultContacts">
-                <h4 mat-line>{{callNumber.name}}</h4>
-                <a href="tel:{{callNumber.phone}}" mat-line>{{callNumber.phone}}</a>
-            </mat-list-item>
-            <mat-list-item *ngFor="let callNumber of contacts">
-                <h4 mat-line>{{callNumber.name}}</h4>
-                <a href="tel:{{callNumber.phone}}" mat-line>{{callNumber.phone}}</a>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-            <h3 mat-subheader>Texting</h3>
-            <mat-divider></mat-divider>
-            <mat-list-item *ngFor="let textNumber of defaultTextNumbers">
-                <h4 mat-line>{{textNumber.name}}</h4>
-                <a href="tel:{{textNumber.number}}" mat-line>{{textNumber.number}}</a>
+            <mat-list-item *ngFor="let contact of contacts">
+                <button mat-icon-button class="delete-button">
+                    <mat-icon matTooltip="Delete" class="delete"
+                              (click)="deleteContact(contact._id['$oid'])">delete</mat-icon>
+                </button>
+                <h4 mat-line>{{contact.name}}</h4>
+                <a href="tel:{{contact.phone}}" mat-line>{{contact.phone}}</a>
             </mat-list-item>
         </mat-list>
     </mat-card>
-    </div>
-    <div class="main-div container">
-    <mat-card class="main-card card">
-        <mat-card-title class="videos title">{{this.videoTitle}}</mat-card-title>
-        <mat-card-subtitle>YouTube video playlists.</mat-card-subtitle>
+    <mat-card class="videos-list">
+        <mat-card-title>{{this.videoTitle}}</mat-card-title>
         <mat-divider></mat-divider>
-        <mat-card-content>
-            <mat-list>
-                <a mat-list-item *ngFor="let video of defaultVideos"
-                   class="video link"
-                   target="_blank"
-                   href={{video.url}}>
-                    <button mat-icon-button class="play-button">
+        <mat-list>
+            <mat-list-item *ngFor="let link of links">
+                <a href="{{link.url}}" target="_blank">
+                <button mat-icon-button class="play-button">
                         <mat-icon matTooltip="Play" class="play-icon">play_arrow</mat-icon>
-                    </button>
-                    <h4 mat-line>{{video.name}}</h4>
-                    <p mat-line>{{video.subname}}</p>
-                </a>
-            </mat-list>
-        </mat-card-content>
+                </button></a>
+                <button mat-icon-button class="delete-button">
+                    <mat-icon matTooltip="Delete" class="delete-icon"
+                              (click)="deleteLink(link._id['$oid'])">delete</mat-icon>
+                </button>
+                <h4 mat-line>{{link.name}}</h4>
+            </mat-list-item>
+        </mat-list>
     </mat-card>
-    </div>
-    <div class="resources-div container">
-    <mat-card class="resources-card card">
-        <mat-card-title class="links title">{{this.linkTitle}}</mat-card-title>
-        <mat-card-subtitle>Visit a page for personal help.</mat-card-subtitle>
-        <mat-divider></mat-divider>
-        <mat-card-content>
-            <mat-list>
-                <a mat-list-item *ngFor="let link of defaultLinks"
-                   class="resource link"
-                   target="_blank"
-                   href={{link.url}}>
-                    <button mat-raised-button class="link-button">
-                        {{link.name}}
-                    </button></a>
-            </mat-list>
-        </mat-card-content>
-    </mat-card>
-    </div>
 </div>
 -->
