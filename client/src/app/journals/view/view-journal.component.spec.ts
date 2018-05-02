@@ -173,7 +173,7 @@ describe('Deleting a journal', () => {
 
     //This test returns Failed: Failed to execute 'send' on 'XMLHttpRequest': Failed to load 'ng:///DynamicTestModule/ViewJournalComponent_Host.ngfactory.js'.
     //We were unable to figure out how to fix this, unfortunately.
-    it('calls JournalsService.deleteGoal', () => {
+    it('calls JournalsService.deleteJournal', () => {
         expect(calledJournal).toBeNull();
         journalList.deleteJournal(this._id);
     });
