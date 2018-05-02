@@ -28,14 +28,12 @@ import {environment} from '../environments/environment';
 import {AppService} from "./app.service";
 import {RouterModule} from "@angular/router";
 import {SettingsComponent} from "./settings/settings.component";
+import {SettingsService} from "./settings/settings.service";
 import {AddContactComponent} from "./resources/add/contacts/add-contact.component";
 import {AddLinkComponent} from "./resources/add/links/add-link.component";
 import {EditLinkComponent} from "./resources/edit/links/edit-links.component";
 import {EditContactComponent} from "./resources/edit/contacts/edit-contacts.component";
-import {ViewContactComponent} from "./resources/view/contacts/view-contact.component";
-import {ViewLinkComponent} from "./resources/view/links/view-link.component";
 import {RandomPrompt} from "./journals/Prompts/open-prompts.component";
-
 import {MatTableModule} from "@angular/material/table";
 import {ShowSummaryListComponent} from "./summary/show/show-summary-list.component";
 
@@ -68,8 +66,6 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         SummaryListComponent,
         AddContactComponent,
         AddLinkComponent,
-        ViewContactComponent,
-        ViewLinkComponent,
         EditContactComponent,
         EditLinkComponent,
         ArraySortPipe,
@@ -84,6 +80,7 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         SummaryListService,
         AppService,
         ResourcesService,
+        SettingsService,
         {provide: APP_BASE_HREF, useValue: '/'},
         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true},
     ],

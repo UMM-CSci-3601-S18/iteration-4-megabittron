@@ -1,6 +1,8 @@
 
 package umm3601.database.user;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.util.JSON;
 import spark.Request;
 import spark.Response;
 
@@ -65,7 +67,41 @@ public class UserRequestHandler {
      */
     public String editUserStyleSetting(Request req, Response res){
         res.type("application/json");
-        return userController.editUserStyleSetting(req.queryMap().toMap());
+        Object o = JSON.parse(req.body());
+
+        try {
+            if(o.getClass().equals(BasicDBObject.class))
+            {
+                try {
+                    BasicDBObject dbO = (BasicDBObject) o;
+
+                    String userID = dbO.getString("userID");
+                    String StyleSetting = dbO.getString("setting");
+
+                    System.out.println("userID: " + userID);
+                    System.out.println("setting: " + StyleSetting);
+
+                    return userController.editUserStyleSetting(userID, StyleSetting);
+                }
+                catch(NullPointerException e)
+                {
+                    return null;
+                }
+
+            }
+            else
+            {
+                System.err.println("Expected BasicDBObject, received " + o.getClass());
+                return null;
+            }
+        }
+        catch(RuntimeException ree)
+        {
+            ree.printStackTrace();
+            return null;
+        }
+
+
     }
 
     /*
@@ -73,6 +109,38 @@ public class UserRequestHandler {
      */
     public String editUserFontSetting(Request req, Response res){
         res.type("application/json");
-        return userController.editUserFontSetting(req.queryMap().toMap());
+        Object o = JSON.parse(req.body());
+
+        try {
+            if(o.getClass().equals(BasicDBObject.class))
+            {
+                try {
+                    BasicDBObject dbO = (BasicDBObject) o;
+
+                    String userID = dbO.getString("userID");
+                    String FontSetting = dbO.getString("setting");
+
+                    System.out.println("userID: " + userID);
+                    System.out.println("setting: " + FontSetting);
+
+                    return userController.editUserFontSetting(userID, FontSetting);
+                }
+                catch(NullPointerException e)
+                {
+                    return null;
+                }
+
+            }
+            else
+            {
+                System.err.println("Expected BasicDBObject, received " + o.getClass());
+                return null;
+            }
+        }
+        catch(RuntimeException ree)
+        {
+            ree.printStackTrace();
+            return null;
+        }
     }
 }

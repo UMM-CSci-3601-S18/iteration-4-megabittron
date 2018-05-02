@@ -121,12 +121,15 @@ export class AppComponent implements OnInit {
         this.http.post(environment.API_URL + "login", {code: code}, httpOptions)
             .subscribe(onSuccess => {
                 console.log("Code sent to server");
+                console.log(onSuccess["_id"]);
                 console.log(onSuccess["_id"]["$oid"]);
                 console.log(onSuccess["FirstName"]);
                 console.log(onSuccess["LastName"]);
                 localStorage.setItem("userID", onSuccess["_id"]["$oid"]);
                 localStorage.setItem("userFirstName", onSuccess["FirstName"]);
                 localStorage.setItem("userLastName", onSuccess["LastName"]);
+                localStorage.setItem("fontSelected", onSuccess["FontSetting"]);
+                localStorage.setItem("styleSelected", onSuccess["StyleSetting"]);
             }, onFail => {
                 console.log("ERROR: Code couldn't be sent to the server");
             });
@@ -138,7 +141,7 @@ export class AppComponent implements OnInit {
 
     initClient() {
         gapi.client.init({
-            'clientId': '1080043572259-h3vk6jgc4skl3uav3g0l13qvlcqpebvu.apps.googleusercontent.com',
+            'clientId': '1080043572259-h76ostj5u9b5e9f6u2j695uin7pd5br5.apps.googleusercontent.com',
             'scope': 'profile email'
         });
     }

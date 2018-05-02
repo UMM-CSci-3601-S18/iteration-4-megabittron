@@ -30,7 +30,7 @@ public class ContactsController {
         contactsCollection = database.getCollection("contacts");
     }
 
-    public String getContacts(String id) {
+    public String getContact(String id) {
 
         FindIterable<Document> jsonContacts
             = contactsCollection
@@ -68,8 +68,8 @@ public class ContactsController {
     public String addNewContacts(String id, String userID, String name, String email, String phone) {
 
         Document newContacts = new Document();
-        newContacts.append("name", name);
         newContacts.append("userID", userID);
+        newContacts.append("name", name);
         newContacts.append("email", email);
         newContacts.append("phone", phone);
 
@@ -88,4 +88,19 @@ public class ContactsController {
             return null;
         }
     }
+
+    public void deleteContact(String id){
+        Document searchQuery = new Document().append("_id", new ObjectId(id));
+        System.out.println("Journal id: " + id);
+        try {
+            contactsCollection.deleteOne(searchQuery);
+            ObjectId theID = searchQuery.getObjectId("_id");
+            System.out.println("Succesfully deleted contact with ID: " + theID);
+
+        } catch(MongoException me) {
+            me.printStackTrace();
+            System.out.println("error");
+        }
+    }
+
 }

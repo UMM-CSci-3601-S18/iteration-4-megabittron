@@ -2,18 +2,6 @@
     padding-left: 10px;
 }
 
-.font-radio{
-    display: inline-block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-}
-.font-radio input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-}
-
 .theme-radio{
     display: inline-block;
     position: relative;
@@ -35,70 +23,32 @@
     background-color: #000000;
 }
 
-.panda-main{
-    position: absolute;
-    top: 0;
-    left: 0px;
-    height: 16px;
-    width: 24px;
-    background-color: #e3f2fd;
-}
-.panda-accent{
-    position: absolute;
-    top: 16px;
-    left: 0px;
-    height: 8px;
-    width: 24px;
-    background-color: #FFFFFF;
-}
 
-.win-main{
+.main{
     position: absolute;
-    top: 0;
+    top: 0px;
     left: 0px;
-    height: 16px;
+    height: 12px;
     width: 24px;
-    background-color: #008080;
 }
-.win-accent{
+.accent{
     position: absolute;
-    top: 16px;
+    top: 12px;
     left: 0px;
-    height: 8px;
-    width: 24px;
-    background-color: #e0e0e0;
+    height: 12px;
+    width: 12px;
 }
-
-.chr-main{
+.sidebar{
     position: absolute;
-    top: 0;
-    left: 0px;
-    height: 16px;
-    width: 24px;
-    background-color: #4CAF50;
+    top: 12px;
+    left: 12px;
+    height: 6px;
+    width: 12px;
 }
-.chr-accent{
+.navbar{
     position: absolute;
-    top: 16px;
-    left: 0px;
-    height: 8px;
-    width: 24px;
-    background-color: #F44336;
-}
-
-.aesth-main{
-    position: absolute;
-    top: 0;
-    left: 0px;
-    height: 16px;
-    width: 24px;
-    background-color: #FFC3DA;
-}
-.aesth-accent{
-    position: absolute;
-    top: 16px;
-    left: 0px;
-    height: 8px;
-    width: 24px;
-    background-color: #84F3D6;
+    top: 18px;
+    left: 12px;
+    height: 6px;
+    width: 12px;
 }

@@ -4,7 +4,6 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.util.JSON;
 import spark.Request;
 import spark.Response;
-import umm3601.database.resource.ContactsController;
 
 
 public class ContactsRequestHandler {
@@ -24,7 +23,7 @@ public class ContactsRequestHandler {
         String id = req.params("id");
         String contacts;
         try {
-            contacts = contactsController.getContacts(id);
+            contacts = contactsController.getContact(id);
         } catch (IllegalArgumentException e) {
             // This is thrown if the ID doesn't have the appropriate
             // form for a Mongo Object ID.
@@ -104,6 +103,24 @@ lls addNewResources helper method
                 System.err.println("Expected BasicDBObject, received " + o.getClass());
                 return null;
             }
+        }
+        catch(RuntimeException ree)
+        {
+            ree.printStackTrace();
+            return null;
+        }
+    }
+
+    public String deleteContact(Request req, Response res){
+
+        System.out.println("Deleting contact with ID: " + req.params(":id"));
+
+        res.type("application/json");
+
+        try {
+            String id = req.params(":id");
+            contactsController.deleteContact(id);
+            return req.params(":id");
         }
         catch(RuntimeException ree)
         {

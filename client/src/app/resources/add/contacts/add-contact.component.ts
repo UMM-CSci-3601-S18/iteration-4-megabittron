@@ -6,7 +6,7 @@ import {AppService} from "../../../app.service";
 @Component({
     selector: 'app-add-contact.component',
     templateUrl: 'add-contact.component.html',
-    styleUrls: ['./add-contact.component.css'],
+    styleUrls: ['./add-contact.component.scss'],
     providers: [AppService],
 })
 

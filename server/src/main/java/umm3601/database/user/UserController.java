@@ -102,12 +102,12 @@ public class UserController {
             newUser.append("SubjectID", SubjectID);
             newUser.append("FirstName", FirstName);
             newUser.append("LastName", LastName);
-            newUser.append("StyleSetting", "default-style");
-            newUser.append("FontSetting", "default-font");
+            newUser.append("StyleSetting", "panda");
+            newUser.append("FontSetting", "arial");
 
             try {
                 userCollection.insertOne(newUser);
-                System.err.println("Successfully added new user [_id=" + id + ", SubjectID=" + SubjectID + " FirstName=" + FirstName + " LastName=" + LastName + ']');
+                System.err.println("Successfully added new user [_id=" + id + ", SubjectID=" + SubjectID + " FirstName=" + FirstName + " LastName=" + LastName + " with Font/Style " + matchingUsers.first().get("FontSetting")+"/"+matchingUsers.first().get("StyleSetting")+ "]");
                 // return JSON.serialize(newUser);
                 Document userInfo = new Document();
                 userInfo.append("_id", matchingUsers.first().get("_id"));
@@ -139,64 +139,59 @@ public class UserController {
     }
 
     //edits user style settings
-    public String editUserStyleSetting(Map<String, String[]> queryParams) {
+    public String editUserStyleSetting(String userID, String setting) {
 
         Document filterDoc = new Document();
         String id;
 
-        if (queryParams.containsKey("userID")) {
-            id = (queryParams.get("userID")[0]);
+        if (!(userID == "")) {
+            id = userID;
         } else {
             return JSON.serialize("[ ]");
         }
 
-        String newSetting = (queryParams.get("StyleSetting")[0]);
-
         Document newStyleSetting = new Document();
-        newStyleSetting.append("StyleSetting", newSetting);
+        newStyleSetting.append("StyleSetting", setting);
 
         Document setQuery = new Document();
         setQuery.append("$set", newStyleSetting);
 
         //Document searchQuery = new Document().append("_id", new ObjectId(id));
-        Document searchQuery = new Document().append("_id", id);
+        Document searchQuery = new Document().append("_id", new ObjectId(id));
 
         try {
             userCollection.updateOne(searchQuery, setQuery);
-            ObjectId theSetting = searchQuery.getObjectId("StyleSetting");
-            return JSON.serialize(theSetting);
+            return JSON.serialize(setting);
         } catch(MongoException me) {
             me.printStackTrace();
             return null;
         }
     }
 
-    public String editUserFontSetting(Map<String, String[]> queryParams) {
+    public String editUserFontSetting(String userID, String setting) {
 
         Document filterDoc = new Document();
         String id;
 
-        if (queryParams.containsKey("userID")) {
-            id = (queryParams.get("userID")[0]);
+        if (!(userID == "")) {
+            id = userID;
         } else {
             return JSON.serialize("[ ]");
         }
 
-        String newSetting = (queryParams.get("FontSetting")[0]);
-
         Document newFontSetting = new Document();
-        newFontSetting.append("FontSetting", newSetting);
+        newFontSetting.append("FontSetting", setting);
 
         Document setQuery = new Document();
         setQuery.append("$set", newFontSetting);
 
         //Document searchQuery = new Document().append("_id", new ObjectId(id));
-        Document searchQuery = new Document().append("_id", id);
+        Document searchQuery = new Document().append("_id", new ObjectId(id));
 
         try {
             userCollection.updateOne(searchQuery, setQuery);
-            ObjectId theSetting = searchQuery.getObjectId("FontSetting");
-            return JSON.serialize(theSetting);
+
+            return JSON.serialize(setting);
         } catch(MongoException me) {
             me.printStackTrace();
             return null;
