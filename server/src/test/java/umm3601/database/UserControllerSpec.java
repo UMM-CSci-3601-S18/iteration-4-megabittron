@@ -35,16 +35,22 @@ public class UserControllerSpec {
             "                    SubjectID: \"121212\",\n" +
             "                    FirstName: \"Ahnaf\",\n" +
             "                    LastName: \"Prio\",\n" +
+            "                    StyleSetting: \"default-style\",\n" +
+            "                    FontSetting: \"default-font\",\n" +
             "                }"));
         testUsers.add(Document.parse("{\n" +
             "                    SubjectID: \"131313\",\n" +
             "                    FirstName: \"Aurora\",\n" +
             "                    LastName: \"Corde\",\n" +
+            "                    StyleSetting: \"panda-style\",\n" +
+            "                    FontSetting: \"arial\",\n" +
             "                }"));
         testUsers.add(Document.parse("{\n" +
             "                    SubjectID: \"141414\",\n" +
             "                    FirstName: \"Matt\",\n" +
             "                    LastName: \"Munns\",\n" +
+            "                    StyleSetting: \"win95\",\n" +
+            "                    FontSetting: \"times new roman\",\n" +
             "                }"));
         testUsers.add(Document.parse("{\n" +
             "                    SubjectID: \"151515\",\n" +
