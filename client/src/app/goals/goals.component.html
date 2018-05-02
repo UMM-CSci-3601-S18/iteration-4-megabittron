@@ -1,6 +1,6 @@
 <div class="sidenav" hide-xs>
-    <h2 class="page-title" *ngIf="this.showAllGoals == false"> Today's Goals</h2>
-    <h2 class="page-title" *ngIf="this.showAllGoals == true"> All Goals</h2>
+    <h2 class="page-title, alt-color" *ngIf="this.showAllGoals == false"> Today's Goals</h2>
+    <h2 class="page-title, alt-color" *ngIf="this.showAllGoals == true"> All Goals</h2>
     <hr class="nav-title-divider">
     <button mat-raised-button (click)="newGoalDialog()" class="new-object-button" id="addNewGoal">
         New Goal
@@ -15,11 +15,11 @@
         <mat-divider></mat-divider>
         <mat-card-content>
             <a *ngIf="!showAllGoals">You cannot filter statuses of today's goals.</a>
-          <mat-radio-group matInput #input *ngIf="showAllGoals" [(ngModel)]="goalStatus" (change)="loadService()" class="status-radio-group">
-              <mat-radio-button id="allStatus" value="all">All</mat-radio-button>
-              <mat-radio-button id="complete" value="true">Complete</mat-radio-button>
-              <mat-radio-button id="incomplete" value="false">Incomplete</mat-radio-button>
-          </mat-radio-group>
+            <mat-radio-group matInput #input *ngIf="showAllGoals" [(ngModel)]="goalStatus" (change)="loadService()" class="status-radio-group">
+                <mat-radio-button id="allStatus" value="all">All</mat-radio-button>
+                <mat-radio-button id="complete" value="true">Complete</mat-radio-button>
+                <mat-radio-button id="incomplete" value="false">Incomplete</mat-radio-button>
+            </mat-radio-group>
         </mat-card-content>
     </mat-card>
 </div>
@@ -55,12 +55,12 @@
             </mat-card-header>
             <mat-divider></mat-divider>
             <mat-card-content class="goal-info break-word">
-                <div class="goal-action-buttons">
+                <div class="journal-action-buttons">
                     <button mat-icon-button class="edit"
                             (click)="openEditGoalDialog(goal._id['$oid'], goal.purpose, goal.category, goal.name, goal.status, goal.frequency)">
                         <mat-icon>create</mat-icon>
                     </button>
-                    <button mat-icon-button class="delete-goal"
+                    <button mat-icon-button class="delete"
                             (click)="deleteGoal(goal._id['$oid'])">
                         <mat-icon>delete</mat-icon>
                     </button>
@@ -91,7 +91,7 @@
 
 
     <mat-list class="goals-list">
-
+        <mat-divider></mat-divider>
 
         <div class="goals-list-info" *ngFor="let goal of shownGoals | dateSort: 'start'"
              #elem [id]="goal._id['$oid']">
@@ -128,7 +128,9 @@
                     <div mat-card-avatar class="category-img spiritual" *ngIf="goal.category == 'spiritual'"></div>
                     <div mat-card-avatar class="category-img social" *ngIf="goal.category == 'social'"></div>
                     <div mat-card-avatar class="category-img other" *ngIf="goal.category == 'other'"></div>
-                    <h6 matLine>{{goal.start| date : "MMM d, yyyy 'at' h:mm a"}}</h6>
+                    <P matLine  *ngIf="goal.end == ''">No end date</P>
+                    <P matLine  *ngIf="goal.end != ''">Ends on {{goal.end | date : "MMM d, yyyy"}}</P>
+
                 </mat-list-item>
                 <mat-divider></mat-divider>
             </a>
