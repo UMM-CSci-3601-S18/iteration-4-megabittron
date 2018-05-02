@@ -3,16 +3,14 @@
     <h2 class="page-title">Resources</h2>
     <hr class="nav-title-divider">
     <button mat-raised-button (click)="newLinkDialog()" class="new-object-button" id="addNewLink">
-
         Add YouTube Video
-
     </button>
     <button mat-raised-button (click)="newContactDialog()" class="new-object-button" id="addNewContact">
         New Contact
     </button>
 </div>
 
-<div layout="row">
+<div layout="row" hide-xs>
     <mat-card class="numbers-list">
         <mat-card-title>{{this.numberTitle}}</mat-card-title>
 
@@ -47,4 +45,73 @@
     </mat-card>
 </div>
 
+<div class="resources-div container" hide-xs>
+    <mat-card class="resources-card card">
+        <mat-card-title class="links title">{{this.linkTitle}}</mat-card-title>
+        <mat-card-subtitle>Visit a page for personal help.</mat-card-subtitle>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+            <mat-list>
+                <a mat-list-item *ngFor="let link of defaultLinks"
+                   class="resource link"
+                   target="_blank"
+                   href={{link.url}}>
+                    <button mat-raised-button class="link-button">
+                        {{link.name}}
+                    </button></a>
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<div class="mobile-view" hide-gt-xs>
+    <div align="center" class="radio-group">
+        <mat-radio-group class="resource-options" [(ngModel)]="typeOfResource">
+            <mat-radio-button value="contacts">Phone Numbers</mat-radio-button>
+            <mat-radio-button value="videos">Videos</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div class="contacts" *ngIf="typeOfResource == 'contacts'">
+        <div class="new-button">
+            <button mat-raised-button (click)="newContactDialog()" class="new-object-button">
+                New Contact
+            </button>
+        </div>
+        <mat-card class="mobile-numbers-list">
+            <mat-list>
+                <mat-list-item *ngFor="let contact of contacts">
+                    <button mat-icon-button class="delete-button">
+                        <mat-icon matTooltip="Delete" class="delete"
+                                  (click)="deleteContact(contact._id['$oid'])">delete</mat-icon>
+                    </button>
+                    <h4 mat-line>{{contact.name}}</h4>
+                    <a href="tel:{{contact.phone}}" mat-line>{{contact.phone}}</a>
+                </mat-list-item>
+            </mat-list>
+        </mat-card>
+    </div>
+    <div class="videos" *ngIf="typeOfResource == 'videos'">
+        <div class="new-button">
+            <button mat-raised-button (click)="newLinkDialog()" class="new-object-button">
+                Add YouTube Video
+            </button>
+        </div>
+
+        <mat-card class="mobile-videos-list">
+            <mat-list>
+                <mat-list-item *ngFor="let link of links">
+                    <a href="{{link.url}}" target="_blank">
+                        <button mat-icon-button class="play-button">
+                            <mat-icon matTooltip="Play" class="play-icon">play_arrow</mat-icon>
+                        </button></a>
+                    <button mat-icon-button class="delete-button">
+                        <mat-icon matTooltip="Delete" class="delete-icon"
+                                  (click)="deleteLink(link._id['$oid'])">delete</mat-icon>
+                    </button>
+                    <h4 mat-line>{{link.name}}</h4>
+                </mat-list-item>
+            </mat-list>
+        </mat-card>
+    </div>
+</div>
 </div>
