@@ -1,12 +1,19 @@
 <form #newLinkForm="ngForm" class="new-object-form">
     <mat-card-title class="new-object-title">Add YouTube Video</mat-card-title>
-        <mat-form-field>
-            <input matInput #input required
-                   id="urlField" placeholder="Enter YouTube Video URL"
-                   [(ngModel)]="data.link.url"
-                   type="url"
-                   name="data.link.url">
-        </mat-form-field>
+    <mat-form-field hintLabel="Max 20 characters">
+        <input matInput #input required
+               maxlength="20"
+               id="linkField" placeholder="YouTube Title"
+               [(ngModel)]="data.link.name"
+               name="data.link.name">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput #input required
+               id="urlField" placeholder="Enter YouTube Video URL"
+               [(ngModel)]="data.link.url"
+               type="url"
+               name="data.link.url">
+    </mat-form-field>
     <div class="button-options">
         <button mat-raised-button
                 id="confirmAddLinkButton"

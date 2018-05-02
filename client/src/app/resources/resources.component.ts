@@ -232,6 +232,42 @@ export class ResourcesComponent implements OnInit{
         });
     }
 
+    deleteContact(_id: string) {
+        this.resourcesService.deleteContact(_id).subscribe(
+            contacts => {
+                console.log("first part");
+                this.refreshContacts();
+                this.loadService();
+            },
+            err => {
+                console.log(err);
+                this.refreshContacts();
+                this.loadService();
+                this.snackBar.open("Contact Deleted", "CLOSE", {
+                    duration: 3000,
+                });
+            }
+        );
+    }
+
+    deleteLink(_id: string) {
+        this.resourcesService.deleteLink(_id).subscribe(
+            links => {
+                console.log("first part");
+                this.refreshLinks();
+                this.loadService();
+            },
+            err => {
+                console.log(err);
+                this.refreshLinks();
+                this.loadService();
+                this.snackBar.open("YouTube Video Deleted", "CLOSE", {
+                    duration: 3000,
+                });
+            }
+        );
+    }
+
     refreshLinks(): Observable<Link[]> {
         const linkObservable: Observable<Link[]> = this.resourcesService.getLinks(localStorage.getItem("userID"));
         console.log(linkObservable);

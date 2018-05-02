@@ -35,20 +35,39 @@
         </div>
     </mat-card>
 </div>-->
-<mat-card class="numbers-list">
-    <mat-card-title class="numbers title">{{this.numberTitle}}</mat-card-title>
-    <mat-divider></mat-divider>
-    <mat-list>
-        <mat-list-item *ngFor="let contact of contacts">
-            <button mat-icon-button class="play-button">
-                <mat-icon matTooltip="Delete" class="delete"
-                          (click)="deleteContact(contact._id['$oid'])">delete</mat-icon>
-            </button>
-            <h4 mat-line>{{contact.name}}</h4>
-            <a href="tel:{{contact.phone}}" mat-line>{{contact.phone}}</a>
-        </mat-list-item>
-    </mat-list>
-</mat-card>
+<div layout="row">
+    <mat-card class="numbers-list">
+        <mat-card-title>{{this.numberTitle}}</mat-card-title>
+        <mat-divider></mat-divider>
+        <mat-list>
+            <mat-list-item *ngFor="let contact of contacts">
+                <button mat-icon-button class="delete-button">
+                    <mat-icon matTooltip="Delete" class="delete"
+                              (click)="deleteContact(contact._id['$oid'])">delete</mat-icon>
+                </button>
+                <h4 mat-line>{{contact.name}}</h4>
+                <a href="tel:{{contact.phone}}" mat-line>{{contact.phone}}</a>
+            </mat-list-item>
+        </mat-list>
+    </mat-card>
+    <mat-card class="videos-list">
+        <mat-card-title>{{this.videoTitle}}</mat-card-title>
+        <mat-divider></mat-divider>
+        <mat-list>
+            <mat-list-item *ngFor="let link of links">
+                <a href="{{link.url}}" target="_blank">
+                <button mat-icon-button class="play-button">
+                        <mat-icon matTooltip="Play" class="play-icon">play_arrow</mat-icon>
+                </button></a>
+                <button mat-icon-button class="delete-button">
+                    <mat-icon matTooltip="Delete" class="delete-icon"
+                              (click)="deleteLink(link._id['$oid'])">delete</mat-icon>
+                </button>
+                <h4 mat-line>{{link.name}}</h4>
+            </mat-list-item>
+        </mat-list>
+    </mat-card>
+</div>
 <!--
 <div layout='row' layout-sm="column" layout-xs="column">
     <div class="phone-div container">
