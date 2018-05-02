@@ -121,12 +121,15 @@ export class AppComponent implements OnInit {
         this.http.post(environment.API_URL + "login", {code: code}, httpOptions)
             .subscribe(onSuccess => {
                 console.log("Code sent to server");
+                console.log(onSuccess["_id"]);
                 console.log(onSuccess["_id"]["$oid"]);
                 console.log(onSuccess["FirstName"]);
                 console.log(onSuccess["LastName"]);
                 localStorage.setItem("userID", onSuccess["_id"]["$oid"]);
                 localStorage.setItem("userFirstName", onSuccess["FirstName"]);
                 localStorage.setItem("userLastName", onSuccess["LastName"]);
+                localStorage.setItem("fontSelected", onSuccess["FontSetting"]);
+                localStorage.setItem("styleSelected", onSuccess["StyleSetting"]);
             }, onFail => {
                 console.log("ERROR: Code couldn't be sent to the server");
             });
