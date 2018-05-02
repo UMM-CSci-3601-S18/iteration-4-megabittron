@@ -6,7 +6,7 @@ import {AppService} from "../../app.service";
 @Component({
     selector: 'app-edit-goal.component',
     templateUrl: 'edit-goal.component.html',
-    styleUrls: ['./edit-goal.component.css'],
+    styleUrls: ['./edit-goal.component.scss'],
     providers: [AppService],
 })
 

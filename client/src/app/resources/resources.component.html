@@ -47,22 +47,4 @@
     </mat-card>
 </div>
 
-<div class="resources-div container">
-    <mat-card class="resources-card card">
-        <mat-card-title class="links title">{{this.linkTitle}}</mat-card-title>
-        <mat-card-subtitle>Visit a page for personal help.</mat-card-subtitle>
-        <mat-divider></mat-divider>
-        <mat-card-content>
-            <mat-list>
-                <a mat-list-item *ngFor="let link of defaultLinks"
-                   class="resource link"
-                   target="_blank"
-                   href={{link.url}}>
-                    <button mat-raised-button class="link-button">
-                        {{link.name}}
-                    </button></a>
-            </mat-list>
-        </mat-card-content>
-    </mat-card>
-</div>
 </div>
