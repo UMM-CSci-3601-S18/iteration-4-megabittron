@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {environment} from '../environments/environment';
 import 'rxjs/add/observable/of';
-import {SettingsComponent} from "./settings/settings.component";
 
 
 @Injectable()

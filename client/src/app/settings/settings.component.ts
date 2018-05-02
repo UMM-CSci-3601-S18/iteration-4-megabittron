@@ -11,7 +11,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
     selector: 'settingscomponent',
     templateUrl: 'settings.component.html',
     styleUrls: ['./settings.component.scss'],
-    providers: [AppService, HttpClient]
+    providers: [AppService, HttpClient, SettingsService]
 })
 
 export class SettingsComponent implements OnInit{
