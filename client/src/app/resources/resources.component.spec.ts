@@ -6,27 +6,29 @@ import {ResourcesService} from './resources.service';
 import {Observable} from 'rxjs/Observable';
 import {FormsModule} from '@angular/forms';
 import {CustomModule} from '../custom.module';
+import {ArraySortPipe} from "../journals/array-sort.pipe";
 import {MATERIAL_COMPATIBILITY_MODE} from '@angular/material';
 import {MatDialog} from '@angular/material';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import {RouterTestingModule} from "@angular/router/testing";
 
-fdescribe( 'Resources', () => {
+describe( 'Resources', () => {
 
     let resourceList: ResourcesComponent;
     let fixture: ComponentFixture<ResourcesComponent>;
 
     let linkServiceStub: {
-        getLinks: () => Observable<Link[]>
-    };
-
-    let contactServiceStub: {
+        getLinks: () => Observable<Link[]>,
         getContacts: () => Observable<Contact[]>
     };
 
+    let contactServiceStub: {
+
+    };
+
     beforeEach(() => {
-        // stub ResourcesService for test reasons
+        // stub GoalsService for test reasons
         linkServiceStub = {
             getLinks: () => Observable.of([
                 {
@@ -50,10 +52,8 @@ fdescribe( 'Resources', () => {
                     subname: 'I went on a 25 mile run today!',
                     url: "runWithMe.life"
                 }
-            ])
-        };
+            ]),
 
-        contactServiceStub = {
             getContacts: () => Observable.of([
                 {
                     _id: 'buying_id',
@@ -81,9 +81,8 @@ fdescribe( 'Resources', () => {
 
         TestBed.configureTestingModule({
             imports: [CustomModule, RouterTestingModule],
-            declarations: [ResourcesComponent],
+            declarations: [ResourcesComponent, ArraySortPipe],
             providers: [{provide: ResourcesService, useValue: linkServiceStub},
-                {provide: ResourcesService, useValue: contactServiceStub},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
     });
@@ -96,126 +95,74 @@ fdescribe( 'Resources', () => {
         });
     }));
 
+    //General Tests
     it('contains all the links', () => {
+        expect(resourceList.links.length).toBe(3);
+    });
+    it('contains all the contacts', () => {
         expect(resourceList.contacts.length).toBe(3);
     });
 
-   /* it('contains a title called \'Buying food\'', () => {
-        expect(journalList.journals.some((journal: Journal) => journal.title === 'Buying food')).toBe(true);
+    it('contains a link titled \'Buying food\'', ()=>{
+        expect(resourceList.links.some((link: Link) => link.name === 'Buying food')).toBe(true);
     });
 
-    it('contains a title called \'Visit mom\'', () => {
-        expect(journalList.journals.some((journal: Journal) => journal.title === 'Visit mom')).toBe(true);
+    it('contains a contact title \'Visit mom\'',()=>{
+        expect(resourceList.contacts.some((contact: Contact) => contact.name === 'Visit mom')).toBe(true);
     });
-
-    it('contains a content called \'I went on a 25 mile run today!\'', () => {
-        expect(journalList.journals.some((journal: Journal) => journal.content === 'I went on a 25 mile run today!')).toBe(true);
-    });
-
-    it('doesn\'t contain a title called \'Meet with Santa\'', () => {
-        expect(journalList.journals.some((journal: Journal) => journal.title === 'Meet with Santa')).toBe(false);
-    });
-
-    it('has a journal dated: Sun Feb 12 16:32:41 CST 2018', () => {
-        expect(journalList.journals.some((journal: Journal) => journal.date === 'Sun Feb 12 16:32:41 CST 2018')).toBe(true);
-    });
-
-    it('journal list filters by search for a certain title', () => {
-        expect(journalList.filteredJournals.length).toBe(3);
-        journalList.search = 'food';
-        journalList.refreshJournals().subscribe(() => {
-            expect(journalList.filteredJournals.length).toBe(1);
-        });
-    });
-
-    it('journal list filters by search for a certain content', () => {
-        expect(journalList.filteredJournals.length).toBe(3);
-        journalList.search = 'today';
-        journalList.refreshJournals().subscribe(() => {
-            expect(journalList.filteredJournals.length).toBe(2);
-        });
-    });
-
-    it('journal list filters by search for a certain date', () => {
-        expect(journalList.filteredJournals.length).toBe(3);
-        journalList.search = 'Jan';
-        journalList.refreshJournals().subscribe(() => {
-            expect(journalList.filteredJournals.length).toBe(1);
-        });
-    });*/
-
 });
 
-// This test is not passing because of sending XML requests. Fix!
-/*describe('Misbehaving Journal List', () => {
-    let journalList: JournalsComponent;
-    let fixture: ComponentFixture<JournalsComponent>;
-
-    let journalListServiceStub: {
-        getJournals: () => Observable<Journal[]>
-    };
-
-    beforeEach(() => {
-        // stub JournalsService for test reasons
-        journalListServiceStub = {
-            getJournals: () => Observable.create(observer => {
-                observer.error('Error-prone observable');
-            })
-        };
-
-        TestBed.configureTestingModule({
-            imports: [FormsModule, CustomModule, RouterTestingModule],
-            declarations: [JournalsComponent, ArraySortPipe],
-            providers: [{provide: JournalsService, useValue: journalListServiceStub},
-                {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
-        });
-    });
-
-    beforeEach(async(() => {
-        TestBed.compileComponents().then(() => {
-            fixture = TestBed.createComponent(JournalsComponent);
-            journalList = fixture.componentInstance;
-            fixture.detectChanges();
-        });
-    }));
-
-    it('generates an error if we don\'t set up a JournalsService', () => {
-        // Since the observer throws an error, we don't expect journals to be defined.
-        expect(journalList.journals).toBeUndefined();
-    });
-});*/
-
-/*describe('Adding a journal', () => {
-    let journalList: JournalsComponent;
-    let fixture: ComponentFixture<JournalsComponent>;
-    const newJournal: Journal =   {
+describe('Adding a link', () => {
+    let resourceList: ResourcesComponent;
+    let fixture: ComponentFixture<ResourcesComponent>;
+    const newLink: Link =   {
         _id: '',
         userID: 'userID4',
-        content: 'To stay awake writing tests',
-        title: 'Drink coffee',
-        date: "Sun Feb 16 17:12:43 CST 2018"
+        name: 'To stay awake writing tests',
+        subname: 'Drink coffee',
+        url: "stayAwake.com"
     };
     const newId = 'coffee_id';
 
-    let calledJournal: Journal;
+    let calledLink: Link;
 
-    let journalListServiceStub: {
-        getJournals: () => Observable<Journal[]>,
-        addNewJournal: (newJournal: Journal) => Observable<{'$oid': string}>
+    let linkListServiceStub: {
+        getLinks: () => Observable<Link[]>,
+        getContacts: () => Observable<Contact[]>,
+        addNewLink: (newLink: Link) => Observable<{'$oid': string}>
     };
     let mockMatDialog: {
-        open: (JournalListComponent, any) => {
-            afterClosed: () => Observable<Journal>
+        open: (ResourceListComponent, any) => {
+            afterClosed: () => Observable<Link>
         };
     };
 
     beforeEach(() => {
-        calledJournal = null;
+        calledLink = null;
         // stub JournalsService for test reasons
-        journalListServiceStub = {
-            getJournals: () => Observable.of([]),
-            addNewJournal: (journalToAdd: Journal) => {
-                calledJournal = journalToAdd;
+        linkListServiceStub = {
+            getLinks: () => Observable.of([
+                {
+                    _id: '',
+                    userID: 'userID4',
+                    name: 'To stay awake writing tests',
+                    subname: 'Drink coffee',
+                    url: "stayAwake.com"
+                }
+            ]),
+
+            getContacts: () => Observable.of([
+                {
+                    _id: 'buying_id',
+                    userID: 'userID1',
+                    name: 'Buying food',
+                    email: 'food@food.com',
+                    phone: "555-555-5555"
+                }
+            ]),
+
+            addNewLink: (linkToAdd: Link) => {
+                calledLink = linkToAdd;
                 return Observable.of({
                     '$oid': newId
                 });
@@ -225,7 +172,7 @@ fdescribe( 'Resources', () => {
             open: () => {
                 return {
                     afterClosed: () => {
-                        return Observable.of(newJournal);
+                        return Observable.of(newLink);
                     }
                 };
             }
@@ -233,9 +180,9 @@ fdescribe( 'Resources', () => {
 
         TestBed.configureTestingModule({
             imports: [FormsModule, CustomModule, RouterTestingModule],
-            declarations: [JournalsComponent, ArraySortPipe],
+            declarations: [ResourcesComponent, ArraySortPipe],
             providers: [
-                {provide: JournalsService, useValue: journalListServiceStub},
+                {provide: ResourcesService, useValue: linkListServiceStub},
                 {provide: MatDialog, useValue: mockMatDialog},
                 {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
         });
@@ -243,21 +190,121 @@ fdescribe( 'Resources', () => {
 
     beforeEach(async(() => {
         TestBed.compileComponents().then(() => {
-            fixture = TestBed.createComponent(JournalsComponent);
-            journalList = fixture.componentInstance;
+            fixture = TestBed.createComponent(ResourcesComponent);
+            resourceList = fixture.componentInstance;
             fixture.detectChanges();
         });
         localStorage.isSignedIn = "true";
     }));
 
-    it('calls JournalsService.addJournal', () => {
-        expect(calledJournal).toBeNull();
-        journalList.openAddJournalDialog();
-        expect(calledJournal).toEqual(newJournal);
+    it('calls ResourcesService.addNewLink', () => {
+        expect(calledLink).toBeNull();
+        resourceList.newLinkDialog();
+        expect(calledLink).toEqual(newLink);
     });
-});*/
+});
 
-/*
+describe('Adding a contact', () => {
+    let resourceList: ResourcesComponent;
+    let fixture: ComponentFixture<ResourcesComponent>;
+    const newContact: Contact =   {
+        _id: 'running_id',
+        userID: 'userID3',
+        name: 'Go on run',
+        email: 'run@run.com',
+        phone: "333-333-3333"
+    };
+    const newId = 'coffee_id';
+
+    let calledContact: Contact;
+
+    let contactListServiceStub: {
+        getLinks: () => Observable<Link[]>,
+        getContacts: () => Observable<Contact[]>,
+        addNewContact: (newContact: Contact) => Observable<{'$oid': string}>
+    };
+    let mockMatDialog: {
+        open: (ResourceListComponent, any) => {
+            afterClosed: () => Observable<Contact>
+        };
+    };
+
+    beforeEach(() => {
+        calledContact = null;
+        // stub JournalsService for test reasons
+        contactListServiceStub = {
+            getLinks: () => Observable.of([
+                {
+                    _id: '',
+                    userID: 'userID4',
+                    name: 'To stay awake writing tests',
+                    subname: 'Drink coffee',
+                    url: "stayAwake.com"
+                }
+            ]),
+
+            getContacts: () => Observable.of([
+                {
+                    _id: 'buying_id',
+                    userID: 'userID1',
+                    name: 'Buying food',
+                    email: 'food@food.com',
+                    phone: "555-555-5555"
+                }
+            ]),
+
+            addNewContact: (contactToAdd: Contact) => {
+                calledContact = contactToAdd;
+                return Observable.of({
+                    '$oid': newId
+                });
+            }
+        };
+        mockMatDialog = {
+            open: () => {
+                return {
+                    afterClosed: () => {
+                        return Observable.of(newContact);
+                    }
+                };
+            }
+        };
+
+        TestBed.configureTestingModule({
+            imports: [FormsModule, CustomModule, RouterTestingModule],
+            declarations: [ResourcesComponent, ArraySortPipe],
+            providers: [
+                {provide: ResourcesService, useValue: contactListServiceStub},
+                {provide: MatDialog, useValue: mockMatDialog},
+                {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
+        });
+    });
+
+    beforeEach(async(() => {
+        TestBed.compileComponents().then(() => {
+            fixture = TestBed.createComponent(ResourcesComponent);
+            resourceList = fixture.componentInstance;
+            fixture.detectChanges();
+        });
+        localStorage.isSignedIn = "true";
+    }));
+
+    it('calls ResourcesService.addNewContact', () => {
+        expect(calledContact).toBeNull();
+        resourceList.newContactDialog();
+        expect(calledContact).toEqual(newContact);
+    });
+});
+
+    /*
+
+
+
+
+
+/!*
+
+/!*
 describe('Editing a journal', () => {
     let journalList: JournalsComponent;
     let fixture: ComponentFixture<JournalsComponent>;
@@ -328,4 +375,5 @@ describe('Editing a journal', () => {
         expect(calledJournal).toEqual(editJournal);
     });
 });
+*!/
 */
