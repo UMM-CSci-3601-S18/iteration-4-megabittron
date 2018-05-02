@@ -65,6 +65,21 @@ export class JournalPage {
         return element(by.className('refresh')).isPresent();
     }
 
+    backButtonExists(): promise.Promise<boolean> {
+        this.highlightElement(by.className('back'));
+        return element(by.className('back')).isPresent();
+    }
+
+    editButtonExists(): promise.Promise<boolean> {
+        this.highlightElement(by.className('edit'));
+        return element(by.className('edit')).isPresent();
+    }
+
+    deleteButtonExists(): promise.Promise<boolean> {
+        this.highlightElement(by.className('delete'));
+        return element(by.className('delete')).isPresent();
+    }
+
     clickJournalPromptButton(): promise.Promise<void> {
         this.highlightElement(by.className('refresh'));
         return element(by.className('refresh')).click();
@@ -75,6 +90,16 @@ export class JournalPage {
         return element(by.id('addNewJournal')).click();
     }
 
+    clickJournalBackButton(): promise.Promise<void> {
+        this.highlightElement(by.className('back'));
+        return element(by.className('back')).click();
+    }
+
+    clickJournalDeleteButton(): promise.Promise<void> {
+        this.highlightElement(by.className('delete'));
+        return element(by.className('delete')).click();
+    }
+
     clickJournalCard(): promise.Promise<void> {
         const journal = by.className('journal-card');
         this.highlightElement(journal);
@@ -83,8 +108,8 @@ export class JournalPage {
     }
 
     clickEditJournalButton(): promise.Promise<void> {
-        this.highlightElement(by.className('edit-journal'));
-        return element(by.className('edit-journal')).click();
+        this.highlightElement(by.className('edit'));
+        return element(by.className('edit')).click();
     }
 
 }

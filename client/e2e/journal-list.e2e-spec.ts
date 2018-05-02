@@ -2,7 +2,7 @@ import {JournalPage} from './journal-list.po';
 import {browser, protractor, element, by} from 'protractor';
 import {Key} from 'selenium-webdriver';
 
-fdescribe('Journal list', () => {
+describe('Journal list', () => {
     let page: JournalPage;
 
     beforeEach(() => {
@@ -82,34 +82,56 @@ fdescribe('Journal list', () => {
 
     });
 
-
-
-    /*it('Should open a dialog box when add journal button is clicked', () => {
+    it('Should click first journal and check journal title', () => {
         page.navigateTo();
-        expect(element(by.className('add-journal')).isPresent()).toBeFalsy('There should not be a modal window yet');
-        element(by.className('add-journal-button')).click();
-        expect(element(by.className('add-journal')).isPresent()).toBeTruthy('There should be a modal window now');
-    });*/
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/journals');
+        page.clickJournalCard();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/journals/5ad12a560b59379e56931423');
+        expect(page.getJournalsTitle()).toEqual('Austin Griffin');
+    });
 
-
-
-    // This test will not work because it cannot find the edit journal button class name since it
-    // is inside of the mat-title.
-    /*it('Should open a dialog box when edit journal button is clicked', () => {
+    it('Should click first journal and check for back button then click it', () => {
         page.navigateTo();
-        page.typeAContent('do nulla incididunt');
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/journals');
+        page.clickJournalCard();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/journals/5ad12a560b59379e56931423');
+        expect(page.backButtonExists()).toBeTruthy();
+        page.clickJournalBackButton();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/journals');
+    });
+
+    it('Should click first journal and open a dialog box when edit journal button is clicked', () => {
+        page.navigateTo();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/journals');
+        page.clickJournalCard();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/journals/5ad12a560b59379e56931423');
+        expect(page.editButtonExists()).toBeTruthy();
         expect(element(by.className('edit-journal-page')).isPresent()).toBeFalsy('There should not be a modal window yet');
         page.clickEditJournalButton();
         expect(element(by.className('edit-journal-page')).isPresent()).toBeTruthy('There should be a modal window now');
-    });*/
+    });
 
-    /*it('Should actually edit the journal with the information we put in the fields', () => {
+    it('Should click first journal and actually edit the journal with the information we put in the fields', () => {
         page.navigateTo();
-        page.typeAContent('sunt deserunt voluptate laboris dolore. ');
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/journals');
+        page.clickJournalCard();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/journals/5ad12a560b59379e56931423');
         page.clickEditJournalButton();
         element(by.id('titleField')).sendKeys('Great day!');
         element(by.id('contentField')).sendKeys('Today my snail won a race against a rabbit.');
         element(by.id('confirmEditJournalButton')).click();
-    });*/
+    });
 
+    it('Should click first journal and check for delete button then click it', () => {
+        page.navigateTo();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/journals');
+        page.clickJournalCard();
+        expect(page.getJournalsTitle()).toBe('Austin Griffin');
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/journals/5ad12a560b59379e56931423');
+        expect(page.deleteButtonExists()).toBeTruthy();
+        page.clickJournalDeleteButton();
+        expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '/journals');
+        page.clickJournalCard();
+        expect(page.getJournalsTitle()).not.toBe('Austin Griffin');
+    });
 });
