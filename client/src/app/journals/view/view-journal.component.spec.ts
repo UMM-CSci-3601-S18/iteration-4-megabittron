@@ -28,7 +28,7 @@ describe('Editing a journal', () => {
     let calledJournal: Journal;
 
     let journalListServiceStub: {
-        getJournals: () => Observable<Journal[]>,
+        getJournalById: () => Observable<Journal>,
         editJournal: (newJournal: Journal) => Observable<{'$oid': string}>
     };
     let mockMatDialog: {
@@ -42,7 +42,15 @@ describe('Editing a journal', () => {
         let highlightedID: { '$oid': string } = {'$oid': ''};
         // stub JournalsService for test reasons
         journalListServiceStub = {
-            getJournals: () => Observable.of([]),
+            getJournalById: () => Observable.of(
+                {
+                    "_id": "5ab53a89551a3d783599082c",
+                    userID: 'userID1',
+                    "title": "Improve relationship",
+                    "content": "Family",
+                    "date": "2018-04-05T18:56:24.702Z",
+                }
+                ),
             editJournal: (journalToEdit: Journal) => {
                 calledJournal = journalToEdit;
                 return Observable.of({
@@ -82,12 +90,12 @@ describe('Editing a journal', () => {
 
     //This test returns Failed: Failed to execute 'send' on 'XMLHttpRequest': Failed to load 'ng:///DynamicTestModule/ViewJournalComponent_Host.ngfactory.js'.
     //We were unable to figure out how to fix this, unfortunately.
-    /*it('calls JournalsService.editJournal', () => {
+    it('calls JournalsService.editJournal', () => {
         expect(calledJournal).toBeNull();
         journalList.openEditJournalDialog(this._id, this.title, this.content, this.date);
         expect(journalList.isHighlighted(calledJournal));
         expect(calledJournal).toEqual(newJournal);
-    });*/
+    });
 });
 
 describe('Deleting a journal', () => {
@@ -105,8 +113,8 @@ describe('Deleting a journal', () => {
     let calledJournal: Journal;
 
     let journalListServiceStub: {
-        getJournals: () => Observable<Journal[]>,
-        deleteJournal: (deleteJournal: Journal) => Observable<{'$oid': string}>
+        getJournalById: () => Observable<Journal>,
+        deleteJournal: (newJournal: Journal) => Observable<{'$oid': string}>
     };
     let mockMatDialog: {
         open: (ViewJournalComponent, any) => {
@@ -116,9 +124,18 @@ describe('Deleting a journal', () => {
 
     beforeEach(() => {
         calledJournal = null;
-        // stub GoalsService for test reasons
+        let highlightedID: { '$oid': string } = {'$oid': ''};
+        // stub JournalsService for test reasons
         journalListServiceStub = {
-            getJournals: () => Observable.of([]),
+            getJournalById: () => Observable.of(
+                {
+                    "_id": "5ab53a89551a3d783599082c",
+                    userID: 'userID1',
+                    "title": "Improve relationship",
+                    "content": "Family",
+                    "date": "2018-04-05T18:56:24.702Z",
+                }
+            ),
             deleteJournal: (journalToDelete: Journal) => {
                 calledJournal = journalToDelete;
                 return Observable.of({
@@ -156,8 +173,8 @@ describe('Deleting a journal', () => {
 
     //This test returns Failed: Failed to execute 'send' on 'XMLHttpRequest': Failed to load 'ng:///DynamicTestModule/ViewJournalComponent_Host.ngfactory.js'.
     //We were unable to figure out how to fix this, unfortunately.
-    /*it('calls JournalsService.deleteGoal', () => {
+    it('calls JournalsService.deleteGoal', () => {
         expect(calledJournal).toBeNull();
         journalList.deleteJournal(this._id);
-    });*/
+    });
 });
