@@ -22,7 +22,26 @@ export class AppService {
             localStorage.setItem("userFirstName", "Patrick");
             localStorage.setItem("userLastName", "Bateman");
             localStorage.setItem("isSignedIn", "true");
+            localStorage.setItem("styleSelected", "default-style");
+            //localStorage.setItem("styleSelected", "dark-style");
+            //localStorage.setItem("styleSelected", "light-style");
         }
+    }
+
+    public styleClassSelector(): any {
+
+        var font: String = localStorage.getItem("fontSelected");
+        var style: String = localStorage.getItem("styleSelected");
+
+        if(font == null || font == "" || font == "null"){
+            font = "arial";
+        }
+
+        if(style == null || style == "" || style == "null"){
+            style = "panda";
+        }
+
+        return [font.toLowerCase(), style.toLowerCase()] ;
     }
 
 }

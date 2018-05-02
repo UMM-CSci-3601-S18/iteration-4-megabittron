@@ -1,6 +1,8 @@
 
 package umm3601.database.user;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.util.JSON;
 import spark.Request;
 import spark.Response;
 
@@ -60,27 +62,85 @@ public class UserRequestHandler {
     }
 
 
-    /**Method called from Server when the 'api/users/new'endpoint is recieved.
-     * Gets specified user info from request and calls addNewUser helper method
-     * to append that info to a document
-     *
-     * @return a boolean as whether the user was added successfully or not
+    /*
+        changes a user's style settings
      */
-    public String addNewUser(String subjectID, String firstName, String lastName)
-    {
+    public String editUserStyleSetting(Request req, Response res){
+        res.type("application/json");
+        Object o = JSON.parse(req.body());
 
-
+        try {
+            if(o.getClass().equals(BasicDBObject.class))
+            {
                 try {
+                    BasicDBObject dbO = (BasicDBObject) o;
 
-                    System.err.println("Adding new user [" + "SubjectID=" + subjectID + " FirstName=" + firstName + " LastName=" + lastName + ']');
-                    return userController.addNewUser(subjectID, firstName, lastName).toString();
+                    String userID = dbO.getString("userID");
+                    String StyleSetting = dbO.getString("setting");
+
+                    System.out.println("userID: " + userID);
+                    System.out.println("setting: " + StyleSetting);
+
+                    return userController.editUserStyleSetting(userID, StyleSetting);
                 }
                 catch(NullPointerException e)
                 {
-                    System.err.println("A value was malformed or omitted, new user request failed.");
                     return null;
                 }
 
+            }
+            else
+            {
+                System.err.println("Expected BasicDBObject, received " + o.getClass());
+                return null;
+            }
+        }
+        catch(RuntimeException ree)
+        {
+            ree.printStackTrace();
+            return null;
+        }
 
+
+    }
+
+    /*
+        changes a user's font settings
+     */
+    public String editUserFontSetting(Request req, Response res){
+        res.type("application/json");
+        Object o = JSON.parse(req.body());
+
+        try {
+            if(o.getClass().equals(BasicDBObject.class))
+            {
+                try {
+                    BasicDBObject dbO = (BasicDBObject) o;
+
+                    String userID = dbO.getString("userID");
+                    String FontSetting = dbO.getString("setting");
+
+                    System.out.println("userID: " + userID);
+                    System.out.println("setting: " + FontSetting);
+
+                    return userController.editUserFontSetting(userID, FontSetting);
+                }
+                catch(NullPointerException e)
+                {
+                    return null;
+                }
+
+            }
+            else
+            {
+                System.err.println("Expected BasicDBObject, received " + o.getClass());
+                return null;
+            }
+        }
+        catch(RuntimeException ree)
+        {
+            ree.printStackTrace();
+            return null;
+        }
     }
 }

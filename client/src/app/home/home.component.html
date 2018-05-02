@@ -1,4 +1,4 @@
-<ng-container *ngIf="appService.isSignedIn(); then showContent else showSignIn"></ng-container>
+<ng-container *ngIf="appService.isSignedIn(); then showContent else showSignIn" [ngClass]="appService.styleClassSelector()"></ng-container>
 
 <ng-template #showContent>
     <div layout-gt-sm="row" class="main-bg">
@@ -104,51 +104,51 @@
                         </div>
                         <div *ngIf="selectedEmotion == 'sad'">
 
-                            <div class="iframe-container">
-                                <iframe src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37CvQMRHaqg-6yEQpLWjAdWu&index=2"
-                                        frameborder="0"
-                                        allowfullscreen
-                                        class="video"></iframe>
+                                <div class="iframe-container">
+                                    <iframe src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37CvQMRHaqg-6yEQpLWjAdWu&index=2"
+                                            frameborder="0"
+                                            allowfullscreen
+                                            class="video"></iframe>
+                                </div>
                             </div>
-                        </div>
-                        <div *ngIf="selectedEmotion == 'meh'">
+                            <div *ngIf="selectedEmotion == 'meh'">
 
-                            <div class="iframe-container">
-                                <iframe src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37D36KCVAns9LYvh1BV4m6YX"
-                                        frameborder="0"
-                                        allowfullscreen
-                                        class="video"></iframe>
+                                <div class="iframe-container">
+                                    <iframe src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37D36KCVAns9LYvh1BV4m6YX"
+                                            frameborder="0"
+                                            allowfullscreen
+                                            class="video"></iframe>
+                                </div>
                             </div>
-                        </div>
-                        <div *ngIf="selectedEmotion == 'mad'">
+                            <div *ngIf="selectedEmotion == 'mad'">
 
-                            <div class="iframe-container">
-                                <iframe src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37Dx6Ohz5al_e1GljuZqvZ_M"
-                                        frameborder="0"
-                                        allowfullscreen
-                                        class="video"></iframe>
+                                <div class="iframe-container">
+                                    <iframe src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37Dx6Ohz5al_e1GljuZqvZ_M"
+                                            frameborder="0"
+                                            allowfullscreen
+                                            class="video"></iframe>
+                                </div>
                             </div>
-                        </div>
-                        <div *ngIf="selectedEmotion == 'anxious'">
+                            <div *ngIf="selectedEmotion == 'anxious'">
 
-                            <div class="iframe-container">
-                                <iframe src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37BVBh18FtFKX-fEEroV6tQ9&index=8"
-                                        frameborder="0"
-                                        allowfullscreen
-                                        class="video"></iframe>
+                                <div class="iframe-container">
+                                    <iframe src="https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37BVBh18FtFKX-fEEroV6tQ9&index=8"
+                                            frameborder="0"
+                                            allowfullscreen
+                                            class="video"></iframe>
+                                </div>
                             </div>
-                        </div>
-                    </mat-step>
-                </mat-horizontal-stepper>
-                <div class="restart-button-div">
-                    <button mat-raised-button mat-button class="restart-button" matTooltip="Restart"
-                            (click)="restart()">
-                        Restart
-                    </button>
-                </div>
-            </mat-card>
+                        </mat-step>
+                    </mat-horizontal-stepper>
+                    <div class="restart-button-div">
+                        <button mat-raised-button mat-button class="restart-button" matTooltip="Restart"
+                                (click)="restart()">
+                            Restart
+                        </button>
+                    </div>
+                </mat-card>
+            </div>
         </div>
-    </div>
 </ng-template>
 
 <ng-template #showSignIn>
@@ -160,3 +160,4 @@
         </mat-card-content>
     </mat-card>
 </ng-template>
+

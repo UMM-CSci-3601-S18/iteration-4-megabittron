@@ -1,0 +1,23 @@
+<div class="sidenav" hide-xs [ngClass]="appService.styleClassSelector()">
+    <h2 class="nav-links-title break-word">{{link.name}}</h2>
+    <hr class="nav-title-divider">
+    <button mat-raised-button class="back action-button"
+            (click)="backClicked()">
+        Back
+    </button>
+    <button mat-raised-button class="edit action-button"
+            (click)="openEditLinkDialog(link._id['$oid'], link.name, link.subname, link.url)">
+        Edit Link
+    </button>
+    <button mat-raised-button class="delete action-button"
+            (click)="deleteLink(link._id['$oid']); backClicked()">
+        Delete Link
+    </button>
+</div>
+<div class="link">
+    <mat-card class="link-card">
+        <mat-card-title class="link-title break-word">{{link.name}}</mat-card-title>
+        <mat-divider></mat-divider>
+        <mat-card-content class="link-content break-word">{{link.url}}</mat-card-content>
+    </mat-card>
+</div>

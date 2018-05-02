@@ -1,11 +1,37 @@
 @import "../theme";
 
-.nav-drawer {
-    .nav-active {
-        background-color: mat-color($mat-grey, 100) !important;
-        color: mat-color($accent) !important;
-    }
+.signInButtonMobile{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 25%;
 
+}
+
+
+.default-style{
+    .nav-drawer {
+        .nav-active {
+            background-color: mat-color($mat-blue, 100) !important;
+            color: mat-color($accent) !important;
+        }
+
+        .nav-active mat-icon {
+            color: mat-color($accent) !important;
+        }
+    }
+}
+
+.dark-style{
+    .nav-drawer {
+        .nav-active {
+            background-color: mat-color($mat-grey, 100)!important;
+            color: mat-color($accent) !important;
+        }
+
+        .nav-active mat-icon {
+            color: mat-color($accent) !important;
+        }
+    }
     .nav-active mat-icon {
         color: mat-color($accent) !important;
     }
@@ -32,4 +58,3 @@
     border: solid 1px;
     border-radius: 3px;
 }
-

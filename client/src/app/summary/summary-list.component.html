@@ -1,4 +1,4 @@
-<div layout-gt-sm="row">
+<div layout-gt-sm="row" [ngClass]="appService.styleClassSelector()">
     <div flex-gt-sm="80" flex-offset-gt-sm="10">
 
         <mat-card class="graphCard">
@@ -11,7 +11,7 @@
 
                     <h3 class="your-summaries-title">Your Emotions</h3>
                         <h6 class="your-summaries-title">There are {{numberEmotions()}} entries represented</h6>
-                    <canvas id="Chart" height="auto"></canvas>
+                    <canvas id="Chart" ></canvas>
                     <br>
 
                         <div class="graphFilter">

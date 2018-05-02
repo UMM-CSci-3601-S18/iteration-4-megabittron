@@ -1,4 +1,4 @@
-<form #newLinkForm="ngForm" class="new-object-form">
+<form #newLinkForm="ngForm" class="new-object-form" [ngClass]="appService.styleClassSelector()">
 
     <mat-card-title class="new-object-title">Add YouTube Video</mat-card-title>
     <mat-form-field hintLabel="Max 20 characters">

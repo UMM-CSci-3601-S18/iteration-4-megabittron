@@ -27,6 +27,8 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
 import {AppService} from "./app.service";
 import {RouterModule} from "@angular/router";
+import {SettingsComponent} from "./settings/settings.component";
+import {SettingsService} from "./settings/settings.service";
 import {AddContactComponent} from "./resources/add/contacts/add-contact.component";
 import {AddLinkComponent} from "./resources/add/links/add-link.component";
 import {EditLinkComponent} from "./resources/edit/links/edit-links.component";
@@ -67,6 +69,7 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         EditContactComponent,
         EditLinkComponent,
         ArraySortPipe,
+        SettingsComponent,
         ShowSummaryListComponent,
         RandomPrompt,
     ],
@@ -77,6 +80,7 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         SummaryListService,
         AppService,
         ResourcesService,
+        SettingsService,
         {provide: APP_BASE_HREF, useValue: '/'},
         {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true},
     ],
