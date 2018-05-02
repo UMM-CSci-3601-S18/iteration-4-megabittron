@@ -54,16 +54,18 @@
 
 .journals-mobile-search{
     margin-bottom: -20px;
-    width: 75%;
-    float: left;
-
+    width: 65%;
+    margin-left: -17px;
 }
 
-.random-prompts-mob{
-    margin-bottom: -20px;
-    width: 25%;
-    float: right;
-}
 .mobile-date {
     font-size: 16px;
 }
+
+.random-prompts-mob-button {
+    font-size: 13px;
+    margin-top: 10px;
+    float: right;
+}
+
+
