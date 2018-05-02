@@ -25,7 +25,19 @@ export class SettingsService {
             return this.empty;
         }
 
-        return this.http.get<string>(this.currentUrl + "/style/edit/?" + userID + "&" + setting);
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            }),
+        };
+
+        var object = {
+            userID: userID,
+            setting: setting
+        }
+
+        return this.http.post<string>(this.currentUrl + "user/style/edit", object, httpOptions);
+        //return this.http.post<string>(this.currentUrl + "user/style/edit?" + "userID=" + userID + "&StyleSetting=" + setting, httpOptions);
     }
 
     editFont(userID: string, setting?: string): Observable<string> {
@@ -33,13 +45,27 @@ export class SettingsService {
         this.noID = false;
 
         this.filterByUserID(userID);
-
+        console.log("editFont()");
         //require a userID
         if(this.noID){
+            console.log("editFont() returned empty");
             return this.empty;
         }
+        console.log("editFont() seems good");
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            }),
+        };
 
-        return this.http.get<string>(this.currentUrl + "/font/edit/?" + userID + "&" + setting);
+        var object = {
+            userID: userID,
+            setting: setting
+        }
+
+        return this.http.post<string>(this.currentUrl + "user/font/edit", object, httpOptions);
+
+        //return this.http.post<string>(this.currentUrl + "user/font/edit?" + "userID=" + userID + "&FontSetting=" + setting, httpOptions);
     }
 
     filterByUserID(userID: string): void {

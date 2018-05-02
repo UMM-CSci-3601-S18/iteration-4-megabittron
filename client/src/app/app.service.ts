@@ -33,11 +33,11 @@ export class AppService {
         var font: String = localStorage.getItem("fontSelected");
         var style: String = localStorage.getItem("styleSelected");
 
-        if(font == null || font == ""){
+        if(font == null || font == "" || font == "null"){
             font = "arial";
         }
 
-        if(style == null || style == ""){
+        if(style == null || style == "" || style == "null"){
             style = "panda";
         }
 
