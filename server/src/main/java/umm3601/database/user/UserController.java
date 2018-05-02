@@ -163,8 +163,8 @@ public class UserController {
 
         try {
             userCollection.updateOne(searchQuery, setQuery);
-            ObjectId theID = searchQuery.getObjectId("_id");
-            return JSON.serialize(theID);
+            ObjectId theSetting = searchQuery.getObjectId("StyleSetting");
+            return JSON.serialize(theSetting);
         } catch(MongoException me) {
             me.printStackTrace();
             return null;
@@ -195,8 +195,8 @@ public class UserController {
 
         try {
             userCollection.updateOne(searchQuery, setQuery);
-            ObjectId theID = searchQuery.getObjectId("_id");
-            return JSON.serialize(theID);
+            ObjectId theSetting = searchQuery.getObjectId("FontSetting");
+            return JSON.serialize(theSetting);
         } catch(MongoException me) {
             me.printStackTrace();
             return null;
