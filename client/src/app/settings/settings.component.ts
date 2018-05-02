@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
 import {AppService} from "../app.service";
+import {SettingsService} from "./settings.service";
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
@@ -15,15 +16,37 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 export class SettingsComponent implements OnInit{
 
-    constructor(public appService: AppService) {}
+    constructor(public appService: AppService,
+        public settingsService: SettingsService) {}
 
     public font: string;
     public theme: string;
 
 
     saveSettings(){
-        localStorage.setItem("fontSelected",this.font);
-        localStorage.setItem("styleSelected",this.theme);
+        if(this.font != localStorage.getItem("fontSelected")){
+            this.settingsService.editFont(localStorage.getItem("userID"), this.font).subscribe(
+                result=>{
+
+                    localStorage.setItem("fontSelected", result)
+                },
+                err => {
+                    console.log('The error was ' + JSON.stringify(err));
+                }
+            );
+        }
+
+        if(this.theme != localStorage.getItem("styleSelected")){
+            this.settingsService.editFont(localStorage.getItem("userID"), this.theme).subscribe(
+                result=>{
+
+                    localStorage.setItem("styleSelected", result)
+                },
+                err => {
+                    console.log('The error was ' + JSON.stringify(err));
+                }
+            );
+        }
     }
 
 

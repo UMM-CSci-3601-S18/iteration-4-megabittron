@@ -9,12 +9,12 @@ export class SettingsService {
     readonly baseUrl: string = environment.API_URL;
     private currentUrl: string = this.baseUrl;
     private noID: boolean = false;
-    private empty: Observable<String> = Observable.of("");
+    private empty: Observable<string> = Observable.of("");
 
     constructor(private http: HttpClient) {
     }
 
-    editStyle(userID: string, setting?: string): Observable<String> {
+    editStyle(userID: string, setting?: string): Observable<string> {
         this.currentUrl = this.baseUrl;
         this.noID = false;
 
@@ -25,10 +25,10 @@ export class SettingsService {
             return this.empty;
         }
 
-        return this.http.get<String>(this.currentUrl + "/style/edit/?" + userID + "&" + setting);
+        return this.http.get<string>(this.currentUrl + "/style/edit/?" + userID + "&" + setting);
     }
 
-    editFont(userID: string, setting?: string): Observable<String> {
+    editFont(userID: string, setting?: string): Observable<string> {
         this.currentUrl = this.baseUrl;
         this.noID = false;
 
@@ -39,7 +39,7 @@ export class SettingsService {
             return this.empty;
         }
 
-        return this.http.get<String>(this.currentUrl + "/font/edit/?" + userID + "&" + setting);
+        return this.http.get<string>(this.currentUrl + "/font/edit/?" + userID + "&" + setting);
     }
 
     filterByUserID(userID: string): void {
