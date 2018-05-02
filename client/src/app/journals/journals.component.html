@@ -6,8 +6,8 @@
     </button>
     <mat-card class="filter-fields">
         <mat-form-field class="form-field">
-            <input matInput placeholder="Search" [(ngModel)]="search"/>
-            <button mat-button *ngIf="journalTitle" matSuffix mat-icon-button aria-label="Clear" (click)="journalTitle=''">
+            <input class="search" matInput placeholder="Search" [(ngModel)]="search"/>
+            <button mat-button *ngIf="search" matSuffix mat-icon-button aria-label="Clear" (click)="search=''">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field>
@@ -18,10 +18,10 @@
                 Journal Prompt
             </button>
         </mat-card-title>
-        <mat-card-content *ngIf="prompt == undefined">
+        <mat-card-content class="no-click" *ngIf="prompt == undefined">
             Click for a prompt
         </mat-card-content>
-        <mat-card-content>
+        <mat-card-content class="prompt-content">
             {{prompt}}
         </mat-card-content>
     </mat-card>
@@ -47,25 +47,32 @@
     </div>
 </div>
 <div class="list-journals-section" hide-gt-xs>
-    <mat-form-field class="journals-mobile-search">
-        <input matInput placeholder="Search" [(ngModel)]="search"/>
-        <button mat-button *ngIf="journalTitle" matSuffix mat-icon-button aria-label="Clear" (click)="journalTitle=''">
-            <mat-icon>close</mat-icon>
+    <div class="top-search-and-propmt">
+        <mat-form-field class="journals-mobile-search">
+            <input matInput placeholder="Search" [(ngModel)]="search"/>
+            <button mat-button *ngIf="search" matSuffix mat-icon-button aria-label="Clear" (click)="search=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <button class="random-prompts-mob-button" (click)="openRandomPrompt()" mat-raised-button color="accent">
+            Prompts
         </button>
-    </mat-form-field>
+    </div>
     <mat-list class="journals-list">
         <div class="journals-list-info" *ngFor="let journal of filterJournals(search) | dateSort: '-date'"
              #elem [id]="journal._id['$oid']">
             <a routerLink="/journals/{{journal._id['$oid']}}" class="journal-card-open">
-            <mat-list-item>
-                <h3 matLine>{{journal.title}}</h3>
-                <p class="mobile-date">{{journal.date | date : "MM/dd/yy"}}</p>
-                <h6 matLine>{{journal.content}}</h6>
-            </mat-list-item>
-            <mat-divider></mat-divider>
+                <mat-list-item>
+                    <h3 matLine>{{journal.title}}</h3>
+                    <p class="mobile-date">{{journal.date | date : "MM/dd/yy"}}</p>
+                    <h6 matLine>{{journal.content}}</h6>
+                </mat-list-item>
+                <mat-divider></mat-divider>
             </a>
         </div>
     </mat-list>
-    <button class="add-journal-fab-button" (click)="openAddJournalDialog()" mat-fab color="primary"><mat-icon>add</mat-icon></button>
+    <button class="add-journal-fab-button" (click)="openAddJournalDialog()" mat-fab color="primary">
+        <mat-icon>add</mat-icon>
+    </button>
 </div>
 

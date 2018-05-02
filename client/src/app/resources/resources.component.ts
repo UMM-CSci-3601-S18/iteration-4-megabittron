@@ -64,7 +64,7 @@ export class ResourcesComponent implements OnInit{
             _id: 'default',
             name: 'Anger Management',
             userID:'',
-            subname: 'Techniques & Tips',
+            subname: 'Techniques & Tip',
             url: 'https://www.youtube.com/embed/videoseries?list=PLJmTiSHMC37Dx6Ohz5al_e1GljuZqvZ_M'
         },        {
             _id: 'default',
