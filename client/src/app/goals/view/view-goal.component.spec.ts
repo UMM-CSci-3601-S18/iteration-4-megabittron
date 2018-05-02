@@ -12,7 +12,7 @@ import 'rxjs/add/operator/do';
 import {RouterTestingModule} from "@angular/router/testing";
 
 
-fdescribe('Editing a journal', () => {
+describe('Editing a goal', () => {
     let goalList: ViewGoalComponent;
     let fixture: ComponentFixture<ViewGoalComponent>;
     const newGoal: Goal =   {
@@ -97,8 +97,6 @@ fdescribe('Editing a journal', () => {
         localStorage.isSignedIn = "true";
     }));
 
-    //This test returns Failed: Failed to execute 'send' on 'XMLHttpRequest': Failed to load 'ng:///DynamicTestModule/ViewJournalComponent_Host.ngfactory.js'.
-    //We were unable to figure out how to fix this, unfortunately.
     it('calls GoalsService.editGoal', () => {
         expect(calledGoal).toBeNull();
         goalList.openEditGoalDialog(this._id, this.purpose, this.category, this.name,
@@ -108,7 +106,7 @@ fdescribe('Editing a journal', () => {
     });
 });
 
-fdescribe('Deleting a goal', () => {
+describe('Deleting a goal', () => {
     let goalList: ViewGoalComponent;
     let fixture: ComponentFixture<ViewGoalComponent>;
     const deleteGoal: Goal =   {
@@ -191,8 +189,6 @@ fdescribe('Deleting a goal', () => {
         });
     }));
 
-    //This test returns Failed: Failed to execute 'send' on 'XMLHttpRequest': Failed to load 'ng:///DynamicTestModule/ViewJournalComponent_Host.ngfactory.js'.
-    //We were unable to figure out how to fix this, unfortunately.
     it('calls GoalsService.deleteGoal', () => {
         expect(calledGoal).toBeNull();
         goalList.deleteGoal(this._id);
