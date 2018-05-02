@@ -103,12 +103,12 @@ public class ContactControllerSpec {
 
     @Test
     public void getContactById() {
-        String jsonResult = contactsController.getContacts(floraId.toHexString());
+        String jsonResult = contactsController.getContact(floraId.toHexString());
         System.out.println(jsonResult);
         Document flora = Document.parse(jsonResult);
 
         assertEquals("Name should match", "Flora Hull", flora.getString("name"));
-        String noJsonResult = contactsController.getContacts(new ObjectId().toString());
+        String noJsonResult = contactsController.getContact(new ObjectId().toString());
         assertNull("No name should match", noJsonResult);
 
     }

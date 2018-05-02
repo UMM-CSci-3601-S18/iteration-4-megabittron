@@ -5,7 +5,7 @@ import {Contact} from "../../contact";
 @Component({
     selector: 'app-add-contact.component',
     templateUrl: 'add-contact.component.html',
-    styleUrls: ['./add-contact.component.css'],
+    styleUrls: ['./add-contact.component.scss'],
 })
 
 export class AddContactComponent {
