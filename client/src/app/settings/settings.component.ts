@@ -6,7 +6,6 @@ import {SettingsService} from "./settings.service";
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-
 @Component({
     selector: 'settingscomponent',
     templateUrl: 'settings.component.html',
@@ -17,7 +16,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class SettingsComponent implements OnInit{
 
     constructor(public appService: AppService,
-        public settingsService: SettingsService) {}
+                public settingsService: SettingsService,
+                public router: Router) {}
 
     public font: string;
     public theme: string;
@@ -55,6 +55,10 @@ export class SettingsComponent implements OnInit{
 
 
     ngOnInit(): void {
+        if (!this.appService.isSignedIn()) {
+            this.router.navigate(['']);
+        }
+
         if (this.font == null || this.font == ''){
             this.font = localStorage.getItem("fontSelected");
         }

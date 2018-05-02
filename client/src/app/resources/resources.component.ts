@@ -8,7 +8,7 @@ import {MatDialog} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
 import {MatSnackBar} from '@angular/material';
 import {AddContactComponent} from "./add/contacts/add-contact.component";
-
+import {Router} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
 
 
@@ -27,7 +27,7 @@ export class ResourcesComponent implements OnInit{
     constructor(public appService: AppService,
                 public resourcesService: ResourcesService,
                 public dialog: MatDialog,
-
+                public router: Router,
                 public snackBar: MatSnackBar,
                 private sanitizer: DomSanitizer) {
 
@@ -335,6 +335,11 @@ export class ResourcesComponent implements OnInit{
         //For testing
         //toggle the value in app service to toggle testing
         this.appService.testingToggle();
+
+        if (!this.appService.isSignedIn()) {
+            this.router.navigate(['']);
+        }
+
         this.refreshLinks();
         this.refreshContacts();
         this.loadService();
