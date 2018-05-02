@@ -56,13 +56,17 @@ public class UserControllerSpec {
             "                    SubjectID: \"151515\",\n" +
             "                    FirstName: \"Charles\",\n" +
             "                    LastName: \"Menne\",\n" +
+            "                    StyleSetting: \"win95\",\n" +
+            "                    FontSetting: \"times new roman\",\n" +
             "                }"));
 
         kylesId = new ObjectId();
         BasicDBObject kyle = new BasicDBObject("_id", kylesId);
         kyle = kyle.append("SubjectID", "161616")
             .append("FirstName", "Kyle")
-            .append("LastName", "Debates");
+            .append("LastName", "Debates")
+            .append("StyleSetting", "Christmas")
+            .append("FontSetting" ,"Verdana");
 
 
 
@@ -117,34 +121,5 @@ public class UserControllerSpec {
         assertEquals("SubjectIDs should match", expectedNames, names);
     }
 
-    @Test
-    public void getUserById() {
-        String jsonResult = userController.getUser(kylesId.toHexString());
-        System.out.println(jsonResult);
-        Document kyle = Document.parse(jsonResult);
-
-        assertEquals("SubjectID should match", "161616", kyle.getString("SubjectID"));
-        String noJsonResult = userController.getUser(new ObjectId().toString());
-        assertNull("No name should match",noJsonResult);
-
-    }
-
-    //@Test
-    //public void addUserTest(){
-    //    String newId = userController.addNewUser("171717","181818","Travis","Warling");
-
-    //    assertNotNull("Adding new user with a _id with a specific SubjectID should return true,", newId);
-    //    Map<String, String[]> argMap = new HashMap<>();
-    //    argMap.put("171717", new String[] { "171717" });
-    //    String jsonResult = userController.getUsers(argMap);
-    //    BsonArray docs = parseJsonArray(jsonResult);
-
-    //    List<String> _id = docs
-    //        .stream()
-    //        .map(UserControllerSpec::get_id)
-    //        .sorted()
-    //        .collect(Collectors.toList());
-    //    assertEquals("Should return the new user", "181818", _id.get(5));
-    //}
 
 }
