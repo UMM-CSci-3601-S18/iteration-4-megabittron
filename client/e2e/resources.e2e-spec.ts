@@ -39,4 +39,32 @@ fdescribe('Resources', () => {
         expect(page.getUniqueContact('5ae930074a2a0fe20cd3f645')).toContain('Shauna Mcfarland');
     });
 
+    it('Should add a youtube video link with information we put in the fields', () => {
+        page.navigateTo();
+        page.clickAddLinkButton();
+        element(by.id('titleField')).sendKeys('Peter Gives it');
+        element(by.id('urlField')).sendKeys('https://www.youtube.com/watch?v=n7zYgtcfrKk');
+        element(by.id('confirmAddLinkButton')).click();
+    });
+
+    it('Should add a contact with information we put in the fields', () => {
+        page.navigateTo();
+        page.clickAddContactButton();
+        element(by.id('nameField')).sendKeys('Paul F.');
+        element(by.id('phoneField')).sendKeys('555-555-5555');
+        element(by.id('confirmAddContactButton')).click();
+    });
+
+    it('Should delete the first youtube video link', () => {
+        page.navigateTo();
+        expect(page.getUniqueContact('5ae933236db5b7b8f9b82709')).toContain('Podunk');
+        page.clickDeleteLinkButton();
+    });
+
+    it('Should delete the first contact', () => {
+        page.navigateTo();
+        expect(page.getUniqueContact('5ae93007908ad31fbb4129a4')).toContain('Avery Lewis');
+        page.clickDeleteContactButton();
+    });
+
 });

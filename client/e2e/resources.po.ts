@@ -42,6 +42,26 @@ export class ResourcePage {
         return element(by.id('addNewContact')).isPresent();
     }
 
+    clickAddLinkButton(): promise.Promise<void> {
+        this.highlightElement(by.id('addNewLink'));
+        return element(by.id('addNewLink')).click();
+    }
+
+    clickAddContactButton(): promise.Promise<void> {
+        this.highlightElement(by.id('addNewContact'));
+        return element(by.id('addNewContact')).click();
+    }
+
+    clickDeleteLinkButton(): promise.Promise<void> {
+        this.highlightElement(by.className('delete'));
+        return element(by.className('delete')).click();
+    }
+
+    clickDeleteContactButton(): promise.Promise<void> {
+        this.highlightElement(by.className('delete'));
+        return element(by.className('delete')).click();
+    }
+
     getUniqueLink(anID: string) {
         const link = element(by.id(anID)).getText();
         this.highlightElement(by.id(anID));
