@@ -22,19 +22,18 @@ export class SettingsComponent implements OnInit{
 
 
     saveSettings(){
-        if (this.font == null || this.font == ''){
-            this.font = "arial";
-        }
-        if (this.theme == null || this.theme == ''){
-            this.theme = "panda";
-        }
         localStorage.setItem("fontSelected",this.font);
         localStorage.setItem("styleSelected",this.theme);
     }
 
 
     ngOnInit(): void {
-
+        if (this.font == null || this.font == ''){
+            this.font = localStorage.getItem("fontSelected");
+        }
+        if (this.theme == null || this.theme == ''){
+            this.theme = localStorage.getItem("styleSelected");
+        }
     }
 }
 
