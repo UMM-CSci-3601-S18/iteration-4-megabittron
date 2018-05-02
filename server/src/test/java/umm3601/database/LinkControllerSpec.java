@@ -103,12 +103,12 @@ public class LinkControllerSpec {
 
     @Test
     public void getLinkById() {
-        String jsonResult = linksController.getLinks(floraId.toHexString());
+        String jsonResult = linksController.getLink(floraId.toHexString());
         System.out.println(jsonResult);
         Document flora = Document.parse(jsonResult);
 
         assertEquals("Name should match", "Flower Video", flora.getString("name"));
-        String noJsonResult = linksController.getLinks(new ObjectId().toString());
+        String noJsonResult = linksController.getLink(new ObjectId().toString());
         assertNull("No name should match", noJsonResult);
 
     }

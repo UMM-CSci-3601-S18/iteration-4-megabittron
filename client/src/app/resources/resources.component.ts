@@ -9,6 +9,9 @@ import {Observable} from 'rxjs/Observable';
 import {MatSnackBar} from '@angular/material';
 import {AddContactComponent} from "./add/contacts/add-contact.component";
 
+import {DomSanitizer} from "@angular/platform-browser";
+
+
 @Component({
     selector: 'resources-component',
     templateUrl: 'resources.component.html',
@@ -24,7 +27,10 @@ export class ResourcesComponent implements OnInit{
     constructor(public appService: AppService,
                 public resourcesService: ResourcesService,
                 public dialog: MatDialog,
-                public snackBar: MatSnackBar) {
+
+                public snackBar: MatSnackBar,
+                private sanitizer: DomSanitizer) {
+
         this.videoTitle = 'Videos';
         this.linkTitle = 'Links';
         this.numberTitle = 'Phone Numbers';
@@ -215,7 +221,9 @@ export class ResourcesComponent implements OnInit{
                     this.resourcesService.addNewContact(result).subscribe(
                         addContactResult => {
                             this.highlightedID = addContactResult;
-                            this.refreshLinks();
+
+                            this.refreshContacts();
+
                             this.snackBar.open("Contact Created", "CLOSE", {
                                 duration: 3000,
                             });
@@ -230,12 +238,46 @@ export class ResourcesComponent implements OnInit{
         });
     }
 
+
+    deleteContact(_id: string) {
+        this.resourcesService.deleteContact(_id).subscribe(
+            contacts => {
+                console.log("first part");
+                this.refreshContacts();
+                this.loadService();
+            },
+            err => {
+                console.log(err);
+                this.refreshContacts();
+                this.loadService();
+                this.snackBar.open("Contact Deleted", "CLOSE", {
+                    duration: 3000,
+                });
+            }
+        );
+    }
+
+    deleteLink(_id: string) {
+        this.resourcesService.deleteLink(_id).subscribe(
+            links => {
+                console.log("first part");
+                this.refreshLinks();
+                this.loadService();
+            },
+            err => {
+                console.log(err);
+                this.refreshLinks();
+                this.loadService();
+                this.snackBar.open("YouTube Video Deleted", "CLOSE", {
+                    duration: 3000,
+                });
+            }
+        );
+    }
+
     refreshLinks(): Observable<Link[]> {
-        var userID = localStorage.getItem("userID");
-        if(userID == null){
-            userID = "";
-        }
-        const linkObservable: Observable<Link[]> = this.resourcesService.getLinks(userID);
+        const linkObservable: Observable<Link[]> = this.resourcesService.getLinks(localStorage.getItem("userID"));
+
         console.log(linkObservable);
         linkObservable.subscribe(
             links => {
@@ -251,11 +293,9 @@ export class ResourcesComponent implements OnInit{
     }
 
     refreshContacts(): Observable<Contact[]> {
-        var userID = localStorage.getItem("userID");
-        if(userID == null){
-            userID = "";
-        }
-        const contactObservable: Observable<Contact[]> = this.resourcesService.getContacts(userID);
+
+        const contactObservable: Observable<Contact[]> = this.resourcesService.getContacts(localStorage.getItem("userID"));
+
         console.log(contactObservable);
         contactObservable.subscribe(
             contacts => {
