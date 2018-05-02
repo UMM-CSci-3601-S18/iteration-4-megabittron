@@ -22,123 +22,396 @@
 }
 
 .panda {
+    --main: #e3f2fd;
+    --accent: #FFFFFF;
+    --sidebar: #546E7A;
+    --navbar: #03A9F4;
+    --alttxt: #FFFFFF;
+
+
     height: 100vh;
-    background-color: #e3f2fd;
+    background-color: var(--main);
     .content{
-        background-color: #e3f2fd;
+        background-color: var(--main);
         *{
             .sidenav {
-                background-color: #546E7A;
+                background-color: var(--sidebar);
             }
         }
     }
 
     .mat-toolbar{
-        background-color: #03A9F4;
+        background-color: var(--navbar);
     }
     form{
-        background-color: #FFFFFF;
+        background-color: var(--accent);
     }
     .mat-card{
-        background-color: #FFFFFF;
+        background-color: var(--accent);
     }
-    .mat-stepper-horizontal{
-        background-color: #FFFFFF;
+    .mat-card-header{
+        background-color: var(--accent);
+    }
+    .mat-card-content{
+        background-color: var(--accent);
+    }
+    .mat-stepper-horizontal {
+        background-color: var(--accent);
+    }
+
+    .journal-card *{
+        background-color: var(--accent);
     }
 
     .alt-color{
-        color: white;
+        color: var(--alttxt);
+    }
+
+
+    .main{
+        background-color: var(--main);
+    }
+    .accent{
+        background-color: var(--accent);
+    }
+    .sidebar{
+        background-color: var(--sidebar);
+    }
+    .navbar{
+        background-color: var(--navbar);
+    }
+}
+
+.dark {
+    --main: #659295;
+    --accent: #9E9E9E;
+    --sidebar: #415762;
+    --navbar: #024969;
+    --alttxt: #D4D4D4;
+
+
+    height: 100vh;
+    background-color: var(--main);
+    .content{
+        background-color: var(--main);
+        *{
+            .sidenav {
+                background-color: var(--sidebar);
+            }
+        }
+    }
+
+    .mat-toolbar{
+        background-color: var(--navbar);
+    }
+    form{
+        background-color: var(--accent);
+    }
+    .mat-card{
+        background-color: var(--accent);
+    }
+    .mat-card-header{
+        background-color: var(--accent);
+    }
+    .mat-card-content{
+        background-color: var(--accent);
+    }
+    .mat-stepper-horizontal {
+        background-color: var(--accent);
+    }
+
+    .journal-card *{
+        background-color: var(--accent);
+    }
+
+    .alt-color{
+        color: var(--alttxt);
+    }
+
+
+    .main{
+        background-color: var(--main);
+    }
+    .accent{
+        background-color: var(--accent);
+    }
+    .sidebar{
+        background-color: var(--sidebar);
+    }
+    .navbar{
+        background-color: var(--navbar);
+    }
+}
+
+.high-contrast {
+    --main: #000000;
+    --accent: #FFFF01;
+    --sidebar: #3FF241;
+    --navbar: #15EFFB;
+    --alttxt: #3FF241;
+
+
+    height: 100vh;
+    background-color: var(--main);
+    .content{
+        background-color: var(--main);
+        *{
+            .sidenav {
+                background-color: var(--main);
+                border: 1px solid #FFFFFF;
+            }
+        }
+    }
+
+    .mat-toolbar{
+        background-color: var(--main);
+        border: 1px solid #FFFFFF;
+    }
+    form{
+        background-color: var(--main);
+        border: 1px solid #FFFFFF;
+    }
+    .mat-card{
+        background-color: var(--main);
+        border: 1px solid #FFFFFF;
+    }
+    .mat-card-header{
+        background-color: var(--main);
+        border: 1px solid #FFFFFF;
+    }
+    .mat-card-content{
+        background-color: var(--main);
+        border: 1px solid #FFFFFF;
+    }
+    .mat-stepper-horizontal{
+        background-color: var(--main);
+        border: 1px solid #FFFFFF;
+    }
+
+    .mat-button-wrapper{
+        background-color: var(--main);
+        border: 8px solid #000000;
+    }
+
+
+    .journal-card *{
+        background-color: var(--main);
+        border: 1px solid #FFFFFF;
+    }
+
+    .mat-icon-button{
+        background-color: #FFFFFF;
+    }
+
+    *{
+        color: #FFFFFF;
+    }
+
+    .page-title{
+        color: #15EFFB;
+    }
+    .alt-color{
+        color: var(--alttxt);
+    }
+    .computer *{
+        color: #FFFF01;
+    }
+
+
+    .main{
+        background-color: var(--main);
+    }
+    .accent{
+        background-color: var(--accent);
+    }
+    .sidebar{
+        background-color: var(--sidebar);
+    }
+    .navbar{
+        background-color: var(--navbar);
     }
 }
 
 .windows95 {
+    --main: #008080;
+    --accent: #E0E0E0;
+    --sidebar: #B0B0B0;
+    --navbar: #808080;
+    --alttxt: #FFFFFF;
+
+
     height: 100vh;
-    background-color: #008080;
+    background-color: var(--main);
     .content{
-        background-color: #008080;
+        background-color: var(--main);
         *{
             .sidenav {
-                background-color: #B0B0B0;
+                background-color: var(--sidebar);
             }
         }
-
     }
 
     .mat-toolbar{
-        background-color: #808080;
+        background-color: var(--navbar);
     }
     form{
-        background-color: #E0E0E0;
+        background-color: var(--accent);
     }
     .mat-card{
-        background-color: #E0E0E0;
+        background-color: var(--accent);
     }
-    .mat-stepper-horizontal{
-        background-color: #E0E0E0;
+    .mat-card-header{
+        background-color: var(--accent);
+    }
+    .mat-card-content{
+        background-color: var(--accent);
+    }
+    .mat-stepper-horizontal {
+        background-color: var(--accent);
+    }
+
+    .journal-card *{
+        background-color: var(--accent);
     }
 
     .alt-color{
-        color: white;
+        color: var(--alttxt);
+    }
+
+
+    .main{
+        background-color: var(--main);
+    }
+    .accent{
+        background-color: var(--accent);
+    }
+    .sidebar{
+        background-color: var(--sidebar);
+    }
+    .navbar{
+        background-color: var(--navbar);
     }
 }
 
 .christmas2018 {
+    --main: #4CAF50;
+    --accent: #F44336;
+    --sidebar: #0caf07;
+    --navbar: #25700e;
+    --alttxt: #FFFFFF;
+
+
     height: 100vh;
-    background-color: #4CAF50;
+    background-color: var(--main);
     .content{
-        background-color: #4CAF50;
+        background-color: var(--main);
         *{
             .sidenav {
-                background-color: #0caf07;
+                background-color: var(--sidebar);
             }
         }
     }
 
     .mat-toolbar{
-        background-color: #25700e;
+        background-color: var(--navbar);
     }
     form{
-        background-color: #F44336;
+        background-color: var(--accent);
     }
     .mat-card{
-        background-color: #F44336;
+        background-color: var(--accent);
     }
-    .mat-stepper-horizontal{
-        background-color: #F44336;
+    .mat-card-header{
+        background-color: var(--accent);
+    }
+    .mat-card-content{
+        background-color: var(--accent);
+    }
+    .mat-stepper-horizontal {
+        background-color: var(--accent);
+    }
+
+    .journal-card *{
+        background-color: var(--accent);
     }
 
     .alt-color{
-        color: white;
+        color: var(--alttxt);
+    }
+
+
+    .main{
+        background-color: var(--main);
+    }
+    .accent{
+        background-color: var(--accent);
+    }
+    .sidebar{
+        background-color: var(--sidebar);
+    }
+    .navbar{
+        background-color: var(--navbar);
     }
 }
 
 .aesthetic {
+    --main: #FFC3DA;
+    --accent: #84F3D6;
+    --sidebar: #fce3f6;
+    --navbar: #ccfdff;
+    --alttxt: #FFFFFF;
+
+
     height: 100vh;
-    background-color: #FFC3DA;
+    background-color: var(--main);
     .content{
-        background-color: #FFC3DA;
+        background-color: var(--main);
         *{
             .sidenav {
-                background-color: #fce3f6;
+                background-color: var(--sidebar);
             }
         }
     }
 
     .mat-toolbar{
-        background-color: #ccfdff;
+        background-color: var(--navbar);
     }
     form{
-        background-color: #84F3D6;
+        background-color: var(--accent);
     }
     .mat-card{
-        background-color: #84F3D6;
+        background-color: var(--accent);
     }
-    .mat-stepper-horizontal{
-        background-color: #84F3D6;
+    .mat-card-header{
+        background-color: var(--accent);
+    }
+    .mat-card-content{
+        background-color: var(--accent);
+    }
+    .mat-stepper-horizontal {
+        background-color: var(--accent);
+    }
+
+    .journal-card *{
+        background-color: var(--accent);
     }
 
     .alt-color{
-        color: white;
+        color: var(--alttxt);
+    }
+
+
+    .main{
+        background-color: var(--main);
+    }
+    .accent{
+        background-color: var(--accent);
+    }
+    .sidebar{
+        background-color: var(--sidebar);
+    }
+    .navbar{
+        background-color: var(--navbar);
     }
 }
 

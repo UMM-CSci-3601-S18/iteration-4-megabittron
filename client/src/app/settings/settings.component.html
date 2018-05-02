@@ -1,6 +1,6 @@
 <div [ngClass]="appService.styleClassSelector()">
-        <mat-card class="phone-numbers card">
-            <mat-card-title class="numbers title">Settings</mat-card-title>
+        <mat-card class="settings-card">
+            <mat-card-title class="title">Settings</mat-card-title>
             <mat-divider></mat-divider>
                 <form>
 
@@ -29,47 +29,85 @@
                     <label class="theme-radio">
                     <input type="radio"
                            (click)="this.theme = 'panda'; saveSettings()">
+                        <a class="panda">
+                            <span class="radio-border"></span>
+                            <span class="main"></span>
+                            <span class="accent"></span>
+                            <span class="sidebar"></span>
+                            <span class="navbar"></span>
+                        </a>
+                    </label>
+                    <label class="theme-radio">
+                    <input type="radio"
+                           (click)="this.theme = 'dark'; saveSettings()">
+                        <a class="dark">
                         <span class="radio-border"></span>
-                        <span class="panda-main"></span>
-                        <span class="panda-accent"></span>
+                            <span class="main"></span>
+                            <span class="accent"></span>
+                            <span class="sidebar"></span>
+                            <span class="navbar"></span>
+                        </a>
+                    </label>
+                    <label class="theme-radio">
+                        <input type="radio"
+                               (click)="this.theme = 'high-contrast'; saveSettings()">
+                        <a class="high-contrast">
+                            <span class="radio-border"></span>
+                            <span class="main"></span>
+                            <span class="accent"></span>
+                            <span class="sidebar"></span>
+                            <span class="navbar"></span>
+                        </a>
                     </label>
                     <label class="theme-radio">
                         <input type="radio"
                            (click)="this.theme = 'windows95'; saveSettings()">
-                        <span class="radio-border"></span>
-                        <span class="win-main"></span>
-                        <span class="win-accent"></span>
+                        <a class="windows95">
+                            <span class="radio-border"></span>
+                            <span class="main"></span>
+                            <span class="accent"></span>
+                            <span class="sidebar"></span>
+                            <span class="navbar"></span>
+                        </a>
                     </label>
                     <label class="theme-radio">
                     <input type="radio"
                            (click)="this.theme = 'christmas2018'; saveSettings()">
-                        <span class="radio-border"></span>
-                        <span class="chr-main"></span>
-                        <span class="chr-accent"></span>
+                        <a class="christmas2018">
+                            <span class="radio-border"></span>
+                            <span class="main"></span>
+                            <span class="accent"></span>
+                            <span class="sidebar"></span>
+                            <span class="navbar"></span>
+                        </a>
                     </label>
                     <label class="theme-radio">
                         <input type="radio"
                                (click)="this.theme = 'aesthetic'; saveSettings()">
-                        <span class="radio-border"></span>
-                        <span class="aesth-main"></span>
-                        <span class="aesth-accent"></span>
+                        <a class="aesthetic">
+                            <span class="radio-border"></span>
+                            <span class="main"></span>
+                            <span class="accent"></span>
+                            <span class="sidebar"></span>
+                            <span class="navbar"></span>
+                        </a>
                     </label>
                     <br><br>
                 </form>
 
         </mat-card>
 
-<div class="about-page">
- <mat-card>
-     <mat-card-title class="numbers title">About</mat-card-title>
+
+ <mat-card class="about-card">
+     <mat-card-title class="title">About</mat-card-title>
      <mat-divider></mat-divider>
-    <div class="{credits, text}">
+    <div class="credits text">
         Icons made by
         <a title="Freepik" href="http://www.freepik.com">Freepik</a>
         from
         <a title="Flaticon" href="http://www.flaticon.com">www.flaticon.com</a>
     </div>
  </mat-card>
-</div>
+
 </div>
 
