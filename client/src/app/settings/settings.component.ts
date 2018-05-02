@@ -17,20 +17,20 @@ export class SettingsComponent implements OnInit{
 
     constructor(public appService: AppService) {}
 
-    public theme: string;
     public font: string;
+    public theme: string;
 
 
     saveSettings(){
+        if (this.font == null || this.font == ''){
+            this.font = "arial";
+        }
         if (this.theme == null || this.theme == ''){
             this.theme = "panda";
         }
+        localStorage.setItem("fontSelected",this.font);
         localStorage.setItem("styleSelected",this.theme);
     }
-
-
-
-
 
 
     ngOnInit(): void {

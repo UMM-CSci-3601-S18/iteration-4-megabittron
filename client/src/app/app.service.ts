@@ -29,16 +29,20 @@ export class AppService {
         }
     }
 
-    public styleClassSelector(): String {
+    public styleClassSelector(): any {
 
+        var font: String = localStorage.getItem("fontSelected");
+        var style: String = localStorage.getItem("styleSelected");
 
-        var holder: String = localStorage.getItem("styleSelected");
-
-        if(holder == null || holder == ""){
-            return "panda";
-        } else {
-            return holder.toLowerCase();
+        if(font == null || font == ""){
+            font = "arial";
         }
+
+        if(style == null || style == ""){
+            style = "panda";
+        }
+
+        return [font.toLowerCase(), style.toLowerCase()] ;
     }
 
 }
