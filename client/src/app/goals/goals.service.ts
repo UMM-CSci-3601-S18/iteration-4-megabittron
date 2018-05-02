@@ -6,6 +6,7 @@ import {environment} from '../../environments/environment';
 import 'rxjs/add/observable/of';
 
 
+
 @Injectable()
 export class GoalsService {
     readonly baseUrl: string = environment.API_URL + 'goals';
@@ -13,7 +14,8 @@ export class GoalsService {
     private noID: boolean = false;
     private emptyObservable: Observable<Goal[]> = Observable.of([]);
 
-    constructor(private http: HttpClient) {
+    constructor(
+        private http: HttpClient) {
     }
 
     //Get goals from the server

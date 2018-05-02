@@ -1,3 +1,4 @@
+<div [ngClass]="appService.styleClassSelector()">
 <td-layout #layout>
     <td-navigation-drawer id="navBar" class="nav-drawer" flex>
         <mat-toolbar>
@@ -30,6 +31,9 @@
             <a mat-list-item [routerLink]="['/summary']" (click)="layout.close()" routerLinkActive="nav-active">
                 <mat-icon><i class="material-icons">assessment</i></mat-icon>
                 Stats</a>
+            <a mat-list-item [routerLink]="['/settings']" (click)="layout.close()" routerLinkActive="nav-active">
+                <mat-icon><i class="material-icons">settings</i></mat-icon>
+                Settings</a>
             <a mat-list-item *ngIf="appService.isSignedIn()" (click)="signOut()">
                 <mat-icon>exit_to_app</mat-icon>
                 Logout</a>
@@ -41,7 +45,7 @@
                 <mat-icon>menu</mat-icon>
             </button>
             <span hide-xs class="desktop-title"><button mat-button class="computer"
-                                                        [routerLink]="['/']"><img class="home-img" src="../android-chrome-192x192.png"></button></span>
+                                                        [routerLink]="['/']"><img class="home-img" src="../assets/images/home-icon-192x192.png"></button></span>
             <span hide-gt-xs>My Panda</span>
             <span flex></span>
             <a class="desktop-goals computer" mat-button [routerLink]="['/goals']" routerLinkActive="nav-active"
@@ -52,6 +56,8 @@
                hide-xs>Resources</a>
             <a class="desktop-stats computer" mat-button [routerLink]="['/summary']" routerLinkActive="nav-active"
                hide-xs>Stats</a>
+            <a class="desktop-settings computer" mat-button [routerLink]="['/settings']" routerLinkActive="nav-active"
+               hide-xs>Settings</a>
             <a class="computer" hide-xs>
                 <div *ngIf="!appService.isSignedIn()" class="g-signin2" (click)="signIn()"></div>
                 <button *ngIf="appService.isSignedIn()" mat-raised-button (click)="signOut()">Logout</button>
@@ -70,4 +76,4 @@
         <router-outlet></router-outlet>
     </td-layout-nav>
 </td-layout>
-
+</div>

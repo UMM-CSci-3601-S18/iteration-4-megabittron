@@ -102,12 +102,21 @@ public class UserController {
             newUser.append("SubjectID", SubjectID);
             newUser.append("FirstName", FirstName);
             newUser.append("LastName", LastName);
+            newUser.append("StyleSetting", "panda");
+            newUser.append("FontSetting", "arial");
 
             try {
                 userCollection.insertOne(newUser);
-                System.err.println("Successfully added new user [_id=" + id + ", SubjectID=" + SubjectID + " FirstName=" + FirstName + " LastName=" + LastName + ']');
+                System.err.println("Successfully added new user [_id=" + id + ", SubjectID=" + SubjectID + " FirstName=" + FirstName + " LastName=" + LastName + " with Font/Style " + matchingUsers.first().get("FontSetting")+"/"+matchingUsers.first().get("StyleSetting")+ "]");
                 // return JSON.serialize(newUser);
-                return JSON.serialize(id);
+                Document userInfo = new Document();
+                userInfo.append("_id", matchingUsers.first().get("_id"));
+                userInfo.append("FirstName", matchingUsers.first().get("FirstName"));
+                userInfo.append("LastName", matchingUsers.first().get("LastName"));
+                userInfo.append("StyleSetting", matchingUsers.first().get("StyleSetting"));
+                userInfo.append("FontSetting", matchingUsers.first().get("FontSetting"));
+
+                return JSON.serialize(userInfo);
             } catch(MongoException me) {
                 me.printStackTrace();
                 return null;
@@ -118,6 +127,8 @@ public class UserController {
             userInfo.append("_id", matchingUsers.first().get("_id"));
             userInfo.append("FirstName", matchingUsers.first().get("FirstName"));
             userInfo.append("LastName", matchingUsers.first().get("LastName"));
+            userInfo.append("StyleSetting", matchingUsers.first().get("StyleSetting"));
+            userInfo.append("FontSetting", matchingUsers.first().get("FontSetting"));
 
             return JSON.serialize(userInfo);
         }
@@ -127,6 +138,65 @@ public class UserController {
 
     }
 
+    //edits user style settings
+    public String editUserStyleSetting(String userID, String setting) {
+
+        Document filterDoc = new Document();
+        String id;
+
+        if (!(userID == "")) {
+            id = userID;
+        } else {
+            return JSON.serialize("[ ]");
+        }
+
+        Document newStyleSetting = new Document();
+        newStyleSetting.append("StyleSetting", setting);
+
+        Document setQuery = new Document();
+        setQuery.append("$set", newStyleSetting);
+
+        //Document searchQuery = new Document().append("_id", new ObjectId(id));
+        Document searchQuery = new Document().append("_id", new ObjectId(id));
+
+        try {
+            userCollection.updateOne(searchQuery, setQuery);
+            return JSON.serialize(setting);
+        } catch(MongoException me) {
+            me.printStackTrace();
+            return null;
+        }
+    }
+
+    public String editUserFontSetting(String userID, String setting) {
+
+        Document filterDoc = new Document();
+        String id;
+
+        if (!(userID == "")) {
+            id = userID;
+        } else {
+            return JSON.serialize("[ ]");
+        }
+
+        Document newFontSetting = new Document();
+        newFontSetting.append("FontSetting", setting);
+
+        Document setQuery = new Document();
+        setQuery.append("$set", newFontSetting);
+
+        //Document searchQuery = new Document().append("_id", new ObjectId(id));
+        Document searchQuery = new Document().append("_id", new ObjectId(id));
+
+        try {
+            userCollection.updateOne(searchQuery, setQuery);
+
+            return JSON.serialize(setting);
+        } catch(MongoException me) {
+            me.printStackTrace();
+            return null;
+        }
+    }
 
 }
 

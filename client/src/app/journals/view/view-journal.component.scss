@@ -5,16 +5,20 @@
     z-index: 1;
     overflow-x: hidden;
     text-align: center;
-    background-color: #546E7A;
+    //background-color: #546E7A;
 }
 
 .journal {
     margin-left: 275px;
-    max-width: 500px;
+    max-width: 100%;
 }
 
 .journal-card {
     margin: 15px;
+}
+
+.journal-title {
+    font-size: 20px;
 }
 
 .action-button {
@@ -27,20 +31,20 @@
 }
 
 .edit {
+
     margin-top: 25px;
-    margin-left: 350px;
+    right: 50px;
     color: #1976D2;
 }
 
 .delete {
     margin-top: 25px;
-    margin-left: 400px;
+    right: 10px;
     color: #F44336;
 }
 
 .page-title {
     margin: 15px;
-    color: white;
     font-size: 34px;
 }
 
@@ -53,6 +57,7 @@
 }
 
 .break-word {
+    white-space: pre-line;
     word-wrap: break-word;
 }
 

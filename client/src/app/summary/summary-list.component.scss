@@ -25,7 +25,8 @@ mat-card.filtering.mat-card {
 }
 
 #Chart {
-    background-color: #ffffff;
+    max-height:90vh;
+    max-width: 175vh;
 }
 
 .selected {
@@ -70,4 +71,8 @@ mat-card.filtering.mat-card {
 
 .page-scroll-buttons {
     text-align: center;
+}
+
+.entire-table{
+    padding-bottom: 5px;
 }

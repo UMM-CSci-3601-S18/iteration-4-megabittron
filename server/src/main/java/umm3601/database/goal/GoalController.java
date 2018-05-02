@@ -52,7 +52,7 @@ public class GoalController {
     // specified goal are found.
     public String getGoals(Map<String, String[]> queryParams) {
 
-        System.out.println("It began getGoals() in GoalController");
+        //System.out.println("It began getGoals() in GoalController");
 
         Document filterDoc = new Document();
 
