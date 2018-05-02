@@ -26,16 +26,28 @@
     background-color: #e3f2fd;
     .content{
         background-color: #e3f2fd;
+        *{
+            .sidenav {
+                background-color: #546E7A;
+            }
+        }
     }
 
     .mat-toolbar{
         background-color: #1976D2;
     }
+    form{
+        background-color: #FFFFFF;
+    }
+    .mat-card{
+        background-color: #FFFFFF;
+    }
+    .mat-stepper-horizontal{
+        background-color: #FFFFFF;
+    }
 
-    .ng-star-inserted{
-        .sidenav {
-            background-color: #546E7A;
-        }
+    .alt-color{
+        color: white;
     }
 }
 
@@ -44,7 +56,7 @@
     background-color: #008080;
     .content{
         background-color: #008080;
-        .ng-star-inserted{
+        *{
             .sidenav {
                 background-color: #B0B0B0;
             }
@@ -64,6 +76,10 @@
     .mat-stepper-horizontal{
         background-color: #E0E0E0;
     }
+
+    .alt-color{
+        color: white;
+    }
 }
 
 .christmas2018 {
@@ -71,7 +87,7 @@
     background-color: #4CAF50;
     .content{
         background-color: #4CAF50;
-        .ng-star-inserted{
+        *{
             .sidenav {
                 background-color: #0caf07;
             }
@@ -90,6 +106,10 @@
     .mat-stepper-horizontal{
         background-color: #F44336;
     }
+
+    .alt-color{
+        color: white;
+    }
 }
 
 .aesthetic {
@@ -97,7 +117,7 @@
     background-color: #FFC3DA;
     .content{
         background-color: #FFC3DA;
-        .ng-star-inserted{
+        *{
             .sidenav {
                 background-color: #fce3f6;
             }
@@ -115,6 +135,10 @@
     }
     .mat-stepper-horizontal{
         background-color: #84F3D6;
+    }
+
+    .alt-color{
+        color: white;
     }
 }
 
