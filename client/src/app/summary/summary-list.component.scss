@@ -38,7 +38,7 @@ mat-card.filtering.mat-card {
 }
 
 .deselected {
-    box-shadow: 0px 1px 3px grey;
+    box-shadow: 0 1px 3px grey;
 }
 
 * {
@@ -50,13 +50,24 @@ mat-card.filtering.mat-card {
 }
 
 .table-header-div {
-    padding-left: 25%;
-    padding-right: 25%;
-   /* border: black solid 1.5px;*/
+    border-right: black solid 2px;
+    border-left: black solid 2px;
+    border-top: black solid 2px;
 }
 
 .table-div {
-    padding-left: 25%;
-    padding-right: 25%;
-    /*border: black solid 1px;*/
+    border: black solid 2px;
+}
+
+.entire-table {
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+.mat-header-cell {
+    color: rgba(0, 0, 0, 0.76);
+}
+
+.page-scroll-buttons {
+    text-align: center;
 }
