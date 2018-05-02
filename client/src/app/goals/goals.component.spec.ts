@@ -17,8 +17,12 @@ describe( 'Goals', () => {
     let goalList: GoalsComponent;
     let fixture: ComponentFixture<GoalsComponent>;
 
+    const newId = 'class_id';
+    let calledGoal: Goal;
+
     let goalsServiceStub: {
         getGoals: () => Observable<Goal[]>
+        editGoal: (newGoal: Goal) => Observable<{'$oid': string}>
     };
 
     beforeEach(() => {
@@ -73,7 +77,14 @@ describe( 'Goals', () => {
                     "next": "2018-04-06T18:56:24.702Z",
                     "frequency": "Daily"
                 }
-            ])
+                ]),
+
+            editGoal: (goalToEdit: Goal) => {
+                calledGoal = goalToEdit;
+                return Observable.of({
+                    '$oid': newId
+                });
+            }
         };
 
         TestBed.configureTestingModule({
@@ -144,6 +155,13 @@ describe( 'Goals', () => {
         goalList.showGoals("all");
         expect(goalList.shownGoals.length).toBe(4);
     });
+
+    it('getNext returns todays goals',()=>{
+        expect(goalList.goals.length).toBe(4);
+        goalList.showAllGoals = false;
+        goalList.getNext();
+        expect(goalList.shownGoals.length).toBe(2)
+    })
 });
 
 describe('Next Goals', () => {
