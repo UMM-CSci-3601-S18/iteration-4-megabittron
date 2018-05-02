@@ -5,7 +5,7 @@ import {Link} from "../../link";
 @Component({
     selector: 'app-add-link.component',
     templateUrl: 'add-link.component.html',
-    styleUrls: ['./add-link.component.css'],
+    styleUrls: ['./add-link.component.scss'],
 })
 
 export class AddLinkComponent {

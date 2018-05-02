@@ -3,11 +3,16 @@ import {Component, OnInit} from '@angular/core';
 import {Contact} from './contact';
 import {Link} from './link';
 import {ResourcesService} from "./resources.service";
+import {AddLinkComponent} from "./add/links/add-link.component";
+import {MatDialog} from '@angular/material';
+import {Observable} from 'rxjs/Observable';
+import {MatSnackBar} from '@angular/material';
+import {AddContactComponent} from "./add/contacts/add-contact.component";
 
 @Component({
     selector: 'resources-component',
     templateUrl: 'resources.component.html',
-    styleUrls: ['./resources.component.css'],
+    styleUrls: ['./resources.component.scss'],
     providers: [AppService]
 })
 export class ResourcesComponent implements OnInit{
@@ -16,10 +21,23 @@ export class ResourcesComponent implements OnInit{
     links: Link[] = [];
     contacts: Contact[] = [];
 
-    constructor(public appService: AppService, public resourcesService: ResourcesService) {
+    constructor(public appService: AppService,
+                public resourcesService: ResourcesService,
+                public dialog: MatDialog,
+                public snackBar: MatSnackBar) {
         this.videoTitle = 'Videos';
         this.linkTitle = 'Links';
         this.numberTitle = 'Phone Numbers';
+    }
+
+    private highlightedID: { '$oid': string } = {'$oid': ''};
+
+    isLinkHighlighted(link: Link): boolean {
+        return link._id['$oid'] === this.highlightedID['$oid'];
+    }
+
+    isContactHighlighted(contact: Contact): boolean {
+        return contact._id['$oid'] === this.highlightedID['$oid'];
     }
 
     defaultVideos = [
@@ -138,6 +156,120 @@ export class ResourcesComponent implements OnInit{
         },
     ]
 
+    newLinkDialog(): void {
+        const newLink: Link = {
+            _id: '',
+            userID: localStorage.getItem("userID"),
+            name: '',
+            subname: '',
+            url: '',
+        };
+        const dialogRef = this.dialog.open(AddLinkComponent, {
+            width: '300px',
+            data: {link: newLink}
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result == undefined) {
+                console.log("Cancelled without adding a link");
+            }
+            else {
+                if(localStorage.isSignedIn == "true"){
+                    this.resourcesService.addNewLink(result).subscribe(
+                        addLinkResult => {
+                            this.highlightedID = addLinkResult;
+                            this.refreshLinks();
+                            this.snackBar.open("Link Created", "CLOSE", {
+                                duration: 3000,
+                            });
+                        },
+                        err => {
+                            // This should probably be turned into some sort of meaningful response.
+                            console.log('There was an error adding the link.');
+                            console.log('The error was ' + JSON.stringify(err));
+                        });
+                }
+            }
+        });
+    }
+
+    newContactDialog(): void {
+        const newContact: Contact = {
+            _id: '',
+            userID: localStorage.getItem("userID"),
+            name: '',
+            email: '',
+            phone: '',
+        };
+        const dialogRef = this.dialog.open(AddContactComponent, {
+            width: '300px',
+            data: {contact: newContact}
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result == undefined) {
+                console.log("Cancelled without adding a contact");
+            }
+            else {
+                if(localStorage.isSignedIn == "true"){
+                    this.resourcesService.addNewContact(result).subscribe(
+                        addContactResult => {
+                            this.highlightedID = addContactResult;
+                            this.refreshLinks();
+                            this.snackBar.open("Contact Created", "CLOSE", {
+                                duration: 3000,
+                            });
+                        },
+                        err => {
+                            // This should probably be turned into some sort of meaningful response.
+                            console.log('There was an error adding the contact.');
+                            console.log('The error was ' + JSON.stringify(err));
+                        });
+                }
+            }
+        });
+    }
+
+    refreshLinks(): Observable<Link[]> {
+        var userID = localStorage.getItem("userID");
+        if(userID == null){
+            userID = "";
+        }
+        const linkObservable: Observable<Link[]> = this.resourcesService.getLinks(userID);
+        console.log(linkObservable);
+        linkObservable.subscribe(
+            links => {
+                console.log(links);
+                if(links != null){
+                    this.links = links;
+                }
+            },
+            err => {
+                console.log(err);
+            });
+        return linkObservable;
+    }
+
+    refreshContacts(): Observable<Contact[]> {
+        var userID = localStorage.getItem("userID");
+        if(userID == null){
+            userID = "";
+        }
+        const contactObservable: Observable<Contact[]> = this.resourcesService.getContacts(userID);
+        console.log(contactObservable);
+        contactObservable.subscribe(
+            contacts => {
+                console.log(contacts);
+                if(contacts != null){
+                    this.contacts = contacts;
+                }
+            },
+            err => {
+                console.log(err);
+            });
+        return contactObservable;
+    }
+
     loadService(): void {
         console.log(localStorage.getItem("userID"));
         this.resourcesService.getLinks(localStorage.getItem("userID")).subscribe(
@@ -163,6 +295,8 @@ export class ResourcesComponent implements OnInit{
         //For testing
         //toggle the value in app service to toggle testing
         this.appService.testingToggle();
+        this.refreshLinks();
+        this.refreshContacts();
         this.loadService();
     }
 

@@ -30,7 +30,7 @@ public class LinksController {
         linksCollection = database.getCollection("links");
     }
 
-    public String getLinks(String id) {
+    public String getLink(String id) {
 
         FindIterable<Document> jsonContacts
             = linksCollection
@@ -88,4 +88,19 @@ public class LinksController {
             return null;
         }
     }
+
+    public void deleteLink(String id){
+        Document searchQuery = new Document().append("_id", new ObjectId(id));
+        System.out.println("Link id: " + id);
+        try {
+            linksCollection.deleteOne(searchQuery);
+            ObjectId theID = searchQuery.getObjectId("_id");
+            System.out.println("Succesfully deleted link with ID: " + theID);
+
+        } catch(MongoException me) {
+            me.printStackTrace();
+            System.out.println("error");
+        }
+    }
+
 }

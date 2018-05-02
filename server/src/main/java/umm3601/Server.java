@@ -133,17 +133,16 @@ public class Server {
         //List summary page
         get("api/summaries", summaryRequestHandler::getSummaries);
 
-        //List Resources page
-        get("api/contacts/:id", contactsRequestHandler::getContactsJSON);
+        //List resources
         get("api/contacts", contactsRequestHandler::getContacts);
+        get("api/contacts/:id", contactsRequestHandler::getContactsJSON);
         post("api/contacts/new", contactsRequestHandler::addNewContacts);
+        delete("api/contacts/delete/:id", contactsRequestHandler::deleteContact);
 
         get("api/links/:id", linksRequestHandler::getLinksJSON);
         get("api/links", linksRequestHandler::getLinks);
         post("api/links/new", linksRequestHandler::addNewLinks);
-
-
-
+        delete("api/links/delete/:id", linksRequestHandler::deleteLink);
 
         //List journals
         get("api/journals", journalRequestHandler::getJournals);
