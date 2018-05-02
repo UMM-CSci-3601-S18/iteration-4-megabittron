@@ -3,7 +3,7 @@ import {TestBed} from '@angular/core/testing';
 import {HttpClient} from '@angular/common/http';
 import {SettingsService} from './settings.service';
 
-fdescribe('Setting list service: ', () => {
+describe('Setting list service: ', () => {
     // A small collection of test journals
 
     let settingListService: SettingsService;
