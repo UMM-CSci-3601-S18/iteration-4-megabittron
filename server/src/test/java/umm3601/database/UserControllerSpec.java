@@ -32,6 +32,7 @@ public class UserControllerSpec {
         userDocuments.drop();
         List<Document> testUsers = new ArrayList<>();
         testUsers.add(Document.parse("{\n" +
+            "                    _id: \"ahnafsId\",\n" +
             "                    SubjectID: \"121212\",\n" +
             "                    FirstName: \"Ahnaf\",\n" +
             "                    LastName: \"Prio\",\n" +
@@ -39,6 +40,7 @@ public class UserControllerSpec {
             "                    FontSetting: \"default-font\",\n" +
             "                }"));
         testUsers.add(Document.parse("{\n" +
+            "                    _id: \"auroraId\",\n" +
             "                    SubjectID: \"131313\",\n" +
             "                    FirstName: \"Aurora\",\n" +
             "                    LastName: \"Corde\",\n" +
@@ -46,6 +48,7 @@ public class UserControllerSpec {
             "                    FontSetting: \"arial\",\n" +
             "                }"));
         testUsers.add(Document.parse("{\n" +
+            "                    _id: \"mattsId\",\n" +
             "                    SubjectID: \"141414\",\n" +
             "                    FirstName: \"Matt\",\n" +
             "                    LastName: \"Munns\",\n" +
@@ -53,6 +56,7 @@ public class UserControllerSpec {
             "                    FontSetting: \"times new roman\",\n" +
             "                }"));
         testUsers.add(Document.parse("{\n" +
+            "                    _id: \"charlesId\",\n" +
             "                    SubjectID: \"151515\",\n" +
             "                    FirstName: \"Charles\",\n" +
             "                    LastName: \"Menne\",\n" +
@@ -121,5 +125,39 @@ public class UserControllerSpec {
         assertEquals("SubjectIDs should match", expectedNames, names);
     }
 
+    @Test
+    public void getUserById() {
+        String jsonResult = userController.getUser(kylesId.toHexString());
+        System.out.println(jsonResult);
+        Document kyle = Document.parse(jsonResult);
+
+        assertEquals("SubjectID should match", "161616", kyle.getString("SubjectID"));
+        String noJsonResult = userController.getUser(new ObjectId().toString());
+        assertNull("No name should match",noJsonResult);
+
+    }
+
+    @Test
+    public void getUserByFirstName(){
+    }
+
+
+    //@Test
+    //public void addUserTest(){
+    //    String newId = userController.addNewUser("171717","181818","Travis","Warling");
+
+    //    assertNotNull("Adding new user with a _id with a specific SubjectID should return true,", newId);
+    //    Map<String, String[]> argMap = new HashMap<>();
+    //    argMap.put("171717", new String[] { "171717" });
+    //    String jsonResult = userController.getUsers(argMap);
+    //    BsonArray docs = parseJsonArray(jsonResult);
+
+    //    List<String> _id = docs
+    //        .stream()
+    //        .map(UserControllerSpec::get_id)
+    //        .sorted()
+    //        .collect(Collectors.toList());
+    //    assertEquals("Should return the new user", "181818", _id.get(5));
+    //}
 
 }
