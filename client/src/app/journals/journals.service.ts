@@ -109,6 +109,21 @@ export class JournalsService {
         return this.http.post<{'$oid': string}>(this.journalUrl + '/new', newJournal, httpOptions);
     }
 
+    RandomPromptsComponent(generatePrompts : Journal)  {
+
+        this.journalUrl = this.baseUrl;
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            }),
+        };
+
+        console.log(generatePrompts);
+        // Send post request to generate new Prompts
+        return this.http.post<{'$oid': string}>(this.journalUrl + '/new', generatePrompts, httpOptions);
+
+}
+
     editJournal(id : Journal): Observable<{'$oid': string}> {
         this.journalUrl = this.baseUrl;
         const httpOptions = {

@@ -34,9 +34,11 @@ import {EditLinkComponent} from "./resources/edit/links/edit-links.component";
 import {EditContactComponent} from "./resources/edit/contacts/edit-contacts.component";
 import {ViewContactComponent} from "./resources/view/contacts/view-contact.component";
 import {ViewLinkComponent} from "./resources/view/links/view-link.component";
+import {RandomPrompt} from "./journals/Prompts/open-prompts.component";
 
 import {MatTableModule} from "@angular/material/table";
 import {ShowSummaryListComponent} from "./summary/show/show-summary-list.component";
+
 
 @NgModule({
     exports: [
@@ -73,6 +75,7 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         ArraySortPipe,
         SettingsComponent,
         ShowSummaryListComponent,
+        RandomPrompt,
     ],
     providers: [
         GoalsService,
@@ -90,10 +93,14 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         AddJournalComponent,
         EditJournalComponent,
         ViewJournalComponent,
+        ShowSummaryListComponent,
+        RandomPrompt,
+
         AddContactComponent,
         AddLinkComponent,
+        RandomPrompt,
 
-        ShowSummaryListComponent
+
     ],
     bootstrap: [
         AppComponent
