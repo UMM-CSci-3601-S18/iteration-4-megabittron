@@ -157,7 +157,7 @@ public class UserController {
         setQuery.append("$set", newStyleSetting);
 
         //Document searchQuery = new Document().append("_id", new ObjectId(id));
-        Document searchQuery = new Document().append("_id", id);
+        Document searchQuery = new Document().append("_id", new ObjectId(id));
 
         try {
             userCollection.updateOne(searchQuery, setQuery);
@@ -186,7 +186,7 @@ public class UserController {
         setQuery.append("$set", newFontSetting);
 
         //Document searchQuery = new Document().append("_id", new ObjectId(id));
-        Document searchQuery = new Document().append("_id", id);
+        Document searchQuery = new Document().append("_id", new ObjectId(id));
 
         try {
             userCollection.updateOne(searchQuery, setQuery);
