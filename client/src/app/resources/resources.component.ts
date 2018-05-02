@@ -8,7 +8,9 @@ import {MatDialog} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
 import {MatSnackBar} from '@angular/material';
 import {AddContactComponent} from "./add/contacts/add-contact.component";
+
 import {DomSanitizer} from "@angular/platform-browser";
+
 
 @Component({
     selector: 'resources-component',
@@ -25,8 +27,10 @@ export class ResourcesComponent implements OnInit{
     constructor(public appService: AppService,
                 public resourcesService: ResourcesService,
                 public dialog: MatDialog,
+
                 public snackBar: MatSnackBar,
                 private sanitizer: DomSanitizer) {
+
         this.videoTitle = 'Videos';
         this.linkTitle = 'Links';
         this.numberTitle = 'Phone Numbers';
@@ -217,7 +221,9 @@ export class ResourcesComponent implements OnInit{
                     this.resourcesService.addNewContact(result).subscribe(
                         addContactResult => {
                             this.highlightedID = addContactResult;
+
                             this.refreshContacts();
+
                             this.snackBar.open("Contact Created", "CLOSE", {
                                 duration: 3000,
                             });
@@ -231,6 +237,7 @@ export class ResourcesComponent implements OnInit{
             }
         });
     }
+
 
     deleteContact(_id: string) {
         this.resourcesService.deleteContact(_id).subscribe(
@@ -270,6 +277,7 @@ export class ResourcesComponent implements OnInit{
 
     refreshLinks(): Observable<Link[]> {
         const linkObservable: Observable<Link[]> = this.resourcesService.getLinks(localStorage.getItem("userID"));
+
         console.log(linkObservable);
         linkObservable.subscribe(
             links => {
@@ -285,7 +293,9 @@ export class ResourcesComponent implements OnInit{
     }
 
     refreshContacts(): Observable<Contact[]> {
+
         const contactObservable: Observable<Contact[]> = this.resourcesService.getContacts(localStorage.getItem("userID"));
+
         console.log(contactObservable);
         contactObservable.subscribe(
             contacts => {

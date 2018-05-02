@@ -2,15 +2,19 @@
     <h2 class="page-title">Resources</h2>
     <hr class="nav-title-divider">
     <button mat-raised-button (click)="newLinkDialog()" class="new-object-button" id="addNewLink">
+
         Add YouTube Video
+
     </button>
     <button mat-raised-button (click)="newContactDialog()" class="new-object-button" id="addNewContact">
         New Contact
     </button>
 </div>
+
 <div layout="row">
     <mat-card class="numbers-list">
         <mat-card-title>{{this.numberTitle}}</mat-card-title>
+
         <mat-divider></mat-divider>
         <mat-list>
             <mat-list-item *ngFor="let contact of contacts">
@@ -41,3 +45,4 @@
         </mat-list>
     </mat-card>
 </div>
+-->
