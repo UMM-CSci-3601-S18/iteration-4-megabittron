@@ -9,6 +9,8 @@ import {AppService} from "../../app.service";
     styleUrls: ['./add-goal.component.scss'],
     providers: [AppService]
 })
+
+// This adds the addGoalComponent function to the goals component
 export class AddGoalComponent {
     constructor(
         public appService: AppService,

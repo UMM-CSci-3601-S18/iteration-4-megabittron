@@ -39,7 +39,7 @@ export class EmotionService {
         if(this. noID){
             return this.emptyObservable;
         }
-        // Send post request to add a new emotion with the emotion data as the body with specified headers.
+        // This function sends a post request to add a new emotion with the emotion data as the body with specified headers.
         return this.http.post<{'$oid': string}>(this.emotionUrl + '/new', newEmotion, httpOptions);
     }
 }

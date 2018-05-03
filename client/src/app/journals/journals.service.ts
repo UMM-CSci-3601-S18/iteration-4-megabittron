@@ -15,7 +15,7 @@ export class JournalsService {
 
     constructor(private http: HttpClient) {
     }
-
+// This funtion calls the journals collection and added to the journals page component.
     getJournals(userID: string, journalBody?: string): Observable<Journal[]> {
         this.journalUrl = this.baseUrl;
         this.noID = false;
@@ -30,12 +30,12 @@ export class JournalsService {
 
         return this.http.get<Journal[]>(this.journalUrl);
     }
-
+// This function calls a journal with their specific ID
     getJournalById(id: string): Observable<Journal> {
         this.journalUrl = this.baseUrl;
         return this.http.get<Journal>(this.journalUrl + '/' + id);
     }
-
+// This function adds a filter by title functionality
     filterByTitle(journalTitle?: string): void {
         if (!(journalTitle == null || journalTitle === '')) {
             if (this.parameterPresent('title=') ) {
@@ -60,7 +60,7 @@ export class JournalsService {
             }
         }
     }
-
+// This filters the journals with the specific userID you are using so you do not see someone else's journals
     filterByUserID(userID: string): void {
         if (!(userID == null || userID === '')) {
             if (this.parameterPresent('userID=') ) {
@@ -136,7 +136,7 @@ export class JournalsService {
         // Send post request to edit journal.
         return this.http.post<{'$oid': string}>(this.journalUrl + '/edit', id, httpOptions);
     }
-
+// This function adds the delete journal functionality
     deleteJournal(journalID: String) {
         this.journalUrl = this.baseUrl;
         const httpOptions = {

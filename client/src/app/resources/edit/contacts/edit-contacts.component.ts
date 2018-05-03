@@ -9,7 +9,7 @@ import {AppService} from "../../../app.service";
     styleUrls: ['./edit-contacts.component.scss'],
     providers: [AppService],
 })
-
+// This adds the EditContactComponent to the contact collection and page
 export class EditContactComponent {
     constructor(
         public appService: AppService,
