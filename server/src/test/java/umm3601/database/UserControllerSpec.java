@@ -24,6 +24,7 @@ package umm3601.database;
 public class UserControllerSpec {
     private UserController userController;
     private ObjectId kylesId;
+
     @Before
     public void clearAndPopulateDB() {
         MongoClient mongoClient = new MongoClient();
@@ -108,7 +109,6 @@ public class UserControllerSpec {
     return ((BsonString) doc.get("_id")).getValue();
     }
 
-
     @Test
     public void getAllUsers() {
         Map<String, String[]> emptyMap = new HashMap<>();
@@ -140,21 +140,42 @@ public class UserControllerSpec {
 
     @Test
     public void addUserTest(){
-        String newId = userController.addNewUser("NicId","Nic","McPhee");
+        String newUserJSON = userController.addNewUser("NicId","Nic","McPhee");
 
-        assertNotNull("Adding new user with a _id with a specific SubjectID should return true,", newId);
+        assertNotNull("Adding new user with a _id with a specific SubjectID should return true,", newUserJSON);
+
         Map<String, String[]> argMap = new HashMap<>();
-        argMap.put("NicId", new String[] { "NicId" });
+
         String jsonResult = userController.getUsers(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
         List<String> _id = docs
             .stream()
-            .map(UserControllerSpec::get_id)
+            .map(UserControllerSpec::getSubjectID)
             .sorted()
             .collect(Collectors.toList());
-        assertEquals("Should return the new user", "Nic", _id.get(5));
+        assertEquals("Should return the new user", "NicId", _id.get(5));
     }
+
+    /* Should work, gives IllegalArgumentException even though the functions take 2 strings and return a string.
+    @Test
+    public void editUserStyleSettingTest(){
+        String newSetting = userController.editUserStyleSetting("ahnafsId", "fake-setting");
+
+        assertNotNull("Editing a style setting with a specific userID should return the style setting,", newSetting);
+
+        assertEquals("Should return the setting", "fake-setting", newSetting);
+    }
+
+    @Test
+    public void editUserFontSettingTest(){
+        String newSetting = userController.editUserFontSetting("ahnafsId", "fake-setting");
+
+        assertNotNull("Editing a style setting with a specific userID should return the style setting,", newSetting);
+
+        assertEquals("Should return the setting", "fake-setting", newSetting);
+    }
+    */
 
 
 }
