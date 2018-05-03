@@ -88,7 +88,7 @@ lls addNewResources helper method
 
 
 
-                    return contactsController.addNewContacts( id, userID, name, email, phone).toString();
+                    return contactsController.addNewContacts(userID, name, email, phone).toString();
                 }
                 catch(NullPointerException e)
                 {
