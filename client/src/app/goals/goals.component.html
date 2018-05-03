@@ -72,3 +72,70 @@
         </mat-card>
     </div>
 </div>
+
+<div class="radio-button-goals-mob">
+
+
+</div>
+<div class="list-goals-section" hide-gt-xs>
+
+    <mat-card-content>
+        <mat-checkbox class="show-all-goals-mob" (change)="showAllGoals = $event.checked; getNext()">Show all goals</mat-checkbox>
+    </mat-card-content>
+
+    <mat-radio-group matInput #input *ngIf="showAllGoals" [(ngModel)]="goalStatus" (change)="loadService()" class="status-radio-group-mob">
+        <mat-radio-button id="allStatusMob" value="all">All</mat-radio-button>
+        <mat-radio-button id="completeMob" value="true">Complete</mat-radio-button>
+        <mat-radio-button id="incompleteMob" value="false">Incomplete</mat-radio-button>
+    </mat-radio-group>
+
+
+    <mat-list class="goals-list">
+        <mat-divider></mat-divider>
+
+        <div class="goals-list-info" *ngFor="let goal of shownGoals | dateSort: 'start'"
+             #elem [id]="goal._id['$oid']">
+
+            <div class="goal-check-box-mob">
+            <button mat-icon-button class="check action-button-mob"
+                    *ngIf="goal.status == false"
+                    (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next)">
+                <mat-icon>check_box_outline_blank</mat-icon>
+            </button>
+            <button mat-icon-button class="uncheck action-button-mob"
+                    *ngIf="goal.status == true"
+                    (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)">
+                <mat-icon>check_box</mat-icon>
+            </button>
+
+
+            </div>
+
+            <div class="right-side-mob">
+
+            <a routerLink="/goals/{{goal._id['$oid']}}" class="goal-card-open" >
+                <mat-list-item>
+
+                    <h3 matLine> {{goal.name}}</h3>
+                    <!--<p class="mobile-date">{{goal.start | date : "MM/dd/yy"}}</p>-->
+                    <div mat-card-avatar class="category-img business" *ngIf="goal.category == 'business-career'"></div>
+                    <div mat-card-avatar class="category-img family" *ngIf="goal.category == 'family'"></div>
+                    <div mat-card-avatar class="category-img finances" *ngIf="goal.category == 'finances'"></div>
+                    <div mat-card-avatar class="category-img fun-recreation" *ngIf="goal.category == 'fun-recreation'"></div>
+                    <div mat-card-avatar class="category-img health" *ngIf="goal.category == 'health'"></div>
+                    <div mat-card-avatar class="category-img personal-development" *ngIf="goal.category == 'personal-development'"></div>
+                    <div mat-card-avatar class="category-img romance" *ngIf="goal.category == 'romance'"></div>
+                    <div mat-card-avatar class="category-img spiritual" *ngIf="goal.category == 'spiritual'"></div>
+                    <div mat-card-avatar class="category-img social" *ngIf="goal.category == 'social'"></div>
+                    <div mat-card-avatar class="category-img other" *ngIf="goal.category == 'other'"></div>
+                    <P matLine  *ngIf="goal.end == ''">No end date</P>
+                    <P matLine  *ngIf="goal.end != ''">Ends on {{goal.end | date : "MMM d, yyyy"}}</P>
+
+                </mat-list-item>
+                <mat-divider></mat-divider>
+            </a>
+            </div>
+        </div>
+    </mat-list>
+    <button class="add-goal-fab-button-fixed" (click)="newGoalDialog()" mat-fab color="primary"><mat-icon>add</mat-icon></button>
+</div>

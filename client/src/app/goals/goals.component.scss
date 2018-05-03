@@ -1,6 +1,37 @@
 @import "../../theme";
 @import "../../styles";
 
+.add-goal-fab-button-fixed {
+
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+}
+
+
+.goal-card-open{
+    text-decoration: none;
+    color: black;
+    left: 75px;
+}
+.right-side-mob{
+    width: 90%;
+    margin-bottom: 1px;
+    float: left;
+
+}
+
+.goal-check-box-mob{
+    width: 10%;
+    margin-bottom: -10 px;
+    float: left;
+    padding-top: 15px ;
+
+
+}
+
+
+
 .goal-card {
     margin: 15px;
     width: 325px;
