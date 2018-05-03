@@ -45,16 +45,10 @@ export class AppComponent implements OnInit {
 
     deleteJournal(_id: string) {
         this.journalListService.deleteJournal(_id).subscribe(
-            journals => {
-                console.log("first part");
-                //this.refreshJournal();
-                //this.loadService();
-            },
+            journals => {},
             err => {
                 console.log(err);
                 console.log("hi");
-                //this.refreshJournal();
-                //this.loadService();
                 this.snackBar.open("Deleted Journal", "CLOSE", {
                     duration: 2000,
                 });
@@ -64,14 +58,9 @@ export class AppComponent implements OnInit {
 
     deleteGoal(_id: string) {
         this.goalListService.deleteGoal(_id).subscribe(
-            goals => {
-                //this.refreshGoals();
-                //this.loadService();
-            },
+            goals => {},
             err => {
                 console.log(err);
-                //this.refreshGoals();
-                //this.loadService();
                 this.snackBar.open("Goal Deleted", "CLOSE", {
                     duration: 3000,
                 });
@@ -113,7 +102,6 @@ export class AppComponent implements OnInit {
     }
 
     signIn() {
-        //let googleAuth = gapi.auth2.getAuthInstance();
         this.googleAuth = gapi.auth2.getAuthInstance();
         console.log(this.googleAuth);
         this.googleAuth.grantOfflineAccess().then((resp) => {
@@ -123,7 +111,6 @@ export class AppComponent implements OnInit {
     }
 
     signOut() {
-        //let googleAuth = gapi.auth2.getAuthInstance();
         this.handleClientLoad();
 
         this.googleAuth = gapi.auth2.getAuthInstance();
