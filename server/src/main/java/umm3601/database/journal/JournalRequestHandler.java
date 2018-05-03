@@ -63,9 +63,6 @@ public class JournalRequestHandler {
                     String title = dbO.getString("title");
                     String content = dbO.getString("content");
 
-
-                    //Date date = dbO.getDate("date");
-
                     System.err.println("Adding new journal for user " + userID + " [title=" + title + ", content=" + content + ']');
                     return journalController.addNewJournal(userID, title, content).toString();
                 }
