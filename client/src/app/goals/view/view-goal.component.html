@@ -31,7 +31,6 @@
         <h2>{{goal.name}}</h2>
     </div>
 
-   <!-- <p class="mobile-date">{{goal.end | date : "MMM d, yyyy 'at' h:mm a"}}</p>-->
     <P matLine  *ngIf="goal.end == ''" class="mobile-date">No end date</P>
     <P matLine  *ngIf="goal.end != ''" class="mobile-date">Ends on {{goal.end | date : "MMM d, yyyy"}}</P>
 
