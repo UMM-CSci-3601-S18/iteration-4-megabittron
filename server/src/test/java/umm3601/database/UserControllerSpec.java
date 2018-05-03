@@ -137,27 +137,24 @@ public class UserControllerSpec {
 
     }
 
+
     @Test
-    public void getUserByFirstName(){
+    public void addUserTest(){
+        String newId = userController.addNewUser("NicId","Nic","McPhee");
+
+        assertNotNull("Adding new user with a _id with a specific SubjectID should return true,", newId);
+        Map<String, String[]> argMap = new HashMap<>();
+        argMap.put("NicId", new String[] { "NicId" });
+        String jsonResult = userController.getUsers(argMap);
+        BsonArray docs = parseJsonArray(jsonResult);
+
+        List<String> _id = docs
+            .stream()
+            .map(UserControllerSpec::get_id)
+            .sorted()
+            .collect(Collectors.toList());
+        assertEquals("Should return the new user", "Nic", _id.get(5));
     }
 
-
-    //@Test
-    //public void addUserTest(){
-    //    String newId = userController.addNewUser("171717","181818","Travis","Warling");
-
-    //    assertNotNull("Adding new user with a _id with a specific SubjectID should return true,", newId);
-    //    Map<String, String[]> argMap = new HashMap<>();
-    //    argMap.put("171717", new String[] { "171717" });
-    //    String jsonResult = userController.getUsers(argMap);
-    //    BsonArray docs = parseJsonArray(jsonResult);
-
-    //    List<String> _id = docs
-    //        .stream()
-    //        .map(UserControllerSpec::get_id)
-    //        .sorted()
-    //        .collect(Collectors.toList());
-    //    assertEquals("Should return the new user", "181818", _id.get(5));
-    //}
 
 }
