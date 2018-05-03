@@ -51,11 +51,11 @@ public class LinksController {
         Document filterDoc = new Document();
 
         if (queryParams.containsKey("userID")) {
-            String targetName = (queryParams.get("userID")[0]);
+            String targetContent = (queryParams.get("userID")[0]);
             Document contentRegQuery = new Document();
-            contentRegQuery.append("$regex", targetName);
+            contentRegQuery.append("$regex", targetContent);
             contentRegQuery.append("$options", "i");
-            filterDoc = filterDoc.append("userID", targetName);
+            filterDoc = filterDoc.append("userID", targetContent);
         }
         else {
             System.out.println("It had no userID");
