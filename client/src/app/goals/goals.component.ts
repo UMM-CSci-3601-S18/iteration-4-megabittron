@@ -80,7 +80,6 @@ export class GoalsComponent implements OnInit {
                             });
                             },
                             err => {
-                            // This should probably be turned into some sort of meaningful response.
                                 console.log('There was an error adding the goal.');
                                 console.log('The error was ' + JSON.stringify(err));
                         });
@@ -88,7 +87,7 @@ export class GoalsComponent implements OnInit {
             }
         });
     }
-
+// This function opens the editing window for the goals
     openEditGoalDialog(_id: string, purpose: string, category: string, name: string, status: boolean, frequency: string,
                        start: string, end: string, next: string): void {
         console.log("Edit goal button clicked.");
@@ -122,7 +121,7 @@ export class GoalsComponent implements OnInit {
         });
     }
 
-    //deletes goal from the page
+    //This function deletes a goal from the page
     deleteGoal(_id: string) {
         this.goalService.deleteGoal(_id).subscribe(
             goals => {
@@ -140,7 +139,7 @@ export class GoalsComponent implements OnInit {
         );
     }
 
-    //edits the specified goal
+    //This function edits the specified goal
     editGoal(_id, name, purpose, category, status, frequency, start, end, next) {
         const updatedGoal: Goal = {
             _id: _id,
@@ -174,7 +173,7 @@ export class GoalsComponent implements OnInit {
             });
     }
 
-    //Checks if the next field is <, = or > than today's date and updates the next field as needed. Returns
+    //This Checks if the next field is <, = or > than today's date and updates the next field as needed. Returns
     //true if the goal is supposed to be shown in the today's goal section
     getNext(){
         console.log(this.showAllGoals);
@@ -263,7 +262,7 @@ export class GoalsComponent implements OnInit {
         }
     }
 
-    //Shows today's goals or all goals based on the the given type
+    //This function shows today's goals or all goals based on the the given type
     showGoals(type){
 
         if(type == "today") {
