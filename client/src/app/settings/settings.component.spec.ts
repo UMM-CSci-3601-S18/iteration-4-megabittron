@@ -60,8 +60,8 @@ describe( 'SaveSettings() functions', () => {
 
         settingsComponent.saveSettings();
 
-        expect(localStorage.getItem("styleSelected")).toBe("not-test-setting");
-        expect(localStorage.getItem("styleSelected")).toBe("not-test-setting");
+        expect(localStorage.getItem("styleSelected")).toBe("");
+        expect(localStorage.getItem("styleSelected")).toBe("");
     });
 
 });
