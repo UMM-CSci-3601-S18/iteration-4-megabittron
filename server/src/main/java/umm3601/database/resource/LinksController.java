@@ -50,12 +50,16 @@ public class LinksController {
     public String getLinks(Map<String, String[]> queryParams) {
         Document filterDoc = new Document();
 
-        if (queryParams.containsKey("name")) {
-            String targetName = (queryParams.get("name")[0]);
+        if (queryParams.containsKey("userID")) {
+            String targetName = (queryParams.get("userID")[0]);
             Document contentRegQuery = new Document();
             contentRegQuery.append("$regex", targetName);
             contentRegQuery.append("$options", "i");
-            filterDoc = filterDoc.append("name", targetName);
+            filterDoc = filterDoc.append("userID", targetName);
+        }
+        else {
+            System.out.println("It had no userID");
+            return JSON.serialize("[ ]");
         }
 
         FindIterable<Document> matchingLinks = linksCollection.find(filterDoc);
