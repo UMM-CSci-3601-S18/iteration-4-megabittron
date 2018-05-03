@@ -59,8 +59,13 @@
         background-color: var(--accent);
     }
 
-    .journal-card *{
-        background-color: var(--accent);
+    .journal-card {
+         .mat-card-content{
+            background-color: var(--accent);
+        }
+        .journal-details{
+            background-color: var(--accent);
+        }
     }
 
     .alt-color{
@@ -138,8 +143,13 @@
         background-color: var(--accent);
     }
 
-    .journal-card *{
-        background-color: var(--accent);
+    .journal-card {
+        .mat-card-content{
+            background-color: var(--accent);
+        }
+        .journal-details{
+            background-color: var(--accent);
+        }
     }
 
     .alt-color{
@@ -231,9 +241,13 @@
     }
 
 
-    .journal-card *{
-        background-color: var(--main);
-        border: 1px solid #FFFFFF;
+    .journal-card {
+        .mat-card-content{
+            background-color: var(--accent);
+        }
+        .journal-details{
+            background-color: var(--accent);
+        }
     }
 
     .mat-icon-button{
@@ -323,8 +337,13 @@
         background-color: var(--accent);
     }
 
-    .journal-card *{
-        background-color: var(--accent);
+    .journal-card {
+        .mat-card-content{
+            background-color: var(--accent);
+        }
+        .journal-details{
+            background-color: var(--accent);
+        }
     }
 
     .alt-color{
@@ -402,8 +421,13 @@
         background-color: var(--accent);
     }
 
-    .journal-card *{
-        background-color: var(--accent);
+    .journal-card {
+        .mat-card-content{
+            background-color: var(--accent);
+        }
+        .journal-details{
+            background-color: var(--accent);
+        }
     }
 
     .alt-color{
@@ -481,8 +505,13 @@
         background-color: var(--accent);
     }
 
-    .journal-card *{
-        background-color: var(--accent);
+    .journal-card {
+        .mat-card-content{
+            background-color: var(--accent);
+        }
+        .journal-details{
+            background-color: var(--accent);
+        }
     }
 
     .alt-color{

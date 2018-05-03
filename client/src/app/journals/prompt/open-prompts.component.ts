@@ -5,10 +5,10 @@ import {Journal} from '../journal';
 @Component({
     selector: 'app-open-prompts.component',
     templateUrl: 'open-prompts.component.html',
-    // styleUrls: ['./add-journal.component.css'],
+    styleUrls: ['./open-prompts.component.scss'],
 })
 
-export class RandomPrompt implements OnInit{
+export class OpenPromptsComponent implements OnInit{
     public prompt: String;
 // This is the array of random prompts. If you wanna add a random prompt. Add here.
     public promptsMobile: String[] = [
@@ -66,7 +66,7 @@ export class RandomPrompt implements OnInit{
 
 
     constructor(
-        public dialogRef: MatDialogRef<RandomPrompt>,
+        public dialogRef: MatDialogRef<OpenPromptsComponent>,
         @Inject(MAT_DIALOG_DATA) public data: {journal: Journal}) {
     }
 
@@ -80,6 +80,7 @@ export class RandomPrompt implements OnInit{
     }
 
     ngOnInit (): void {
+
         this.randomPromptsMobile();
     }
 
