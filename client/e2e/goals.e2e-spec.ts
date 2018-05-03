@@ -20,60 +20,93 @@ describe('Goal list', () => {
         page = new GoalPage();
     });
 
-    it('Should get and highlight Goals title attribute ', () => {
+    it('Should have a new goal button', () => {
         page.navigateTo();
-        expect(page.getGoalManageTitle()).toEqual('Your Goals');
+        expect(page.addButtonExists()).toBeTruthy();
+    });
+
+    it('Should have a show all goals button', () => {
+        page.navigateTo();
+        expect(page.showAllGoalsButtonExists()).toBeTruthy();
+    });
+
+    it('Should have a edit goal button', () => {
+        page.navigateTo();
+        expect(page.editButtonExists()).toBeTruthy();
+    });
+
+    it('Should have a delete goal button', () => {
+        page.navigateTo();
+        expect(page.deleteButtonExists()).toBeTruthy();
+    });
+
+    it('Should not have status buttons', () => {
+        page.navigateTo();
+        expect(page.getStatusText()).toBe('You cannot filter statuses of today\'s goals.');
+    });
+
+    it('Should click show all goals button and should have status buttons', () => {
+        page.navigateTo();
+        page.clickShowAllGoalsButton();
+        expect(page.statusButtonsExists()).toBeTruthy();
+    });
+
+    it('Should get and highlight Todays Goals title', () => {
+        page.navigateTo();
+        expect(page.getGoalTitle()).toEqual('Today\'s Goals');
+    });
+
+    it('Should click Show all goals button highlight All Goals title', () => {
+        page.navigateTo();
+        expect(page.getGoalTitle()).toEqual('Today\'s Goals');
+        page.clickShowAllGoalsButton();
+        expect(page.getGoalTitle()).toEqual('All Goals');
     });
 
     it('Should check that goal with name: \'Clean my room\' matches unique id', () => {
         page.navigateTo();
-        expect(page.getUniqueGoal('5ab53a8944a44f6ec5e15853')).toContain('Clean my room');
-    });
-
-    it('Total number of goals should be 3', () => {
-        page.navigateTo();
-        expect(page.getGoals()).toEqual(3);
-    });
-
-    it('Should check that goal with purpose: \'Wash the dishes\' matches unique id', () => {
-        page.navigateTo();
-        expect(page.getUniqueGoal('5ab53a89dd3b308feb0e14c3')).toContain('Wash the dishes');
-    });
-
-    it('Should check that goal with status: \'Incomplete\' matches unique id', () => {
-        page.navigateTo();
-        expect(page.getUniqueGoal('5ab53a89dd3b308feb0e14c3')).toContain('Incomplete');
-    });
-
-
-    it('Should switch between todays goals and all goals', () =>{
-        page.navigateTo();
-        element(by.className('show-all-goals')).click();
-        expect(page.getGoals()).toEqual(6);
-    });
-
-    it('Should have an add goal button', () => {
-        page.navigateTo();
-        expect(page.buttonExists()).toBeTruthy();
+        expect(page.getUniqueGoal('5ae6846708f9cf57e7bf4478')).toContain('Marilyn Decker');
     });
 
     it('Should open a dialog box when add goal button is clicked', () => {
         page.navigateTo();
-        expect(element(by.className('add-goal')).isPresent()).toBeFalsy('There should not be a modal window yet');
-        element(by.className('goal-button')).click();
-        expect(element(by.className('add-goal')).isPresent()).toBeTruthy('There should be a modal window now');
+        expect(element(by.className('new-object-title')).isPresent()).toBeFalsy('There should not be a modal window yet');
+        page.clickAddGoalButton();
+        expect(element(by.className('new-object-title')).isPresent()).toBeTruthy('There should be a modal window now');
     });
 
-    it('Should have an edit goal button', () =>{
+    it('Should open add goal dialog box and add a goal', () => {
         page.navigateTo();
-        expect(page.buttonExists()).toBeTruthy();
+        expect(element(by.className('new-object-title')).isPresent()).toBeFalsy('There should not be a modal window yet');
+        page.clickAddGoalButton();
+        expect(element(by.className('new-object-title')).isPresent()).toBeTruthy('There should be a modal window now');
+        element(by.className('nameField')).sendKeys('Sad day');
+        page.pickTopCategory();
+        page.pickTopFrequency()
+        element(by.className('purposeField')).sendKeys('IDK');
+        element(by.className('submit')).click();
     });
+
+
 
     it('Should open a dialog box when edit goal button is clicked', () =>{
         page.navigateTo();
-        expect(element(by.className('edit-goal')).isPresent()).toBeFalsy('There should not be a modal window yet');
-        element(by.className('edit-goal-button')).click();
-        expect(element(by.className('edit-goal')).isPresent()).toBeTruthy('There should be a modal window now');
-    })
+        expect(element(by.className('new-object-title')).isPresent()).toBeFalsy('There should not be a modal window yet');
+        element(by.className('edit')).click();
+        expect(element(by.className('new-object-title')).isPresent()).toBeTruthy('There should be a modal window now');
+    });
+
+    it('Should click all status buttons', () => {
+        page.navigateTo();
+        page.clickShowAllGoalsButton();
+        page.clickAllButton();
+        page.clickCompleteButton();
+        page.clickIncompleteButton();
+    });
+
+    it('Should click done button', () => {
+        page.navigateTo();
+        page.clickCheckButton();
+    });
 
 });

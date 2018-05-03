@@ -1,6 +1,6 @@
 <div class="sidenav" [ngClass]="appService.styleClassSelector()" hide-xs>
-    <h2 class="page-title, alt-color" *ngIf="this.showAllGoals == false"> Today's Goals</h2>
-    <h2 class="page-title, alt-color" *ngIf="this.showAllGoals == true"> All Goals</h2>
+    <h2 class="page-title alt-color" *ngIf="this.showAllGoals == false"> Today's Goals</h2>
+    <h2 class="page-title alt-color" *ngIf="this.showAllGoals == true"> All Goals</h2>
     <hr class="nav-title-divider">
     <button mat-raised-button (click)="newGoalDialog()" class="new-object-button" id="addNewGoal">
         New Goal
@@ -14,12 +14,12 @@
         <mat-card-title>Status</mat-card-title>
         <mat-divider></mat-divider>
         <mat-card-content>
-            <a *ngIf="!showAllGoals">You cannot filter statuses of today's goals.</a>
-            <mat-radio-group matInput #input *ngIf="showAllGoals" [(ngModel)]="goalStatus" (change)="loadService()" class="status-radio-group">
-                <mat-radio-button id="allStatus" value="all">All</mat-radio-button>
-                <mat-radio-button id="complete" value="true">Complete</mat-radio-button>
-                <mat-radio-button id="incomplete" value="false">Incomplete</mat-radio-button>
-            </mat-radio-group>
+            <a class="no-filters" *ngIf="!showAllGoals">You cannot filter statuses of today's goals.</a>
+          <mat-radio-group matInput #input *ngIf="showAllGoals" [(ngModel)]="goalStatus" (change)="loadService()" class="status-radio-group">
+              <mat-radio-button id="allStatus" value="all">All</mat-radio-button>
+              <mat-radio-button id="complete" value="true">Complete</mat-radio-button>
+              <mat-radio-button id="incomplete" value="false">Incomplete</mat-radio-button>
+          </mat-radio-group>
         </mat-card-content>
     </mat-card>
 </div>
