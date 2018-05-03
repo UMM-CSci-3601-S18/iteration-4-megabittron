@@ -74,7 +74,8 @@
 
                     </mat-tab>
 
-                    <mat-tab label="Table">
+                    <div class="table-tab-div">
+                    <mat-tab label="Table" class="table-tab">
                         <!--<mat-card class="filtering">-->
                         <div class="top" class="filterCard">
 
@@ -130,7 +131,6 @@
                                                            enabled></mat-datepicker-toggle>
                                     <mat-datepicker touchUi="true" #start disabled="false"></mat-datepicker>
                                 </mat-form-field>
-                                :
                                 <mat-form-field class="end">
                                     <input
                                         class="endDate"
@@ -161,7 +161,7 @@
                         <div class="page-scroll-buttons">
                             <button *ngIf="this.currentPage != 1" mat-icon-button class="first-page" (click)="goFirstPage();
                     showSummaries()" [disabled]="false" matTooltip="First Page">
-                                <mat-icon>keyboard_arrow_left</mat-icon>
+                                <mat-icon>fast_rewind</mat-icon>
                             </button>
                             <button *ngIf="this.currentPage == 1" mat-icon-button class="previous-page" (click)="this.currentPage = this.currentPage - 1;
                     showSummaries()" [disabled]="true">
@@ -182,7 +182,7 @@
                             </button>
                             <button *ngIf="maxNumPages() == true " mat-icon-button class="last-page" (click)="goLastPage();
                     showSummaries()" [disabled]="false" matTooltip="Last Page">
-                                <mat-icon>keyboard_arrow_right</mat-icon>
+                                <mat-icon>fast_forward</mat-icon>
                             </button>
                         </div>
                         <mat-accordion *ngIf="summaries && myTabGroup.selectedIndex == 1; else summariesError">
@@ -241,8 +241,6 @@
                                     </mat-table>
                                 </div>
                             </div>
-                            <br>
-                            <br>
                         </mat-accordion>
                         <ng-template #summariesError>
                             <mat-error>
@@ -255,6 +253,7 @@
                         </ng-template>
                         <!--</mat-card>-->
                     </mat-tab>
+                    </div>
                 </mat-tab-group>
             </div>
         </mat-card>
