@@ -45,16 +45,9 @@ export class AppComponent implements OnInit {
 
     deleteJournal(_id: string) {
         this.journalListService.deleteJournal(_id).subscribe(
-            journals => {
-                console.log("first part");
-                //this.refreshJournal();
-                //this.loadService();
-            },
+            journals => {},
             err => {
                 console.log(err);
-                console.log("hi");
-                //this.refreshJournal();
-                //this.loadService();
                 this.snackBar.open("Deleted Journal", "CLOSE", {
                     duration: 2000,
                 });
@@ -64,14 +57,9 @@ export class AppComponent implements OnInit {
 
     deleteGoal(_id: string) {
         this.goalListService.deleteGoal(_id).subscribe(
-            goals => {
-                //this.refreshGoals();
-                //this.loadService();
-            },
+            goals => {},
             err => {
                 console.log(err);
-                //this.refreshGoals();
-                //this.loadService();
                 this.snackBar.open("Goal Deleted", "CLOSE", {
                     duration: 3000,
                 });
@@ -88,7 +76,8 @@ export class AppComponent implements OnInit {
         this._location.back();
 
     }
-
+    // Checks if the user is on journal mobile view or desktop view
+    // And sets according add, delete buttons in the navbar
     isJournalView(): boolean {
         if (this.currentPath == 'journals/:_id' && this.currentWidth < 600) {
             return true;
@@ -96,7 +85,8 @@ export class AppComponent implements OnInit {
             return false;
         }
     }
-
+    // Checks if the user is on goal mobile view or desktop view
+    // And sets according add, delete buttons in the navbar
     isGoalView(): boolean {
         if (this.currentPath == 'goals/:_id' && this.currentWidth < 600) {
             return true;
@@ -104,16 +94,15 @@ export class AppComponent implements OnInit {
             return false;
         }
     }
-
+    // This requests and gets the name from local storage
     getUsername () {
         this.username = localStorage.getItem("userFirstName") + " " + localStorage.getItem("userLastName");
         if (this.username.length > 18) {
             this.username = this.username.slice(0, 17) + "...";
         }
     }
-
+    // This signs in the user and opens the window for signing in
     signIn() {
-        //let googleAuth = gapi.auth2.getAuthInstance();
         this.googleAuth = gapi.auth2.getAuthInstance();
         console.log(this.googleAuth);
         this.googleAuth.grantOfflineAccess().then((resp) => {
@@ -121,9 +110,8 @@ export class AppComponent implements OnInit {
             this.sendAuthCode(resp.code);
         });
     }
-
+    // This signs the user out
     signOut() {
-        //let googleAuth = gapi.auth2.getAuthInstance();
         this.handleClientLoad();
 
         this.googleAuth = gapi.auth2.getAuthInstance();
@@ -135,7 +123,8 @@ export class AppComponent implements OnInit {
             window.location.reload();
         })
     }
-
+    // This sends the auth code of our user to the server and stores the fields in local storage when we get data back
+    // from gapi
     sendAuthCode(code: string): void {
         const httpOptions = {
             headers: new HttpHeaders({

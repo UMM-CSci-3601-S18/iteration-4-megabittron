@@ -9,7 +9,7 @@ import {AppService} from "../../app.service";
     styleUrls: ['./show-summary-list.component.scss'],
     providers: [AppService],
 })
-
+// Opens the Show Summary component
 export class ShowSummaryListComponent {
     constructor(
         public appService: AppService,
