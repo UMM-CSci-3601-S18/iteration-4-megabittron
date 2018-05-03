@@ -103,7 +103,7 @@ export class JournalsComponent implements OnInit {
         console.log("Mobile-vied prompts icon clicked.");
          const dialogRef = this.dialog.open(OpenPromptsComponent, {
              width: '300px',
-
+             height: '200px'
          });
 
         dialogRef.afterClosed().subscribe(result => {

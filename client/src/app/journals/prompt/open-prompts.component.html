@@ -24,9 +24,15 @@
         </button>
         </div>-->
 
-<mat-card-title class="new-object-title">Journal Prompts</mat-card-title>
-<button mat-raised-button (click)="randomPromptsMobile()" class="mobile-prompt-button">
-    Click for prompt
+<button mat-icon-button class="cancel"
+        (click)="onNoClick()"><mat-icon>close</mat-icon>
 </button>
-{{prompt}}
+<mat-card-content class="prompts-card">
+    <button mat-raised-button (click)="randomPromptsMobile()">
+        Click for new idea
+    </button>
+    <p>{{prompt}}</p>
+
+</mat-card-content>
+
 
