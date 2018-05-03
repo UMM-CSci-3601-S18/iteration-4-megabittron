@@ -9,7 +9,7 @@ import {AppService} from "../../../app.service";
     styleUrls: ['./add-link.component.scss'],
     providers: [AppService],
 })
-
+//This adds the add link component to the link page
 export class AddLinkComponent {
 
 
