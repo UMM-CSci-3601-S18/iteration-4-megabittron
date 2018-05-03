@@ -113,7 +113,7 @@ export class ResourcesComponent implements OnInit{
             }
         });
     }
-
+    // This opens up the new Contact dialog specific to your userID
     newContactDialog(): void {
         const newContact: Contact = {
             _id: '',
@@ -152,7 +152,7 @@ export class ResourcesComponent implements OnInit{
             }
         });
     }
-
+    // This adds the delete contact functionality to the contact collection
     deleteContact(_id: string) {
         this.resourcesService.deleteContact(_id).subscribe(
             contacts => {
@@ -170,7 +170,7 @@ export class ResourcesComponent implements OnInit{
             }
         );
     }
-
+    // This adds the delete link functionality to the link collection
     deleteLink(_id: string) {
         this.resourcesService.deleteLink(_id).subscribe(
             links => {
@@ -188,7 +188,7 @@ export class ResourcesComponent implements OnInit{
             }
         );
     }
-
+    // This function refreshes the link component in the resources page
     refreshLinks(): Observable<Link[]> {
         const linkObservable: Observable<Link[]> = this.resourcesService.getLinks(localStorage.getItem("userID"));
 
@@ -205,7 +205,7 @@ export class ResourcesComponent implements OnInit{
             });
         return linkObservable;
     }
-
+    // This function refreshes the contact component in the resources page
     refreshContacts(): Observable<Contact[]> {
 
         const contactObservable: Observable<Contact[]> = this.resourcesService.getContacts(localStorage.getItem("userID"));
