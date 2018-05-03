@@ -40,7 +40,7 @@
         </mat-nav-list>
     </td-navigation-drawer>
     <td-layout-nav class="nav-bar">
-        <div td-toolbar-content layout="row" layout-align="start center" flex *ngIf="!isJournalView()">
+        <div td-toolbar-content layout="row" layout-align="start center" flex *ngIf="!isJournalView() && !isGoalView()">
             <button mat-icon-button td-menu-button tdLayoutToggle hide-gt-xs>
                 <mat-icon>menu</mat-icon>
             </button>
@@ -67,6 +67,11 @@
             <button class="mobile-back" mat-icon-button (click)="backClicked()"><mat-icon>arrow_back</mat-icon></button>
             <span class="spacer"></span>
             <button class="mobile-back" mat-icon-button (click)="deleteJournal(currentId); backClicked()"><mat-icon>delete_forever</mat-icon></button>
+        </div>
+        <div td-toolbar-content layout="row" layout-align="start center" flex *ngIf="isGoalView()">
+            <button class="mobile-back" mat-icon-button (click)="backClicked()"><mat-icon>arrow_back</mat-icon></button>
+            <span class="spacer"></span>
+            <button class="mobile-back" mat-icon-button (click)="deleteGoal(currentId); backClicked()"><mat-icon>delete_forever</mat-icon></button>
         </div>
         <router-outlet></router-outlet>
     </td-layout-nav>

@@ -7,6 +7,7 @@ import {Location} from "@angular/common";
 import {HostListener} from "@angular/core";
 import {JournalsService} from "./journals/journals.service";
 import {MatSnackBar} from "@angular/material";
+import {GoalsService} from "./goals/goals.service";
 
 
 declare var gapi: any;
@@ -15,7 +16,7 @@ declare var gapi: any;
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    providers: [AppService, JournalsService]
+    providers: [AppService, JournalsService, GoalsService]
 })
 export class AppComponent implements OnInit {
     googleAuth;
@@ -29,7 +30,8 @@ export class AppComponent implements OnInit {
                 private router: Router,
                 private _location: Location,
                 public journalListService: JournalsService,
-                public snackBar: MatSnackBar) {
+                public snackBar: MatSnackBar,
+                public goalListService: GoalsService) {
 
         this.router.events.subscribe((e) => {
             if (e instanceof ActivationStart) {
@@ -60,6 +62,23 @@ export class AppComponent implements OnInit {
         );
     }
 
+    deleteGoal(_id: string) {
+        this.goalListService.deleteGoal(_id).subscribe(
+            goals => {
+                //this.refreshGoals();
+                //this.loadService();
+            },
+            err => {
+                console.log(err);
+                //this.refreshGoals();
+                //this.loadService();
+                this.snackBar.open("Goal Deleted", "CLOSE", {
+                    duration: 3000,
+                });
+            }
+        );
+    }
+
     @HostListener('window:resize', ['$event'])
     onResize(event?) {
         this.currentWidth = window.innerWidth;
@@ -76,8 +95,14 @@ export class AppComponent implements OnInit {
         } else {
             return false;
         }
+    }
 
-
+    isGoalView(): boolean {
+        if (this.currentPath == 'goals/:_id' && this.currentWidth < 600) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     getUsername () {

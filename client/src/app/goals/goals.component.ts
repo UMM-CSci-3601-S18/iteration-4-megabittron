@@ -180,7 +180,6 @@ export class GoalsComponent implements OnInit {
         console.log(this.showAllGoals);
 
         if(this.showAllGoals == false) {
-            console.log("here");
             if(this.today !== undefined) {
                 this.todayGoals = this.goals.filter(goal => {
 
