@@ -190,6 +190,7 @@
     }
 }
 
+/*
 .high-contrast {
     --main: #000000;
     --accent: #FFFF01;
@@ -254,6 +255,10 @@
         background-color: #FFFFFF;
     }
 
+    *.mat-raised-button{
+        background-color: #FFFFFF;
+    }
+
     *{
         color: #FFFFFF;
     }
@@ -268,6 +273,266 @@
         color: #FFFF01;
     }
 
+    .home-img{
+        background-color: #FFFFFF;
+    }
+
+
+    .main{
+        background-color: var(--main);
+    }
+    .accent{
+        background-color: var(--accent);
+    }
+    .sidebar{
+        background-color: var(--sidebar);
+    }
+    .navbar{
+        background-color: var(--navbar);
+    }
+
+    .material-icons {
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-feature-settings: 'liga';
+        -webkit-font-smoothing: antialiased;
+    }
+}
+*/
+
+
+.neutral {
+    --main: #5B7065;
+    --accent: #C9D1C8;
+    --sidebar: #04202C;
+    --navbar: #304040;
+    --alttxt: #FFFFFF;
+
+
+    height: 100vh;
+    background-color: var(--main);
+    .content{
+        background-color: var(--main);
+        *{
+            .sidenav {
+                background-color: var(--sidebar);
+            }
+        }
+    }
+
+    .mat-toolbar{
+        background-color: var(--navbar);
+    }
+    form{
+        background-color: var(--accent);
+    }
+    .mat-card{
+        background-color: var(--accent);
+    }
+    .mat-card-header{
+        background-color: var(--accent);
+    }
+    .mat-card-content{
+        background-color: var(--accent);
+    }
+    .mat-stepper-horizontal {
+        background-color: var(--accent);
+    }
+
+    .journal-card {
+        .mat-card-content{
+            background-color: var(--accent);
+        }
+        .journal-details{
+            background-color: var(--accent);
+        }
+    }
+
+    .alt-color{
+        color: var(--alttxt);
+    }
+    .computer{
+        color: var(--alttxt);
+    }
+
+
+    .main{
+        background-color: var(--main);
+    }
+    .accent{
+        background-color: var(--accent);
+    }
+    .sidebar{
+        background-color: var(--sidebar);
+    }
+    .navbar{
+        background-color: var(--navbar);
+    }
+
+    .material-icons {
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-feature-settings: 'liga';
+        -webkit-font-smoothing: antialiased;
+    }
+}
+
+
+.leaf {
+    --main: #C6D166;
+    --accent: #FFFFFF;
+    --sidebar: #0F1B07;
+    --navbar: #5C821A;
+    --alttxt: #FFFFFF;
+
+
+    height: 100vh;
+    background-color: var(--main);
+    .content{
+        background-color: var(--main);
+        *{
+            .sidenav {
+                background-color: var(--sidebar);
+            }
+        }
+    }
+
+    .mat-toolbar{
+        background-color: var(--navbar);
+    }
+    form{
+        background-color: var(--accent);
+    }
+    .mat-card{
+        background-color: var(--accent);
+    }
+    .mat-card-header{
+        background-color: var(--accent);
+    }
+    .mat-card-content{
+        background-color: var(--accent);
+    }
+    .mat-stepper-horizontal {
+        background-color: var(--accent);
+    }
+
+    .journal-card {
+        .mat-card-content{
+            background-color: var(--accent);
+        }
+        .journal-details{
+            background-color: var(--accent);
+        }
+    }
+
+    .alt-color{
+        color: var(--alttxt);
+    }
+    .computer{
+        color: var(--alttxt);
+    }
+
+    .main{
+        background-color: var(--main);
+    }
+    .accent{
+        background-color: var(--accent);
+    }
+    .sidebar{
+        background-color: var(--sidebar);
+    }
+    .navbar{
+        background-color: var(--navbar);
+    }
+
+    .material-icons {
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-feature-settings: 'liga';
+        -webkit-font-smoothing: antialiased;
+    }
+}
+
+.sunflower {
+    --main: #7CAA2D;
+    --accent: #F5E356;
+    --sidebar: #CB6318;
+    --navbar: #34888C;
+    --alttxt: #FFFFFF;
+
+
+    height: 100vh;
+    background-color: var(--main);
+    .content{
+        background-color: var(--main);
+        *{
+            .sidenav {
+                background-color: var(--sidebar);
+            }
+        }
+    }
+
+    .mat-toolbar{
+        background-color: var(--navbar);
+    }
+    form{
+        background-color: var(--accent);
+    }
+    .mat-card{
+        background-color: var(--accent);
+    }
+    .mat-card-header{
+        background-color: var(--accent);
+    }
+    .mat-card-content{
+        background-color: var(--accent);
+    }
+    .mat-stepper-horizontal {
+        background-color: var(--accent);
+    }
+
+    .journal-card {
+        .mat-card-content{
+            background-color: var(--accent);
+        }
+        .journal-details{
+            background-color: var(--accent);
+        }
+    }
+
+    .alt-color{
+        color: var(--alttxt);
+    }
+    .computer{
+        color: var(--alttxt);
+    }
 
     .main{
         background-color: var(--main);
@@ -382,176 +647,6 @@
         -webkit-font-smoothing: antialiased;
     }
 }
-
-.christmas2018 {
-    --main: #4CAF50;
-    --accent: #F44336;
-    --sidebar: #0caf07;
-    --navbar: #25700e;
-    --alttxt: #FFFFFF;
-
-
-    height: 100vh;
-    background-color: var(--main);
-    .content{
-        background-color: var(--main);
-        *{
-            .sidenav {
-                background-color: var(--sidebar);
-            }
-        }
-    }
-
-    .mat-toolbar{
-        background-color: var(--navbar);
-    }
-    form{
-        background-color: var(--accent);
-    }
-    .mat-card{
-        background-color: var(--accent);
-    }
-    .mat-card-header{
-        background-color: var(--accent);
-    }
-    .mat-card-content{
-        background-color: var(--accent);
-    }
-    .mat-stepper-horizontal {
-        background-color: var(--accent);
-    }
-
-    .journal-card {
-        .mat-card-content{
-            background-color: var(--accent);
-        }
-        .journal-details{
-            background-color: var(--accent);
-        }
-    }
-
-    .alt-color{
-        color: var(--alttxt);
-    }
-    .computer{
-        color: var(--alttxt);
-    }
-
-    .main{
-        background-color: var(--main);
-    }
-    .accent{
-        background-color: var(--accent);
-    }
-    .sidebar{
-        background-color: var(--sidebar);
-    }
-    .navbar{
-        background-color: var(--navbar);
-    }
-
-    .material-icons {
-        font-family: 'Material Icons';
-        font-weight: normal;
-        font-style: normal;
-        font-size: 24px;
-        line-height: 1;
-        letter-spacing: normal;
-        text-transform: none;
-        display: inline-block;
-        white-space: nowrap;
-        word-wrap: normal;
-        direction: ltr;
-        -webkit-font-feature-settings: 'liga';
-        -webkit-font-smoothing: antialiased;
-    }
-}
-
-.aesthetic {
-    --main: #FFC3DA;
-    --accent: #84F3D6;
-    --sidebar: #fce3f6;
-    --navbar: #ccfdff;
-    --alttxt: #CF95FF;
-
-
-    height: 100vh;
-    background-color: var(--main);
-    .content{
-        background-color: var(--main);
-        *{
-            .sidenav {
-                background-color: var(--sidebar);
-            }
-        }
-    }
-
-    .mat-toolbar{
-        background-color: var(--navbar);
-    }
-    form{
-        background-color: var(--accent);
-    }
-    .mat-card{
-        background-color: var(--accent);
-    }
-    .mat-card-header{
-        background-color: var(--accent);
-    }
-    .mat-card-content{
-        background-color: var(--accent);
-    }
-    .mat-stepper-horizontal {
-        background-color: var(--accent);
-    }
-
-    .journal-card {
-        .mat-card-content{
-            background-color: var(--accent);
-        }
-        .journal-details{
-            background-color: var(--accent);
-        }
-    }
-
-    .alt-color{
-        color: var(--alttxt);
-    }
-    .computer{
-        color: var(--alttxt);
-    }
-
-    .main{
-        background-color: var(--main);
-    }
-    .accent{
-        background-color: var(--accent);
-    }
-    .sidebar{
-        background-color: var(--sidebar);
-    }
-    .navbar{
-        background-color: var(--navbar);
-    }
-
-    .material-icons {
-        font-family: 'Material Icons';
-        font-weight: normal;
-        font-style: normal;
-        font-size: 24px;
-        line-height: 1;
-        letter-spacing: normal;
-        text-transform: none;
-        display: inline-block;
-        white-space: nowrap;
-        word-wrap: normal;
-        direction: ltr;
-        -webkit-font-feature-settings: 'liga';
-        -webkit-font-smoothing: antialiased;
-    }
-}
-
-
 
 
 
