@@ -125,7 +125,6 @@ public class GoalController {
         newGoal.append("start", start);
         newGoal.append("end", end);
         newGoal.append("next", next);
-        // Append new goals here
 
         try {
             goalCollection.insertOne(newGoal);
@@ -134,7 +133,6 @@ public class GoalController {
             System.err.println("Successfully added new goal " + userID + " [_id=" + id + ", purpose=" + purpose +
                 ", category=" + category + ", name=" + name + ", frequency= "+ frequency +  ", start=" + start +
                 ", end=" + end + ", next=" + next +']');
-            //return id.toHexString();
             return JSON.serialize(id);
         } catch(MongoException me) {
             me.printStackTrace();
