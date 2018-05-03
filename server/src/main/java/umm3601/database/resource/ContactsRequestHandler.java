@@ -89,7 +89,7 @@ lls addNewResources helper method
 
 //
 //                    System.err.println("Adding new contact [id=" + id + ", userID=" + userID + name=" + name + " phonenumber=" + phonenumber + "email" + email  + ']');
-                    return contactsController.addNewContacts( id, userID, name, email, phone).toString();
+                    return contactsController.addNewContacts(userID, name, email, phone).toString();
                 }
                 catch(NullPointerException e)
                 {

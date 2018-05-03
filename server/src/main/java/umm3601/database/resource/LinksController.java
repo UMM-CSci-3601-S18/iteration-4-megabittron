@@ -69,7 +69,7 @@ public class LinksController {
     }
 
 
-    public String addNewLinks(String id, String userID, String name, String subname, String url) {
+    public String addNewLinks(String userID, String name, String subname, String url) {
 
         Document newLinks = new Document();
         newLinks.append("name", name);
@@ -83,10 +83,10 @@ public class LinksController {
         try {
             linksCollection.insertOne(newLinks);
 
-            ObjectId Id = newLinks.getObjectId("_id");
-            System.err.println("Successfully added new link for" + userID + "[_id=" + id + ", name=" + name + ", subname=" + subname + " url=" + url + ']');
+            ObjectId id = newLinks.getObjectId("_id");
+            System.err.println("Successfully added new link for user " + userID + " [_id=" + id + ", name=" + name + ", subname=" + subname + " url=" + url + ']');
 
-            return JSON.serialize(Id);
+            return JSON.serialize(id);
         } catch (MongoException me) {
             me.printStackTrace();
             return null;

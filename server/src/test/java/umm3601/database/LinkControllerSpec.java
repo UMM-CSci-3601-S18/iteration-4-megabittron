@@ -36,28 +36,24 @@ public class LinkControllerSpec {
         linkDocuments.drop();
         List<Document> testLinks = new ArrayList<>();
         testLinks.add(Document.parse("{\n" +
-            "                    _id: \"5ab88ab16148ec7b0f6b6fa4\",\n" +
             "                    userID: \"4cb56a89541a2d783595012c\",\n " +
             "                    name: \"Chuck Menne\",\n" +
             "                    subname: \"chuck@umn.edu\",\n" +
             "                    url: \"https://www.youtube.com/watch?v=IcDI1iWmIp8\",\n" +
             "                }"));
         testLinks.add(Document.parse("{\n" +
-            "                    _id: \"5ab88ab17205545c679992e4\",\n" +
             "                    userID: \"4cb56a89541a2d783595012c\",\n " +
             "                    name: \"John Hoff\",\n" +
             "                    subname: \"john@umn.edu\",\n" +
             "                    url: \"https://www.youtube.com/watch?v=JrYNSCEHLlI\",\n" +
             "                }"));
         testLinks.add(Document.parse("{\n" +
-            "                    _id: \"5ab88ab1543afe51da42359e\",\n" +
             "                    userID: \"4cb56a89541a2d783595012c\",\n " +
             "                    name: \"Dustin Blake\",\n" +
             "                    subname: \"dustin@umn.edu\",\n" +
             "                    url: \"https://www.youtube.com/watch?v=WuuhqpRmb_o\",\n" +
             "                }"));
         testLinks.add(Document.parse("{\n" +
-            "                    _id: \"5ab88ab1a5b4ebf66df44c40\",\n" +
             "                    userID: \"4cb56a89541a2d783595012c\",\n " +
             "                    name: \"Abe Monjor\",\n" +
             "                    subname: \"abe@umn.edu\",\n" +
@@ -112,13 +108,13 @@ public class LinkControllerSpec {
         String jsonResult = linkController.getLinks(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
-        assertEquals("Should be 5 links", 5, docs.size());
+        assertEquals("Should be 4 links", 4, docs.size());
         List<String> names = docs
             .stream()
             .map(LinkControllerSpec::getName)
             .sorted()
             .collect(Collectors.toList());
-        List<String> expectedNames = Arrays.asList("Abe Monjor", "Chuck Menne", "Dustin Blake", "John Hoff", "Sam Score");
+        List<String> expectedNames = Arrays.asList("Abe Monjor", "Chuck Menne", "Dustin Blake", "John Hoff");
         assertEquals("Names should match", expectedNames, names);
     }
 
@@ -134,7 +130,7 @@ public class LinkControllerSpec {
 
     @Test
     public void addLinkTest() {
-        String newId = linkController.addNewLinks("4cb56a89541a2d783595012c","defaultUserID", "Aaron Bass", "aaron@umn.edu", "https://www.youtube.com/watch?v=IcDI1iWmIp8");
+        String newId = linkController.addNewLinks("defaultUserID", "Aaron Bass", "abe@umn.edu", "https://www.youtube.com/watch?v=IcDI1iWmIp8");
         assertNotNull("Add new links should return true,", newId);
         Map<String, String[]> argMap = new HashMap<>();
         argMap.put("userID", new String[]{"4cb56a89541a2d783595012c"});
@@ -148,7 +144,7 @@ public class LinkControllerSpec {
             .sorted()
             .collect(Collectors.toList());
         System.out.println(links);
-        assertEquals("Should return name of new link", "aaron@umn.edu", links.get(0));
+        assertEquals("Should return name of new link", "abe@umn.edu", links.get(0));
     }
 
     @Test

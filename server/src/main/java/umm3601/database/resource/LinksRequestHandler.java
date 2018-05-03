@@ -89,7 +89,7 @@ public class LinksRequestHandler {
 
 //
 //                    System.err.println("Adding new contact [id=" + id + ", name=" + name + " subname=" + subname + "url" + url  + ']');
-                    return linksController.addNewLinks( id, userID, name, email, phone).toString();
+                    return linksController.addNewLinks(userID, name, email, phone).toString();
                 }
                 catch(NullPointerException e)
                 {

@@ -36,28 +36,24 @@ public class ContactControllerSpec {
         contactDocuments.drop();
         List<Document> testContacts = new ArrayList<>();
         testContacts.add(Document.parse("{\n" +
-            "                    _id: \"5ab88ab16148ec7b0f6b6fa4\",\n" +
             "                    userID: \"4cb56a89541a2d783595012c\",\n " +
             "                    name: \"Chuck Menne\",\n" +
             "                    email: \"chuck@umn.edu\",\n" +
             "                    phone: \"555-555-5555\",\n" +
             "                }"));
         testContacts.add(Document.parse("{\n" +
-            "                    _id: \"5ab88ab17205545c679992e4\",\n" +
             "                    userID: \"4cb56a89541a2d783595012c\",\n " +
             "                    name: \"John Hoff\",\n" +
             "                    email: \"john@umn.edu\",\n" +
             "                    phone: \"444-444-4444\",\n" +
             "                }"));
         testContacts.add(Document.parse("{\n" +
-            "                    _id: \"5ab88ab1543afe51da42359e\",\n" +
             "                    userID: \"4cb56a89541a2d783595012c\",\n " +
             "                    name: \"Dustin Blake\",\n" +
             "                    email: \"dustin@umn.edu\",\n" +
             "                    phone: \"333-333-3333\",\n" +
             "                }"));
         testContacts.add(Document.parse("{\n" +
-            "                    _id: \"5ab88ab1a5b4ebf66df44c40\",\n" +
             "                    userID: \"4cb56a89541a2d783595012c\",\n " +
             "                    name: \"Abe Monjor\",\n" +
             "                    email: \"abe@umn.edu\",\n" +
@@ -112,13 +108,13 @@ public class ContactControllerSpec {
         String jsonResult = contactController.getContacts(argMap);
         BsonArray docs = parseJsonArray(jsonResult);
 
-        assertEquals("Should be 5 contacts", 5, docs.size());
+        assertEquals("Should be 4 contacts", 4, docs.size());
         List<String> names = docs
             .stream()
             .map(ContactControllerSpec::getName)
             .sorted()
             .collect(Collectors.toList());
-        List<String> expectedNames = Arrays.asList("Abe Monjor", "Chuck Menne", "Dustin Blake", "John Hoff", "Sam Score");
+        List<String> expectedNames = Arrays.asList("Abe Monjor", "Chuck Menne", "Dustin Blake", "John Hoff");
         assertEquals("Names should match", expectedNames, names);
     }
 
@@ -134,7 +130,7 @@ public class ContactControllerSpec {
 
     @Test
     public void addContactTest() {
-        String newId = contactController.addNewContacts("4cb56a89541a2d783595012c","defaultUserID", "Aaron Bass", "aaron@umn.edu", "555-555-5555");
+        String newId = contactController.addNewContacts("defaultUserID", "Aaron Bass", "abe@umn.edu", "555-555-5555");
         assertNotNull("Add new contacts should return true,", newId);
         Map<String, String[]> argMap = new HashMap<>();
         argMap.put("userID", new String[]{"4cb56a89541a2d783595012c"});
@@ -148,7 +144,7 @@ public class ContactControllerSpec {
             .sorted()
             .collect(Collectors.toList());
         System.out.println(contacts);
-        assertEquals("Should return name of new contact", "aaron@umn.edu", contacts.get(0));
+        assertEquals("Should return name of new contact", "abe@umn.edu", contacts.get(0));
     }
 
     @Test

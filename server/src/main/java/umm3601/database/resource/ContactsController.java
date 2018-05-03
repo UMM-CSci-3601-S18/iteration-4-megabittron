@@ -70,7 +70,7 @@ public class ContactsController {
     }
 
 
-    public String addNewContacts(String id, String userID, String name, String email, String phone) {
+    public String addNewContacts( String userID, String name, String email, String phone) {
 
         Document newContacts = new Document();
         newContacts.append("userID", userID);
@@ -84,10 +84,10 @@ public class ContactsController {
         try {
             contactsCollection.insertOne(newContacts);
 
-            ObjectId Id = newContacts.getObjectId("_id");
+            ObjectId id = newContacts.getObjectId("_id");
             System.err.println("Successfully added new contact [_id=" + id + ",userID=" + userID + " name=" + name + ", email=" + email + " phone=" + phone + ']');
 
-            return JSON.serialize(Id);
+            return JSON.serialize(id);
         } catch (MongoException me) {
             me.printStackTrace();
             return null;
