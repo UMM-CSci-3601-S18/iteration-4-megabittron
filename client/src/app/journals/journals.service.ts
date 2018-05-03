@@ -15,7 +15,7 @@ export class JournalsService {
 
     constructor(private http: HttpClient) {
     }
-
+// This funtion calls the journals collection and added to the journals page component.
     getJournals(userID: string, journalBody?: string): Observable<Journal[]> {
         this.journalUrl = this.baseUrl;
         this.noID = false;
@@ -30,7 +30,7 @@ export class JournalsService {
 
         return this.http.get<Journal[]>(this.journalUrl);
     }
-
+// This function calls a journal with their specific ID
     getJournalById(id: string): Observable<Journal> {
         this.journalUrl = this.baseUrl;
         return this.http.get<Journal>(this.journalUrl + '/' + id);
