@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
     public emotionDate: string;
     public emojiRating: number = 0;
 
-    //Reloads the window and resets the page when the user clicks the reset button
+    //This function reloads the window and resets the page when the user clicks the reset button
     restart() {
         this.resetPage();
         window.location.reload();

@@ -9,7 +9,7 @@
         <mat-card-header>
             <mat-card-title class="goal-title break-word">{{goal.name}}</mat-card-title>
             <button mat-icon-button class="edit action-button"
-                    (click)="openEditGoalDialog(goal._id['$oid'], goal.name, goal.purpose, goal.end)">
+                    (click)="openEditGoalDialog(goal._id['$oid'], goal.purpose, goal.category, goal.name, goal.status, goal.frequency, goal.start, goal.end, goal.next)">
                 <mat-icon>create</mat-icon>
             </button>
             <button mat-icon-button class="delete action-button"
@@ -34,6 +34,6 @@
         <p *ngIf="goal.frequency == 'Does not repeat'">This goal does not repeat</p>
         <p>{{goal.purpose}}</p>
     </div>
-    <button class="mobile-edit" (click)="openEditGoalDialog(goal._id, goal.purpose, goal.category, goal.name, goal.status, goal.frequency, goal.start, goal.end, goal.next)" mat-fab color="primary">
+    <button class="mobile-edit" (click)="openEditGoalDialog(goal._id['$oid'], goal.purpose, goal.category, goal.name, goal.status, goal.frequency, goal.start, goal.end, goal.next)" mat-fab color="primary">
         <mat-icon>edit</mat-icon></button>
 </div>

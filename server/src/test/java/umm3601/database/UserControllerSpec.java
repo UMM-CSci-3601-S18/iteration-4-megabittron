@@ -24,6 +24,7 @@ package umm3601.database;
 public class UserControllerSpec {
     private UserController userController;
     private ObjectId kylesId;
+
     @Before
     public void clearAndPopulateDB() {
         MongoClient mongoClient = new MongoClient();
@@ -32,31 +33,45 @@ public class UserControllerSpec {
         userDocuments.drop();
         List<Document> testUsers = new ArrayList<>();
         testUsers.add(Document.parse("{\n" +
+            "                    _id: \"ahnafsId\",\n" +
             "                    SubjectID: \"121212\",\n" +
             "                    FirstName: \"Ahnaf\",\n" +
             "                    LastName: \"Prio\",\n" +
+            "                    StyleSetting: \"default-style\",\n" +
+            "                    FontSetting: \"default-font\",\n" +
             "                }"));
         testUsers.add(Document.parse("{\n" +
+            "                    _id: \"auroraId\",\n" +
             "                    SubjectID: \"131313\",\n" +
             "                    FirstName: \"Aurora\",\n" +
             "                    LastName: \"Corde\",\n" +
+            "                    StyleSetting: \"panda-style\",\n" +
+            "                    FontSetting: \"arial\",\n" +
             "                }"));
         testUsers.add(Document.parse("{\n" +
+            "                    _id: \"mattsId\",\n" +
             "                    SubjectID: \"141414\",\n" +
             "                    FirstName: \"Matt\",\n" +
             "                    LastName: \"Munns\",\n" +
+            "                    StyleSetting: \"win95\",\n" +
+            "                    FontSetting: \"times new roman\",\n" +
             "                }"));
         testUsers.add(Document.parse("{\n" +
+            "                    _id: \"charlesId\",\n" +
             "                    SubjectID: \"151515\",\n" +
             "                    FirstName: \"Charles\",\n" +
             "                    LastName: \"Menne\",\n" +
+            "                    StyleSetting: \"win95\",\n" +
+            "                    FontSetting: \"times new roman\",\n" +
             "                }"));
 
         kylesId = new ObjectId();
         BasicDBObject kyle = new BasicDBObject("_id", kylesId);
         kyle = kyle.append("SubjectID", "161616")
             .append("FirstName", "Kyle")
-            .append("LastName", "Debates");
+            .append("LastName", "Debates")
+            .append("StyleSetting", "Christmas")
+            .append("FontSetting" ,"Verdana");
 
 
 
@@ -94,7 +109,6 @@ public class UserControllerSpec {
     return ((BsonString) doc.get("_id")).getValue();
     }
 
-
     @Test
     public void getAllUsers() {
         Map<String, String[]> emptyMap = new HashMap<>();
@@ -123,22 +137,45 @@ public class UserControllerSpec {
 
     }
 
-    //@Test
-    //public void addUserTest(){
-    //    String newId = userController.addNewUser("171717","181818","Travis","Warling");
 
-    //    assertNotNull("Adding new user with a _id with a specific SubjectID should return true,", newId);
-    //    Map<String, String[]> argMap = new HashMap<>();
-    //    argMap.put("171717", new String[] { "171717" });
-    //    String jsonResult = userController.getUsers(argMap);
-    //    BsonArray docs = parseJsonArray(jsonResult);
+    @Test
+    public void addUserTest(){
+        String newUserJSON = userController.addNewUser("NicId","Nic","McPhee");
 
-    //    List<String> _id = docs
-    //        .stream()
-    //        .map(UserControllerSpec::get_id)
-    //        .sorted()
-    //        .collect(Collectors.toList());
-    //    assertEquals("Should return the new user", "181818", _id.get(5));
-    //}
+        assertNotNull("Adding new user with a _id with a specific SubjectID should return true,", newUserJSON);
+
+        Map<String, String[]> argMap = new HashMap<>();
+
+        String jsonResult = userController.getUsers(argMap);
+        BsonArray docs = parseJsonArray(jsonResult);
+
+        List<String> _id = docs
+            .stream()
+            .map(UserControllerSpec::getSubjectID)
+            .sorted()
+            .collect(Collectors.toList());
+        assertEquals("Should return the new user", "NicId", _id.get(5));
+    }
+
+    /* Should work, gives IllegalArgumentException even though the functions take 2 strings and return a string.
+    @Test
+    public void editUserStyleSettingTest(){
+        String newSetting = userController.editUserStyleSetting("ahnafsId", "fake-setting");
+
+        assertNotNull("Editing a style setting with a specific userID should return the style setting,", newSetting);
+
+        assertEquals("Should return the setting", "fake-setting", newSetting);
+    }
+
+    @Test
+    public void editUserFontSettingTest(){
+        String newSetting = userController.editUserFontSetting("ahnafsId", "fake-setting");
+
+        assertNotNull("Editing a style setting with a specific userID should return the style setting,", newSetting);
+
+        assertEquals("Should return the setting", "fake-setting", newSetting);
+    }
+    */
+
 
 }

@@ -9,7 +9,7 @@ import {AppService} from "../../app.service";
     styleUrls: ['./edit-journal.component.scss'],
     providers: [AppService],
 })
-
+// Adds an EditJournalComponent to the Edit Page
 export class EditJournalComponent {
     constructor(
         public appService: AppService,

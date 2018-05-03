@@ -135,7 +135,6 @@ public class GoalRequestHandler {
                     String end = dbO.getString("end");
                     String next = dbO.getString("next");
 
-                    /*System.out.println("Completing goal [purpose: " + purpose + ", category: " + category + ", name: " + name + ", status: " + status + ']');*/
                     return goalController.editGoal(id, purpose, category, name, status, frequency, start, end, next).toString();
                 } catch (NullPointerException e) {
                     System.err.println("A value was malformed or omitted, new item request failed.");
