@@ -19,8 +19,8 @@ export class SettingsComponent implements OnInit{
                 public settingsService: SettingsService,
                 public router: Router) {}
 
-    public font: string;
-    public theme: string;
+    public font: string = "";
+    public theme: string = "";
 
 
     saveSettings(){
@@ -48,11 +48,6 @@ export class SettingsComponent implements OnInit{
             );
         }
     }
-
-    getstyle(){
-        return localStorage.getItem("styleSelected");
-    }
-
 
     ngOnInit(): void {
         if (!this.appService.isSignedIn()) {
