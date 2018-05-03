@@ -169,7 +169,6 @@ export class JournalsComponent implements OnInit {
             },
             err => {
                 console.log(err);
-                console.log("hi");
                 this.refreshJournals();
                 this.loadService();
                 this.snackBar.open("Journal Deleted", "CLOSE", {
