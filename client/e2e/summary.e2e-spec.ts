@@ -14,8 +14,6 @@ describe('Summary', () => {
         SummaryPage.navigateTo();
     });
 
-
-
     /** NEED TO GET DELAY FUNCTION. MUST DELAY AFTER TAB SWITCH **/
 
     /**
@@ -294,11 +292,84 @@ describe('Summary', () => {
         element(by.className('lineradio')).click();
     });
 
-
-    it('Should click on the list tab then graph tab', () => {
+    it('Should click on the table tab then graph tab', () => {
         SummaryPage.navigateTo();
-        element(by.className('mat-tab-label mat-ripple ng-star-inserted')).click();
+        element(by.id('md-tab-label-0-1')).click();
         element(by.className('mat-tab-label mat-ripple ng-star-inserted')).click();
     });
+
+    it('next-page button should be present, then clicked', () => {
+        var EC = protractor.ExpectedConditions;
+        var nextPage = element(by.className('next-page'));
+
+        SummaryPage.navigateTo();
+        element(by.id('md-tab-label-0-1')).click();
+        browser.wait(EC.elementToBeClickable(nextPage), 2000);
+        expect(element(by.className('next-page')).isPresent()).toBeTruthy();
+        nextPage.click();
+    });
+
+    it('previous-page button should be present, then clicked', () => {
+        var EC = protractor.ExpectedConditions;
+        var nextPage = element(by.className('next-page'));
+        var previousPage = element(by.className('previous-page'));
+
+        SummaryPage.navigateTo();
+        element(by.id('md-tab-label-0-1')).click();
+        browser.wait(EC.elementToBeClickable(nextPage), 2000);
+        nextPage.click();
+        expect(element(by.className('previous-page')).isPresent()).toBeTruthy();
+        previousPage.click();
+    });
+
+    it('last-page button should be present, then clicked', () => {
+        var EC = protractor.ExpectedConditions;
+        var lastPage = element(by.className('last-page'));
+
+        SummaryPage.navigateTo();
+        element(by.id('md-tab-label-0-1')).click();
+        browser.wait(EC.elementToBeClickable(lastPage), 2000);
+        expect(element(by.className('last-page')).isPresent()).toBeTruthy();
+        lastPage.click();
+    });
+
+    // this test does not pass. It times out when trying to go to the first page. removing the second browser.wait(firstPage one)
+    // causes it to be unable to located className or id of the first page, resulting in the test failing.
+    /*it('first-page button should be present, then clicked', () => {
+        var EC = protractor.ExpectedConditions;
+        var nextPage = element(by.className('next-page'));
+        var firstPage = element(by.className('first-page'));
+        var lastPage = element(by.className('last-page'));
+
+        /!*SummaryPage.navigateTo();
+        element(by.id('md-tab-label-0-1')).click();
+        browser.wait(EC.elementToBeClickable(nextPage), 2000);
+        nextPage.click();
+        expect(element(by.className('first-page')).isPresent()).toBeTruthy();
+        firstPage.click();*!/
+
+        /!*SummaryPage.navigateTo();
+        element(by.id('md-tab-label-0-1')).click();
+        browser.wait(EC.elementToBeClickable(nextPage), 2000);
+        nextPage.click();
+        browser.wait(EC.elementToBeClickable(firstPage), 2000);
+        expect(element(by.className('first-page')).isPresent()).toBeTruthy();
+        firstPage.click();*!/
+
+        /!*SummaryPage.navigateTo();
+        element(by.id('md-tab-label-0-1')).click();
+        browser.wait(EC.elementToBeClickable(lastPage), 2000);
+        lastPage.click();
+        expect(element(by.className('first-page')).isPresent()).toBeTruthy();
+        firstPage.click();*!/
+
+        /!*SummaryPage.navigateTo();
+        element(by.id('md-tab-label-0-1')).click();
+        browser.wait(EC.elementToBeClickable(lastPage), 2000);
+        lastPage.click();
+        browser.wait(EC.elementToBeClickable(firstPage), 2000);
+        expect(element(by.className('first-page')).isPresent()).toBeTruthy();
+        firstPage.click();*!/
+    });*/
 
 });

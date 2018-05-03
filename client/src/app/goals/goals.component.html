@@ -1,6 +1,6 @@
 <div class="sidenav" [ngClass]="appService.styleClassSelector()" hide-xs>
-    <h2 class="page-title, alt-color" *ngIf="this.showAllGoals == false"> Today's Goals</h2>
-    <h2 class="page-title, alt-color" *ngIf="this.showAllGoals == true"> All Goals</h2>
+    <h2 class="page-title alt-color" *ngIf="this.showAllGoals == false"> Today's Goals</h2>
+    <h2 class="page-title alt-color" *ngIf="this.showAllGoals == true"> All Goals</h2>
     <hr class="nav-title-divider">
     <button mat-raised-button (click)="newGoalDialog()" class="new-object-button" id="addNewGoal">
         New Goal
@@ -14,7 +14,7 @@
         <mat-card-title>Status</mat-card-title>
         <mat-divider></mat-divider>
         <mat-card-content>
-            <a *ngIf="!showAllGoals">You cannot filter statuses of today's goals.</a>
+            <a class="no-filters" *ngIf="!showAllGoals">You cannot filter statuses of today's goals.</a>
           <mat-radio-group matInput #input *ngIf="showAllGoals" [(ngModel)]="goalStatus" (change)="loadService()" class="status-radio-group">
               <mat-radio-button id="allStatus" value="all">All</mat-radio-button>
               <mat-radio-button id="complete" value="true">Complete</mat-radio-button>
@@ -55,7 +55,7 @@
             </mat-card-header>
             <mat-divider></mat-divider>
             <mat-card-content class="goal-info break-word">
-                <div class="journal-action-buttons">
+                <div class="goal-action-buttons-mobile">
                     <button mat-icon-button class="edit"
                             (click)="openEditGoalDialog(goal._id['$oid'], goal.purpose, goal.category, goal.name, goal.status, goal.frequency)">
                         <mat-icon>create</mat-icon>
@@ -71,4 +71,58 @@
             </mat-card-content>
         </mat-card>
     </div>
+</div>
+<div class="list-goals-section" hide-gt-xs>
+    <div class="header-options">
+        <mat-checkbox class="show-all-goals-mob" (change)="showAllGoals = $event.checked; getNext()">Show all goals</mat-checkbox>
+        <p>
+            <a *ngIf="!showAllGoals">You cannot filter statuses of today's goals.</a>
+            <mat-radio-group matInput #input *ngIf="showAllGoals" [(ngModel)]="goalStatus" (change)="loadService()" class="status-radio-group-mob">
+                <mat-radio-button id="allStatusMob" value="all">All</mat-radio-button>
+                <mat-radio-button id="completeMob" value="true">Complete</mat-radio-button>
+                <mat-radio-button id="incompleteMob" value="false">Incomplete</mat-radio-button>
+            </mat-radio-group>
+        </p>
+    </div>
+    <mat-divider></mat-divider>
+    <mat-list class="goals-list">
+        <div class="goals-list-info" *ngFor="let goal of shownGoals | dateSort: 'start'"
+             #elem [id]="goal._id['$oid']">
+            <div class="goal-check-box-mob">
+            <button mat-icon-button class="check action-button-mob"
+                    *ngIf="goal.status == false"
+                    (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, true, goal.frequency, goal.start, goal.end, goal.next)">
+                <mat-icon>check_box_outline_blank</mat-icon>
+            </button>
+            <button mat-icon-button class="uncheck action-button-mob"
+                    *ngIf="goal.status == true"
+                    (click)="editGoal(goal._id['$oid'], goal.name, goal.purpose, goal.category, false, goal.frequency, goal.start, goal.end, goal.next)">
+                <mat-icon>check_box</mat-icon>
+            </button>
+            </div>
+            <div class="right-side-mob">
+                <a routerLink="/goals/{{goal._id['$oid']}}" class="goal-card-open" >
+                    <mat-list-item>
+                        <h3 matLine> {{goal.name}}</h3>
+                        <div mat-card-avatar class="category-img business" *ngIf="goal.category == 'business-career'"></div>
+                        <div mat-card-avatar class="category-img family" *ngIf="goal.category == 'family'"></div>
+                        <div mat-card-avatar class="category-img finances" *ngIf="goal.category == 'finances'"></div>
+                        <div mat-card-avatar class="category-img fun-recreation" *ngIf="goal.category == 'fun-recreation'"></div>
+                        <div mat-card-avatar class="category-img health" *ngIf="goal.category == 'health'"></div>
+                        <div mat-card-avatar class="category-img personal-development" *ngIf="goal.category == 'personal-development'"></div>
+                        <div mat-card-avatar class="category-img romance" *ngIf="goal.category == 'romance'"></div>
+                        <div mat-card-avatar class="category-img spiritual" *ngIf="goal.category == 'spiritual'"></div>
+                        <div mat-card-avatar class="category-img social" *ngIf="goal.category == 'social'"></div>
+                        <div mat-card-avatar class="category-img other" *ngIf="goal.category == 'other'"></div>
+                        <p matLine  *ngIf="goal.end == ''">No end date</p>
+                        <p matLine  *ngIf="goal.end != ''">Ends on {{goal.end | date : "MMM d, yyyy"}}</p>
+                    </mat-list-item>
+                </a>
+                <mat-divider></mat-divider>
+            </div>
+        </div>
+    </mat-list>
+    <button class="add-goal-fab-button-fixed" (click)="newGoalDialog()" mat-fab color="primary">
+        <mat-icon>add</mat-icon>
+    </button>
 </div>

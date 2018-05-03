@@ -9,7 +9,7 @@ import {AppService} from "../../../app.service";
     styleUrls: ['./add-contact.component.scss'],
     providers: [AppService],
 })
-
+// This function adds the addContact Component to the add page
 export class AddContactComponent {
 
 

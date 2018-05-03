@@ -87,8 +87,7 @@ lls addNewResources helper method
                     String phone = dbO.getString("phone");
 
 
-//
-//                    System.err.println("Adding new contact [id=" + id + ", userID=" + userID + name=" + name + " phonenumber=" + phonenumber + "email" + email  + ']');
+
                     return contactsController.addNewContacts( id, userID, name, email, phone).toString();
                 }
                 catch(NullPointerException e)
@@ -110,7 +109,7 @@ lls addNewResources helper method
             return null;
         }
     }
-
+// Deletes a specific contact
     public String deleteContact(Request req, Response res){
 
         System.out.println("Deleting contact with ID: " + req.params(":id"));

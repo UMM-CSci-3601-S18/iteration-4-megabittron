@@ -7,6 +7,7 @@ import {Location} from "@angular/common";
 import {HostListener} from "@angular/core";
 import {JournalsService} from "./journals/journals.service";
 import {MatSnackBar} from "@angular/material";
+import {GoalsService} from "./goals/goals.service";
 
 
 declare var gapi: any;
@@ -15,7 +16,7 @@ declare var gapi: any;
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    providers: [AppService, JournalsService]
+    providers: [AppService, JournalsService, GoalsService]
 })
 export class AppComponent implements OnInit {
     googleAuth;
@@ -29,7 +30,8 @@ export class AppComponent implements OnInit {
                 private router: Router,
                 private _location: Location,
                 public journalListService: JournalsService,
-                public snackBar: MatSnackBar) {
+                public snackBar: MatSnackBar,
+                public goalListService: GoalsService) {
 
         this.router.events.subscribe((e) => {
             if (e instanceof ActivationStart) {
@@ -43,18 +45,23 @@ export class AppComponent implements OnInit {
 
     deleteJournal(_id: string) {
         this.journalListService.deleteJournal(_id).subscribe(
-            journals => {
-                console.log("first part");
-                //this.refreshJournal();
-                //this.loadService();
-            },
+            journals => {},
             err => {
                 console.log(err);
-                console.log("hi");
-                //this.refreshJournal();
-                //this.loadService();
                 this.snackBar.open("Deleted Journal", "CLOSE", {
                     duration: 2000,
+                });
+            }
+        );
+    }
+
+    deleteGoal(_id: string) {
+        this.goalListService.deleteGoal(_id).subscribe(
+            goals => {},
+            err => {
+                console.log(err);
+                this.snackBar.open("Goal Deleted", "CLOSE", {
+                    duration: 3000,
                 });
             }
         );
@@ -69,26 +76,33 @@ export class AppComponent implements OnInit {
         this._location.back();
 
     }
-
+    // Checks if the user is on journal mobile view or desktop view
+    // And sets according add, delete buttons in the navbar
     isJournalView(): boolean {
         if (this.currentPath == 'journals/:_id' && this.currentWidth < 600) {
             return true;
         } else {
             return false;
         }
-
-
     }
-
+    // Checks if the user is on goal mobile view or desktop view
+    // And sets according add, delete buttons in the navbar
+    isGoalView(): boolean {
+        if (this.currentPath == 'goals/:_id' && this.currentWidth < 600) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    // This requests and gets the name from local storage
     getUsername () {
         this.username = localStorage.getItem("userFirstName") + " " + localStorage.getItem("userLastName");
         if (this.username.length > 18) {
             this.username = this.username.slice(0, 17) + "...";
         }
     }
-
+    // This signs in the user and opens the window for signing in
     signIn() {
-        //let googleAuth = gapi.auth2.getAuthInstance();
         this.googleAuth = gapi.auth2.getAuthInstance();
         console.log(this.googleAuth);
         this.googleAuth.grantOfflineAccess().then((resp) => {
@@ -96,9 +110,8 @@ export class AppComponent implements OnInit {
             this.sendAuthCode(resp.code);
         });
     }
-
+    // This signs the user out
     signOut() {
-        //let googleAuth = gapi.auth2.getAuthInstance();
         this.handleClientLoad();
 
         this.googleAuth = gapi.auth2.getAuthInstance();
@@ -110,7 +123,8 @@ export class AppComponent implements OnInit {
             window.location.reload();
         })
     }
-
+    // This sends the auth code of our user to the server and stores the fields in local storage when we get data back
+    // from gapi
     sendAuthCode(code: string): void {
         const httpOptions = {
             headers: new HttpHeaders({

@@ -5,12 +5,12 @@ import {Journal} from '../journal';
 @Component({
     selector: 'app-open-prompts.component',
     templateUrl: 'open-prompts.component.html',
-    // styleUrls: ['./add-journal.component.css'],
+    styleUrls: ['./open-prompts.component.scss'],
 })
 
-export class RandomPrompt implements OnInit{
+export class OpenPromptsComponent implements OnInit{
     public prompt: String;
-
+// This is the array of random prompts. If you wanna add a random prompt. Add here.
     public promptsMobile: String[] = [
         "What scares you?",
         "Do you have a plan? Do you need a plan? Have you had a plan fall spectacularly to pieces?",
@@ -66,7 +66,7 @@ export class RandomPrompt implements OnInit{
 
 
     constructor(
-        public dialogRef: MatDialogRef<RandomPrompt>,
+        public dialogRef: MatDialogRef<OpenPromptsComponent>,
         @Inject(MAT_DIALOG_DATA) public data: {journal: Journal}) {
     }
 
@@ -80,6 +80,7 @@ export class RandomPrompt implements OnInit{
     }
 
     ngOnInit (): void {
+
         this.randomPromptsMobile();
     }
 

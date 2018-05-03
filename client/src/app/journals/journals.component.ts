@@ -6,7 +6,7 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 import {AddJournalComponent} from './add/add-journal.component';
 import {AppService} from "../app.service";
 import {Router} from "@angular/router";
-import {RandomPrompt} from "./Prompts/open-prompts.component";
+import {OpenPromptsComponent} from "./prompt/open-prompts.component";
 
 @Component({
     selector: 'app-journals-component',
@@ -92,7 +92,7 @@ export class JournalsComponent implements OnInit {
 
     }
 
-    RandomPrompt(): void {
+    randomPrompt(): void {
         this.prompt = this.prompts[Math.floor(Math.random() * this.prompts.length)];
     }
 
@@ -101,9 +101,9 @@ export class JournalsComponent implements OnInit {
         this.prompt = this.prompts[Math.floor(Math.random() * this.prompts.length)];
         //this one is for mobile view
         console.log("Mobile-vied prompts icon clicked.");
-         const dialogRef = this.dialog.open(RandomPrompt, {
+         const dialogRef = this.dialog.open(OpenPromptsComponent, {
              width: '300px',
-
+             height: '200px'
          });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -169,7 +169,6 @@ export class JournalsComponent implements OnInit {
             },
             err => {
                 console.log(err);
-                console.log("hi");
                 this.refreshJournals();
                 this.loadService();
                 this.snackBar.open("Journal Deleted", "CLOSE", {

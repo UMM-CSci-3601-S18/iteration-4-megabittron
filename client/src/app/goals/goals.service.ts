@@ -18,7 +18,7 @@ export class GoalsService {
         private http: HttpClient) {
     }
 
-    //Get goals from the server
+    //This function gets goals from the server
     getGoals(userID: string, status?: string): Observable<Goal[]> {
         this.goalUrl = this.baseUrl;
         this.noID = false;

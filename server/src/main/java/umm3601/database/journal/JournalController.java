@@ -117,7 +117,6 @@ public class JournalController {
 
 
         try {
-            //System.out.println(journalCollection.find());
             journalCollection.updateOne(searchQuery, setQuery);
             System.out.println(journalCollection.find());
             ObjectId id1 = searchQuery.getObjectId("_id");

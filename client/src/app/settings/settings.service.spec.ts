@@ -3,7 +3,7 @@ import {TestBed} from '@angular/core/testing';
 import {HttpClient} from '@angular/common/http';
 import {SettingsService} from './settings.service';
 
-describe('Journal list service: ', () => {
+describe('Setting list service: ', () => {
 
     //set of users
     const testUsers = [

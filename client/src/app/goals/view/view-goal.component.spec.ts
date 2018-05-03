@@ -44,7 +44,7 @@ describe('Editing a goal', () => {
     beforeEach(() => {
         calledGoal = null;
         let highlightedID: { '$oid': string } = {'$oid': ''};
-        // stub JournalsService for test reasons
+        // This stub JournalsService for test reasons
         goalListServiceStub = {
             getGoalById: () => Observable.of(
                 {

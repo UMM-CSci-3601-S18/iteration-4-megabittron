@@ -27,7 +27,6 @@ export class SettingsComponent implements OnInit{
         if(this.font != localStorage.getItem("fontSelected")){
             this.settingsService.editFont(localStorage.getItem("userID"), this.font).subscribe(
                 result=>{
-                    console.log("fontselected got tereasefdf");
                     localStorage.setItem("fontSelected", result)
                 },
                 err => {
@@ -48,6 +47,7 @@ export class SettingsComponent implements OnInit{
             );
         }
     }
+
 
     ngOnInit(): void {
         if (!this.appService.isSignedIn()) {
