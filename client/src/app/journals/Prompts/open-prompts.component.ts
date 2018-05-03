@@ -10,7 +10,7 @@ import {Journal} from '../journal';
 
 export class RandomPrompt implements OnInit{
     public prompt: String;
-
+// This is the array of random prompts. If you wanna add a random prompt. Add here.
     public promptsMobile: String[] = [
         "What scares you?",
         "Do you have a plan? Do you need a plan? Have you had a plan fall spectacularly to pieces?",
