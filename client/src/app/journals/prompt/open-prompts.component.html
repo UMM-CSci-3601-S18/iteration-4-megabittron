@@ -1,4 +1,4 @@
-
+<!--
     <div class="random-prompts-mob" layout-gt-sm="row">
         <div flex-gt-sm="80" flex-offset-gt-sm="10">
             <mat-card-title class="random-prompts-mob">Random Journal Prompts</mat-card-title>
@@ -22,6 +22,17 @@
                 id="exitWithoutAddingButton"
                 (click)="onNoClick()">Cancel
         </button>
-        </div>
+        </div>-->
+
+<button mat-icon-button class="cancel"
+        (click)="onNoClick()"><mat-icon>close</mat-icon>
+</button>
+<mat-card-content class="prompts-card">
+    <button mat-raised-button (click)="randomPromptsMobile()">
+        Click for new idea
+    </button>
+    <p>{{prompt}}</p>
+
+</mat-card-content>
 
 

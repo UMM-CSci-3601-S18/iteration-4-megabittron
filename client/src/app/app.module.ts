@@ -33,7 +33,7 @@ import {AddContactComponent} from "./resources/add/contacts/add-contact.componen
 import {AddLinkComponent} from "./resources/add/links/add-link.component";
 import {EditLinkComponent} from "./resources/edit/links/edit-links.component";
 import {EditContactComponent} from "./resources/edit/contacts/edit-contacts.component";
-import {RandomPrompt} from "./journals/Prompts/open-prompts.component";
+import {OpenPromptsComponent} from "./journals/prompt/open-prompts.component";
 import {MatTableModule} from "@angular/material/table";
 import {ShowSummaryListComponent} from "./summary/show/show-summary-list.component";
 
@@ -71,7 +71,7 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         ArraySortPipe,
         SettingsComponent,
         ShowSummaryListComponent,
-        RandomPrompt,
+        OpenPromptsComponent,
     ],
     providers: [
         GoalsService,
@@ -91,13 +91,9 @@ import {ShowSummaryListComponent} from "./summary/show/show-summary-list.compone
         EditJournalComponent,
         ViewJournalComponent,
         ShowSummaryListComponent,
-        RandomPrompt,
-
+        OpenPromptsComponent,
         AddContactComponent,
         AddLinkComponent,
-        RandomPrompt,
-
-
     ],
     bootstrap: [
         AppComponent
