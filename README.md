@@ -9,13 +9,13 @@ An example of a live build can be found at https://mypanda.website/
 
 <!-- TOC depthFrom:1 depthTo:5 withLinks:1 updateOnSave:1 orderedList:0 -->
 ## Table of Contents
-- [For Programmers](#For Programmers)
+- [For Programmers](#For-Programmers)
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
     - [Running your project](#running-your-project)
     - [Deploying Project for Production](#deploying-project-for-production)
     - [Testing and Continuous Integration](#testing-and-continuous-integration)
-- [For Users](#For Users)
+- [For Users](#For-Users)
 - [Authors](#authors)
 
 <!-- /TOC -->
@@ -51,7 +51,7 @@ If you let IDEA do it, you'll
 have a ton of JavaScript files cluttering up your project and confusing other
 tools.
 
-## Running the project with Gradle
+## Running the project
 
 - The **build** task will _build_ the entire project (but not run it)
 - The **run** Gradle task will still run your SparkJava server.
