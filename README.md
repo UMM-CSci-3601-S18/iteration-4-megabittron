@@ -20,7 +20,7 @@ An example of a live build can be found at https://mypanda.website/
 
 <!-- /TOC -->
 
-# For Programmers
+## For Programmers
 
 ## Prerequisites
 
@@ -89,7 +89,7 @@ The server (`run`) needs to be on for this test to work, and you have to
 need to have data in the `dev` database before running the e2e tests!
 * `runServerTests` runs the server tests.
 
-# For Users
+## For Users
 
 ## What is MyPanda
 
