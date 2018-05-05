@@ -84,10 +84,6 @@ You can add the title of your video in the YouTube Title with its corresponding 
 ### Adding and deleting a contact
 You can add that favorite person you always like to talk to in times of anxiety and maybe even when you’re happy using this feature. Add the name of the person with their phone number and click submit to add them to the list. Press the little trash icon text to it if you don’t want that number to show there anymore and that will be taken care of as well. 
 
- 
-
-
-
 ## Stats
 The stats page contains a ‘graph view’ and a ‘table view’, which can be traversed by clicking on the **Graphs** tab or **Table** tab.
 
@@ -99,7 +95,9 @@ Emotion(s) can be excluded from the graph by clicking on said emotion(s)’s leg
 There are two different graph views, ‘Stacked Bar Graph’ and ‘Line Graph’. Clicking on the **Stacked Bar Graph** button changes the graph to a stacked bar graph. Clicking on the **Line Graph** button changes the graph to a line graph. Users can view entries by **hour**, **weekday**, **date**, or **month** simply by clicking on the preferred view. Users also have the option to include all entries by clicking on the **All Time** button or view only past month entries by clicking on the **Past Month** button. Users can enable Colorblind Mode by clicking on the **Colorblind** toggle.
 
 ### Table
-The table can be filtered by **Emotion**, **Intensity**, or **Date**.  The **Clear Date Filters** buttons removed dates from filtering. The **total emotions logged can be viewed under 
+The table can be filtered by **Emotion**, **Intensity**, or **Date**.  The **Clear Date Filters** buttons removes dates from filtering. The **total emotions logged** can be viewed under the text ‘Your Emotions’. The table only loads 10 entries per page. If more than 10 entries have been logged, users can traverse through pages by clicking on the **Next Page** or **Previous Page** buttons. Users can go straight to the first or last page by clicking the **First Page** or the **Last Page** buttons.
+
+If entries logged include a description, the description can be viewed by clicking on the **eye** icon located under the description column.
 
 ## Settings
 The settings page houses the different fonts and themes. To change the font on the web-app, **click** on the font of your choice. To change the theme of the web-app, **click** on the color pallette of your choice.
@@ -107,9 +105,6 @@ The settings page houses the different fonts and themes. To change the font on t
 
 # Authors
 
-To see more detailed information on each team member’s individual commits and contributions, see the GitHub [contributors page](https://github.com/UMM-CSci-3601-S18/iteration-4-megabittron/graphs/contributors)
-
-### Team Members
 - Abenezer Monjor
 - Ahnaf Prio
 - Charles Menne
