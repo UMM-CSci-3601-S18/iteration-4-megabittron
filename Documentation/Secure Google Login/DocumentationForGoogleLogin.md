@@ -212,6 +212,8 @@ subjectID = The one we import from the Gapi Client
 (String userId = payload.getSubject)
 FirstName = User Given name from the Gapi Client
 LastName = User Last name from the Gapi client
+FontSetting = Field that adds on theming preference for a specific user
+StyleSetting = Field that adds on theming preference for a specific user
 
 We then used filtering on all the different collections in the server controller and handler through adding one more field to the collection which is userID. 
 
@@ -308,6 +310,12 @@ $oid(for that specific goal), purpose, category, name, status, start, end, next,
 Emotions Collection:
 
 $oid(for that specific Emotion), mood, intensity, date and userID (from user collection)  
+
+Resources (Had two collections):
+Links Collection: $oid(for that specific link), name, subname, url and userID (from user collection)
+Contacts Collection:  $oid(for that specific contact), name, email, phone and userID (from user collection)
+
+Themes/Settings Page has no collection of their own. It's added to the user collection where on default the user is given "PandaStyle" background and "Arial" font and then they can choose their preference and it will continue to be constant every time the user logs in.
 
 
 ##### References:
