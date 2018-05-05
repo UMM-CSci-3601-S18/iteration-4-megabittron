@@ -2,17 +2,8 @@
 
 ## Summary
 This document is, essentially, a short guide to setting up a "droplet" on [DigitalOcean](https://www.digitalocean.com)
-to be used as a tool for deploying simple web applications. 
-
-The majority of the information here will be presented in the form of bulleted lists,
-because we all know none of us actually read walls of text.
-
-The SSH key part is somewhat very important.
-If you don't get the SSH keypair stuff right, you'll probably have a pile of issues logging in
-to your droplet.
-
-Most of this will happen in a terminal window, which is yet another reason to take
-some time to learn how to use the Unix shell.
+to be used as a tool for deploying simple web applications. The majority of the information here will be presented in the form of bulleted lists,because we all know none of us actually read walls of text.The SSH key part is somewhat very important.
+If you don't get the SSH keypair stuff right, you'll probably have a pile of issues logging in to your droplet.Most of this will happen in a terminal window, which is yet another reason to take some time to learn how to use the Unix shell.
 
 ### Some terminology:
 You're going to see the word "droplet" used a lot here. Digital ocean is in the
@@ -63,7 +54,7 @@ entails.
 - Navigate back to your repository. (Type `cd ~` and then `cd [your repo name]`).
 - Run `./build.sh` to build and deploy your project.
 - run ``tmux`` to enter a Tmux session.
-- run ``./3601.sh`` to start your server (**3601.sh** is in the home directory `cd ~`).
+- run ``./3601.sh`` to start your server (**3601.sh** is in the home directory `cd ~`) or your specific home directory.
 - press ``Ctrl + b`` and then ``d`` to *detach* from this Tmux session. It will continue running even after you log out. To reconnect to the Tmux session, log into your droplet and run ``tmux a`` (a for *attach*!)
 
 If you're interested in doing more fun things with Tmux, check out [this](https://gist.github.com/MohamedAlaa/2961058) cheat-sheet. Tmux is a really cool tool, and if you ever plan on doing system administration stuff in the future it's worth getting to know it.
