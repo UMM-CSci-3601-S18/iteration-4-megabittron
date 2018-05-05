@@ -1,7 +1,6 @@
 <div align="middle"><a href="https://mypanda.website/"><img src="client/src/android-chrome-512x512.png" width="100px" height="100px"/></a></div>
 
-
-![My Panda Screenshot](client/src/assets/images/device-mockups.png)
+<div align="middle"><a href="https://mypanda.website/"><img src="client/src/assets/images/device-mockups.png"/></a></div>
 
 [![Build Status](https://travis-ci.org/UMM-CSci-3601-S18/iteration-4-megabittron.svg?branch=master)](https://travis-ci.org/UMM-CSci-3601-S18/iteration-4-megabittron)
 
