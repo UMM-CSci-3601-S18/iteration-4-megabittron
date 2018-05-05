@@ -1,4 +1,4 @@
-# Friendly Panda Emotion Tracker
+# MyPanda
 
 An emotion tracking web application which can be used by health practioners and their consumers.
 Provides ability for consumers to quickly log data about emotion and mood, and provides convenient, helpful links.
@@ -24,6 +24,10 @@ An example of a live build can be found at https://mypanda.website/
 To start, you'll need a Google account to log-in. You can find the **sign in** button in the top right on a desktop view, or in the side menu on a mobile view. Once you're signed in, you'll have access to the rest of the site.
 
 ## Home Page
+
+The home page houses the main feature of the web-app - emotion recording. You have the choice of 5 different emotions (Happy, Sad, Meh, Angry, Anxious). After selecting your current emotion and clicking the **next** button, there may be the option to select your emotional intensity (on a scale of 1-5). This option will only occur if you haven't selected "Meh" as your emotion. After clicking the **next** button again, you will be given the option to describe why you feel the way you do, with the prompt "I'm feeling this way because..." However, this portion is optional. The final step is clicking the **submit** button, which will log your emotion, and send you to a Youtube video playlist created to provide useful resources for each emotion.
+
+## Goals Page
 
 # Authors
 - **Abenezer Monjor**
