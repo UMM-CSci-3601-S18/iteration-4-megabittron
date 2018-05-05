@@ -1,4 +1,5 @@
-# [![My Panda Logo](client/src/android-chrome-512x512.png)](https://mypanda.website/)
+<a href="https://mypanda.website/"><img src="client/src/android-chrome-512x512.png" style="width: 200px; height: 200px;"/></a>
+
 
 ![My Panda Screenshot](client/src/assets/images/device-mockups.png)
 
