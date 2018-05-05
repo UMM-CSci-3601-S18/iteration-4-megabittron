@@ -17,7 +17,7 @@ An example of a live build can be found at https://mypanda.website/
 
 ## What is MyPanda
 
-[MyPanda](https://mypanda.website) is an web-app that promotes mental health. This is achieved through providing the capability to record emotions, set goals, and write journals. These allow for quick and convienient ways to reflect on past trends and promote personal growth. Furthermore, MyPanda provides resources for managing stress, anxiety, anger, and much more!
+[MyPanda](https://mypanda.website) is an web-app that promotes mental health. This is achieved through providing the capability to record emotions, set goals, and write journals. These allow for quick and convenient ways to reflect on past trends and promote personal growth. Furthermore, MyPanda provides resources for managing stress, anxiety, anger, and much more!
 
 ## Getting Started
 
@@ -27,7 +27,23 @@ To start, you'll need a Google account to log-in. You can find the **sign in** b
 
 The home page houses the main feature of the web-app - emotion recording. You have the choice of 5 different emotions (Happy, Sad, Meh, Angry, Anxious). After selecting your current emotion and clicking the **next** button, there may be the option to select your emotional intensity (on a scale of 1-5). This option will only occur if you haven't selected "Meh" as your emotion. After clicking the **next** button again, you will be given the option to describe why you feel the way you do, with the prompt "I'm feeling this way because..." However, this portion is optional. The final step is clicking the **submit** button, which will log your emotion, and send you to a Youtube video playlist created to provide useful resources for each emotion.
 
+At any point in this process, if you want to start over, you can click the **Restart** button, to remove your progress, and return to the first step.
+
 ## Goals Page
+
+The goals page has two distinct views depending on if one is using a desktop or mobile device. 
+
+The desktop view contains a sidebar with a **New Goal** button, a toggle to switch between showing today's goals and all goals. If **Show all goals** is selected, three options to filter the goals appear (All, Complete, and Incomplete). The right side of the screen is reserved for goals, which are viewed as cards.
+
+The mobile view contains a navbar, a toggle to show all goals, and filtering options if **Show all goals** is toggled at the top of the screen. In the bottom right corner, there is a button to add a new goal, indicated by a plus sign. The center of the screen is reserved for listing goals.
+
+### Creating a goal
+
+To create a goal, click the aforementioned **New Goal** button. When creating a goal, it requires the text of the goal, a category, and a frequency. Optionally, you can also include text describing the purpose of the goal and an end date. 
+
+### Using your goal
+
+A goal begins as incomplete, and 
 
 # Authors
 - **Abenezer Monjor**
