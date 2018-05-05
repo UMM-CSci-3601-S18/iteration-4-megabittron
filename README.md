@@ -17,11 +17,11 @@ An example of a live build can be found at https://mypanda.website/
 
 ## What is MyPanda
 
-MyPanda is an web-app that promotes mental health. This is achieved through providing the capability to record emotions, set goals, and write journals. These allow for quick and convienient ways to reflect on past trends and promote personal growth. Furthermore, MyPanda provides resources for managing stress, anxiety, anger, and much more!
+[MyPanda](https://mypanda.website) is an web-app that promotes mental health. This is achieved through providing the capability to record emotions, set goals, and write journals. These allow for quick and convienient ways to reflect on past trends and promote personal growth. Furthermore, MyPanda provides resources for managing stress, anxiety, anger, and much more!
 
 ## Getting Started
 
-
+To start, you'll need a Google account to log-in. You can find the **sign in** button in the top right on a desktop view, or in the side menu on a mobile view. Once you're signed in, you'll have access to the rest of the site.
 
 ## Home Page
 
