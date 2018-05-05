@@ -9,14 +9,18 @@ An example of a live build can be found at https://mypanda.website/
 
 <!-- TOC depthFrom:1 depthTo:5 withLinks:1 updateOnSave:1 orderedList:0 -->
 ## Table of Contents
-- [Prerequisites](#prerequisites)
-- [Setup](#setup)
-- [Running your project](#running-your-project)
-- [Deploying Project for Production](#deploying-project-for-production)
-- [Testing and Continuous Integration](#testing-and-continuous-integration)
+- [For Programmers](#For Programmers)
+    - [Prerequisites](#prerequisites)
+    - [Setup](#setup)
+    - [Running your project](#running-your-project)
+    - [Deploying Project for Production](#deploying-project-for-production)
+    - [Testing and Continuous Integration](#testing-and-continuous-integration)
+- [For Users](#For Users)
 - [Authors](#authors)
 
 <!-- /TOC -->
+
+# For Programmers
 
 ## Prerequisites
 
@@ -47,7 +51,7 @@ If you let IDEA do it, you'll
 have a ton of JavaScript files cluttering up your project and confusing other
 tools.
 
-## Running the project
+## Running the project with Gradle
 
 - The **build** task will _build_ the entire project (but not run it)
 - The **run** Gradle task will still run your SparkJava server.
@@ -70,11 +74,11 @@ the actual URL of the server. If your server is deployed on a droplet or virtual
 
 ## Deploying Project for Production 
 Instructions on setting up the project for production can be found here: 
-[UMM CSCI 3601 Droplet Setup Instructions](https://gist.github.com/pluck011/d968c2280cc9dc190a294eaf149b1c6e)
+[Droplet Setup Instructions](https://gist.github.com/pluck011/d968c2280cc9dc190a294eaf149b1c6e)
 
 ## Testing and Continuous Integration
 
-Testing the client:
+Testing the client with Gradle:
 
 * `runAllTests` runs both the server tests and the clients tests once.
 * `runClientTests` runs the client tests once.
@@ -85,7 +89,15 @@ The server (`run`) needs to be on for this test to work, and you have to
 need to have data in the `dev` database before running the e2e tests!
 * `runServerTests` runs the server tests.
 
-## Authors
+# For Users
+
+## What is MyPanda
+
+
+
+## Home Page
+
+# Authors
 - **Abenezer Monjor**
 - **Ahnaf Prio**
 - **Charles Menne**
