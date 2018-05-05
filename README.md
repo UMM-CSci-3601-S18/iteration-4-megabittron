@@ -2,7 +2,7 @@
 
 <div align="middle"><a href="https://mypanda.website/"><img src="client/src/assets/images/device-mockups.png"/></a></div>
 
-<div align="middle">[![Build Status](https://travis-ci.org/UMM-CSci-3601-S18/iteration-4-megabittron.svg?branch=master)](https://travis-ci.org/UMM-CSci-3601-S18/iteration-4-megabittron)</div>
+[![Build Status](https://travis-ci.org/UMM-CSci-3601-S18/iteration-4-megabittron.svg?branch=master)](https://travis-ci.org/UMM-CSci-3601-S18/iteration-4-megabittron)
 
 ## Table of Contents
 - [What is My Panda](#what-is-my-panda)
