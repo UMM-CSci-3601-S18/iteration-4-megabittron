@@ -62,6 +62,9 @@ The server (`run`) needs to be on for this test to work, and you have to
 need to have data in the `dev` database before running the e2e tests!
 * `runServerTests` runs the server tests.
 
+Note: 
+To make sure testing works for goals component make sure the testing boolean is set to true in client/app/goals/ in the goals.component.ts file.
+
 ## Deploying Project for Production 
 Instructions on setting up the project for production can be found here: 
 [Droplet Setup Instructions](https://github.com/UMM-CSci-3601-S18/iteration-4-megabittron/blob/master/Documentation/Droplet%20Setup%20Instructions.md)
