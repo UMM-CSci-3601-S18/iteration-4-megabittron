@@ -39,7 +39,7 @@ The mobile view contains a navbar, a toggle to show all goals, and filtering opt
 
 ### Creating a goal
 
-To create a goal, click the aforementioned **New Goal** button. When creating a goal, it requres the text of the goal, a category, and a frequency. Optionally, you can also include text describing the purpose of the goal and an end date. 
+To create a goal, click the aforementioned **New Goal** button. When creating a goal, it requires the text of the goal, a category, and a frequency. Optionally, you can also include text describing the purpose of the goal and an end date. 
 
 ### Using your goal
 
