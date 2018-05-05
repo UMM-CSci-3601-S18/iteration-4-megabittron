@@ -1,6 +1,6 @@
-# [![My Panda Logo](client/src/android-chrome-512x512.png =100x100)](https://mypanda.website/)
+# [![My Panda Logo](client/src/android-chrome-512x512.png)](https://mypanda.website/)
 
-![My Panda Screenshot](client/src/assets/images/devices-screenshot-mockups.png)
+![My Panda Screenshot](client/src/assets/images/device-mockups.png)
 
 [![Build Status](https://travis-ci.org/UMM-CSci-3601-S18/iteration-4-megabittron.svg?branch=master)](https://travis-ci.org/UMM-CSci-3601-S18/iteration-4-megabittron)
 
@@ -21,6 +21,7 @@
 	- [Graphs](#graphs)
 	- [Tables](#tables)
 - [Settings](#settings)
+- [Authors](#authors)
 
 	
 
@@ -88,12 +89,9 @@ You can add that favorite person you always like to talk to in times of anxiety 
 
 
 ## Stats
-
-The stats page contains a ‘graph view’ and a ‘table view’.
-
+The stats page contains a ‘graph view’ and a ‘table view’, which can be traversed by clicking on the **Graphs** tab or **Table** tab.
 
 ### Graphs
-
 The total number of emotions logged can be seen at the top of the page.
 
 Emotion(s) can be excluded from the graph by clicking on said emotion(s)’s legend/toggle.
@@ -101,11 +99,9 @@ Emotion(s) can be excluded from the graph by clicking on said emotion(s)’s leg
 There are two different graph views, ‘Stacked Bar Graph’ and ‘Line Graph’. Clicking on the **Stacked Bar Graph** button changes the graph to a stacked bar graph. Clicking on the **Line Graph** button changes the graph to a line graph. Users can view entries by **hour**, **weekday**, **date**, or **month** simply by clicking on the preferred view. Users also have the option to include all entries by clicking on the **All Time** button or view only past month entries by clicking on the **Past Month** button. Users can enable Colorblind Mode by clicking on the **Colorblind** toggle.
 
 ### Table
-
-The table can be filtered by emotion, intensity, and date.
+The table can be filtered by **Emotion**, **Intensity**, or **Date**.  The **Clear Date Filters** buttons removed dates from filtering. The **total emotions logged can be viewed under 
 
 ## Settings
-
 The settings page houses the different fonts and themes. To change the font on the web-app, **click** on the font of your choice. To change the theme of the web-app, **click** on the color pallette of your choice.
 
 
@@ -113,7 +109,7 @@ The settings page houses the different fonts and themes. To change the font on t
 
 To see more detailed information on each team member’s individual commits and contributions, see the GitHub [contributors page](https://github.com/UMM-CSci-3601-S18/iteration-4-megabittron/graphs/contributors)
 
-## Team Members
+### Team Members
 - Abenezer Monjor
 - Ahnaf Prio
 - Charles Menne
@@ -132,3 +128,5 @@ To see more detailed information on each team member’s individual commits and 
 [mongo-jdbc]: https://docs.mongodb.com/ecosystem/drivers/java/
 [labtasks]: LABTASKS.md
 [travis]: https://travis-ci.org/
+
+
