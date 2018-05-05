@@ -1,75 +1,61 @@
 import {SettingsPage} from './settings.po';
-import {browser, protractor, element, by} from 'protractor';
-import {Key} from 'selenium-webdriver';
 
-fdescribe('Settings', () => {
+describe('Settings', () => {
     let page: SettingsPage;
 
     beforeEach(() => {
         page = new SettingsPage();
     });
 
-    it('Should cilck on the arial button ', () => {
+    it('Should click on the arial button ', () => {
         page.navigateTo();
         page.getFont('arial');
-    });
+    }) ;
 
-    it('Should cilck on the verdana button ', () => {
+    it('Should click on the verdana button ', () => {
         page.navigateTo();
         page.getFont('verdana');
     });
 
-    it('Should cilck on the times-new-roman button ', () => {
+    it('Should click on the times-new-roman button ', () => {
         page.navigateTo();
         page.getFont('times-new-roman');
     });
 
-    it('Should cilck on the comic-sans button ', () => {
+    it('Should click on the comic-sans button ', () => {
         page.navigateTo();
         page.getFont('comic-sans');
     });
 
-    it('Should cilck on the panda button ', () => {
+    it('Should click on the panda button ', () => {
         page.navigateTo();
         page.getStyle('panda');
     });
 
-    it('Should cilck on the dark button ', () => {
+    it('Should click on the dark button ', () => {
         page.navigateTo();
         page.getStyle('dark');
     });
 
-    it('Should cilck on the high-contrast button ', () => {
+    it('Should click on the neutral button ', () => {
         page.navigateTo();
-        page.getStyle('high-contrast');
+        page.getStyle('neutral');
     });
 
-    it('Should cilck on the windows95 button ', () => {
+    it('Should click on the windows95 button ', () => {
         page.navigateTo();
         page.getStyle('windows95');
     });
 
-    it('Should cilck on the christmas2018 button ', () => {
+    it('Should click on the leaf button ', () => {
         page.navigateTo();
-        page.getStyle('christmas2018');
+        page.getStyle('leaf');
     });
 
-    it('Should cilck on the aesthetic button ', () => {
+    it('Should click on the sunflower button ', () => {
         page.navigateTo();
-        page.getStyle('aesthetic');
+        page.getStyle('sunflower');
     });
 
-
-
-
-    /* it('Should get and highlight videos title attribute ', () => {
-         page.navigateTo();
-         expect(page.getVideosTitle()).toEqual('Videos');
-     });
-
-     it('Should get and highlight links title attribute ', () => {
-         page.navigateTo();
-         expect(page.getLinksTitle()).toEqual('Links');
-     });*/
 
 });

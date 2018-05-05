@@ -1,8 +1,7 @@
 import {ResourcePage} from './resources.po';
 import {browser, protractor, element, by} from 'protractor';
-import {Key} from 'selenium-webdriver';
 
-fdescribe('Resources', () => {
+describe('Resources', () => {
     let page: ResourcePage;
 
     beforeEach(() => {
