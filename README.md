@@ -1,4 +1,4 @@
-# [![My Panda Logo](client/src/android-chrome-512x512.png)](https://mypanda.website/)
+# [![My Panda Logo](client/src/android-chrome-512x512.png =100x100)](https://mypanda.website/)
 
 ![My Panda Screenshot](client/src/assets/images/devices-screenshot-mockups.png)
 
