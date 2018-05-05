@@ -64,6 +64,6 @@ need to have data in the `dev` database before running the e2e tests!
 
 ## Deploying Project for Production 
 Instructions on setting up the project for production can be found here: 
-[Droplet Setup Instructions](https://gist.github.com/pluck011/d968c2280cc9dc190a294eaf149b1c6e)
+[Droplet Setup Instructions](https://github.com/UMM-CSci-3601-S18/iteration-4-megabittron/blob/master/Documentation/Droplet%20Setup%20Instructions.md)
 
 
