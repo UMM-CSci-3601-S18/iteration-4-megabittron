@@ -1,15 +1,13 @@
-#### Droplet Setup Instructions
+## Droplet Setup Instructions
 
 ## Summary
 This document is, essentially, a short guide to setting up a "droplet" on [DigitalOcean](https://www.digitalocean.com)
-to be used as a tool for deploying simple web applications. This is by no means a
-comprehensive guide, and you are encouraged to reach out to classmates, faculty, and
-TAs (through Slack, for example) with questions.
+to be used as a tool for deploying simple web applications. 
 
 The majority of the information here will be presented in the form of bulleted lists,
 because we all know none of us actually read walls of text.
 
-These instructions assume you're in the lab. The SSH key part in particular won't likely work if you're not.
+The SSH key part is somewhat very important.
 If you don't get the SSH keypair stuff right, you'll probably have a pile of issues logging in
 to your droplet.
 
@@ -77,7 +75,7 @@ If you're interested in doing more fun things with Tmux, check out [this](https:
 - Run ``git pull``
 - Repeat steps starting at ``./build.sh`` from above.
 
-## Logging in from outside the lab, or as someone other than the person who did this setup.
+## Logging in as someone other than the person who did this setup.
 - You're free to add accounts to your droplet as you see fit and provide that login info to others.
 - You **should not** share the private key that you generated.
 - You can enable password ssh logins by editing the ``PasswordAuthentication`` field in ``/etc/ssh/sshd_config``
